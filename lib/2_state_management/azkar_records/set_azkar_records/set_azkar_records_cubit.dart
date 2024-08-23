@@ -7,13 +7,15 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 part 'set_azkar_records_state.dart';
+  //Generally, this cubit fixes records with all azkar said, and increments a zikr if needed
+  // this fixes things up for GetWeekAzkarRecordCubit to get all records to show it in the graph 
 
 class SetAzkarRecordsCubit extends Cubit<SetAzkarRecordsState> {
   SetAzkarRecordsCubit() : super(SetAzkarRecordsInitial());
 
   final HiveDB _hiveDB = HiveDB();
 
-  List<DayZikrRecord> fixRecords(Queue<DayZikrRecord> dayZikrRecords) {
+  List<DayZikrRecord> _fixRecords(Queue<DayZikrRecord> dayZikrRecords) {
     DateTime dateTimeNow = DateTime.now();
     DateTime dateTimeNowStartFrom12am =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
@@ -39,7 +41,7 @@ class SetAzkarRecordsCubit extends Cubit<SetAzkarRecordsState> {
       var dayZikrRecordBox =
           await _hiveDB.openAndGetBox(boxName: dayZikrRecordHiveBox);
       var oldRecords = Queue<DayZikrRecord>.from(dayZikrRecordBox.values);
-      var newDayZikrRecordsList = fixRecords(oldRecords);
+      var newDayZikrRecordsList = _fixRecords(oldRecords);
 
       if (newDayZikrRecordsList.first.id !=
           (dayZikrRecordBox.values.first as DayZikrRecord).id) {

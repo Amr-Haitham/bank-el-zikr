@@ -9,13 +9,13 @@ part 'get_random_prayer_state.dart';
 class GetRandomPrayerCubit extends Cubit<GetRandomPrayerState> {
   GetRandomPrayerCubit() : super(GetRandomPrayerInitial());
   final HiveDB _hiveDB = HiveDB();
-
   Prayer? _getRandomPrayer(List<Prayer> list) {
     if (list.isEmpty) return null; // Return null if the list is empty
     final random = Random();
     final randomIndex = random.nextInt(list.length);
     return list[randomIndex];
   }
+    //this gets a prayer in random manner and passes it to state
 
   void getPrayer() async {
     emit(GetRandomPrayerLoading());

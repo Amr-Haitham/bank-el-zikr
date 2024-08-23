@@ -10,10 +10,11 @@ part 'add_custom_zikr_state.dart';
 class AddCustomZikrCubit extends Cubit<AddCustomZikrState> {
   AddCustomZikrCubit() : super(AddCustomZikrInitial());
   final HiveDB _hiveDB = HiveDB();
-
+  //this function adds a custom zikr (zikr made by user) to the azkar list
   void addCustomZikr({required String customZikrContent}) async {
     emit(AddCustomZikrLoading());
     try {
+
       Box azkarBox = await _hiveDB.openAndGetBox(boxName: zikrHiveBox);
       Zikr newZikr = Zikr(
           isCustomZikr: true,

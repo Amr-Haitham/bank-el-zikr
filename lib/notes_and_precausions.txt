@@ -1,0 +1,10 @@
+Massive Warnings:
+    (1) updating using indexes in (updateCustomZikrCubit & deleteCustomZikrCubit)is extremely dangerous and has to be changed in the future
+
+Warnings:
+    (1) this line in addCustomAzkarCubit: (id: azkarBox.values.isEmpty ? 0 : azkarBox.values.last.id + 1,)
+     doesn't gurantee complete uniqueness because there might be multiple azkar with the same id this way
+    (2) 
+Notes:
+    (1) the days records has to always initialize having 7 entries in the begining because SetAzkarRecordsCubit removes a day for each day it adds, so it makes sure the list length count doesn't get below its initial length
+    (2) 

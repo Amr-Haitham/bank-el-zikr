@@ -7,13 +7,21 @@ part 'get_general_data_state.dart';
 
 class GetGeneralDataCubit extends Cubit<GetGeneralDataState> {
   GetGeneralDataCubit() : super(GetGeneralDataInitial());
-   void getGeneralData() async{
+  //this gets the general data
+  /*
+  currentZikrId
+  currentCounter
+  currentGoal
+  accountBalance
+ */
+  void getGeneralData() async {
     emit(GetGeneralDataLoading());
     try {
-     HiveDB hiveDb = HiveDB();
-    var generalDataBox= await hiveDb.openAndGetBox(boxName: generalDataHiveBox);
+      HiveDB hiveDb = HiveDB();
+      var generalDataBox =
+          await hiveDb.openAndGetBox(boxName: generalDataHiveBox);
 
-      emit(GetGeneralDataLoaded(generalData:generalDataBox.values.first ));
+      emit(GetGeneralDataLoaded(generalData: generalDataBox.values.first));
     } catch (e) {
       emit(GetGeneralDataError());
     }

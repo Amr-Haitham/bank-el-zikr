@@ -10,7 +10,7 @@ part 'update_custom_zikr_state.dart';
 class UpdateCustomZikrCubit extends Cubit<UpdateCustomZikrState> {
   UpdateCustomZikrCubit() : super(UpdateCustomZikrInitial());
   final HiveDB _hiveDB = HiveDB();
-
+  // here i update the custom azkar (the one added by user)
   void updateCustomZikr(
       {required Zikr zikr,
       required String newContent,
@@ -19,7 +19,10 @@ class UpdateCustomZikrCubit extends Cubit<UpdateCustomZikrState> {
     try {
       Box azkarBox = await _hiveDB.openAndGetBox(boxName: zikrHiveBox);
 
-      // azkarBox.deleteAt(zikrIndex);
+      //Mr. reader, you might confuse again why i use zikr index??
+      //because hive doesn't have update statement other that putAt
+      // I get the zikr by zikrIndex, then update it and put it exactly in its place
+
       zikr.content = newContent;
       azkarBox.putAt(zikrIndex, zikr);
       emit(UpdateCustomZikrLoaded());

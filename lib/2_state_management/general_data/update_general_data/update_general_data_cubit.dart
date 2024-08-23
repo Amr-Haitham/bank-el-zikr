@@ -8,6 +8,14 @@ part 'update_general_data_state.dart';
 
 class UpdateGeneralDataCubit extends Cubit<UpdateGeneralDataState> {
   UpdateGeneralDataCubit() : super(UpdateGeneralDataInitial());
+
+    //this updates all kinds of general data
+  /*
+  currentZikrId
+  currentCounter
+  currentGoal
+  accountBalance
+ */
   void incrementAccountBalance() async {
     emit(UpdateGeneralDataLoading());
     HiveDB hiveDb = HiveDB();

@@ -283,10 +283,12 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                 child: TabBarView(
                     physics: const BouncingScrollPhysics(),
                     children: [
+                  //list buidler of azkar records of only the first day
                   ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: widget.allAzkar.length,
                     itemBuilder: ((context, index) {
+                      //weird sort functions to sort from highest to lowest score
                       widget.allAzkar.sort((a, b) {
                         int valueA = widget.firstDayAzkarRecord.entries
                             .firstWhere((e) => e.key == a.id,
@@ -344,6 +346,8 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                       );
                     }),
                   ),
+                  //list builder of azkar records of only the first day
+
                   ListView.builder(
                     physics: const BouncingScrollPhysics(),
                     itemCount: widget.allAzkar.length,

@@ -8,6 +8,16 @@ part 'get_current_zikr_state.dart';
 
 class GetCurrentZikrCubit extends Cubit<GetCurrentZikrState> {
   GetCurrentZikrCubit() : super(GetCurrentZikrInitial());
+
+  //this gets the general data
+  /*
+  currentZikrId
+  currentCounter
+  currentGoal
+  accountBalance
+ */
+
+//then passes the current zikr id to the state
   getCurrentZikr() async {
     emit(GetCurrentZikrLoading());
     try {
