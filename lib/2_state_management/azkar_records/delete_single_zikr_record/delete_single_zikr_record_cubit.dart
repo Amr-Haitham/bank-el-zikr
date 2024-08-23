@@ -6,7 +6,7 @@ import '../../../3_data/models/day_zikr_record.dart';
 
 part 'delete_single_zikr_record_state.dart';
 
-//this cubit simply deletes a record by looping on all records for each day and removing the record of that particular zikr from it
+//this cubit simply deletes a record by looping on all records for each day and removing the record of that particular day from it
 class DeleteSingleZikrRecordCubit extends Cubit<DeleteSingleZikrRecordState> {
   DeleteSingleZikrRecordCubit() : super(DeleteSingleZikrRecordInitial());
   final HiveDB _hiveDB = HiveDB();

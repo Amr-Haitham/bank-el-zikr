@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 import '../../../3_data/services/hive_db.dart';
 
 part 'get_week_azkar_record_state.dart';
+
 /**
  * this cubit gets all week record for line graph
  */
@@ -20,6 +21,9 @@ class GetWeekAzkarRecordCubit extends Cubit<GetWeekAzkarRecordState> {
       List<DayZikrRecord> weekRecord =
           List<DayZikrRecord>.from(dayZikrRecordBox.values);
       Map<int, int> map = {};
+
+      // yup bit too complicated, but all it does is looping on all days to get the azkar you did in the week
+      //it just returns a map<string,string> with key id of the zikr and value: counter of zikr
       for (var dayRecord in weekRecord) {
         for (var e in dayRecord.azkarRecordById.entries) {
           var x = map[e.key];
@@ -32,7 +36,8 @@ class GetWeekAzkarRecordCubit extends Cubit<GetWeekAzkarRecordState> {
       }
       emit(GetWeekAzkarRecordLoaded(
           allWeekAzkarRecordsById: map,
-          firstDayAzkarRecord: weekRecord.first.azkarRecordById,allWeekRecord:weekRecord));
+          firstDayAzkarRecord: weekRecord.first.azkarRecordById,
+          allWeekRecord: weekRecord));
     } catch (e) {
       emit(GetWeekAzkarRecordError());
     }

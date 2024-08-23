@@ -19,6 +19,8 @@ class SetAzkarRecordsCubit extends Cubit<SetAzkarRecordsState> {
     DateTime dateTimeNow = DateTime.now();
     DateTime dateTimeNowStartFrom12am =
         DateTime(dateTimeNow.year, dateTimeNow.month, dateTimeNow.day);
+        //we just get the difference here to calculate how many days from now to the last time we fixed the records
+        //then we add days with respect to that difference, to ensure we are updated to today
     int difference =
         dateTimeNowStartFrom12am.difference(dayZikrRecords.first.dateTime).inDays;
 
