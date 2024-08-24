@@ -1,5 +1,5 @@
-import 'package:bank_el_ziker/consts/colors.dart';
-import 'package:bank_el_ziker/consts/text_styles.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 
 class AddNewZikrScreen extends StatefulWidget {
   const AddNewZikrScreen({super.key});

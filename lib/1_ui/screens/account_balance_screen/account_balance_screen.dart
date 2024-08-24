@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../3_data/models/zikr.dart';
-import '../../../consts/colors.dart';
-import '../../../consts/text_styles.dart';
+import '../../core/consts/colors.dart';
+import '../../core/consts/text_styles.dart';
 import '../../re-usable widgets/back_button.dart';
 import 'components/azkar_weekly_record_chart.dart';
 

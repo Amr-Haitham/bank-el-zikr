@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/build_list_of_azkar_widget.dart';
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
-import 'package:bank_el_ziker/consts/colors.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
 import '../morning_azkar_screen/components/upper_bar_widget.dart';

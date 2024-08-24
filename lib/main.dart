@@ -1,6 +1,7 @@
+import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
 import 'package:bank_el_ziker/app_router.dart';
-import 'package:bank_el_ziker/consts/colors.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,12 +52,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, _) {
           return MaterialApp(
-              theme: ThemeData(
-                  fontFamily: 'Cairo',
-                  textSelectionTheme: TextSelectionThemeData(
-                      cursorColor: appGreen,
-                      selectionHandleColor: appGreen,
-                      selectionColor: appDarkTextColor.withOpacity(.4))),
+              theme: AppTheme.lightTheme,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: appRouter.generateRouter);
         });

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../consts/colors.dart';
+import '../../../../core/consts/colors.dart';
 
 class NightAzkarScreenUpperBarWidget extends StatelessWidget {
   const NightAzkarScreenUpperBarWidget({super.key});

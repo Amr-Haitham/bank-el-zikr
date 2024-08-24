@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../2_state_management/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
 import '../../../3_data/models/zikr.dart';
-import '../../../consts/colors.dart';
+import '../../core/consts/colors.dart';
 import '../../re-usable widgets/back_button.dart';
 
 class SituationsAzkarScreen extends StatefulWidget {

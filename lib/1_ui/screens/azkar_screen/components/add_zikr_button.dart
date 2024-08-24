@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 class AddNewZikrButton extends StatefulWidget {
   const AddNewZikrButton({super.key});
 

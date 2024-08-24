@@ -2,7 +2,7 @@ import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_ran
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 
 class RandomZikerContainer extends StatelessWidget {
   const RandomZikerContainer({

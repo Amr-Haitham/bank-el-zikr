@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 
 
 class NightAzkarCard extends StatelessWidget {

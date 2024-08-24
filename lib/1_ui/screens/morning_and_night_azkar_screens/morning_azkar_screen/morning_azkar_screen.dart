@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 import '../common/build_list_of_azkar_widget.dart';
 import 'components/upper_bar_widget.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
 import '../../../../app_router.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 
 class MorningAzkarCard extends StatelessWidget {
   const MorningAzkarCard({super.key});

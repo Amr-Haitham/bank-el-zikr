@@ -1,7 +1,7 @@
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
 import 'package:bank_el_ziker/3_data/models/zikr.dart';
 
-import '../3_data/models/prayer.dart';
+import '../../../3_data/models/prayer.dart';
 
 class InitialData {
   static List<Zikr> generalAzkar = [

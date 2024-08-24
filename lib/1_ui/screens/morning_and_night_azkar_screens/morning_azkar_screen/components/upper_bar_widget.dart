@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../consts/colors.dart';
+import '../../../../core/consts/colors.dart';
 
 class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
   const MorningAzkarScreenUpperBarWidget({super.key});

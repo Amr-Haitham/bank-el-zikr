@@ -1,13 +1,13 @@
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
 import 'package:bank_el_ziker/3_data/models/prayer.dart';
-import 'package:bank_el_ziker/consts/general_functions.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/general_functions.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../models/release_version.dart';
 import '../models/version.dart';
 import '../models/day_zikr_record.dart';
 import '../models/general_data.dart';
 import '../models/zikr.dart';
-import '../../consts/initial_data.dart';
+import '../../1_ui/core/consts/initial_data.dart';
 
 const zikrHiveBox = "zikrHiveBox";
 const customAzkarHiveBox = "customAzkarHiveBox";

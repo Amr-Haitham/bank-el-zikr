@@ -4,12 +4,12 @@ import 'package:bank_el_ziker/2_state_management/azkar_records/delete_single_zik
 import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-import 'package:bank_el_ziker/consts/initial_data.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/initial_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../3_data/models/zikr.dart';
-import '../../../../consts/colors.dart';
+import '../../../core/consts/colors.dart';
 
 class EditCustomZikerScreen extends StatefulWidget {
   const EditCustomZikerScreen(

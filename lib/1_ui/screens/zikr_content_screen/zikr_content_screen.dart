@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/back_button.dart';
 import 'package:bank_el_ziker/3_data/models/zikr.dart';
-import 'package:bank_el_ziker/consts/colors.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

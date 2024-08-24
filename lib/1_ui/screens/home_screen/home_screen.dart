@@ -7,11 +7,11 @@ import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_wid
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
 import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
-import 'package:bank_el_ziker/consts/colors.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../../consts/initial_data.dart';
+import '../../core/consts/initial_data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

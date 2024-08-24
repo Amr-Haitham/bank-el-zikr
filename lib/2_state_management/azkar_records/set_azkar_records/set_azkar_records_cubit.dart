@@ -2,7 +2,7 @@ import 'dart:collection';
 
 import 'package:bank_el_ziker/3_data/models/day_zikr_record.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
-import 'package:bank_el_ziker/consts/general_functions.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/general_functions.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
