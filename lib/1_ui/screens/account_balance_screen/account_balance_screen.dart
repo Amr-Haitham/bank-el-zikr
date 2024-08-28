@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
+import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,96 +37,108 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: Stack(
-            children: [
-              Hero(
-                  tag: "balanceScreenButton",
-                  child: Container(
-                    color: Colors.white,
-                  )),
-              Padding(
-                padding: EdgeInsets.only(
-                    top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    const TitleWithBackButton(
-                      title: "رصيد الذكر",
-                    ),
-                    const SizedBox(height: 34,),
-                    AutoSizeText(
-                      "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
-                      textAlign: TextAlign.center,
-                      style: cairoTextStyle(
-                          15.sp, FontWeight.w800, null, appDarkTextColor),
-                    ),                    const SizedBox(height: 32,),
-
-                    const TotalBalanceNumber(),                    const SizedBox(height: 32,),
-
-                    Expanded(
-                      flex: 4,
-                      child: BlocBuilder<GetWeekAzkarRecordCubit,
-                          GetWeekAzkarRecordState>(builder: ((context, state) {
-                        if (state is GetWeekAzkarRecordLoaded) {
-                          return LineChartForDayRecords(
-                              records: state.allWeekRecord);
-                        } else if (state is GetWeekAzkarRecordLoading) {
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      })),
-                    ),
-                    SizedBox(
-                      height: 23.h,
-                    ),
-                    Expanded(
-                      flex: 10,
-                      child: BlocBuilder<GetWeekAzkarRecordCubit,
-                          GetWeekAzkarRecordState>(
-                        builder: (context, parentState) {
-                          if (parentState is GetWeekAzkarRecordLoaded) {
-                            return BlocBuilder<AzkarCubit, AzkarState>(
-                              builder: (context, state) {
-                                if (state is AzkarLoaded) {
-                                  return TabbarOfAzkarRecord(
-                                    screenWidth: screenWidth,
-                                    allWeekAzkarRecordsById:
-                                        parentState.allWeekAzkarRecordsById,
-                                    firstDayAzkarRecord:
-                                        parentState.firstDayAzkarRecord,
-                                    allAzkar: state.azkar,
-                                  );
-                                } else if (state is AzkarError) {
-                                  return const Center(
-                                    child: Text("Error"),
-                                  );
-                                } else {
-                                  return const Center(
-                                    child: CircularProgressIndicator(),
-                                  );
-                                }
-                              },
-                            );
-                          } else if (parentState is GetWeekAzkarRecordError) {
-                            return const Center(
-                              child: Text("Error"),
-                            );
-                          } else {
-                            return const Center(
-                              child: CircularProgressIndicator(),
-                            );
-                          }
-                        },
-                      ),
-                    )
-                  ],
+          body: Padding(
+            padding: EdgeInsets.only(
+                top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
+            child: CustomScrollView(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              slivers: [
+                const SliverToBoxAdapter(
+                  child: TitleWithBackButton(
+                    title: "رصيد الذكر",
+                  ),
                 ),
-              ),
-            ],
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 34,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: AutoSizeText(
+                    "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
+                    textAlign: TextAlign.center,
+                    style: cairoTextStyle(
+                        15.sp, FontWeight.w800, null, appDarkTextColor),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 42,
+                  ),
+                ),
+                const SliverToBoxAdapter(child: TotalBalanceNumber()),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 42,
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: ScreenUtils.getScreenHeight(context)/6,
+                    child: BlocBuilder<GetWeekAzkarRecordCubit,
+                        GetWeekAzkarRecordState>(builder: ((context, state) {
+                      if (state is GetWeekAzkarRecordLoaded) {
+                        return LineChartForDayRecords(
+                            records: state.allWeekRecord);
+                      } else if (state is GetWeekAzkarRecordLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else {
+                        return const SizedBox();
+                      }
+                    })),
+                  ),
+                ),
+                               const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: 42,
+                  ),
+                ),
+
+                SliverToBoxAdapter(
+                  // flex: 10,
+                  child: BlocBuilder<GetWeekAzkarRecordCubit,
+                      GetWeekAzkarRecordState>(
+                    builder: (context, parentState) {
+                      if (parentState is GetWeekAzkarRecordLoaded) {
+                        return BlocBuilder<AzkarCubit, AzkarState>(
+                          builder: (context, state) {
+                            if (state is AzkarLoaded) {
+                              return TabbarOfAzkarRecord(
+                                screenWidth: screenWidth,
+                                allWeekAzkarRecordsById:
+                                    parentState.allWeekAzkarRecordsById,
+                                firstDayAzkarRecord:
+                                    parentState.firstDayAzkarRecord,
+                                allAzkar: state.azkar,
+                              );
+                            } else if (state is AzkarError) {
+                              return const Center(
+                                child: Text("Error"),
+                              );
+                            } else {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          },
+                        );
+                      } else if (parentState is GetWeekAzkarRecordError) {
+                        return const Center(
+                          child: Text("Error"),
+                        );
+                      } else {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                    },
+                  ),
+                )
+              ],
+            ),
           )),
     );
   }
@@ -148,7 +161,22 @@ class TabbarOfAzkarRecord extends StatefulWidget {
 }
 
 class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
+ List<Zikr> getSortedFilteredAzkar(Map<int, int> mapAzkarRecord) {
+  // Filter out azkar with zero records or empty values
+  List<Zikr> filteredAzkar = widget.allAzkar.where((zikr) {
+    int? recordValue = mapAzkarRecord[zikr.id];
+    return recordValue != null && recordValue != 0;
+  }).toList();
 
+  // Sort the remaining azkar based on the record values
+  filteredAzkar.sort((a, b) {
+    int valueA = mapAzkarRecord[a.id] ?? 0;
+    int valueB = mapAzkarRecord[b.id] ?? 0;
+    return valueB.compareTo(valueA);
+  });
+
+  return filteredAzkar;
+}
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -158,37 +186,38 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
           children: [
             Container(
               margin: EdgeInsets.only(bottom: 20.h),
+              decoration: BoxDecoration(
+                color: Theme.of(context)
+                    .cardColor, // Background color of the tab bar
+                borderRadius: BorderRadius.circular(
+                    42), // Rounded corners for the entire tab bar
+              ),
+              // padding: EdgeInsets.all(
+              //     3), // Padding inside the container to space the tabs a bit
               child: TabBar(
-                labelPadding: const EdgeInsets.symmetric(horizontal: 5),
+                dividerColor: Colors.transparent,
+                labelPadding: const EdgeInsets.symmetric(horizontal: 0),
                 indicatorPadding: const EdgeInsets.symmetric(horizontal: 0),
                 indicator: BoxDecoration(
-                  color: Theme.of(context).primaryColor,
-                  borderRadius: BorderRadius.circular(13),
+                  color: Theme.of(context)
+                      .primaryColor, // Active tab background color
+                  borderRadius: BorderRadius.circular(
+                      42), // Rounded corners for the active tab
                 ),
-                labelColor: Colors.white,
-                labelStyle: cairoTextStyle(15.sp, FontWeight.w800, null,
-                    Theme.of(context).primaryColor),
-                unselectedLabelColor: appDarkTextColor,
-                unselectedLabelStyle: cairoTextStyle(15.sp, FontWeight.w800,
-                    null, Theme.of(context).primaryColor),
+                labelColor: Colors.white, // Text color for the active tab
+                labelStyle: Theme.of(context).textTheme.headlineSmall,
+                unselectedLabelColor:
+                    appDarkTextColor, // Text color for the inactive tabs
+                unselectedLabelStyle: Theme.of(context).textTheme.headlineSmall,
                 tabs: [
                   Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 1, color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(13),
-                      ),
-                      child: const Tab(
-                        text: "يومي",
-                      )),
+                    width: double.infinity,
+                    child: const Tab(
+                      text: "يومي",
+                    ),
+                  ),
                   Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 1, color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(13),
-                    ),
                     child: const Tab(
                       text: "اسبوعي",
                     ),
@@ -196,140 +225,111 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                 ],
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).length*81,
                 child: TabBarView(
                     physics: const BouncingScrollPhysics(),
                     children: [
-                  //list buidler of azkar records of only the first day
-                  ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: widget.allAzkar.length,
-                    itemBuilder: ((context, index) {
-                      //weird sort functions to sort from highest to lowest score
-                      widget.allAzkar.sort((a, b) {
-                        int valueA = widget.firstDayAzkarRecord.entries
-                            .firstWhere((e) => e.key == a.id,
-                                orElse: () => const MapEntry(0, 0))
-                            .value;
+                  SizedBox.expand(
+                    child: Column(
+                      children: getSortedFilteredAzkar(widget.firstDayAzkarRecord).map((azkar) {
+                        int value = widget.firstDayAzkarRecord[azkar.id] ?? 0;
 
-                        int valueB = widget.firstDayAzkarRecord.entries
-                            .firstWhere((e) => e.key == b.id,
-                                orElse: () => const MapEntry(0, 0))
-                            .value;
-
-                        return valueB.compareTo(valueA);
-                      });
-                      int value =
-                          widget.firstDayAzkarRecord.entries.firstWhere((e) {
-                        return e.key == widget.allAzkar[index].id;
-                      }, orElse: () => const MapEntry(0, 0)).value;
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 20.h),
-                          margin: EdgeInsets.only(bottom: 20.h),
+                        return Container(
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 20.0),
+                          margin: const EdgeInsets.only(bottom: 20.0),
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
                             border: Border.all(
                                 width: 1,
-                                color: Theme.of(context).primaryColor),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              AutoSizeText(
-                                value != 0 ? value.toString() : "-",
-                                maxLines: 1,
-                                style: cairoTextStyle(14.sp, FontWeight.w800,
-                                    null, appDarkTextColor),
-                              ),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              Expanded(
-                                child: AutoSizeText(
-                                  widget.allAzkar[index].content,
-                                  textAlign: TextAlign.right,
-                                  //  maxLines: 1,
-                                  style: cairoTextStyle(14.sp, FontWeight.w800,
-                                      null, appDarkTextColor),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      );
-                    }),
-                  ),
-                  //list builder of azkar records of only the first day
-
-                  ListView.builder(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: widget.allAzkar.length,
-                    itemBuilder: ((context, index) {
-                      widget.allAzkar.sort((a, b) {
-                        int valueA = widget.allWeekAzkarRecordsById.entries
-                            .firstWhere((e) => e.key == a.id,
-                                orElse: () => const MapEntry(0, 0))
-                            .value;
-
-                        int valueB = widget.allWeekAzkarRecordsById.entries
-                            .firstWhere((e) => e.key == b.id,
-                                orElse: () => const MapEntry(0, 0))
-                            .value;
-
-                        return valueB.compareTo(valueA);
-                      });
-                      int value = widget.allWeekAzkarRecordsById.entries
-                          .firstWhere((e) {
-                        return e.key == widget.allAzkar[index].id;
-                      }, orElse: () => const MapEntry(0, 0)).value;
-
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 15.w, vertical: 20.h),
-                          margin: EdgeInsets.only(bottom: 20.h),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                                width: 1,
-                                color: Theme.of(context).primaryColor),
-                            borderRadius: BorderRadius.circular(20),
+                                color: appDarkTextColor),
+                            borderRadius: BorderRadius.circular(40),
                           ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
                                 value != 0 ? value.toString() : "-",
-                                maxLines: 1,
-                                style: cairoTextStyle(14.sp, FontWeight.w800,
-                                    null, appDarkTextColor),
-                              ),
-                              SizedBox(
-                                width: 20.w,
-                              ),
-                              Expanded(
-                                child: AutoSizeText(
-                                  widget.allAzkar[index].content,
-                                  textAlign: TextAlign.right,
-                                  //  maxLines: 1,
-                                  style: cairoTextStyle(14.sp, FontWeight.w800,
-                                      null, appDarkTextColor),
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors
+                                      .black, // Replace with appDarkTextColor
                                 ),
-                              )
+                              ),
+                              const SizedBox(width: 20.0),
+                              Expanded(
+                                child: Text(
+                                  azkar.content,
+                                  textAlign: TextAlign.right,
+                                  style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors
+                                        .black, // Replace with appDarkTextColor
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      );
-                    }),
-                  ),
+                        );
+                      }).toList(),
+                    ),
+                  ), //list builder of azkar records of only the first day
+                  SizedBox.expand(
+                    child: Column(
+                      children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
+                        int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
+
+                        return Container(
+                          height: 60,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 15.0, vertical: 20.0),
+                          margin: const EdgeInsets.only(bottom: 20.0),
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                width: 1,
+                                color: appDarkTextColor),
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                value != 0 ? value.toString() : "-",
+                                style: const TextStyle(
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.w800,
+                                  color: Colors
+                                      .black, // Replace with appDarkTextColor
+                                ),
+                              ),
+                              const SizedBox(width: 20.0),
+                              Expanded(
+                                child: Text(
+                                  azkar.content,
+                                  textAlign: TextAlign.right,
+                                  style: const TextStyle(
+                                    fontSize: 14.0,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors
+                                        .black, // Replace with appDarkTextColor
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                    ),
+                  ), //list builder of azkar records of only the first day
+
+
                 ]))
           ],
         ));
@@ -344,7 +344,7 @@ class TotalBalanceNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 22,horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 16),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -359,11 +359,15 @@ class TotalBalanceNumber extends StatelessWidget {
             builder: (context, state) {
               if (state is GetGeneralDataLoaded) {
                 return AutoSizeText(
-                  ArabicNumbers().convert(state.generalData.accountBalance).toString(),
-                  maxLines: 1,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).primaryColor)
-                );
+                    ArabicNumbers()
+                        .convert(state.generalData.accountBalance)
+                        .toString(),
+                    maxLines: 1,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headlineLarge!
+                        .copyWith(color: Theme.of(context).primaryColor));
               } else if (state is GetGeneralDataError) {
                 return AutoSizeText(
                   "Error",
