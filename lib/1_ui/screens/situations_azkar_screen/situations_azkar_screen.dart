@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../2_state_management/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
 import '../../../3_data/models/zikr.dart';
 import '../../core/consts/colors.dart';
-import '../../re-usable widgets/back_button.dart';
+import '../../re-usable widgets/title_with_back_button.dart';
 
 class SituationsAzkarScreen extends StatefulWidget {
   const SituationsAzkarScreen({super.key});
@@ -25,20 +25,14 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: const CustomBackButton(
-          color: appGreen,
-        ),
-      ),
       body: Padding(
         padding:
             EdgeInsets.only(top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
         child: Material(
-          color: appWhite,
+          color: Colors.white,
           child: Column(
-            children: [
-              const Row(
+            children: [TitleWithBackButton(title: "رصيد الذكر",),
+               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
@@ -46,15 +40,15 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.w700,
-                        color: appGreen),
+                        color: Theme.of(context).primaryColor),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Icon(
                     Icons.mood,
                     size: 35,
-                    color: appGreen,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ],
               ),

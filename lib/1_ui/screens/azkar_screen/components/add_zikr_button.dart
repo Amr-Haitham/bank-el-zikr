@@ -18,10 +18,10 @@ class _AddNewZikrButtonState extends State<AddNewZikrButton> {
 
       child: Container(
         decoration: BoxDecoration(
-          color: appGreen,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(30),
         ),
-        // backgroundColor: appGreen,
+        // backgroundColor: Theme.of(context).primaryColor,
         // foregroundColor: appWhite,
         //
         // onPressed: (){},

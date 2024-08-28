@@ -8,7 +8,7 @@ class NightAzkarScreenUpperBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: appGreen,
+      color: Theme.of(context).primaryColor,
       height: 230,
       width: MediaQuery.of(context).size.width,
       child: Stack(
@@ -70,7 +70,7 @@ class NightAzkarScreenUpperBarWidget extends StatelessWidget {
                       //     style: TextStyle(
                       //         fontSize: 16,
                       //         fontWeight: FontWeight.w800,
-                      //         color: appGreen),
+                      //         color: Theme.of(context).primaryColor),
                       //   ),
                       // ),
                     ),

@@ -47,9 +47,9 @@ class _AnimatedStartWidgetState extends State<AnimatedStartWidget>
             builder: (context, child) {
               return Transform.translate(
                   offset: Offset(_animationController.value * -60.w, 0),
-                  child: const Icon(
+                  child:  Icon(
                     Icons.arrow_circle_left_outlined,
-                    color: appGreen,
+                    color: Theme.of(context).primaryColor,
                   ));
             }),
         AnimatedBuilder(
@@ -60,7 +60,7 @@ class _AnimatedStartWidgetState extends State<AnimatedStartWidget>
                   child: Text(
                     "إبدأ",
                     style:
-                        cairoTextStyle(30.sp, FontWeight.w700, null, appGreen),
+                        cairoTextStyle(30.sp, FontWeight.w700, null, Theme.of(context).primaryColor),
                   ));
             })
       ],

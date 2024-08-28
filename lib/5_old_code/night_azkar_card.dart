@@ -17,7 +17,7 @@ class NightAzkarCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 34,
-            backgroundColor: appGreen,
+            backgroundColor: Theme.of(context).primaryColor,
             child:CircleAvatar(
               radius: 33,
               backgroundColor: appWhite,
@@ -49,13 +49,13 @@ class RecuangularNightAzkarCard extends StatelessWidget {
         height: ScreenUtils.getScreenHeight(context) / 6 - 10,
         width: ScreenUtils.getScreenWidth(context) / 2 - 30,
         decoration: BoxDecoration(
-          border: Border.all(color: appGreen, width: 2),
+          border: Border.all(color: Theme.of(context).primaryColor, width: 2),
           borderRadius: BorderRadius.circular(10),
         ),
         child: Center(
           child: Stack(
             children: [
-              const Positioned(
+               Positioned(
                 left: 30,
                 top: 10,
                 child: Row(
@@ -67,7 +67,7 @@ class RecuangularNightAzkarCard extends StatelessWidget {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 20,
-                          color: appGreen),
+                          color: Theme.of(context).primaryColor),
                     ),
                   ],
                 ),

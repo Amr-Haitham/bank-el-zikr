@@ -67,7 +67,7 @@ class LineChartForDayRecords extends StatelessWidget {
                 .dateTime
                 .weekday] ??
             "#",
-        style: cairoTextStyle(10.sp, FontWeight.w200, null, appDarkTextColor));
+        style: cairoTextStyle(10.sp, FontWeight.w500, null, appDarkTextColor));
   }
 
   Widget customTextForVerticalTitles(
@@ -89,10 +89,11 @@ class LineChartForDayRecords extends StatelessWidget {
     return Center(
       child: LineChart(
         LineChartData(
-          gridData: const FlGridData(show: true),
+          gridData: const FlGridData(show: false),
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
+                
                 showTitles: true,
                 interval: 1,
                 getTitlesWidget: (index, titleMeta) =>
@@ -114,7 +115,7 @@ class LineChartForDayRecords extends StatelessWidget {
             )),
             topTitles: const AxisTitles(),
           ),
-          borderData: FlBorderData(show: true),
+          borderData: FlBorderData(show: false),
           minX: 1,
           maxX: 7,
           minY:
@@ -125,12 +126,15 @@ class LineChartForDayRecords extends StatelessWidget {
               .toDouble()),
           lineBarsData: [
             LineChartBarData(
+              curveSmoothness: .7,
+              preventCurveOverShooting: true,
               barWidth: 3,
               spots: _generateLineChartBarDataSpots(records),
-              isCurved: false,
-              color: appGreen,
-              dotData: const FlDotData(show: true),
-              belowBarData: BarAreaData(show: true),
+              isCurved: true,
+              
+              color: Color.fromRGBO(255, 184, 0, 1),
+              dotData: const FlDotData(show: false),
+              belowBarData: BarAreaData(show: false),
             ),
           ],
         ),

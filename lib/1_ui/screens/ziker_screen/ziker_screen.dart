@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/1_ui/re-usable%20widgets/back_button.dart';
+import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/set_azkar_records/set_azkar_records_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
@@ -54,12 +54,6 @@ class _ZikerScreenState extends State<ZikerScreen> {
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         backgroundColor: appWhite,
-        appBar: AppBar(
-          backgroundColor: appGreen,
-          leading: const CustomBackButton(
-            color: Colors.white,
-          ),
-        ),
         body: Stack(
           children: [
             Padding(
@@ -67,7 +61,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: [TitleWithBackButton(title: "رصيد الذكر",),
                   Expanded(
                     flex: 4,
                     child: Stack(
@@ -76,7 +70,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                             tag: "green_welcome_to_home_container",
                             child: Container(
                               decoration: BoxDecoration(
-                                color: appGreen,
+                                color: Theme.of(context).primaryColor,
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(45.w),
                                   bottomRight: Radius.circular(45.w),
@@ -87,7 +81,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                           padding: EdgeInsets.only(
                               left: 31.w, right: 31.w, bottom: 10.h),
                           decoration: BoxDecoration(
-                            color: appGreen,
+                            color: Theme.of(context).primaryColor,
                             borderRadius: BorderRadius.only(
                               bottomLeft: Radius.circular(45.w),
                               bottomRight: Radius.circular(45.w),
@@ -135,12 +129,12 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                       14.sp,
                                                       FontWeight.w800,
                                                       null,
-                                                      appGreen),
+                                                      Theme.of(context).primaryColor),
                                                 ),
                                               ),
-                                              const Icon(
+                                               Icon(
                                                 Icons.menu_book,
-                                                color: appGreen,
+                                                color: Theme.of(context).primaryColor,
                                               ),
                                             ],
                                           ),
@@ -184,7 +178,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   //                     9.sp,
                                   //                     FontWeight.w800,
                                   //                     null,
-                                  //                     appGreen),
+                                  //                     Theme.of(context).primaryColor),
                                   //               ),
                                   //             ),
                                   //             Container(
@@ -195,7 +189,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   //                   borderRadius:
                                   //                       BorderRadius.circular(
                                   //                           11),
-                                  //                   color: appGreen),
+                                  //                   color: Theme.of(context).primaryColor),
                                   //               child: Image.asset(
                                   //                 "assets/images/bank_icon.png",
                                   //                 color: Colors.white,
@@ -283,7 +277,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                           TextSpan(
                             text: "جدد نيتك :",
                             style: cairoTextStyle(
-                                1.sp, FontWeight.w800, null, appGreen),
+                                1.sp, FontWeight.w800, null, Theme.of(context).primaryColor),
                           ),
                           TextSpan(
                             text:
@@ -321,7 +315,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   });
                                 },
                                 style: TextButton.styleFrom(
-                                  backgroundColor: appGreen,
+                                  backgroundColor: Theme.of(context).primaryColor,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(
                                         61.0), // Set your desired border radius here
@@ -348,7 +342,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   // HiveDB().printDB();
                                 },
                                 style: TextButton.styleFrom(
-                                    backgroundColor: appGreen,
+                                    backgroundColor: Theme.of(context).primaryColor,
                                     shape: const CircleBorder()),
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -435,9 +429,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   style: TextButton.styleFrom(
                                       backgroundColor: const Color.fromRGBO(
                                           232, 255, 238, 1),
-                                      shape: const CircleBorder(
+                                      shape:  CircleBorder(
                                           side: BorderSide(
-                                              color: appGreen, width: 7))),
+                                              color: Theme.of(context).primaryColor, width: 7))),
                                   child: Container(
                                     width: screenWidth * .6,
                                     padding: EdgeInsets.all(10.h),
@@ -453,7 +447,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                         50.sp,
                                                         FontWeight.w700,
                                                         null,
-                                                        appGreen),
+                                                        Theme.of(context).primaryColor),
                                                     maxLines: 1,
                                                   )
                                                 : AutoSizeText.rich(
@@ -465,7 +459,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                               50.sp,
                                                               FontWeight.w700,
                                                               .85,
-                                                              appGreen),
+                                                              Theme.of(context).primaryColor),
                                                         ),
                                                         TextSpan(
                                                           text:
@@ -574,9 +568,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
                     child: TextFormField(
                       controller: textEditingController,
-                      decoration: inputDecoration,
+                      decoration: inputDecoration(context),
                       textAlign: TextAlign.center,
-                      cursorColor: appGreen,
+                      cursorColor: Theme.of(context).primaryColor,
                       style: cairoTextStyle(
                           28.sp, FontWeight.w500, null, appDarkTextColor),
                       maxLength: 7,
@@ -611,7 +605,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                         child: Text(
                           'حفظ',
                           style: cairoTextStyle(
-                              13.sp, FontWeight.w700, null, appGreen),
+                              13.sp, FontWeight.w700, null, Theme.of(context).primaryColor),
                         ),
                       ),
                       OutlinedButton(
@@ -640,30 +634,30 @@ class _ZikerScreenState extends State<ZikerScreen> {
   }
 }
 
-var inputDecoration = InputDecoration(
+ inputDecoration(context) => InputDecoration(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 8, color: Colors.green),
+      borderSide:  BorderSide(width: 8, color: Colors.green),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 2, color: appGreen),
+      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 2, color: appGreen),
+      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 2, color: appGreen),
+      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 2, color: appGreen),
+      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide: const BorderSide(width: 2, color: appGreen),
+      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ));
 
 class NoLeadingZeroInputFormatter extends TextInputFormatter {

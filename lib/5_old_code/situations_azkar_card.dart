@@ -16,7 +16,7 @@ class SituationsAzkarCard extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 34,
-            backgroundColor: appGreen,
+            backgroundColor: Theme.of(context).primaryColor,
             child: CircleAvatar(
               radius: 33,
               backgroundColor: appWhite,
@@ -56,13 +56,13 @@ class RectangularSituationsAzkarCard extends StatelessWidget {
           height: ScreenUtils.getScreenHeight(context) / 3 - 10,
           width: ScreenUtils.getScreenWidth(context) / 2 - 30,
           decoration: BoxDecoration(
-            border: Border.all(color: appGreen, width: 2),
+            border: Border.all(color: Theme.of(context).primaryColor, width: 2),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Center(
             child: Stack(
               children: [
-                const Positioned(
+                 Positioned(
                   right: 30,
                   top: 30,
                   child: Row(
@@ -74,7 +74,7 @@ class RectangularSituationsAzkarCard extends StatelessWidget {
                         style: TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
-                            color: appGreen),
+                            color: Theme.of(context).primaryColor),
                       ),
                     ],
                   ),
@@ -86,8 +86,8 @@ class RectangularSituationsAzkarCard extends StatelessWidget {
                     height: ScreenUtils.getScreenHeight(context) / 8 - 10,
                     width: ScreenUtils.getScreenWidth(context) / 3.2 - 20,
                     decoration: BoxDecoration(
-                      color: appGreen,
-                      border: Border.all(color: appGreen, width: 0),
+                      color: Theme.of(context).primaryColor,
+                      border: Border.all(color: Theme.of(context).primaryColor, width: 0),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(

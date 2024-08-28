@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
@@ -9,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../3_data/models/zikr.dart';
 import '../../core/consts/colors.dart';
 import '../../core/consts/text_styles.dart';
-import '../../re-usable widgets/back_button.dart';
+import '../../re-usable widgets/title_with_back_button.dart';
 import 'components/azkar_weekly_record_chart.dart';
 
 class AccountBalanceScreen extends StatefulWidget {
@@ -34,13 +35,7 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
 
     return SafeArea(
       child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: Colors.white,
-            leading: const CustomBackButton(
-              color: appGreen,
-            ),
-          ),
-          backgroundColor: appWhite,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Stack(
             children: [
               Hero(
@@ -55,60 +50,21 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // TextButton.icon(
-                        //     onPressed: () {
-                        //       Navigator.pop(context);
-                        //     },
-                        //     icon: Padding(
-                        //       padding: const EdgeInsets.only(top: 9),
-                        //       child: Icon(
-                        //         Icons.arrow_circle_left_outlined,
-                        //         color: appGreen,
-                        //         size: 30.sp,
-                        //       ),
-                        //     ),
-                        //     label: Text(
-                        //       "رجوع",
-                        //       style: cairoTextStyle(
-                        //           14.sp, FontWeight.w800, null, appGreen),
-                        //     )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "رصيد البنك",
-                              style: TextStyle(
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.w700,
-                                  color: appGreen),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Icon(
-                              Icons.account_balance_rounded,
-                              size: 35,
-                              color: appGreen,
-                            ),
-                          ],
-                        )
-                      ],
+                    const TitleWithBackButton(
+                      title: "رصيد الذكر",
                     ),
-                    SizedBox(
-                      height: 23.h,
-                    ),
-                    // AutoSizeText(
-                    //   "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
-                    //   textAlign: TextAlign.center,
-                    //   style: cairoTextStyle(
-                    //       15.sp, FontWeight.w800, null, appDarkTextColor),
-                    // ),
+                    const SizedBox(height: 34,),
+                    AutoSizeText(
+                      "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
+                      textAlign: TextAlign.center,
+                      style: cairoTextStyle(
+                          15.sp, FontWeight.w800, null, appDarkTextColor),
+                    ),                    const SizedBox(height: 32,),
+
+                    const TotalBalanceNumber(),                    const SizedBox(height: 32,),
+
                     Expanded(
-                      flex: 3,
+                      flex: 4,
                       child: BlocBuilder<GetWeekAzkarRecordCubit,
                           GetWeekAzkarRecordState>(builder: ((context, state) {
                         if (state is GetWeekAzkarRecordLoaded) {
@@ -123,10 +79,6 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                         }
                       })),
                     ),
-                    SizedBox(
-                      height: 23.h,
-                    ),
-                    const TotalBalanceNumber(),
                     SizedBox(
                       height: 23.h,
                     ),
@@ -196,43 +148,6 @@ class TabbarOfAzkarRecord extends StatefulWidget {
 }
 
 class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
-  // void swap(Zikr first, Zikr second)
-  // {
-  //   Zikr temp;
-  //   temp = first;
-  //   first = second;
-  //   second = temp;
-  // }
-  //
-  // void sortAzkarByNoOfRepetitions(List<Zikr> allAzkar) {
-  //   int currentRep = 0;
-  //   int nextRep = 0;
-  //   for (int j = 0; j < allAzkar.length-1; j++) {
-  //     for (int i = 0; i < allAzkar.length-1; i++) {
-  //       currentRep =
-  //           widget.allWeekAzkarRecordsById.entries.firstWhere((e) {
-  //             return e.key == allAzkar[i].id;
-  //           }, orElse: () => const MapEntry("", 0)).value;
-  //
-  //
-  //       nextRep =
-  //           widget.allWeekAzkarRecordsById.entries.firstWhere((e) {
-  //             return e.key == allAzkar[i + 1].id;
-  //           }, orElse: () => const MapEntry("", 0)).value;
-  //
-  //       if (currentRep < nextRep) {
-  //         swap(allAzkar[i], allAzkar[i + 1]);
-  //       }
-  //     }
-  //   }
-  // }
-  //
-  // @override
-  // void initState()
-  // {
-  //   super.initState();
-  //   sortAzkarByNoOfRepetitions( widget.allAzkar) ;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -247,20 +162,21 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                 labelPadding: const EdgeInsets.symmetric(horizontal: 5),
                 indicatorPadding: const EdgeInsets.symmetric(horizontal: 0),
                 indicator: BoxDecoration(
-                  color: appGreen,
+                  color: Theme.of(context).primaryColor,
                   borderRadius: BorderRadius.circular(13),
                 ),
                 labelColor: Colors.white,
-                labelStyle:
-                    cairoTextStyle(15.sp, FontWeight.w800, null, appGreen),
+                labelStyle: cairoTextStyle(15.sp, FontWeight.w800, null,
+                    Theme.of(context).primaryColor),
                 unselectedLabelColor: appDarkTextColor,
-                unselectedLabelStyle:
-                    cairoTextStyle(15.sp, FontWeight.w800, null, appGreen),
+                unselectedLabelStyle: cairoTextStyle(15.sp, FontWeight.w800,
+                    null, Theme.of(context).primaryColor),
                 tabs: [
                   Container(
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: appGreen),
+                        border: Border.all(
+                            width: 1, color: Theme.of(context).primaryColor),
                         borderRadius: BorderRadius.circular(13),
                       ),
                       child: const Tab(
@@ -269,7 +185,8 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                      border: Border.all(width: 1, color: appGreen),
+                      border: Border.all(
+                          width: 1, color: Theme.of(context).primaryColor),
                       borderRadius: BorderRadius.circular(13),
                     ),
                     child: const Tab(
@@ -316,7 +233,9 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(width: 1, color: appGreen),
+                            border: Border.all(
+                                width: 1,
+                                color: Theme.of(context).primaryColor),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -379,7 +298,9 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                           width: double.infinity,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(width: 1, color: appGreen),
+                            border: Border.all(
+                                width: 1,
+                                color: Theme.of(context).primaryColor),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -422,66 +343,48 @@ class TotalBalanceNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: appGreen,
-          border: Border.all(width: 1, color: appGreen),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                color: appGreen,
-                padding: EdgeInsets.all(13.w),
-                child: BlocBuilder<GetGeneralDataCubit, GetGeneralDataState>(
-                  builder: (context, state) {
-                    if (state is GetGeneralDataLoaded) {
-                      return AutoSizeText(
-                        state.generalData.accountBalance.toString(),
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        style: cairoTextStyle(
-                            19.sp, FontWeight.w800, null, Colors.white),
-                      );
-                    } else if (state is GetGeneralDataError) {
-                      return AutoSizeText(
-                        "Error",
-                        maxLines: 1,
-                        textAlign: TextAlign.center,
-                        style: cairoTextStyle(
-                            19.sp, FontWeight.w800, null, Colors.white),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                ),
-              ),
-            ),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(20)),
-                ),
-                padding: EdgeInsets.all(13.w),
-                child: Text(
-                  "رصيدك",
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 22,horizontal: 16),
+      width: double.infinity,
+      decoration: BoxDecoration(
+        color: Theme.of(context).cardColor,
+        // border: Border.all(width: 1, color: Theme.of(context).primaryColor),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          BlocBuilder<GetGeneralDataCubit, GetGeneralDataState>(
+            builder: (context, state) {
+              if (state is GetGeneralDataLoaded) {
+                return AutoSizeText(
+                  ArabicNumbers().convert(state.generalData.accountBalance).toString(),
+                  maxLines: 1,
                   textAlign: TextAlign.center,
-                  style: cairoTextStyle(19.sp, FontWeight.w800, null, appGreen),
-                ),
-              ),
-            ),
-          ],
-        ),
+                  style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: Theme.of(context).primaryColor)
+                );
+              } else if (state is GetGeneralDataError) {
+                return AutoSizeText(
+                  "Error",
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
+                  style: cairoTextStyle(
+                      19.sp, FontWeight.w800, null, Colors.white),
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          ),
+          Text(
+            "رصيد الذكر",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headlineMedium,
+          ),
+        ],
       ),
     );
   }

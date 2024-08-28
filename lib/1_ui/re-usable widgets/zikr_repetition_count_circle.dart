@@ -35,7 +35,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
                   child: CircleAvatar(
                     radius: 35,
                     backgroundColor:
-                        appGreen ,
+                        Theme.of(context).primaryColor ,
                     child: Center(
                       child: CircleAvatar(
                         radius: 33,
@@ -44,8 +44,8 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
                         child: Center(
                           child: Text(
                             count.toString(),
-                            style: const TextStyle(
-                              color: appGreen,
+                            style:  TextStyle(
+                              color: Theme.of(context).primaryColor,
                               fontWeight: FontWeight.w700,
                               fontSize: 24,
                             ),
@@ -157,10 +157,10 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
           const SizedBox(
             height: 10,
           ),
-          const Text(
+           Text(
             "عدد التكرار",
             style: TextStyle(
-              color:appGreen ,
+              color:Theme.of(context).primaryColor ,
               fontWeight: FontWeight.w500,
               fontSize: 20,
             ),

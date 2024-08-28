@@ -8,21 +8,19 @@ import '../../../core/consts/colors.dart';
 
 class RectangularZikrHomeCard extends StatelessWidget {
   const RectangularZikrHomeCard(
-      {super.key, required this.title, required this.imageAssetUrl});
+      {super.key, required this.title, required this.imageAssetUrl,required this.onTap});
   final String title;
   final String imageAssetUrl;
-
+  final Function() onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pushNamed(morningAzkarScreen);
-      },
+      onTap:onTap,
       child: Container(
         height: ScreenUtils.getScreenHeight(context) / 6 - 10,
         width: ScreenUtils.getScreenWidth(context) / 2 - 30,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: Theme.of(context).brightness==Brightness.light?Color(0xffF3F3F3):Color.fromRGBO(26, 26, 26, 1),
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),

@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/1_ui/re-usable%20widgets/back_button.dart';
+import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/delete_single_zikr_record/delete_single_zikr_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
@@ -38,10 +38,7 @@ class _EditCustomZikerScreenState extends State<EditCustomZikerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appWhite,
-      appBar: AppBar(
-        leading: const CustomBackButton(),
-      ),
-      body: Center(
+           body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.only(
@@ -49,8 +46,8 @@ class _EditCustomZikerScreenState extends State<EditCustomZikerScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
+              children: [TitleWithBackButton(title: "رصيد الذكر",),
+                 Padding(
                   padding: EdgeInsets.only(right: 15.0, left: 15, bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,7 +57,7 @@ class _EditCustomZikerScreenState extends State<EditCustomZikerScreen> {
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w700,
-                            color: appGreen),
+                            color: Theme.of(context).primaryColor),
                       ),
                     ],
                   ),
@@ -112,8 +109,8 @@ class _EditCustomZikerScreenState extends State<EditCustomZikerScreen> {
           focusedBorder: OutlineInputBorder(
             // Border when focused
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(
-                width: 2, color: appGreen), // Green border when focused
+            borderSide:  BorderSide(
+                width: 2, color: Theme.of(context).primaryColor), // Green border when focused
           ),
         ),
         maxLines: 5,
@@ -136,7 +133,7 @@ class _EditCustomZikerScreenState extends State<EditCustomZikerScreen> {
         width: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: appGreen,
+          color: Theme.of(context).primaryColor,
         ),
         child: const Center(
           child: Padding(

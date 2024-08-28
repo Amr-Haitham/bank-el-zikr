@@ -2,6 +2,7 @@ import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:bank_el_ziker/5_old_code/morning_azkar_card.dart';
 import 'package:bank_el_ziker/5_old_code/night_azkar_card.dart';
 import 'package:bank_el_ziker/5_old_code/situations_azkar_card.dart';
+import 'package:bank_el_ziker/app_router.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'rectangular_zikr_home_card.dart';
@@ -11,22 +12,26 @@ class AzkarHomeWidgets extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: Column(children: [
             RectangularZikrHomeCard(
-              title: 'أذكار الأحوال',
-              imageAssetUrl: ImagesUrls.prayingHands,
+              title: 'أذكار المساء',
+              imageAssetUrl: ImagesUrls.prayingInNight,onTap: () {
+                Navigator.of(context).pushNamed(nightAzkarScreen);
+              }
             ),
             const SizedBox(
               height: 15,
             ),
             RectangularZikrHomeCard(
-              title: 'تسبيح',
-              imageAssetUrl: ImagesUrls.masbaha,
+              title: 'أذكار الأحوال',
+              imageAssetUrl: ImagesUrls.prayingHands,onTap: () {
+                Navigator.of(context).pushNamed(situationsAzkarScreen);
+              }
             ),
           ]),
         ),
@@ -36,15 +41,21 @@ class AzkarHomeWidgets extends StatelessWidget {
         Expanded(
           child: Column(children: [
             RectangularZikrHomeCard(
-              title: 'أذكار المساء',
-              imageAssetUrl:ImagesUrls.prayingInNight,
+              title: 'أذكار الصباح',
+              imageAssetUrl: ImagesUrls.prayingInMorning,
+              onTap: () {
+                Navigator.of(context).pushNamed(morningAzkarScreen);
+              },
             ),
             const SizedBox(
               height: 15,
             ),
             RectangularZikrHomeCard(
-              title: 'أذكار الصباح',
-              imageAssetUrl: ImagesUrls.prayingInMorning,
+              title: 'تسبيح',
+              imageAssetUrl: ImagesUrls.masbaha,
+              onTap: () {
+                Navigator.of(context).pushNamed(tasbeehWerdScreen);
+              },
             ),
           ]),
         ),

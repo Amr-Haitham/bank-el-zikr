@@ -52,7 +52,7 @@ class RandomZikerContainer extends StatelessWidget {
       height: ScreenUtils.getScreenHeight(context) / 6,
       // width: ScreenUtils.getScreenWidth(context) - 50,
       decoration: BoxDecoration(
-        // border: Border.all(color: appGreen, width: 2),
+        // border: Border.all(color: Theme.of(context).primaryColor, width: 2),
         // color: Colors.black,
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
@@ -80,7 +80,7 @@ class RandomZikerContainer extends StatelessWidget {
   //       width: ScreenUtils.getScreenWidth(context) - 50,
   //       decoration: BoxDecoration(
   //       image: DecorationImage(image: AssetImage(ImagesUrls.randomZikrBackgroundLightTheme)),
-  //         // border: Border.all(color: appGreen, width: 2),
+  //         // border: Border.all(color: Theme.of(context).primaryColor, width: 2),
   //         borderRadius: BorderRadius.circular(10),
   //       ),
   //       child: const Padding(

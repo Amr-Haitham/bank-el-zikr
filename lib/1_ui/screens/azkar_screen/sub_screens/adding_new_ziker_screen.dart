@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/1_ui/re-usable%20widgets/back_button.dart';
+import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,9 +24,7 @@ class _AddNewZikrScreenState extends State<AddNewZikrScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: appWhite,
-      appBar: AppBar(
-        leading: const CustomBackButton(),
-      ),
+     
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
@@ -35,8 +33,8 @@ class _AddNewZikrScreenState extends State<AddNewZikrScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Padding(
+              children: [TitleWithBackButton(title: "رصيد الذكر",),
+                 Padding(
                   padding: EdgeInsets.only(right: 15.0, left: 15, bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -46,7 +44,7 @@ class _AddNewZikrScreenState extends State<AddNewZikrScreen> {
                         style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w700,
-                            color: appGreen),
+                            color: Theme.of(context).primaryColor),
                       ),
                     ],
                   ),
@@ -87,8 +85,8 @@ class _AddNewZikrScreenState extends State<AddNewZikrScreen> {
           focusedBorder: OutlineInputBorder(
             // Border when focused
             borderRadius: BorderRadius.circular(8),
-            borderSide: const BorderSide(
-                width: 2, color: appGreen), // Green border when focused
+            borderSide:  BorderSide(
+                width: 2, color: Theme.of(context).primaryColor), // Green border when focused
           ),
         ),
         maxLines: 5,
@@ -107,7 +105,7 @@ class _AddNewZikrScreenState extends State<AddNewZikrScreen> {
         width: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: appGreen,
+          color: Theme.of(context).primaryColor,
         ),
         child: const Center(
           child: Padding(

@@ -40,18 +40,17 @@ class _HomeScreenState extends State<HomeScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const SizedBox(
-                  height: 65,
+                  height: 30,
                 ),
-                DateSettingsWelcomeWidget(),
+                const DateSettingsWelcomeWidget(),
                 const ZikerBalanceWidget(),
                 const SizedBox(height: 20),
                 const AzkarHomeWidgets(),
                 const SizedBox(height: 20),
-                // const TasbeehCard(),
-                const SizedBox(height: 20),
                 const RandomZikerContainer(),
                 const SizedBox(height: 40),
                 shareWithFriends(),
+                const SizedBox(height: 20),
               ],
             ),
           ),
@@ -65,20 +64,22 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         Share.share(InitialData.shareMessage);
       },
-      child: const Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
             Icons.share,
-            color: appGreen,
+            color: Theme.of(context).primaryColor,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
           Text(
             "شارك الأجر مع أصدقاءك",
             style: TextStyle(
-                color: appGreen, fontSize: 16, fontWeight: FontWeight.w700),
+                color: Theme.of(context).primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.w700),
           )
         ],
       ),

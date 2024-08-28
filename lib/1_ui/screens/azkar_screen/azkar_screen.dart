@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../3_data/models/zikr.dart';
-import '../../re-usable widgets/back_button.dart';
+import '../../re-usable widgets/title_with_back_button.dart';
 import 'components/add_zikr_button.dart';
 
 // List<Zikr> listOfAllAzkar = [];
@@ -55,13 +55,6 @@ class _AzkarScreenState extends State<AzkarScreen> {
       child: SafeArea(
         child: Scaffold(
             backgroundColor: appWhite,
-            appBar: AppBar(
-              surfaceTintColor: appWhite,
-              // backgroundColor: appGreen,
-              leading: const CustomBackButton(
-                color: appGreen,
-              ),
-            ),
             body: Stack(
               children: [
                 Hero(
@@ -75,7 +68,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: [TitleWithBackButton(title: "رصيد الذكر",),
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       //   children: [
@@ -85,7 +78,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       //         },
                       //         icon: Icon(
                       //           Icons.arrow_circle_left_outlined,
-                      //           color: appGreen,
+                      //           color: Theme.of(context).primaryColor,
                       //           size: 30.sp,
                       //         ),
                       //         style: TextButton.styleFrom(
@@ -93,7 +86,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       //         label: Text(
                       //           "رجوع",
                       //           style: cairoTextStyle(
-                      //               12.sp, FontWeight.w800, null, appGreen),
+                      //               12.sp, FontWeight.w800, null, Theme.of(context).primaryColor),
                       //         )),
                       //     // Row(
                       //     //   mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +95,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       //     //     Text(
                       //     //       "إختر الذكر",
                       //     //       style: cairoTextStyle(
-                      //     //           9.sp, FontWeight.w800, null, appGreen),
+                      //     //           9.sp, FontWeight.w800, null, Theme.of(context).primaryColor),
                       //     //     ),
                       //     //     SizedBox(
                       //     //       width: 5.w,
@@ -112,17 +105,17 @@ class _AzkarScreenState extends State<AzkarScreen> {
                       //     //       //     horizontal: 16.w, vertical: 6.sp),
                       //     //       // decoration: BoxDecoration(
                       //     //       //     borderRadius: BorderRadius.circular(11),
-                      //     //       //     color: appGreen),
+                      //     //       //     color: Theme.of(context).primaryColor),
                       //     //       child: Icon(
                       //     //         Icons.menu_book,
-                      //     //         color: appGreen,
+                      //     //         color: Theme.of(context).primaryColor,
                       //     //       ),
                       //     //     ),
                       //     //   ],
                       //     // )
                       //   ],
                       // ),
-                      const Padding(
+                       Padding(
                         padding:
                             EdgeInsets.only(right: 15.0, left: 15, bottom: 15),
                         child: Row(
@@ -133,7 +126,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                               style: TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.w700,
-                                  color: appGreen),
+                                  color: Theme.of(context).primaryColor),
                             ),
                             SizedBox(
                               width: 10,
@@ -141,7 +134,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                             Icon(
                               Icons.menu_book,
                               size: 35,
-                              color: appGreen,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ],
                         ),
@@ -261,7 +254,7 @@ class ListTileOfZikr extends StatelessWidget {
                     isSelected
                         ? "assets/images/checked.png"
                         : "assets/images/unchecked.png",
-                    color: isSelected ? appGreen : appDarkTextColor,
+                    color: isSelected ? Theme.of(context).primaryColor : appDarkTextColor,
                   ),
                 ),
                 Expanded(
@@ -285,7 +278,7 @@ class ListTileOfZikr extends StatelessWidget {
                           zikr.content,
                           textDirection: TextDirection.rtl,
                           style: cairoTextStyle(
-                              20.sp, FontWeight.w800, 1.25, appGreen),
+                              20.sp, FontWeight.w800, 1.25, Theme.of(context).primaryColor),
                         ),
                       ),
                       Padding(

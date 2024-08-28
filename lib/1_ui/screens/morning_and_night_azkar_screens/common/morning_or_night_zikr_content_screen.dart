@@ -89,8 +89,8 @@ class _MorningOrNightZikrContentScreenState
             Text(
               zikrTitle,
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                color: appGreen,
+              style:  TextStyle(
+                color: Theme.of(context).primaryColor,
                 fontWeight: FontWeight.w700,
                 fontSize: 24,
               ),
@@ -141,10 +141,10 @@ class _MorningOrNightZikrContentScreenState
       child: Container(
         width: widthOfNextAndPreviousButtons,
         decoration: BoxDecoration(
-          color: (currentZikrIndex < indexOfLastZikr ? appGreen : Colors.white),
+          color: (currentZikrIndex < indexOfLastZikr ? Theme.of(context).primaryColor : Colors.white),
           border: Border.all(
             color:
-                (currentZikrIndex < indexOfLastZikr ? Colors.white : appGreen),
+                (currentZikrIndex < indexOfLastZikr ? Colors.white : Theme.of(context).primaryColor),
           ),
         ),
         child: Padding(
@@ -156,7 +156,7 @@ class _MorningOrNightZikrContentScreenState
                 Icons.arrow_back_ios,
                 color: (currentZikrIndex < indexOfLastZikr
                     ? Colors.white
-                    : appGreen),
+                    : Theme.of(context).primaryColor),
               ),
               const SizedBox(
                 width: 5,
@@ -167,7 +167,7 @@ class _MorningOrNightZikrContentScreenState
                   fontSize: 18,
                   color: (currentZikrIndex < indexOfLastZikr
                       ? Colors.white
-                      : appGreen),
+                      : Theme.of(context).primaryColor),
                 ),
               ),
             ],
@@ -190,10 +190,10 @@ class _MorningOrNightZikrContentScreenState
         width: widthOfNextAndPreviousButtons,
         decoration: BoxDecoration(
           color:
-              (currentZikrIndex > indexOfFirstZikr ? appGreen : Colors.white),
+              (currentZikrIndex > indexOfFirstZikr ? Theme.of(context).primaryColor : Colors.white),
           border: Border.all(
             color:
-                (currentZikrIndex > indexOfFirstZikr ? Colors.white : appGreen),
+                (currentZikrIndex > indexOfFirstZikr ? Colors.white : Theme.of(context).primaryColor),
           ),
         ),
         child: Padding(
@@ -207,7 +207,7 @@ class _MorningOrNightZikrContentScreenState
                   fontSize: 18,
                   color: (currentZikrIndex > indexOfFirstZikr
                       ? Colors.white
-                      : appGreen),
+                      : Theme.of(context).primaryColor),
                 ),
               ),
               const SizedBox(
@@ -217,7 +217,7 @@ class _MorningOrNightZikrContentScreenState
                 Icons.arrow_forward_ios,
                 color: (currentZikrIndex > indexOfFirstZikr
                     ? Colors.white
-                    : appGreen),
+                    : Theme.of(context).primaryColor),
               ),
             ],
           ),

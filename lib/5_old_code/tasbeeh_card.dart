@@ -19,13 +19,13 @@ class TasbeehCard extends StatelessWidget {
           height: ScreenUtils.getScreenHeight(context) / 7.5,
           width: ScreenUtils.getScreenWidth(context) - 50,
           decoration: BoxDecoration(
-            color: appGreen,
-            border: Border.all(color: appGreen, width: 0),
+            color: Theme.of(context).primaryColor,
+            border: Border.all(color: Theme.of(context).primaryColor, width: 0),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Stack(
             children: [
-              bigWhiteCircleWithSmallerYellowCirclesOnIt(),
+              bigWhiteCircleWithSmallerYellowCirclesOnIt(context),
 
               const Positioned(
                 right: 10,
@@ -50,10 +50,10 @@ class TasbeehCard extends StatelessWidget {
     );
   }
 
-  Widget bigWhiteCircleWithSmallerYellowCirclesOnIt(){
+  Widget bigWhiteCircleWithSmallerYellowCirclesOnIt(context){
     return Stack(
       children: [
-        const Positioned(
+         Positioned(
           left: -35,
           top: 30,
           child: CircleAvatar(
@@ -61,46 +61,46 @@ class TasbeehCard extends StatelessWidget {
             backgroundColor: Colors.white,
             child: CircleAvatar(
               radius: 90,
-              backgroundColor: appGreen,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
         ),
         Positioned(
           left: 15,
           top: 22,
-          child: smallGreenCircle(),
+          child: smallGreenCircle(context),
         ),
         Positioned(
           left: 47,
           top: 18,
-          child: smallGreenCircle(),
+          child: smallGreenCircle(context),
         ),
         Positioned(
           left: 78,
           top: 25,
-          child: smallGreenCircle(),
+          child: smallGreenCircle(context),
         ),
         Positioned(
           left: 105,
           top: 40,
-          child: smallGreenCircle(),
+          child: smallGreenCircle(context),
         ),
         Positioned(
           left: 123,
           top: 65,
-          child: smallGreenCircle(),
+          child: smallGreenCircle(context),
         ),
       ],
     );
   }
 
-  Widget smallGreenCircle() {
-    return const CircleAvatar(
+  Widget smallGreenCircle(context) {
+    return  CircleAvatar(
       radius: 14,
       backgroundColor: Colors.yellow,
       child: CircleAvatar(
         radius: 11,
-        backgroundColor: appGreen,
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }

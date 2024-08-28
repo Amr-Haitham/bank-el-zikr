@@ -33,27 +33,28 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
       },
       child: Container(
         height: ScreenUtils.getScreenHeight(context) / 6,
-     
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
           
               IconButton.filled(
                   onPressed: () {},
                   // color: Colors.black,
                   style:
-                      IconButton.styleFrom(backgroundColor: appGreen),
+                      IconButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
                   icon: Icon(
                     Icons.settings,
                     color: Colors.black,
                   )),
               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "مرحبا بعودتك",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: appGreen,fontSize: 30),
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Theme.of(context).primaryColor,fontSize: 30),
                   ),
                   SizedBox(
                     height: 5,

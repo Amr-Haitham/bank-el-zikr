@@ -8,8 +8,9 @@ class AppTheme {
   //amr change all colors here
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
-    primaryColor: const Color(0xff34C759),
-brightness: Brightness.light,
+    primaryColor: Color.fromRGBO(52, 199, 89, 1.0),
+
+    brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.black,
         selectionColor: Color.fromARGB(101, 255, 89, 97),
@@ -37,7 +38,7 @@ brightness: Brightness.light,
     dialogBackgroundColor: Colors.white,
     // unselectedWidgetColor: Colors.grey,
     // dividerColor: Colors.grey[300],
-    cardColor: Color(0xffF3F3F3),
+    cardColor:Color.fromRGBO(237, 250, 237, 1) ,
     dialogTheme: DialogTheme(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 255, 246, 247),
@@ -61,13 +62,13 @@ brightness: Brightness.light,
 
   static final ThemeData darkTheme = ThemeData(
     primarySwatch: createMaterialColor(const Color(0xffFF5961)),
-brightness: Brightness.dark,
+    brightness: Brightness.dark,
     primaryColor: const Color(0xff30D158),
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.black,
         selectionColor: Color.fromARGB(137, 255, 89, 97),
         selectionHandleColor: Color(0xffFF5961)),
-    scaffoldBackgroundColor: const Color(0xff27313D),
+    scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
     fontFamily: GoogleFonts.tajawal().fontFamily,
     inputDecorationTheme: const InputDecorationTheme(
         focusedBorder:
@@ -92,7 +93,7 @@ brightness: Brightness.dark,
     dialogBackgroundColor: const Color(0xff1E1E1E),
     // unselectedWidgetColor: Colors.white60,
     // dividerColor: Colors.white12,
-    cardColor: const Color(0xff1A1A1A),
+    cardColor: const Color.fromRGBO(29, 57, 33, 1),
     dialogTheme: DialogTheme(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(

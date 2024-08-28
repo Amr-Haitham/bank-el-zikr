@@ -24,28 +24,28 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
               ),
             ),
           ),
-          const Positioned(
+           Positioned(
             top: 15,
             left: 187,
             child: CircleAvatar(
               radius: 55,
-              backgroundColor: appGreen,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
-          const Positioned(
+           Positioned(
             top: -0,
             left: 247,
             child: CircleAvatar(
               radius: 64,
-              backgroundColor: appGreen,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
-          const Positioned(
+           Positioned(
             top: -11,
             left: 330,
             child: CircleAvatar(
               radius: 64,
-              backgroundColor: appGreen,
+              backgroundColor: Theme.of(context).primaryColor,
             ),
           ),
           Positioned(
@@ -60,7 +60,7 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                       width: 71,
                       height: 28,
                       decoration: BoxDecoration(
-                        //   color: appGreen,
+                        //   color: Theme.of(context).primaryColor,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       // child: const Center(
@@ -73,12 +73,12 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                       //   ),
                       // ),
                     ),
-                    const Text(
+                     Text(
                       "أذكار الصباح",
                       style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          color: appGreen),
+                          color: Theme.of(context).primaryColor),
                     ),
                   ],
                 )),
@@ -98,7 +98,7 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/Vectorback_button.png',
                     fit: BoxFit.contain,
-                    color: appGreen,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ),

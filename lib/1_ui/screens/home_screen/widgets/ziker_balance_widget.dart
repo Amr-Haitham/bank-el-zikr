@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:flutter/material.dart';
@@ -38,8 +39,8 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
             image: DecorationImage(
                 fit: BoxFit.cover,
                 image: AssetImage(ImagesUrls.zikrBalanceBackgroundLightThemeHomeScreen))
-            // color: appGreen,
-            // border: Border.all(color: appGreen, width: 0),
+            // color: Theme.of(context).primaryColor,
+            // border: Border.all(color: Theme.of(context).primaryColor, width: 0),
             // borderRadius: BorderRadius.circular(10),
             ),
         child: Padding(
@@ -57,35 +58,37 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
               IconButton.filled(
                   onPressed: () {},
                   // color: Colors.black,
-                  style: IconButton.styleFrom(backgroundColor: Color(0xff1A1A1A)),
+                  style: IconButton.styleFrom(backgroundColor: const Color(0xff1A1A1A)),
                   
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back,
                     color: Colors.white,
                   )),
               Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     "رصيد الذكر",
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   BlocBuilder<GetGeneralDataCubit, GetGeneralDataState>(
                     builder: (context, state) {
                       if (state is GetGeneralDataLoaded) {
                         return AutoSizeText(
-                          state.generalData.accountBalance.toString(),
+                          ArabicNumbers().convert(state.generalData.accountBalance).toString(),
                           maxLines: 1,
-                          textAlign: TextAlign.center,
+                          
+                          textAlign: TextAlign.right,
                           style: Theme.of(context).textTheme.headlineLarge,
                         );
                       } else if (state is GetGeneralDataError) {
                         return AutoSizeText(
                           "Error",
                           maxLines: 1,
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.right,
                           style: cairoTextStyle(
                               19.sp, FontWeight.w800, null, Colors.white),
                         );

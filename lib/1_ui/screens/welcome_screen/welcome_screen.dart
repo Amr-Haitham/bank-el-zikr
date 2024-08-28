@@ -30,7 +30,7 @@
 //                   padding:
 //                       EdgeInsets.symmetric(horizontal: 47.w, vertical: 10.h),
 //                   decoration: BoxDecoration(
-//                     color: appGreen,
+//                     color: Theme.of(context).primaryColor,
 //                     borderRadius: BorderRadius.only(
 //                       bottomLeft: Radius.circular(45.w),
 //                       bottomRight: Radius.circular(45.w),
@@ -165,7 +165,7 @@
 //                                     'assets/images/share.png',
 //                                     width: 37,
 //                                     height: 37,
-//                                     color: appGreen,
+//                                     color: Theme.of(context).primaryColor,
 //                                   ),
 //                                   const SizedBox(
 //                                     width: 11,
@@ -176,7 +176,7 @@
 //                                       "شارك الأجر مع أصدقائك",
 //                                       textAlign: TextAlign.center,
 //                                       style: cairoTextStyle(12.sp,
-//                                           FontWeight.w700, null, appGreen),
+//                                           FontWeight.w700, null, Theme.of(context).primaryColor),
 //                                     ),
 //                                   ),
 //                                 ],

@@ -51,8 +51,8 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, _) {
-          return MaterialApp(
-              theme: AppTheme.darkTheme,
+          return MaterialApp(locale: Locale("ar"),
+              theme: AppTheme.lightTheme,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: appRouter.generateRouter);
         });
