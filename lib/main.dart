@@ -52,7 +52,7 @@ class MyApp extends StatelessWidget {
         splitScreenMode: true,
         builder: (context, _) {
           return MaterialApp(
-              theme: AppTheme.lightTheme,
+              theme: AppTheme.darkTheme,
               debugShowCheckedModeBanner: false,
               onGenerateRoute: appRouter.generateRouter);
         });

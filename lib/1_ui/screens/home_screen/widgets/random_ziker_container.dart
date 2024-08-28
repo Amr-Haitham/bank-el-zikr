@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_random_prayer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,11 +28,15 @@ class RandomZikerContainer extends StatelessWidget {
           return prayerContainer(prayer, context);
         } else if (state is GetRandomPrayerError) {
           return Center(
-            child: backupPrayer(context),
+            child: prayerContainer(
+                "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+                context),
           );
         } else {
           return Center(
-            child: backupPrayer(context),
+            child: prayerContainer(
+                "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+                context),
           );
         }
       },
@@ -39,62 +44,61 @@ class RandomZikerContainer extends StatelessWidget {
   }
 
   Widget prayerContainer(String prayer, BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        height: ScreenUtils.getScreenHeight(context) / 5,
-        width: ScreenUtils.getScreenWidth(context) - 50,
-        decoration: BoxDecoration(
-          border: Border.all(color: appGreen, width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Text(
-                prayer,
-                textAlign: TextAlign.start,
-                textDirection: TextDirection.rtl,
-                style: const TextStyle(
-                    // height: 1.5,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: appDarkTextColor),
-              ),
-            ),
+    return Container(
+      // margin: EdgeInsets.symmetric(
+      //   horizontal: 15,
+      // ),
+      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      height: ScreenUtils.getScreenHeight(context) / 6,
+      // width: ScreenUtils.getScreenWidth(context) - 50,
+      decoration: BoxDecoration(
+        // border: Border.all(color: appGreen, width: 2),
+        // color: Colors.black,
+        borderRadius: BorderRadius.circular(8),
+        image: DecorationImage(
+          fit: BoxFit.cover,
+            image: AssetImage(Theme.of(context).brightness == Brightness.dark?ImagesUrls.randomZikrBackgroundDarkTheme:ImagesUrls.randomZikrBackgroundLightTheme)),
+      ),
+      child: Center(
+        child: SingleChildScrollView(
+          child: Text(
+            prayer,
+            textAlign: TextAlign.start,
+            textDirection: TextDirection.rtl,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
       ),
     );
   }
 
-  Widget backupPrayer(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Container(
-        height: ScreenUtils.getScreenHeight(context) / 8,
-        width: ScreenUtils.getScreenWidth(context) - 50,
-        decoration: BoxDecoration(
-          border: Border.all(color: appGreen, width: 2),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(10),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Text(
-                "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
-                textAlign: TextAlign.end,
-                style: TextStyle(
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
-                    color: appDarkTextColor),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  // Widget backupPrayer(BuildContext context) {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(horizontal: 20),
+  //     child: Container(
+  //       height: ScreenUtils.getScreenHeight(context) / 8,
+  //       width: ScreenUtils.getScreenWidth(context) - 50,
+  //       decoration: BoxDecoration(
+  //       image: DecorationImage(image: AssetImage(ImagesUrls.randomZikrBackgroundLightTheme)),
+  //         // border: Border.all(color: appGreen, width: 2),
+  //         borderRadius: BorderRadius.circular(10),
+  //       ),
+  //       child: const Padding(
+  //         padding: EdgeInsets.all(10),
+  //         child: Center(
+  //           child: SingleChildScrollView(
+  //             child: Text(
+  //               "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+  //               textAlign: TextAlign.end,
+  //               style: TextStyle(
+  //                   fontWeight: FontWeight.w700,
+  //                   fontSize: 16,
+  //                   color: appDarkTextColor),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
 }

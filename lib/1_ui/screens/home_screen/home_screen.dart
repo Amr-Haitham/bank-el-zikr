@@ -1,8 +1,9 @@
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_circles.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/situations_azkar_card.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/morning_and_night_azkar_cards_in_one_column.dart';
+import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
+import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
+import 'package:bank_el_ziker/5_old_code/situations_azkar_card.dart';
+import 'package:bank_el_ziker/5_old_code/morning_and_night_azkar_cards_in_one_column.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/tasbeeh_card.dart';
+import 'package:bank_el_ziker/5_old_code/tasbeeh_card.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_widget.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
@@ -30,25 +31,29 @@ class _HomeScreenState extends State<HomeScreen> {
         }
       },
       child: Scaffold(
-        backgroundColor: appWhite,
-        body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                height: 65,
-              ),
-              const ZikerBalanceWidget(),
-              const SizedBox(height: 20),
-              const AzkarCicles(),
-              const SizedBox(height: 20),
-              const TasbeehCard(),
-              const SizedBox(height: 20),
-              const RandomZikerContainer(),
-              const SizedBox(height: 40),
-              shareWithFriends(),
-            ],
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const SizedBox(
+                  height: 65,
+                ),
+                DateSettingsWelcomeWidget(),
+                const ZikerBalanceWidget(),
+                const SizedBox(height: 20),
+                const AzkarHomeWidgets(),
+                const SizedBox(height: 20),
+                // const TasbeehCard(),
+                const SizedBox(height: 20),
+                const RandomZikerContainer(),
+                const SizedBox(height: 40),
+                shareWithFriends(),
+              ],
+            ),
           ),
         ),
       ),
@@ -80,42 +85,42 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget background() {
-    return SizedBox(
-      height: ScreenUtils.getScreenHeight(context) - 600,
-      width: ScreenUtils.getScreenWidth(context) - 50,
-      child: Stack(
-        children: [
-          Positioned(
-            right: -55,
-            bottom: -400,
-            child: SizedBox(
-              height: ScreenUtils.getScreenHeight(context) - 200,
-              child: Image.asset("assets/images/background.png"),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget background() {
+  //   return SizedBox(
+  //     height: ScreenUtils.getScreenHeight(context) - 600,
+  //     width: ScreenUtils.getScreenWidth(context) - 50,
+  //     child: Stack(
+  //       children: [
+  //         Positioned(
+  //           right: -55,
+  //           bottom: -400,
+  //           child: SizedBox(
+  //             height: ScreenUtils.getScreenHeight(context) - 200,
+  //             child: Image.asset("assets/images/background.png"),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget allAzkarWidget() {
-    return Stack(
-      children: [
-        background(),
-        const Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SituationsAzkarCard(),
-                MonringAndNightAzkarCardsInOneColumn(),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget allAzkarWidget() {
+  //   return Stack(
+  //     children: [
+  //       background(),
+  //       const Column(
+  //         children: [
+  //           Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               SituationsAzkarCard(),
+  //               MonringAndNightAzkarCardsInOneColumn(),
+  //             ],
+  //           ),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 }

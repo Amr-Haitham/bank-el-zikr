@@ -9,13 +9,13 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
     primaryColor: const Color(0xff34C759),
-
+brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.black,
         selectionColor: Color.fromARGB(101, 255, 89, 97),
         selectionHandleColor: Color(0xffFF5961)),
     scaffoldBackgroundColor: const Color(0xffffffff),
-    fontFamily: GoogleFonts.aBeeZee().fontFamily,
+    fontFamily: GoogleFonts.tajawal().fontFamily,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
     ),
@@ -37,7 +37,7 @@ class AppTheme {
     dialogBackgroundColor: Colors.white,
     // unselectedWidgetColor: Colors.grey,
     // dividerColor: Colors.grey[300],
-    cardColor: Colors.white,
+    cardColor: Color(0xffF3F3F3),
     dialogTheme: DialogTheme(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 255, 246, 247),
@@ -61,14 +61,14 @@ class AppTheme {
 
   static final ThemeData darkTheme = ThemeData(
     primarySwatch: createMaterialColor(const Color(0xffFF5961)),
-
-    primaryColor: const Color(0xffFF5961),
+brightness: Brightness.dark,
+    primaryColor: const Color(0xff30D158),
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.black,
         selectionColor: Color.fromARGB(137, 255, 89, 97),
         selectionHandleColor: Color(0xffFF5961)),
     scaffoldBackgroundColor: const Color(0xff27313D),
-    fontFamily: GoogleFonts.aBeeZee().fontFamily,
+    fontFamily: GoogleFonts.tajawal().fontFamily,
     inputDecorationTheme: const InputDecorationTheme(
         focusedBorder:
             OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
@@ -92,7 +92,7 @@ class AppTheme {
     dialogBackgroundColor: const Color(0xff1E1E1E),
     // unselectedWidgetColor: Colors.white60,
     // dividerColor: Colors.white12,
-    cardColor: const Color(0xff1E1E1E),
+    cardColor: const Color(0xff1A1A1A),
     dialogTheme: DialogTheme(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(

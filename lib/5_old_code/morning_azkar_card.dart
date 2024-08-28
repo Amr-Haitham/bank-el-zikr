@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
-import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../core/consts/colors.dart';
+import '../4_utility_functions/screen_utils.dart';
+import '../app_router.dart';
+import '../1_ui/core/consts/colors.dart';
 
-
-class NightAzkarCard extends StatelessWidget {
-  const NightAzkarCard({super.key});
+class MorningAzkarCard extends StatelessWidget {
+  const MorningAzkarCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () {
-      Navigator.of(context).pushNamed('nightAzkarScreen');
-    },
-    child:
-    Column(
+      onTap: () {
+        Navigator.of(context).pushNamed(morningAzkarScreen);
+      },
+      child: Column(
         children: [
-          CircleAvatar(
-            radius: 34,
-            backgroundColor: appGreen,
-            child:CircleAvatar(
-              radius: 33,
-              backgroundColor: appWhite,
-              child: SizedBox(height: 66, width: 66, child:
-              Image.asset('assets/images/night_circle_components.png', fit: BoxFit.contain,),
-              ),),),
+          SizedBox(
+            height: 68,
+            width: 68,
+            child: Image.asset('assets/images/morning_circle.png'),
+          ),
           const Text(
-            "أذكار المساء",
+            "أذكار الصباح",
             textAlign: TextAlign.end,
             style: TextStyle(
-                fontWeight: FontWeight.w700, fontSize: 16, color: appDarkTextColor),
+                fontWeight: FontWeight.w700,
+                fontSize: 16,
+                color: appDarkTextColor),
           ),
         ],
       ),
@@ -36,14 +33,14 @@ class NightAzkarCard extends StatelessWidget {
   }
 }
 
-class RecuangularNightAzkarCard extends StatelessWidget {
-  const RecuangularNightAzkarCard({super.key});
+class RectangularMorningAzkarCard extends StatelessWidget {
+  const RectangularMorningAzkarCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed('nightAzkarScreen');
+        Navigator.of(context).pushNamed(morningAzkarScreen);
       },
       child: Container(
         height: ScreenUtils.getScreenHeight(context) / 6 - 10,
@@ -62,7 +59,7 @@ class RecuangularNightAzkarCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "أذكار المساء",
+                      "أذكار الصباح",
                       textAlign: TextAlign.end,
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
@@ -73,26 +70,18 @@ class RecuangularNightAzkarCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                left: 0,
-                top: 80,
-                child: Image.asset(
-                  'assets/images/stars1.png',
-                  scale: 2.5,
-                ),
-              ),
-              Positioned(
                 left: 10,
                 top: 50,
                 child: Image.asset(
-                  'assets/images/stars2.png',
-                  scale: 2.5,
+                  'assets/images/sun.png',
+                  scale: 3,
                 ),
               ),
               Positioned(
-                bottom: 10,
-                right: 10,
+                bottom: 0,
+                right: 0,
                 child: Image.asset(
-                  'assets/images/moon.png',
+                  'assets/images/clouds.png',
                   scale: 3.5,
                 ),
               ),
