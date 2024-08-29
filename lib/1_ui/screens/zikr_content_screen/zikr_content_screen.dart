@@ -12,7 +12,7 @@ class ZikrContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: appWhite,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(right: 30.w, left: 30.w),

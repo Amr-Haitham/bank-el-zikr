@@ -11,7 +11,7 @@ class AddCustomZikrCubit extends Cubit<AddCustomZikrState> {
   AddCustomZikrCubit() : super(AddCustomZikrInitial());
   final HiveDB _hiveDB = HiveDB();
   //this function adds a custom zikr (zikr made by user) to the azkar list
-  void addCustomZikr({required String customZikrContent}) async {
+  void addCustomZikr({required String customZikrContent,required String? customZikrDescription}) async {
     emit(AddCustomZikrLoading());
     try {
 
@@ -20,7 +20,7 @@ class AddCustomZikrCubit extends Cubit<AddCustomZikrState> {
           isCustomZikr: true,
           content: customZikrContent,
           id: azkarBox.values.isEmpty ? 0 : azkarBox.values.last.id + 1,
-          description: null);
+          description: customZikrDescription);
 
       azkarBox.add(newZikr);
       emit(AddCustomZikrLoaded(zikr: newZikr));

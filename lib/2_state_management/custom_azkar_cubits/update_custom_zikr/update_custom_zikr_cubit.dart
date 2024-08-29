@@ -14,6 +14,7 @@ class UpdateCustomZikrCubit extends Cubit<UpdateCustomZikrState> {
   void updateCustomZikr(
       {required Zikr zikr,
       required String newContent,
+      required String newZikrDescription,
       required int zikrIndex}) async {
     emit(UpdateCustomZikrLoading());
     try {
@@ -24,6 +25,7 @@ class UpdateCustomZikrCubit extends Cubit<UpdateCustomZikrState> {
       // I get the zikr by zikrIndex, then update it and put it exactly in its place
 
       zikr.content = newContent;
+      zikr.description = newZikrDescription;
       azkarBox.putAt(zikrIndex, zikr);
       emit(UpdateCustomZikrLoaded());
     } catch (e) {

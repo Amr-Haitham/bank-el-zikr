@@ -1,7 +1,7 @@
 import 'package:bank_el_ziker/1_ui/screens/account_balance_screen/account_balance_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/azkar_screen/azkar_screen.dart';
-import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/adding_new_ziker_screen.dart';
-import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/edit_custom_ziker_screen.dart';
+import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/adding_new_ziker_popup.dart';
+import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/edit_custom_ziker_popup.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/home_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/welcome_screen/welcome_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_screen.dart';
@@ -29,7 +29,6 @@ import '3_data/models/zikr.dart';
 const welcomeScreenUrl = "welcomScreen";
 const homeScreen = "/";
 const azkarScreenUrl = "/azkarScreenUrl";
-const zikerScreen = "zikerScreen";
 const accountBalanceUrl = "/accountBalanceUrl";
 // const landingScreen = '/';
 // const animatedSecondScreen = '/';
@@ -39,38 +38,24 @@ const tasbeehWerdScreen = 'tasbeehWerdScreen';
 const dailyAzkarScreen = 'dailyAzkarScreen';
 const situationsAzkarScreen = 'conditionalAzkarScreen';
 const zikrContentScreen = 'zikrContentScreen';
-const addNewZikrScreen = 'addNewZikrScreen';
-const editCustomZikrScreen = 'editCustomZikrScreen';
+// const addNewZikrPopUp = 'addNewZikrPopUp';
+// const editCustomZikrPopup = 'editCustomZikrPopup';
 
 class AppRouter {
   final GetCurrentZikrCubit _getCurrentZikrCubit = GetCurrentZikrCubit();
-  final UpdateGeneralDataCubit _updateGeneralDataCubit =
+  static final UpdateGeneralDataCubit updateGeneralDataCubit =
       UpdateGeneralDataCubit();
-  final AzkarCubit _azkarCubit = AzkarCubit();
+  static final AzkarCubit azkarCubit = AzkarCubit();
 
-  final AddCustomZikrCubit _addCustomZikrCubit = AddCustomZikrCubit();
+  static final AddCustomZikrCubit addCustomZikrCubit = AddCustomZikrCubit();
+
   Route? generateRouter(RouteSettings settings, {Object? arguments}) {
     switch (settings.name) {
-      // case welcomeScreenUrl:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return const WelcomeScreen();
-      //   });
-
-      // case landingScreen:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return const LandingScreen();
-      //   });
-
-      // case animatedSecondScreen:
-      //   return MaterialPageRoute(builder: (context) {
-      //     return const AnimatedSecondScreen();
-      //   });
-
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: _updateGeneralDataCubit),
+              BlocProvider.value(value: updateGeneralDataCubit),
               BlocProvider(
                 create: (context) => GetGeneralDataCubit(),
               ),
@@ -102,7 +87,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => GetConditionalAzkarCubit(),
-            child:  const SituationsAzkarScreen(),
+            child: const SituationsAzkarScreen(),
           );
         });
 
@@ -113,39 +98,6 @@ class AppRouter {
           });
         }
 
-      case addNewZikrScreen:
-        return MaterialPageRoute(builder: (context) {
-          return MultiBlocProvider(providers: [
-            BlocProvider.value(value: _addCustomZikrCubit),
-          ], child: const AddNewZikrScreen());
-        });
-      case editCustomZikrScreen:
-        final List isSelectedThenindexThenZikr = settings.arguments as List;
-
-        return MaterialPageRoute(builder: (context) {
-          return MultiBlocProvider(
-              providers: [
-                BlocProvider(
-                  create: (context) => UpdateCustomZikrCubit(),
-                ),
-                BlocProvider(
-                  create: (context) => DeleteCustomZikrCubit(),
-                ),
-                BlocProvider(
-                  create: (context) => DeleteSingleZikrRecordCubit(),
-                ),
-                BlocProvider.value(value: _updateGeneralDataCubit),
-                BlocProvider.value(value: _azkarCubit),
-
-              ],
-              child: EditCustomZikerScreen(
-                isSelected: isSelectedThenindexThenZikr[0],
-                zikrIndex: isSelectedThenindexThenZikr[1],
-                zikr: isSelectedThenindexThenZikr[2],
-              ));
-        });
-
-      case zikerScreen:
       case tasbeehWerdScreen:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
@@ -153,9 +105,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => GetGeneralDataCubit(),
               ),
-              BlocProvider.value(value: _updateGeneralDataCubit),
+              BlocProvider.value(value: updateGeneralDataCubit),
               BlocProvider.value(
-                value: _azkarCubit,
+                value: azkarCubit,
               ),
               BlocProvider.value(
                 value: _getCurrentZikrCubit,
@@ -174,13 +126,13 @@ class AppRouter {
           return MultiBlocProvider(
             providers: [
               BlocProvider.value(
-                value: _azkarCubit,
+                value: azkarCubit,
               ),
               BlocProvider.value(
-                value: _updateGeneralDataCubit,
+                value: updateGeneralDataCubit,
               ),
               BlocProvider.value(value: _getCurrentZikrCubit),
-              BlocProvider.value(value: _addCustomZikrCubit),
+              BlocProvider.value(value: addCustomZikrCubit),
             ],
             child: const AzkarScreen(),
           );
