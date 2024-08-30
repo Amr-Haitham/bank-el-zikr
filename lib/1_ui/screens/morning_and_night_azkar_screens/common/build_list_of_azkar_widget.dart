@@ -3,20 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
 import '../../../../3_data/models/morning_or_night_zikr.dart';
+import 'morning_or_night_zikr_content_screen.dart';
 
-List<MorningOrNightZikr> morningOrNightAzkarList = [];
+// List<MorningOrNightZikr> morningOrNightAzkarList = [];
 
-void fillListOfAzkar(List<MorningOrNightZikr> list) {
-  // print("called now");
-  morningOrNightAzkarList.clear();
-  for (int i = 0; i < list.length; i++) {
-    if (morningOrNightAzkarList.contains(list[i])) {
-      continue;
-    } else {
-      morningOrNightAzkarList.add(list[i]);
-    }
-  }
-}
+// void fillListOfAzkar(List<MorningOrNightZikr> list) {
+//   // print("called now");
+//   morningOrNightAzkarList.clear();
+//   for (int i = 0; i < list.length; i++) {
+//     if (morningOrNightAzkarList.contains(list[i])) {
+//       continue;
+//     } else {
+//       morningOrNightAzkarList.add(list[i]);
+//     }
+//   }
+// }
 
 class BuildListOfAzkarWidget extends StatefulWidget {
   final bool isMorningAzkar;
@@ -49,11 +50,13 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
             ),
           );
         } else if (state is GetAllMorningOrNightAzkarLoaded) {
-          fillListOfAzkar(state.morningOrNightZikr);
+          // fillListOfAzkar(state.morningOrNightZikr);
 
           return SliverList.separated(
             separatorBuilder: (context, index) {
-              return const SizedBox(height: 16,);
+              return const SizedBox(
+                height: 16,
+              );
             },
             itemCount: state.morningOrNightZikr.length,
             itemBuilder: (context, index) {
@@ -61,6 +64,14 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
               return ZikerTile(
                 zikr: zikr,
                 isMorningZiker: widget.isMorningAzkar,
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => MorningOrNightZikrContentScreen(
+                            isMorningZikr: widget.isMorningAzkar,
+                            azkar: state.morningOrNightZikr,
+                            index: index,
+                          )));
+                },
               );
               //   ListTile(
               //   title: Text(zikr.content),
@@ -76,8 +87,8 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
         } else {
           return const SliverToBoxAdapter(
             child: Center(
-                        child: Text('unknown error occurd while loading azkar'),
-                      ),
+              child: Text('unknown error occurd while loading azkar'),
+            ),
           );
         }
       },

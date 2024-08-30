@@ -6,19 +6,14 @@ import 'morning_or_night_zikr_content_screen.dart';
 class ZikerTile extends StatelessWidget {
   final MorningOrNightZikr zikr;
   final bool isMorningZiker;
+  final Function() onTap;
   const ZikerTile(
-      {super.key, required this.zikr, required this.isMorningZiker});
+      {super.key, required this.zikr, required this.isMorningZiker, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => MorningOrNightZikrContentScreen(
-                  zikr,
-                  isMorningZikr: isMorningZiker,
-                )));
-      },
+      onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
         decoration: BoxDecoration(

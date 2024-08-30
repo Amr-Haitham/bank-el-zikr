@@ -14,16 +14,15 @@ class MorningOrNightAzkarScreen extends StatelessWidget {
       body: SafeArea(
         child: Container(
           color: Theme.of(context).scaffoldBackgroundColor,
-          padding: const EdgeInsets.only(
+   padding: const EdgeInsets.only(
               top: ConstantValues.appTopPadding,
               left: ConstantValues.appHorizontalPadding,
-              right: ConstantValues.appHorizontalPadding),
-          child: CustomScrollView(
+              right: ConstantValues.appHorizontalPadding),          child: CustomScrollView(
             slivers: [
-              const SliverToBoxAdapter(
-                  child: SizedBox(
-                height: 14,
-              )),
+              // const SliverToBoxAdapter(
+              //     child: SizedBox(
+              //   height: 14,
+              // )),
               isMorning
                   ? const SliverToBoxAdapter(
                       child: TitleWithBackButton(title: "أذكار الصباح"))

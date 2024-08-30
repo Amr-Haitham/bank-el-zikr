@@ -12,7 +12,7 @@ class TitleWithBackButton extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        trailing ?? SizedBox.shrink(),
+        trailing ?? const SizedBox.shrink(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -23,7 +23,7 @@ class TitleWithBackButton extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineMedium,
                   )
                 : const SizedBox.shrink(),
-                SizedBox(width: 8,),
+                const SizedBox(width: 8,),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();
