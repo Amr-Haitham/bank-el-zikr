@@ -1,5 +1,6 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/constant_values.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
@@ -38,8 +39,10 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
       child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Padding(
-            padding: EdgeInsets.only(
-                top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
+            padding:  const EdgeInsets.only(
+              top: ConstantValues.appTopPadding,
+              left: ConstantValues.appHorizontalPadding,
+              right: ConstantValues.appHorizontalPadding),
             child: CustomScrollView(
               // mainAxisAlignment: MainAxisAlignment.start,
               // crossAxisAlignment: CrossAxisAlignment.center,

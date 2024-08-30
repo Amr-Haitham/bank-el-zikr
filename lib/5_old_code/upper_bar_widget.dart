@@ -1,53 +1,54 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/consts/colors.dart';
+import '../1_ui/core/consts/colors.dart';
 
-class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
-  const MorningAzkarScreenUpperBarWidget({super.key});
+class NightAzkarScreenUpperBarWidget extends StatelessWidget {
+  const NightAzkarScreenUpperBarWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
+      color: Theme.of(context).primaryColor,
       height: 230,
       width: MediaQuery.of(context).size.width,
       child: Stack(
         children: [
           Positioned(
-            top: 80,
-            left: 70,
+            top: 73,
+            left: -24,
             child: SizedBox(
               height: 98,
               width: 98,
               child: Image.asset(
-                'assets/images/green_sun.png',
+                'assets/images/night_mood_stars.png',
                 scale: 1.3,
               ),
             ),
           ),
-           Positioned(
-            top: 15,
-            left: 187,
-            child: CircleAvatar(
-              radius: 55,
-              backgroundColor: Theme.of(context).primaryColor,
+
+          Positioned(
+            top: 75,
+            left: 115,
+            child: SizedBox(
+              height: 98,
+              width: 98,
+              child: Image.asset(
+                'assets/images/night_mood_stars.png',
+                scale: 1.3,
+              ),
             ),
           ),
-           Positioned(
-            top: -0,
-            left: 247,
-            child: CircleAvatar(
-              radius: 64,
-              backgroundColor: Theme.of(context).primaryColor,
+
+          Positioned(
+            top: 60,
+            left: 270,
+            child: SizedBox(
+              height: 110,
+              width: 110,
+              child: Image.asset('assets/images/night_mood_moon.png'),
             ),
           ),
-           Positioned(
-            top: -11,
-            left: 330,
-            child: CircleAvatar(
-              radius: 64,
-              backgroundColor: Theme.of(context).primaryColor,
-            ),
-          ),
+
           Positioned(
             top: 180,
             left: 31,
@@ -60,7 +61,7 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                       width: 71,
                       height: 28,
                       decoration: BoxDecoration(
-                        //   color: Theme.of(context).primaryColor,
+                        // color: Colors.white,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       // child: const Center(
@@ -69,20 +70,21 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                       //     style: TextStyle(
                       //         fontSize: 16,
                       //         fontWeight: FontWeight.w800,
-                      //         color: Colors.white),
+                      //         color: Theme.of(context).primaryColor),
                       //   ),
                       // ),
                     ),
-                     Text(
-                      "أذكار الصباح",
+                    const Text(
+                      "أذكار المساء",
                       style: TextStyle(
                           fontSize: 32,
                           fontWeight: FontWeight.w700,
-                          color: Theme.of(context).primaryColor),
+                          color: Colors.white),
                     ),
                   ],
                 )),
           ),
+
           Positioned(
             top: 30,
             left: 0,
@@ -98,7 +100,7 @@ class MorningAzkarScreenUpperBarWidget extends StatelessWidget {
                   child: Image.asset(
                     'assets/images/Vectorback_button.png',
                     fit: BoxFit.contain,
-                    color: Theme.of(context).primaryColor,
+                    color: appWhite,
                   ),
                 ),
               ),

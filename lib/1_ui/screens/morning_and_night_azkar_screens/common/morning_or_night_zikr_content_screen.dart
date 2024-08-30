@@ -3,8 +3,6 @@ import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
-import '../morning_azkar_screen/components/upper_bar_widget.dart';
-import '../night_azkar_screen/components/upper_bar_widget.dart';
 
 class MorningOrNightZikrContentScreen extends StatefulWidget {
   final MorningOrNightZikr zikr;
@@ -37,9 +35,7 @@ class _MorningOrNightZikrContentScreenState
       color: appWhite,
       child: Column(
         children: [
-          widget.isMorningZikr
-              ? const MorningAzkarScreenUpperBarWidget()
-              : const NightAzkarScreenUpperBarWidget(),
+      
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(20),

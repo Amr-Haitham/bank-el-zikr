@@ -41,15 +41,20 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
         GetAllMorningOrNightAzkarState>(
       builder: (context, state) {
         if (state is GetAllMorningOrNightAzkarLoading) {
-          return const Center(
-            child: CircularProgressIndicator(
-              color: Colors.yellow,
+          return const SliverToBoxAdapter(
+            child: Center(
+              child: CircularProgressIndicator(
+                color: Colors.yellow,
+              ),
             ),
           );
         } else if (state is GetAllMorningOrNightAzkarLoaded) {
           fillListOfAzkar(state.morningOrNightZikr);
 
-          return ListView.builder(
+          return SliverList.separated(
+            separatorBuilder: (context, index) {
+              return const SizedBox(height: 16,);
+            },
             itemCount: state.morningOrNightZikr.length,
             itemBuilder: (context, index) {
               final zikr = state.morningOrNightZikr[index];
@@ -63,13 +68,17 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
             },
           );
         } else if (state is GetAllMorningOrNightAzkarError) {
-          return const Center(
-            child: Text('Error loading azkar'),
+          return const SliverToBoxAdapter(
+            child: Center(
+              child: Text('Error loading azkar'),
+            ),
           );
         } else {
-          return const Center(
-                      child: Text('unknown error occurd while loading azkar'),
-                    );
+          return const SliverToBoxAdapter(
+            child: Center(
+                        child: Text('unknown error occurd while loading azkar'),
+                      ),
+          );
         }
       },
     );

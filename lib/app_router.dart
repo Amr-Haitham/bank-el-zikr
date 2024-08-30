@@ -18,8 +18,8 @@ import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_ran
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/1_ui/screens/ziker_screen/ziker_screen.dart';
-import '1_ui/screens/morning_and_night_azkar_screens/morning_azkar_screen/morning_azkar_screen.dart';
-import '1_ui/screens/morning_and_night_azkar_screens/night_azkar_screen/night_azkar_screen.dart';
+import '1_ui/screens/morning_and_night_azkar_screens/morning_or_night_azkar_screen.dart';
+import '5_old_code/night_azkar_screen.dart';
 import '1_ui/screens/situations_azkar_screen/situations_azkar_screen.dart';
 import '2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
 import '2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
@@ -71,7 +71,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => GetAllMorningOrNightAzkarCubit(),
-            child: const MorningAzkarScreen(),
+            child: const MorningOrNightAzkarScreen(isMorning: true,),
           );
         });
 
@@ -79,7 +79,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
             create: (context) => GetAllMorningOrNightAzkarCubit(),
-            child: const NightAzkarScreen(),
+            child: const MorningOrNightAzkarScreen(isMorning: false,),
           );
         });
 

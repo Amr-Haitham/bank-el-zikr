@@ -277,7 +277,7 @@ class ListTileOfZikr extends StatelessWidget {
                               // Navigator.pushNamed(context, editCustomZikrPopup,
                               //     arguments: [isSelected, index, zikr]);
                             },
-                            child: const Icon(Icons.edit_note))
+                            child:  Icon(Icons.settings_outlined,color: Theme.of(context).primaryColor))
                         : const SizedBox.shrink(),
                     Expanded(
                       child: AutoSizeText(

@@ -2,7 +2,6 @@ import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/commo
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'components/upper_bar_widget.dart';
 
 class NightAzkarScreen extends StatelessWidget {
   const NightAzkarScreen({super.key});
@@ -15,7 +14,6 @@ class NightAzkarScreen extends StatelessWidget {
         color: appWhite,
         child: Column(
           children: [
-            const NightAzkarScreenUpperBarWidget(),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(

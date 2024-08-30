@@ -19,31 +19,49 @@ class ZikerTile extends StatelessWidget {
                   isMorningZikr: isMorningZiker,
                 )));
       },
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 40),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
+        decoration: BoxDecoration(
+            color: Theme.of(context).cardColor,
+            borderRadius: BorderRadius.circular(38)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.black,
-              size: 18,
+            CircleAvatar(
+              radius: 16, // Half of the width/height of your original Container
+              backgroundColor: const Color.fromRGBO(255, 184, 0, 1),
+              child: Center(
+                child: Text(
+                  zikr.count.toString(),
+                  textAlign: TextAlign.center,
+                  textHeightBehavior: const TextHeightBehavior(
+                      leadingDistribution: TextLeadingDistribution.even,
+                      applyHeightToLastDescent: false,
+                      applyHeightToFirstAscent: false),
+                  strutStyle: const StrutStyle(
+                    // fontSize: 12.0, // Match this to your text size
+                    height: 1.0,
+                    forceStrutHeight:
+                        true, // Forces the height to the font size
+                  ),
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(color: Colors.white),
+                ),
+              ),
             ),
             const SizedBox(
-              width: 10,
+              width: 12,
             ),
             Expanded(
-              child: SizedBox(
-                // width: MediaQuery.of(context).size.width - 100,
-                child: Text(
-                  zikr.title ?? zikr.content,
-                  maxLines: 1,
-                  textAlign: TextAlign.right,
-                  style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black),
-                ),
+              child: Text(
+                zikr.title ?? zikr.content,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.right,
+                textDirection: TextDirection.rtl,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
           ],

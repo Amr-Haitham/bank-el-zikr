@@ -126,7 +126,7 @@ class LineChartForDayRecords extends StatelessWidget {
               .toDouble()),
           lineBarsData: [
             LineChartBarData(
-              curveSmoothness: .7,
+              curveSmoothness: .5,
               preventCurveOverShooting: true,
               barWidth: 3,
               spots: _generateLineChartBarDataSpots(records),

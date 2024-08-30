@@ -83,23 +83,26 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
                   CustomAppTextField(
                     title: 'فضل الذكر',
                     controller: edittedZikerDescriptionController,
-                    maxLines: 5,
+                    maxLines: 4,
                   ),
                   const SizedBox(
-                    height: 48,
+                    height: 38,
                   ),
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          deleteButton(),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(child: saveButton()),
-                        ],
-                      ),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      //   children: [
+                          
+                      //     SizedBox(
+                      //       width: 10,
+                      //     ),
+                      //     Expanded(child: saveButton()),
+                      //   ],
+                      // ),
+                      saveButton(),
+                      SizedBox(height:16),
+                      deleteButton(),
                       //  const SizedBox(
                       //    height: 40,
                       //  ),
@@ -199,7 +202,9 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
         // width: 100,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(39),
-          color: Colors.red,
+          color: Colors.transparent,
+          border: Border.all(width: 1,color: Colors.red)
+          
         ),
         child: const Center(
           child: Padding(
@@ -207,7 +212,7 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
             child: Text(
               'حذف الذكر',
               style: TextStyle(
-                color: appWhite,
+                color: Colors.red,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
               ),
