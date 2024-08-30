@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
@@ -7,6 +8,7 @@ import 'package:bank_el_ziker/2_state_management/azkar_records/set_azkar_records
 import 'package:bank_el_ziker/2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
+import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:confetti/confetti.dart';
 import '../../core/consts/colors.dart';
+import '../../core/consts/constant_values.dart';
 
 class ZikerScreen extends StatefulWidget {
   const ZikerScreen({super.key});
@@ -53,154 +56,62 @@ class _ZikerScreenState extends State<ZikerScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: appWhite,
-        body: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 8.0.h),
-              child: Column(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Padding(
+          padding: const EdgeInsets.only(
+              top: ConstantValues.appTopPadding,
+              left: ConstantValues.appHorizontalPadding,
+              right: ConstantValues.appHorizontalPadding),
+          child: Stack(
+            children: [
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [TitleWithBackButton(title: "رصيد الذكر",),
-                  Expanded(
-                    flex: 4,
+                children: [
+                  TitleWithBackButton(
+                    title: "ورد التسبيح",
+                    trailing: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, azkarScreenUrl);
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                61.0), // Set your desired border radius here
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Text(
+                            "تغيير الذكر",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                  ),
+                  const SizedBox(
+                    height: 48,
+                  ),
+                  SizedBox(
+                    height: ScreenUtils.getScreenHeight(context) / 5,
                     child: Stack(
                       children: [
-                        Hero(
-                            tag: "green_welcome_to_home_container",
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Theme.of(context).primaryColor,
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(45.w),
-                                  bottomRight: Radius.circular(45.w),
-                                ),
-                              ),
-                            )),
                         Container(
-                          padding: EdgeInsets.only(
-                              left: 31.w, right: 31.w, bottom: 10.h),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(45.w),
-                              bottomRight: Radius.circular(45.w),
+                            color: Theme.of(context).cardColor,
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(24),
                             ),
                           ),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pushNamed(
-                                            context, azkarScreenUrl);
-                                      },
-                                      style: ButtonStyle(
-                                        overlayColor:
-                                            MaterialStateColor.resolveWith(
-                                                (states) => Colors.transparent),
-                                      ),
-                                      child: Hero(
-                                        tag: "azkarScreenButton",
-                                        child: Container(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 16.w, vertical: 6.sp),
-                                          decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(11))),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 18.w),
-                                                child: Text(
-                                                  "اختر الذكر",
-                                                  textAlign: TextAlign.center,
-                                                  style: cairoTextStyle(
-                                                      14.sp,
-                                                      FontWeight.w800,
-                                                      null,
-                                                      Theme.of(context).primaryColor),
-                                                ),
-                                              ),
-                                               Icon(
-                                                Icons.menu_book,
-                                                color: Theme.of(context).primaryColor,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      )),
-                                  // TextButton(
-                                  //     onPressed: () {
-                                  //       BlocProvider.of<SetAzkarRecordsCubit>(
-                                  //               context)
-                                  //           .incrementCertainZikrRecordOrJustFixRecords(
-                                  //               null);
-                                  //       Navigator.pushNamed(
-                                  //           context, accountBalanceUrl);
-                                  //     },
-                                  //     style: ButtonStyle(
-                                  //       overlayColor:
-                                  //           MaterialStateColor.resolveWith(
-                                  //               (states) => Colors.transparent),
-                                  //     ),
-                                  //     child: Hero(
-                                  //       tag: "balanceScreenButton",
-                                  //       child: Container(
-                                  //         padding: const EdgeInsets.all(1),
-                                  //         decoration: const BoxDecoration(
-                                  //             color: Colors.white,
-                                  //             borderRadius: BorderRadius.all(
-                                  //                 Radius.circular(11))),
-                                  //         child: Row(
-                                  //           mainAxisAlignment:
-                                  //               MainAxisAlignment.spaceBetween,
-                                  //           crossAxisAlignment:
-                                  //               CrossAxisAlignment.center,
-                                  //           children: [
-                                  //             Container(
-                                  //               padding: EdgeInsets.symmetric(
-                                  //                   horizontal: 18.w),
-                                  //               child: Text(
-                                  //                 "رصيد البنك",
-                                  //                 textAlign: TextAlign.center,
-                                  //                 style: cairoTextStyle(
-                                  //                     9.sp,
-                                  //                     FontWeight.w800,
-                                  //                     null,
-                                  //                     Theme.of(context).primaryColor),
-                                  //               ),
-                                  //             ),
-                                  //             Container(
-                                  //               padding: EdgeInsets.symmetric(
-                                  //                   horizontal: 16.w,
-                                  //                   vertical: 6.sp),
-                                  //               decoration: BoxDecoration(
-                                  //                   borderRadius:
-                                  //                       BorderRadius.circular(
-                                  //                           11),
-                                  //                   color: Theme.of(context).primaryColor),
-                                  //               child: Image.asset(
-                                  //                 "assets/images/bank_icon.png",
-                                  //                 color: Colors.white,
-                                  //               ),
-                                  //             ),
-                                  //           ],
-                                  //         ),
-                                  //       ),
-                                  //     )),
-                                ],
-                              ),
                               Expanded(child: BlocBuilder<GetCurrentZikrCubit,
                                   GetCurrentZikrState>(
                                 builder: (context, parentState) {
@@ -219,11 +130,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                         parentState.zikrId)
                                                     .content,
                                                 textAlign: TextAlign.center,
-                                                style: cairoTextStyle(
-                                                    47.sp,
-                                                    FontWeight.w700,
-                                                    1.4,
-                                                    Colors.white),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineMedium,
                                               ),
                                             ),
                                           );
@@ -267,26 +176,49 @@ class _ZikerScreenState extends State<ZikerScreen> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: 31.w, vertical: 19.h),
-                    child: AutoSizeText.rich(
-                      textAlign: TextAlign.center,
-                      TextSpan(
-                        children: <TextSpan>[
-                          TextSpan(
-                            text: "جدد نيتك :",
-                            style: cairoTextStyle(
-                                1.sp, FontWeight.w800, null, Theme.of(context).primaryColor),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        onPressed: () {
+                          showGoalSettingSheet(
+                              context, screenHeight, currentGoalController, () {
+                            setState(() {
+                              counter = 0;
+                            });
+                            BlocProvider.of<UpdateGeneralDataCubit>(context)
+                                .updateCounter(0);
+                            // HiveDB().printDB();
+                          });
+                        },
+                        style: TextButton.styleFrom(
+                          backgroundColor: Theme.of(context).primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                61.0), // Set your desired border radius here
                           ),
-                          TextSpan(
-                            text:
-                                " وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُم مَّغْفِرَةً وَأَجْرًا عَظِيمًا - الأحزاب 35",
-                            style: cairoTextStyle(
-                                15.sp, FontWeight.w400, null, appDarkTextColor),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
+                          child: Text(
+                            "تعيين الهدف",
+                            style: Theme.of(context)
+                                .textTheme
+                                .headlineSmall!
+                                .copyWith(color: Colors.white),
                           ),
-                        ],
+                        ),
                       ),
+                    ],
+                  ),
+                  Container(
+                    height: 50,
+                    child: Text(
+                      currentGoalController.text
                     ),
                   ),
                   Expanded(
@@ -295,84 +227,38 @@ class _ZikerScreenState extends State<ZikerScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(horizontal: 31.w),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              TextButton(
-                                onPressed: () {
-                                  showGoalSettingSheet(context, screenHeight,
-                                      currentGoalController, () {
-                                    setState(() {
-                                      counter = 0;
-                                    });
-                                    BlocProvider.of<UpdateGeneralDataCubit>(
-                                            context)
-                                        .updateCounter(0);
-                                    // HiveDB().printDB();
-                                  });
-                                },
-                                style: TextButton.styleFrom(
-                                  backgroundColor: Theme.of(context).primaryColor,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(
-                                        61.0), // Set your desired border radius here
-                                  ),
-                                ),
-                                child: Text(
-                                  "تعيين الهدف",
-                                  style: cairoTextStyle(14.sp, FontWeight.w600,
-                                      null, Colors.white),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            TextButton(
+                              onPressed: () {
+                                setState(() {
+                                  counter = 0;
+                                  currentGoalController.text = "";
+                                });
+                                BlocProvider.of<UpdateGeneralDataCubit>(context)
+                                    .updateCounter(counter);
+                                BlocProvider.of<UpdateGeneralDataCubit>(context)
+                                    .updateGeneralDataGoal(null);
+                                // HiveDB().printDB();
+                              },
+                              style: TextButton.styleFrom(
+                                  backgroundColor:
+                                      Theme.of(context).primaryColor,
+                                  shape: const CircleBorder()),
+                              child: const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Icon(
+                                  Icons.replay_rounded,
+                                  color: Colors.white,
                                 ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  setState(() {
-                                    counter = 0;
-                                    currentGoalController.text = "";
-                                  });
-                                  BlocProvider.of<UpdateGeneralDataCubit>(
-                                          context)
-                                      .updateCounter(counter);
-                                  BlocProvider.of<UpdateGeneralDataCubit>(
-                                          context)
-                                      .updateGeneralDataGoal(null);
-                                  // HiveDB().printDB();
-                                },
-                                style: TextButton.styleFrom(
-                                    backgroundColor: Theme.of(context).primaryColor,
-                                    shape: const CircleBorder()),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "إعادة",
-                                        style: cairoTextStyle(
-                                            10.sp,
-                                            FontWeight.w700,
-                                            1.18,
-                                            Colors.white),
-                                      ),
-                                      Text(
-                                        "ضبط",
-                                        style: cairoTextStyle(
-                                            10.sp,
-                                            FontWeight.w700,
-                                            1.18,
-                                            Colors.white),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(
+                              width: 15,
+                            )
+                          ],
                         ),
                         Expanded(
                           child: BlocConsumer<GetGeneralDataCubit,
@@ -427,11 +313,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                     // HiveDB().printDB();
                                   },
                                   style: TextButton.styleFrom(
-                                      backgroundColor: const Color.fromRGBO(
-                                          232, 255, 238, 1),
-                                      shape:  CircleBorder(
-                                          side: BorderSide(
-                                              color: Theme.of(context).primaryColor, width: 7))),
+                                      backgroundColor:
+                                          Theme.of(context).cardColor,
+                                      shape: const CircleBorder()),
                                   child: Container(
                                     width: screenWidth * .6,
                                     padding: EdgeInsets.all(10.h),
@@ -439,42 +323,45 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                       child: Container(
                                         padding: EdgeInsets.all(10.h),
                                         child:
-                                            currentGoalController.text.isEmpty
-                                                ? AutoSizeText(
-                                                    counter.toString(),
+                                            // currentGoalController.text.isEmpty
+                                            //     ?
+                                                 AutoSizeText(
+                                                 counter!=0?   
+                                                  ArabicNumbers().convert(counter).toString():"إضغط للبدء",
                                                     textAlign: TextAlign.center,
-                                                    style: cairoTextStyle(
-                                                        50.sp,
-                                                        FontWeight.w700,
-                                                        null,
-                                                        Theme.of(context).primaryColor),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .headlineLarge!
+                                                        .copyWith(fontSize:counter!=0 ?50:24,color: Theme.of(context).primaryColor),
                                                     maxLines: 1,
                                                   )
-                                                : AutoSizeText.rich(
-                                                    TextSpan(
-                                                      children: [
-                                                        TextSpan(
-                                                          text: "$counter",
-                                                          style: cairoTextStyle(
-                                                              50.sp,
-                                                              FontWeight.w700,
-                                                              .85,
-                                                              Theme.of(context).primaryColor),
-                                                        ),
-                                                        TextSpan(
-                                                          text:
-                                                              "\n━\n${currentGoalController.text}",
-                                                          style: cairoTextStyle(
-                                                              25.sp,
-                                                              FontWeight.w700,
-                                                              .85,
-                                                              goalYellow),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    textAlign: TextAlign.center,
-                                                    maxLines: 3,
-                                                  ),
+                                                // :
+                                                //  AutoSizeText.rich(
+                                                //     TextSpan(
+                                                //       children: [
+                                                //         TextSpan(
+                                                //           text:
+                                                //               ArabicNumbers().convert(counter),
+                                                //           style:Theme.of(context)
+                                                //         .textTheme
+                                                //         .headlineLarge!
+                                                //         .copyWith(fontSize: 50),
+                                                //         ),
+                                                //         TextSpan(
+                                                //           text:
+                                                //               "\n━\n${currentGoalController.text}",
+                                                //           style: cairoTextStyle(
+                                                //               25.sp,
+                                                //               FontWeight.w700,
+                                                //               .85,
+                                                //               goalYellow),
+                                                //         ),
+                                                //       ],
+                                                //     ),
+                                                //     textAlign: TextAlign.center,
+                                                //     maxLines: 3,
+                                                //   )
+                                                  ,
                                       ),
                                     ),
                                   ),
@@ -496,30 +383,30 @@ class _ZikerScreenState extends State<ZikerScreen> {
                   ),
                 ],
               ),
-            ),
-            Align(
-              alignment: Alignment.topCenter,
-              child: ConfettiWidget(
-                confettiController: _controllerTopCenter,
-                blastDirection: pi / 2, // Set the blast direction
-                particleDrag: 0.05, // apply drag to the confetti
-                emissionFrequency: 0.05, // how often it should emit
-                numberOfParticles: 20, // number of particles to emit
-                gravity: 0.1, // gravity - or fall speed
-                shouldLoop: false, maximumSize: const Size(15, 15),
-                minimumSize: const Size(10, 10),
-                colors: const [
-                  Colors.green,
-                  Colors.blue,
-                  Colors.red,
-                  Colors.yellow,
-                  Colors.purple,
-                  Colors.orange,
-                ],
-                strokeWidth: 0,
+              Align(
+                alignment: Alignment.topCenter,
+                child: ConfettiWidget(
+                  confettiController: _controllerTopCenter,
+                  blastDirection: pi / 2, // Set the blast direction
+                  particleDrag: 0.05, // apply drag to the confetti
+                  emissionFrequency: 0.05, // how often it should emit
+                  numberOfParticles: 20, // number of particles to emit
+                  gravity: 0.1, // gravity - or fall speed
+                  shouldLoop: false, maximumSize: const Size(15, 15),
+                  minimumSize: const Size(10, 10),
+                  colors: const [
+                    Colors.green,
+                    Colors.blue,
+                    Colors.red,
+                    Colors.yellow,
+                    Colors.purple,
+                    Colors.orange,
+                  ],
+                  strokeWidth: 0,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 
@@ -604,8 +491,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                         ),
                         child: Text(
                           'حفظ',
-                          style: cairoTextStyle(
-                              13.sp, FontWeight.w700, null, Theme.of(context).primaryColor),
+                          style: cairoTextStyle(13.sp, FontWeight.w700, null,
+                              Theme.of(context).primaryColor),
                         ),
                       ),
                       OutlinedButton(
@@ -634,30 +521,30 @@ class _ZikerScreenState extends State<ZikerScreen> {
   }
 }
 
- inputDecoration(context) => InputDecoration(
+inputDecoration(context) => InputDecoration(
     border: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 8, color: Colors.green),
+      borderSide: const BorderSide(width: 8, color: Colors.green),
     ),
     enabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
+      borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
+      borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     disabledBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
+      borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
+      borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ),
     focusedErrorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(30),
-      borderSide:  BorderSide(width: 2, color: Theme.of(context).primaryColor),
+      borderSide: BorderSide(width: 2, color: Theme.of(context).primaryColor),
     ));
 
 class NoLeadingZeroInputFormatter extends TextInputFormatter {
