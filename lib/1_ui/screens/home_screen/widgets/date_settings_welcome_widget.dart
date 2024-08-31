@@ -31,7 +31,7 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
       onTap: () {
         Navigator.of(context).pushNamed(accountBalanceUrl);
       },
-      child: Container(
+      child: SizedBox(
         height: ScreenUtils.getScreenHeight(context) / 6,
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -41,11 +41,13 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
             children: [
           
               IconButton.filled(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, settingsScreenUrl);
+                  },
                   // color: Colors.black,
                   style:
                       IconButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.settings,
                     color: Colors.black,
                   )),
@@ -56,12 +58,12 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                     "مرحبا بعودتك",
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Theme.of(context).primaryColor,fontSize: 30),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Text(
                     "26 ذو الحجة 1556 هجري",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: Color(0xffEBAA00)),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: const Color(0xffEBAA00)),
                   ),
                 ],
               ),

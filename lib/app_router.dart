@@ -19,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/1_ui/screens/ziker_screen/ziker_screen.dart';
 import '1_ui/screens/morning_and_night_azkar_screens/morning_or_night_azkar_screen.dart';
+import '1_ui/screens/settings_screen/settings_screen.dart';
 import '2_state_management/situational_azkar_cubits/add_or_remove_situational_azkar/handle_fav_situational_azkar_cubit.dart';
 import '5_old_code/night_azkar_screen.dart';
 import '1_ui/screens/situations_azkar_screen/situations_azkar_screen.dart';
@@ -39,6 +40,7 @@ const tasbeehWerdScreen = 'tasbeehWerdScreen';
 const dailyAzkarScreen = 'dailyAzkarScreen';
 const situationsAzkarScreen = 'conditionalAzkarScreen';
 const zikrContentScreen = 'zikrContentScreen';
+const settingsScreenUrl = 'settingsScreenUrl';
 // const addNewZikrPopUp = 'addNewZikrPopUp';
 // const editCustomZikrPopup = 'editCustomZikrPopup';
 
@@ -50,7 +52,7 @@ class AppRouter {
 
   static final AddCustomZikrCubit addCustomZikrCubit = AddCustomZikrCubit();
 
-  Route? generateRouter(RouteSettings settings, {Object? arguments}) {
+  Route? generateRouter(RouteSettings settings) {
     switch (settings.name) {
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
@@ -65,6 +67,21 @@ class AppRouter {
               ),
             ],
             child: const HomeScreen(),
+          );
+        });
+      case settingsScreenUrl:
+        return MaterialPageRoute(builder: (context) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider.value(value: updateGeneralDataCubit),
+              BlocProvider(
+                create: (context) => GetGeneralDataCubit(),
+              ),
+              BlocProvider(
+                create: (context) => GetRandomPrayerCubit(),
+              ),
+            ],
+            child:  SettingsScreen(),
           );
         });
 
@@ -104,9 +121,10 @@ class AppRouter {
         });
 
       case zikrContentScreen:
-        if (arguments != null && arguments is Zikr) {
+      print("katkooot");
+        if (settings.arguments != null && settings.arguments is Zikr) {
           return MaterialPageRoute(builder: (context) {
-            return ZikrContentScreen(zikr: arguments);
+            return ZikrContentScreen(zikr: settings.arguments as Zikr);
           });
         }
 

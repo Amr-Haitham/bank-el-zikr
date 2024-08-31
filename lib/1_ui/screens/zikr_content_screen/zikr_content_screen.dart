@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/1_ui/core/consts/constant_values.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/3_data/models/zikr.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
@@ -13,61 +14,68 @@ class ZikrContentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.only(right: 30.w, left: 30.w),
-          child: Center(
-            child: Column(
-              children: [TitleWithBackButton(title: "رصيد الذكر",),
-                // Text(
-                //   zikr.title ?? zikr.content,
-                //   overflow: TextOverflow.ellipsis,
-                //   style: TextStyle(fontSize: 24),
-                // ),
-                Text(
-                  zikr.title ?? zikr.content,
-                  textAlign: TextAlign.center,
-                  style:  TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.w700,
-                      color: Theme.of(context).primaryColor),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height - 200,
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            zikr.content,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 24),
-                          ),
-                           Padding(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 50, horizontal: 16),
-                            child: Divider(
-                              color: Theme.of(context).primaryColor,
-                              thickness: 1,
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.only(top: ConstantValues.appTopPadding,
+                right: ConstantValues.appHorizontalPadding,
+                left: ConstantValues.appHorizontalPadding),
+            child: Center(
+              child: Column(
+                children: [
+                  TitleWithBackButton(
+                    title:zikr.title??"",
+                  ),
+                  // Text(
+                  //   zikr.title ?? zikr.content,
+                  //   overflow: TextOverflow.ellipsis,
+                  //   style: TextStyle(fontSize: 24),
+                  // ),
+                  // Text(
+                  //   zikr.title ?? zikr.content,
+                  //   textAlign: TextAlign.center,
+                  //   style: TextStyle(
+                  //       fontSize: 32,
+                  //       fontWeight: FontWeight.w700,
+                  //       color: Theme.of(context).primaryColor),
+                  // ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height - 200,
+                    child: Center(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              zikr.content,
+                              textAlign: TextAlign.center,
+                              style:  Theme.of(context).textTheme.headlineMedium!.copyWith(color:Theme.of(context).primaryColor ),
                             ),
-                          ),
-                          Text(
-                            zikr.description ?? "",
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 16,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 50, horizontal: 16),
+                              child: Divider(
+                                color: Theme.of(context).textTheme.bodySmall!.color,
+                                thickness: 1,
+                              ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              zikr.description ?? "",
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

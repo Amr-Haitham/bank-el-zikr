@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
@@ -118,7 +119,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                     GetCurrentZikrState>(
                                   builder: (context, parentState) {
                                     if (parentState is GetCurrentZikrLoaded) {
-                                      return BlocBuilder<AzkarCubit, AzkarState>(
+                                      return BlocBuilder<AzkarCubit,
+                                          AzkarState>(
                                         builder: (context, state) {
                                           if (state is AzkarLoaded) {
                                             return Center(
@@ -151,7 +153,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                             );
                                           } else {
                                             return const Center(
-                                              child: CircularProgressIndicator(),
+                                              child:
+                                                  CircularProgressIndicator(),
                                             );
                                           }
                                         },
@@ -162,8 +165,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                       return AutoSizeText(
                                         ".يوجد خطأ. يرجي إعادة فتح التطبيق",
                                         textAlign: TextAlign.center,
-                                        style: cairoTextStyle(20.sp,
-                                            FontWeight.w700, null, Colors.white),
+                                        style: cairoTextStyle(
+                                            20.sp,
+                                            FontWeight.w700,
+                                            null,
+                                            Colors.white),
                                       );
                                     } else {
                                       return const Center(
@@ -187,7 +193,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                         TextButton(
                           onPressed: () {
                             showGoalSettingSheet(
-                                context, screenHeight, currentGoalController, () {
+                                context, screenHeight, currentGoalController,
+                                () {
                               setState(() {
                                 counter = 0;
                               });
@@ -218,13 +225,15 @@ class _ZikerScreenState extends State<ZikerScreen> {
                       ],
                     ),
                     Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8, horizontal: 8),
                       child: Text(
                         ArabicNumbers().convert(currentGoalController.text),
                         style: Theme.of(context)
                             .textTheme
                             .headlineLarge!
-                            .copyWith(color: const Color.fromRGBO(255, 184, 0, 1)),
+                            .copyWith(
+                                color: const Color.fromRGBO(255, 184, 0, 1)),
                       ),
                     ),
                     Expanded(
@@ -243,9 +252,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                     counter = 0;
                                     currentGoalController.text = "";
                                   });
-                                  BlocProvider.of<UpdateGeneralDataCubit>(context)
+                                  BlocProvider.of<UpdateGeneralDataCubit>(
+                                          context)
                                       .updateCounter(counter);
-                                  BlocProvider.of<UpdateGeneralDataCubit>(context)
+                                  BlocProvider.of<UpdateGeneralDataCubit>(
+                                          context)
                                       .updateGeneralDataGoal(null);
                                   // HiveDB().printDB();
                                 },
@@ -273,8 +284,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 if (state is GetGeneralDataLoaded) {
                                   counter = state.generalData.currentCounter;
                                   if (state.generalData.currentGoal != null) {
-                                    currentGoalController.text =
-                                        state.generalData.currentGoal.toString();
+                                    currentGoalController.text = state
+                                        .generalData.currentGoal
+                                        .toString();
                                   }
                                 }
                               },
@@ -295,13 +307,15 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                               context)
                                           .incrementCertainZikrRecordOrJustFixRecords(
                                               state.generalData.currentZikrId);
-                                      if (currentGoalController.text.isNotEmpty &&
+                                      if (currentGoalController
+                                              .text.isNotEmpty &&
                                           counter ==
                                               int.parse(
                                                   currentGoalController.text)) {
                                         _controllerTopCenter.play();
                                       }
-                                      if (currentGoalController.text.isNotEmpty &&
+                                      if (currentGoalController
+                                              .text.isNotEmpty &&
                                           counter >
                                               int.parse(
                                                   currentGoalController.text)) {
@@ -442,12 +456,13 @@ class _ZikerScreenState extends State<ZikerScreen> {
       context: context,
       builder: (context) {
         return Container(
-          // height: ScreenUtils.getScreenHeight(context)*.75,     
-        
+          // height: ScreenUtils.getScreenHeight(context)*.75,
+
           padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom, top: ConstantValues.appTopPadding,
-            right: ConstantValues.appHorizontalPadding,
-            left: ConstantValues.appHorizontalPadding),
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+              top: ConstantValues.appTopPadding,
+              right: ConstantValues.appHorizontalPadding,
+              left: ConstantValues.appHorizontalPadding),
           decoration: const BoxDecoration(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24),
@@ -489,41 +504,26 @@ class _ZikerScreenState extends State<ZikerScreen> {
                   ],
                   keyboardType: TextInputType.number,
                 ),
-                 SizedBox(height: 150,),
+                SizedBox(
+                  height: 150,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Expanded(
-                      child: OutlinedButton(
-                        onPressed: () {
-                          BlocProvider.of<UpdateGeneralDataCubit>(parentContext)
-                              .updateGeneralDataGoal(int.parse(
-                                  currentGoalController.text.toString()));
-                          onGoalUpdate();
-                          isSaved = true;
-                          // HiveDB().printDB();
-                      
-                          Navigator.pop(context);
-                        },
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Theme.of(context).primaryColor,
-                            side: const BorderSide(style: BorderStyle.none),
-                            shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                39.0), // Set your desired border radius here
-                          ),
-                            
-                            ),
-                        child: Padding(   padding: const EdgeInsets.all(16),
-                          child: Text(
-                            'حفظ',
-                            style: Theme.of(context)
-                                .textTheme
-                                .headlineSmall!
-                                .copyWith(color: Colors.white),
-                          ),
-                        ),
-                      ),
+                      child: CustomAppButton(
+                          onPressed: () {
+                            BlocProvider.of<UpdateGeneralDataCubit>(
+                                    parentContext)
+                                .updateGeneralDataGoal(int.parse(
+                                    currentGoalController.text.toString()));
+                            onGoalUpdate();
+                            isSaved = true;
+                            // HiveDB().printDB();
+
+                            Navigator.pop(context);
+                          },
+                          text: "حفظ"),
                     ),
                     // OutlinedButton(
                     //   onPressed: () {

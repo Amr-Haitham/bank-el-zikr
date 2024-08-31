@@ -1,0 +1,26 @@
+import 'package:bank_el_ziker/3_data/services/settings_shared_prefs.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+
+part 'get_settings_state.dart';
+
+class GetSettingsCubit extends Cubit<GetSettingsState> {
+  GetSettingsCubit() : super(GetSettingsInitial());
+  final SettingsSharedPrefs _settingsSharedPrefs = SettingsSharedPrefs();
+
+  void getSettings() async {
+    emit(GetSettingsLoading());
+    try {
+      var isLightTheme = await _settingsSharedPrefs.getIsLightTheme();
+      var morningZikrAlarm = await _settingsSharedPrefs.getMorningZikrAlarm();
+      var nightZikrAlarm = await _settingsSharedPrefs.getNightZikrAlarm();
+      emit(GetSettingsLoaded(
+          isLightTheme: isLightTheme,
+          morningZikrAlarm: morningZikrAlarm,
+          nightZikrAlarm: nightZikrAlarm));
+    } catch (e) {
+      emit(GetSettingsError());
+    }
+  }
+}

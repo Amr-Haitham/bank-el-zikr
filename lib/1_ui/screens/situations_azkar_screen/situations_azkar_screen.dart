@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../2_state_management/situational_azkar_cubits/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
 import '../../../3_data/models/zikr.dart';
+import '../../../app_router.dart';
 import '../../core/consts/colors.dart';
 import '../../core/consts/constant_values.dart';
 import '../../re-usable widgets/title_with_back_button.dart';
@@ -34,7 +35,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
 
   void updateListOfShownAzkarToFavAzkar() {
     setState(() {
-      shownAzkar=[];
+      shownAzkar = [];
       for (var zikr in allAzkar) {
         if (listOfFavIds.contains(zikr.id.toString())) {
           shownAzkar.add(zikr);
@@ -48,17 +49,28 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
       shownAzkar = allAzkar;
     });
   }
-  // void getListOfSearchedAzkar({
-  //   required List<String> listOfFavIds,
-  //   required List<Zikr> allAzkar,
-  // }) {
-  //   List<Zikr> shownAzkar = [];
-  //   for (var zikr in allAzkar) {
-  //     if (listOfFavIds.contains(zikr.id.toString())) {
-  //       shownAzkar.add(zikr);
-  //     }
-  //   }
-  // }
+
+  void updateListOfShownAzkarToSearchedAzkar({
+    required String searchText,
+  }) {
+    if (searchText.isEmpty) {
+      if (showFavourites) {
+        updateListOfShownAzkarToFavAzkar();
+      } else {
+        updateListOfShownAzkarToAllAzkar();
+      }
+    } else {
+      List<Zikr> azkar = [];
+      azkar = allAzkar
+          .where((zikr) =>
+              zikr.title!.toLowerCase().contains(searchText.toLowerCase()))
+          .toList();
+
+      setState(() {
+        shownAzkar = azkar;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +81,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
           setState(() {
             listOfFavIds = state.ids;
           });
-          if(showFavourites) {
+          if (showFavourites) {
             updateListOfShownAzkarToFavAzkar();
           }
         }
@@ -101,7 +113,10 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                       Expanded(
                         child: SituationalZikrSearchWidget(
                           hintText: 'ابحث عن الذكر',
-                          onChanged: (someString) {},
+                          onChanged: (searchedText) {
+                            updateListOfShownAzkarToSearchedAzkar(
+                                searchText: searchedText);
+                          },
                         ),
                       ),
                       const SizedBox(
@@ -170,39 +185,58 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                         ),
                       );
                     } else if (parentState is GetConditionalAzkarLoaded) {
-                      return SliverList.separated(
-                        separatorBuilder: (context, index) {
-                          return const SizedBox(
-                            height: 16,
-                          );
-                        },
-                        itemCount: shownAzkar.length,
-                        itemBuilder: (context, index) {
-                          final Zikr zikr = shownAzkar[index];
-                          return (showFavourites
-                                  ? listOfFavIds.contains(zikr.id.toString())
-                                  : true)
-                              ? SituationalZikrListTile(
-                                  zikr: zikr,
-                                  onTap: () {
-                                    BlocProvider.of<
-                                                HandleFavSituationalAzkarCubit>(
-                                            context)
-                                        .addOrRemoveFromFavourites(
-                                            zikr.id.toString());
-                                  },
-                                  trailing: Icon(
-                                    listOfFavIds.contains(zikr.id.toString())
-                                        ? Icons.star_rounded
-                                        : Icons.star_outline_rounded,
-                                    color: const Color.fromRGBO(255, 184, 0, 1),
-                                  ),
-                                )
-                              : null;
+                      if (shownAzkar.isEmpty) {
+                        return SliverToBoxAdapter(
+                            child: Center(
+                                child: Text(
+                          "لم يتم العثور على أي نتائج",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: Colors.red),
+                        )));
+                      } else {
+                        return SliverList.separated(
+                          separatorBuilder: (context, index) {
+                            return const SizedBox(
+                              height: 16,
+                            );
+                          },
+                          itemCount: shownAzkar.length,
+                          itemBuilder: (context, index) {
+                            final Zikr zikr = shownAzkar[index];
+                            return (showFavourites
+                                    ? listOfFavIds.contains(zikr.id.toString())
+                                    : true)
+                                ? SituationalZikrListTile(
+                                    zikr: zikr,
+                                    onTap: () {
+                                      Navigator.pushNamed(context, zikrContentScreen,arguments: zikr);
+                                    },
+                                    trailing: GestureDetector(
+                                      onTap: () {
+                                        BlocProvider.of<
+                                                    HandleFavSituationalAzkarCubit>(
+                                                context)
+                                            .addOrRemoveFromFavourites(
+                                                zikr.id.toString());
+                                      },
+                                      child: Icon(
+                                        listOfFavIds
+                                                .contains(zikr.id.toString())
+                                            ? Icons.star_rounded
+                                            : Icons.star_outline_rounded,
+                                        color: const Color.fromRGBO(
+                                            255, 184, 0, 1),
+                                      ),
+                                    ),
+                                  )
+                                : null;
 
-                          //ZikrCard(zikr: zikr,);
-                        },
-                      );
+                            //ZikrCard(zikr: zikr,);
+                          },
+                        );
+                      }
                     } else if (parentState is GetConditionalAzkarError) {
                       return const SliverToBoxAdapter(
                         child: Center(
