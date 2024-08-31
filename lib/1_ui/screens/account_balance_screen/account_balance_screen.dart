@@ -38,109 +38,111 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          body: Padding(
-            padding:  const EdgeInsets.only(
-              top: ConstantValues.appTopPadding,
-              left: ConstantValues.appHorizontalPadding,
-              right: ConstantValues.appHorizontalPadding),
-            child: CustomScrollView(
-              // mainAxisAlignment: MainAxisAlignment.start,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              slivers: [
-                const SliverToBoxAdapter(
-                  child: TitleWithBackButton(
-                    title: "رصيد الذكر",
+          body: SafeArea(
+            child: Padding(
+              padding:  const EdgeInsets.only(
+                top: ConstantValues.appTopPadding,
+                left: ConstantValues.appHorizontalPadding,
+                right: ConstantValues.appHorizontalPadding),
+              child: CustomScrollView(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                slivers: [
+                  const SliverToBoxAdapter(
+                    child: TitleWithBackButton(
+                      title: "رصيد الذكر",
+                    ),
                   ),
-                ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 34,
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 34,
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: AutoSizeText(
-                    "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
-                    textAlign: TextAlign.center,
-                    style: cairoTextStyle(
-                        15.sp, FontWeight.w800, null, appDarkTextColor),
+                  SliverToBoxAdapter(
+                    child: AutoSizeText(
+                      "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
+                      textAlign: TextAlign.center,
+                      style: cairoTextStyle(
+                          15.sp, FontWeight.w800, null, appDarkTextColor),
+                    ),
                   ),
-                ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 42,
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 42,
+                    ),
                   ),
-                ),
-                const SliverToBoxAdapter(child: TotalBalanceNumber()),
-                const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 42,
+                  const SliverToBoxAdapter(child: TotalBalanceNumber()),
+                  const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 42,
+                    ),
                   ),
-                ),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: ScreenUtils.getScreenHeight(context)/6,
+                  SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: ScreenUtils.getScreenHeight(context)/6,
+                      child: BlocBuilder<GetWeekAzkarRecordCubit,
+                          GetWeekAzkarRecordState>(builder: ((context, state) {
+                        if (state is GetWeekAzkarRecordLoaded) {
+                          return LineChartForDayRecords(
+                              records: state.allWeekRecord);
+                        } else if (state is GetWeekAzkarRecordLoading) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      })),
+                    ),
+                  ),
+                                 const SliverToBoxAdapter(
+                    child: SizedBox(
+                      height: 42,
+                    ),
+                  ),
+            
+                  SliverToBoxAdapter(
+                    // flex: 10,
                     child: BlocBuilder<GetWeekAzkarRecordCubit,
-                        GetWeekAzkarRecordState>(builder: ((context, state) {
-                      if (state is GetWeekAzkarRecordLoaded) {
-                        return LineChartForDayRecords(
-                            records: state.allWeekRecord);
-                      } else if (state is GetWeekAzkarRecordLoading) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    })),
-                  ),
-                ),
-                               const SliverToBoxAdapter(
-                  child: SizedBox(
-                    height: 42,
-                  ),
-                ),
-
-                SliverToBoxAdapter(
-                  // flex: 10,
-                  child: BlocBuilder<GetWeekAzkarRecordCubit,
-                      GetWeekAzkarRecordState>(
-                    builder: (context, parentState) {
-                      if (parentState is GetWeekAzkarRecordLoaded) {
-                        return BlocBuilder<AzkarCubit, AzkarState>(
-                          builder: (context, state) {
-                            if (state is AzkarLoaded) {
-                              return TabbarOfAzkarRecord(
-                                screenWidth: screenWidth,
-                                allWeekAzkarRecordsById:
-                                    parentState.allWeekAzkarRecordsById,
-                                firstDayAzkarRecord:
-                                    parentState.firstDayAzkarRecord,
-                                allAzkar: state.azkar,
-                              );
-                            } else if (state is AzkarError) {
-                              return const Center(
-                                child: Text("Error"),
-                              );
-                            } else {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                          },
-                        );
-                      } else if (parentState is GetWeekAzkarRecordError) {
-                        return const Center(
-                          child: Text("Error"),
-                        );
-                      } else {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                    },
-                  ),
-                )
-              ],
+                        GetWeekAzkarRecordState>(
+                      builder: (context, parentState) {
+                        if (parentState is GetWeekAzkarRecordLoaded) {
+                          return BlocBuilder<AzkarCubit, AzkarState>(
+                            builder: (context, state) {
+                              if (state is AzkarLoaded) {
+                                return TabbarOfAzkarRecord(
+                                  screenWidth: screenWidth,
+                                  allWeekAzkarRecordsById:
+                                      parentState.allWeekAzkarRecordsById,
+                                  firstDayAzkarRecord:
+                                      parentState.firstDayAzkarRecord,
+                                  allAzkar: state.azkar,
+                                );
+                              } else if (state is AzkarError) {
+                                return const Center(
+                                  child: Text("Error"),
+                                );
+                              } else {
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              }
+                            },
+                          );
+                        } else if (parentState is GetWeekAzkarRecordError) {
+                          return const Center(
+                            child: Text("Error"),
+                          );
+                        } else {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
           )),
     );

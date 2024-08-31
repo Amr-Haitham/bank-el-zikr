@@ -3,7 +3,7 @@ import 'package:bloc/bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meta/meta.dart';
 
-import '../../3_data/services/hive_db.dart';
+import '../../../3_data/services/hive_db.dart';
 
 part 'get_conditional_azkar_state.dart';
 

@@ -131,6 +131,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                                               context)
                                           .updateGeneralDataCurrentZikr(
                                               selectedZikrId);
+                                              Navigator.pop(context);
                                     },
                                     zikr: state.azkar[index],
                                     isSelected: (selectedZikrId ==
@@ -208,24 +209,11 @@ class ListTileOfZikr extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: EdgeInsets.only(right: 16.0.w),
-                child: Image.asset(
-                  isSelected
-                      ? "assets/images/checked.png"
-                      : "assets/images/unchecked.png",
-                  color: isSelected
-                      ? Theme.of(context).primaryColor
-                      : appDarkTextColor,
-                ),
-              ),
+              
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(
-                      width: 10,
-                    ),
                     zikr.isCustomZikr == true
                         ? GestureDetector(
                             onTap: () {

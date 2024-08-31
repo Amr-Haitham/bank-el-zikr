@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/ziker_tile.dart';
+import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/morning_or_night_zikr_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
@@ -61,7 +61,7 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
             itemCount: state.morningOrNightZikr.length,
             itemBuilder: (context, index) {
               final zikr = state.morningOrNightZikr[index];
-              return ZikerTile(
+              return MorningOrNightZikrListTile(
                 zikr: zikr,
                 isMorningZiker: widget.isMorningAzkar,
                 onTap: () {
@@ -72,6 +72,31 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                             index: index,
                           )));
                 },
+                trailing: CircleAvatar(
+                  radius:
+                      16, // Half of the width/height of your original Container
+                  backgroundColor: const Color.fromRGBO(255, 184, 0, 1),
+                  child: Center(
+                    child: Text(
+                      zikr.count.toString(),
+                      textAlign: TextAlign.center,
+                      textHeightBehavior: const TextHeightBehavior(
+                          leadingDistribution: TextLeadingDistribution.even,
+                          applyHeightToLastDescent: false,
+                          applyHeightToFirstAscent: false),
+                      strutStyle: const StrutStyle(
+                        // fontSize: 12.0, // Match this to your text size
+                        height: 1.0,
+                        forceStrutHeight:
+                            true, // Forces the height to the font size
+                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(color: Colors.white),
+                    ),
+                  ),
+                ),
               );
               //   ListTile(
               //   title: Text(zikr.content),

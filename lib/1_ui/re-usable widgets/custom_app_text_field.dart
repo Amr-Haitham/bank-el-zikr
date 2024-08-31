@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class CustomAppTextField extends StatelessWidget {
   final String title;
   final TextEditingController controller;
   final int? maxLines;
   final bool optional;
-
-  const CustomAppTextField({
-    Key? key,
-    required this.title,
-    required this.controller,
-    this.maxLines,
-    this.optional = false,
-  }) : super(key: key);
+  final List<TextInputFormatter>? inputFormatters;
+  final TextInputType? keyboardType;
+  const CustomAppTextField(
+      {Key? key,
+      required this.title,
+      required this.controller,
+      this.inputFormatters,
+      this.maxLines,
+      this.optional = false,
+      this.keyboardType})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,8 @@ class CustomAppTextField extends StatelessWidget {
           TextField(
             textDirection: TextDirection.rtl,
             controller: controller,
+            inputFormatters: inputFormatters,
+            keyboardType: TextInputType.number,
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),

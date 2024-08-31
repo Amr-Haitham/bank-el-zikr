@@ -31,7 +31,7 @@ class MorningOrNightAzkarScreen extends StatelessWidget {
                       child: TitleWithBackButton(title: "أذكار المساء")),
               const SliverToBoxAdapter(
                   child: SizedBox(
-                height: 34,
+                height: 41,
               )),
               BuildListOfAzkarWidget(
                 isMorningAzkar: isMorning,

@@ -53,6 +53,7 @@ dependencies:
   google_fonts: ^6.2.1
   nb_utils: ^7.0.4
   arabic_numbers: ^1.0.0
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
