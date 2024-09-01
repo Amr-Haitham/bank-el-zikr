@@ -18,8 +18,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:confetti/confetti.dart';
-import '../../core/consts/colors.dart';
 import '../../core/consts/constant_values.dart';
+import 'package:vibration/vibration.dart';
 
 class ZikerScreen extends StatefulWidget {
   const ZikerScreen({super.key});
@@ -313,6 +313,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                               int.parse(
                                                   currentGoalController.text)) {
                                         _controllerTopCenter.play();
+                                        Vibration.hasVibrator().then((value) {
+                                          if (value == true) {
+                                            Vibration.vibrate(duration: 1000);
+                                          }
+                                        });
                                       }
                                       if (currentGoalController
                                               .text.isNotEmpty &&
@@ -342,10 +347,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                       child: Center(
                                         child: Container(
                                           padding: EdgeInsets.all(10.h),
-                                          child:
-                                              // currentGoalController.text.isEmpty
-                                              //     ?
-                                              AutoSizeText(
+                                          child: AutoSizeText(
                                             counter != 0
                                                 ? ArabicNumbers()
                                                     .convert(counter)
@@ -361,34 +363,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                     color: Theme.of(context)
                                                         .primaryColor),
                                             maxLines: 1,
-                                          )
-                                          // :
-                                          //  AutoSizeText.rich(
-                                          //     TextSpan(
-                                          //       children: [
-                                          //         TextSpan(
-                                          //           text:
-                                          //               ArabicNumbers().convert(counter),
-                                          //           style:Theme.of(context)
-                                          //         .textTheme
-                                          //         .headlineLarge!
-                                          //         .copyWith(fontSize: 50),
-                                          //         ),
-                                          //         TextSpan(
-                                          //           text:
-                                          //               "\n━\n${currentGoalController.text}",
-                                          //           style: cairoTextStyle(
-                                          //               25.sp,
-                                          //               FontWeight.w700,
-                                          //               .85,
-                                          //               goalYellow),
-                                          //         ),
-                                          //       ],
-                                          //     ),
-                                          //     textAlign: TextAlign.center,
-                                          //     maxLines: 3,
-                                          //   )
-                                          ,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -485,11 +460,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                 const SizedBox(
                   height: 35,
                 ),
-                Container(
-                  child: Center(
-                    child: Text('سيهتز الهاتف عند بلوغ الهدف',
-                        style: Theme.of(context).textTheme.bodyMedium),
-                  ),
+                Center(
+                  child: Text('سيهتز الهاتف عند بلوغ الهدف',
+                      style: Theme.of(context).textTheme.bodyMedium),
                 ),
                 const SizedBox(
                   height: 35,
@@ -504,7 +477,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                   ],
                   keyboardType: TextInputType.number,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 150,
                 ),
                 Row(
@@ -525,20 +498,6 @@ class _ZikerScreenState extends State<ZikerScreen> {
                           },
                           text: "حفظ"),
                     ),
-                    // OutlinedButton(
-                    //   onPressed: () {
-                    //     Navigator.pop(context);
-                    //   },
-                    //   style: OutlinedButton.styleFrom(
-                    //     shape: RoundedRectangleBorder(
-                    //       borderRadius: BorderRadius.circular(30.0),
-                    //     ),
-                    //     side: const BorderSide(width: 1, color: Colors.red),
-                    //   ),
-                    //   child: Text('إلغاء',
-                    //       style: cairoTextStyle(
-                    //           13.sp, FontWeight.w700, null, Colors.red)),
-                    // ),
                   ],
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
+import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/5_old_code/situations_azkar_card.dart';
 import 'package:bank_el_ziker/5_old_code/morning_and_night_azkar_cards_in_one_column.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
@@ -22,6 +23,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    BlocProvider.of<GetHijriDateCubit>(context).getHijriDate();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocListener<UpdateGeneralDataCubit, UpdateGeneralDataState>(
@@ -85,43 +91,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  // Widget background() {
-  //   return SizedBox(
-  //     height: ScreenUtils.getScreenHeight(context) - 600,
-  //     width: ScreenUtils.getScreenWidth(context) - 50,
-  //     child: Stack(
-  //       children: [
-  //         Positioned(
-  //           right: -55,
-  //           bottom: -400,
-  //           child: SizedBox(
-  //             height: ScreenUtils.getScreenHeight(context) - 200,
-  //             child: Image.asset("assets/images/background.png"),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  // Widget allAzkarWidget() {
-  //   return Stack(
-  //     children: [
-  //       background(),
-  //       const Column(
-  //         children: [
-  //           Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               SituationsAzkarCard(),
-  //               MonringAndNightAzkarCardsInOneColumn(),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
 }

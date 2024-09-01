@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
+import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -39,31 +40,43 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-          
               IconButton.filled(
                   onPressed: () {
                     Navigator.pushNamed(context, settingsScreenUrl);
                   },
                   // color: Colors.black,
-                  style:
-                      IconButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
+                  style: IconButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor),
                   icon: const Icon(
                     Icons.settings,
                     color: Colors.black,
                   )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
                     "مرحبا بعودتك",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(color: Theme.of(context).primaryColor,fontSize: 30),
+                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                        color: Theme.of(context).primaryColor, fontSize: 30),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(
-                    "26 ذو الحجة 1556 هجري",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(color: const Color(0xffEBAA00)),
+                  BlocBuilder<GetHijriDateCubit, GetHijriDateState>(
+                    builder: (context, state) {
+                      if (state is GetHijriDateLoaded) {
+                        return Text(
+                          state.hijriDate.fromObjectToFullDateString(),
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineSmall!
+                              .copyWith(color: const Color(0xffEBAA00)),
+                        );
+                      } else {
+                        return SizedBox.shrink();
+                      }
+                    },
                   ),
                 ],
               ),

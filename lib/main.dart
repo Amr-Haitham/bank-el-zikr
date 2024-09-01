@@ -1,9 +1,12 @@
 import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
+import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
+import 'package:bank_el_ziker/3_data/services/hijri_date_api.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() async {
@@ -12,38 +15,28 @@ void main() async {
   await HiveDB().setupInitHiveDbDataIfNonExisting();
   // await ScreenUtil.ensureScreenSize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  runApp(MyApp(appRouter: AppRouter()));
-  // TestClassFormorningornightazkar.GetAllMorningOrNightAzkar(
-  //     isMorningZikr: true);
-
-  // GetConditionalAzkarCubit x = GetConditionalAzkarCubit();
-  // x.getConditionalAzkar();
-  //  GetRandomPrayerCubit x = GetRandomPrayerCubit();
-  //  x.getPrayer();
-
-  // GetAllMorningOrNightAzkarCubit x = GetAllMorningOrNightAzkarCubit();
-  // x.getAllMorningOrNightAzkar(isMorningZikr: false);
-  // AddCustomZikrCubit x = AddCustomZikrCubit();
-  // x.addCustomZikr(
-  //     zikr: Zikr(id: 0, content: "content", description: "description"));
-  // // x.addCustomZikr(
-  // //     zikr: Zikr(id: 0, content: "content", description: "description"));
-  // // x.addCustomZikr(
-  // //     zikr: Zikr(id: 0, content: "content", description: "description"));
-  // // DeleteCustomZikrCubit s = DeleteCustomZikrCubit();
-  // // s.deleteCustomZikr(zikrIndex: 13);
-  // UpdateCustomZikrCubit v = UpdateCustomZikrCubit();
-  // v.updateCustomZikr(
-  //     zikr: Zikr(id: 01, content: "content", description: "description"),
-  //     zikrIndex: 17);
-
-  // AzkarCubit azkarCubit = AzkarCubit();
-  // azkarCubit.getAllAzkar();
+  runApp(BlocProvider(
+    create: (context) => GetSettingsCubit(),
+    child: MyApp(appRouter: AppRouter()),
+  ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key, required this.appRouter});
   final AppRouter appRouter;
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLightTheme = true;
+  @override
+  void initState() {
+    BlocProvider.of<GetSettingsCubit>(context).getSettings();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -51,10 +44,23 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, _) {
-          return MaterialApp(locale: Locale("ar"),
-              theme: AppTheme.lightTheme,
-              debugShowCheckedModeBanner: false,
-              onGenerateRoute: appRouter.generateRouter);
+          return BlocListener<GetSettingsCubit, GetSettingsState>(
+            listener: (context, state) {
+              if (state is GetSettingsLoaded) {
+                if (isLightTheme!=state.isLightTheme) {
+                  setState(() {
+                  isLightTheme = state.isLightTheme;
+                });
+                }
+                
+              }
+            },
+            child: MaterialApp(
+                locale: const Locale("ar"),
+                theme: isLightTheme? AppTheme.lightTheme:AppTheme.darkTheme,
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: widget.appRouter.generateRouter),
+          );
         });
   }
 }

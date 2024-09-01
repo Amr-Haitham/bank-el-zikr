@@ -124,7 +124,6 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          print("hwllewklewr");
                           setState(() {
                             showFavourites = !showFavourites;
                           });

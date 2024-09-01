@@ -3,6 +3,8 @@ import 'package:bank_el_ziker/1_ui/screens/azkar_screen/azkar_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/adding_new_ziker_popup.dart';
 import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/edit_custom_ziker_popup.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/home_screen.dart';
+import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
+import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
 import 'package:bank_el_ziker/5_old_code/welcome_screen/welcome_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_screen.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
@@ -65,6 +67,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => GetRandomPrayerCubit(),
               ),
+              BlocProvider(
+                create: (context) => GetHijriDateCubit(),
+              ),
             ],
             child: const HomeScreen(),
           );
@@ -79,6 +84,9 @@ class AppRouter {
               ),
               BlocProvider(
                 create: (context) => GetRandomPrayerCubit(),
+              ),
+              BlocProvider(
+                create: (context) => SetSettingsCubit(),
               ),
             ],
             child:  SettingsScreen(),
