@@ -3,7 +3,6 @@ import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_ran
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../core/consts/colors.dart';
 
 class RandomZikerContainer extends StatelessWidget {
   const RandomZikerContainer({
@@ -48,7 +47,7 @@ class RandomZikerContainer extends StatelessWidget {
       // margin: EdgeInsets.symmetric(
       //   horizontal: 15,
       // ),
-      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       height: ScreenUtils.getScreenHeight(context) / 6,
       // width: ScreenUtils.getScreenWidth(context) - 50,
       decoration: BoxDecoration(

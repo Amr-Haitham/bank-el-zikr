@@ -1,18 +1,12 @@
 import 'package:bank_el_ziker/1_ui/screens/account_balance_screen/account_balance_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/azkar_screen/azkar_screen.dart';
-import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/adding_new_ziker_popup.dart';
-import 'package:bank_el_ziker/1_ui/screens/azkar_screen/sub_screens/edit_custom_ziker_popup.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/home_screen.dart';
 import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
-import 'package:bank_el_ziker/5_old_code/welcome_screen/welcome_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_screen.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_records/delete_single_zikr_record/delete_single_zikr_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/set_azkar_records/set_azkar_records_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/situational_azkar_cubits/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
@@ -23,7 +17,6 @@ import 'package:bank_el_ziker/1_ui/screens/ziker_screen/ziker_screen.dart';
 import '1_ui/screens/morning_and_night_azkar_screens/morning_or_night_azkar_screen.dart';
 import '1_ui/screens/settings_screen/settings_screen.dart';
 import '2_state_management/situational_azkar_cubits/add_or_remove_situational_azkar/handle_fav_situational_azkar_cubit.dart';
-import '5_old_code/night_azkar_screen.dart';
 import '1_ui/screens/situations_azkar_screen/situations_azkar_screen.dart';
 import '2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
 import '2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
@@ -89,7 +82,7 @@ class AppRouter {
                 create: (context) => SetSettingsCubit(),
               ),
             ],
-            child:  SettingsScreen(),
+            child:  const SettingsScreen(),
           );
         });
 

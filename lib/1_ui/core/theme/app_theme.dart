@@ -8,7 +8,7 @@ class AppTheme {
   //amr change all colors here
   static final ThemeData lightTheme = ThemeData(
     primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
-    primaryColor: Color.fromRGBO(52, 199, 89, 1.0),
+    primaryColor: const Color.fromRGBO(52, 199, 89, 1.0),
 
     brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
@@ -38,7 +38,7 @@ class AppTheme {
     dialogBackgroundColor: Colors.white,
     // unselectedWidgetColor: Colors.grey,
     // dividerColor: Colors.grey[300],
-    cardColor:Color.fromRGBO(237, 250, 237, 1) ,
+    cardColor:const Color.fromRGBO(237, 250, 237, 1) ,
     dialogTheme: DialogTheme(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       color: Color.fromARGB(255, 255, 246, 247),

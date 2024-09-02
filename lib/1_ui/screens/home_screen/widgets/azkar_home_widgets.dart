@@ -1,7 +1,4 @@
 import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
-import 'package:bank_el_ziker/5_old_code/morning_azkar_card.dart';
-import 'package:bank_el_ziker/5_old_code/night_azkar_card.dart';
-import 'package:bank_el_ziker/5_old_code/situations_azkar_card.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:flutter/cupertino.dart';
 

@@ -214,16 +214,16 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                 unselectedLabelColor:
                     appDarkTextColor, // Text color for the inactive tabs
                 unselectedLabelStyle: Theme.of(context).textTheme.headlineSmall,
-                tabs: [
-                  Container(
+                tabs: const [
+                  SizedBox(
                     width: double.infinity,
-                    child: const Tab(
+                    child: Tab(
                       text: "يومي",
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: double.infinity,
-                    child: const Tab(
+                    child: Tab(
                       text: "اسبوعي",
                     ),
                   ),

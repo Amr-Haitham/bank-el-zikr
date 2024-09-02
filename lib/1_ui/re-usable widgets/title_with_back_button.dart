@@ -1,4 +1,3 @@
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 
 class TitleWithBackButton extends StatelessWidget {

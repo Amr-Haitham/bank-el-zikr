@@ -1,15 +1,10 @@
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
 import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
-import 'package:bank_el_ziker/5_old_code/situations_azkar_card.dart';
-import 'package:bank_el_ziker/5_old_code/morning_and_night_azkar_cards_in_one_column.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
-import 'package:bank_el_ziker/5_old_code/tasbeeh_card.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_widget.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share_plus/share_plus.dart';

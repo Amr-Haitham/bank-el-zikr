@@ -1,7 +1,6 @@
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
 import 'package:flutter/material.dart';
 
-import 'morning_or_night_zikr_content_screen.dart';
 
 class MorningOrNightZikrListTile extends StatelessWidget {
   final MorningOrNightZikr zikr;
@@ -27,12 +26,12 @@ class MorningOrNightZikrListTile extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            trailing ?? SizedBox.shrink(),
+            trailing ?? const SizedBox.shrink(),
             trailing != null
                 ? const SizedBox(
                     width: 12,
                   )
-                : SizedBox.shrink(),
+                : const SizedBox.shrink(),
             Expanded(
               child: Text(
                 zikr.title ?? zikr.content,

@@ -1,13 +1,10 @@
-import 'package:bank_el_ziker/1_ui/re-usable%20widgets/zikr_card.dart';
 import 'package:bank_el_ziker/1_ui/screens/situations_azkar_screen/components/situational_zikr_list_tile.dart';
 import 'package:bank_el_ziker/2_state_management/situational_azkar_cubits/add_or_remove_situational_azkar/handle_fav_situational_azkar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../2_state_management/situational_azkar_cubits/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
 import '../../../3_data/models/zikr.dart';
 import '../../../app_router.dart';
-import '../../core/consts/colors.dart';
 import '../../core/consts/constant_values.dart';
 import '../../re-usable widgets/title_with_back_button.dart';
 import 'components/situational_zikr_search_widget.dart';

@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
 import '../../../../app_router.dart';
-import '../../../core/consts/colors.dart';
 import '../../../core/consts/text_styles.dart';
 
 class ZikerBalanceWidget extends StatefulWidget {

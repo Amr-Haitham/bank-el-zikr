@@ -1,4 +1,3 @@
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:vibration/vibration.dart';
 
@@ -45,12 +44,12 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
                 shape: BoxShape.circle,
                 color: Theme.of(context).scaffoldBackgroundColor,
                 border: Border.all(
-                    width: 1, color: Color.fromRGBO(255, 214, 0, 1))),
+                    width: 1, color: const Color.fromRGBO(255, 214, 0, 1))),
             child: Center(
               child: Text(
                 count.toString(),
                 style: Theme.of(context).textTheme.headlineMedium,
-                strutStyle: StrutStyle(height: 1.2, forceStrutHeight: true),
+                strutStyle: const StrutStyle(height: 1.2, forceStrutHeight: true),
               ),
             ),
           ),

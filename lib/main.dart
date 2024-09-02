@@ -1,9 +1,7 @@
 import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
-import 'package:bank_el_ziker/3_data/services/hijri_date_api.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
 import 'package:bank_el_ziker/app_router.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -1,7 +1,6 @@
 import 'package:bank_el_ziker/3_data/services/settings_shared_prefs.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 part 'set_settings_state.dart';
 

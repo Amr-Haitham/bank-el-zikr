@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../4_utility_functions/screen_utils.dart';
 import '../app_router.dart';
-import '../1_ui/core/consts/colors.dart';
 
 class TasbeehCard extends StatelessWidget {
   const TasbeehCard({super.key});

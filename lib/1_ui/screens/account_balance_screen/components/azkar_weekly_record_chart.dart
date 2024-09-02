@@ -132,7 +132,7 @@ class LineChartForDayRecords extends StatelessWidget {
               spots: _generateLineChartBarDataSpots(records),
               isCurved: true,
               
-              color: Color.fromRGBO(255, 184, 0, 1),
+              color: const Color.fromRGBO(255, 184, 0, 1),
               dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(show: false),
             ),

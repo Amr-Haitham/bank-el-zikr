@@ -4,7 +4,6 @@ import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
@@ -16,7 +15,6 @@ import '../../../2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit
 import '../../../2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
 import '../../../3_data/models/zikr.dart';
 import '../../re-usable widgets/title_with_back_button.dart';
-import '../../../5_old_code/add_zikr_button.dart';
 import 'sub_screens/edit_custom_ziker_popup.dart';
 
 // List<Zikr> listOfAllAzkar = [];

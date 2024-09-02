@@ -1,7 +1,5 @@
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
-import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/build_list_of_azkar_widget.dart';
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import '../../../core/consts/constant_values.dart';
 import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
@@ -146,7 +144,7 @@ class _MorningOrNightZikrContentScreenState
               color: Theme.of(context).primaryColor, shape: BoxShape.circle),
           width: widthOfNextAndPreviousButtons,
           height: widthOfNextAndPreviousButtons,
-          child: Icon(
+          child: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           )),
@@ -167,7 +165,7 @@ class _MorningOrNightZikrContentScreenState
               color: Theme.of(context).primaryColor, shape: BoxShape.circle),
           width: widthOfNextAndPreviousButtons,
           height: widthOfNextAndPreviousButtons,
-          child: Icon(
+          child: const Icon(
             Icons.arrow_forward,
             color: Colors.white,
           )),

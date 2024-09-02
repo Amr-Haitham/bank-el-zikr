@@ -6,9 +6,7 @@ import '../../../3_data/services/hive_db.dart';
 
 part 'get_week_azkar_record_state.dart';
 
-/**
- * this cubit gets all week record for line graph
- */
+/// this cubit gets all week record for line graph
 class GetWeekAzkarRecordCubit extends Cubit<GetWeekAzkarRecordState> {
   GetWeekAzkarRecordCubit() : super(GetWeekAzkarRecordInitial());
 

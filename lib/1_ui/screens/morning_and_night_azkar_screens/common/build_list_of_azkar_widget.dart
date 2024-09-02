@@ -2,7 +2,6 @@ import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/commo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
-import '../../../../3_data/models/morning_or_night_zikr.dart';
 import 'morning_or_night_zikr_content_screen.dart';
 
 // List<MorningOrNightZikr> morningOrNightAzkarList = [];

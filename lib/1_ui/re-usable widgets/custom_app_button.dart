@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-
 class CustomAppButton extends StatelessWidget {
   const CustomAppButton(
       {super.key, required this.onPressed, this.trailing, required this.text});
@@ -27,7 +25,7 @@ class CustomAppButton extends StatelessWidget {
               ? MainAxisAlignment.center
               : MainAxisAlignment.spaceBetween,
           children: [
-            trailing ?? SizedBox.shrink(),
+            trailing ?? const SizedBox.shrink(),
             Text(
               text,
               style: Theme.of(context)

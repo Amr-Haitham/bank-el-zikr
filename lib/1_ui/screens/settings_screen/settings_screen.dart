@@ -89,24 +89,24 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     });
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 48,
                 ),
                 CustomAppButton(
                   onPressed: () {},
                   text: "دعم التطبيق",
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 24,
                 ),
                 CustomAppButton(
                   onPressed: () {},
                   text: "تواصل معنا",
-                  trailing: Icon(
+                  trailing: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   ),
