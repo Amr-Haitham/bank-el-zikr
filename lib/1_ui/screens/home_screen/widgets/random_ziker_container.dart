@@ -2,7 +2,9 @@ import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_random_prayer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../4_utility_functions/general_utils.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
+import '../../../core/consts/colors.dart';
 
 class RandomZikerContainer extends StatelessWidget {
   const RandomZikerContainer({
@@ -44,9 +46,6 @@ class RandomZikerContainer extends StatelessWidget {
 
   Widget prayerContainer(String prayer, BuildContext context) {
     return Container(
-      // margin: EdgeInsets.symmetric(
-      //   horizontal: 15,
-      // ),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
       height: ScreenUtils.getScreenHeight(context) / 6,
       // width: ScreenUtils.getScreenWidth(context) - 50,
@@ -55,17 +54,37 @@ class RandomZikerContainer extends StatelessWidget {
         // color: Colors.black,
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
-          fit: BoxFit.cover,
-            image: AssetImage(Theme.of(context).brightness == Brightness.dark?ImagesUrls.randomZikrBackgroundDarkTheme:ImagesUrls.randomZikrBackgroundLightTheme)),
+            fit: BoxFit.cover,
+            image: AssetImage(Theme.of(context).brightness == Brightness.dark
+                ? ImagesUrls.randomZikrBackgroundDarkTheme
+                : ImagesUrls.randomZikrBackgroundLightTheme)),
       ),
-      child: Center(
-        child: SingleChildScrollView(
-          child: Text(
-            prayer,
-            textAlign: TextAlign.start,
-            textDirection: TextDirection.rtl,
-            style: Theme.of(context).textTheme.bodyMedium,
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text(
+              "دعاء",
+              textDirection: TextDirection.rtl,
+              style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontWeight: FontWeight.w700,
+                  color: Theme.of(context).primaryColor),
+            ),
+            Container(
+              // margin: EdgeInsets.symmetric(
+              //   horizontal: 15,
+              // ),
+                    
+              child: Center(
+                child: Text(
+                  prayer,
+                  textAlign: TextAlign.start,
+                  textDirection: TextDirection.rtl,
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -92,7 +111,7 @@ class RandomZikerContainer extends StatelessWidget {
   //               style: TextStyle(
   //                   fontWeight: FontWeight.w700,
   //                   fontSize: 16,
-  //                   color: appDarkTextColor),
+  //                   color: appGray),
   //             ),
   //           ),
   //         ),

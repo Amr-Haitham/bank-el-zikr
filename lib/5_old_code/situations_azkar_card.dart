@@ -34,7 +34,7 @@ class SituationsAzkarCard extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 16,
-                color: appDarkTextColor),
+                color: appGray),
           ),
         ],
       ),

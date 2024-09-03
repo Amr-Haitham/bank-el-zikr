@@ -70,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            Icons.share,
+            Icons.share_outlined,
             color: Theme.of(context).primaryColor,
           ),
           const SizedBox(

@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -59,7 +60,7 @@ class LineChartForDayRecords extends StatelessWidget {
     return spots;
   }
 
-  Widget customGetTitle(
+  Widget customGetTitle(context,
       double dayIndex, TitleMeta meta, List<DayZikrRecord> records) {
     return Text(
         mapOfDays[records.reversed
@@ -67,19 +68,19 @@ class LineChartForDayRecords extends StatelessWidget {
                 .dateTime
                 .weekday] ??
             "#",
-        style: cairoTextStyle(10.sp, FontWeight.w500, null, appDarkTextColor));
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10));
   }
 
-  Widget customTextForVerticalTitles(
+  Widget customTextForVerticalTitles(context,
     double dayIndex,
     TitleMeta meta,
   ) {
     return Container(
       margin: EdgeInsets.only(right: 3.w),
-      child: Text(dayIndex.toInt().toString(),
+      child: Text(ArabicNumbers().convert(dayIndex.toInt().toString()),
           textAlign: TextAlign.right,
           style:
-              cairoTextStyle(10.sp, FontWeight.w500, null, appDarkTextColor)),
+              Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10)),
     );
   }
 
@@ -97,7 +98,7 @@ class LineChartForDayRecords extends StatelessWidget {
                 showTitles: true,
                 interval: 1,
                 getTitlesWidget: (index, titleMeta) =>
-                    customGetTitle(index, titleMeta, records),
+                    customGetTitle(context,index, titleMeta, records),
               ),
             ),
             rightTitles: AxisTitles(
@@ -111,7 +112,7 @@ class LineChartForDayRecords extends StatelessWidget {
               reservedSize: 32.w,
               showTitles: true,
               getTitlesWidget: (index, titleMeta) =>
-                  customTextForVerticalTitles(index, titleMeta),
+                  customTextForVerticalTitles(context,index, titleMeta),
             )),
             topTitles: const AxisTitles(),
           ),

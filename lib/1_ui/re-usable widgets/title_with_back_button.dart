@@ -19,7 +19,7 @@ class TitleWithBackButton extends StatelessWidget {
             title != null
                 ? Text(
                     title!,
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : const SizedBox.shrink(),
                 const SizedBox(width: 8,),

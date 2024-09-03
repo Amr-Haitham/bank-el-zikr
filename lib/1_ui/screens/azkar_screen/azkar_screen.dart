@@ -14,6 +14,7 @@ import '../../../2_state_management/azkar_records/delete_single_zikr_record/dele
 import '../../../2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
 import '../../../2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
 import '../../../3_data/models/zikr.dart';
+import '../../../4_utility_functions/general_utils.dart';
 import '../../re-usable widgets/title_with_back_button.dart';
 import 'sub_screens/edit_custom_ziker_popup.dart';
 
@@ -58,7 +59,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
       ],
       child: SafeArea(
         child: Scaffold(
-            backgroundColor: appWhite,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Padding(
               padding: EdgeInsets.only(
                   top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
@@ -73,7 +74,8 @@ class _AzkarScreenState extends State<AzkarScreen> {
                           showModalBottomSheet(
                             context: context,
                             isScrollControlled: true,
-                            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
                             shape: const RoundedRectangleBorder(
                               borderRadius: BorderRadius.vertical(
                                   top: Radius.circular(24)),
@@ -88,9 +90,11 @@ class _AzkarScreenState extends State<AzkarScreen> {
                         },
                         style: IconButton.styleFrom(
                             backgroundColor: Theme.of(context).primaryColor),
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.add,
-                          color: Colors.white,
+                          color: GeneralUtils.isLightTheme(context)
+                              ? appWhite
+                              : appDark,
                         ),
                       ),
                       title: "اختر الذكر",
@@ -129,7 +133,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
                                               context)
                                           .updateGeneralDataCurrentZikr(
                                               selectedZikrId);
-                                              Navigator.pop(context);
+                                      Navigator.pop(context);
                                     },
                                     zikr: state.azkar[index],
                                     isSelected: (selectedZikrId ==
@@ -202,12 +206,12 @@ class ListTileOfZikr extends StatelessWidget {
       onTap: onTap,
       contentPadding: const EdgeInsets.all(0),
       title: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              
               Expanded(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -215,9 +219,10 @@ class ListTileOfZikr extends StatelessWidget {
                     zikr.isCustomZikr == true
                         ? GestureDetector(
                             onTap: () {
-                              
                               showModalBottomSheet(
-                                context: context,backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                                context: context,
+                                backgroundColor:
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 isScrollControlled: true,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.vertical(
@@ -245,17 +250,15 @@ class ListTileOfZikr extends StatelessWidget {
                                                   DeleteSingleZikrRecordCubit(),
                                             ),
                                             BlocProvider.value(
-                                                value: AppRouter.updateGeneralDataCubit),
+                                                value: AppRouter
+                                                    .updateGeneralDataCubit),
                                             BlocProvider.value(
                                                 value: AppRouter.azkarCubit),
                                           ],
                                           child: EditCustomZikerPopup(
-                                            isSelected:
-                                               isSelected,
-                                            zikrIndex:
-                                               index,
-                                            zikr:
-                                                zikr,
+                                            isSelected: isSelected,
+                                            zikrIndex: index,
+                                            zikr: zikr,
                                           )));
                                 },
                               );
@@ -263,13 +266,17 @@ class ListTileOfZikr extends StatelessWidget {
                               // Navigator.pushNamed(context, editCustomZikrPopup,
                               //     arguments: [isSelected, index, zikr]);
                             },
-                            child:  Icon(Icons.settings_outlined,color: Theme.of(context).primaryColor))
+                            child: Icon(Icons.settings_outlined,
+                                color: Theme.of(context).primaryColor))
                         : const SizedBox.shrink(),
                     Expanded(
                       child: AutoSizeText(
                         zikr.content,
                         textDirection: TextDirection.rtl,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium!
+                            .copyWith(fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
@@ -277,7 +284,16 @@ class ListTileOfZikr extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: Theme.of(context).primaryColor,
+                          border: Border.all(
+                              width: 1,
+                              color: GeneralUtils.isLightTheme(context)
+                                  ? appLightGold
+                                  : appDarkGold),
+                          color: isSelected
+                              ? (GeneralUtils.isLightTheme(context)
+                                  ? appLightGold
+                                  : appDarkGold)
+                              : Colors.transparent,
                         ),
                         height: 16,
                         width: 16,
@@ -294,7 +310,10 @@ class ListTileOfZikr extends StatelessWidget {
           Text(
             zikr.description ?? "",
             textDirection: TextDirection.rtl,
-            style: cairoTextStyle(15, FontWeight.w600, null, appDarkTextColor),
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                color: GeneralUtils.isLightTheme(context)
+                    ? appGray
+                    : appLightGrey),
           ),
         ],
       ),

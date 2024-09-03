@@ -37,7 +37,7 @@ class SituationalZikrListTile extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.right,
                 textDirection: TextDirection.rtl,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
           ],

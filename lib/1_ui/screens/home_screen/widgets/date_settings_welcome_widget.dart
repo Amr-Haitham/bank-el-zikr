@@ -1,4 +1,6 @@
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
+import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -42,9 +44,11 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                   // color: Colors.black,
                   style: IconButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor),
-                  icon: const Icon(
-                    Icons.settings,
-                    color: Colors.black,
+                  icon: Icon(
+                    Icons.settings_outlined,
+                    
+                    color: 
+                    Theme.of(context).iconTheme.color
                   )),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -52,8 +56,11 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                 children: [
                   Text(
                     "مرحبا بعودتك",
-                    style: Theme.of(context).textTheme.headlineMedium!.copyWith(
-                        color: Theme.of(context).primaryColor, fontSize: 30),
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: GeneralUtils.isLightTheme(context)
+                            ? Theme.of(context).primaryColor
+                            : appWhite,
+                        fontSize: 30),
                   ),
                   const SizedBox(
                     height: 5,
@@ -66,7 +73,11 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                           style: Theme.of(context)
                               .textTheme
                               .headlineSmall!
-                              .copyWith(color: const Color(0xffEBAA00)),
+                              .copyWith(
+                                fontSize: 16,
+                                  color: GeneralUtils.isLightTheme(context)
+                                      ? appLightGold
+                                      : appDarkGold),
                         );
                       } else {
                         return const SizedBox.shrink();

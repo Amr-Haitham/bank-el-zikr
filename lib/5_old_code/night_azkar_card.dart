@@ -28,7 +28,7 @@ class NightAzkarCard extends StatelessWidget {
             "أذكار المساء",
             textAlign: TextAlign.end,
             style: TextStyle(
-                fontWeight: FontWeight.w700, fontSize: 16, color: appDarkTextColor),
+                fontWeight: FontWeight.w700, fontSize: 16, color: appGray),
           ),
         ],
       ),

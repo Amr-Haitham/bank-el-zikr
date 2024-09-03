@@ -1,6 +1,8 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
 import 'package:flutter/material.dart';
+import 'package:vibration/vibration.dart';
 import '../../../core/consts/constant_values.dart';
 import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
 
@@ -21,15 +23,19 @@ class MorningOrNightZikrContentScreen extends StatefulWidget {
 class _MorningOrNightZikrContentScreenState
     extends State<MorningOrNightZikrContentScreen> {
   late int currentZikrIndex;
- 
+
   late int indexOfLastZikr;
+
+  late int currentCounter;
   double widthOfNextAndPreviousButtons = 40;
   @override
   void initState() {
     super.initState();
     currentZikrIndex = widget.index;
 
-    indexOfLastZikr = widget.azkar.length-1;
+    indexOfLastZikr = widget.azkar.length - 1;
+
+    currentCounter = widget.azkar[currentZikrIndex].count;
   }
 
   bool _checkIfNextIsAvailable() {
@@ -38,6 +44,27 @@ class _MorningOrNightZikrContentScreenState
 
   bool _checkIfPreviousIsAvailable() {
     return currentZikrIndex > 0;
+  }
+
+  void handleOnCount() {
+    if (currentCounter > 1) {
+      setState(() {
+        currentCounter--;
+      });
+    } else {
+      if (_checkIfNextIsAvailable()) {
+        setState(() {
+          currentZikrIndex++;
+          currentCounter = widget.azkar[currentZikrIndex].count;
+        });
+      }
+      // widget.onFinished();
+      Vibration.hasVibrator().then((value) {
+        if (value == true) {
+          Vibration.vibrate(duration: 200);
+        }
+      });
+    }
   }
 
   @override
@@ -55,43 +82,54 @@ class _MorningOrNightZikrContentScreenState
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TitleWithBackButton(
-                  title: widget.isMorningZikr ? "أذكار الصباح" : "أذكار المساء"),
+                  title:
+                      widget.isMorningZikr ? "أذكار الصباح" : "أذكار المساء"),
               Expanded(
-                  child: Center(
-                      child: zikrContainer(
-                          morningOrNightZikr: widget.azkar[currentZikrIndex]))),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _checkIfNextIsAvailable()
-                        ? nextButton()
-                        : Container(
-                            width: widthOfNextAndPreviousButtons,
+                child: GestureDetector(
+                  onTap: handleOnCount,
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: Center(
+                                child: zikrContainer(
+                                    morningOrNightZikr:
+                                        widget.azkar[currentZikrIndex]))),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 30, horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _checkIfNextIsAvailable()
+                                  ? nextButton()
+                                  : Container(
+                                      width: widthOfNextAndPreviousButtons,
+                                    ),
+                              Expanded(
+                                child: IgnorePointer(
+                                  child: ZikrRepetitonCountCircle(
+                                    key: GlobalKey(),
+                                    count: currentCounter,
+                                    isMorningZikr: widget.isMorningZikr,
+                                    onFinished: () {},
+                                  ),
+                                ),
+                              ),
+                              _checkIfPreviousIsAvailable()
+                                  ? previousButton()
+                                  : Container(
+                                      width: widthOfNextAndPreviousButtons,
+                                    )
+                            ],
                           ),
-                    Expanded(
-                      child: ZikrRepetitonCountCircle(
-                        key: GlobalKey(),
-                        count: widget.azkar[currentZikrIndex].count,
-                        isMorningZikr: widget.isMorningZikr,
-                        onFinished: () {
-                          if (_checkIfNextIsAvailable()) {
-                            setState(() {
-                              currentZikrIndex++;
-                            });
-                          }
-                        },
-                      ),
+                        ),
+                      ],
                     ),
-                    _checkIfPreviousIsAvailable()
-                        ? previousButton()
-                        : Container(
-                            width: widthOfNextAndPreviousButtons,
-                          )
-                  ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),
@@ -112,15 +150,16 @@ class _MorningOrNightZikrContentScreenState
     return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       width: MediaQuery.of(context).size.width - 10,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            morningOrNightZikr.content,
-            textAlign: TextAlign.center,textDirection: TextDirection.rtl,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
-          ),
-        ],
+      child: Center(
+        child: AutoSizeText(
+          morningOrNightZikr.content,
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.rtl,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.w500),
+        ),
       ),
     );
   }
@@ -136,6 +175,7 @@ class _MorningOrNightZikrContentScreenState
 
           setState(() {
             currentZikrIndex++;
+            currentCounter = widget.azkar[currentZikrIndex].count;
           });
         }
       },
@@ -157,6 +197,7 @@ class _MorningOrNightZikrContentScreenState
         if (_checkIfPreviousIsAvailable()) {
           setState(() {
             currentZikrIndex--;
+            currentCounter = widget.azkar[currentZikrIndex].count;
           });
         }
       },

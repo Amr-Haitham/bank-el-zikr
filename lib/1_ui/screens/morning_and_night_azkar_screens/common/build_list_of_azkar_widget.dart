@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/morning_or_night_zikr_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -91,8 +92,8 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                       ),
                       style: Theme.of(context)
                           .textTheme
-                          .headlineSmall!
-                          .copyWith(color: Colors.white),
+                          .bodySmall!
+                          .copyWith(color: appWhite,fontWeight: FontWeight.w700),
                     ),
                   ),
                 ),

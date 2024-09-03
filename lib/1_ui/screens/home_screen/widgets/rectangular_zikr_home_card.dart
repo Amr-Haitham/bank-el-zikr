@@ -28,7 +28,7 @@ class RectangularZikrHomeCard extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.start,
-                style: Theme.of(context).textTheme.headlineSmall,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.bold),
               ),
               Row(
                 children: [Image.asset(imageAssetUrl)],

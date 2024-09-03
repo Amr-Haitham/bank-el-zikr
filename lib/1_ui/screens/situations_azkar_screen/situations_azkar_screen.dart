@@ -104,7 +104,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                 )),
                 SliverToBoxAdapter(
                     child: SizedBox(
-                  height: 41,
+                  // height: 41,
                   child: Row(
                     children: [
                       Expanded(
@@ -138,7 +138,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                             shape: BoxShape.circle,
                             color: showFavourites
                                 ? const Color.fromRGBO(255, 184, 0, 1)
-                                : Colors.white,
+                                : Theme.of(context).scaffoldBackgroundColor,
                             border: Border.all(
                                 width: 1,
                                 color: const Color.fromRGBO(255, 184, 0, 1)),
@@ -149,7 +149,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                                   ? Icons.star_rounded
                                   : Icons.star_outline_rounded,
                               color: showFavourites
-                                  ? Colors.white
+                                  ? Theme.of(context).scaffoldBackgroundColor
                                   : const Color.fromRGBO(255, 184, 0, 1),
                             ),
                           ),
@@ -185,10 +185,12 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                         return SliverToBoxAdapter(
                             child: Center(
                                 child: Text(
-                          "لم يتم العثور على أي نتائج",
+                          showFavourites
+                              ? "لا يوجد أذكار في المفضلة"
+                              : "لم يتم العثور على أي نتائج",
                           style: Theme.of(context)
                               .textTheme
-                              .headlineSmall!
+                              .bodyLarge!
                               .copyWith(color: Colors.red),
                         )));
                       } else {
@@ -207,7 +209,9 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                                 ? SituationalZikrListTile(
                                     zikr: zikr,
                                     onTap: () {
-                                      Navigator.pushNamed(context, zikrContentScreen,arguments: zikr);
+                                      Navigator.pushNamed(
+                                          context, zikrContentScreen,
+                                          arguments: zikr);
                                     },
                                     trailing: GestureDetector(
                                       onTap: () {

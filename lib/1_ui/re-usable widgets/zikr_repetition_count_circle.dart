@@ -22,18 +22,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (count > 1) {
-          setState(() {
-            count--;
-          });
-        } else {
-          widget.onFinished();
-          Vibration.hasVibrator().then((value) {
-            if (value == true) {
-              Vibration.vibrate(duration: 200);
-            }
-          });
-        }
+        
       },
       child: Column(
         children: [
@@ -48,7 +37,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
             child: Center(
               child: Text(
                 count.toString(),
-                style: Theme.of(context).textTheme.headlineMedium,
+                style: Theme.of(context).textTheme.bodyLarge,
                 strutStyle: const StrutStyle(height: 1.2, forceStrutHeight: true),
               ),
             ),

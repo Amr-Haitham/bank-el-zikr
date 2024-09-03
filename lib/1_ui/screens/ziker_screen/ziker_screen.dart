@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
@@ -10,6 +11,7 @@ import 'package:bank_el_ziker/2_state_management/azkar_records/set_azkar_records
 import 'package:bank_el_ziker/2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
+import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
@@ -91,14 +93,18 @@ class _ZikerScreenState extends State<ZikerScreen> {
                             "تغيير الذكر",
                             style: Theme.of(context)
                                 .textTheme
-                                .headlineSmall!
-                                .copyWith(color: Colors.white),
+                                .bodySmall!
+                                .copyWith(
+                                    color: GeneralUtils.isLightTheme(context)
+                                        ? appWhite
+                                        : appDark,
+                                    fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
                     ),
                     const SizedBox(
-                      height: 48,
+                      height: 30,
                     ),
                     SizedBox(
                       height: ScreenUtils.getScreenHeight(context) / 5,
@@ -217,8 +223,12 @@ class _ZikerScreenState extends State<ZikerScreen> {
                               "تعيين الهدف",
                               style: Theme.of(context)
                                   .textTheme
-                                  .headlineSmall!
-                                  .copyWith(color: Colors.white),
+                                  .bodySmall!
+                                  .copyWith(
+                                      color: GeneralUtils.isLightTheme(context)
+                                          ? appWhite
+                                          : appDark,
+                                      fontWeight: FontWeight.bold),
                             ),
                           ),
                         ),
@@ -264,11 +274,13 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                     backgroundColor:
                                         Theme.of(context).primaryColor,
                                     shape: const CircleBorder()),
-                                child: const Padding(
+                                child:  Padding(
                                   padding: EdgeInsets.all(8.0),
                                   child: Icon(
                                     Icons.replay_rounded,
-                                    color: Colors.white,
+                                    color: GeneralUtils.isLightTheme(context)
+                                        ? appWhite
+                                        : appDark,
                                   ),
                                 ),
                               ),
@@ -343,10 +355,10 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                         shape: const CircleBorder()),
                                     child: Container(
                                       width: screenWidth * .6,
-                                      padding: EdgeInsets.all(10.h),
+                                      // padding: EdgeInsets.all(10.h),
                                       child: Center(
                                         child: Container(
-                                          padding: EdgeInsets.all(10.h),
+                                          // padding: EdgeInsets.all(10.h),
                                           child: AutoSizeText(
                                             counter != 0
                                                 ? ArabicNumbers()
@@ -359,7 +371,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                 .headlineLarge!
                                                 .copyWith(
                                                     fontSize:
-                                                        counter != 0 ? 50 : 24,
+                                                        counter != 0 ? 70 : 24,
                                                     color: Theme.of(context)
                                                         .primaryColor),
                                             maxLines: 1,
@@ -379,7 +391,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 }
                               },
                             ),
-                          )
+                          ),
+                        const SizedBox(height: 20),
                         ],
                       ),
                     ),

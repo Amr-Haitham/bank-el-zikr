@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/1_ui/core/consts/constant_values.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
+import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -59,11 +60,13 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: AutoSizeText(
-                      "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
-                      textAlign: TextAlign.center,
-                      style: cairoTextStyle(
-                          15.sp, FontWeight.w800, null, appDarkTextColor),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal:   ConstantValues.appHorizontalPadding*2),
+                      child: AutoSizeText(
+                        "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
+                        textAlign: TextAlign.center,
+                        style:Theme.of(context).textTheme.bodyMedium!.copyWith(fontFamily: "Arial",fontSize: 20,fontWeight: FontWeight.w700),
+                      ),
                     ),
                   ),
                   const SliverToBoxAdapter(
@@ -209,11 +212,11 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                   borderRadius: BorderRadius.circular(
                       42), // Rounded corners for the active tab
                 ),
-                labelColor: Colors.white, // Text color for the active tab
-                labelStyle: Theme.of(context).textTheme.headlineSmall,
+                labelColor: GeneralUtils.isLightTheme(context)?  appWhite:appDark, // Text color for the active tab
+                labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 unselectedLabelColor:
-                    appDarkTextColor, // Text color for the inactive tabs
-                unselectedLabelStyle: Theme.of(context).textTheme.headlineSmall,
+                  GeneralUtils.isLightTheme(context)? appDark :appWhite, // Text color for the inactive tabs
+                unselectedLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                 tabs: const [
                   SizedBox(
                     width: double.infinity,
@@ -241,16 +244,16 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                         int value = widget.firstDayAzkarRecord[azkar.id] ?? 0;
 
                         return Container(
-                          height: 60,
+                        height: 60,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15.0, vertical: 20.0),
                           margin: const EdgeInsets.only(bottom: 20.0),
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Theme.of(context).scaffoldBackgroundColor,
                             border: Border.all(
                                 width: 1,
-                                color: appDarkTextColor),
+                                color: appGray),
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Row(
@@ -258,24 +261,14 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                             children: [
                               Text(
                                 value != 0 ? value.toString() : "-",
-                                style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors
-                                      .black, // Replace with appDarkTextColor
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(width: 20.0),
                               Expanded(
                                 child: Text(
                                   azkar.content,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors
-                                        .black, // Replace with appDarkTextColor
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ],
@@ -283,23 +276,23 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                         );
                       }).toList(),
                     ),
-                  ), //list builder of azkar records of only the first day
+                  ), 
                   SizedBox.expand(
                     child: Column(
                       children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
-                        int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
+                         int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
 
                         return Container(
-                          height: 60,
+                            height: 60,
                           padding: const EdgeInsets.symmetric(
                               horizontal: 15.0, vertical: 20.0),
                           margin: const EdgeInsets.only(bottom: 20.0),
                           width: double.infinity,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Theme.of(context).scaffoldBackgroundColor,
                             border: Border.all(
                                 width: 1,
-                                color: appDarkTextColor),
+                                color: appGray),
                             borderRadius: BorderRadius.circular(40),
                           ),
                           child: Row(
@@ -307,24 +300,14 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                             children: [
                               Text(
                                 value != 0 ? value.toString() : "-",
-                                style: const TextStyle(
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.w800,
-                                  color: Colors
-                                      .black, // Replace with appDarkTextColor
-                                ),
+                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),
                               ),
                               const SizedBox(width: 20.0),
                               Expanded(
                                 child: Text(
                                   azkar.content,
                                   textAlign: TextAlign.right,
-                                  style: const TextStyle(
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w800,
-                                    color: Colors
-                                        .black, // Replace with appDarkTextColor
-                                  ),
+                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500),
                                 ),
                               ),
                             ],
@@ -332,7 +315,59 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                         );
                       }).toList(),
                     ),
-                  ), //list builder of azkar records of only the first day
+                  ), 
+
+
+
+                  // SizedBox.expand(
+                  //   child: Column(
+                  //     children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
+                  //       int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
+
+                  //       return Container(
+                  //         height: 60,
+                  //         padding: const EdgeInsets.symmetric(
+                  //             horizontal: 15.0, vertical: 20.0),
+                  //         margin: const EdgeInsets.only(bottom: 20.0),
+                  //         width: double.infinity,
+                  //         decoration: BoxDecoration(
+                  //           color: Colors.white,
+                  //           border: Border.all(
+                  //               width: 1,
+                  //               color: appGray),
+                  //           borderRadius: BorderRadius.circular(40),
+                  //         ),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Text(
+                  //               value != 0 ? value.toString() : "-",
+                  //               style: const TextStyle(
+                  //                 fontSize: 14.0,
+                  //                 fontWeight: FontWeight.w800,
+                  //                 color: Colors
+                  //                     .black, // Replace with appGray
+                  //               ),
+                  //             ),
+                  //             const SizedBox(width: 20.0),
+                  //             Expanded(
+                  //               child: Text(
+                  //                 azkar.content,
+                  //                 textAlign: TextAlign.right,
+                  //                 style: const TextStyle(
+                  //                   fontSize: 14.0,
+                  //                   fontWeight: FontWeight.w800,
+                  //                   color: Colors
+                  //                       .black, // Replace with appGray
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //   ),
+                  // ), //list builder of azkar records of only the first day
 
 
                 ]))
@@ -349,7 +384,7 @@ class TotalBalanceNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 22, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 16),
       width: double.infinity,
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
@@ -391,7 +426,7 @@ class TotalBalanceNumber extends StatelessWidget {
           Text(
             "رصيد الذكر",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headlineMedium,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight:FontWeight.bold),
           ),
         ],
       ),

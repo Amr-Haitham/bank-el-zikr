@@ -1,6 +1,8 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
+import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,7 +39,8 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
             borderRadius: BorderRadius.circular(8),
             image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(ImagesUrls.zikrBalanceBackgroundLightThemeHomeScreen))
+                image: AssetImage(
+                    ImagesUrls.zikrBalanceBackgroundLightThemeHomeScreen))
             // color: Theme.of(context).primaryColor,
             // border: Border.all(color: Theme.of(context).primaryColor, width: 0),
             // borderRadius: BorderRadius.circular(10),
@@ -54,21 +57,30 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
               //       fontSize: 35,
               //       color: Colors.white),
               // ),
-              IconButton.filled(
-                  onPressed: () {},
-                  // color: Colors.black,
-                  style: IconButton.styleFrom(backgroundColor: const Color(0xff1A1A1A)),
-                  
-                  icon: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
+              IgnorePointer(
+                child: IconButton.filled(
+                    onPressed: () {},
+                    // color: Colors.black,
+                    style: IconButton.styleFrom(
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor),
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color:
+                          GeneralUtils.isLightTheme(context) ? appDark : appWhite,
+                    )),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     "رصيد الذكر",
-                    style: Theme.of(context).textTheme.headlineMedium,
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: GeneralUtils.isLightTheme(context)
+                            ? appWhite
+                            : const Color.fromARGB(255, 0, 0, 0)),
                   ),
                   const SizedBox(
                     height: 5,
@@ -77,11 +89,14 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
                     builder: (context, state) {
                       if (state is GetGeneralDataLoaded) {
                         return AutoSizeText(
-                          ArabicNumbers().convert(state.generalData.accountBalance).toString(),
+                          ArabicNumbers()
+                              .convert(state.generalData.accountBalance)
+                              .toString(),
                           maxLines: 1,
-                          
                           textAlign: TextAlign.right,
-                          style: Theme.of(context).textTheme.headlineLarge,
+                          style: Theme.of(context).textTheme.headlineLarge!.copyWith(color: GeneralUtils.isLightTheme(context)
+                            ? appWhite
+                            : const Color.fromARGB(255, 0, 0, 0)),
                         );
                       } else if (state is GetGeneralDataError) {
                         return AutoSizeText(

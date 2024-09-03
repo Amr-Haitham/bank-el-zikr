@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
+import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppButton extends StatelessWidget {
@@ -30,8 +32,8 @@ class CustomAppButton extends StatelessWidget {
               text,
               style: Theme.of(context)
                   .textTheme
-                  .headlineSmall!
-                  .copyWith(color: Colors.white),
+                  .bodyMedium!
+                  .copyWith(color:GeneralUtils.isLightTheme(context)? appWhite:appDark,fontWeight: FontWeight.bold),
             ),
           ],
         ),

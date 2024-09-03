@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../2_state_management/charity_funds_paypal_cubit/charity_funds_paypal_cubit.dart';
+import '../../../4_utility_functions/general_utils.dart';
+import '../../core/consts/colors.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -99,9 +101,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .launchCharityLink();
                   },
                   text: "دعم التطبيق",
-                  trailing: const Icon(
+                  trailing:  Icon(
                     Icons.arrow_back_ios,
-                    color: Colors.white,
+                    color: GeneralUtils.isLightTheme(context)? appWhite:appDark,
                   ),
                 ),
                 const SizedBox(
@@ -113,9 +115,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .launchEmail();
                   },
                   text: "تواصل معنا",
-                  trailing: const Icon(
+                  trailing:  Icon(
                     Icons.arrow_back_ios,
-                    color: Colors.white,
+                    color: GeneralUtils.isLightTheme(context)? appWhite:appDark,
                   ),
                 ),
               ],
