@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/1_ui/core/consts/third_party_values.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
 import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget shareWithFriends() {
     return GestureDetector(
       onTap: () {
-        Share.share(InitialData.shareMessage);
+        Share.share(ThirdPartyValues.appLink);
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

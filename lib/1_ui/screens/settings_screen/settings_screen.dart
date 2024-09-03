@@ -1,10 +1,13 @@
 import 'package:bank_el_ziker/1_ui/core/consts/constant_values.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/2_state_management/email_us_cubit/email_us_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../2_state_management/charity_funds_paypal_cubit/charity_funds_paypal_cubit.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -37,11 +40,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
         BlocListener<GetSettingsCubit, GetSettingsState>(
           listener: (context, state) {
             if (state is GetSettingsLoaded) {
-        
               setState(() {
-                isLightTheme=state.isLightTheme;
+                isLightTheme = state.isLightTheme;
               });
-              
             }
           },
         ),
@@ -93,7 +94,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   height: 48,
                 ),
                 CustomAppButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    BlocProvider.of<CharityFundsPaypalCubit>(context)
+                        .launchCharityLink();
+                  },
                   text: "دعم التطبيق",
                   trailing: const Icon(
                     Icons.arrow_back_ios,
@@ -104,7 +108,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   height: 24,
                 ),
                 CustomAppButton(
-                  onPressed: () {},
+                  onPressed: () {
+                 BlocProvider.of<EmailUsCubit>(context)
+                        .launchEmail();
+                  },
                   text: "تواصل معنا",
                   trailing: const Icon(
                     Icons.arrow_back_ios,

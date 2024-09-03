@@ -616,8 +616,6 @@ class InitialData {
         description: """
 وَلَوْلا إِذْ دَخَلْتَ جَنَّتَكَ قُلْتَ مَا شَاءَ اللَّهُ لا قُوَّةَ إِلَّا بِاللَّهِ[الكهف:39] .وفي الحديث: إذا رأى أحدُكم ما يُعجبُهُ في نَفسِهِ ، أو مالِهِ فليبرِّكْ علَيهِ فإنَّ العَينَ حقٌّ """),
   ];
-  static const shareMessage =
-      'https://play.google.com/store/apps/details?id=com.neutron.bank_el_zikr';
 
   static List<Prayer> prayers = [
     Prayer(id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),

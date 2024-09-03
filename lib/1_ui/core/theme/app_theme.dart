@@ -7,14 +7,14 @@ class AppTheme {
   AppTheme._();
   //amr change all colors here
   static final ThemeData lightTheme = ThemeData(
-    primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
+    // primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
     primaryColor: const Color.fromRGBO(52, 199, 89, 1.0),
 
     brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: Colors.black,
-        selectionColor: Color.fromARGB(101, 255, 89, 97),
-        selectionHandleColor: Color(0xffFF5961)),
+        selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
+        selectionHandleColor:Color.fromRGBO(52, 199, 89, 1.0) ),
     scaffoldBackgroundColor: const Color(0xffffffff),
     fontFamily: GoogleFonts.tajawal().fontFamily,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
