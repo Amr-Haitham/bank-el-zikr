@@ -6,6 +6,7 @@ import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get
 import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 import '../../../2_state_management/charity_funds_paypal_cubit/charity_funds_paypal_cubit.dart';
 import '../../../4_utility_functions/general_utils.dart';
@@ -68,7 +69,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 _buildSwitchTile(
                   text: 'سمة البرنامج',
-                  value: isLightTheme,
+                  value: isLightTheme,activeIcon: Icon(Icons.wb_sunny,color: Theme.of(context).primaryColor,),inActiveIcon: const Icon(Icons.nights_stay),
+                 inActiveColor:Theme.of(context).primaryColor,
                   onChanged: (value) {
                     setState(() {
                       isLightTheme = value;
@@ -76,15 +78,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                           .setTheme(isLightTheme: isLightTheme);
                     });
                   },
-                  icon: isLightTheme ? Icons.wb_sunny : Icons.nights_stay,
                 ),
+                const SizedBox(
+                  height: 46,
+                ),
+
                 _buildSwitchTile(
                   text: 'الأهتزاز',
                   value: isVibrating,
                   onChanged: (value) {
                     setState(() {
                       isVibrating = value;
-                      BlocProvider.of<SetSettingsCubit>(context).setIsVibrating(isVibrating: isVibrating);
+                      BlocProvider.of<SetSettingsCubit>(context)
+                          .setIsVibrating(isVibrating: isVibrating);
                     });
                   },
                 ),
@@ -146,27 +152,57 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSwitchTile({
     required String text,
     required bool value,
+    Icon? activeIcon,
+    Icon? inActiveIcon,
+    Color? inActiveColor,
     required Function(bool) onChanged,
-    IconData? icon,
+ 
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Transform.scale(
-          scaleX: -1,
-          child: Switch(
-            value: value,
-            onChanged: onChanged,
-            activeColor: Theme.of(context).primaryColor,
-            inactiveThumbColor: Colors.grey,
+        Container(
+          padding: EdgeInsets.zero,
+          margin: EdgeInsets.zero,
+          height: 36,
+          width: 78,
+          child: Transform.scale(
+            scaleX: -1,
+            // fit: BoxFit.fitHeight,
+            child: FlutterSwitch(
+              
+              // width: 125.0,
+              // height: 55.0,
+              
+              activeIcon: activeIcon,
+              inactiveIcon:inActiveIcon,
+              activeColor: Theme.of(context).primaryColor,
+              inactiveColor:inActiveColor?? const Color(0xff787880),
+              valueFontSize: 25.0,
+              // toggleSize: 45.0,
+              value: value,
+              borderRadius: 30.0,
+              // padding: 8.0,
+              showOnOff: false,
+              onToggle: onChanged,
+            ),
+
+            //  Switch(
+            //   value: value,
+            //   onChanged: onChanged,
+            //   activeColor: Theme.of(context).primaryColor,
+            //   inactiveThumbColor: Colors.grey,
+            //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            //   splashRadius: 0,
+            // ),
           ),
         ),
         Row(
           children: [
-            if (icon != null)
-              Icon(icon,
-                  color: value ? Theme.of(context).primaryColor : Colors.grey),
-            const SizedBox(width: 8),
+            // if (icon != null)
+            //   Icon(icon,
+            //       color: value ? Theme.of(context).primaryColor : Colors.grey),
+            // const SizedBox(width: 8),
             Text(
               text,
               style: Theme.of(context).textTheme.bodyMedium,

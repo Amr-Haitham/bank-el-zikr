@@ -29,12 +29,12 @@ class SituationalZikrSearchWidget extends StatelessWidget {
         ),
         enabledBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(color: Theme.of(context).primaryColor, width: 2),
+              BorderSide(color: Theme.of(context).primaryColor, width: 1),
           borderRadius: BorderRadius.circular(30),
         ),
         focusedBorder: OutlineInputBorder(
           borderSide:
-              BorderSide(color: Theme.of(context).primaryColor, width: 2),
+              BorderSide(color: Theme.of(context).primaryColor, width: 1),
           borderRadius: BorderRadius.circular(30),
         ),
       ),

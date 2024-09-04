@@ -104,7 +104,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                 )),
                 SliverToBoxAdapter(
                     child: SizedBox(
-                  // height: 41,
+                  height: 50,
                   child: Row(
                     children: [
                       Expanded(
@@ -132,8 +132,8 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                           // print(showFavourites);
                         },
                         child: Container(
-                          width: 44,
-                          height: 44,
+                          width: 50,
+                          height: 50,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: showFavourites

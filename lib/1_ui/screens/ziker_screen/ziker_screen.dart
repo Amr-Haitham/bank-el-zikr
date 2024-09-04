@@ -315,8 +315,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 },
                                 builder: (context, state) {
                                   if (state is GetGeneralDataLoaded) {
-                                    return TextButton(
-                                      onPressed: () {
+                                    return GestureDetector(
+                                      onTap: () {
                                         setState(() {
                                           counter++;
                                         });
@@ -370,33 +370,43 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                   context)
                                               .updateGeneralDataGoal(null);
                                         }
-                                        // HiveDB().printDB();
                                       },
-                                      style: TextButton.styleFrom(
-                                          backgroundColor:
-                                              Theme.of(context).cardColor,
-                                          shape: const CircleBorder()),
-                                      child: SizedBox(
-                                        width: screenWidth * .6,
-                                        // padding: EdgeInsets.all(10.h),
-                                        child: Center(
-                                          child: AutoSizeText(
-                                            counter != 0
-                                                ? ArabicNumbers()
-                                                    .convert(counter)
-                                                    .toString()
-                                                : "إضغط للبدء",
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineLarge!
-                                                .copyWith(
-                                                    fontSize: counter != 0
-                                                        ? 70
-                                                        : 24,
-                                                    color: Theme.of(context)
-                                                        .primaryColor),
-                                            maxLines: 1,
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        width: double.infinity,
+                                        child: IgnorePointer(
+                                          child: TextButton(
+                                            onPressed: () {
+                                              // HiveDB().printDB();
+                                            },
+                                            style: TextButton.styleFrom(
+                                                backgroundColor:
+                                                    Theme.of(context).cardColor,
+                                                shape: const CircleBorder()),
+                                            child: SizedBox(
+                                              width: screenWidth * .6,
+                                              // padding: EdgeInsets.all(10.h),
+                                              child: Center(
+                                                child: AutoSizeText(
+                                                  counter != 0
+                                                      ? ArabicNumbers()
+                                                          .convert(counter)
+                                                          .toString()
+                                                      : "إضغط للبدء",
+                                                  textAlign: TextAlign.center,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineLarge!
+                                                      .copyWith(
+                                                          fontSize: counter != 0
+                                                              ? 70
+                                                              : 24,
+                                                          color: Theme.of(context)
+                                                              .primaryColor),
+                                                  maxLines: 1,
+                                                ),
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),

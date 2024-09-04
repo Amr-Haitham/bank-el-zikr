@@ -31,63 +31,60 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
       },
       child: SizedBox(
         height: ScreenUtils.getScreenHeight(context) / 6,
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              IconButton.filled(
-                  onPressed: () {
-                    Navigator.pushNamed(context, settingsScreenUrl);
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            IconButton.filled(
+                onPressed: () {
+                  Navigator.pushNamed(context, settingsScreenUrl);
+                },
+                // color: Colors.black,
+                style: IconButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor),
+                icon: Icon(
+                  Icons.settings_outlined,
+                  
+                  color: 
+                  Theme.of(context).iconTheme.color
+                )),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  "مرحبا بعودتك",
+                  style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                      color: GeneralUtils.isLightTheme(context)
+                          ? Theme.of(context).primaryColor
+                          : appWhite,
+                      fontSize: 30),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+                BlocBuilder<GetHijriDateCubit, GetHijriDateState>(
+                  builder: (context, state) {
+                    if (state is GetHijriDateLoaded) {
+                      return Text(
+                        state.hijriDate.fromObjectToFullDateString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(
+                              fontSize: 16,
+                                color: GeneralUtils.isLightTheme(context)
+                                    ? appLightGold
+                                    : appDarkGold),
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
                   },
-                  // color: Colors.black,
-                  style: IconButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor),
-                  icon: Icon(
-                    Icons.settings_outlined,
-                    
-                    color: 
-                    Theme.of(context).iconTheme.color
-                  )),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    "مرحبا بعودتك",
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: GeneralUtils.isLightTheme(context)
-                            ? Theme.of(context).primaryColor
-                            : appWhite,
-                        fontSize: 30),
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  BlocBuilder<GetHijriDateCubit, GetHijriDateState>(
-                    builder: (context, state) {
-                      if (state is GetHijriDateLoaded) {
-                        return Text(
-                          state.hijriDate.fromObjectToFullDateString(),
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(
-                                fontSize: 16,
-                                  color: GeneralUtils.isLightTheme(context)
-                                      ? appLightGold
-                                      : appDarkGold),
-                        );
-                      } else {
-                        return const SizedBox.shrink();
-                      }
-                    },
-                  ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
