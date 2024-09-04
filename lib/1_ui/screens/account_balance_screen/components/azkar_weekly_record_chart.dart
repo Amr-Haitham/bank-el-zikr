@@ -122,7 +122,7 @@ class LineChartForDayRecords extends StatelessWidget {
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
                 showTitles: true,
-                interval: 1,
+                interval: 1,reservedSize: 32,
                 getTitlesWidget: (index, titleMeta) =>
                     customGetTitle(context, index, titleMeta, records),
               ),

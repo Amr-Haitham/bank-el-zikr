@@ -85,7 +85,7 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                   ),
                   SliverToBoxAdapter(
                     child: SizedBox(
-                      height: ScreenUtils.getScreenHeight(context) / 6,
+                      height: ScreenUtils.getScreenHeight(context) / 5.5,
                       child: BlocBuilder<GetWeekAzkarRecordCubit,
                           GetWeekAzkarRecordState>(builder: ((context, state) {
                         if (state is GetWeekAzkarRecordLoaded) {

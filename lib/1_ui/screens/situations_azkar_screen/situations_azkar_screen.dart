@@ -104,7 +104,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                 )),
                 SliverToBoxAdapter(
                     child: SizedBox(
-                  height: 50,
+                  // height: 50,
                   child: Row(
                     children: [
                       Expanded(
