@@ -62,7 +62,7 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
-    primarySwatch: createMaterialColor(const Color(0xffFF5961)),
+    // primarySwatch: createMaterialColor(const Color(0xffFF5961)),
     brightness: Brightness.dark,
     primaryColor: const Color(0xff30D158),
     textSelectionTheme: const TextSelectionThemeData(
