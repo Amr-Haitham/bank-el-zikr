@@ -22,7 +22,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
-    BlocProvider.of<GetHijriDateCubit>(context).getHijriDate();
+    // BlocProvider.of<GetHijriDateCubit>(context).getHijriDate();
     super.initState();
   }
   @override

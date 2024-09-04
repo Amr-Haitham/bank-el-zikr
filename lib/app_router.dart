@@ -62,9 +62,9 @@ class AppRouter {
               BlocProvider(
                 create: (context) => GetRandomPrayerCubit(),
               ),
-              BlocProvider(
-                create: (context) => GetHijriDateCubit(),
-              ),
+              // BlocProvider(
+              //   create: (context) => GetHijriDateCubit(),
+              // ),
             ],
             child: const HomeScreen(),
           );

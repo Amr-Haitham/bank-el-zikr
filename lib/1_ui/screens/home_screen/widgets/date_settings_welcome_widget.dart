@@ -1,8 +1,10 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jhijri/jHijri.dart';
 
 import '../../../../2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
@@ -17,10 +19,12 @@ class DateSettingsWelcomeWidget extends StatefulWidget {
 }
 
 class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
+  late HijriDate _hijriDate;
   @override
   void initState() {
-    super.initState();
+     _hijriDate= JHijri.now().hijri;
     BlocProvider.of<GetGeneralDataCubit>(context).getGeneralData();
+    super.initState();
   }
 
   @override
@@ -62,12 +66,8 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                 ),
                 const SizedBox(
                   height: 5,
-                ),
-                BlocBuilder<GetHijriDateCubit, GetHijriDateState>(
-                  builder: (context, state) {
-                    if (state is GetHijriDateLoaded) {
-                      return Text(
-                        state.hijriDate.fromObjectToFullDateString(),
+                ),Text(
+                       "${_hijriDate.dayName} ${ArabicNumbers().convert(_hijriDate.day)} ${ArabicNumbers().convert(_hijriDate.monthName)} ${_hijriDate.year}" ,
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall!
@@ -76,12 +76,16 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
                                 color: GeneralUtils.isLightTheme(context)
                                     ? appLightGold
                                     : appDarkGold),
-                      );
-                    } else {
-                      return const SizedBox.shrink();
-                    }
-                  },
-                ),
+                      )
+                // BlocBuilder<GetHijriDateCubit, GetHijriDateState>(
+                //   builder: (context, state) {
+                //     if (state is GetHijriDateLoaded) {
+                //       return 
+                //     } else {
+                //       return const SizedBox.shrink();
+                //     }
+                //   },
+                // ),
               ],
             ),
           ],
