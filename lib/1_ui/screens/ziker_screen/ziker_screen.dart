@@ -286,7 +286,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                           Theme.of(context).primaryColor,
                                       shape: const CircleBorder()),
                                   child: Padding(
-                                    padding: EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(8.0),
                                     child: Icon(
                                       Icons.replay_rounded,
                                       color: GeneralUtils.isLightTheme(context)
@@ -376,30 +376,27 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                           backgroundColor:
                                               Theme.of(context).cardColor,
                                           shape: const CircleBorder()),
-                                      child: Container(
+                                      child: SizedBox(
                                         width: screenWidth * .6,
                                         // padding: EdgeInsets.all(10.h),
                                         child: Center(
-                                          child: Container(
-                                            // padding: EdgeInsets.all(10.h),
-                                            child: AutoSizeText(
-                                              counter != 0
-                                                  ? ArabicNumbers()
-                                                      .convert(counter)
-                                                      .toString()
-                                                  : "إضغط للبدء",
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineLarge!
-                                                  .copyWith(
-                                                      fontSize: counter != 0
-                                                          ? 70
-                                                          : 24,
-                                                      color: Theme.of(context)
-                                                          .primaryColor),
-                                              maxLines: 1,
-                                            ),
+                                          child: AutoSizeText(
+                                            counter != 0
+                                                ? ArabicNumbers()
+                                                    .convert(counter)
+                                                    .toString()
+                                                : "إضغط للبدء",
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineLarge!
+                                                .copyWith(
+                                                    fontSize: counter != 0
+                                                        ? 70
+                                                        : 24,
+                                                    color: Theme.of(context)
+                                                        .primaryColor),
+                                            maxLines: 1,
                                           ),
                                         ),
                                       ),

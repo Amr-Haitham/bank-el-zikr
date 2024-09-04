@@ -2,9 +2,7 @@ import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_random_prayer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../4_utility_functions/general_utils.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../core/consts/colors.dart';
 
 class RandomZikerContainer extends StatelessWidget {
   const RandomZikerContainer({
@@ -70,18 +68,12 @@ class RandomZikerContainer extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                   color: Theme.of(context).primaryColor),
             ),
-            Container(
-              // margin: EdgeInsets.symmetric(
-              //   horizontal: 15,
-              // ),
-                    
-              child: Center(
-                child: Text(
-                  prayer,
-                  textAlign: TextAlign.start,
-                  textDirection: TextDirection.rtl,
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+            Center(
+              child: Text(
+                prayer,
+                textAlign: TextAlign.start,
+                textDirection: TextDirection.rtl,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
           ],

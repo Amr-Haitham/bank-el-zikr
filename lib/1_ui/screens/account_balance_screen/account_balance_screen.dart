@@ -196,7 +196,7 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 20),
+              margin: const EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context)
                     .cardColor, // Background color of the tab bar

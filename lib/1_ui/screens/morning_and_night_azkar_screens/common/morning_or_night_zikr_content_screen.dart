@@ -185,11 +185,6 @@ class _MorningOrNightZikrContentScreenState
     return IconButton(
       onPressed: () {
         if (_checkIfNextIsAvailable()) {
-          print("hellooo");
-          print(currentZikrIndex);
-          print(indexOfLastZikr);
-          print(widget.azkar.length);
-
           setState(() {
             currentZikrIndex++;
             currentCounter = widget.azkar[currentZikrIndex].count;

@@ -48,15 +48,7 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
                 const SizedBox(
                   height: 16,
                 ),
-                Container(
-                  height: 5,
-                  decoration: BoxDecoration(
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appDark
-                          : appWhite,
-                      borderRadius: BorderRadius.circular(11)),
-                  width: ScreenUtils.getScreenWidth(context) / 4,
-                ),
+               
                 Container(
                   height: 5,
                   decoration: BoxDecoration(
@@ -113,7 +105,7 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
         ),
         child: Center(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Text('إضافة الذكر',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color:

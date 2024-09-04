@@ -30,7 +30,7 @@ class DayZikrRecordAdapter extends TypeAdapter<DayZikrRecord> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    ;
+    
     return DayZikrRecord(
       id: fields[0] as String,
       dateTime: fields[1] as DateTime,

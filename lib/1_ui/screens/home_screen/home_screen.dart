@@ -9,7 +9,6 @@ import 'package:bank_el_ziker/2_state_management/general_data/update_general_dat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:share_plus/share_plus.dart';
-import '../../core/consts/initial_data.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

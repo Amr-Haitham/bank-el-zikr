@@ -1,5 +1,6 @@
 import 'package:bank_el_ziker/1_ui/core/consts/constant_values.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/custom_app_text_field.dart';
+import 'package:bank_el_ziker/1_ui/re-usable%20widgets/popup_functions.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_records/delete_single_zikr_record/delete_single_zikr_record_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
@@ -13,7 +14,7 @@ import '../../../../3_data/models/zikr.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
 import '../../../core/consts/colors.dart';
 
-class EditCustomZikerPopup extends StatefulWidget { 
+class EditCustomZikerPopup extends StatefulWidget {
   const EditCustomZikerPopup(
       {super.key,
       required this.zikr,
@@ -61,15 +62,15 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
                 const SizedBox(
                   height: 16,
                 ),
-                
                 Container(
                   height: 5,
                   decoration: BoxDecoration(
-                      color:GeneralUtils.isLightTheme(context) ?appDark:appWhite,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appDark
+                          : appWhite,
                       borderRadius: BorderRadius.circular(11)),
                   width: ScreenUtils.getScreenWidth(context) / 4,
                 ),
-                
                 CustomAppTextField(
                   title: 'الذكر',
                   controller: edittedZikerContentController,
@@ -88,11 +89,9 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
                 ),
                 Column(
                   children: [
-                
                     saveButton(),
                     const SizedBox(height: 16),
                     deleteButton(),
-                
                   ],
                 ),
                 const SizedBox(height: ConstantValues.appBottomPadding),
@@ -149,35 +148,40 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
           borderRadius: BorderRadius.circular(39),
           color: Theme.of(context).primaryColor,
         ),
-        child:  Center(
+        child: Center(
           child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Text(
-              'حفظ',
-              style:  Theme.of(context).textTheme.bodyMedium!.copyWith(
+            padding: const EdgeInsets.all(16),
+            child: Text('حفظ',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     color:
                         GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                     fontWeight: FontWeight.w700)),
-            ),
           ),
         ),
-      );
+      ),
+    );
   }
 
   Widget deleteButton() {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<DeleteCustomZikrCubit>(context)
-            .deleteCustomZikr(zikrIndex: widget.zikrIndex);
+        PopupFunctions.deleteZikrDialog(
+            context: context,
+            content: "هل أنت متأكد من حذف الذكر",
+            onDelete: () {
+              BlocProvider.of<DeleteCustomZikrCubit>(context)
+                  .deleteCustomZikr(zikrIndex: widget.zikrIndex);
 
-        widget.isSelected
-            ? BlocProvider.of<UpdateGeneralDataCubit>(context)
-                .updateGeneralDataCurrentZikr(InitialData.generalAzkar.first.id)
-            : null;
-        BlocProvider.of<DeleteSingleZikrRecordCubit>(context)
-            .deleteZikrRecord(zikrId: widget.zikr.id);
-        BlocProvider.of<AzkarCubit>(context).getAllAzkar();
-        Navigator.of(context).pop();
+              widget.isSelected
+                  ? BlocProvider.of<UpdateGeneralDataCubit>(context)
+                      .updateGeneralDataCurrentZikr(
+                          InitialData.generalAzkar.first.id)
+                  : null;
+              BlocProvider.of<DeleteSingleZikrRecordCubit>(context)
+                  .deleteZikrRecord(zikrId: widget.zikr.id);
+              BlocProvider.of<AzkarCubit>(context).getAllAzkar();
+              Navigator.of(context).pop();
+            });
       },
       child: Container(
         // width: 100,

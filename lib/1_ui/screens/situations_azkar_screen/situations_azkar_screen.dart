@@ -253,6 +253,11 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                     }
                   },
                 ),
+                const SliverToBoxAdapter(
+                  child: SizedBox(
+                    height: ConstantValues.appBottomPadding,
+                  ),
+                )
               ],
             ),
           ),

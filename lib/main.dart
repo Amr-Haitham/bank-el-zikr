@@ -1,7 +1,6 @@
 import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
-import 'package:bank_el_ziker/3_data/services/notifications.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -62,6 +61,5 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: widget.appRouter.generateRouter),
     );
-    ;
   }
 }

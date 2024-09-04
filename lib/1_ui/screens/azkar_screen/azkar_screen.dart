@@ -6,7 +6,6 @@ import 'package:bank_el_ziker/2_state_management/general_data/get_current_zikr/g
 import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
 import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -61,7 +60,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
         child: Scaffold(
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Padding(
-              padding: EdgeInsets.only(
+              padding: const EdgeInsets.only(
                   top: 30, right: 30, left: 30, bottom: 10),
               child: CustomScrollView(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -289,7 +288,7 @@ class ListTileOfZikr extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 16.0),
+                      padding: const EdgeInsets.only(left: 16.0),
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
