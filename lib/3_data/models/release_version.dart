@@ -1,3 +1,3 @@
 class ReleaseVersion {
-  static int version = 6;
+  static int version = 7;
 }

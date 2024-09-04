@@ -8,7 +8,6 @@ import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:bank_el_ziker/4_utility_functions/screen_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../3_data/models/zikr.dart';
 import '../../core/consts/colors.dart';
@@ -41,10 +40,10 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: SafeArea(
             child: Padding(
-              padding:  const EdgeInsets.only(
-                top: ConstantValues.appTopPadding,
-                left: ConstantValues.appHorizontalPadding,
-                right: ConstantValues.appHorizontalPadding),
+              padding: const EdgeInsets.only(
+                  top: ConstantValues.appTopPadding,
+                  left: ConstantValues.appHorizontalPadding,
+                  right: ConstantValues.appHorizontalPadding),
               child: CustomScrollView(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.center,
@@ -61,11 +60,15 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal:   ConstantValues.appHorizontalPadding*2),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: ConstantValues.appHorizontalPadding * 2),
                       child: AutoSizeText(
                         "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
                         textAlign: TextAlign.center,
-                        style:Theme.of(context).textTheme.bodyMedium!.copyWith(fontFamily: "Arial",fontSize: 20,fontWeight: FontWeight.w700),
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                            fontFamily: "Arial",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700),
                       ),
                     ),
                   ),
@@ -77,12 +80,12 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                   const SliverToBoxAdapter(child: TotalBalanceNumber()),
                   const SliverToBoxAdapter(
                     child: SizedBox(
-                      height: 42,
+                      height: 48,
                     ),
                   ),
                   SliverToBoxAdapter(
                     child: SizedBox(
-                      height: ScreenUtils.getScreenHeight(context)/6,
+                      height: ScreenUtils.getScreenHeight(context) / 6,
                       child: BlocBuilder<GetWeekAzkarRecordCubit,
                           GetWeekAzkarRecordState>(builder: ((context, state) {
                         if (state is GetWeekAzkarRecordLoaded) {
@@ -98,12 +101,11 @@ class _AccountBalanceScreenState extends State<AccountBalanceScreen> {
                       })),
                     ),
                   ),
-                                 const SliverToBoxAdapter(
+                  const SliverToBoxAdapter(
                     child: SizedBox(
                       height: 42,
                     ),
                   ),
-            
                   SliverToBoxAdapter(
                     // flex: 10,
                     child: BlocBuilder<GetWeekAzkarRecordCubit,
@@ -169,22 +171,23 @@ class TabbarOfAzkarRecord extends StatefulWidget {
 }
 
 class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
- List<Zikr> getSortedFilteredAzkar(Map<int, int> mapAzkarRecord) {
-  // Filter out azkar with zero records or empty values
-  List<Zikr> filteredAzkar = widget.allAzkar.where((zikr) {
-    int? recordValue = mapAzkarRecord[zikr.id];
-    return recordValue != null && recordValue != 0;
-  }).toList();
+  List<Zikr> getSortedFilteredAzkar(Map<int, int> mapAzkarRecord) {
+    // Filter out azkar with zero records or empty values
+    List<Zikr> filteredAzkar = widget.allAzkar.where((zikr) {
+      int? recordValue = mapAzkarRecord[zikr.id];
+      return recordValue != null && recordValue != 0;
+    }).toList();
 
-  // Sort the remaining azkar based on the record values
-  filteredAzkar.sort((a, b) {
-    int valueA = mapAzkarRecord[a.id] ?? 0;
-    int valueB = mapAzkarRecord[b.id] ?? 0;
-    return valueB.compareTo(valueA);
-  });
+    // Sort the remaining azkar based on the record values
+    filteredAzkar.sort((a, b) {
+      int valueA = mapAzkarRecord[a.id] ?? 0;
+      int valueB = mapAzkarRecord[b.id] ?? 0;
+      return valueB.compareTo(valueA);
+    });
 
-  return filteredAzkar;
-}
+    return filteredAzkar;
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -193,7 +196,7 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
         child: Column(
           children: [
             Container(
-              margin: EdgeInsets.only(bottom: 20.h),
+              margin: EdgeInsets.only(bottom: 20),
               decoration: BoxDecoration(
                 color: Theme.of(context)
                     .cardColor, // Background color of the tab bar
@@ -204,6 +207,7 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
               //     3), // Padding inside the container to space the tabs a bit
               child: TabBar(
                 dividerColor: Colors.transparent,
+
                 labelPadding: const EdgeInsets.symmetric(horizontal: 0),
                 indicatorPadding: const EdgeInsets.symmetric(horizontal: 0),
                 indicator: BoxDecoration(
@@ -212,11 +216,20 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                   borderRadius: BorderRadius.circular(
                       42), // Rounded corners for the active tab
                 ),
-                labelColor: GeneralUtils.isLightTheme(context)?  appWhite:appDark, // Text color for the active tab
-                labelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
-                unselectedLabelColor:
-                  GeneralUtils.isLightTheme(context)? appDark :appWhite, // Text color for the inactive tabs
-                unselectedLabelStyle: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
+                labelColor: GeneralUtils.isLightTheme(context)
+                    ? appWhite
+                    : appDark, // Text color for the active tab
+                labelStyle: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
+                unselectedLabelColor: GeneralUtils.isLightTheme(context)
+                    ? appDark
+                    : appWhite, // Text color for the inactive tabs
+                unselectedLabelStyle: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .copyWith(fontWeight: FontWeight.bold),
                 tabs: const [
                   SizedBox(
                     width: double.infinity,
@@ -234,143 +247,194 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
               ),
             ),
             SizedBox(
-              height: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).length*81,
+                height: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById)
+                        .length *
+                    81,
                 child: TabBarView(
                     physics: const BouncingScrollPhysics(),
                     children: [
-                  SizedBox.expand(
-                    child: Column(
-                      children: getSortedFilteredAzkar(widget.firstDayAzkarRecord).map((azkar) {
-                        int value = widget.firstDayAzkarRecord[azkar.id] ?? 0;
+                      SizedBox.expand(
+                        child: Column(
+                          children: widget.firstDayAzkarRecord.keys.isEmpty
+                              ? [
+                                  Center(
+                                      child: Text(
+                                    "لم يتم العثور على أي إحداثيات",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(color: Colors.red),
+                                  ))
+                                ]
+                              : getSortedFilteredAzkar(
+                                      widget.firstDayAzkarRecord)
+                                  .map((azkar) {
+                                  int value =
+                                      widget.firstDayAzkarRecord[azkar.id] ?? 0;
 
-                        return Container(
-                        height: 60,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 20.0),
-                          margin: const EdgeInsets.only(bottom: 20.0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            border: Border.all(
-                                width: 1,
-                                color: appGray),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                value != 0 ? value.toString() : "-",
-                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),
-                              ),
-                              const SizedBox(width: 20.0),
-                              Expanded(
-                                child: Text(
-                                  azkar.content,
-                                  textAlign: TextAlign.right,
-                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ), 
-                  SizedBox.expand(
-                    child: Column(
-                      children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
-                         int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
+                                  return Container(
+                                    height: 60,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 20.0),
+                                    margin: const EdgeInsets.only(bottom: 20.0),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      border:
+                                          Border.all(width: 1, color: appGray),
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          value != 0 ? value.toString() : "-",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w700),
+                                        ),
+                                        const SizedBox(width: 20.0),
+                                        Expanded(
+                                          child: Text(
+                                            azkar.content,
+                                            textAlign: TextAlign.right,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                        ),
+                      ),
+                      SizedBox.expand(
+                        child: Column(
+                          children: widget.allWeekAzkarRecordsById.keys.isEmpty
+                              ? [
+                                  Center(
+                                      child: Text(
+                                    "لم يتم العثور على أي إحداثيات",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyMedium!
+                                        .copyWith(color: Colors.red),
+                                  ))
+                                ]
+                              : getSortedFilteredAzkar(
+                                      widget.allWeekAzkarRecordsById)
+                                  .map((azkar) {
+                                  int value = widget
+                                          .allWeekAzkarRecordsById[azkar.id] ??
+                                      0;
 
-                        return Container(
-                            height: 60,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 15.0, vertical: 20.0),
-                          margin: const EdgeInsets.only(bottom: 20.0),
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            border: Border.all(
-                                width: 1,
-                                color: appGray),
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                value != 0 ? value.toString() : "-",
-                                style: Theme.of(context).textTheme.bodySmall!.copyWith(color: Theme.of(context).primaryColor,fontWeight: FontWeight.w700),
-                              ),
-                              const SizedBox(width: 20.0),
-                              Expanded(
-                                child: Text(
-                                  azkar.content,
-                                  textAlign: TextAlign.right,
-                                  style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      }).toList(),
-                    ),
-                  ), 
+                                  return Container(
+                                    height: 60,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 15.0, vertical: 20.0),
+                                    margin: const EdgeInsets.only(bottom: 20.0),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                      border:
+                                          Border.all(width: 1, color: appGray),
+                                      borderRadius: BorderRadius.circular(40),
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          value != 0 ? value.toString() : "-",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall!
+                                              .copyWith(
+                                                  color: Theme.of(context)
+                                                      .primaryColor,
+                                                  fontWeight: FontWeight.w700),
+                                        ),
+                                        const SizedBox(width: 20.0),
+                                        Expanded(
+                                          child: Text(
+                                            azkar.content,
+                                            textAlign: TextAlign.right,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall!
+                                                .copyWith(
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }).toList(),
+                        ),
+                      ),
 
+                      // SizedBox.expand(
+                      //   child: Column(
+                      //     children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
+                      //       int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
 
-
-                  // SizedBox.expand(
-                  //   child: Column(
-                  //     children: getSortedFilteredAzkar(widget.allWeekAzkarRecordsById).map((azkar) {
-                  //       int value = widget.allWeekAzkarRecordsById[azkar.id] ?? 0;
-
-                  //       return Container(
-                  //         height: 60,
-                  //         padding: const EdgeInsets.symmetric(
-                  //             horizontal: 15.0, vertical: 20.0),
-                  //         margin: const EdgeInsets.only(bottom: 20.0),
-                  //         width: double.infinity,
-                  //         decoration: BoxDecoration(
-                  //           color: Colors.white,
-                  //           border: Border.all(
-                  //               width: 1,
-                  //               color: appGray),
-                  //           borderRadius: BorderRadius.circular(40),
-                  //         ),
-                  //         child: Row(
-                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //           children: [
-                  //             Text(
-                  //               value != 0 ? value.toString() : "-",
-                  //               style: const TextStyle(
-                  //                 fontSize: 14.0,
-                  //                 fontWeight: FontWeight.w800,
-                  //                 color: Colors
-                  //                     .black, // Replace with appGray
-                  //               ),
-                  //             ),
-                  //             const SizedBox(width: 20.0),
-                  //             Expanded(
-                  //               child: Text(
-                  //                 azkar.content,
-                  //                 textAlign: TextAlign.right,
-                  //                 style: const TextStyle(
-                  //                   fontSize: 14.0,
-                  //                   fontWeight: FontWeight.w800,
-                  //                   color: Colors
-                  //                       .black, // Replace with appGray
-                  //                 ),
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //   ),
-                  // ), //list builder of azkar records of only the first day
-
-
-                ]))
+                      //       return Container(
+                      //         height: 60,
+                      //         padding: const EdgeInsets.symmetric(
+                      //             horizontal: 15.0, vertical: 20.0),
+                      //         margin: const EdgeInsets.only(bottom: 20.0),
+                      //         width: double.infinity,
+                      //         decoration: BoxDecoration(
+                      //           color: Colors.white,
+                      //           border: Border.all(
+                      //               width: 1,
+                      //               color: appGray),
+                      //           borderRadius: BorderRadius.circular(40),
+                      //         ),
+                      //         child: Row(
+                      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //           children: [
+                      //             Text(
+                      //               value != 0 ? value.toString() : "-",
+                      //               style: const TextStyle(
+                      //                 fontSize: 14.0,
+                      //                 fontWeight: FontWeight.w800,
+                      //                 color: Colors
+                      //                     .black, // Replace with appGray
+                      //               ),
+                      //             ),
+                      //             const SizedBox(width: 20.0),
+                      //             Expanded(
+                      //               child: Text(
+                      //                 azkar.content,
+                      //                 textAlign: TextAlign.right,
+                      //                 style: const TextStyle(
+                      //                   fontSize: 14.0,
+                      //                   fontWeight: FontWeight.w800,
+                      //                   color: Colors
+                      //                       .black, // Replace with appGray
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       );
+                      //     }).toList(),
+                      //   ),
+                      // ), //list builder of azkar records of only the first day
+                    ]))
           ],
         ));
   }
@@ -413,8 +477,8 @@ class TotalBalanceNumber extends StatelessWidget {
                   "Error",
                   maxLines: 1,
                   textAlign: TextAlign.center,
-                  style: cairoTextStyle(
-                      19.sp, FontWeight.w800, null, Colors.white),
+                  style:
+                      cairoTextStyle(19, FontWeight.w800, null, Colors.white),
                 );
               } else {
                 return const Center(
@@ -426,7 +490,10 @@ class TotalBalanceNumber extends StatelessWidget {
           Text(
             "رصيد الذكر",
             textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight:FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .copyWith(fontWeight: FontWeight.bold),
           ),
         ],
       ),

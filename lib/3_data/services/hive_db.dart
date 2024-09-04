@@ -54,7 +54,11 @@ class HiveDB {
     if (versionBox.isEmpty ||
         (versionBox.values.first.currentVersion != ReleaseVersion.version)) {
       await versionBox.clear();
-      versionBox.add(Version(currentVersion: ReleaseVersion.version));
+      await versionBox.add(Version(currentVersion: ReleaseVersion.version));
+
+      await morningAzkarBox.clear();
+      await nightAzkarBox.clear();
+      await conditionalAzkarBox.clear();
 
       if ((generalDataBox.isNotEmpty)) {
         GeneralData generalData = generalDataBox.values.first;
@@ -74,11 +78,11 @@ class HiveDB {
       }
 
       // print('made update');
-      await zikrBox.clear();
-      await morningAzkarBox.clear();
-      await nightAzkarBox.clear();
-      await prayerAzkarBox.clear();
-      await conditionalAzkarBox.clear();
+      // await zikrBox.clear();
+      // await morningAzkarBox.clear();
+      // await nightAzkarBox.clear();
+      // await prayerAzkarBox.clear();
+      // await conditionalAzkarBox.clear();
     }
 
     if (zikrBox.isEmpty) {

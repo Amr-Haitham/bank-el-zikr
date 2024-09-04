@@ -3,7 +3,6 @@ import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../3_data/models/day_zikr_record.dart';
 
@@ -60,27 +59,30 @@ class LineChartForDayRecords extends StatelessWidget {
     return spots;
   }
 
-  Widget customGetTitle(context,
-      double dayIndex, TitleMeta meta, List<DayZikrRecord> records) {
-    return Text(
-        mapOfDays[records.reversed
-                .toList()[dayIndex.toInt() - 1]
-                .dateTime
-                .weekday] ??
-            "#",
-        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10));
+  Widget customGetTitle(
+      context, double dayIndex, TitleMeta meta, List<DayZikrRecord> records) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 12.0),
+      child: Text(
+          mapOfDays[records.reversed
+                  .toList()[dayIndex.toInt() - 1]
+                  .dateTime
+                  .weekday] ??
+              "#",
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10)),
+    );
   }
 
-  Widget customTextForVerticalTitles(context,
+  Widget customTextForVerticalTitles(
+    context,
     double dayIndex,
     TitleMeta meta,
   ) {
     return Container(
-      margin: EdgeInsets.only(right: 3.w),
+      margin: const EdgeInsets.only(right: 3),
       child: Text(ArabicNumbers().convert(dayIndex.toInt().toString()),
           textAlign: TextAlign.right,
-          style:
-              Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10)),
+          style: Theme.of(context).textTheme.bodySmall!.copyWith(fontSize: 10)),
     );
   }
 
@@ -91,28 +93,53 @@ class LineChartForDayRecords extends StatelessWidget {
       child: LineChart(
         LineChartData(
           gridData: const FlGridData(show: false),
+          lineTouchData: LineTouchData(
+            enabled: true,
+            // touchCallback:
+            //     (FlTouchEvent event, LineTouchResponse? touchResponse) {
+            //   if (event.isInterestedForInteractions && touchResponse != null) {
+            //     final touchedSpot = touchResponse.lineBarSpots?.first;
+            //     if (touchedSpot != null) {
+            //       // Do something with the touched spot data
+            //       final spotValue = touchedSpot.y;
+            //       print(
+            //           'Touched spot value: \$${spotValue.toStringAsFixed(2)}');
+            //     }
+            //   }
+            // },
+            touchTooltipData: LineTouchTooltipData(tooltipBgColor: Theme.of(context).cardColor,tooltipPadding: const EdgeInsets.symmetric(horizontal: 15),tooltipHorizontalAlignment: FLHorizontalAlignment.center,
+              getTooltipItems: (List<LineBarSpot> touchedSpots) {
+                return touchedSpots.map((touchedSpot) {
+                  // Add dollar sign to the tooltip
+                  return LineTooltipItem(ArabicNumbers().convert(touchedSpot.y.toInt()),
+                      Theme.of(context).textTheme.bodyMedium!);
+                }).toList();
+              },
+            ),
+            handleBuiltInTouches:
+                true, // Ensure built-in touch handling is enabled
+          ),
           titlesData: FlTitlesData(
             bottomTitles: AxisTitles(
               sideTitles: SideTitles(
-                
                 showTitles: true,
                 interval: 1,
                 getTitlesWidget: (index, titleMeta) =>
-                    customGetTitle(context,index, titleMeta, records),
+                    customGetTitle(context, index, titleMeta, records),
               ),
             ),
             rightTitles: AxisTitles(
                 sideTitles: SideTitles(
               showTitles: true,
-              reservedSize: 32.w,
+              reservedSize: 32,
               getTitlesWidget: (index, titleMeta) => const Text(""),
             )),
             leftTitles: AxisTitles(
                 sideTitles: SideTitles(
-              reservedSize: 32.w,
+              reservedSize: 32,
               showTitles: true,
               getTitlesWidget: (index, titleMeta) =>
-                  customTextForVerticalTitles(context,index, titleMeta),
+                  customTextForVerticalTitles(context, index, titleMeta),
             )),
             topTitles: const AxisTitles(),
           ),
@@ -132,8 +159,9 @@ class LineChartForDayRecords extends StatelessWidget {
               barWidth: 3,
               spots: _generateLineChartBarDataSpots(records),
               isCurved: true,
-              
-              color: const Color.fromRGBO(255, 184, 0, 1),
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? appDarkGold
+                  : appLightGold,
               dotData: const FlDotData(show: false),
               belowBarData: BarAreaData(show: false),
             ),

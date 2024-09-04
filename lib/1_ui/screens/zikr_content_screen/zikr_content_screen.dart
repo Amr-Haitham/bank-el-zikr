@@ -45,12 +45,12 @@ class ZikrContentScreen extends StatelessWidget {
                     child: Center(
                       child: SingleChildScrollView(
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               zikr.content,
                               textAlign: TextAlign.center,
-                              style:  Theme.of(context).textTheme.headlineMedium!.copyWith(color:Theme.of(context).primaryColor ),
+                              style:  Theme.of(context).textTheme.headlineSmall!.copyWith(color:Theme.of(context).primaryColor ),
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(

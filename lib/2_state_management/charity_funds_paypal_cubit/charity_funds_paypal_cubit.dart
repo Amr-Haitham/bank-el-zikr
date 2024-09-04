@@ -12,10 +12,14 @@ class CharityFundsPaypalCubit extends Cubit<CharityFundsPaypalState> {
   launchCharityLink() async {
     emit(CharityFundsPaypalLoading());
     try {
-      if (await canLaunch(ThirdPartyValues.paypalLink)) {
-        await launch(ThirdPartyValues.paypalLink);
+      final Uri uri = Uri.parse(ThirdPartyValues.paypalLink);
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(
+          uri,
+          mode: LaunchMode.externalApplication,
+        );
       } else {
-        throw 'Could not launch ${ThirdPartyValues.paypalLink}';
+        throw 'Could not launch';
       }
 
       emit(CharityFundsPaypalLoaded());

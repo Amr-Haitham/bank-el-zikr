@@ -5,7 +5,7 @@ import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
 import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 
 import '../../../../2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
@@ -104,7 +104,7 @@ class _ZikerBalanceWidgetState extends State<ZikerBalanceWidget> {
                           maxLines: 1,
                           textAlign: TextAlign.right,
                           style: cairoTextStyle(
-                              19.sp, FontWeight.w800, null, Colors.white),
+                              19, FontWeight.w800, null, Colors.white),
                         );
                       } else {
                         return const Center(

@@ -14,10 +14,12 @@ class GetSettingsCubit extends Cubit<GetSettingsState> {
       var isLightTheme = await _settingsSharedPrefs.getIsLightTheme();
       var morningZikrAlarm = await _settingsSharedPrefs.getMorningZikrAlarm();
       var nightZikrAlarm = await _settingsSharedPrefs.getNightZikrAlarm();
+      var isVibrating = await _settingsSharedPrefs.getIsVibrating();
       emit(GetSettingsLoaded(
           isLightTheme: isLightTheme,
           morningZikrAlarm: morningZikrAlarm,
-          nightZikrAlarm: nightZikrAlarm));
+          nightZikrAlarm: nightZikrAlarm,
+          isVibrating: isVibrating));
     } catch (e) {
       emit(GetSettingsError());
     }

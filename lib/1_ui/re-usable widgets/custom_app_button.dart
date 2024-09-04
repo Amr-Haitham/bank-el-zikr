@@ -30,10 +30,10 @@ class CustomAppButton extends StatelessWidget {
             trailing ?? const SizedBox.shrink(),
             Text(
               text,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color:GeneralUtils.isLightTheme(context)? appWhite:appDark,fontWeight: FontWeight.bold),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color:
+                      GeneralUtils.isLightTheme(context) ? appWhite : appDark,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),

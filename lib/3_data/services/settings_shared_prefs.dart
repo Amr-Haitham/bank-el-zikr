@@ -5,12 +5,19 @@ class SettingsSharedPrefs {
   static const String _isLightThemeKey = 'isLightTheme';
   static const String _morningZikrAlarmKey = 'morningZikrAlarm';
   static const String _nightZikrAlarmKey = 'nightZikrAlarm';
+  static const String _isVibratingKey = 'isVibrating';
 
   // Getters
   Future<bool> getIsLightTheme() async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
 
     return preferences.getBool(_isLightThemeKey) ?? true;
+  }
+
+  Future<bool> getIsVibrating() async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+
+    return preferences.getBool(_isVibratingKey) ?? true;
   }
 
   Future<TimeOfDay?> getMorningZikrAlarm() async {
@@ -30,6 +37,12 @@ class SettingsSharedPrefs {
   Future<void> setLightTheme(bool value) async {
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     await preferences.setBool(_isLightThemeKey, value);
+  }
+
+  // Setters
+  Future<void> setIsVibrating(bool value) async {
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    await preferences.setBool(_isVibratingKey, value);
   }
 
   Future<void> setMorningZikrAlarm(TimeOfDay time) async {

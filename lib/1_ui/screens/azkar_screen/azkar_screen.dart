@@ -9,7 +9,7 @@ import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../2_state_management/azkar_records/delete_single_zikr_record/delete_single_zikr_record_cubit.dart';
 import '../../../2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
 import '../../../2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
@@ -62,7 +62,7 @@ class _AzkarScreenState extends State<AzkarScreen> {
             backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             body: Padding(
               padding: EdgeInsets.only(
-                  top: 30.w, right: 30.w, left: 30.w, bottom: 10.h),
+                  top: 30, right: 30, left: 30, bottom: 10),
               child: CustomScrollView(
                 // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 // crossAxisAlignment: CrossAxisAlignment.center,
@@ -84,7 +84,14 @@ class _AzkarScreenState extends State<AzkarScreen> {
                               return MultiBlocProvider(providers: [
                                 BlocProvider.value(
                                     value: AppRouter.addCustomZikrCubit),
-                              ], child: const AddNewZikrPopUp());
+                              ], child: Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: MediaQuery.of(context)
+                                            .viewInsets
+                                            .bottom,
+                                      ),
+                                child: const AddNewZikrPopUp(),
+                              ));
                             },
                           );
                         },
@@ -221,9 +228,11 @@ class ListTileOfZikr extends StatelessWidget {
                             onTap: () {
                               showModalBottomSheet(
                                 context: context,
+                                isScrollControlled: true,
+
                                 backgroundColor:
                                     Theme.of(context).scaffoldBackgroundColor,
-                                isScrollControlled: true,
+                                // isScrollControlled: true,
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.vertical(
                                       top: Radius.circular(24)),
@@ -280,7 +289,7 @@ class ListTileOfZikr extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 16.0.w),
+                      padding: EdgeInsets.only(left: 16.0),
                       child: Container(
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,

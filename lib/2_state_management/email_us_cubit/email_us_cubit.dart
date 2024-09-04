@@ -13,14 +13,14 @@ class EmailUsCubit extends Cubit<EmailUsState> {
     try {
       final Uri emailUri = Uri(
         scheme: 'mailto',
-        path:
-            ThirdPartyValues.amrEmailLink, // Replace with your actual email address
+        path: ThirdPartyValues
+            .amrEmailLink, // Replace with your actual email address
         query:
             'subject=استفسار مستخدم بنك الذكر&body=أريد السؤال عن...', // Optional: Pre-fill subject and body
       );
 
-      if (await canLaunch(emailUri.toString())) {
-        await launch(emailUri.toString());
+      if (await canLaunchUrl(emailUri)) {
+        await launchUrl(emailUri, mode: LaunchMode.externalApplication);
       } else {
         throw 'Could not launch $emailUri';
       }

@@ -16,6 +16,15 @@ class SetSettingsCubit extends Cubit<SetSettingsState> {
       emit(SetSettingsError());
     }
   }
+  setIsVibrating({required bool isVibrating}) async {
+    emit(SetSettingsLoading());
+    try {
+      await _settingsSharedPrefs.setIsVibrating(isVibrating);
+      emit(SetSettingsLoaded());
+    } catch (e) {
+      emit(SetSettingsError());
+    }
+  }
 
   setMorningZikrAlarm({required TimeOfDay time}) async {
     emit(SetSettingsLoading());

@@ -11,8 +11,13 @@ final class GetSettingsLoaded extends GetSettingsState {
   final bool isLightTheme;
   final TimeOfDay? morningZikrAlarm;
   final TimeOfDay? nightZikrAlarm;
+  final bool isVibrating;
 
-  GetSettingsLoaded({required this.isLightTheme, required this.morningZikrAlarm, required this.nightZikrAlarm});
+  GetSettingsLoaded(
+      {required this.isVibrating,
+      required this.isLightTheme,
+      required this.morningZikrAlarm,
+      required this.nightZikrAlarm});
 }
 
 final class GetSettingsError extends GetSettingsState {}

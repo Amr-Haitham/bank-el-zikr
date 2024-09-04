@@ -20,8 +20,10 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isLightTheme = false;
-  bool isMorningAzkarEnabled = false;
-  bool isEveningAzkarEnabled = false;
+  bool isVibrating = false;
+  // bool isMorningAzkarEnabled = false;
+  // bool isEveningAzkarEnabled = false;
+
   @override
   void initState() {
     BlocProvider.of<GetSettingsCubit>(context).getSettings();
@@ -44,6 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             if (state is GetSettingsLoaded) {
               setState(() {
                 isLightTheme = state.isLightTheme;
+                isVibrating = state.isVibrating;
               });
             }
           },
@@ -75,23 +78,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   icon: isLightTheme ? Icons.wb_sunny : Icons.nights_stay,
                 ),
                 _buildSwitchTile(
-                  text: 'أذكار الصباح',
-                  value: isMorningAzkarEnabled,
+                  text: 'الأهتزاز',
+                  value: isVibrating,
                   onChanged: (value) {
                     setState(() {
-                      isMorningAzkarEnabled = value;
+                      isVibrating = value;
+                      BlocProvider.of<SetSettingsCubit>(context).setIsVibrating(isVibrating: isVibrating);
                     });
                   },
                 ),
-                _buildSwitchTile(
-                  text: 'أذكار المساء',
-                  value: isEveningAzkarEnabled,
-                  onChanged: (value) {
-                    setState(() {
-                      isEveningAzkarEnabled = value;
-                    });
-                  },
-                ),
+                // _buildSwitchTile(
+                //   text: 'أذكار الصباح',
+                //   value: isMorningAzkarEnabled,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isMorningAzkarEnabled = value;
+                //     });
+                //   },
+                // ),
+                // _buildSwitchTile(
+                //   text: 'أذكار المساء',
+                //   value: isEveningAzkarEnabled,
+                //   onChanged: (value) {
+                //     setState(() {
+                //       isEveningAzkarEnabled = value;
+                //     });
+                //   },
+                // ),
                 const SizedBox(
                   height: 48,
                 ),
@@ -101,9 +114,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .launchCharityLink();
                   },
                   text: "دعم التطبيق",
-                  trailing:  Icon(
+                  trailing: Icon(
                     Icons.arrow_back_ios,
-                    color: GeneralUtils.isLightTheme(context)? appWhite:appDark,
+                    color:
+                        GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                   ),
                 ),
                 const SizedBox(
@@ -111,13 +125,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 CustomAppButton(
                   onPressed: () {
-                 BlocProvider.of<EmailUsCubit>(context)
-                        .launchEmail();
+                    BlocProvider.of<EmailUsCubit>(context).launchEmail();
                   },
                   text: "تواصل معنا",
-                  trailing:  Icon(
+                  trailing: Icon(
                     Icons.arrow_back_ios,
-                    color: GeneralUtils.isLightTheme(context)? appWhite:appDark,
+                    color:
+                        GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                   ),
                 ),
               ],
