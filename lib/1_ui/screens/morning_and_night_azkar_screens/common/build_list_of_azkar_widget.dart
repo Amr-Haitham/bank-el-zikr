@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/morning_or_night_zikr_list_tile.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                   backgroundColor: const Color.fromRGBO(255, 184, 0, 1),
                   child: Center(
                     child: Text(
-                      zikr.count.toString(),
+                      ArabicNumbers().convert(zikr.count).toString(),
                       textAlign: TextAlign.center,
                       textHeightBehavior: const TextHeightBehavior(
                           leadingDistribution: TextLeadingDistribution.even,

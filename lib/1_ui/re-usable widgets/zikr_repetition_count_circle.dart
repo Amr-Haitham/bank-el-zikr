@@ -1,3 +1,4 @@
+import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 
 class ZikrRepetitonCountCircle extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
                     width: 1, color: const Color.fromRGBO(255, 214, 0, 1))),
             child: Center(
               child: Text(
-                count.toString(),
+               ArabicNumbers().convert(count),
                 style: Theme.of(context).textTheme.bodyLarge,
                 strutStyle: const StrutStyle(height: 1.2, forceStrutHeight: true),
               ),
