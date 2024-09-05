@@ -1,7 +1,6 @@
 import 'package:bank_el_ziker/1_ui/core/consts/third_party_values.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
-import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_widget.dart';
 import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';

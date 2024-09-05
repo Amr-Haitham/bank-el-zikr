@@ -290,7 +290,7 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          value != 0 ? value.toString() : "-",
+                                          value != 0 ? ArabicNumbers().convert(value) : "-",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall!
@@ -356,7 +356,7 @@ class _TabbarOfAzkarRecordState extends State<TabbarOfAzkarRecord> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          value != 0 ? value.toString() : "-",
+                                          value != 0 ? ArabicNumbers().convert(value) : "-",
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodySmall!

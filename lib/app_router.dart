@@ -3,7 +3,6 @@ import 'package:bank_el_ziker/1_ui/screens/azkar_screen/azkar_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/home_screen.dart';
 import 'package:bank_el_ziker/2_state_management/charity_funds_paypal_cubit/charity_funds_paypal_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/email_us_cubit/email_us_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
 import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_screen.dart';
 import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';

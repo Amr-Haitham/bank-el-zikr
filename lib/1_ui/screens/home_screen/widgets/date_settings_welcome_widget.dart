@@ -1,6 +1,5 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
-import 'package:bank_el_ziker/2_state_management/get_hijri_date/get_hijri_date_cubit.dart';
 import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
