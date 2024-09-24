@@ -14,7 +14,7 @@ class EmailUsCubit extends Cubit<EmailUsState> {
       final Uri emailUri = Uri(
         scheme: 'mailto',
         path: ThirdPartyValues
-            .amrEmailLink, // Replace with your actual email address
+            .neutronEmailLink, // Replace with your actual email address
         query:
             'subject=استفسار مستخدم بنك الذكر&body=أريد السؤال عن...', // Optional: Pre-fill subject and body
       );
