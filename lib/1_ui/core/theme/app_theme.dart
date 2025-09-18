@@ -10,12 +10,12 @@ class AppTheme {
   static final ThemeData lightTheme = ThemeData(
     // primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
     primaryColor: const Color(0xff34C759),
- 
+
     brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: appDark,
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
-        selectionHandleColor:Color.fromRGBO(52, 199, 89, 1.0) ),
+        selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
     scaffoldBackgroundColor: const Color(0xffffffff),
     fontFamily: GoogleFonts.tajawal().fontFamily,
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -39,8 +39,8 @@ class AppTheme {
     dialogBackgroundColor: Colors.white,
     // unselectedWidgetColor: Colors.grey,
     // dividerColor: Colors.grey[300],
-    cardColor:const Color.fromRGBO(237, 250, 237, 1) ,
-    dialogTheme: DialogTheme(shape: dialogShape()),
+    cardColor: const Color.fromRGBO(237, 250, 237, 1),
+    dialogTheme: DialogThemeData(shape: dialogShape()),
     // appBarTheme: const AppBarTheme(
     //   color: Color.fromARGB(255, 255, 246, 247),
     //   iconTheme: IconThemeData(
@@ -68,7 +68,7 @@ class AppTheme {
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: appWhite,
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
-        selectionHandleColor:Color.fromRGBO(52, 199, 89, 1.0) ),
+        selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
     scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
     fontFamily: GoogleFonts.tajawal().fontFamily,
     inputDecorationTheme: const InputDecorationTheme(
@@ -84,7 +84,7 @@ class AppTheme {
       headlineLarge: TextStyle(
           fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
       headlineMedium: TextStyle(
-          fontSize:32 , fontWeight: FontWeight.bold, color: Colors.white),
+          fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
       headlineSmall: TextStyle(
           fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
       bodyLarge: TextStyle(fontSize: 24, color: Colors.white),
@@ -95,7 +95,7 @@ class AppTheme {
     // unselectedWidgetColor: Colors.white60,
     // dividerColor: Colors.white12,
     cardColor: const Color.fromRGBO(29, 57, 33, 1),
-    dialogTheme: DialogTheme(shape: dialogShape()),
+    dialogTheme: DialogThemeData(shape: dialogShape()),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
         color: appDark, // Change the color of the back button here.
