@@ -15,7 +15,7 @@ class GetRandomPrayerCubit extends Cubit<GetRandomPrayerState> {
     final randomIndex = random.nextInt(list.length);
     return list[randomIndex];
   }
-    //this gets a prayer in random manner and passes it to state
+  //this gets a prayer in random manner and passes it to state
 
   void getPrayer() async {
     emit(GetRandomPrayerLoading());

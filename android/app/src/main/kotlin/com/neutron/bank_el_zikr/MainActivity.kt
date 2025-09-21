@@ -1,4 +1,4 @@
-package com.example.bank_el_ziker
+package com.neutron.bank_el_zikr
 
 import io.flutter.embedding.android.FlutterActivity
 

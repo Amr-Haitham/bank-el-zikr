@@ -2,10 +2,18 @@ import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nb_utils/nb_utils.dart';
+// import 'package:nb_utils/nb_utils.dart';
 
 class AppTheme {
   AppTheme._();
+
+  // Custom dialog shape function to replace nb_utils dependency
+  static RoundedRectangleBorder dialogShape() {
+    return RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(16.0),
+    );
+  }
+
   //amr change all colors here
   static final ThemeData lightTheme = ThemeData(
     // primarySwatch: createMaterialColor(const Color.fromRGBO(255, 89, 97, 1)),
@@ -40,7 +48,7 @@ class AppTheme {
     // unselectedWidgetColor: Colors.grey,
     // dividerColor: Colors.grey[300],
     cardColor: const Color.fromRGBO(237, 250, 237, 1),
-    dialogTheme: DialogThemeData(shape: dialogShape()),
+    dialogTheme: DialogThemeData(shape: AppTheme.dialogShape()),
     // appBarTheme: const AppBarTheme(
     //   color: Color.fromARGB(255, 255, 246, 247),
     //   iconTheme: IconThemeData(
@@ -95,7 +103,7 @@ class AppTheme {
     // unselectedWidgetColor: Colors.white60,
     // dividerColor: Colors.white12,
     cardColor: const Color.fromRGBO(29, 57, 33, 1),
-    dialogTheme: DialogThemeData(shape: dialogShape()),
+    dialogTheme: DialogThemeData(shape: AppTheme.dialogShape()),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
         color: appDark, // Change the color of the back button here.
