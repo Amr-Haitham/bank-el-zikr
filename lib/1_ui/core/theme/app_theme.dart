@@ -1,7 +1,6 @@
 import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 // import 'package:nb_utils/nb_utils.dart';
 
 class AppTheme {
@@ -25,7 +24,7 @@ class AppTheme {
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
         selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
     scaffoldBackgroundColor: const Color(0xffffffff),
-    fontFamily: GoogleFonts.tajawal().fontFamily,
+    fontFamily: 'Tajawal',
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
     ),
@@ -78,7 +77,7 @@ class AppTheme {
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
         selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
     scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
-    fontFamily: GoogleFonts.tajawal().fontFamily,
+    fontFamily: 'Tajawal',
     inputDecorationTheme: const InputDecorationTheme(
         focusedBorder:
             OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
