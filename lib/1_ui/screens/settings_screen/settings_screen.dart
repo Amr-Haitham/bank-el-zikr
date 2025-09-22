@@ -69,8 +69,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 _buildSwitchTile(
                   text: 'سمة البرنامج',
-                  value: isLightTheme,activeIcon: Icon(Icons.wb_sunny,color: Theme.of(context).primaryColor,),inActiveIcon: const Icon(Icons.nights_stay),
-                 inActiveColor:Theme.of(context).primaryColor,
+                  value: isLightTheme,
+                  activeIcon: Icon(
+                    Icons.wb_sunny,
+                    color: Theme.of(context).primaryColor,
+                  ),
+                  inActiveIcon: const Icon(Icons.nights_stay),
+                  inActiveColor: Theme.of(context).primaryColor,
                   onChanged: (value) {
                     setState(() {
                       isLightTheme = value;
@@ -127,20 +132,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                   ),
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
-                CustomAppButton(
-                  onPressed: () {
-                    BlocProvider.of<EmailUsCubit>(context).launchEmail();
-                  },
-                  text: "تواصل معنا",
-                  trailing: Icon(
-                    Icons.arrow_back_ios,
-                    color:
-                        GeneralUtils.isLightTheme(context) ? appWhite : appDark,
-                  ),
-                ),
+                // const SizedBox(
+                //   height: 24,
+                // ),
+                // CustomAppButton(
+                //   onPressed: () {
+                //     BlocProvider.of<EmailUsCubit>(context).launchEmail();
+                //   },
+                //   text: "تواصل معنا",
+                //   trailing: Icon(
+                //     Icons.arrow_back_ios,
+                //     color:
+                //         GeneralUtils.isLightTheme(context) ? appWhite : appDark,
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -156,7 +161,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     Icon? inActiveIcon,
     Color? inActiveColor,
     required Function(bool) onChanged,
- 
   }) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -170,14 +174,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             scaleX: -1,
             // fit: BoxFit.fitHeight,
             child: FlutterSwitch(
-              
               // width: 125.0,
               // height: 55.0,
-              
+
               activeIcon: activeIcon,
-              inactiveIcon:inActiveIcon,
+              inactiveIcon: inActiveIcon,
               activeColor: Theme.of(context).primaryColor,
-              inactiveColor:inActiveColor?? const Color(0xff787880),
+              inactiveColor: inActiveColor ?? const Color(0xff787880),
               valueFontSize: 25.0,
               // toggleSize: 45.0,
               value: value,
