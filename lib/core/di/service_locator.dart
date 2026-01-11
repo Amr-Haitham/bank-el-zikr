@@ -61,6 +61,14 @@ import '../../features/settings/domain/usecases/get_settings.dart';
 import '../../features/settings/domain/usecases/update_settings.dart';
 import '../../features/settings/presentation/cubit/settings_cubit.dart';
 
+// home imports
+import '../../features/home/data/datasources/home_local_datasource.dart';
+import '../../features/home/data/models/prayer_model.dart';
+import '../../features/home/data/repositories/home_repository_impl.dart';
+import '../../features/home/domain/repositories/home_repository.dart';
+import '../../features/home/domain/usecases/get_random_prayer.dart';
+import '../../features/home/presentation/cubit/home_cubit.dart';
+
 final _getIt = GetIt.instance;
 
 /// Get a registered service from the service locator
@@ -106,6 +114,11 @@ Future<void> setupServiceLocator() async {
   _setUpSettingsRepositories();
   _setUpSettingsUseCases();
   _setUpSettingsBlocs();
+
+  _setUpHomeDataSources();
+  _setUpHomeRepositories();
+  _setUpHomeUseCases();
+  _setUpHomeBlocs();
 }
 
 /// Setup external dependencies like Hive boxes
@@ -158,6 +171,13 @@ Future<void> _setUpExternalDependencies() async {
 
   final sharedPreferences = await SharedPreferences.getInstance();
   _getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  // home
+  final prayerBox = Hive.box<PrayerModel>('prayerHiveBox');
+  _getIt.registerLazySingleton<Box<PrayerModel>>(
+    () => prayerBox,
+    instanceName: 'prayerBox',
+  );
 }
 
 // ============================================================================
@@ -420,6 +440,40 @@ void _setUpSettingsBlocs() {
     () => SettingsCubit(
       getSettings: getService<GetSettings>(),
       updateSettings: getService<UpdateSettings>(),
+    ),
+  );
+}
+
+// ============================================================================
+// home
+// ============================================================================
+
+void _setUpHomeDataSources() {
+  _getIt.registerLazySingleton<HomeLocalDataSource>(
+    () => HomeLocalDataSourceImpl(
+      prayerBox: getService<Box<PrayerModel>>(instanceName: 'prayerBox'),
+    ),
+  );
+}
+
+void _setUpHomeRepositories() {
+  _getIt.registerLazySingleton<HomeRepository>(
+    () => HomeRepositoryImpl(
+      localDataSource: getService<HomeLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpHomeUseCases() {
+  _getIt.registerLazySingleton<GetRandomPrayer>(
+    () => GetRandomPrayer(getService<HomeRepository>()),
+  );
+}
+
+void _setUpHomeBlocs() {
+  _getIt.registerFactory<HomeCubit>(
+    () => HomeCubit(
+      getRandomPrayer: getService<GetRandomPrayer>(),
     ),
   );
 }
