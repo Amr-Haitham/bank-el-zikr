@@ -2,6 +2,7 @@ import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
 import 'package:bank_el_ziker/app_router.dart';
+import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,8 +18,13 @@ void main() async {
   // Notifications.setMorningAzkar(
   //     dateTime: DateTime.now().add(Duration(minutes: 2)));
 
+  // Initialize Hive FIRST (still needed for old architecture during migration)
   await HiveDB.initHiveDB();
   await HiveDB().setupInitHiveDbDataIfNonExisting();
+
+  // Initialize service locator (will grow as we migrate features to clean architecture)
+  await setupServiceLocator();
+
   // await ScreenUtil.ensureScreenSize();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   runApp(BlocProvider(
