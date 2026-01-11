@@ -53,6 +53,14 @@ import '../../features/situational_azkar/domain/usecases/get_situational_azkar.d
 import '../../features/situational_azkar/domain/usecases/toggle_favorite.dart';
 import '../../features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
 
+// settings imports
+import '../../features/settings/data/datasources/settings_local_datasource.dart';
+import '../../features/settings/data/repositories/settings_repository_impl.dart';
+import '../../features/settings/domain/repositories/settings_repository.dart';
+import '../../features/settings/domain/usecases/get_settings.dart';
+import '../../features/settings/domain/usecases/update_settings.dart';
+import '../../features/settings/presentation/cubit/settings_cubit.dart';
+
 final _getIt = GetIt.instance;
 
 /// Get a registered service from the service locator
@@ -93,6 +101,11 @@ Future<void> setupServiceLocator() async {
   _setUpSituationalAzkarRepositories();
   _setUpSituationalAzkarUseCases();
   _setUpSituationalAzkarBlocs();
+
+  _setUpSettingsDataSources();
+  _setUpSettingsRepositories();
+  _setUpSettingsUseCases();
+  _setUpSettingsBlocs();
 }
 
 /// Setup external dependencies like Hive boxes
@@ -369,6 +382,44 @@ void _setUpSituationalAzkarBlocs() {
       getSituationalAzkar: getService<GetSituationalAzkar>(),
       getFavorites: getService<GetFavorites>(),
       toggleFavorite: getService<ToggleFavorite>(),
+    ),
+  );
+}
+
+// ============================================================================
+// settings
+// ============================================================================
+
+void _setUpSettingsDataSources() {
+  _getIt.registerLazySingleton<SettingsLocalDataSource>(
+    () => SettingsLocalDataSourceImpl(
+      sharedPreferences: getService<SharedPreferences>(),
+    ),
+  );
+}
+
+void _setUpSettingsRepositories() {
+  _getIt.registerLazySingleton<SettingsRepository>(
+    () => SettingsRepositoryImpl(
+      localDataSource: getService<SettingsLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpSettingsUseCases() {
+  _getIt.registerLazySingleton<GetSettings>(
+    () => GetSettings(getService<SettingsRepository>()),
+  );
+  _getIt.registerLazySingleton<UpdateSettings>(
+    () => UpdateSettings(getService<SettingsRepository>()),
+  );
+}
+
+void _setUpSettingsBlocs() {
+  _getIt.registerFactory<SettingsCubit>(
+    () => SettingsCubit(
+      getSettings: getService<GetSettings>(),
+      updateSettings: getService<UpdateSettings>(),
     ),
   );
 }
