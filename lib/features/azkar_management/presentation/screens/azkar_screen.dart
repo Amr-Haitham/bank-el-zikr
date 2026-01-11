@@ -1,11 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
-import 'package:bank_el_ziker/core/utils/screen_utils.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/screens/sub_screens/adding_new_ziker_popup.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/azkar_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/app_router.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,133 +10,102 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
-import 'sub_screens/edit_custom_ziker_popup.dart';
+import 'sub_screens/adding_new_ziker_popup.dart';
 
-class AzkarScreen extends StatefulWidget {
+class AzkarScreen extends StatelessWidget {
   const AzkarScreen({super.key});
 
   @override
-  State<AzkarScreen> createState() => _AzkarScreenState();
-}
-
-class _AzkarScreenState extends State<AzkarScreen> {
-  late int selectedZikrId;
-
-  @override
-  void initState() {
-    // Cubits load data automatically via callOnCreate: true
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MultiBlocListener(
-      listeners: [
-        BlocListener<UpdateGeneralDataCubit, UpdateGeneralDataState>(
-          listener: (context, state) {
-            if (state is UpdateGeneralDataUpdated) {
-              BlocProvider.of<GetCurrentZikrCubit>(context).getCurrentZikr();
-            }
-          },
-        ),
-        BlocListener<AddCustomZikrCubit, AddCustomZikrState>(
-          listener: (context, state) {
-            if (state is AddCustomZikrLoaded) {
-              BlocProvider.of<AzkarCubit>(context).getAllAzkar();
-            }
-          },
-        ),
-      ],
-      child: SafeArea(
-        child: Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            body: Padding(
-              padding: const EdgeInsets.only(
-                  top: 30, right: 30, left: 30, bottom: 10),
-              child: CustomScrollView(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: TitleWithBackButton(
-                      trailing: IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                            context: context,
-                            isScrollControlled: true,
-                            backgroundColor:
-                                Theme.of(context).scaffoldBackgroundColor,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(24)),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        body: Padding(
+          padding:
+              const EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 10),
+          child: CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(
+                child: TitleWithBackButton(
+                  trailing: IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(24),
+                          ),
+                        ),
+                        builder: (dialogContext) {
+                          return Padding(
+                            padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(dialogContext)
+                                  .viewInsets
+                                  .bottom,
                             ),
-                            builder: (context) {
-                              return MultiBlocProvider(
-                                  providers: [
-                                    BlocProvider.value(
-                                        value: AppRouter.addCustomZikrCubit),
-                                  ],
-                                  child: Padding(
-                                    padding: EdgeInsets.only(
-                                      bottom: MediaQuery.of(context)
-                                          .viewInsets
-                                          .bottom,
-                                    ),
-                                    child: const AddNewZikrPopUp(),
-                                  ));
-                            },
+                            child: BlocProvider.value(
+                              value: context.read<AzkarCubit>(),
+                              child: const AddNewZikrPopUp(),
+                            ),
                           );
                         },
-                        style: IconButton.styleFrom(
-                            backgroundColor: Theme.of(context).primaryColor),
-                        icon: Icon(
-                          Icons.add,
-                          color: GeneralUtils.isLightTheme(context)
-                              ? appWhite
-                              : appDark,
-                        ),
-                      ),
-                      title: "اختر الذكر",
-                    ),
-                  ),
-                  const SliverToBoxAdapter(
-                    child: SizedBox(
-                      height: 52,
-                    ),
-                  ),
-                  BlocConsumer<GetCurrentZikrCubit, GetCurrentZikrState>(
-                    listener: (context, state) {
-                      if (state is GetCurrentZikrLoaded) {
-                        setState(() {
-                          selectedZikrId = state.zikrId;
-                        });
-                      }
+                      );
                     },
-                    builder: (context, parentState) {
-                      if (parentState is GetCurrentZikrLoaded) {
-                        return BlocBuilder<AzkarCubit, AzkarState>(
-                          builder: (context, state) {
-                            if (state is AzkarLoaded) {
+                    style: IconButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor),
+                    icon: Icon(
+                      Icons.add,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appWhite
+                          : appDark,
+                    ),
+                  ),
+                  title: "اختر الذكر",
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 52),
+              ),
+              // Main content: Counter state + Azkar list
+              BlocBuilder<CounterCubit, RequestState<CounterState>>(
+                builder: (context, counterState) {
+                  return counterState.when(
+                    initial: () => const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                    loading: () => const SliverToBoxAdapter(
+                      child: Center(child: CircularProgressIndicator()),
+                    ),
+                    success: (counter) {
+                      final selectedZikrId = counter.currentZikrId;
+
+                      return BlocBuilder<AzkarCubit, RequestState<List<Zikr>>>(
+                        builder: (context, azkarState) {
+                          return azkarState.when(
+                            initial: () => const SliverToBoxAdapter(
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                            loading: () => const SliverToBoxAdapter(
+                              child: Center(child: CircularProgressIndicator()),
+                            ),
+                            success: (azkar) {
                               return SliverList.separated(
-                                // physics: const BouncingScrollPhysics(),
-                                itemCount: state.azkar.length,
+                                itemCount: azkar.length,
                                 itemBuilder: (context, index) {
-                                  // listOfAllAzkar.add(state.azkar[index]);
                                   return ListTileOfZikr(
                                     index: index,
                                     onTap: () {
-                                      setState(() {
-                                        selectedZikrId = state.azkar[index].id;
-                                      });
-                                      BlocProvider.of<UpdateGeneralDataCubit>(
-                                              context)
-                                          .updateGeneralDataCurrentZikr(
-                                              selectedZikrId);
+                                      context
+                                          .read<CounterCubit>()
+                                          .setCurrentZikr(azkar[index].id);
                                       Navigator.pop(context);
                                     },
-                                    zikr: state.azkar[index],
-                                    isSelected: (selectedZikrId ==
-                                        state.azkar[index].id),
+                                    zikr: azkar[index],
+                                    isSelected:
+                                        (selectedZikrId == azkar[index].id),
                                   );
                                 },
                                 separatorBuilder:
@@ -151,51 +117,41 @@ class _AzkarScreenState extends State<AzkarScreen> {
                                   );
                                 },
                               );
-                            } else if (state is AzkarError) {
-                              return const SliverToBoxAdapter(
-                                child: Center(
-                                  child: Text("Error"),
-                                ),
-                              );
-                            } else {
-                              return const SliverToBoxAdapter(
-                                child: Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                              );
-                            }
-                          },
-                        );
-                      } else if (parentState is AzkarError) {
-                        return const SliverToBoxAdapter(
-                          child: Center(
-                            child: Text("Error"),
-                          ),
-                        );
-                      } else {
-                        return const SliverToBoxAdapter(
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
+                            },
+                            failure: (failure) => const SliverToBoxAdapter(
+                              child: Center(
+                                child: Text("Error loading azkar"),
+                              ),
+                            ),
+                          );
+                        },
+                      );
                     },
-                  )
-                ],
+                    failure: (failure) => const SliverToBoxAdapter(
+                      child: Center(
+                        child: Text("Error loading counter state"),
+                      ),
+                    ),
+                  );
+                },
               ),
-            )),
+            ],
+          ),
+        ),
       ),
     );
   }
 }
 
 class ListTileOfZikr extends StatelessWidget {
-  const ListTileOfZikr(
-      {super.key,
-      required this.zikr,
-      required this.onTap,
-      required this.index,
-      required this.isSelected});
+  const ListTileOfZikr({
+    super.key,
+    required this.zikr,
+    required this.onTap,
+    required this.index,
+    required this.isSelected,
+  });
+
   final bool isSelected;
   final Zikr zikr;
   final int index;
@@ -218,61 +174,21 @@ class ListTileOfZikr extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    zikr.isCustomZikr == true
-                        ? GestureDetector(
-                            onTap: () {
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled: true,
-
-                                backgroundColor:
-                                    Theme.of(context).scaffoldBackgroundColor,
-                                // isScrollControlled: true,
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.vertical(
-                                      top: Radius.circular(24)),
-                                ),
-                                builder: (context) {
-                                  return Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom,
-                                      ),
-                                      child: MultiBlocProvider(
-                                          providers: [
-                                            BlocProvider(
-                                              create: (context) =>
-                                                  UpdateCustomZikrCubit(),
-                                            ),
-                                            BlocProvider(
-                                              create: (context) =>
-                                                  DeleteCustomZikrCubit(),
-                                            ),
-                                            BlocProvider(
-                                              create: (context) =>
-                                                  DeleteSingleZikrRecordCubit(),
-                                            ),
-                                            BlocProvider.value(
-                                                value: AppRouter
-                                                    .updateGeneralDataCubit),
-                                            BlocProvider.value(
-                                                value: AppRouter.azkarCubit),
-                                          ],
-                                          child: EditCustomZikerPopup(
-                                            isSelected: isSelected,
-                                            zikrIndex: index,
-                                            zikr: zikr,
-                                          )));
-                                },
-                              );
-
-                              // Navigator.pushNamed(context, editCustomZikrPopup,
-                              //     arguments: [isSelected, index, zikr]);
-                            },
-                            child: Icon(Icons.settings_outlined,
-                                color: Theme.of(context).primaryColor))
-                        : const SizedBox.shrink(),
+                    // Settings icon for custom zikr
+                    if (zikr.isCustomZikr == true)
+                      GestureDetector(
+                        onTap: () {
+                          // TODO: Implement edit custom zikr dialog
+                          // Will need to create a new version of EditCustomZikerPopup
+                          // that uses AzkarCubit.updateZikr() and AzkarCubit.deleteZikr()
+                        },
+                        child: Icon(
+                          Icons.settings_outlined,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      )
+                    else
+                      const SizedBox.shrink(),
                     Expanded(
                       child: AutoSizeText(
                         zikr.content,
@@ -289,10 +205,11 @@ class ListTileOfZikr extends StatelessWidget {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
-                              width: 1,
-                              color: GeneralUtils.isLightTheme(context)
-                                  ? appLightGold
-                                  : appDarkGold),
+                            width: 1,
+                            color: GeneralUtils.isLightTheme(context)
+                                ? appLightGold
+                                : appDarkGold,
+                          ),
                           color: isSelected
                               ? (GeneralUtils.isLightTheme(context)
                                   ? appLightGold
@@ -308,16 +225,15 @@ class ListTileOfZikr extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(
-            height: 8,
-          ),
+          const SizedBox(height: 8),
           Text(
             zikr.description ?? "",
             textDirection: TextDirection.rtl,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: GeneralUtils.isLightTheme(context)
-                    ? appGray
-                    : appLightGrey),
+                  color: GeneralUtils.isLightTheme(context)
+                      ? appGray
+                      : appLightGrey,
+                ),
           ),
         ],
       ),

@@ -2,12 +2,11 @@ import 'package:bank_el_ziker/core/presentation/widgets/custom_app_text_field.da
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
+import 'package:bank_el_ziker/core/utils/screen_utils.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/azkar_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
-import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../core/consts/colors.dart';
-import '../../../core/consts/constant_values.dart';
 
 class AddNewZikrPopUp extends StatefulWidget {
   const AddNewZikrPopUp({super.key});
@@ -21,11 +20,6 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
   TextEditingController newZikrDescription = TextEditingController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     newZikerController.dispose();
     newZikrDescription.dispose();
@@ -35,8 +29,6 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // padding: EdgeInsets.symmetric(
-      //     horizontal: ConstantValues.appHorizontalPadding.toDouble()),
       child: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -47,10 +39,7 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 16,
-                ),
-               
+                const SizedBox(height: 16),
                 Container(
                   height: 5,
                   decoration: BoxDecoration(
@@ -62,18 +51,14 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
                   title: 'الذكر',
                   controller: newZikerController,
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40),
                 CustomAppTextField(
                   title: 'فضل الذكر',
                   controller: newZikrDescription,
                   optional: true,
                   maxLines: 5,
                 ),
-                const SizedBox(
-                  height: 48,
-                ),
+                const SizedBox(height: 48),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -92,11 +77,29 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
   Widget saveButton() {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<AddCustomZikrCubit>(context).addCustomZikr(
-            customZikrContent: newZikerController.text,
-            customZikrDescription: newZikrDescription.text.isNotEmpty
-                ? newZikrDescription.text
-                : null);
+        // Validate input
+        if (newZikerController.text.trim().isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('الرجاء إدخال نص الذكر')),
+          );
+          return;
+        }
+
+        // Create new Zikr entity
+        final newZikr = Zikr(
+          id: 0, // Will be assigned by repository
+          content: newZikerController.text.trim(),
+          description: newZikrDescription.text.trim().isNotEmpty
+              ? newZikrDescription.text.trim()
+              : null,
+          isCustomZikr: true,
+          title: null, // Custom zikr don't have titles
+        );
+
+        // Add zikr using new AzkarCubit
+        context.read<AzkarCubit>().addZikr(newZikr);
+
+        // Close dialog
         Navigator.of(context).pop();
       },
       child: Container(
