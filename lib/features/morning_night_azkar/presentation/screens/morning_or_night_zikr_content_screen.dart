@@ -1,5 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
@@ -7,8 +7,8 @@ import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubi
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibration/vibration.dart';
-import '../../../core/consts/constant_values.dart';
-import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/presentation/widgets/zikr_repetition_count_circle.dart';
 
 class MorningOrNightZikrContentScreen extends StatefulWidget {
   final List<MorningNightZikr> azkar;
@@ -92,71 +92,70 @@ class _MorningOrNightZikrContentScreenState
 
   Widget buildScaffold(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Container(
-            color: Theme.of(context).scaffoldBackgroundColor,
-            padding: const EdgeInsets.only(
-                top: ConstantValues.appTopPadding,
-                left: ConstantValues.appHorizontalPadding,
-                right: ConstantValues.appHorizontalPadding),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TitleWithBackButton(
-                    title:
-                        widget.isMorningZikr ? "أذكار الصباح" : "أذكار المساء"),
-                Expanded(
-                  child: GestureDetector(
-                    onTap: handleOnCount,
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: Center(
-                                  child: zikrContainer(
-                                      morningOrNightZikr:
-                                          widget.azkar[currentZikrIndex]))),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 30, horizontal: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                _checkIfNextIsAvailable()
-                                    ? nextButton()
-                                    : Container(
-                                        width: widthOfNextAndPreviousButtons,
-                                      ),
-                                Expanded(
-                                  child: IgnorePointer(
-                                    child: ZikrRepetitonCountCircle(
-                                      key: GlobalKey(),
-                                      count: currentCounter,
-                                      isMorningZikr: widget.isMorningZikr,
-                                      onFinished: () {},
+      body: SafeArea(
+        child: Container(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          padding: const EdgeInsets.only(
+              top: ConstantValues.appTopPadding,
+              left: ConstantValues.appHorizontalPadding,
+              right: ConstantValues.appHorizontalPadding),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TitleWithBackButton(
+                  title:
+                      widget.isMorningZikr ? "أذكار الصباح" : "أذكار المساء"),
+              Expanded(
+                child: GestureDetector(
+                  onTap: handleOnCount,
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Column(
+                      children: [
+                        Expanded(
+                            child: Center(
+                                child: zikrContainer(
+                                    morningOrNightZikr:
+                                        widget.azkar[currentZikrIndex]))),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 30, horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              _checkIfNextIsAvailable()
+                                  ? nextButton()
+                                  : Container(
+                                      width: widthOfNextAndPreviousButtons,
                                     ),
+                              Expanded(
+                                child: IgnorePointer(
+                                  child: ZikrRepetitonCountCircle(
+                                    key: GlobalKey(),
+                                    count: currentCounter,
+                                    isMorningZikr: widget.isMorningZikr,
+                                    onFinished: () {},
                                   ),
                                 ),
-                                _checkIfPreviousIsAvailable()
-                                    ? previousButton()
-                                    : Container(
-                                        width: widthOfNextAndPreviousButtons,
-                                      )
-                              ],
-                            ),
+                              ),
+                              _checkIfPreviousIsAvailable()
+                                  ? previousButton()
+                                  : Container(
+                                      width: widthOfNextAndPreviousButtons,
+                                    )
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                )
-              ],
-            ),
+                ),
+              )
+            ],
           ),
+        ),
       ),
     );
-  }
   }
 
   Widget zikrContainer({required MorningNightZikr morningOrNightZikr}) {

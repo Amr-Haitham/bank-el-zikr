@@ -1,13 +1,13 @@
-import 'package:bank_el_ziker/1_ui/screens/situations_azkar_screen/components/situational_zikr_list_tile.dart';
+import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/situational_zikr_list_tile.dart';
 import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../app_router.dart';
-import '../../core/consts/constant_values.dart';
-import '../../re-usable widgets/title_with_back_button.dart';
-import 'components/situational_zikr_search_widget.dart';
+import 'package:bank_el_ziker/app_router.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/situational_zikr_search_widget.dart';
 
 class SituationsAzkarScreen extends StatefulWidget {
   const SituationsAzkarScreen({super.key});

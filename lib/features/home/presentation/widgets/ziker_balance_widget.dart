@@ -1,8 +1,8 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
-import 'package:bank_el_ziker/4_utility_functions/general_utils.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/images_urls.dart';
+import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';

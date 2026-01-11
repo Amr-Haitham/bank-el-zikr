@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/1_ui/core/consts/third_party_values.dart';
+import 'package:bank_el_ziker/core/constants/third_party_values.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
@@ -6,7 +6,7 @@ import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_wid
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../core/consts/constant_values.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

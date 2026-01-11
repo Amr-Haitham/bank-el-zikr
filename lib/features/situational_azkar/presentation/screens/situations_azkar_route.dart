@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/di/service_locator.dart';
-import '../../../features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
+import 'package:bank_el_ziker/core/di/service_locator.dart';
+import 'package:bank_el_ziker/features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
 import 'situations_azkar_screen.dart';
 
 @RoutePage()

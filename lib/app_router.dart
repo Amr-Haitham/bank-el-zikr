@@ -7,7 +7,7 @@ import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_scre
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/1_ui/screens/ziker_screen/ziker_screen.dart';
-import '1_ui/screens/morning_and_night_azkar_screens/morning_or_night_azkar_screen.dart';
+import 'features/morning_night_azkar/presentation/screens/morning_or_night_azkar_screen.dart';
 import '1_ui/screens/settings_screen/settings_screen.dart';
 import '1_ui/screens/situations_azkar_screen/situations_azkar_screen.dart';
 import '3_data/models/zikr.dart';

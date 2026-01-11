@@ -2,8 +2,9 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
-import 'morning_or_night_azkar_screen.dart';
+import '../../../core/di/service_locator.dart';
+import '../../../features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
+import '../../../features/morning_night_azkar/presentation/screens/morning_or_night_azkar_screen.dart';
 
 @RoutePage()
 class NightAzkarRoute extends StatelessWidget {
@@ -12,7 +13,7 @@ class NightAzkarRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => GetAllMorningOrNightAzkarCubit(),
+      create: (context) => getService<MorningNightAzkarCubit>(),
       child: const MorningOrNightAzkarScreen(isMorning: false),
     );
   }

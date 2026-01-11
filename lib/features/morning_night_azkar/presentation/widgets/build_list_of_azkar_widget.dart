@@ -1,12 +1,12 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:bank_el_ziker/1_ui/core/consts/colors.dart';
-import 'package:bank_el_ziker/1_ui/screens/morning_and_night_azkar_screens/common/morning_or_night_zikr_list_tile.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'morning_or_night_zikr_content_screen.dart';
+import 'morning_or_night_zikr_list_tile.dart';
+import '../screens/morning_or_night_zikr_content_screen.dart';
 
 class BuildListOfAzkarWidget extends StatefulWidget {
   final bool isMorningAzkar;
