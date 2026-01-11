@@ -1,5 +1,7 @@
 import 'package:bank_el_ziker/1_ui/core/consts/images_urls.dart';
-import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_random_prayer_cubit.dart';
+import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
+import 'package:bank_el_ziker/features/home/presentation/cubit/home_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../4_utility_functions/screen_utils.dart';
@@ -11,33 +13,29 @@ class RandomZikerContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<GetRandomPrayerCubit>(context).getPrayer();
+    // Load random prayer on widget build
+    context.read<HomeCubit>().loadRandomPrayer();
 
-    return BlocBuilder<GetRandomPrayerCubit, GetRandomPrayerState>(
+    return BlocBuilder<HomeCubit, RequestState<Prayer>>(
       builder: (context, state) {
-        if (state is GetRandomPrayerLoading) {
-          return const Center(
+        return state.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const Center(
             child: CircularProgressIndicator(
               color: Colors.yellow,
             ),
-          );
-        } else if (state is GetRandomPrayerLoaded) {
-          String prayer = state.prayer.content;
-
-          return prayerContainer(prayer, context);
-        } else if (state is GetRandomPrayerError) {
-          return Center(
-            child: prayerContainer(
-                "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
-                context),
-          );
-        } else {
-          return Center(
-            child: prayerContainer(
-                "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
-                context),
-          );
-        }
+          ),
+          success: (prayer) {
+            return prayerContainer(prayer.content, context);
+          },
+          failure: (failure) {
+            return Center(
+              child: prayerContainer(
+                  "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+                  context),
+            );
+          },
+        );
       },
     );
   }

@@ -1,7 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/1_ui/re-usable%20widgets/title_with_back_button.dart';
-import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
-import 'package:bank_el_ziker/3_data/models/morning_or_night_zikr.dart';
+import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
+import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
+import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibration/vibration.dart';
@@ -9,7 +11,7 @@ import '../../../core/consts/constant_values.dart';
 import '../../../re-usable widgets/zikr_repetition_count_circle.dart';
 
 class MorningOrNightZikrContentScreen extends StatefulWidget {
-  final List<MorningOrNightZikr> azkar;
+  final List<MorningNightZikr> azkar;
   final bool isMorningZikr;
   final int index;
   const MorningOrNightZikrContentScreen(
@@ -38,7 +40,6 @@ class _MorningOrNightZikrContentScreenState
     indexOfLastZikr = widget.azkar.length - 1;
 
     currentCounter = widget.azkar[currentZikrIndex].count;
-    BlocProvider.of<GetSettingsCubit>(context).getSettings();
   }
 
   bool _checkIfNextIsAvailable() {
@@ -76,17 +77,21 @@ class _MorningOrNightZikrContentScreenState
 
   @override
   Widget build(BuildContext context) {
-    // print("new state");
-    return BlocListener<GetSettingsCubit, GetSettingsState>(
-      listener: (context, state) {
-        if (state is GetSettingsLoaded) {
-          
-          setState(() {
-            isVibrating = state.isVibrating;
-          });
-        }
+    return BlocBuilder<SettingsCubit, RequestState<Settings>>(
+      builder: (context, state) {
+        return state.maybeWhen(
+          success: (settings) {
+            isVibrating = settings.isVibrating;
+            return buildScaffold(context);
+          },
+          orElse: () => buildScaffold(context),
+        );
       },
-      child: Scaffold(
+    );
+  }
+
+  Widget buildScaffold(BuildContext context) {
+    return Scaffold(
         body: SafeArea(
           child: Container(
             color: Theme.of(context).scaffoldBackgroundColor,
@@ -149,12 +154,12 @@ class _MorningOrNightZikrContentScreenState
               ],
             ),
           ),
-        ),
       ),
     );
   }
+  }
 
-  Widget zikrContainer({required MorningOrNightZikr morningOrNightZikr}) {
+  Widget zikrContainer({required MorningNightZikr morningOrNightZikr}) {
     // MorningOrNightZikr currentMorningOrNightZikr = morningOrNightAzkarList
     //     .firstWhere((zikr) => zikr.id.toInt() == currentZikrIndex);
 
