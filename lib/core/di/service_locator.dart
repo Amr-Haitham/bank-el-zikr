@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
 
 // zikr_counter imports
 import '../../features/zikr_counter/data/datasources/counter_local_datasource.dart';
@@ -140,16 +141,15 @@ Future<void> setupServiceLocator() async {
 /// Setup external dependencies like Hive boxes
 Future<void> _setUpExternalDependencies() async {
   // zikr_counter
-  final counterBox = Hive.box<GeneralData>('generalDataHiveBox');
+  final counterBox = Hive.box<GeneralData>(generalDataHiveBox);
   _getIt.registerLazySingleton<Box<GeneralData>>(
     () => counterBox,
     instanceName: 'counterBox',
   );
 
   // azkar_management
-  // azkar_management
-  final defaultAzkarBox = Hive.box<Zikr>('zikrHiveBox');
-  final customAzkarBox = Hive.box<Zikr>('customAzkarHiveBox');
+  final defaultAzkarBox = Hive.box<Zikr>(zikrHiveBox);
+  final customAzkarBox = Hive.box<Zikr>(customAzkarHiveBox);
   _getIt.registerLazySingleton<Box<Zikr>>(
     () => defaultAzkarBox,
     instanceName: 'defaultAzkarBox',
@@ -160,15 +160,15 @@ Future<void> _setUpExternalDependencies() async {
   );
 
   // azkar_records
-  final azkarRecordsBox = Hive.box<DayZikrRecord>('dayZikrRecordHiveBox');
+  final azkarRecordsBox = Hive.box<DayZikrRecord>(dayZikrRecordHiveBox);
   _getIt.registerLazySingleton<Box<DayZikrRecord>>(
     () => azkarRecordsBox,
     instanceName: 'azkarRecordsBox',
   );
 
   // morning_night_azkar
-  final morningAzkarBox = Hive.box<MorningOrNightZikr>('morningAzkarHiveBox');
-  final nightAzkarBox = Hive.box<MorningOrNightZikr>('nightAzkarHiveBox');
+  final morningAzkarBox = Hive.box<MorningOrNightZikr>(morningAzkarHiveBox);
+  final nightAzkarBox = Hive.box<MorningOrNightZikr>(nightAzkarHiveBox);
   _getIt.registerLazySingleton<Box<MorningOrNightZikr>>(
     () => morningAzkarBox,
     instanceName: 'morningAzkarBox',
@@ -178,22 +178,22 @@ Future<void> _setUpExternalDependencies() async {
     instanceName: 'nightAzkarBox',
   );
 
-  // situational_azkar
-  final situationalAzkarBox = Hive.box<Zikr>('conditionalAzkarHiveBox');
-  _getIt.registerLazySingleton<Box<Zikr>>(
-    () => situationalAzkarBox,
-    instanceName: 'situationalAzkarBox',
-  );
-
-  final sharedPreferences = await SharedPreferences.getInstance();
-  _getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
-
-  // home
-  final prayerBox = Hive.box<Prayer>('prayerHiveBox');
+  // home (prayer)
+  final prayerBox = Hive.box<Prayer>(prayerHiveBox);
   _getIt.registerLazySingleton<Box<Prayer>>(
     () => prayerBox,
     instanceName: 'prayerBox',
   );
+
+  // situational_azkar
+  final situationalAzkarBox = Hive.box<Zikr>(conditionalAzkarHiveBox);
+  _getIt.registerLazySingleton<Box<Zikr>>(
+    () => situationalAzkarBox,
+    instanceName: 'situationalAzkarBox',
+  );
+  // shared_preferences
+  final sharedPreferences = await SharedPreferences.getInstance();
+  _getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }
 
 // ============================================================================

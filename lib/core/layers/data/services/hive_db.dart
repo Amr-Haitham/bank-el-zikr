@@ -32,24 +32,28 @@ class HiveDB {
     Hive.registerAdapter<Version>(VersionAdapter());
   }
 
-  Future<Box> openAndGetBox({required boxName}) async {
+  Future<Box<T>> openAndGetBox<T>({required String boxName}) async {
     if (!(Hive.isBoxOpen(boxName))) {
-      return await Hive.openBox(boxName);
+      return await Hive.openBox<T>(boxName);
     } else {
-      return Hive.box(boxName);
+      return Hive.box<T>(boxName);
     }
   }
 
   Future<void> setupInitHiveDbDataIfNonExisting() async {
-    var zikrBox = await openAndGetBox(boxName: zikrHiveBox);
-    var generalDataBox = await openAndGetBox(boxName: generalDataHiveBox);
-    var dayZikrRecordBox = await openAndGetBox(boxName: dayZikrRecordHiveBox);
-    var morningAzkarBox = await openAndGetBox(boxName: morningAzkarHiveBox);
-    var nightAzkarBox = await openAndGetBox(boxName: nightAzkarHiveBox);
-    var prayerAzkarBox = await openAndGetBox(boxName: prayerHiveBox);
+    var zikrBox = await openAndGetBox<Zikr>(boxName: zikrHiveBox);
+    var generalDataBox =
+        await openAndGetBox<GeneralData>(boxName: generalDataHiveBox);
+    var dayZikrRecordBox =
+        await openAndGetBox<DayZikrRecord>(boxName: dayZikrRecordHiveBox);
+    var morningAzkarBox =
+        await openAndGetBox<MorningOrNightZikr>(boxName: morningAzkarHiveBox);
+    var nightAzkarBox =
+        await openAndGetBox<MorningOrNightZikr>(boxName: nightAzkarHiveBox);
+    var prayerAzkarBox = await openAndGetBox<Prayer>(boxName: prayerHiveBox);
     var conditionalAzkarBox =
-        await openAndGetBox(boxName: conditionalAzkarHiveBox);
-    var versionBox = await openAndGetBox(boxName: versionCheckHiveBox);
+        await openAndGetBox<Zikr>(boxName: conditionalAzkarHiveBox);
+    var versionBox = await openAndGetBox<Version>(boxName: versionCheckHiveBox);
 
     if (versionBox.isEmpty ||
         (versionBox.values.first.currentVersion != ReleaseVersion.version)) {
@@ -79,19 +83,24 @@ class HiveDB {
     }
 
     if (zikrBox.isEmpty) {
-      await zikrBox.addAll(InitialData.generalAzkar);
+      await zikrBox
+          .addAll(InitialData.generalAzkar.map((e) => Zikr.fromEntity(e)));
     }
     if (morningAzkarBox.isEmpty) {
-      await morningAzkarBox.addAll(InitialData.morningAzkar);
+      await morningAzkarBox.addAll(InitialData.morningAzkar
+          .map((e) => MorningOrNightZikr.fromEntity(e)));
     }
     if (nightAzkarBox.isEmpty) {
-      await nightAzkarBox.addAll(InitialData.nightAzkar);
+      await nightAzkarBox.addAll(
+          InitialData.nightAzkar.map((e) => MorningOrNightZikr.fromEntity(e)));
     }
     if (prayerAzkarBox.isEmpty) {
-      await prayerAzkarBox.addAll(InitialData.prayers);
+      await prayerAzkarBox
+          .addAll(InitialData.prayers.map((e) => Prayer.fromEntity(e)));
     }
     if (conditionalAzkarBox.isEmpty) {
-      await conditionalAzkarBox.addAll(InitialData.conditionAzkar);
+      await conditionalAzkarBox
+          .addAll(InitialData.conditionAzkar.map((e) => Zikr.fromEntity(e)));
     }
 
     if (generalDataBox.isEmpty) {
