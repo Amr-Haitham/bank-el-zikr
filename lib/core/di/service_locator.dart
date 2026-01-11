@@ -43,6 +43,16 @@ import '../../features/morning_night_azkar/domain/usecases/get_morning_azkar.dar
 import '../../features/morning_night_azkar/domain/usecases/get_night_azkar.dart';
 import '../../features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
 
+// situational_azkar imports
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../features/situational_azkar/data/datasources/situational_azkar_local_datasource.dart';
+import '../../features/situational_azkar/data/repositories/situational_azkar_repository_impl.dart';
+import '../../features/situational_azkar/domain/repositories/situational_azkar_repository.dart';
+import '../../features/situational_azkar/domain/usecases/get_favorites.dart';
+import '../../features/situational_azkar/domain/usecases/get_situational_azkar.dart';
+import '../../features/situational_azkar/domain/usecases/toggle_favorite.dart';
+import '../../features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
+
 final _getIt = GetIt.instance;
 
 /// Get a registered service from the service locator
@@ -78,6 +88,11 @@ Future<void> setupServiceLocator() async {
   _setUpMorningNightAzkarRepositories();
   _setUpMorningNightAzkarUseCases();
   _setUpMorningNightAzkarBlocs();
+
+  _setUpSituationalAzkarDataSources();
+  _setUpSituationalAzkarRepositories();
+  _setUpSituationalAzkarUseCases();
+  _setUpSituationalAzkarBlocs();
 }
 
 /// Setup external dependencies like Hive boxes
@@ -120,6 +135,16 @@ Future<void> _setUpExternalDependencies() async {
     () => nightAzkarBox,
     instanceName: 'nightAzkarBox',
   );
+
+  // situational_azkar
+  final situationalAzkarBox = Hive.box<ZikrModel>('conditionalAzkarHiveBox');
+  _getIt.registerLazySingleton<Box<ZikrModel>>(
+    () => situationalAzkarBox,
+    instanceName: 'situationalAzkarBox',
+  );
+
+  final sharedPreferences = await SharedPreferences.getInstance();
+  _getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
 }
 
 // ============================================================================
@@ -300,6 +325,50 @@ void _setUpMorningNightAzkarBlocs() {
     () => MorningNightAzkarCubit(
       getMorningAzkar: getService<GetMorningAzkar>(),
       getNightAzkar: getService<GetNightAzkar>(),
+    ),
+  );
+}
+
+// ============================================================================
+// situational_azkar
+// ============================================================================
+
+void _setUpSituationalAzkarDataSources() {
+  _getIt.registerLazySingleton<SituationalAzkarLocalDataSource>(
+    () => SituationalAzkarLocalDataSourceImpl(
+      situationalAzkarBox:
+          getService<Box<ZikrModel>>(instanceName: 'situationalAzkarBox'),
+      sharedPreferences: getService<SharedPreferences>(),
+    ),
+  );
+}
+
+void _setUpSituationalAzkarRepositories() {
+  _getIt.registerLazySingleton<SituationalAzkarRepository>(
+    () => SituationalAzkarRepositoryImpl(
+      localDataSource: getService<SituationalAzkarLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpSituationalAzkarUseCases() {
+  _getIt.registerLazySingleton<GetSituationalAzkar>(
+    () => GetSituationalAzkar(getService<SituationalAzkarRepository>()),
+  );
+  _getIt.registerLazySingleton<GetFavorites>(
+    () => GetFavorites(getService<SituationalAzkarRepository>()),
+  );
+  _getIt.registerLazySingleton<ToggleFavorite>(
+    () => ToggleFavorite(getService<SituationalAzkarRepository>()),
+  );
+}
+
+void _setUpSituationalAzkarBlocs() {
+  _getIt.registerFactory<SituationalAzkarCubit>(
+    () => SituationalAzkarCubit(
+      getSituationalAzkar: getService<GetSituationalAzkar>(),
+      getFavorites: getService<GetFavorites>(),
+      toggleFavorite: getService<ToggleFavorite>(),
     ),
   );
 }
