@@ -3,37 +3,29 @@ import 'package:bank_el_ziker/1_ui/screens/azkar_screen/azkar_screen.dart';
 import 'package:bank_el_ziker/1_ui/screens/home_screen/home_screen.dart';
 import 'package:bank_el_ziker/2_state_management/charity_funds_paypal_cubit/charity_funds_paypal_cubit.dart';
 import 'package:bank_el_ziker/2_state_management/email_us_cubit/email_us_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/settings/set_settings_cubit/set_settings_cubit.dart';
 import 'package:bank_el_ziker/1_ui/screens/zikr_content_screen/zikr_content_screen.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_records/get_week_azkar_record/get_week_azkar_record_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_records/set_azkar_records/set_azkar_records_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/general_data/get_general_data/get_general_data_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/situational_azkar_cubits/get_conditional_azkar_cubit/get_conditional_azkar_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/get_random_prayer_cubit/get_random_prayer_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/1_ui/screens/ziker_screen/ziker_screen.dart';
 import '1_ui/screens/morning_and_night_azkar_screens/morning_or_night_azkar_screen.dart';
 import '1_ui/screens/settings_screen/settings_screen.dart';
-import '2_state_management/situational_azkar_cubits/add_or_remove_situational_azkar/handle_fav_situational_azkar_cubit.dart';
 import '1_ui/screens/situations_azkar_screen/situations_azkar_screen.dart';
-import '2_state_management/custom_azkar_cubits/add_custom_zikr_cubit/add_custom_zikr_cubit.dart';
-import '2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.dart';
-import '2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
 import '3_data/models/zikr.dart';
 
 // Clean Architecture imports
 import 'core/di/service_locator.dart';
 import 'features/zikr_counter/presentation/cubit/counter_cubit.dart';
+import 'features/azkar_management/presentation/cubit/azkar_cubit.dart';
+import 'features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
+import 'features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
+import 'features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
+import 'features/settings/presentation/cubit/settings_cubit.dart';
+import 'features/home/presentation/cubit/home_cubit.dart';
 
 const welcomeScreenUrl = "welcomScreen";
 const homeScreen = "/";
 const azkarScreenUrl = "/azkarScreenUrl";
 const accountBalanceUrl = "/accountBalanceUrl";
-// const landingScreen = '/';
-// const animatedSecondScreen = '/';
 const morningAzkarScreen = 'morningAzkarScreen';
 const nightAzkarScreen = 'nightAzkarScreen';
 const tasbeehWerdScreen = 'tasbeehWerdScreen';
@@ -41,157 +33,97 @@ const dailyAzkarScreen = 'dailyAzkarScreen';
 const situationsAzkarScreen = 'conditionalAzkarScreen';
 const zikrContentScreen = 'zikrContentScreen';
 const settingsScreenUrl = 'settingsScreenUrl';
-// const addNewZikrPopUp = 'addNewZikrPopUp';
-// const editCustomZikrPopup = 'editCustomZikrPopup';
 
 class AppRouter {
-  final GetCurrentZikrCubit _getCurrentZikrCubit = GetCurrentZikrCubit();
-  static final UpdateGeneralDataCubit updateGeneralDataCubit =
-      UpdateGeneralDataCubit();
-  static final AzkarCubit azkarCubit = AzkarCubit();
-
-  static final AddCustomZikrCubit addCustomZikrCubit = AddCustomZikrCubit();
-
   Route? generateRouter(RouteSettings settings) {
     switch (settings.name) {
       case homeScreen:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: updateGeneralDataCubit),
-              BlocProvider(
-                create: (context) => GetGeneralDataCubit(),
-              ),
-              BlocProvider(
-                create: (context) => GetRandomPrayerCubit(),
-              ),
-              // BlocProvider(
-              //   create: (context) => GetHijriDateCubit(),
-              // ),
+              BlocProvider(create: (_) => getService<CounterCubit>()),
+              BlocProvider(create: (_) => getService<HomeCubit>()),
             ],
             child: const HomeScreen(),
           );
         });
+
       case settingsScreenUrl:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider.value(value: updateGeneralDataCubit),
-              BlocProvider(
-                create: (context) => GetGeneralDataCubit(),
-              ),
-              BlocProvider(
-                create: (context) => GetRandomPrayerCubit(),
-              ),
-              BlocProvider(
-                create: (context) => SetSettingsCubit(),
-              ),
-              BlocProvider(
-                create: (context) => CharityFundsPaypalCubit(),
-              ),
-              BlocProvider(
-                create: (context) => EmailUsCubit(),
-              ),
+              BlocProvider(create: (_) => getService<SettingsCubit>()),
+              BlocProvider(create: (_) => CharityFundsPaypalCubit()),
+              BlocProvider(create: (_) => EmailUsCubit()),
             ],
-            child:  const SettingsScreen(),
+            child: const SettingsScreen(),
           );
         });
 
       case morningAzkarScreen:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
-            create: (context) => GetAllMorningOrNightAzkarCubit(),
-            child: const MorningOrNightAzkarScreen(
-              isMorning: true,
-            ),
+            create: (_) => getService<MorningNightAzkarCubit>(),
+            child: const MorningOrNightAzkarScreen(isMorning: true),
           );
         });
 
       case nightAzkarScreen:
         return MaterialPageRoute(builder: (context) {
           return BlocProvider(
-            create: (context) => GetAllMorningOrNightAzkarCubit(),
-            child: const MorningOrNightAzkarScreen(
-              isMorning: false,
-            ),
+            create: (_) => getService<MorningNightAzkarCubit>(),
+            child: const MorningOrNightAzkarScreen(isMorning: false),
           );
         });
 
       case situationsAzkarScreen:
         return MaterialPageRoute(builder: (context) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider(
-                create: (context) => GetConditionalAzkarCubit(),
-              ),
-              BlocProvider(
-                create: (context) => HandleFavSituationalAzkarCubit(),
-              ),
-            ],
+          return BlocProvider(
+            create: (_) => getService<SituationalAzkarCubit>(),
             child: const SituationsAzkarScreen(),
           );
         });
 
       case zikrContentScreen:
-
         if (settings.arguments != null && settings.arguments is Zikr) {
           return MaterialPageRoute(builder: (context) {
             return ZikrContentScreen(zikr: settings.arguments as Zikr);
           });
         }
+        break;
 
       case tasbeehWerdScreen:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => GetGeneralDataCubit(),
-              ),
-              BlocProvider.value(value: updateGeneralDataCubit),
-              BlocProvider.value(
-                value: azkarCubit,
-              ),
-              BlocProvider.value(
-                value: _getCurrentZikrCubit,
-              ),
-              BlocProvider(
-                lazy: false,
-                create: (context) => SetAzkarRecordsCubit(),
-              ),
+              BlocProvider(create: (_) => getService<CounterCubit>()),
+              BlocProvider(create: (_) => getService<AzkarCubit>()),
+              BlocProvider(create: (_) => getService<AzkarRecordsCubit>()),
+              BlocProvider(create: (_) => getService<SettingsCubit>()),
             ],
             child: const ZikerScreen(),
           );
         });
+
       case azkarScreenUrl:
       case dailyAzkarScreen:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: azkarCubit,
-              ),
-              BlocProvider.value(
-                value: updateGeneralDataCubit,
-              ),
-              BlocProvider.value(value: _getCurrentZikrCubit),
-              BlocProvider.value(value: addCustomZikrCubit),
+              BlocProvider(create: (_) => getService<AzkarCubit>()),
+              BlocProvider(create: (_) => getService<CounterCubit>()),
             ],
             child: const AzkarScreen(),
           );
         });
+
       case accountBalanceUrl:
         return MaterialPageRoute(builder: (context) {
           return MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (context) => GetGeneralDataCubit(),
-              ),
-              BlocProvider(
-                create: (context) => GetWeekAzkarRecordCubit(),
-              ),
-              BlocProvider(
-                create: (context) => AzkarCubit(),
-              ),
+              BlocProvider(create: (_) => getService<CounterCubit>()),
+              BlocProvider(create: (_) => getService<AzkarRecordsCubit>()),
+              BlocProvider(create: (_) => getService<AzkarCubit>()),
             ],
             child: const AccountBalanceScreen(),
           );
