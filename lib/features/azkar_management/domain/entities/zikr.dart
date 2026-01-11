@@ -19,4 +19,20 @@ class Zikr extends Equatable {
 
   @override
   List<Object?> get props => [id, content, title, description, isCustomZikr];
+
+  Zikr copyWith({
+    int? id,
+    String? content,
+    String? title,
+    String? description,
+    bool? isCustomZikr,
+  }) {
+    return Zikr(
+      id: id ?? this.id,
+      content: content ?? this.content,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      isCustomZikr: isCustomZikr ?? this.isCustomZikr,
+    );
+  }
 }

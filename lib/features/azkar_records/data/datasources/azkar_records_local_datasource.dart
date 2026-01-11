@@ -11,6 +11,9 @@ abstract class AzkarRecordsLocalDataSource {
 
   /// Increment a specific zikr's count for today
   Future<void> incrementZikrRecord(int zikrId);
+
+  /// Delete all records for a specific zikr
+  Future<void> deleteZikrRecord(int zikrId);
 }
 
 /// Implementation of AzkarRecordsLocalDataSource using Hive
@@ -48,5 +51,16 @@ class AzkarRecordsLocalDataSourceImpl implements AzkarRecordsLocalDataSource {
 
     // Save the updated record
     await todayRecord.save();
+  }
+
+  @override
+  Future<void> deleteZikrRecord(int zikrId) async {
+    for (var i = 0; i < box.length; i++) {
+      final record = box.getAt(i);
+      if (record != null && record.azkarRecordById.containsKey(zikrId)) {
+        record.azkarRecordById.remove(zikrId);
+        await box.putAt(i, record);
+      }
+    }
   }
 }

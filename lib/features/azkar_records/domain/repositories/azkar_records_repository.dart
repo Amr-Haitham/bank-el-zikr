@@ -10,4 +10,7 @@ abstract class AzkarRecordsRepository {
 
   /// Increment a specific zikr's count for today
   Future<RequestResult<void>> incrementZikrRecord(int zikrId);
+
+  /// Delete all records for a specific zikr
+  Future<RequestResult<void>> deleteZikrRecord(int zikrId);
 }

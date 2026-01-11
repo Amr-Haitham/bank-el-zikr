@@ -40,4 +40,15 @@ class AzkarRecordsCubit extends RequestCubit<List<DayZikrRecord>> {
       (_) => reExecutePastRequest(), // Reload after successful fix/increment
     );
   }
+
+  /// Delete all records for a specific zikr
+  Future<void> deleteZikrRecordById(int zikrId) async {
+    final result =
+        await getWeekAzkarRecords.repository.deleteZikrRecord(zikrId);
+
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(), // Reload after successful deletion
+    );
+  }
 }

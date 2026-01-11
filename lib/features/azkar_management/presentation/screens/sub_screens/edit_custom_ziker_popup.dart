@@ -2,27 +2,23 @@ import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/presentation/widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/core/presentation/widgets/popup_functions.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_cubit/azkar_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/azkar_records/delete_single_zikr_record/delete_single_zikr_record_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/delete_custom_zikr_cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/custom_azkar_cubits/update_custom_zikr/update_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/2_state_management/general_data/update_general_data/update_general_data_cubit.dart';
-import 'package:bank_el_ziker/core/constants/initial_data.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
+import 'package:bank_el_ziker/core/utils/screen_utils.dart';
+import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../3_data/models/zikr.dart';
-import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../core/consts/colors.dart';
 
 class EditCustomZikerPopup extends StatefulWidget {
-  const EditCustomZikerPopup(
-      {super.key,
-      required this.zikr,
-      required this.zikrIndex,
-      required this.isSelected});
+  const EditCustomZikerPopup({
+    super.key,
+    required this.zikr,
+    required this.isSelected,
+  });
   final Zikr zikr;
-  final int zikrIndex;
   final bool isSelected;
 
   @override
@@ -36,11 +32,6 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
       TextEditingController(text: widget.zikr.description ?? "");
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   void dispose() {
     edittedZikerContentController.dispose();
     edittedZikerDescriptionController.dispose();
@@ -50,7 +41,6 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      // height: ScreenUtils.getScreenHeight(context) * .75,
       child: SingleChildScrollView(
         child: Center(
           child: Padding(
@@ -60,9 +50,7 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const SizedBox(
-                  height: 16,
-                ),
+                const SizedBox(height: 16),
                 Container(
                   height: 5,
                   decoration: BoxDecoration(
@@ -76,18 +64,14 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
                   title: 'الذكر',
                   controller: edittedZikerContentController,
                 ),
-                const SizedBox(
-                  height: 40,
-                ),
+                const SizedBox(height: 40),
                 CustomAppTextField(
                   title: 'فضل الذكر',
                   controller: edittedZikerDescriptionController,
                   optional: true,
                   maxLines: 4,
                 ),
-                const SizedBox(
-                  height: 38,
-                ),
+                const SizedBox(height: 38),
                 Column(
                   children: [
                     saveButton(),
@@ -104,43 +88,24 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
     );
   }
 
-  // Widget newZikrTextField() {
-  //   return Padding(
-  //     padding: const EdgeInsets.all(10),
-  //     child: TextField(
-  //       textDirection: TextDirection.rtl,
-  //       controller: edittedZikerController,
-  //       decoration: InputDecoration(
-  //         border: OutlineInputBorder(
-  //           borderRadius: BorderRadius.circular(8),
-  //           borderSide: const BorderSide(
-  //               width: 2,
-  //               color: Colors
-  //                   .transparent), // Set border width and make it transparent initially
-  //         ),
-  //         focusedBorder: OutlineInputBorder(
-  //           // Border when focused
-  //           borderRadius: BorderRadius.circular(8),
-  //           borderSide:  BorderSide(
-  //               width: 2, color: Theme.of(context).primaryColor), // Green border when focused
-  //         ),
-  //       ),
-  //       maxLines: 5,
-  //     ),
-  //   );
-  // }
-
   Widget saveButton() {
     return GestureDetector(
       onTap: () {
-        BlocProvider.of<UpdateCustomZikrCubit>(context).updateCustomZikr(
-          zikr: widget.zikr,
-          zikrIndex: widget.zikrIndex,
-          newContent: edittedZikerContentController.text,
-          newZikrDescription: edittedZikerDescriptionController.text,
-        );
-        BlocProvider.of<AzkarCubit>(context).getAllAzkar();
+        if (edittedZikerContentController.text.trim().isEmpty) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('الرجاء إدخال نص الذكر')),
+          );
+          return;
+        }
 
+        final updatedZikr = widget.zikr.copyWith(
+          content: edittedZikerContentController.text.trim(),
+          description: edittedZikerDescriptionController.text.trim().isNotEmpty
+              ? edittedZikerDescriptionController.text.trim()
+              : null,
+        );
+
+        context.read<UpdateCustomZikrCubit>().updateZikr(updatedZikr);
         Navigator.of(context).pop();
       },
       child: Container(
@@ -167,25 +132,28 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
     return GestureDetector(
       onTap: () {
         PopupFunctions.deleteZikrDialog(
-            context: context,
-            content: "هل أنت متأكد من حذف الذكر",
-            onDelete: () {
-              BlocProvider.of<DeleteCustomZikrCubit>(context)
-                  .deleteCustomZikr(zikrIndex: widget.zikrIndex);
+          context: context,
+          content: "هل أنت متأكد من حذف الذكر",
+          onDelete: () {
+            // Delete the zikr itself
+            context.read<DeleteCustomZikrCubit>().deleteZikr(widget.zikr.id);
 
-              widget.isSelected
-                  ? BlocProvider.of<UpdateGeneralDataCubit>(context)
-                      .updateGeneralDataCurrentZikr(
-                          InitialData.generalAzkar.first.id)
-                  : null;
-              BlocProvider.of<DeleteSingleZikrRecordCubit>(context)
-                  .deleteZikrRecord(zikrId: widget.zikr.id);
-              BlocProvider.of<AzkarCubit>(context).getAllAzkar();
-              Navigator.of(context).pop();
-            });
+            // If it was selected, reset to a default zikr (ID 1)
+            if (widget.isSelected) {
+              context.read<CounterCubit>().setCurrentZikr(1);
+            }
+
+            // Delete associated records
+            context
+                .read<AzkarRecordsCubit>()
+                .deleteZikrRecordById(widget.zikr.id);
+
+            Navigator.of(context).pop(); // Close dialog
+            Navigator.of(context).pop(); // Close popup
+          },
+        );
       },
       child: Container(
-        // width: 100,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(39),
             color: Colors.transparent,
@@ -206,33 +174,4 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
       ),
     );
   }
-
-  // Widget cancelButton() {
-  //   return GestureDetector(
-  //     onTap: () {
-  //       Navigator.of(context).pop();
-  //     },
-  //     child: Container(
-  //       width: 100,
-  //       decoration: BoxDecoration(
-  //         borderRadius: BorderRadius.circular(8),
-  //         border: Border.all(color: Colors.red),
-  //         color: appWhite,
-  //       ),
-  //       child: const Center(
-  //         child: Padding(
-  //           padding: EdgeInsets.all(16),
-  //           child: Text(
-  //             'إلفاء',
-  //             style: TextStyle(
-  //               color: Colors.red,
-  //               fontSize: 16,
-  //               fontWeight: FontWeight.w700,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }

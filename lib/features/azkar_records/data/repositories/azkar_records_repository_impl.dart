@@ -27,7 +27,8 @@ class AzkarRecordsRepositoryImpl implements AzkarRecordsRepository {
   }
 
   @override
-  Future<RequestResult<void>> updateAllRecords(List<DayZikrRecord> records) async {
+  Future<RequestResult<void>> updateAllRecords(
+      List<DayZikrRecord> records) async {
     try {
       final recordModels = records
           .map((entity) => DayZikrRecordModel.fromEntity(entity))
@@ -49,6 +50,18 @@ class AzkarRecordsRepositoryImpl implements AzkarRecordsRepository {
     } catch (e) {
       return Left(Failure(
         message: 'Failed to increment zikr record: ${e.toString()}',
+      ));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> deleteZikrRecord(int zikrId) async {
+    try {
+      await localDataSource.deleteZikrRecord(zikrId);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(
+        message: 'Failed to delete zikr record: ${e.toString()}',
       ));
     }
   }

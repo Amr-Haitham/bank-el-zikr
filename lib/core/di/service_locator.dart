@@ -23,7 +23,10 @@ import '../../features/azkar_management/domain/usecases/add_custom_zikr.dart';
 import '../../features/azkar_management/domain/usecases/delete_custom_zikr.dart';
 import '../../features/azkar_management/domain/usecases/get_all_azkar.dart';
 import '../../features/azkar_management/domain/usecases/update_custom_zikr.dart';
-import '../../features/azkar_management/presentation/cubit/azkar_cubit.dart';
+import '../../features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
+import '../../features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
+import '../../features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
+import '../../features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
 
 // azkar_records imports
 import '../../features/azkar_records/data/datasources/azkar_records_local_datasource.dart';
@@ -273,11 +276,23 @@ void _setUpAzkarManagementUseCases() {
 }
 
 void _setUpAzkarManagementBlocs() {
-  _getIt.registerFactory<AzkarCubit>(
-    () => AzkarCubit(
+  _getIt.registerFactory<GetAllAzkarCubit>(
+    () => GetAllAzkarCubit(
       getAllAzkar: getService<GetAllAzkar>(),
+    ),
+  );
+  _getIt.registerFactory<AddCustomZikrCubit>(
+    () => AddCustomZikrCubit(
       addCustomZikr: getService<AddCustomZikr>(),
+    ),
+  );
+  _getIt.registerFactory<UpdateCustomZikrCubit>(
+    () => UpdateCustomZikrCubit(
       updateCustomZikr: getService<UpdateCustomZikr>(),
+    ),
+  );
+  _getIt.registerFactory<DeleteCustomZikrCubit>(
+    () => DeleteCustomZikrCubit(
       deleteCustomZikr: getService<DeleteCustomZikr>(),
     ),
   );

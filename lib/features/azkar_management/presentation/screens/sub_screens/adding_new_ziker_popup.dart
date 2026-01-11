@@ -3,7 +3,7 @@ import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/azkar_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,8 +96,8 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
           title: null, // Custom zikr don't have titles
         );
 
-        // Add zikr using new AzkarCubit
-        context.read<AzkarCubit>().addZikr(newZikr);
+        // Add zikr using separate AddCustomZikrCubit
+        context.read<AddCustomZikrCubit>().addZikr(newZikr);
 
         // Close dialog
         Navigator.of(context).pop();
