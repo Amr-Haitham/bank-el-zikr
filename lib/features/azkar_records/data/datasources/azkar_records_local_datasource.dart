@@ -1,13 +1,13 @@
 import 'package:hive/hive.dart';
-import '../models/day_zikr_record_model.dart';
+import 'package:bank_el_ziker/features/azkar_records/data/models/day_zikr_record_model.dart';
 
 /// Abstract interface for azkar records local data source
 abstract class AzkarRecordsLocalDataSource {
   /// Get all records from local storage (7-day window)
-  Future<List<DayZikrRecordModel>> getAllRecords();
+  Future<List<DayZikrRecord>> getAllRecords();
 
   /// Update all records in local storage
-  Future<void> updateAllRecords(List<DayZikrRecordModel> records);
+  Future<void> updateAllRecords(List<DayZikrRecord> records);
 
   /// Increment a specific zikr's count for today
   Future<void> incrementZikrRecord(int zikrId);
@@ -18,18 +18,18 @@ abstract class AzkarRecordsLocalDataSource {
 
 /// Implementation of AzkarRecordsLocalDataSource using Hive
 class AzkarRecordsLocalDataSourceImpl implements AzkarRecordsLocalDataSource {
-  final Box<DayZikrRecordModel> box;
+  final Box<DayZikrRecord> box;
 
   AzkarRecordsLocalDataSourceImpl({required this.box});
 
   @override
-  Future<List<DayZikrRecordModel>> getAllRecords() async {
+  Future<List<DayZikrRecord>> getAllRecords() async {
     // Get all records from the box and return as a list
     return box.values.toList();
   }
 
   @override
-  Future<void> updateAllRecords(List<DayZikrRecordModel> records) async {
+  Future<void> updateAllRecords(List<DayZikrRecord> records) async {
     // Clear the box and add all new records
     await box.clear();
     for (var i = 0; i < records.length; i++) {
@@ -50,7 +50,7 @@ class AzkarRecordsLocalDataSourceImpl implements AzkarRecordsLocalDataSource {
     todayRecord.azkarRecordById[zikrId] = currentCount + 1;
 
     // Save the updated record
-    await todayRecord.save();
+    await box.putAt(0, todayRecord);
   }
 
   @override

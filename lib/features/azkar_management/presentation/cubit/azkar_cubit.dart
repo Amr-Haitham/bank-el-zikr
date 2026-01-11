@@ -1,5 +1,5 @@
-import '../../../../core/presentation/request_cubit/request_cubit.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../core/layers/presentation/request_cubit/request_cubit.dart';
+import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../../domain/entities/zikr.dart';
 import '../../domain/usecases/add_custom_zikr.dart';
 import '../../domain/usecases/delete_custom_zikr.dart';
@@ -8,7 +8,7 @@ import '../../domain/usecases/update_custom_zikr.dart';
 
 /// Cubit for managing azkar (both default and custom)
 /// Replaces the old AzkarCubit, AddCustomZikrCubit, UpdateCustomZikrCubit, and DeleteCustomZikrCubit
-class AzkarCubit extends RequestCubit<List<Zikr>> {
+class AzkarCubit extends RequestCubit<List<ZikrEntity>> {
   final GetAllAzkar getAllAzkar;
   final AddCustomZikr addCustomZikr;
   final UpdateCustomZikr updateCustomZikr;
@@ -30,7 +30,7 @@ class AzkarCubit extends RequestCubit<List<Zikr>> {
   }
 
   /// Add a new custom zikr and reload the list
-  Future<void> addZikr(Zikr zikr) async {
+  Future<void> addZikr(ZikrEntity zikr) async {
     final result = await addCustomZikr(AddCustomZikrParams(zikr: zikr));
 
     result.fold(
@@ -40,7 +40,7 @@ class AzkarCubit extends RequestCubit<List<Zikr>> {
   }
 
   /// Update an existing custom zikr and reload the list
-  Future<void> updateZikr(Zikr zikr) async {
+  Future<void> updateZikr(ZikrEntity zikr) async {
     final result = await updateCustomZikr(UpdateCustomZikrParams(zikr: zikr));
 
     result.fold(

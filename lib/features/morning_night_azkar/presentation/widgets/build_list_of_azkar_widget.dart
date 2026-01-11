@@ -1,6 +1,6 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MorningNightAzkarCubit,
-        RequestState<List<MorningNightZikr>>>(
+        RequestState<List<MorningNightZikrEntity>>>(
       builder: (context, state) {
         return state.when(
           initial: () => const SliverToBoxAdapter(

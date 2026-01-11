@@ -5,13 +5,13 @@ import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dar
 import 'zikr_content_screen.dart';
 
 @RoutePage()
-class ZikrContentRoute extends StatelessWidget {
-  const ZikrContentRoute({
+class ZikrContentPage extends StatelessWidget {
+  const ZikrContentPage({
     super.key,
     required this.zikr,
   });
 
-  final Zikr zikr;
+  final ZikrEntity zikr;
 
   @override
   Widget build(BuildContext context) {

@@ -6,17 +6,17 @@ part of 'day_zikr_record_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DayZikrRecordModelAdapter extends TypeAdapter<DayZikrRecordModel> {
+class DayZikrRecordAdapter extends TypeAdapter<DayZikrRecord> {
   @override
   final int typeId = 1;
 
   @override
-  DayZikrRecordModel read(BinaryReader reader) {
+  DayZikrRecord read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return DayZikrRecordModel(
+    return DayZikrRecord(
       id: fields[0] as String,
       dateTime: fields[1] as DateTime,
       azkarRecordById: (fields[2] as Map).cast<int, int>(),
@@ -24,7 +24,7 @@ class DayZikrRecordModelAdapter extends TypeAdapter<DayZikrRecordModel> {
   }
 
   @override
-  void write(BinaryWriter writer, DayZikrRecordModel obj) {
+  void write(BinaryWriter writer, DayZikrRecord obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)
@@ -41,7 +41,7 @@ class DayZikrRecordModelAdapter extends TypeAdapter<DayZikrRecordModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is DayZikrRecordModelAdapter &&
+      other is DayZikrRecordAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

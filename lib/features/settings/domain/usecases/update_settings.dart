@@ -1,5 +1,5 @@
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
-import 'package:bank_el_ziker/core/usecases/usecase.dart';
+import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/settings/domain/repositories/settings_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';

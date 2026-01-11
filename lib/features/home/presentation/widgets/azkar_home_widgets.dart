@@ -1,5 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/images_urls.dart';
-import 'package:bank_el_ziker/app_router.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'rectangular_zikr_home_card.dart';
@@ -16,20 +17,20 @@ class AzkarHomeWidgets extends StatelessWidget {
         Expanded(
           child: Column(children: [
             RectangularZikrHomeCard(
-              title: 'أذكار المساء',
-              imageAssetUrl: ImagesUrls.prayingInNight,onTap: () {
-                Navigator.of(context).pushNamed(nightAzkarScreen);
-              }
-            ),
+                title: 'أذكار المساء',
+                imageAssetUrl: ImagesUrls.prayingInNight,
+                onTap: () {
+                  AutoRouter.of(context).push(const NightAzkarRoute());
+                }),
             const SizedBox(
               height: 15,
             ),
             RectangularZikrHomeCard(
-              title: 'أذكار الأحوال',
-              imageAssetUrl: ImagesUrls.prayingHands,onTap: () {
-                Navigator.of(context).pushNamed(situationsAzkarScreen);
-              }
-            ),
+                title: 'أذكار الأحوال',
+                imageAssetUrl: ImagesUrls.prayingHands,
+                onTap: () {
+                  AutoRouter.of(context).push(const SituationsAzkarRoute());
+                }),
           ]),
         ),
         const SizedBox(
@@ -41,7 +42,7 @@ class AzkarHomeWidgets extends StatelessWidget {
               title: 'أذكار الصباح',
               imageAssetUrl: ImagesUrls.prayingInMorning,
               onTap: () {
-                Navigator.of(context).pushNamed(morningAzkarScreen);
+                AutoRouter.of(context).push(const MorningAzkarRoute());
               },
             ),
             const SizedBox(
@@ -51,7 +52,7 @@ class AzkarHomeWidgets extends StatelessWidget {
               title: 'تسبيح',
               imageAssetUrl: ImagesUrls.masbaha,
               onTap: () {
-                Navigator.of(context).pushNamed(tasbeehWerdScreen);
+                AutoRouter.of(context).push(const TasbeehWerdRoute());
               },
             ),
           ]),

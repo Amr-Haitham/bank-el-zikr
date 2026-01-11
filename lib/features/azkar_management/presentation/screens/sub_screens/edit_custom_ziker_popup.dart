@@ -1,11 +1,11 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/custom_app_text_field.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/popup_functions.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_field.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/popup_functions.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_current_zikr_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
@@ -18,7 +18,7 @@ class EditCustomZikerPopup extends StatefulWidget {
     required this.zikr,
     required this.isSelected,
   });
-  final Zikr zikr;
+  final ZikrEntity zikr;
   final bool isSelected;
 
   @override
@@ -140,13 +140,11 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
 
             // If it was selected, reset to a default zikr (ID 1)
             if (widget.isSelected) {
-              context.read<CounterCubit>().setCurrentZikr(1);
+              context.read<UpdateCurrentZikrCubit>().executeUpdate(1);
             }
 
             // Delete associated records
-            context
-                .read<AzkarRecordsCubit>()
-                .deleteZikrRecordById(widget.zikr.id);
+            context.read<DeleteZikrRecordCubit>().executeDelete(widget.zikr.id);
 
             Navigator.of(context).pop(); // Close dialog
             Navigator.of(context).pop(); // Close popup

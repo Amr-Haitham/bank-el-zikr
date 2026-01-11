@@ -7,8 +7,8 @@ import 'package:bank_el_ziker/features/situational_azkar/presentation/cubit/situ
 import 'situations_azkar_screen.dart';
 
 @RoutePage()
-class SituationsAzkarRoute extends StatelessWidget {
-  const SituationsAzkarRoute({super.key});
+class SituationsAzkarPage extends StatelessWidget {
+  const SituationsAzkarPage({super.key});
 
   @override
   Widget build(BuildContext context) {

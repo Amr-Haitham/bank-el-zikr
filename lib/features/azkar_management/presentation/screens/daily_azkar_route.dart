@@ -7,13 +7,13 @@ import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_a
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'azkar_screen.dart';
 
 @RoutePage()
-class DailyAzkarRoute extends StatelessWidget {
-  const DailyAzkarRoute({super.key});
+class DailyAzkarPage extends StatelessWidget {
+  const DailyAzkarPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +23,9 @@ class DailyAzkarRoute extends StatelessWidget {
         BlocProvider(create: (context) => getService<AddCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<UpdateCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<DeleteCustomZikrCubit>()),
-        BlocProvider(create: (context) => getService<CounterCubit>()),
-        BlocProvider(create: (context) => getService<AzkarRecordsCubit>()),
+        BlocProvider(create: (context) => getService<GetCounterStateCubit>()),
+        BlocProvider(
+            create: (context) => getService<GetWeekAzkarRecordsCubit>()),
       ],
       child: const AzkarScreen(),
     );

@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class Prayer extends Equatable {
+class PrayerEntity extends Equatable {
   final int id;
   final String content;
 
-  const Prayer({
+  const PrayerEntity({
     required this.id,
     required this.content,
   });

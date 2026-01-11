@@ -4,16 +4,17 @@ import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_a
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_current_zikr_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'sub_screens/adding_new_ziker_popup.dart';
 import 'sub_screens/edit_custom_ziker_popup.dart';
 
@@ -105,7 +106,8 @@ class AzkarScreen extends StatelessWidget {
                   child: SizedBox(height: 52),
                 ),
                 // Main content: Counter state + Azkar list
-                BlocBuilder<CounterCubit, RequestState<CounterState>>(
+                BlocBuilder<GetCounterStateCubit,
+                    RequestState<CounterStateEntity>>(
                   builder: (context, counterState) {
                     return counterState.when(
                       initial: () => const SliverToBoxAdapter(
@@ -118,7 +120,7 @@ class AzkarScreen extends StatelessWidget {
                         final selectedZikrId = counter.currentZikrId;
 
                         return BlocBuilder<GetAllAzkarCubit,
-                            RequestState<List<Zikr>>>(
+                            RequestState<List<ZikrEntity>>>(
                           builder: (context, azkarState) {
                             return azkarState.when(
                               initial: () => const SliverToBoxAdapter(
@@ -137,8 +139,8 @@ class AzkarScreen extends StatelessWidget {
                                       index: index,
                                       onTap: () {
                                         context
-                                            .read<CounterCubit>()
-                                            .setCurrentZikr(azkar[index].id);
+                                            .read<UpdateCurrentZikrCubit>()
+                                            .executeUpdate(azkar[index].id);
                                         Navigator.pop(context);
                                       },
                                       zikr: azkar[index],
@@ -192,7 +194,7 @@ class ListTileOfZikr extends StatelessWidget {
   });
 
   final bool isSelected;
-  final Zikr zikr;
+  final ZikrEntity zikr;
   final int index;
   final Function() onTap;
 
@@ -243,10 +245,11 @@ class ListTileOfZikr extends StatelessWidget {
                                         value: context
                                             .read<DeleteCustomZikrCubit>()),
                                     BlocProvider.value(
-                                        value: context.read<CounterCubit>()),
+                                        value: context
+                                            .read<UpdateCurrentZikrCubit>()),
                                     BlocProvider.value(
-                                        value:
-                                            context.read<AzkarRecordsCubit>()),
+                                        value: context
+                                            .read<DeleteZikrRecordCubit>()),
                                   ],
                                   child: EditCustomZikerPopup(
                                     zikr: zikr,

@@ -1,6 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
@@ -8,10 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vibration/vibration.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/zikr_repetition_count_circle.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_repetition_count_circle.dart';
 
 class MorningOrNightZikrContentScreen extends StatefulWidget {
-  final List<MorningNightZikr> azkar;
+  final List<MorningNightZikrEntity> azkar;
   final bool isMorningZikr;
   final int index;
   const MorningOrNightZikrContentScreen(
@@ -158,7 +158,7 @@ class _MorningOrNightZikrContentScreenState
     );
   }
 
-  Widget zikrContainer({required MorningNightZikr morningOrNightZikr}) {
+  Widget zikrContainer({required MorningNightZikrEntity morningOrNightZikr}) {
     // MorningOrNightZikr currentMorningOrNightZikr = morningOrNightAzkarList
     //     .firstWhere((zikr) => zikr.id.toInt() == currentZikrIndex);
 

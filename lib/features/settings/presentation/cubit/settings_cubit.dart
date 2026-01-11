@@ -1,5 +1,5 @@
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/core/usecases/usecase.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/domain/usecases/get_settings.dart';
 import 'package:bank_el_ziker/features/settings/domain/usecases/update_settings.dart';

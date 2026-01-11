@@ -2,7 +2,7 @@ import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morni
 import 'package:flutter/material.dart';
 
 class MorningOrNightZikrListTile extends StatelessWidget {
-  final MorningNightZikr zikr;
+  final MorningNightZikrEntity zikr;
   final bool isMorningZiker;
   final Widget? trailing;
   final Function() onTap;

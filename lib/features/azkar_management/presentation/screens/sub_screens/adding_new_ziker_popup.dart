@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/core/presentation/widgets/custom_app_text_field.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
@@ -85,8 +85,8 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
           return;
         }
 
-        // Create new Zikr entity
-        final newZikr = Zikr(
+        // Create new ZikrEntity entity
+        final newZikr = ZikrEntity(
           id: 0, // Will be assigned by repository
           content: newZikerController.text.trim(),
           description: newZikrDescription.text.trim().isNotEmpty

@@ -1,15 +1,11 @@
-import '../../../../core/presentation/request_cubit/request_cubit.dart';
-import '../../../../core/usecases/usecase.dart';
-import '../../domain/entities/day_zikr_record.dart';
-import '../../domain/usecases/fix_and_increment_record.dart';
-import '../../domain/usecases/get_week_azkar_records.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/usecases/get_week_azkar_records.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 
-/// Cubit for managing azkar records using RequestCubit pattern with Freezed
-/// Replaces the old SetAzkarRecordsCubit and GetWeekAzkarRecordCubit
-///
-/// This cubit manages the 7-day sliding window of zikr records and handles
-/// incrementing counts for individual azkar
-class AzkarRecordsCubit extends RequestCubit<List<DayZikrRecord>> {
+/// Cubit for managing azkar records across a week
+class AzkarRecordsCubit extends RequestCubit<WeekAzkarRecord> {
   final GetWeekAzkarRecords getWeekAzkarRecords;
   final FixAndIncrementRecord fixAndIncrementRecord;
 
@@ -18,18 +14,23 @@ class AzkarRecordsCubit extends RequestCubit<List<DayZikrRecord>> {
     required this.fixAndIncrementRecord,
   }) : super(
           callOnCreate: false, // Don't auto-load on creation
-          request: () => getWeekAzkarRecords(const NoParams()),
+          request: () async {
+            final result = await getWeekAzkarRecords(const NoParams());
+            return result.map((list) => WeekAzkarRecord.fromDailyRecords(list));
+          },
         );
 
-  /// Load the azkar records (can also call execute() directly)
+  /// Load the azkar records
   Future<void> loadRecords() async {
-    await execute(request: () => getWeekAzkarRecords(const NoParams()));
+    await execute(
+      request: () async {
+        final result = await getWeekAzkarRecords(const NoParams());
+        return result.map((list) => WeekAzkarRecord.fromDailyRecords(list));
+      },
+    );
   }
 
   /// Fix records to maintain 7-day window and optionally increment a zikr's count
-  /// After fixing/incrementing, reload the records to show updated data
-  ///
-  /// [zikrId] - The ID of the zikr to increment. If null, just fix records without incrementing
   Future<void> fixAndIncrementRecordById(int? zikrId) async {
     final result = await fixAndIncrementRecord(
       FixAndIncrementRecordParams(zikrId: zikrId),
@@ -37,7 +38,7 @@ class AzkarRecordsCubit extends RequestCubit<List<DayZikrRecord>> {
 
     result.fold(
       (failure) => null,
-      (_) => reExecutePastRequest(), // Reload after successful fix/increment
+      (_) => loadRecords(), // Reload after successful fix/increment
     );
   }
 
@@ -48,7 +49,7 @@ class AzkarRecordsCubit extends RequestCubit<List<DayZikrRecord>> {
 
     result.fold(
       (failure) => null,
-      (_) => reExecutePastRequest(), // Reload after successful deletion
+      (_) => loadRecords(), // Reload after successful deletion
     );
   }
 }

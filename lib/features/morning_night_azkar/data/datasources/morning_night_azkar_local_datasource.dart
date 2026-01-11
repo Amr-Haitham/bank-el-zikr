@@ -2,14 +2,14 @@ import 'package:bank_el_ziker/features/morning_night_azkar/data/models/morning_n
 import 'package:hive/hive.dart';
 
 abstract class MorningNightAzkarLocalDataSource {
-  Future<List<MorningNightZikrModel>> getMorningAzkar();
-  Future<List<MorningNightZikrModel>> getNightAzkar();
+  Future<List<MorningOrNightZikr>> getMorningAzkar();
+  Future<List<MorningOrNightZikr>> getNightAzkar();
 }
 
 class MorningNightAzkarLocalDataSourceImpl
     implements MorningNightAzkarLocalDataSource {
-  final Box<MorningNightZikrModel> morningAzkarBox;
-  final Box<MorningNightZikrModel> nightAzkarBox;
+  final Box<MorningOrNightZikr> morningAzkarBox;
+  final Box<MorningOrNightZikr> nightAzkarBox;
 
   MorningNightAzkarLocalDataSourceImpl({
     required this.morningAzkarBox,
@@ -17,12 +17,12 @@ class MorningNightAzkarLocalDataSourceImpl
   });
 
   @override
-  Future<List<MorningNightZikrModel>> getMorningAzkar() async {
+  Future<List<MorningOrNightZikr>> getMorningAzkar() async {
     return morningAzkarBox.values.toList();
   }
 
   @override
-  Future<List<MorningNightZikrModel>> getNightAzkar() async {
+  Future<List<MorningOrNightZikr>> getNightAzkar() async {
     return nightAzkarBox.values.toList();
   }
 }

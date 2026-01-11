@@ -10,7 +10,7 @@
 part of 'app_router.dart';
 
 /// generated route for
-/// [AccountBalanceRoute]
+/// [AccountBalancePage]
 class AccountBalanceRoute extends PageRouteInfo<void> {
   const AccountBalanceRoute({List<PageRouteInfo>? children})
       : super(
@@ -23,13 +23,13 @@ class AccountBalanceRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AccountBalanceRoute();
+      return const AccountBalancePage();
     },
   );
 }
 
 /// generated route for
-/// [AzkarRoute]
+/// [AzkarPage]
 class AzkarRoute extends PageRouteInfo<void> {
   const AzkarRoute({List<PageRouteInfo>? children})
       : super(
@@ -42,13 +42,13 @@ class AzkarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AzkarRoute();
+      return const AzkarPage();
     },
   );
 }
 
 /// generated route for
-/// [DailyAzkarRoute]
+/// [DailyAzkarPage]
 class DailyAzkarRoute extends PageRouteInfo<void> {
   const DailyAzkarRoute({List<PageRouteInfo>? children})
       : super(
@@ -61,13 +61,13 @@ class DailyAzkarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const DailyAzkarRoute();
+      return const DailyAzkarPage();
     },
   );
 }
 
 /// generated route for
-/// [HomeRoute]
+/// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
       : super(
@@ -80,13 +80,13 @@ class HomeRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const HomeRoute();
+      return const HomePage();
     },
   );
 }
 
 /// generated route for
-/// [MorningAzkarRoute]
+/// [MorningAzkarPage]
 class MorningAzkarRoute extends PageRouteInfo<void> {
   const MorningAzkarRoute({List<PageRouteInfo>? children})
       : super(
@@ -99,13 +99,13 @@ class MorningAzkarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const MorningAzkarRoute();
+      return const MorningAzkarPage();
     },
   );
 }
 
 /// generated route for
-/// [NightAzkarRoute]
+/// [NightAzkarPage]
 class NightAzkarRoute extends PageRouteInfo<void> {
   const NightAzkarRoute({List<PageRouteInfo>? children})
       : super(
@@ -118,13 +118,13 @@ class NightAzkarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const NightAzkarRoute();
+      return const NightAzkarPage();
     },
   );
 }
 
 /// generated route for
-/// [SettingsRoute]
+/// [SettingsPage]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})
       : super(
@@ -137,13 +137,13 @@ class SettingsRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SettingsRoute();
+      return const SettingsPage();
     },
   );
 }
 
 /// generated route for
-/// [SituationsAzkarRoute]
+/// [SituationsAzkarPage]
 class SituationsAzkarRoute extends PageRouteInfo<void> {
   const SituationsAzkarRoute({List<PageRouteInfo>? children})
       : super(
@@ -156,13 +156,13 @@ class SituationsAzkarRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const SituationsAzkarRoute();
+      return const SituationsAzkarPage();
     },
   );
 }
 
 /// generated route for
-/// [TasbeehWerdRoute]
+/// [TasbeehWerdPage]
 class TasbeehWerdRoute extends PageRouteInfo<void> {
   const TasbeehWerdRoute({List<PageRouteInfo>? children})
       : super(
@@ -175,17 +175,17 @@ class TasbeehWerdRoute extends PageRouteInfo<void> {
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const TasbeehWerdRoute();
+      return const TasbeehWerdPage();
     },
   );
 }
 
 /// generated route for
-/// [ZikrContentRoute]
+/// [ZikrContentPage]
 class ZikrContentRoute extends PageRouteInfo<ZikrContentRouteArgs> {
   ZikrContentRoute({
     Key? key,
-    required Zikr zikr,
+    required ZikrEntity zikr,
     List<PageRouteInfo>? children,
   }) : super(
           ZikrContentRoute.name,
@@ -202,7 +202,7 @@ class ZikrContentRoute extends PageRouteInfo<ZikrContentRouteArgs> {
     name,
     builder: (data) {
       final args = data.argsAs<ZikrContentRouteArgs>();
-      return ZikrContentRoute(
+      return ZikrContentPage(
         key: args.key,
         zikr: args.zikr,
       );
@@ -218,7 +218,7 @@ class ZikrContentRouteArgs {
 
   final Key? key;
 
-  final Zikr zikr;
+  final ZikrEntity zikr;
 
   @override
   String toString() {

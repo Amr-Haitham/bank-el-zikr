@@ -1,5 +1,5 @@
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
-import 'package:bank_el_ziker/core/usecases/usecase.dart';
+import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/situational_azkar/domain/entities/situational_azkar_favorites.dart';
 import 'package:bank_el_ziker/features/situational_azkar/domain/repositories/situational_azkar_repository.dart';
 

@@ -6,27 +6,27 @@ part of 'morning_night_zikr_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MorningNightZikrModelAdapter extends TypeAdapter<MorningNightZikrModel> {
+class MorningOrNightZikrAdapter extends TypeAdapter<MorningOrNightZikr> {
   @override
   final int typeId = 3;
 
   @override
-  MorningNightZikrModel read(BinaryReader reader) {
+  MorningOrNightZikr read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return MorningNightZikrModel(
+    return MorningOrNightZikr(
       id: fields[0] as int,
-      title: fields[1] as String?,
       content: fields[2] as String,
+      title: fields[1] as String?,
       count: fields[3] as int,
       favor: fields[4] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, MorningNightZikrModel obj) {
+  void write(BinaryWriter writer, MorningOrNightZikr obj) {
     writer
       ..writeByte(5)
       ..writeByte(0)
@@ -47,7 +47,7 @@ class MorningNightZikrModelAdapter extends TypeAdapter<MorningNightZikrModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MorningNightZikrModelAdapter &&
+      other is MorningOrNightZikrAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

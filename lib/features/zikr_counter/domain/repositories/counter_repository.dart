@@ -5,7 +5,7 @@ import '../entities/counter_state.dart';
 /// This defines the contract that the data layer must implement
 abstract class CounterRepository {
   /// Get the current counter state
-  Future<RequestResult<CounterState>> getCounterState();
+  Future<RequestResult<CounterStateEntity>> getCounterState();
 
   /// Update the counter value
   Future<RequestResult<void>> updateCounter(int counter);

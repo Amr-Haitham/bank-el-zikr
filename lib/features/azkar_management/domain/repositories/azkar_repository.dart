@@ -2,14 +2,14 @@ import '../../../../core/constants/type_definitions.dart';
 import '../entities/zikr.dart';
 
 abstract class AzkarRepository {
-  /// Get all azkar (both default and custom)
-  Future<RequestResult<List<Zikr>>> getAllAzkar();
+  /// Get all azkar
+  Future<RequestResult<List<ZikrEntity>>> getAllAzkar();
 
-  /// Add a new custom zikr
-  Future<RequestResult<void>> addCustomZikr(Zikr zikr);
+  /// Add a custom zikr
+  Future<RequestResult<void>> addCustomZikr(ZikrEntity zikr);
 
-  /// Update an existing custom zikr
-  Future<RequestResult<void>> updateCustomZikr(Zikr zikr);
+  /// Update a custom zikr
+  Future<RequestResult<void>> updateCustomZikr(ZikrEntity zikr);
 
   /// Delete a custom zikr by ID
   Future<RequestResult<void>> deleteCustomZikr(int id);

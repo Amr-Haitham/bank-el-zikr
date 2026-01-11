@@ -1,5 +1,5 @@
 import '../../../../core/constants/type_definitions.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../entities/zikr.dart';
 import '../repositories/azkar_repository.dart';
 
@@ -15,7 +15,7 @@ class AddCustomZikr implements UseCase<void, AddCustomZikrParams> {
 }
 
 class AddCustomZikrParams {
-  final Zikr zikr;
+  final ZikrEntity zikr;
 
   AddCustomZikrParams({required this.zikr});
 }

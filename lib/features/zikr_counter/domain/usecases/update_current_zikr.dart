@@ -1,5 +1,5 @@
 import '../../../../core/constants/type_definitions.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../repositories/counter_repository.dart';
 
 /// Use case for updating the current active zikr

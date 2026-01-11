@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
-class MorningNightZikr extends Equatable {
+class MorningNightZikrEntity extends Equatable {
   final int id;
   final String? title;
   final String content;
   final int count;
   final String? favor;
 
-  const MorningNightZikr({
+  const MorningNightZikrEntity({
     required this.id,
     this.title,
     required this.content,

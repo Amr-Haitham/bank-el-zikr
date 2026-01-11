@@ -1,13 +1,14 @@
 import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/situational_zikr_list_tile.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:bank_el_ziker/app_router.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/situational_zikr_search_widget.dart';
+import 'package:auto_route/auto_route.dart';
 
 class SituationsAzkarScreen extends StatefulWidget {
   const SituationsAzkarScreen({super.key});
@@ -26,9 +27,9 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
 
   List<int> listOfFavIds = [];
   bool showFavourites = false;
-  List<Zikr> shownAzkar = [];
+  List<ZikrEntity> shownAzkar = [];
 
-  List<Zikr> allAzkar = [];
+  List<ZikrEntity> allAzkar = [];
 
   void updateListOfShownAzkarToFavAzkar() {
     setState(() {
@@ -57,10 +58,11 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
         updateListOfShownAzkarToAllAzkar();
       }
     } else {
-      List<Zikr> azkar = [];
+      List<ZikrEntity> azkar = [];
       azkar = allAzkar
-          .where((zikr) =>
-              zikr.title!.toLowerCase().contains(searchText.toLowerCase()))
+          .where((zikr) => (zikr.title ?? "")
+              .toLowerCase()
+              .contains(searchText.toLowerCase()))
           .toList();
 
       setState(() {
@@ -150,7 +152,8 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                   child: SizedBox(
                 height: 32,
               )),
-              BlocBuilder<SituationalAzkarCubit, RequestState<List<Zikr>>>(
+              BlocBuilder<SituationalAzkarCubit,
+                  RequestState<List<ZikrEntity>>>(
                 builder: (context, state) {
                   return state.when(
                     initial: () => const SliverToBoxAdapter(
@@ -194,16 +197,15 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                           },
                           itemCount: shownAzkar.length,
                           itemBuilder: (context, index) {
-                            final Zikr zikr = shownAzkar[index];
+                            final ZikrEntity zikr = shownAzkar[index];
                             return (showFavourites
                                     ? cubit.isFavorite(zikr.id)
                                     : true)
                                 ? SituationalZikrListTile(
                                     zikr: zikr,
                                     onTap: () {
-                                      Navigator.pushNamed(
-                                          context, zikrContentScreen,
-                                          arguments: zikr);
+                                      context.router
+                                          .push(ZikrContentRoute(zikr: zikr));
                                     },
                                     trailing: GestureDetector(
                                       onTap: () {
@@ -225,7 +227,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                                       ),
                                     ),
                                   )
-                                : null;
+                                : const SizedBox.shrink();
                           },
                         );
                       }

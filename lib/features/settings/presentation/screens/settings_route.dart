@@ -4,16 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:bank_el_ziker/features/settings/presentation/cubit/support_cubit.dart';
 import 'settings_screen.dart';
 
 @RoutePage()
-class SettingsRoute extends StatelessWidget {
-  const SettingsRoute({super.key});
+class SettingsPage extends StatelessWidget {
+  const SettingsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getService<SettingsCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getService<SettingsCubit>()),
+        BlocProvider(create: (context) => getService<SupportCubit>()),
+      ],
       child: const SettingsScreen(),
     );
   }

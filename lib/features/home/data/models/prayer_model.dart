@@ -1,30 +1,25 @@
 import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
-import 'package:hive/hive.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 part 'prayer_model.g.dart';
 
 @HiveType(typeId: 4)
-class PrayerModel extends HiveObject {
+class Prayer extends HiveObject {
   @HiveField(0)
   final int id;
-
   @HiveField(1)
   final String content;
 
-  PrayerModel({
-    required this.id,
-    required this.content,
-  });
+  Prayer({required this.id, required this.content});
 
-  Prayer toEntity() {
-    return Prayer(
+  PrayerEntity toEntity() {
+    return PrayerEntity(
       id: id,
       content: content,
     );
   }
 
-  factory PrayerModel.fromEntity(Prayer entity) {
-    return PrayerModel(
+  factory Prayer.fromEntity(PrayerEntity entity) {
+    return Prayer(
       id: entity.id,
       content: entity.content,
     );

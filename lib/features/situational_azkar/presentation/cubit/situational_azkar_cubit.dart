@@ -1,11 +1,11 @@
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/core/usecases/usecase.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/situational_azkar/domain/usecases/get_favorites.dart';
 import 'package:bank_el_ziker/features/situational_azkar/domain/usecases/get_situational_azkar.dart';
 import 'package:bank_el_ziker/features/situational_azkar/domain/usecases/toggle_favorite.dart';
 
-class SituationalAzkarCubit extends RequestCubit<List<Zikr>> {
+class SituationalAzkarCubit extends RequestCubit<List<ZikrEntity>> {
   final GetSituationalAzkar getSituationalAzkar;
   final GetFavorites getFavorites;
   final ToggleFavorite toggleFavorite;

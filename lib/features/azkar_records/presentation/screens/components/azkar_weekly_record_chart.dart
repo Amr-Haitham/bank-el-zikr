@@ -16,9 +16,9 @@ const Map<int, String> mapOfDays = {
 };
 
 class LineChartForDayRecords extends StatelessWidget {
-  final List<DayZikrRecord> records;
+  final List<DayZikrRecordEntity> records;
 
-  int _calculateAllDayAzkarRecord(DayZikrRecord dayZikrRecord) {
+  int _calculateAllDayAzkarRecord(DayZikrRecordEntity dayZikrRecord) {
     int total = 0;
     for (var singleZikrRecord in dayZikrRecord.azkarRecordById.values) {
       total += singleZikrRecord;
@@ -27,7 +27,7 @@ class LineChartForDayRecords extends StatelessWidget {
   }
 
   int _getMinOrMaxDayRecordInAWeekRecord(
-      {required List<DayZikrRecord> records, required bool isMin}) {
+      {required List<DayZikrRecordEntity> records, required bool isMin}) {
     int x;
     if (isMin) {
       x = _calculateAllDayAzkarRecord(records.first);
@@ -47,7 +47,7 @@ class LineChartForDayRecords extends StatelessWidget {
     return x;
   }
 
-  List<FlSpot> _generateLineChartBarDataSpots(List<DayZikrRecord> records) {
+  List<FlSpot> _generateLineChartBarDataSpots(List<DayZikrRecordEntity> records) {
     List<FlSpot> spots = [];
     int i = 0;
     for (var r in records.reversed) {
@@ -59,7 +59,7 @@ class LineChartForDayRecords extends StatelessWidget {
   }
 
   Widget customGetTitle(
-      context, double dayIndex, TitleMeta meta, List<DayZikrRecord> records) {
+      context, double dayIndex, TitleMeta meta, List<DayZikrRecordEntity> records) {
     return Padding(
       padding: const EdgeInsets.only(top: 12.0),
       child: Text(

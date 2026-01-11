@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/usecases/add_custom_zikr.dart';
 
@@ -15,7 +15,7 @@ class AddCustomZikrCubit extends RequestCubit<void> {
         );
 
   /// Add a new custom zikr
-  Future<void> addZikr(Zikr zikr) async {
+  Future<void> addZikr(ZikrEntity zikr) async {
     await execute(
       request: () => addCustomZikr(AddCustomZikrParams(zikr: zikr)),
     );

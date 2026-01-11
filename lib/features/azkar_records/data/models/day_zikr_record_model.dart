@@ -1,12 +1,14 @@
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_zikr_record.dart';
 import 'package:hive/hive.dart';
-import '../../domain/entities/day_zikr_record.dart';
-
 part 'day_zikr_record_model.g.dart';
 
-/// Data model for DayZikrRecord with Hive persistence
-/// Uses typeId: 1 for backward compatibility with old model
 @HiveType(typeId: 1)
-class DayZikrRecordModel extends HiveObject {
+class DayZikrRecord extends HiveObject {
+  DayZikrRecord({
+    required this.id,
+    required this.dateTime,
+    required this.azkarRecordById,
+  });
   @HiveField(0)
   String id;
 
@@ -16,27 +18,19 @@ class DayZikrRecordModel extends HiveObject {
   @HiveField(2)
   Map<int, int> azkarRecordById;
 
-  DayZikrRecordModel({
-    required this.id,
-    required this.dateTime,
-    required this.azkarRecordById,
-  });
-
-  /// Convert model to domain entity
-  DayZikrRecord toEntity() {
-    return DayZikrRecord(
+  DayZikrRecordEntity toEntity() {
+    return DayZikrRecordEntity(
       id: id,
       dateTime: dateTime,
-      azkarRecordById: azkarRecordById,
+      azkarRecordById: Map<int, int>.from(azkarRecordById),
     );
   }
 
-  /// Create model from domain entity
-  factory DayZikrRecordModel.fromEntity(DayZikrRecord entity) {
-    return DayZikrRecordModel(
+  factory DayZikrRecord.fromEntity(DayZikrRecordEntity entity) {
+    return DayZikrRecord(
       id: entity.id,
       dateTime: entity.dateTime,
-      azkarRecordById: entity.azkarRecordById,
+      azkarRecordById: Map<int, int>.from(entity.azkarRecordById),
     );
   }
 }

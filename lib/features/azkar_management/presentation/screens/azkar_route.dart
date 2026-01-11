@@ -12,8 +12,8 @@ import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_re
 import 'azkar_screen.dart';
 
 @RoutePage()
-class AzkarRoute extends StatelessWidget {
-  const AzkarRoute({super.key});
+class AzkarPage extends StatelessWidget {
+  const AzkarPage({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,28 +1,28 @@
 import 'package:hive/hive.dart';
-import '../models/zikr_model.dart';
+import 'package:bank_el_ziker/core/layers/data/models/zikr_model.dart';
 
 /// Abstract interface for azkar local data source
 abstract class AzkarLocalDataSource {
-  /// Get all default azkar
-  Future<List<ZikrModel>> getDefaultAzkar();
+  /// Get default azkar from local storage
+  Future<List<Zikr>> getDefaultAzkar();
 
-  /// Get all custom azkar
-  Future<List<ZikrModel>> getCustomAzkar();
+  /// Get custom azkar from local storage
+  Future<List<Zikr>> getCustomAzkar();
 
-  /// Add a custom zikr
-  Future<void> addCustomZikr(ZikrModel zikr);
+  /// Add a custom zikr to local storage
+  Future<void> addCustomZikr(Zikr zikr);
 
-  /// Update a custom zikr
-  Future<void> updateCustomZikr(ZikrModel zikr);
+  /// Update a custom zikr in local storage
+  Future<void> updateCustomZikr(Zikr zikr);
 
-  /// Delete a custom zikr by ID
+  /// Delete a custom zikr from local storage
   Future<void> deleteCustomZikr(int id);
 }
 
-/// Implementation using Hive
+/// Implementation of AzkarLocalDataSource using Hive
 class AzkarLocalDataSourceImpl implements AzkarLocalDataSource {
-  final Box<ZikrModel> defaultAzkarBox;
-  final Box<ZikrModel> customAzkarBox;
+  final Box<Zikr> defaultAzkarBox;
+  final Box<Zikr> customAzkarBox;
 
   AzkarLocalDataSourceImpl({
     required this.defaultAzkarBox,
@@ -30,38 +30,28 @@ class AzkarLocalDataSourceImpl implements AzkarLocalDataSource {
   });
 
   @override
-  Future<List<ZikrModel>> getDefaultAzkar() async {
+  Future<List<Zikr>> getDefaultAzkar() async {
     return defaultAzkarBox.values.toList();
   }
 
   @override
-  Future<List<ZikrModel>> getCustomAzkar() async {
+  Future<List<Zikr>> getCustomAzkar() async {
     return customAzkarBox.values.toList();
   }
 
   @override
-  Future<void> addCustomZikr(ZikrModel zikr) async {
-    await customAzkarBox.add(zikr);
+  Future<void> addCustomZikr(Zikr zikr) async {
+    // For custom azkar, we use the id as the key
+    await customAzkarBox.put(zikr.id, zikr);
   }
 
   @override
-  Future<void> updateCustomZikr(ZikrModel zikr) async {
-    // Find and update the zikr by ID
-    final index = customAzkarBox.values.toList().indexWhere((z) => z.id == zikr.id);
-    if (index != -1) {
-      await customAzkarBox.putAt(index, zikr);
-    } else {
-      throw Exception('Custom zikr with id ${zikr.id} not found');
-    }
+  Future<void> updateCustomZikr(Zikr zikr) async {
+    await customAzkarBox.put(zikr.id, zikr);
   }
 
   @override
   Future<void> deleteCustomZikr(int id) async {
-    final index = customAzkarBox.values.toList().indexWhere((z) => z.id == id);
-    if (index != -1) {
-      await customAzkarBox.deleteAt(index);
-    } else {
-      throw Exception('Custom zikr with id $id not found');
-    }
+    await customAzkarBox.delete(id);
   }
 }

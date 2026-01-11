@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 /// Domain entity representing the current state of the zikr counter
 /// This is a pure Dart class with no external dependencies
-class CounterState extends Equatable {
+class CounterStateEntity extends Equatable {
   final int currentZikrId;
   final int currentCounter;
   final int? currentGoal;
   final int accountBalance;
 
-  const CounterState({
+  const CounterStateEntity({
     required this.currentZikrId,
     required this.currentCounter,
     this.currentGoal,
@@ -16,13 +16,13 @@ class CounterState extends Equatable {
   });
 
   /// Creates a copy with updated fields
-  CounterState copyWith({
+  CounterStateEntity copyWith({
     int? currentZikrId,
     int? currentCounter,
     int? currentGoal,
     int? accountBalance,
   }) {
-    return CounterState(
+    return CounterStateEntity(
       currentZikrId: currentZikrId ?? this.currentZikrId,
       currentCounter: currentCounter ?? this.currentCounter,
       currentGoal: currentGoal ?? this.currentGoal,

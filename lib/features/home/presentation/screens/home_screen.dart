@@ -1,8 +1,8 @@
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/azkar_home_widgets.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/date_settings_welcome_widget.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/random_ziker_container.dart';
-import 'package:bank_el_ziker/1_ui/screens/home_screen/widgets/ziker_balance_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/azkar_home_widgets.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/date_settings_welcome_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/random_ziker_container.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/ziker_balance_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -16,11 +16,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget shareWithFriends() {
     return GestureDetector(
       onTap: () {
-        Share.share(ThirdPartyValues.appLink);
+        SharePlus.instance.share(ShareParams(text: ThirdPartyValues.appLink));
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

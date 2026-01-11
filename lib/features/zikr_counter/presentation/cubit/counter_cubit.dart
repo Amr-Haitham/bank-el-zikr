@@ -1,5 +1,5 @@
-import '../../../../core/presentation/request_cubit/request_cubit.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../core/layers/presentation/request_cubit/request_cubit.dart';
+import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../../domain/entities/counter_state.dart';
 import '../../domain/usecases/get_counter_state.dart';
 import '../../domain/usecases/get_current_zikr_id.dart';
@@ -10,7 +10,7 @@ import '../../domain/usecases/update_goal.dart';
 
 /// Cubit for managing zikr counter state using RequestCubit pattern with Freezed
 /// Replaces the old GetGeneralDataCubit, UpdateGeneralDataCubit, and GetCurrentZikrCubit
-class CounterCubit extends RequestCubit<CounterState> {
+class CounterCubit extends RequestCubit<CounterStateEntity> {
   final GetCounterState getCounterState;
   final GetCurrentZikrId getCurrentZikrId;
   final UpdateCounter updateCounter;
@@ -56,7 +56,8 @@ class CounterCubit extends RequestCubit<CounterState> {
 
   /// Update the current active zikr and reload state
   Future<void> setCurrentZikr(int zikrId) async {
-    final result = await updateCurrentZikr(UpdateCurrentZikrParams(zikrId: zikrId));
+    final result =
+        await updateCurrentZikr(UpdateCurrentZikrParams(zikrId: zikrId));
 
     result.fold(
       (failure) => null,

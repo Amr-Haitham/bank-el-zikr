@@ -2,7 +2,7 @@ import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dar
 import 'package:flutter/material.dart';
 
 class SituationalZikrListTile extends StatelessWidget {
-  final Zikr zikr;
+  final ZikrEntity zikr;
   final Widget? trailing;
   final Function() onTap;
   const SituationalZikrListTile(

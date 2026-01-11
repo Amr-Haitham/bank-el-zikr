@@ -1,35 +1,29 @@
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
-import 'package:hive/hive.dart';
-
+import 'package:hive_flutter/hive_flutter.dart';
 part 'morning_night_zikr_model.g.dart';
 
 @HiveType(typeId: 3)
-class MorningNightZikrModel extends HiveObject {
+class MorningOrNightZikr extends HiveObject {
   @HiveField(0)
   final int id;
-
   @HiveField(1)
   final String? title;
-
   @HiveField(2)
   final String content;
-
   @HiveField(3)
   final int count;
-
   @HiveField(4)
   final String? favor;
 
-  MorningNightZikrModel({
-    required this.id,
-    this.title,
-    required this.content,
-    required this.count,
-    this.favor,
-  });
+  MorningOrNightZikr(
+      {required this.id,
+      required this.content,
+      this.title,
+      required this.count,
+      required this.favor});
 
-  MorningNightZikr toEntity() {
-    return MorningNightZikr(
+  MorningNightZikrEntity toEntity() {
+    return MorningNightZikrEntity(
       id: id,
       title: title,
       content: content,
@@ -38,8 +32,8 @@ class MorningNightZikrModel extends HiveObject {
     );
   }
 
-  factory MorningNightZikrModel.fromEntity(MorningNightZikr entity) {
-    return MorningNightZikrModel(
+  factory MorningOrNightZikr.fromEntity(MorningNightZikrEntity entity) {
+    return MorningOrNightZikr(
       id: entity.id,
       title: entity.title,
       content: entity.content,

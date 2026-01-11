@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import '../../../../core/constants/type_definitions.dart';
-import '../../../../core/usecases/usecase.dart';
+import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../repositories/counter_repository.dart';
 
 /// Use case for getting just the current zikr ID

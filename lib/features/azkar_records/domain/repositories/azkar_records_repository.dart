@@ -3,10 +3,11 @@ import '../entities/day_zikr_record.dart';
 
 abstract class AzkarRecordsRepository {
   /// Get all azkar records (7-day window)
-  Future<RequestResult<List<DayZikrRecord>>> getAllRecords();
+  Future<RequestResult<List<DayZikrRecordEntity>>> getAllRecords();
 
   /// Update all records (used after fixing/maintaining 7-day window)
-  Future<RequestResult<void>> updateAllRecords(List<DayZikrRecord> records);
+  Future<RequestResult<void>> updateAllRecords(
+      List<DayZikrRecordEntity> records);
 
   /// Increment a specific zikr's count for today
   Future<RequestResult<void>> incrementZikrRecord(int zikrId);

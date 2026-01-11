@@ -1,17 +1,16 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/images_urls.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/utils/screen_utils.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../../../4_utility_functions/screen_utils.dart';
-import '../../../../app_router.dart';
-import '../../../core/consts/text_styles.dart';
 
 class ZikerBalanceWidget extends StatelessWidget {
   const ZikerBalanceWidget({super.key});
@@ -20,7 +19,7 @@ class ZikerBalanceWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).pushNamed(accountBalanceUrl);
+        AutoRouter.of(context).push(const AccountBalanceRoute());
       },
       child: Container(
         height: ScreenUtils.getScreenHeight(context) / 6,
@@ -63,7 +62,8 @@ class ZikerBalanceWidget extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  BlocBuilder<CounterCubit, RequestState<CounterState>>(
+                  BlocBuilder<GetCounterStateCubit,
+                      RequestState<CounterStateEntity>>(
                     builder: (context, state) {
                       return state.when(
                         initial: () => const Center(
@@ -89,12 +89,10 @@ class ZikerBalanceWidget extends StatelessWidget {
                           );
                         },
                         failure: (failure) {
-                          return AutoSizeText(
+                          return const AutoSizeText(
                             "Error",
                             maxLines: 1,
                             textAlign: TextAlign.right,
-                            style: cairoTextStyle(
-                                19, FontWeight.w800, null, Colors.white),
                           );
                         },
                       );

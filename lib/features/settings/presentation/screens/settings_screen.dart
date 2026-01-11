@@ -1,7 +1,11 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:bank_el_ziker/core/presentation/widgets/title_with_back_button.dart';
-import 'package:bank_el_ziker/core/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_button.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:bank_el_ziker/features/settings/presentation/cubit/support_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -80,20 +84,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   const SizedBox(
                     height: 48,
                   ),
-                  // TODO: Re-enable after migrating CharityFundsPaypalCubit
-                  // CustomAppButton(
-                  //   onPressed: () {
-                  //     BlocProvider.of<CharityFundsPaypalCubit>(context)
-                  //         .launchCharityLink();
-                  //   },
-                  //   text: "دعم التطبيق",
-                  //   trailing: Icon(
-                  //     Icons.arrow_back_ios,
-                  //     color: GeneralUtils.isLightTheme(context)
-                  //         ? appWhite
-                  //         : appDark,
-                  //   ),
-                  // ),
+                  CustomAppButton(
+                    onPressed: () {
+                      context.read<SupportCubit>().launchCharityLink();
+                    },
+                    text: "دعم التطبيق",
+                    trailing: Icon(
+                      Icons.arrow_back_ios,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appWhite
+                          : appWhite, // Fixed to appWhite for both or adjust as needed
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomAppButton(
+                    onPressed: () {
+                      context.read<SupportCubit>().launchEmail();
+                    },
+                    text: "تواصل معنا",
+                    trailing: Icon(
+                      Icons.email_outlined,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appWhite
+                          : appWhite,
+                    ),
+                  ),
                 ],
               ),
             ),
