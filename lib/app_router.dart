@@ -24,6 +24,10 @@ import '2_state_management/general_data/get_current_zikr/get_current_zikr_cubit.
 import '2_state_management/get_all_morning_or_night_azkar_cubit/get_all_morning_or_night_azkar_cubit.dart';
 import '3_data/models/zikr.dart';
 
+// Clean Architecture imports
+import 'core/di/service_locator.dart';
+import 'features/zikr_counter/presentation/cubit/counter_cubit.dart';
+
 const welcomeScreenUrl = "welcomScreen";
 const homeScreen = "/";
 const azkarScreenUrl = "/azkarScreenUrl";

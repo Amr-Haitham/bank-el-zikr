@@ -1,44 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'zikr.dart';
+part of 'counter_state_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ZikrAdapter extends TypeAdapter<Zikr> {
+class CounterStateModelAdapter extends TypeAdapter<CounterStateModel> {
   @override
-  final int typeId = 0;
+  final int typeId = 2;
 
   @override
-  Zikr read(BinaryReader reader) {
+  CounterStateModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Zikr(
-      id: fields[0] as int,
-      content: fields[1] as String,
-      description: fields[3] as String?,
-      title: fields[2] as String?,
-      isCustomZikr: fields[4] as bool?,
+    return CounterStateModel(
+      currentZikrId: fields[0] as int,
+      currentCounter: fields[1] as int,
+      currentGoal: fields[2] as int?,
+      accountBalance: fields[3] as int,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Zikr obj) {
+  void write(BinaryWriter writer, CounterStateModel obj) {
     writer
-      ..writeByte(5)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.content)
-      ..writeByte(2)
-      ..write(obj.title)
-      ..writeByte(3)
-      ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.isCustomZikr);
+      ..writeByte(0)
+      ..write(obj.currentZikrId)
+      ..writeByte(1)
+      ..write(obj.currentCounter)
+      ..writeByte(2)
+      ..write(obj.currentGoal)
+      ..writeByte(3)
+      ..write(obj.accountBalance);
   }
 
   @override
@@ -47,7 +44,7 @@ class ZikrAdapter extends TypeAdapter<Zikr> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ZikrAdapter &&
+      other is CounterStateModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

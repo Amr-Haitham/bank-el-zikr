@@ -7,20 +7,6 @@ part of 'day_zikr_record.dart';
 // **************************************************************************
 
 class DayZikrRecordAdapter extends TypeAdapter<DayZikrRecord> {
-  Map<int, int> _convertToIntIntMap(Map<dynamic, dynamic> input) {
-    Map<int, int> result = {};
-
-    input.forEach((key, value) {
-      // Convert keys and values to int if possible
-      if (key is int && value is int) {
-        result[key] = value;
-      } else if (key is String && int.tryParse(key) != null && value is int) {
-        result[int.parse(key)] = value;
-      }
-    });
-    return result;
-  }
-
   @override
   final int typeId = 1;
 
@@ -30,11 +16,10 @@ class DayZikrRecordAdapter extends TypeAdapter<DayZikrRecord> {
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    
     return DayZikrRecord(
       id: fields[0] as String,
       dateTime: fields[1] as DateTime,
-      azkarRecordById: _convertToIntIntMap(fields[2]),
+      azkarRecordById: (fields[2] as Map).cast<int, int>(),
     );
   }
 

@@ -17,8 +17,7 @@ class GeneralDataAdapter extends TypeAdapter<GeneralData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GeneralData(
-      currentZikrId:
-          fields[0].runtimeType == String ? int.parse(fields[0]) : fields[0],
+      currentZikrId: fields[0] as int,
       currentCounter: fields[1] as int,
       currentGoal: fields[2] as int?,
       accountBalance: fields[3] as int,

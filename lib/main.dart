@@ -1,7 +1,7 @@
 import 'package:bank_el_ziker/1_ui/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/2_state_management/settings/get_settings_cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/3_data/services/hive_db.dart';
-import 'package:bank_el_ziker/app_router.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -61,11 +61,12 @@ class _MyAppState extends State<MyApp> {
           }
         }
       },
-      child: MaterialApp(
-          locale: const Locale("ar"),
-          theme: isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme,
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: widget.appRouter.generateRouter),
+      child: MaterialApp.router(
+        locale: const Locale("ar"),
+        theme: isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme,
+        debugShowCheckedModeBanner: false,
+        routerConfig: widget.appRouter.config(),
+      ),
     );
   }
 }
