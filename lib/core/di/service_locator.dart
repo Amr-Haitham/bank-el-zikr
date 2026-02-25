@@ -19,6 +19,7 @@ import '../../features/zikr_counter/presentation/cubit/update_current_zikr_cubit
 import '../../features/zikr_counter/presentation/cubit/update_goal_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/increment_balance_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/get_current_zikr_id_cubit.dart';
+import '../../features/zikr_counter/presentation/cubit/counter_cubit.dart';
 
 // azkar_management imports
 import '../../features/azkar_management/data/datasources/azkar_local_datasource.dart';
@@ -45,6 +46,7 @@ import '../../features/azkar_records/domain/usecases/delete_zikr_record.dart';
 import '../../features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import '../../features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
 import '../../features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
+import '../../features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
 
 // morning_night_azkar imports
 import '../../features/morning_night_azkar/data/datasources/morning_night_azkar_local_datasource.dart';
@@ -55,6 +57,7 @@ import '../../features/morning_night_azkar/domain/usecases/get_morning_azkar.dar
 import '../../features/morning_night_azkar/domain/usecases/get_night_azkar.dart';
 import '../../features/morning_night_azkar/presentation/cubit/get_morning_azkar_cubit.dart';
 import '../../features/morning_night_azkar/presentation/cubit/get_night_azkar_cubit.dart';
+import '../../features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
 
 // situational_azkar imports
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,6 +70,7 @@ import '../../features/situational_azkar/domain/usecases/toggle_favorite.dart';
 import '../../features/situational_azkar/presentation/cubit/get_situational_azkar_cubit.dart';
 import '../../features/situational_azkar/presentation/cubit/get_favorites_cubit.dart';
 import '../../features/situational_azkar/presentation/cubit/toggle_favorite_cubit.dart';
+import '../../features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
 
 // settings imports
 import '../../features/settings/data/datasources/settings_local_datasource.dart';
@@ -239,6 +243,16 @@ void _setUpZikrCounterUseCases() {
 }
 
 void _setUpZikrCounterBlocs() {
+  _getIt.registerFactory<CounterCubit>(
+    () => CounterCubit(
+      getCounterState: getService<GetCounterState>(),
+      getCurrentZikrId: getService<GetCurrentZikrId>(),
+      updateCounter: getService<UpdateCounter>(),
+      updateCurrentZikr: getService<UpdateCurrentZikr>(),
+      updateGoal: getService<UpdateGoal>(),
+      incrementBalance: getService<IncrementBalance>(),
+    ),
+  );
   _getIt.registerFactory<GetCounterStateCubit>(
     () => GetCounterStateCubit(getCounterState: getService<GetCounterState>()),
   );
@@ -354,6 +368,12 @@ void _setUpAzkarRecordsUseCases() {
 }
 
 void _setUpAzkarRecordsBlocs() {
+  _getIt.registerFactory<AzkarRecordsCubit>(
+    () => AzkarRecordsCubit(
+      getWeekAzkarRecords: getService<GetWeekAzkarRecords>(),
+      fixAndIncrementRecord: getService<FixAndIncrementRecord>(),
+    ),
+  );
   _getIt.registerFactory<GetWeekAzkarRecordsCubit>(
     () => GetWeekAzkarRecordsCubit(
         getWeekAzkarRecords: getService<GetWeekAzkarRecords>()),
@@ -401,6 +421,12 @@ void _setUpMorningNightAzkarUseCases() {
 }
 
 void _setUpMorningNightAzkarBlocs() {
+  _getIt.registerFactory<MorningNightAzkarCubit>(
+    () => MorningNightAzkarCubit(
+      getMorningAzkar: getService<GetMorningAzkar>(),
+      getNightAzkar: getService<GetNightAzkar>(),
+    ),
+  );
   _getIt.registerFactory<GetMorningAzkarCubit>(
     () => GetMorningAzkarCubit(getMorningAzkar: getService<GetMorningAzkar>()),
   );
@@ -443,6 +469,13 @@ void _setUpSituationalAzkarUseCases() {
 }
 
 void _setUpSituationalAzkarBlocs() {
+  _getIt.registerFactory<SituationalAzkarCubit>(
+    () => SituationalAzkarCubit(
+      getSituationalAzkar: getService<GetSituationalAzkar>(),
+      getFavorites: getService<GetFavorites>(),
+      toggleFavorite: getService<ToggleFavorite>(),
+    ),
+  );
   _getIt.registerFactory<GetSituationalAzkarCubit>(
     () => GetSituationalAzkarCubit(
         getSituationalAzkar: getService<GetSituationalAzkar>()),
