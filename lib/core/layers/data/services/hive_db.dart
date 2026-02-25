@@ -42,6 +42,7 @@ class HiveDB {
 
   Future<void> setupInitHiveDbDataIfNonExisting() async {
     var zikrBox = await openAndGetBox<Zikr>(boxName: zikrHiveBox);
+    await openAndGetBox<Zikr>(boxName: customAzkarHiveBox);
     var generalDataBox =
         await openAndGetBox<GeneralData>(boxName: generalDataHiveBox);
     var dayZikrRecordBox =

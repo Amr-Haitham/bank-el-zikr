@@ -76,6 +76,7 @@ import '../../features/settings/domain/usecases/get_settings.dart';
 import '../../features/settings/domain/usecases/update_settings.dart';
 import '../../features/settings/presentation/cubit/get_settings_cubit.dart';
 import '../../features/settings/presentation/cubit/update_settings_cubit.dart';
+import '../../features/settings/presentation/cubit/settings_cubit.dart';
 import '../../features/settings/presentation/cubit/support_cubit.dart';
 
 // home imports
@@ -484,6 +485,12 @@ void _setUpSettingsUseCases() {
 }
 
 void _setUpSettingsBlocs() {
+  _getIt.registerFactory<SettingsCubit>(
+    () => SettingsCubit(
+      getSettings: getService<GetSettings>(),
+      updateSettings: getService<UpdateSettings>(),
+    ),
+  );
   _getIt.registerFactory<GetSettingsCubit>(
     () => GetSettingsCubit(getSettings: getService<GetSettings>()),
   );
