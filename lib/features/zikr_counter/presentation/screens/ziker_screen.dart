@@ -9,10 +9,7 @@ import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_b
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_counter_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_goal_cubit.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/increment_balance_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
@@ -63,17 +60,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
   void _handleIncrement(CounterStateEntity counterState, bool isVibrating) {
     final newCounter = counterState.currentCounter + 1;
 
-    // 1. Update session counter
-    context.read<UpdateCounterCubit>().executeUpdate(newCounter);
-
-    // 2. Increment global balance
-    context.read<IncrementBalanceCubit>().executeIncrement();
-
-    // 3. Increment daily record
-    context.read<FixAndIncrementRecordCubit>().executeFixAndIncrement(
-        FixAndIncrementRecordParams(zikrId: counterState.currentZikrId));
-
-    // 4. Check goal
+    // Check goal
     if (counterState.currentGoal != null &&
         newCounter == counterState.currentGoal) {
       _controllerTopCenter.play();
@@ -86,12 +73,21 @@ class _ZikerScreenState extends State<ZikerScreen> {
       }
     }
 
-    // 5. Check if exceeded goal (auto-reset)
+    // Auto-reset if exceeded goal
     if (counterState.currentGoal != null &&
         newCounter > counterState.currentGoal!) {
-      context.read<UpdateCounterCubit>().executeUpdate(1);
-      context.read<UpdateGoalCubit>().executeUpdate(null);
+      context.read<CounterCubit>().setCounter(1);
+      context.read<CounterCubit>().setGoal(null);
+    } else {
+      context.read<CounterCubit>().setCounter(newCounter);
     }
+
+    // Increment global balance
+    context.read<CounterCubit>().addToBalance();
+
+    // Increment daily record
+    context.read<FixAndIncrementRecordCubit>().executeFixAndIncrement(
+        FixAndIncrementRecordParams(zikrId: counterState.currentZikrId));
   }
 
   @override
@@ -113,8 +109,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                   right: ConstantValues.appHorizontalPadding),
               child: Stack(
                 children: [
-                  BlocBuilder<GetCounterStateCubit,
-                      RequestState<CounterStateEntity>>(
+                  BlocBuilder<CounterCubit, RequestState<CounterStateEntity>>(
                     builder: (context, counterState) {
                       return counterState.when(
                         initial: () =>
@@ -278,11 +273,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                         TextButton(
                                           onPressed: () {
                                             context
-                                                .read<UpdateCounterCubit>()
-                                                .executeUpdate(0);
+                                                .read<CounterCubit>()
+                                                .setCounter(0);
                                             context
-                                                .read<UpdateGoalCubit>()
-                                                .executeUpdate(null);
+                                                .read<CounterCubit>()
+                                                .setGoal(null);
                                           },
                                           style: TextButton.styleFrom(
                                               backgroundColor: Theme.of(context)
@@ -444,11 +439,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 int.tryParse(currentGoalController.text);
                             if (goal != null) {
                               parentContext
-                                  .read<UpdateGoalCubit>()
-                                  .executeUpdate(goal);
+                                  .read<CounterCubit>()
+                                  .setGoal(goal);
                               parentContext
-                                  .read<UpdateCounterCubit>()
-                                  .executeUpdate(0);
+                                  .read<CounterCubit>()
+                                  .setCounter(0);
                               Navigator.pop(context);
                             }
                           },
