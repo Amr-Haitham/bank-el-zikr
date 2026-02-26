@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(flutter analyze:*)",
+      "Bash(wc:*)",
+      "Bash(git add lib/core/di/service_locator.dart lib/core/layers/data/services/hive_db.dart)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
