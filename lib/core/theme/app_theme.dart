@@ -18,7 +18,7 @@ class AppTheme {
         cursorColor: appDark,
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
         selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
-    scaffoldBackgroundColor: const Color(0xffffffff),
+    scaffoldBackgroundColor: const Color(0xFFEEEEF3),
     fontFamily: 'Tajawal',
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: Colors.white,

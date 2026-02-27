@@ -1,5 +1,3 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
@@ -57,6 +55,8 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                 return MorningOrNightZikrListTile(
                   zikr: zikr,
                   isMorningZiker: widget.isMorningAzkar,
+                  index: index,
+                  total: azkarList.length,
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => MorningOrNightZikrContentScreen(
@@ -65,26 +65,6 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                               index: index,
                             )));
                   },
-                  trailing: CircleAvatar(
-                    radius: 16,
-                    backgroundColor: const Color.fromRGBO(255, 184, 0, 1),
-                    child: Center(
-                      child: Text(
-                        ArabicNumbers().convert(zikr.count).toString(),
-                        textAlign: TextAlign.center,
-                        textHeightBehavior: const TextHeightBehavior(
-                            leadingDistribution: TextLeadingDistribution.even,
-                            applyHeightToLastDescent: false,
-                            applyHeightToFirstAscent: false),
-                        strutStyle: const StrutStyle(
-                          height: 1.0,
-                          forceStrutHeight: true,
-                        ),
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                            color: appWhite, fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                  ),
                 );
               },
             );

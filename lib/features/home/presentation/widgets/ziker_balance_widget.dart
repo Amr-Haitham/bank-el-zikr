@@ -1,11 +1,6 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/core/constants/colors.dart';
-import 'package:bank_el_ziker/core/constants/images_urls.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
-import 'package:bank_el_ziker/core/utils/general_utils.dart';
-import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
@@ -17,91 +12,134 @@ class ZikerBalanceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        AutoRouter.of(context).push(const AccountBalanceRoute());
-      },
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
       child: Container(
-        height: ScreenUtils.getScreenHeight(context) / 6,
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage(
-                    ImagesUrls.zikrBalanceBackgroundLightThemeHomeScreen))),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IgnorePointer(
-                child: IconButton.filled(
-                    onPressed: () {},
-                    style: IconButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor),
-                    icon: Icon(
-                      Icons.arrow_back,
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appDark
-                          : appWhite,
-                    )),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.06),
+              blurRadius: 16,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Stack(
+          children: [
+            // Decorative green circle (top-left)
+            Positioned(
+              left: -40,
+              top: -40,
+              child: Container(
+                width: 150,
+                height: 150,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).primaryColor.withValues(alpha: 0.08),
+                ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    "رصيد الذكر",
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w700,
-                        color: GeneralUtils.isLightTheme(context)
-                            ? appWhite
-                            : const Color.fromARGB(255, 0, 0, 0)),
+                  // Header row
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.account_balance_wallet_outlined,
+                        color: Theme.of(context).primaryColor,
+                        size: 20,
+                      ),
+                      const SizedBox(width: 8),
+                      Text(
+                        'رصيد الحسنات الكلي',
+                        textDirection: TextDirection.rtl,
+                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.w500,
+                            ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  const SizedBox(height: 16),
+                  // Balance number
                   BlocBuilder<GetCounterStateCubit,
                       RequestState<CounterStateEntity>>(
                     builder: (context, state) {
                       return state.when(
-                        initial: () => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        loading: () => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
+                        initial: () =>
+                            const Center(child: CircularProgressIndicator()),
+                        loading: () =>
+                            const Center(child: CircularProgressIndicator()),
                         success: (counterState) {
                           return AutoSizeText(
-                            ArabicNumbers()
-                                .convert(counterState.accountBalance)
-                                .toString(),
+                            counterState.accountBalance.toString(),
                             maxLines: 1,
-                            textAlign: TextAlign.right,
+                            textAlign: TextAlign.center,
                             style: Theme.of(context)
                                 .textTheme
                                 .headlineLarge!
                                 .copyWith(
-                                    color: GeneralUtils.isLightTheme(context)
-                                        ? appWhite
-                                        : const Color.fromARGB(255, 0, 0, 0)),
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 64,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           );
                         },
-                        failure: (failure) {
-                          return const AutoSizeText(
-                            "Error",
-                            maxLines: 1,
-                            textAlign: TextAlign.right,
-                          );
-                        },
+                        failure: (_) => Text(
+                          '---',
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headlineLarge!
+                              .copyWith(
+                                color: Theme.of(context).primaryColor,
+                              ),
+                        ),
                       );
                     },
                   ),
+                  const SizedBox(height: 20),
+                  // Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        AutoRouter.of(context).push(const AccountBalanceRoute());
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Theme.of(context).primaryColor,
+                        foregroundColor: Colors.white,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'أودع المزيد',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 8),
+                          Icon(Icons.add, size: 20),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

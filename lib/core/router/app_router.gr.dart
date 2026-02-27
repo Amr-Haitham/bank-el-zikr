@@ -29,6 +29,25 @@ class AccountBalanceRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [AzkarListPage]
+class AzkarListRoute extends PageRouteInfo<void> {
+  const AzkarListRoute({List<PageRouteInfo>? children})
+      : super(
+          AzkarListRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'AzkarListRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const AzkarListPage();
+    },
+  );
+}
+
+/// generated route for
 /// [AzkarPage]
 class AzkarRoute extends PageRouteInfo<void> {
   const AzkarRoute({List<PageRouteInfo>? children})
@@ -81,6 +100,25 @@ class HomeRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const HomePage();
+    },
+  );
+}
+
+/// generated route for
+/// [MainShellPage]
+class MainShellRoute extends PageRouteInfo<void> {
+  const MainShellRoute({List<PageRouteInfo>? children})
+      : super(
+          MainShellRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'MainShellRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const MainShellPage();
     },
   );
 }
