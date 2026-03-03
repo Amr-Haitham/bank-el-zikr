@@ -1,7 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
 import 'package:bank_el_ziker/core/layers/data/failure/failure.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -57,7 +56,6 @@ abstract class RequestCubit<T> extends Cubit<RequestState<T>> {
       );
     }
 
-    debugPrint('Executing request...');
     emit(RequestState<T>.loading());
 
     RequestResult<T> result;
@@ -73,11 +71,9 @@ abstract class RequestCubit<T> extends Cubit<RequestState<T>> {
 
     result.fold(
       (failure) {
-        debugPrint('Request failed with: $failure');
         emit(RequestState<T>.failure(failure));
       },
       (data) {
-        debugPrint('Request successful with: $data');
         emit(RequestState<T>.success(data));
       },
     );
