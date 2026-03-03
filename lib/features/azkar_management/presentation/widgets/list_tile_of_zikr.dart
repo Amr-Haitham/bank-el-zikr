@@ -15,13 +15,11 @@ class ListTileOfZikr extends StatelessWidget {
     super.key,
     required this.zikr,
     required this.onTap,
-    required this.index,
     required this.isSelected,
   });
 
   final bool isSelected;
   final ZikrEntity zikr;
-  final int index;
   final Function() onTap;
 
   @override

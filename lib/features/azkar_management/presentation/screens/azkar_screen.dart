@@ -130,7 +130,6 @@ class AzkarScreen extends StatelessWidget {
                       itemCount: azkar.length,
                       itemBuilder: (context, index) {
                         return ListTileOfZikr(
-                          index: index,
                           onTap: () {
                             context
                                 .read<UpdateCurrentZikrCubit>()

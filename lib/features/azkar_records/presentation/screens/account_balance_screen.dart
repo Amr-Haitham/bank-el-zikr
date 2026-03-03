@@ -19,8 +19,6 @@ class AccountBalanceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return SafeArea(
       child: Scaffold(
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -57,7 +55,7 @@ class AccountBalanceScreen extends StatelessWidget {
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 42)),
               SliverToBoxAdapter(
-                child: _buildRecordsTabbar(context, screenWidth),
+                child: _buildRecordsTabbar(context),
               ),
             ],
           ),
@@ -85,7 +83,7 @@ class AccountBalanceScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildRecordsTabbar(BuildContext context, double screenWidth) {
+  Widget _buildRecordsTabbar(BuildContext context) {
     return BlocBuilder<GetWeekAzkarRecordsCubit,
         RequestState<WeekAzkarRecord>>(
       builder: (context, recordsState) {
@@ -103,7 +101,6 @@ class AccountBalanceScreen extends StatelessWidget {
                   loading: () =>
                       const Center(child: CircularProgressIndicator()),
                   success: (azkar) => TabbarOfAzkarRecord(
-                    screenWidth: screenWidth,
                     allWeekAzkarRecordsById: records.totalCountsByZikrId,
                     firstDayAzkarRecord: records.todayCountsByZikrId,
                     allAzkar: azkar,
