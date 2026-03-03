@@ -26,7 +26,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getService<SettingsCubit>()),
-        BlocProvider(create: (context) => getService<CounterCubit>()),
+        BlocProvider.value(value: getService<CounterCubit>()),
       ],
       child: MyApp(appRouter: AppRouter()),
     ),
