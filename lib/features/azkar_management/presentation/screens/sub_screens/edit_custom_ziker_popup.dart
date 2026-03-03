@@ -155,14 +155,14 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(39),
             color: Colors.transparent,
-            border: Border.all(width: 1, color: Colors.red)),
+            border: Border.all(width: 1, color: appRed)),
         child: const Center(
           child: Padding(
             padding: EdgeInsets.all(16),
             child: Text(
               'حذف الذكر',
               style: TextStyle(
-                color: Colors.red,
+                color: appRed,
                 fontSize: 16,
                 fontWeight: FontWeight.w700,
               ),
