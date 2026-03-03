@@ -255,8 +255,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                       .textTheme
                                       .headlineLarge!
                                       .copyWith(
-                                          color: const Color.fromRGBO(
-                                              255, 184, 0, 1)),
+                                          color: appGold),
                                 ),
                               ),
                               Expanded(

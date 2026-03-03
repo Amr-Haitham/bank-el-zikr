@@ -2,6 +2,7 @@ import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/si
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
@@ -127,11 +128,11 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: showFavourites
-                              ? const Color.fromRGBO(255, 184, 0, 1)
+                              ? appGold
                               : Theme.of(context).scaffoldBackgroundColor,
                           border: Border.all(
                               width: 1,
-                              color: const Color.fromRGBO(255, 184, 0, 1)),
+                              color: appGold),
                         ),
                         child: Center(
                           child: Icon(
@@ -140,7 +141,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                                 : Icons.star_outline_rounded,
                             color: showFavourites
                                 ? Theme.of(context).scaffoldBackgroundColor
-                                : const Color.fromRGBO(255, 184, 0, 1),
+                                : appGold,
                           ),
                         ),
                       ),
@@ -186,7 +187,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                           style: Theme.of(context)
                               .textTheme
                               .bodyLarge!
-                              .copyWith(color: Colors.red),
+                              .copyWith(color: appRed),
                         )));
                       } else {
                         return SliverList.separated(

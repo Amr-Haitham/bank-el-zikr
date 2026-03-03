@@ -57,7 +57,7 @@ class ZikerBalanceWidget extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: GeneralUtils.isLightTheme(context)
                             ? appWhite
-                            : const Color.fromARGB(255, 0, 0, 0)),
+                            : appDark),
                   ),
                   const SizedBox(
                     height: 5,
@@ -85,7 +85,7 @@ class ZikerBalanceWidget extends StatelessWidget {
                                 .copyWith(
                                     color: GeneralUtils.isLightTheme(context)
                                         ? appWhite
-                                        : const Color.fromARGB(255, 0, 0, 0)),
+                                        : appDark),
                           );
                         },
                         failure: (failure) {

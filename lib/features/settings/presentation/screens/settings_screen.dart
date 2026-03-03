@@ -3,7 +3,6 @@ import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
-import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/support_cubit.dart';
 import 'package:flutter/material.dart';
@@ -89,11 +88,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       context.read<SupportCubit>().launchCharityLink();
                     },
                     text: "دعم التطبيق",
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.arrow_back_ios,
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appWhite
-                          : appWhite, // Fixed to appWhite for both or adjust as needed
+                      color: appWhite,
                     ),
                   ),
                   const SizedBox(
@@ -104,11 +101,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       context.read<SupportCubit>().launchEmail();
                     },
                     text: "تواصل معنا",
-                    trailing: Icon(
+                    trailing: const Icon(
                       Icons.email_outlined,
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appWhite
-                          : appWhite,
+                      color: appWhite,
                     ),
                   ),
                 ],
@@ -140,43 +135,22 @@ class _SettingsScreenState extends State<SettingsScreen> {
             scaleX: -1,
             // fit: BoxFit.fitHeight,
             child: FlutterSwitch(
-              // width: 125.0,
-              // height: 55.0,
-
               activeIcon: activeIcon,
               inactiveIcon: inActiveIcon,
               activeColor: Theme.of(context).primaryColor,
-              inactiveColor: inActiveColor ?? const Color(0xff787880),
+              inactiveColor: inActiveColor ?? appInactiveSwitch,
               valueFontSize: 25.0,
-              // toggleSize: 45.0,
               value: value,
               borderRadius: 30.0,
-              // padding: 8.0,
               showOnOff: false,
               onToggle: onChanged,
             ),
 
-            //  Switch(
-            //   value: value,
-            //   onChanged: onChanged,
-            //   activeColor: Theme.of(context).primaryColor,
-            //   inactiveThumbColor: Colors.grey,
-            //   materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            //   splashRadius: 0,
-            // ),
           ),
         ),
-        Row(
-          children: [
-            // if (icon != null)
-            //   Icon(icon,
-            //       color: value ? Theme.of(context).primaryColor : Colors.grey),
-            // const SizedBox(width: 8),
-            Text(
-              text,
-              style: Theme.of(context).textTheme.bodyMedium,
-            ),
-          ],
+        Text(
+          text,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
       ],
     );

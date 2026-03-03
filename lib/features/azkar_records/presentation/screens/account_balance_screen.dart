@@ -258,7 +258,7 @@ class _AzkarListView extends StatelessWidget {
           style: Theme.of(context)
               .textTheme
               .bodyMedium!
-              .copyWith(color: Colors.red),
+              .copyWith(color: appRed),
         ),
       );
     }
