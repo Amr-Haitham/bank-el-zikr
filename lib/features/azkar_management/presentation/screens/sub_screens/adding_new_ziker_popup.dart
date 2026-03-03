@@ -43,7 +43,9 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
                 Container(
                   height: 5,
                   decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appDark
+                          : appWhite,
                       borderRadius: BorderRadius.circular(11)),
                   width: ScreenUtils.getScreenWidth(context) / 4,
                 ),

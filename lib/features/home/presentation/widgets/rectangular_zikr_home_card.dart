@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 
@@ -19,8 +20,8 @@ class RectangularZikrHomeCard extends StatelessWidget {
         width: ScreenUtils.getScreenWidth(context) / 2 - 30,
         decoration: BoxDecoration(
           color: Theme.of(context).brightness == Brightness.light
-              ? const Color(0xffF3F3F3)
-              : const Color.fromRGBO(26, 26, 26, 1),
+              ? appLight
+              : appDark,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 8),
