@@ -81,8 +81,6 @@ import '../../features/settings/domain/usecases/update_settings.dart';
 import '../../features/settings/presentation/cubit/get_settings_cubit.dart';
 import '../../features/settings/presentation/cubit/update_settings_cubit.dart';
 import '../../features/settings/presentation/cubit/settings_cubit.dart';
-import '../../features/settings/presentation/cubit/support_cubit.dart';
-
 // home imports
 import '../../features/home/data/datasources/home_local_datasource.dart';
 import '../../features/home/data/models/prayer_model.dart';
@@ -530,7 +528,6 @@ void _setUpSettingsBlocs() {
   _getIt.registerFactory<UpdateSettingsCubit>(
     () => UpdateSettingsCubit(updateSettings: getService<UpdateSettings>()),
   );
-  _getIt.registerFactory<SupportCubit>(() => SupportCubit());
 }
 
 // ============================================================================
