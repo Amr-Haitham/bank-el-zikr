@@ -17,9 +17,9 @@ class RandomZikerContainer extends StatelessWidget {
       builder: (context, state) {
         return state.when(
           initial: () => const SizedBox.shrink(),
-          loading: () => const Center(
+          loading: () => Center(
             child: CircularProgressIndicator(
-              color: Colors.yellow,
+              color: Theme.of(context).primaryColor,
             ),
           ),
           success: (prayer) {

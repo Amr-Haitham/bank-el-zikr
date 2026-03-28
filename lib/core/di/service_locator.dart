@@ -241,7 +241,7 @@ void _setUpZikrCounterUseCases() {
 }
 
 void _setUpZikrCounterBlocs() {
-  _getIt.registerFactory<CounterCubit>(
+  _getIt.registerLazySingleton<CounterCubit>(
     () => CounterCubit(
       getCounterState: getService<GetCounterState>(),
       getCurrentZikrId: getService<GetCurrentZikrId>(),

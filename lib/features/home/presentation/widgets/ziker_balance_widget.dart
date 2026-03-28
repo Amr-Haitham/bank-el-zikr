@@ -8,7 +8,7 @@ import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/get_counter_state_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,12 +57,12 @@ class ZikerBalanceWidget extends StatelessWidget {
                         fontWeight: FontWeight.w700,
                         color: GeneralUtils.isLightTheme(context)
                             ? appWhite
-                            : const Color.fromARGB(255, 0, 0, 0)),
+                            : appDark),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  BlocBuilder<GetCounterStateCubit,
+                  BlocBuilder<CounterCubit,
                       RequestState<CounterStateEntity>>(
                     builder: (context, state) {
                       return state.when(
@@ -85,7 +85,7 @@ class ZikerBalanceWidget extends StatelessWidget {
                                 .copyWith(
                                     color: GeneralUtils.isLightTheme(context)
                                         ? appWhite
-                                        : const Color.fromARGB(255, 0, 0, 0)),
+                                        : appDark),
                           );
                         },
                         failure: (failure) {
