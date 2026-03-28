@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 class TabbarOfAzkarRecord extends StatefulWidget {
   const TabbarOfAzkarRecord({
     super.key,
-    required this.screenWidth,
     required this.allWeekAzkarRecordsById,
     required this.firstDayAzkarRecord,
     required this.allAzkar,
@@ -16,7 +15,6 @@ class TabbarOfAzkarRecord extends StatefulWidget {
   final Map<int, int> allWeekAzkarRecordsById;
   final Map<int, int> firstDayAzkarRecord;
   final List<ZikrEntity> allAzkar;
-  final double screenWidth;
 
   @override
   State<TabbarOfAzkarRecord> createState() => _TabbarOfAzkarRecordState();

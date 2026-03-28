@@ -31,6 +31,9 @@ class ZikrDisplayCard extends StatelessWidget {
                   loading: () => const CircularProgressIndicator(),
                   failure: (f) => const Text("Error loading azkar"),
                   success: (azkar) {
+                    if (azkar.isEmpty) {
+                      return const SizedBox.shrink();
+                    }
                     final currentZikr = azkar.firstWhere(
                       (z) => z.id == currentZikrId,
                       orElse: () => azkar.first,

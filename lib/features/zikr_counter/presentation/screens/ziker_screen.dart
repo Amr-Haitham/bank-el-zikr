@@ -141,7 +141,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                               ZikrDisplayCard(
                                   currentZikrId: counter.currentZikrId),
                               const SizedBox(height: 16),
-                              _buildGoalButton(context, counter),
+                              _buildGoalButton(context),
                               _buildGoalDisplay(context, counter),
                               Expanded(
                                 flex: 5,
@@ -226,7 +226,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
     );
   }
 
-  Widget _buildGoalButton(BuildContext context, CounterStateEntity counter) {
+  Widget _buildGoalButton(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

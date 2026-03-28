@@ -1,6 +1,7 @@
 import 'package:bank_el_ziker/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
@@ -25,6 +26,7 @@ void main() async {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getService<SettingsCubit>()),
+        BlocProvider.value(value: getService<CounterCubit>()),
       ],
       child: MyApp(appRouter: AppRouter()),
     ),
