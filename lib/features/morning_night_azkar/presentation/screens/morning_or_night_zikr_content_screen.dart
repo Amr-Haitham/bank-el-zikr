@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
@@ -159,15 +160,6 @@ class _MorningOrNightZikrContentScreenState
   }
 
   Widget zikrContainer({required MorningNightZikrEntity morningOrNightZikr}) {
-    // MorningOrNightZikr currentMorningOrNightZikr = morningOrNightAzkarList
-    //     .firstWhere((zikr) => zikr.id.toInt() == currentZikrIndex);
-
-    // // String zikrTitle = currentMorningOrNightZikr.title ?? '';
-
-    // String zikrContent = currentMorningOrNightZikr.content;
-
-    // int zikrCount = currentMorningOrNightZikr.count;
-
     return SizedBox(
       height: MediaQuery.of(context).size.height / 2,
       width: MediaQuery.of(context).size.width - 10,
@@ -202,7 +194,7 @@ class _MorningOrNightZikrContentScreenState
           height: widthOfNextAndPreviousButtons,
           child: const Icon(
             Icons.arrow_back,
-            color: Colors.white,
+            color: appWhite,
           )),
     );
   }
@@ -224,7 +216,7 @@ class _MorningOrNightZikrContentScreenState
           height: widthOfNextAndPreviousButtons,
           child: const Icon(
             Icons.arrow_forward,
-            color: Colors.white,
+            color: appWhite,
           )),
     );
   }

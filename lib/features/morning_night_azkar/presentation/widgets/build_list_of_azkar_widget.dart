@@ -40,7 +40,7 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
           loading: () => const SliverToBoxAdapter(
             child: Center(
               child: CircularProgressIndicator(
-                color: Colors.yellow,
+                color: appGold,
               ),
             ),
           ),
@@ -67,7 +67,7 @@ class _BuildListOfAzkarWidgetState extends State<BuildListOfAzkarWidget> {
                   },
                   trailing: CircleAvatar(
                     radius: 16,
-                    backgroundColor: const Color.fromRGBO(255, 184, 0, 1),
+                    backgroundColor: appGold,
                     child: Center(
                       child: Text(
                         ArabicNumbers().convert(zikr.count).toString(),
