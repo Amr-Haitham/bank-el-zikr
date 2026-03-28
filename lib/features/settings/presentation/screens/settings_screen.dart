@@ -1,10 +1,8 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
-import 'package:bank_el_ziker/features/settings/presentation/cubit/support_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -20,6 +18,18 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isLightTheme = false;
   bool isVibrating = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final currentState = context.read<SettingsCubit>().state;
+    currentState.whenOrNull(
+      success: (settings) {
+        isLightTheme = settings.isLightTheme;
+        isVibrating = settings.isVibrating;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,32 +89,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                       context.read<SettingsCubit>().setVibration(isVibrating);
                     },
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchCharityLink();
-                    },
-                    text: "دعم التطبيق",
-                    trailing: const Icon(
-                      Icons.arrow_back_ios,
-                      color: appWhite,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchEmail();
-                    },
-                    text: "تواصل معنا",
-                    trailing: const Icon(
-                      Icons.email_outlined,
-                      color: appWhite,
-                    ),
                   ),
                 ],
               ),
