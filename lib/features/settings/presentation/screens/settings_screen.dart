@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
@@ -88,32 +89,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       });
                       context.read<SettingsCubit>().setVibration(isVibrating);
                     },
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchCharityLink();
-                    },
-                    text: "دعم التطبيق",
-                    trailing: const Icon(
-                      Icons.arrow_back_ios,
-                      color: appWhite,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchEmail();
-                    },
-                    text: "تواصل معنا",
-                    trailing: const Icon(
-                      Icons.email_outlined,
-                      color: appWhite,
-                    ),
                   ),
                 ],
               ),
