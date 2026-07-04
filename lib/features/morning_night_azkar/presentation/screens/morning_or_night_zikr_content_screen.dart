@@ -7,7 +7,7 @@ import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:vibration/vibration.dart';
+import 'package:flutter/services.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_repetition_count_circle.dart';
 
@@ -65,11 +65,7 @@ class _MorningOrNightZikrContentScreenState
       }
       // widget.onFinished();
       if (isVibrating) {
-        Vibration.hasVibrator().then((value) {
-          if (value == true) {
-            Vibration.vibrate(duration: 200);
-          }
-        });
+        HapticFeedback.mediumImpact();
       }
     }
   }
