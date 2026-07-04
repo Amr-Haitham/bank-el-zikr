@@ -49,7 +49,6 @@ dependencies:
   # nb_utils: ^7.0.4
   arabic_numbers: ^1.0.0
   shared_preferences: ^2.3.2
-  vibration: ^2.0.0
   # flutter_local_notifications: ^17.2.2
   url_launcher: ^6.3.0
   meta: ^1.15.0

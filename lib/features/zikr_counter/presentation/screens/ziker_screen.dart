@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:confetti/confetti.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:vibration/vibration.dart';
+import 'package:flutter/services.dart';
 import 'package:auto_route/auto_route.dart';
 
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
@@ -59,11 +59,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
         newCounter == counterState.currentGoal) {
       _controllerTopCenter.play();
       if (isVibrating) {
-        Vibration.hasVibrator().then((value) {
-          if (value == true) {
-            Vibration.vibrate(duration: 1000);
-          }
-        });
+        HapticFeedback.vibrate();
       }
     }
 
@@ -125,11 +121,11 @@ class _ZikerScreenState extends State<ZikerScreen> {
                         failure: (f) =>
                             const Center(child: Text("Error loading counter")),
                         success: (counter) {
-                          if (counter.currentGoal != null) {
-                            currentGoalController.text =
-                                counter.currentGoal.toString();
-                          } else {
-                            currentGoalController.text = "";
+                          final goalText = counter.currentGoal?.toString() ?? "";
+                          if (currentGoalController.text != goalText) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              currentGoalController.text = goalText;
+                            });
                           }
 
                           return Column(

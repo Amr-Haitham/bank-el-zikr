@@ -1,10 +1,9 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
+import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
-import 'package:bank_el_ziker/features/settings/presentation/cubit/support_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -13,7 +12,6 @@ class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
@@ -22,22 +20,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool isVibrating = false;
 
   @override
+  void initState() {
+    super.initState();
+    final settingsState = context.read<SettingsCubit>().state;
+    settingsState.maybeWhen(
+      success: (settings) {
+        isLightTheme = settings.isLightTheme;
+        isVibrating = settings.isVibrating;
+      },
+      orElse: () {},
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SettingsCubit, RequestState>(
+    return BlocConsumer<SettingsCubit, RequestState<Settings>>(
       listener: (context, state) {
-        state.when(
-          initial: () {},
-          loading: () {},
+        state.whenOrNull(
           success: (settings) {
             setState(() {
               isLightTheme = settings.isLightTheme;
               isVibrating = settings.isVibrating;
             });
           },
-          failure: (failure) {},
         );
       },
       builder: (context, state) {
+        state.whenOrNull(
+          success: (settings) {
+            isLightTheme = settings.isLightTheme;
+            isVibrating = settings.isVibrating;
+          },
+        );
         return Scaffold(
           body: SafeArea(
             child: Padding(
@@ -61,10 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     inActiveIcon: const Icon(Icons.nights_stay),
                     inActiveColor: Theme.of(context).primaryColor,
                     onChanged: (value) {
-                      setState(() {
-                        isLightTheme = value;
-                      });
-                      context.read<SettingsCubit>().setTheme(isLightTheme);
+                      context.read<SettingsCubit>().setTheme(value);
                     },
                   ),
                   const SizedBox(
@@ -74,37 +85,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     text: 'الأهتزاز',
                     value: isVibrating,
                     onChanged: (value) {
-                      setState(() {
-                        isVibrating = value;
-                      });
-                      context.read<SettingsCubit>().setVibration(isVibrating);
+                      context.read<SettingsCubit>().setVibration(value);
                     },
-                  ),
-                  const SizedBox(
-                    height: 48,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchCharityLink();
-                    },
-                    text: "دعم التطبيق",
-                    trailing: const Icon(
-                      Icons.arrow_back_ios,
-                      color: appWhite,
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  CustomAppButton(
-                    onPressed: () {
-                      context.read<SupportCubit>().launchEmail();
-                    },
-                    text: "تواصل معنا",
-                    trailing: const Icon(
-                      Icons.email_outlined,
-                      color: appWhite,
-                    ),
                   ),
                 ],
               ),
