@@ -1,0 +1,27 @@
+{
+  "@@locale": "ar",
+  "appName": "بنك الذكر",
+  "@appName": {
+    "description": "The application name shown on splash/about screens"
+  },
+  "save": "حفظ",
+  "@save": {
+    "description": "Generic save action button label"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Generic cancel action button label"
+  },
+  "ok": "موافق",
+  "@ok": {
+    "description": "Generic confirmation button label"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "description": "Home screen title / nav label"
+  }
+}
