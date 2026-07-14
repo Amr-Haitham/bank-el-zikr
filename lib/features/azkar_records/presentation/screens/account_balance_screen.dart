@@ -1,123 +1,108 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/core/utils/screen_utils.dart';
+import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/daily_activity_entry.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
-import 'components/azkar_weekly_record_chart.dart';
-import 'components/total_balance_number.dart';
-import 'components/azkar_record_tabbar.dart';
+import 'components/category_streak_ring.dart';
+import 'components/dhikr_breakdown_list.dart';
+import 'components/hasanat_growth_card.dart';
+import 'components/journey_streak_card.dart';
+import 'components/weekly_activity_grid.dart';
 
 class AccountBalanceScreen extends StatelessWidget {
   const AccountBalanceScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        body: Padding(
-          padding: const EdgeInsets.only(
-              top: ConstantValues.appTopPadding,
-              left: ConstantValues.appHorizontalPadding,
-              right: ConstantValues.appHorizontalPadding),
-          child: CustomScrollView(
-            slivers: [
-              SliverToBoxAdapter(
-                child: Text(
-                  "رصيد الذكر",
+    return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      body: SafeArea(
+        child: BlocBuilder<DailyActivityLogCubit, List<DailyActivityEntry>>(
+          builder: (context, entries) {
+            final stats = JourneyStats(entries);
+
+            return ListView(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: ConstantValues.appHorizontalPadding),
+              children: [
+                const SizedBox(height: ConstantValues.appTopPadding),
+                Text(
+                  "My Spiritual Journey",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall!
+                      .copyWith(fontSize: 22),
                 ),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 34)),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: ConstantValues.appHorizontalPadding * 2),
-                  child: AutoSizeText(
-                    "وَالذَّاكِرِينَ اللَّهَ كَثِيرًا وَالذَّاكِرَاتِ أَعَدَّ اللَّهُ لَهُمْ مَغْفِرَةً وَأَجْرًا عَظِيمًا",
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontFamily: "Arial",
-                        fontSize: 20,
-                        fontWeight: FontWeight.w700),
-                  ),
+                const SizedBox(height: 20),
+                JourneyStreakCard(
+                  currentStreak: stats.overallCurrentStreak,
+                  longestStreak: stats.overallLongestStreak,
                 ),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 42)),
-              const SliverToBoxAdapter(child: TotalBalanceNumber()),
-              const SliverToBoxAdapter(child: SizedBox(height: 48)),
-              SliverToBoxAdapter(
-                child: _buildWeeklyChart(context),
-              ),
-              const SliverToBoxAdapter(child: SizedBox(height: 42)),
-              SliverToBoxAdapter(
-                child: _buildRecordsTabbar(context),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWeeklyChart(BuildContext context) {
-    return SizedBox(
-      height: ScreenUtils.getScreenHeight(context) / 5.5,
-      child: BlocBuilder<GetWeekAzkarRecordsCubit,
-          RequestState<WeekAzkarRecord>>(
-        builder: (context, state) {
-          return state.when(
-            initial: () => const Center(child: CircularProgressIndicator()),
-            loading: () => const Center(child: CircularProgressIndicator()),
-            success: (weekRecord) => LineChartForDayRecords(
-              records: weekRecord.dailyRecords,
-            ),
-            failure: (failure) => const SizedBox.shrink(),
-          );
-        },
-      ),
-    );
-  }
-
-  Widget _buildRecordsTabbar(BuildContext context) {
-    return BlocBuilder<GetWeekAzkarRecordsCubit,
-        RequestState<WeekAzkarRecord>>(
-      builder: (context, recordsState) {
-        return BlocBuilder<GetAllAzkarCubit, RequestState<List<ZikrEntity>>>(
-          builder: (context, azkarState) {
-            return recordsState.when(
-              initial: () =>
-                  const Center(child: CircularProgressIndicator()),
-              loading: () =>
-                  const Center(child: CircularProgressIndicator()),
-              success: (records) {
-                return azkarState.when(
-                  initial: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  loading: () =>
-                      const Center(child: CircularProgressIndicator()),
-                  success: (azkar) => TabbarOfAzkarRecord(
-                    allWeekAzkarRecordsById: records.totalCountsByZikrId,
-                    firstDayAzkarRecord: records.todayCountsByZikrId,
-                    allAzkar: azkar,
-                  ),
-                  failure: (failure) =>
-                      const Center(child: Text("Error loading azkar")),
-                );
-              },
-              failure: (failure) =>
-                  const Center(child: Text("Error loading records")),
+                const SizedBox(height: 16),
+                BlocBuilder<CounterCubit, RequestState<CounterStateEntity>>(
+                  builder: (context, counterState) {
+                    final balance = counterState.whenOrNull(
+                          success: (s) => s.accountBalance,
+                        ) ??
+                        0;
+                    return HasanatGrowthCard(
+                      stats: stats,
+                      totalBalance: balance,
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CategoryStreakRing(
+                        title: "Evening Adhkar",
+                        currentStreak: stats.eveningCurrentStreak,
+                        color: const Color(0xff5E5CE6),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: CategoryStreakRing(
+                        title: "Morning Adhkar",
+                        currentStreak: stats.morningCurrentStreak,
+                        color: const Color(0xffFF9F43),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 16),
+                WeeklyActivityGrid(
+                  days: stats.weeklyGrid,
+                  activeCount: stats.activeDaysThisWeek,
+                ),
+                const SizedBox(height: 16),
+                BlocBuilder<GetAllAzkarCubit, RequestState<List<ZikrEntity>>>(
+                  builder: (context, azkarState) {
+                    final allAzkar =
+                        azkarState.whenOrNull(success: (azkar) => azkar) ??
+                            const <ZikrEntity>[];
+                    return DhikrBreakdownList(
+                      allAzkar: allAzkar,
+                      weekTotals: stats.zikrTotalsOverLastDays(7),
+                      monthTotals: stats.zikrTotalsOverLastDays(30),
+                    );
+                  },
+                ),
+                const SizedBox(height: ConstantValues.appBottomPadding),
+              ],
             );
           },
-        );
-      },
+        ),
+      ),
     );
   }
 }

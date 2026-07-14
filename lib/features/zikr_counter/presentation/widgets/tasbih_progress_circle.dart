@@ -32,6 +32,7 @@ class TasbihProgressCircle extends StatelessWidget {
               child: CircularProgressIndicator(
                 value: progress,
                 strokeWidth: 8,
+                strokeCap: StrokeCap.round,
                 backgroundColor:
                     Theme.of(context).cardColor,
                 valueColor: const AlwaysStoppedAnimation<Color>(

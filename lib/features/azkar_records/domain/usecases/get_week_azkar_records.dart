@@ -4,7 +4,8 @@ import '../entities/day_zikr_record.dart';
 import '../repositories/azkar_records_repository.dart';
 
 /// Use case for getting all azkar records (7-day window)
-class GetWeekAzkarRecords implements UseCase<List<DayZikrRecordEntity>, NoParams> {
+class GetWeekAzkarRecords
+    implements UseCase<List<DayZikrRecordEntity>, NoParams> {
   final AzkarRecordsRepository repository;
 
   GetWeekAzkarRecords(this.repository);

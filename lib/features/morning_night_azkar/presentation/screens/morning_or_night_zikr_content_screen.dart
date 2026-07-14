@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_b
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
@@ -75,14 +76,18 @@ class _MorningOrNightZikrContentScreenState
   }
 
   void _saveProgress({required int completedCount}) {
+    final category = widget.isMorningZikr ? 'morning' : 'evening';
     context.read<AdhkarProgressCubit>().saveProgress(
           AdhkarProgressEntity(
-            category: widget.isMorningZikr ? 'morning' : 'evening',
+            category: category,
             lastReadAt: DateTime.now(),
             completedCount: completedCount,
             totalCount: widget.azkar.length,
           ),
         );
+    if (completedCount >= widget.azkar.length) {
+      context.read<DailyActivityLogCubit>().markAdhkarCompleted(category);
+    }
   }
 
   bool isVibrating = true;

@@ -53,6 +53,13 @@ import '../../features/azkar_records/domain/repositories/adhkar_progress_reposit
 import '../../features/azkar_records/domain/usecases/get_all_adhkar_progress.dart';
 import '../../features/azkar_records/domain/usecases/save_adhkar_progress.dart';
 import '../../features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
+import '../../features/azkar_records/data/datasources/daily_activity_log_local_datasource.dart';
+import '../../features/azkar_records/data/repositories/daily_activity_log_repository_impl.dart';
+import '../../features/azkar_records/domain/repositories/daily_activity_log_repository.dart';
+import '../../features/azkar_records/domain/usecases/get_daily_activity_log.dart';
+import '../../features/azkar_records/domain/usecases/log_zikr_increment.dart';
+import '../../features/azkar_records/domain/usecases/mark_adhkar_completed.dart';
+import '../../features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 
 // morning_night_azkar imports
 import '../../features/morning_night_azkar/data/datasources/morning_night_azkar_local_datasource.dart';
@@ -131,6 +138,11 @@ Future<void> setupServiceLocator() async {
   _setUpAdhkarProgressRepositories();
   _setUpAdhkarProgressUseCases();
   _setUpAdhkarProgressBlocs();
+
+  _setUpDailyActivityLogDataSources();
+  _setUpDailyActivityLogRepositories();
+  _setUpDailyActivityLogUseCases();
+  _setUpDailyActivityLogBlocs();
 
   _setUpMorningNightAzkarDataSources();
   _setUpMorningNightAzkarRepositories();
@@ -432,6 +444,48 @@ void _setUpAdhkarProgressBlocs() {
     () => AdhkarProgressCubit(
       getAllAdhkarProgress: getService<GetAllAdhkarProgress>(),
       saveAdhkarProgressUseCase: getService<SaveAdhkarProgress>(),
+    ),
+  );
+}
+
+// ============================================================================
+// daily_activity_log
+// ============================================================================
+
+void _setUpDailyActivityLogDataSources() {
+  _getIt.registerLazySingleton<DailyActivityLogLocalDataSource>(
+    () => DailyActivityLogLocalDataSourceImpl(
+      sharedPreferences: getService<SharedPreferences>(),
+    ),
+  );
+}
+
+void _setUpDailyActivityLogRepositories() {
+  _getIt.registerLazySingleton<DailyActivityLogRepository>(
+    () => DailyActivityLogRepositoryImpl(
+      localDataSource: getService<DailyActivityLogLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpDailyActivityLogUseCases() {
+  _getIt.registerLazySingleton<GetDailyActivityLog>(
+    () => GetDailyActivityLog(getService<DailyActivityLogRepository>()),
+  );
+  _getIt.registerLazySingleton<LogZikrIncrement>(
+    () => LogZikrIncrement(getService<DailyActivityLogRepository>()),
+  );
+  _getIt.registerLazySingleton<MarkAdhkarCompleted>(
+    () => MarkAdhkarCompleted(getService<DailyActivityLogRepository>()),
+  );
+}
+
+void _setUpDailyActivityLogBlocs() {
+  _getIt.registerLazySingleton<DailyActivityLogCubit>(
+    () => DailyActivityLogCubit(
+      getDailyActivityLog: getService<GetDailyActivityLog>(),
+      logZikrIncrementUseCase: getService<LogZikrIncrement>(),
+      markAdhkarCompletedUseCase: getService<MarkAdhkarCompleted>(),
     ),
   );
 }

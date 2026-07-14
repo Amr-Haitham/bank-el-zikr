@@ -7,6 +7,7 @@ import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,7 @@ void main() async {
         BlocProvider(create: (context) => getService<SettingsCubit>()),
         BlocProvider.value(value: getService<CounterCubit>()),
         BlocProvider.value(value: getService<AdhkarProgressCubit>()),
+        BlocProvider.value(value: getService<DailyActivityLogCubit>()),
       ],
       child: MyApp(appRouter: AppRouter()),
     ),

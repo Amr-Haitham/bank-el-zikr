@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/core/di/service_locator.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
 import 'account_balance_screen.dart';
 
@@ -13,12 +12,8 @@ class AccountBalancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-            create: (context) => getService<GetWeekAzkarRecordsCubit>()),
-        BlocProvider(create: (context) => getService<GetAllAzkarCubit>()),
-      ],
+    return BlocProvider(
+      create: (context) => getService<GetAllAzkarCubit>(),
       child: const AccountBalanceScreen(),
     );
   }

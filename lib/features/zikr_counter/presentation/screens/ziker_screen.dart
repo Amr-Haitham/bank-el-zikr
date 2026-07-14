@@ -5,6 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/get_settings_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
@@ -75,6 +76,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
 
     context.read<FixAndIncrementRecordCubit>().executeFixAndIncrement(
         FixAndIncrementRecordParams(zikrId: counterState.currentZikrId));
+    context
+        .read<DailyActivityLogCubit>()
+        .logZikrIncrement(counterState.currentZikrId);
   }
 
   void _showGoalSettingSheet(BuildContext parentContext) {
@@ -249,8 +253,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
           ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: () =>
-                AutoRouter.of(context).push(const SelectZikrRoute()),
+            onTap: () => AutoRouter.of(context).push(const SelectZikrRoute()),
             child: Icon(Icons.swap_horiz_rounded,
                 color: Theme.of(context).primaryColor, size: 34),
           ),
