@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morning_night_zikr.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
@@ -62,12 +64,25 @@ class _MorningOrNightZikrContentScreenState
           currentZikrIndex++;
           currentCounter = widget.azkar[currentZikrIndex].count;
         });
+        _saveProgress(completedCount: currentZikrIndex);
+      } else {
+        _saveProgress(completedCount: widget.azkar.length);
       }
-      // widget.onFinished();
       if (isVibrating) {
         HapticFeedback.mediumImpact();
       }
     }
+  }
+
+  void _saveProgress({required int completedCount}) {
+    context.read<AdhkarProgressCubit>().saveProgress(
+          AdhkarProgressEntity(
+            category: widget.isMorningZikr ? 'morning' : 'evening',
+            lastReadAt: DateTime.now(),
+            completedCount: completedCount,
+            totalCount: widget.azkar.length,
+          ),
+        );
   }
 
   bool isVibrating = true;
@@ -181,6 +196,7 @@ class _MorningOrNightZikrContentScreenState
             currentZikrIndex++;
             currentCounter = widget.azkar[currentZikrIndex].count;
           });
+          _saveProgress(completedCount: currentZikrIndex);
         }
       },
       icon: Container(

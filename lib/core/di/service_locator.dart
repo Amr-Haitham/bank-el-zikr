@@ -47,6 +47,12 @@ import '../../features/azkar_records/presentation/cubit/get_week_azkar_records_c
 import '../../features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
 import '../../features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
 import '../../features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
+import '../../features/azkar_records/data/datasources/adhkar_progress_local_datasource.dart';
+import '../../features/azkar_records/data/repositories/adhkar_progress_repository_impl.dart';
+import '../../features/azkar_records/domain/repositories/adhkar_progress_repository.dart';
+import '../../features/azkar_records/domain/usecases/get_all_adhkar_progress.dart';
+import '../../features/azkar_records/domain/usecases/save_adhkar_progress.dart';
+import '../../features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
 
 // morning_night_azkar imports
 import '../../features/morning_night_azkar/data/datasources/morning_night_azkar_local_datasource.dart';
@@ -120,6 +126,11 @@ Future<void> setupServiceLocator() async {
   _setUpAzkarRecordsRepositories();
   _setUpAzkarRecordsUseCases();
   _setUpAzkarRecordsBlocs();
+
+  _setUpAdhkarProgressDataSources();
+  _setUpAdhkarProgressRepositories();
+  _setUpAdhkarProgressUseCases();
+  _setUpAdhkarProgressBlocs();
 
   _setUpMorningNightAzkarDataSources();
   _setUpMorningNightAzkarRepositories();
@@ -384,6 +395,44 @@ void _setUpAzkarRecordsBlocs() {
   _getIt.registerFactory<DeleteZikrRecordCubit>(
     () =>
         DeleteZikrRecordCubit(deleteZikrRecord: getService<DeleteZikrRecord>()),
+  );
+}
+
+// ============================================================================
+// adhkar_progress
+// ============================================================================
+
+void _setUpAdhkarProgressDataSources() {
+  _getIt.registerLazySingleton<AdhkarProgressLocalDataSource>(
+    () => AdhkarProgressLocalDataSourceImpl(
+      sharedPreferences: getService<SharedPreferences>(),
+    ),
+  );
+}
+
+void _setUpAdhkarProgressRepositories() {
+  _getIt.registerLazySingleton<AdhkarProgressRepository>(
+    () => AdhkarProgressRepositoryImpl(
+      localDataSource: getService<AdhkarProgressLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpAdhkarProgressUseCases() {
+  _getIt.registerLazySingleton<GetAllAdhkarProgress>(
+    () => GetAllAdhkarProgress(getService<AdhkarProgressRepository>()),
+  );
+  _getIt.registerLazySingleton<SaveAdhkarProgress>(
+    () => SaveAdhkarProgress(getService<AdhkarProgressRepository>()),
+  );
+}
+
+void _setUpAdhkarProgressBlocs() {
+  _getIt.registerLazySingleton<AdhkarProgressCubit>(
+    () => AdhkarProgressCubit(
+      getAllAdhkarProgress: getService<GetAllAdhkarProgress>(),
+      saveAdhkarProgressUseCase: getService<SaveAdhkarProgress>(),
+    ),
   );
 }
 

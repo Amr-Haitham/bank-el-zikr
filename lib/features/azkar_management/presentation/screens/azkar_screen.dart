@@ -63,6 +63,13 @@ class AzkarScreen extends StatelessWidget {
                         "اختر الذكر",
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
+                      GestureDetector(
+                        onTap: () => context.router.maybePop(),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          color: Theme.of(context).textTheme.bodyLarge!.color,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -140,7 +147,7 @@ class AzkarScreen extends StatelessWidget {
                             context
                                 .read<CounterCubit>()
                                 .setCurrentZikr(azkar[index].id);
-                            AutoTabsRouter.of(context).setActiveIndex(1);
+                            context.router.maybePop();
                           },
                           zikr: azkar[index],
                           isSelected: selectedZikrId == azkar[index].id,

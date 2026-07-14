@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
@@ -248,7 +249,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
           ),
           const SizedBox(width: 8),
           GestureDetector(
-            onTap: () => AutoTabsRouter.of(context).setActiveIndex(2),
+            onTap: () =>
+                AutoRouter.of(context).push(const SelectZikrRoute()),
             child: Icon(Icons.swap_horiz_rounded,
                 color: Theme.of(context).primaryColor, size: 34),
           ),

@@ -143,6 +143,25 @@ class NightAzkarRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SelectZikrPage]
+class SelectZikrRoute extends PageRouteInfo<void> {
+  const SelectZikrRoute({List<PageRouteInfo>? children})
+      : super(
+          SelectZikrRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectZikrRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SelectZikrPage();
+    },
+  );
+}
+
+/// generated route for
 /// [SettingsPage]
 class SettingsRoute extends PageRouteInfo<void> {
   const SettingsRoute({List<PageRouteInfo>? children})

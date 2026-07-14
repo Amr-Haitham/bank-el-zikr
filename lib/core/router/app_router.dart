@@ -10,6 +10,7 @@ import 'package:bank_el_ziker/features/situational_azkar/presentation/screens/si
 import 'package:bank_el_ziker/features/zikr_counter/presentation/screens/zikr_content_route.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/screens/tasbeeh_werd_route.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/screens/azkar_route.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/screens/select_zikr_route.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/screens/daily_azkar_route.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/screens/account_balance_route.dart';
 
@@ -35,5 +36,6 @@ class AppRouter extends RootStackRouter {
         AutoRoute(page: SituationsAzkarRoute.page),
         AutoRoute(page: ZikrContentRoute.page),
         AutoRoute(page: DailyAzkarRoute.page),
+        AutoRoute(page: SelectZikrRoute.page),
       ];
 }
