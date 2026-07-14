@@ -44,9 +44,11 @@ class MyApp extends StatelessWidget {
       builder: (context, state) {
         final isLightTheme =
             state.whenOrNull(success: (s) => s.isLightTheme) ?? true;
+        final locale =
+            state.whenOrNull(success: (s) => s.locale) ?? const Locale('ar');
 
         return MaterialApp.router(
-          locale: const Locale("ar"),
+          locale: locale,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           theme: isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme,

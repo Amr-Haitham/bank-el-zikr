@@ -33,6 +33,11 @@ class UpdateSettings implements UseCase<void, UpdateSettingsParams> {
       if (result.isLeft()) return result;
     }
 
+    if (params.locale != null) {
+      final result = await repository.setLocale(params.locale!);
+      if (result.isLeft()) return result;
+    }
+
     return const Right(null);
   }
 }
@@ -42,12 +47,14 @@ class UpdateSettingsParams extends Equatable {
   final bool? isVibrating;
   final TimeOfDay? morningZikrAlarm;
   final TimeOfDay? nightZikrAlarm;
+  final Locale? locale;
 
   const UpdateSettingsParams({
     this.isLightTheme,
     this.isVibrating,
     this.morningZikrAlarm,
     this.nightZikrAlarm,
+    this.locale,
   });
 
   @override
@@ -56,5 +63,6 @@ class UpdateSettingsParams extends Equatable {
         isVibrating,
         morningZikrAlarm,
         nightZikrAlarm,
+        locale,
       ];
 }

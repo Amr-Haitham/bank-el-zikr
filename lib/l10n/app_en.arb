@@ -5,5 +5,8 @@
   "cancel": "Cancel",
   "ok": "OK",
   "settings": "Settings",
-  "home": "Home"
+  "home": "Home",
+  "welcomeBack": "Welcome back",
+  "shareRewardWithFriends": "Share the reward with your friends",
+  "language": "Language"
 }

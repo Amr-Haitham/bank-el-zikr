@@ -25,4 +25,13 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get home => 'الرئيسية';
+
+  @override
+  String get welcomeBack => 'مرحبا بعودتك';
+
+  @override
+  String get shareRewardWithFriends => 'شارك الأجر مع أصدقاءك';
+
+  @override
+  String get language => 'اللغة';
 }

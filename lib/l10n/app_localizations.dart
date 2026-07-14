@@ -133,6 +133,24 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الرئيسية'**
   String get home;
+
+  /// Home screen welcome-back greeting
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحبا بعودتك'**
+  String get welcomeBack;
+
+  /// Home screen share-app-with-friends prompt
+  ///
+  /// In ar, this message translates to:
+  /// **'شارك الأجر مع أصدقاءك'**
+  String get shareRewardWithFriends;
+
+  /// Settings screen language toggle label
+  ///
+  /// In ar, this message translates to:
+  /// **'اللغة'**
+  String get language;
 }
 
 class _AppLocalizationsDelegate

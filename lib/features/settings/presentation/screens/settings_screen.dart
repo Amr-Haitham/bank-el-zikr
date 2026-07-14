@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cub
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:bank_el_ziker/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_switch/flutter_switch.dart';
@@ -18,6 +19,7 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool isLightTheme = false;
   bool isVibrating = false;
+  bool isEnglish = false;
 
   @override
   void initState() {
@@ -27,6 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       success: (settings) {
         isLightTheme = settings.isLightTheme;
         isVibrating = settings.isVibrating;
+        isEnglish = settings.locale.languageCode == 'en';
       },
       orElse: () {},
     );
@@ -34,6 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return BlocConsumer<SettingsCubit, RequestState<Settings>>(
       listener: (context, state) {
         state.whenOrNull(
@@ -41,6 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             setState(() {
               isLightTheme = settings.isLightTheme;
               isVibrating = settings.isVibrating;
+              isEnglish = settings.locale.languageCode == 'en';
             });
           },
         );
@@ -50,6 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           success: (settings) {
             isLightTheme = settings.isLightTheme;
             isVibrating = settings.isVibrating;
+            isEnglish = settings.locale.languageCode == 'en';
           },
         );
         return Scaffold(
@@ -61,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   left: ConstantValues.appHorizontalPadding),
               child: Column(
                 children: [
-                  const TitleWithBackButton(title: "الإعدادات"),
+                  TitleWithBackButton(title: l10n.settings),
                   const SizedBox(
                     height: 50,
                   ),
@@ -86,6 +92,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     value: isVibrating,
                     onChanged: (value) {
                       context.read<SettingsCubit>().setVibration(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 46,
+                  ),
+                  _buildSwitchTile(
+                    text: l10n.language,
+                    value: isEnglish,
+                    onChanged: (value) {
+                      context
+                          .read<SettingsCubit>()
+                          .setLocale(Locale(value ? 'en' : 'ar'));
                     },
                   ),
                 ],

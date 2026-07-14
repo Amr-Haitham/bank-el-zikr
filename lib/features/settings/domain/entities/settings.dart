@@ -6,12 +6,14 @@ class Settings extends Equatable {
   final TimeOfDay? morningZikrAlarm;
   final TimeOfDay? nightZikrAlarm;
   final bool isVibrating;
+  final Locale locale;
 
   const Settings({
     required this.isLightTheme,
     this.morningZikrAlarm,
     this.nightZikrAlarm,
     required this.isVibrating,
+    this.locale = const Locale('ar'),
   });
 
   @override
@@ -20,6 +22,7 @@ class Settings extends Equatable {
         morningZikrAlarm,
         nightZikrAlarm,
         isVibrating,
+        locale,
       ];
 
   Settings copyWith({
@@ -27,12 +30,14 @@ class Settings extends Equatable {
     TimeOfDay? morningZikrAlarm,
     TimeOfDay? nightZikrAlarm,
     bool? isVibrating,
+    Locale? locale,
   }) {
     return Settings(
       isLightTheme: isLightTheme ?? this.isLightTheme,
       morningZikrAlarm: morningZikrAlarm ?? this.morningZikrAlarm,
       nightZikrAlarm: nightZikrAlarm ?? this.nightZikrAlarm,
       isVibrating: isVibrating ?? this.isVibrating,
+      locale: locale ?? this.locale,
     );
   }
 }
