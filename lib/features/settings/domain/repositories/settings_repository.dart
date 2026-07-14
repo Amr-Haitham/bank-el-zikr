@@ -8,4 +8,5 @@ abstract class SettingsRepository {
   Future<RequestResult<void>> setIsVibrating(bool isVibrating);
   Future<RequestResult<void>> setMorningZikrAlarm(TimeOfDay time);
   Future<RequestResult<void>> setNightZikrAlarm(TimeOfDay time);
+  Future<RequestResult<void>> setLocale(Locale locale);
 }

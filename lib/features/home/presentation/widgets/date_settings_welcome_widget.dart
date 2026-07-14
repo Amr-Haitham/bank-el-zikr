@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
+import 'package:bank_el_ziker/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:jhijri/jHijri.dart';
 
@@ -48,7 +49,7 @@ class _DateSettingsWelcomeWidgetState extends State<DateSettingsWelcomeWidget> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
-                  "مرحبا بعودتك",
+                  AppLocalizations.of(context)!.welcomeBack,
                   style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                       color: GeneralUtils.isLightTheme(context)
                           ? Theme.of(context).primaryColor

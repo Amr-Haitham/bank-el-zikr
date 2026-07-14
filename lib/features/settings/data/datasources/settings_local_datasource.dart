@@ -6,10 +6,12 @@ abstract class SettingsLocalDataSource {
   Future<bool> getIsVibrating();
   Future<TimeOfDay?> getMorningZikrAlarm();
   Future<TimeOfDay?> getNightZikrAlarm();
+  Future<String> getLanguageCode();
   Future<void> setLightTheme(bool value);
   Future<void> setIsVibrating(bool value);
   Future<void> setMorningZikrAlarm(TimeOfDay time);
   Future<void> setNightZikrAlarm(TimeOfDay time);
+  Future<void> setLanguageCode(String languageCode);
 }
 
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
@@ -19,6 +21,7 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   static const String _morningZikrAlarmKey = 'morningZikrAlarm';
   static const String _nightZikrAlarmKey = 'nightZikrAlarm';
   static const String _isVibratingKey = 'isVibrating';
+  static const String _languageCodeKey = 'languageCode';
 
   SettingsLocalDataSourceImpl({required this.sharedPreferences});
 
@@ -30,6 +33,11 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   @override
   Future<bool> getIsVibrating() async {
     return sharedPreferences.getBool(_isVibratingKey) ?? true;
+  }
+
+  @override
+  Future<String> getLanguageCode() async {
+    return sharedPreferences.getString(_languageCodeKey) ?? 'ar';
   }
 
   @override
@@ -52,6 +60,11 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   @override
   Future<void> setIsVibrating(bool value) async {
     await sharedPreferences.setBool(_isVibratingKey, value);
+  }
+
+  @override
+  Future<void> setLanguageCode(String languageCode) async {
+    await sharedPreferences.setString(_languageCodeKey, languageCode);
   }
 
   @override

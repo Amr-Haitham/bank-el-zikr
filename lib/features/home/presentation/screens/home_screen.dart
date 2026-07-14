@@ -3,6 +3,7 @@ import 'package:bank_el_ziker/features/home/presentation/widgets/azkar_home_widg
 import 'package:bank_el_ziker/features/home/presentation/widgets/date_settings_welcome_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/random_ziker_container.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/ziker_balance_widget.dart';
+import 'package:bank_el_ziker/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -63,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: 10,
           ),
           Text(
-            "شارك الأجر مع أصدقاءك",
+            AppLocalizations.of(context)!.shareRewardWithFriends,
             style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 16,

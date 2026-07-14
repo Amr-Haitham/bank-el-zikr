@@ -18,12 +18,14 @@ class SettingsRepositoryImpl implements SettingsRepository {
       final isVibrating = await localDataSource.getIsVibrating();
       final morningZikrAlarm = await localDataSource.getMorningZikrAlarm();
       final nightZikrAlarm = await localDataSource.getNightZikrAlarm();
+      final languageCode = await localDataSource.getLanguageCode();
 
       return Right(Settings(
         isLightTheme: isLightTheme,
         isVibrating: isVibrating,
         morningZikrAlarm: morningZikrAlarm,
         nightZikrAlarm: nightZikrAlarm,
+        locale: Locale(languageCode),
       ));
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -64,6 +66,16 @@ class SettingsRepositoryImpl implements SettingsRepository {
   Future<RequestResult<void>> setNightZikrAlarm(TimeOfDay time) async {
     try {
       await localDataSource.setNightZikrAlarm(time);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setLocale(Locale locale) async {
+    try {
+      await localDataSource.setLanguageCode(locale.languageCode);
       return const Right(null);
     } catch (e) {
       return Left(Failure(message: e.toString()));
