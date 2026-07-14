@@ -9,7 +9,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
-import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'components/azkar_weekly_record_chart.dart';
 import 'components/total_balance_number.dart';
 import 'components/azkar_record_tabbar.dart';
@@ -29,8 +28,12 @@ class AccountBalanceScreen extends StatelessWidget {
               right: ConstantValues.appHorizontalPadding),
           child: CustomScrollView(
             slivers: [
-              const SliverToBoxAdapter(
-                child: TitleWithBackButton(title: "رصيد الذكر"),
+              SliverToBoxAdapter(
+                child: Text(
+                  "رصيد الذكر",
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               const SliverToBoxAdapter(child: SizedBox(height: 34)),
               SliverToBoxAdapter(
