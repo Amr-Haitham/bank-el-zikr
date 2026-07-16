@@ -5,6 +5,7 @@ import 'package:bank_el_ziker/features/home/presentation/widgets/home_header_wid
 import 'package:bank_el_ziker/features/home/presentation/widgets/streak_card_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/support_app_card_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/verse_of_day_card_widget.dart';
+import 'package:bank_el_ziker/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(width: 10),
           Text(
-            "شارك الأجر مع أصدقاءك",
+            AppLocalizations.of(context)!.shareRewardWithFriends,
             style: TextStyle(
                 color: Theme.of(context).primaryColor,
                 fontSize: 16,

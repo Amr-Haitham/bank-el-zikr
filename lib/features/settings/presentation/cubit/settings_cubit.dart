@@ -56,4 +56,14 @@ class SettingsCubit extends RequestCubit<Settings> {
       (_) => reExecutePastRequest(),
     );
   }
+
+  Future<void> setLocale(Locale locale) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(locale: locale),
+    );
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(),
+    );
+  }
 }

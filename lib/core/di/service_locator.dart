@@ -620,7 +620,7 @@ void _setUpSettingsUseCases() {
 }
 
 void _setUpSettingsBlocs() {
-  _getIt.registerFactory<SettingsCubit>(
+  _getIt.registerLazySingleton<SettingsCubit>(
     () => SettingsCubit(
       getSettings: getService<GetSettings>(),
       updateSettings: getService<UpdateSettings>(),
