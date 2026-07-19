@@ -88,5 +88,15 @@
   "shareLabel": "Share",
   "copyLabel": "Copy",
   "copied": "Copied",
-  "swipeHint": "Swipe right or left to move between adhkar"
+  "swipeHint": "Swipe right or left to move between adhkar",
+
+  "appName": "Bank El Zikr",
+  "save": "Save",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "settings": "Settings",
+  "home": "Home",
+  "welcomeBack": "Welcome back",
+  "shareRewardWithFriends": "Share the reward with your friends",
+  "language": "Language"
 }

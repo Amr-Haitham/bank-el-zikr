@@ -121,5 +121,42 @@
   "shareLabel": "مشاركة",
   "copyLabel": "نسخ",
   "copied": "تم النسخ",
-  "swipeHint": "اسحب يمينًا أو يسارًا للتنقل بين الأذكار"
+  "swipeHint": "اسحب يمينًا أو يسارًا للتنقل بين الأذكار",
+
+  "appName": "بنك الذكر",
+  "@appName": {
+    "description": "The application name shown on splash/about screens"
+  },
+  "save": "حفظ",
+  "@save": {
+    "description": "Generic save action button label"
+  },
+  "cancel": "إلغاء",
+  "@cancel": {
+    "description": "Generic cancel action button label"
+  },
+  "ok": "موافق",
+  "@ok": {
+    "description": "Generic confirmation button label"
+  },
+  "settings": "الإعدادات",
+  "@settings": {
+    "description": "Settings screen title"
+  },
+  "home": "الرئيسية",
+  "@home": {
+    "description": "Home screen title / nav label"
+  },
+  "welcomeBack": "مرحبا بعودتك",
+  "@welcomeBack": {
+    "description": "Home screen welcome-back greeting"
+  },
+  "shareRewardWithFriends": "شارك الأجر مع أصدقاءك",
+  "@shareRewardWithFriends": {
+    "description": "Home screen share-app-with-friends prompt"
+  },
+  "language": "اللغة",
+  "@language": {
+    "description": "Settings screen language toggle label"
+  }
 }
