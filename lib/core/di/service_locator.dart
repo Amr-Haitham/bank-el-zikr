@@ -91,8 +91,6 @@ import '../../features/settings/data/repositories/settings_repository_impl.dart'
 import '../../features/settings/domain/repositories/settings_repository.dart';
 import '../../features/settings/domain/usecases/get_settings.dart';
 import '../../features/settings/domain/usecases/update_settings.dart';
-import '../../features/settings/presentation/cubit/get_settings_cubit.dart';
-import '../../features/settings/presentation/cubit/update_settings_cubit.dart';
 import '../../features/settings/presentation/cubit/settings_cubit.dart';
 
 // home imports
@@ -620,17 +618,11 @@ void _setUpSettingsUseCases() {
 }
 
 void _setUpSettingsBlocs() {
-  _getIt.registerFactory<SettingsCubit>(
+  _getIt.registerLazySingleton<SettingsCubit>(
     () => SettingsCubit(
       getSettings: getService<GetSettings>(),
       updateSettings: getService<UpdateSettings>(),
     ),
-  );
-  _getIt.registerFactory<GetSettingsCubit>(
-    () => GetSettingsCubit(getSettings: getService<GetSettings>()),
-  );
-  _getIt.registerFactory<UpdateSettingsCubit>(
-    () => UpdateSettingsCubit(updateSettings: getService<UpdateSettings>()),
   );
 }
 

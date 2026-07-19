@@ -1,4 +1,6 @@
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class WeeklyActivityGrid extends StatelessWidget {
@@ -38,7 +40,8 @@ class WeeklyActivityGrid extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  "$activeCount / 21 adhkar",
+                  AppLocalizations.of(context)
+                      .adhkarOutOf21(formatNumber(context, activeCount)),
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
@@ -47,7 +50,7 @@ class WeeklyActivityGrid extends StatelessWidget {
                 ),
               ),
               Text(
-                "This week",
+                AppLocalizations.of(context).thisWeek,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
@@ -90,11 +93,14 @@ class WeeklyActivityGrid extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _legendItem(context, "Morning", _morningColor),
+              _legendItem(context, AppLocalizations.of(context).morningAdhkar,
+                  _morningColor),
               const SizedBox(width: 14),
-              _legendItem(context, "Evening", _eveningColor),
+              _legendItem(context, AppLocalizations.of(context).eveningAdhkar,
+                  _eveningColor),
               const SizedBox(width: 14),
-              _legendItem(context, "Tasbih", _zikrColor),
+              _legendItem(
+                  context, AppLocalizations.of(context).navTasbih, _zikrColor),
             ],
           ),
         ],

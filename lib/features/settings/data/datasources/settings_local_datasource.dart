@@ -6,10 +6,20 @@ abstract class SettingsLocalDataSource {
   Future<bool> getIsVibrating();
   Future<TimeOfDay?> getMorningZikrAlarm();
   Future<TimeOfDay?> getNightZikrAlarm();
+  Future<String> getSelectedLanguage();
+  Future<bool> getHasSeenOnboarding();
+  Future<String> getDhikrFont();
+  Future<String> getTextSize();
+  Future<bool> getUseArabicNumerals();
   Future<void> setLightTheme(bool value);
   Future<void> setIsVibrating(bool value);
   Future<void> setMorningZikrAlarm(TimeOfDay time);
   Future<void> setNightZikrAlarm(TimeOfDay time);
+  Future<void> setSelectedLanguage(String value);
+  Future<void> setHasSeenOnboarding(bool value);
+  Future<void> setDhikrFont(String value);
+  Future<void> setTextSize(String value);
+  Future<void> setUseArabicNumerals(bool value);
 }
 
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
@@ -19,6 +29,11 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   static const String _morningZikrAlarmKey = 'morningZikrAlarm';
   static const String _nightZikrAlarmKey = 'nightZikrAlarm';
   static const String _isVibratingKey = 'isVibrating';
+  static const String _selectedLanguageKey = 'selectedLanguage';
+  static const String _hasSeenOnboardingKey = 'hasSeenOnboarding';
+  static const String _dhikrFontKey = 'dhikrFont';
+  static const String _textSizeKey = 'textSize';
+  static const String _useArabicNumeralsKey = 'useArabicNumerals';
 
   SettingsLocalDataSourceImpl({required this.sharedPreferences});
 
@@ -64,6 +79,56 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   Future<void> setNightZikrAlarm(TimeOfDay time) async {
     await sharedPreferences.setString(
         _nightZikrAlarmKey, _timeOfDayToString(time));
+  }
+
+  @override
+  Future<String> getSelectedLanguage() async {
+    return sharedPreferences.getString(_selectedLanguageKey) ?? 'ar';
+  }
+
+  @override
+  Future<bool> getHasSeenOnboarding() async {
+    return sharedPreferences.getBool(_hasSeenOnboardingKey) ?? false;
+  }
+
+  @override
+  Future<void> setSelectedLanguage(String value) async {
+    await sharedPreferences.setString(_selectedLanguageKey, value);
+  }
+
+  @override
+  Future<void> setHasSeenOnboarding(bool value) async {
+    await sharedPreferences.setBool(_hasSeenOnboardingKey, value);
+  }
+
+  @override
+  Future<String> getDhikrFont() async {
+    return sharedPreferences.getString(_dhikrFontKey) ?? 'clear';
+  }
+
+  @override
+  Future<void> setDhikrFont(String value) async {
+    await sharedPreferences.setString(_dhikrFontKey, value);
+  }
+
+  @override
+  Future<String> getTextSize() async {
+    return sharedPreferences.getString(_textSizeKey) ?? 'medium';
+  }
+
+  @override
+  Future<void> setTextSize(String value) async {
+    await sharedPreferences.setString(_textSizeKey, value);
+  }
+
+  @override
+  Future<bool> getUseArabicNumerals() async {
+    return sharedPreferences.getBool(_useArabicNumeralsKey) ?? true;
+  }
+
+  @override
+  Future<void> setUseArabicNumerals(bool value) async {
+    await sharedPreferences.setBool(_useArabicNumeralsKey, value);
   }
 
   // Helper methods for TimeOfDay conversion

@@ -1,5 +1,6 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class TasbihProgressCircle extends StatelessWidget {
@@ -16,8 +17,9 @@ class TasbihProgressCircle extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final size = screenWidth * .62;
-    final progress =
-        goal != null && goal! > 0 ? (currentCounter / goal!).clamp(0.0, 1.0) : 0.0;
+    final progress = goal != null && goal! > 0
+        ? (currentCounter / goal!).clamp(0.0, 1.0)
+        : 0.0;
 
     return Center(
       child: SizedBox(
@@ -33,10 +35,9 @@ class TasbihProgressCircle extends StatelessWidget {
                 value: progress,
                 strokeWidth: 8,
                 strokeCap: StrokeCap.round,
-                backgroundColor:
-                    Theme.of(context).cardColor,
-                valueColor: const AlwaysStoppedAnimation<Color>(
-                    Color(0xffFFB800)),
+                backgroundColor: Theme.of(context).cardColor,
+                valueColor:
+                    const AlwaysStoppedAnimation<Color>(Color(0xffFFB800)),
               ),
             ),
             Container(
@@ -56,7 +57,7 @@ class TasbihProgressCircle extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     AutoSizeText(
-                      ArabicNumbers().convert(currentCounter),
+                      formatNumber(context, currentCounter),
                       maxLines: 1,
                       style: const TextStyle(
                         fontSize: 56,
@@ -67,7 +68,8 @@ class TasbihProgressCircle extends StatelessWidget {
                     if (goal != null) ...[
                       const SizedBox(height: 4),
                       Text(
-                        "of ${ArabicNumbers().convert(goal!)}",
+                        AppLocalizations.of(context)
+                            .ofCount(formatNumber(context, goal!)),
                         style: const TextStyle(
                           fontSize: 14,
                           color: Colors.black54,
@@ -75,9 +77,10 @@ class TasbihProgressCircle extends StatelessWidget {
                       ),
                     ],
                     const SizedBox(height: 8),
-                    const Text(
-                      "⚡ Tap anywhere",
-                      style: TextStyle(fontSize: 12, color: Colors.black45),
+                    Text(
+                      AppLocalizations.of(context).tapAnywhere,
+                      style:
+                          const TextStyle(fontSize: 12, color: Colors.black45),
                     ),
                   ],
                 ),

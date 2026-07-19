@@ -5,6 +5,7 @@ import 'package:bank_el_ziker/features/azkar_management/presentation/widgets/adh
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
 import 'package:bank_el_ziker/features/situational_azkar/presentation/widgets/situational_zikr_search_widget.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -39,69 +40,76 @@ class AdhkarListScreen extends StatefulWidget {
 class _AdhkarListScreenState extends State<AdhkarListScreen> {
   String _query = "";
 
-  static final List<_AdhkarCategory> _categories = [
-    _AdhkarCategory(
-      title: "Morning Adhkar",
-      progressKey: "morning",
-      icon: Icons.wb_sunny_outlined,
-      iconBackgroundColor: const Color(0xffFFE7CF),
-      iconColor: const Color(0xffFF9F43),
-      onTapBuilder: (context) =>
-          () => AutoRouter.of(context).push(const MorningAzkarRoute()),
-    ),
-    _AdhkarCategory(
-      title: "Evening Adhkar",
-      progressKey: "evening",
-      icon: Icons.nightlight_round,
-      iconBackgroundColor: const Color(0xffE3E1FB),
-      iconColor: const Color(0xff5E5CE6),
-      onTapBuilder: (context) =>
-          () => AutoRouter.of(context).push(const NightAzkarRoute()),
-    ),
-    _AdhkarCategory(
-      title: "Sleep Adhkar",
-      progressKey: null,
-      icon: Icons.bed_outlined,
-      iconBackgroundColor: const Color(0xffDCF5E0),
-      iconColor: const Color(0xff34C759),
-      onTapBuilder: (context) =>
-          () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
-    ),
-    _AdhkarCategory(
-      title: "After-Prayer Adhkar",
-      progressKey: null,
-      icon: Icons.flag_outlined,
-      iconBackgroundColor: const Color(0xffDCF5E0),
-      iconColor: const Color(0xff34C759),
-      onTapBuilder: (context) =>
-          () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
-    ),
-    _AdhkarCategory(
-      title: "Ruqyah",
-      progressKey: null,
-      icon: Icons.shield_outlined,
-      iconBackgroundColor: const Color(0xffDCF5E0),
-      iconColor: const Color(0xff34C759),
-      onTapBuilder: (context) =>
-          () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
-    ),
-  ];
+  List<_AdhkarCategory> _buildCategories(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return [
+      _AdhkarCategory(
+        title: l10n.morningAdhkar,
+        progressKey: "morning",
+        icon: Icons.wb_sunny_outlined,
+        iconBackgroundColor: const Color(0xffFFE7CF),
+        iconColor: const Color(0xffFF9F43),
+        onTapBuilder: (context) =>
+            () => AutoRouter.of(context).push(const MorningAzkarRoute()),
+      ),
+      _AdhkarCategory(
+        title: l10n.eveningAdhkar,
+        progressKey: "evening",
+        icon: Icons.nightlight_round,
+        iconBackgroundColor: const Color(0xffE3E1FB),
+        iconColor: const Color(0xff5E5CE6),
+        onTapBuilder: (context) =>
+            () => AutoRouter.of(context).push(const NightAzkarRoute()),
+      ),
+      _AdhkarCategory(
+        title: l10n.sleepAdhkar,
+        progressKey: null,
+        icon: Icons.bed_outlined,
+        iconBackgroundColor: const Color(0xffDCF5E0),
+        iconColor: const Color(0xff34C759),
+        onTapBuilder: (context) =>
+            () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
+      ),
+      _AdhkarCategory(
+        title: l10n.afterPrayerAdhkar,
+        progressKey: null,
+        icon: Icons.flag_outlined,
+        iconBackgroundColor: const Color(0xffDCF5E0),
+        iconColor: const Color(0xff34C759),
+        onTapBuilder: (context) =>
+            () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
+      ),
+      _AdhkarCategory(
+        title: l10n.ruqyah,
+        progressKey: null,
+        icon: Icons.shield_outlined,
+        iconBackgroundColor: const Color(0xffDCF5E0),
+        iconColor: const Color(0xff34C759),
+        onTapBuilder: (context) =>
+            () => AutoRouter.of(context).push(const SituationsAzkarRoute()),
+      ),
+    ];
+  }
 
-  String _formatLastRead(DateTime dateTime) {
+  String _formatLastRead(BuildContext context, DateTime dateTime) {
+    final l10n = AppLocalizations.of(context);
     final now = DateTime.now();
     final diff = now.difference(dateTime);
     if (diff.inMinutes < 60) {
-      return diff.inMinutes <= 1 ? "Just now" : "${diff.inMinutes}m ago";
+      return diff.inMinutes <= 1
+          ? l10n.justNow
+          : l10n.minutesAgo(diff.inMinutes);
     }
     if (diff.inHours < 24 &&
         dateTime.year == now.year &&
         dateTime.month == now.month &&
         dateTime.day == now.day) {
-      return "${diff.inHours}h ago";
+      return l10n.hoursAgo(diff.inHours);
     }
     final hour = dateTime.hour % 12 == 0 ? 12 : dateTime.hour % 12;
     final minute = dateTime.minute.toString().padLeft(2, '0');
-    final period = dateTime.hour >= 12 ? "PM" : "AM";
+    final period = dateTime.hour >= 12 ? l10n.pm : l10n.am;
+    final time = "$hour:$minute $period";
     final yesterday = now.subtract(const Duration(days: 1));
     final isYesterday = dateTime.year == yesterday.year &&
         dateTime.month == yesterday.month &&
@@ -109,25 +117,27 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
     if (dateTime.year == now.year &&
         dateTime.month == now.month &&
         dateTime.day == now.day) {
-      return "Today, $hour:$minute $period";
+      return l10n.today(time);
     }
     if (isYesterday) {
-      return "Yesterday, $hour:$minute $period";
+      return l10n.yesterday(time);
     }
     return "${dateTime.day}/${dateTime.month}/${dateTime.year}";
   }
 
   @override
   Widget build(BuildContext context) {
-    final filtered = _categories
+    final l10n = AppLocalizations.of(context);
+    final categories = _buildCategories(context);
+    final filtered = categories
         .where((c) => c.title.toLowerCase().contains(_query.toLowerCase()))
         .toList();
 
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: BlocBuilder<AdhkarProgressCubit,
-            Map<String, AdhkarProgressEntity>>(
+        child:
+            BlocBuilder<AdhkarProgressCubit, Map<String, AdhkarProgressEntity>>(
           builder: (context, progressByCategory) {
             return ListView(
               padding: const EdgeInsets.symmetric(
@@ -135,7 +145,7 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
               children: [
                 const SizedBox(height: ConstantValues.appTopPadding),
                 Text(
-                  "Adhkar List",
+                  l10n.adhkarList,
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -144,7 +154,7 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
                 ),
                 const SizedBox(height: 22),
                 SituationalZikrSearchWidget(
-                  hintText: "Search adhkar...",
+                  hintText: l10n.searchAdhkar,
                   onChanged: (value) => setState(() => _query = value),
                 ),
                 const SizedBox(height: 20),
@@ -156,12 +166,12 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
 
                     final String subtitle;
                     if (category.progressKey == null) {
-                      subtitle = "Not tracked yet";
+                      subtitle = l10n.notTrackedYet;
                     } else if (progress?.lastReadAt == null) {
-                      subtitle = "Status: Not started";
+                      subtitle = l10n.statusNotStarted;
                     } else {
-                      subtitle =
-                          "Last read: ${_formatLastRead(progress!.lastReadAt!)}";
+                      subtitle = l10n.lastRead(
+                          _formatLastRead(context, progress!.lastReadAt!));
                     }
 
                     return AdhkarCategoryCard(

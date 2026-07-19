@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_zikr_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
@@ -59,13 +61,15 @@ class StreakCardWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      "Streak",
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                    Text(
+                      AppLocalizations.of(context).streakLabel,
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      "$streak day streak",
+                      AppLocalizations.of(context)
+                          .dayStreakCount(formatNumber(context, streak)),
                       style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
@@ -73,26 +77,27 @@ class StreakCardWidget extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      "You've kept up your daily adhkar without\nmissing a day",
-                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                    Text(
+                      AppLocalizations.of(context).streakDescription,
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 13),
                     ),
                     const SizedBox(height: 10),
                     GestureDetector(
                       onTap: () => AutoTabsRouter.of(context).setActiveIndex(3),
-                      child: const Row(
+                      child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "View stats",
-                            style: TextStyle(
+                            AppLocalizations.of(context).viewStats,
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          SizedBox(width: 4),
-                          Icon(Icons.chevron_right,
+                          const SizedBox(width: 4),
+                          const Icon(Icons.chevron_right,
                               color: Colors.white, size: 16),
                         ],
                       ),

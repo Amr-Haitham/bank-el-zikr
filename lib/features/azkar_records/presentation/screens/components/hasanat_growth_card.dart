@@ -1,4 +1,5 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -20,14 +21,18 @@ class HasanatGrowthCard extends StatefulWidget {
 class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
   GrowthPeriod _period = GrowthPeriod.week;
 
-  static const _periodLabel = {
-    GrowthPeriod.week: "Week",
-    GrowthPeriod.month: "Month",
-    GrowthPeriod.year: "Year",
-  };
+  Map<GrowthPeriod, String> _periodLabels(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return {
+      GrowthPeriod.week: l10n.weekLabel,
+      GrowthPeriod.month: l10n.monthLabel,
+      GrowthPeriod.year: l10n.yearLabel,
+    };
+  }
 
   @override
   Widget build(BuildContext context) {
+    final periodLabels = _periodLabels(context);
     final points = widget.stats.growthPoints(_period);
     final percentChange = widget.stats.growthPercentChange(_period);
     final maxY = points.fold<int>(1, (m, p) => p.value > m ? p.value : m);
@@ -62,7 +67,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    "${percentChange >= 0 ? '+' : ''}${percentChange.round()}% this $_periodNoun",
+                    "${percentChange >= 0 ? '+' : ''}${percentChange.round()}% ${periodLabels[_period]}",
                     style: const TextStyle(color: Colors.white, fontSize: 11),
                   ),
                 )
@@ -71,12 +76,12 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
-                  const Text(
-                    "Hasanat growth",
-                    style: TextStyle(color: Colors.white70, fontSize: 12),
+                  Text(
+                    AppLocalizations.of(context).hasanatGrowth,
+                    style: const TextStyle(color: Colors.white70, fontSize: 12),
                   ),
                   Text(
-                    ArabicNumbers().convert(widget.totalBalance).toString(),
+                    formatNumber(context, widget.totalBalance),
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -107,7 +112,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                         borderRadius: BorderRadius.circular(26),
                       ),
                       child: Text(
-                        _periodLabel[period]!,
+                        periodLabels[period]!,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13,
@@ -191,16 +196,5 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
         ],
       ),
     );
-  }
-
-  String get _periodNoun {
-    switch (_period) {
-      case GrowthPeriod.week:
-        return "week";
-      case GrowthPeriod.month:
-        return "month";
-      case GrowthPeriod.year:
-        return "year";
-    }
   }
 }

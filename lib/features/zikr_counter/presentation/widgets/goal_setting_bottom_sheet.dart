@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,8 +18,7 @@ class GoalSettingBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<GoalSettingBottomSheet> createState() =>
-      _GoalSettingBottomSheetState();
+  State<GoalSettingBottomSheet> createState() => _GoalSettingBottomSheetState();
 }
 
 class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
@@ -72,7 +72,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
             ),
             const SizedBox(height: 20),
             Text(
-              "Set goal",
+              AppLocalizations.of(context).setGoal,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -80,7 +80,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
             ),
             const SizedBox(height: 12),
             Text(
-              "The phone vibrates at each completed lap",
+              AppLocalizations.of(context).vibrateAtLap,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,
@@ -108,8 +108,8 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                   NoLeadingZeroInputFormatter(),
                   WhitespaceInputFormatter(),
                 ],
-                style: const TextStyle(
-                    fontSize: 24, fontWeight: FontWeight.w800),
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
                 decoration: const InputDecoration(
                   border: InputBorder.none,
                   isCollapsed: true,
@@ -125,8 +125,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                           child: GestureDetector(
                             onTap: () => _selectPreset(preset),
                             child: Container(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(vertical: 12),
                               decoration: BoxDecoration(
                                 color: Theme.of(context).cardColor,
                                 borderRadius: BorderRadius.circular(12),
@@ -159,9 +158,10 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: const Text(
-                  "Save",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                child: Text(
+                  AppLocalizations.of(context).saveLabel,
+                  style: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -169,7 +169,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
             GestureDetector(
               onTap: _removeGoal,
               child: Text(
-                "Remove goal",
+                AppLocalizations.of(context).removeGoal,
                 style: TextStyle(
                   fontSize: 13,
                   color: Theme.of(context)

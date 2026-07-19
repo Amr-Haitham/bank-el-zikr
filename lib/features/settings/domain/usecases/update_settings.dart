@@ -33,6 +33,34 @@ class UpdateSettings implements UseCase<void, UpdateSettingsParams> {
       if (result.isLeft()) return result;
     }
 
+    if (params.selectedLanguage != null) {
+      final result =
+          await repository.setSelectedLanguage(params.selectedLanguage!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.hasSeenOnboarding != null) {
+      final result =
+          await repository.setHasSeenOnboarding(params.hasSeenOnboarding!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.dhikrFont != null) {
+      final result = await repository.setDhikrFont(params.dhikrFont!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.textSize != null) {
+      final result = await repository.setTextSize(params.textSize!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.useArabicNumerals != null) {
+      final result =
+          await repository.setUseArabicNumerals(params.useArabicNumerals!);
+      if (result.isLeft()) return result;
+    }
+
     return const Right(null);
   }
 }
@@ -42,12 +70,22 @@ class UpdateSettingsParams extends Equatable {
   final bool? isVibrating;
   final TimeOfDay? morningZikrAlarm;
   final TimeOfDay? nightZikrAlarm;
+  final String? selectedLanguage;
+  final bool? hasSeenOnboarding;
+  final String? dhikrFont;
+  final String? textSize;
+  final bool? useArabicNumerals;
 
   const UpdateSettingsParams({
     this.isLightTheme,
     this.isVibrating,
     this.morningZikrAlarm,
     this.nightZikrAlarm,
+    this.selectedLanguage,
+    this.hasSeenOnboarding,
+    this.dhikrFont,
+    this.textSize,
+    this.useArabicNumerals,
   });
 
   @override
@@ -56,5 +94,10 @@ class UpdateSettingsParams extends Equatable {
         isVibrating,
         morningZikrAlarm,
         nightZikrAlarm,
+        selectedLanguage,
+        hasSeenOnboarding,
+        dhikrFont,
+        textSize,
+        useArabicNumerals,
       ];
 }

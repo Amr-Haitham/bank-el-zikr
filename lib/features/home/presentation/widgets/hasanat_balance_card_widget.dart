@@ -1,6 +1,7 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
@@ -23,10 +24,13 @@ class HasanatBalanceCardWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Total hasanat balance",
+            AppLocalizations.of(context).totalHasanatBalance,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
                   fontSize: 14,
-                  color: Theme.of(context).textTheme.bodySmall!.color!
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .color!
                       .withValues(alpha: 0.6),
                 ),
           ),
@@ -36,7 +40,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
               final balance =
                   state.whenOrNull(success: (s) => s.accountBalance) ?? 0;
               return Text(
-                ArabicNumbers().convert(balance).toString(),
+                formatNumber(context, balance),
                 style: Theme.of(context)
                     .textTheme
                     .headlineLarge!
@@ -61,7 +65,8 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Text(
-                  "Deposited today +${ArabicNumbers().convert(depositedToday)}",
+                  AppLocalizations.of(context)
+                      .depositedToday(formatNumber(context, depositedToday)),
                   style: TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.w600,
@@ -86,9 +91,10 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
-              child: const Text(
-                "Deposit more +",
-                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+              child: Text(
+                AppLocalizations.of(context).depositMore,
+                style:
+                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ),
           ),

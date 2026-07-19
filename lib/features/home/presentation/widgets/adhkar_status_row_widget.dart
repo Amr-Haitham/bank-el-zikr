@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AdhkarStatusRowWidget extends StatelessWidget {
@@ -7,15 +8,19 @@ class AdhkarStatusRowWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return Row(
       children: [
         Expanded(
           child: _AdhkarStatusCard(
             icon: Icons.nightlight_round,
             iconColor: const Color(0xff5E5CE6),
-            title: "Evening Adhkar",
-            status: "Incomplete",
-            statusColor: Theme.of(context).textTheme.bodySmall!.color!
+            title: l10n.eveningAdhkar,
+            status: l10n.incomplete,
+            statusColor: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .color!
                 .withValues(alpha: 0.5),
             onTap: () => AutoRouter.of(context).push(const NightAzkarRoute()),
           ),
@@ -25,11 +30,10 @@ class AdhkarStatusRowWidget extends StatelessWidget {
           child: _AdhkarStatusCard(
             icon: Icons.wb_sunny_outlined,
             iconColor: const Color(0xffFFB800),
-            title: "Morning Adhkar",
-            status: "Done",
+            title: l10n.morningAdhkar,
+            status: l10n.done,
             statusColor: Theme.of(context).primaryColor,
-            onTap: () =>
-                AutoRouter.of(context).push(const MorningAzkarRoute()),
+            onTap: () => AutoRouter.of(context).push(const MorningAzkarRoute()),
           ),
         ),
       ],

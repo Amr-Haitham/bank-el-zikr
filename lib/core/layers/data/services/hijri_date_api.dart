@@ -9,7 +9,7 @@
 //   Future<HijriDate> getTodaysHijriDate() async {
 //     final now = DateTime.now();
 //     print(now.toString());
-    
+
 //     // Format the date as DD-MM-YYYY
 //     final formattedDate =
 //         '${now.day.toString().padLeft(2, '0')}-${now.month.toString().padLeft(2, '0')}-${now.year}';

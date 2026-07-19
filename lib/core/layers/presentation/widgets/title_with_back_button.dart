@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class TitleWithBackButton extends StatelessWidget {
   final String? title;
-  final Widget? trailing; 
-  const TitleWithBackButton({super.key, required this.title,  this.trailing });
+  final Widget? trailing;
+  const TitleWithBackButton({super.key, required this.title, this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,9 @@ class TitleWithBackButton extends StatelessWidget {
                     style: Theme.of(context).textTheme.headlineSmall,
                   )
                 : const SizedBox.shrink(),
-                const SizedBox(width: 8,),
+            const SizedBox(
+              width: 8,
+            ),
             GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();

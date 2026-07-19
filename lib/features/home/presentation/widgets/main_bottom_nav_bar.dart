@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class MainBottomNavBar extends StatelessWidget {
@@ -7,15 +8,16 @@ class MainBottomNavBar extends StatelessWidget {
 
   final TabsRouter tabsRouter;
 
-  static const _items = [
-    _NavItemData(icon: Icons.grid_view_rounded, label: "Home"),
-    _NavItemData(icon: Icons.track_changes_outlined, label: "Tasbih"),
-    _NavItemData(icon: Icons.menu_book_outlined, label: "Adhkar"),
-    _NavItemData(icon: Icons.insights_outlined, label: "Journey"),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final items = [
+      _NavItemData(icon: Icons.grid_view_rounded, label: l10n.navHome),
+      _NavItemData(icon: Icons.track_changes_outlined, label: l10n.navTasbih),
+      _NavItemData(icon: Icons.menu_book_outlined, label: l10n.navAdhkar),
+      _NavItemData(icon: Icons.insights_outlined, label: l10n.navJourney),
+    ];
+
     final isLight = GeneralUtils.isLightTheme(context);
     return DecoratedBox(
       decoration: BoxDecoration(
@@ -33,7 +35,7 @@ class MainBottomNavBar extends StatelessWidget {
           height: 62,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(_items.length, (index) {
+            children: List.generate(items.length, (index) {
               final isActive = tabsRouter.activeIndex == index;
               final color = isActive
                   ? Theme.of(context).primaryColor
@@ -44,10 +46,10 @@ class MainBottomNavBar extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(_items[index].icon, color: color, size: 24),
+                    Icon(items[index].icon, color: color, size: 24),
                     const SizedBox(height: 4),
                     Text(
-                      _items[index].label,
+                      items[index].label,
                       style: TextStyle(
                         color: color,
                         fontSize: 11,

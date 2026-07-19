@@ -8,9 +8,12 @@ import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,6 +27,9 @@ void main() async {
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  final hasSeenOnboarding =
+      getService<SharedPreferences>().getBool('hasSeenOnboarding') ?? false;
+
   runApp(
     MultiBlocProvider(
       providers: [
@@ -32,7 +38,9 @@ void main() async {
         BlocProvider.value(value: getService<AdhkarProgressCubit>()),
         BlocProvider.value(value: getService<DailyActivityLogCubit>()),
       ],
-      child: MyApp(appRouter: AppRouter()),
+      child: MyApp(
+        appRouter: AppRouter(showOnboarding: !hasSeenOnboarding),
+      ),
     ),
   );
 }
@@ -41,18 +49,53 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key, required this.appRouter});
   final AppRouter appRouter;
 
+  static const _textSizeScales = {
+    'small': 0.9,
+    'medium': 1.0,
+    'large': 1.15,
+  };
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<SettingsCubit, RequestState<Settings>>(
       builder: (context, state) {
-        final isLightTheme =
-            state.whenOrNull(success: (s) => s.isLightTheme) ?? true;
+        final settings = state.whenOrNull(success: (s) => s);
+        final isLightTheme = settings?.isLightTheme ?? true;
+        final dhikrFont = settings?.dhikrFont ?? 'clear';
+        final textSize = settings?.textSize ?? 'medium';
+
+        final baseTheme =
+            isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme;
+        // 'clear' uses the app's default Tajawal font; 'uthmani' switches to
+        // Cairo, the closest bundled alternative — there's no true Uthmani
+        // calligraphic Quran font asset shipped with the app.
+        final fontFamily = dhikrFont == 'uthmani' ? 'Cairo' : 'Tajawal';
+        final theme = baseTheme.copyWith(
+          textTheme: baseTheme.textTheme.apply(fontFamily: fontFamily),
+          primaryTextTheme:
+              baseTheme.primaryTextTheme.apply(fontFamily: fontFamily),
+        );
+
+        final textScale = _textSizeScales[textSize] ?? 1.0;
+        final locale = Locale(settings?.selectedLanguage ?? 'ar');
 
         return MaterialApp.router(
-          locale: const Locale("ar"),
-          theme: isLightTheme ? AppTheme.lightTheme : AppTheme.darkTheme,
+          locale: locale,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: const [
+            AppLocalizations.delegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          theme: theme,
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter.config(),
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context)
+                .copyWith(textScaler: TextScaler.linear(textScale)),
+            child: child!,
+          ),
         );
       },
     );

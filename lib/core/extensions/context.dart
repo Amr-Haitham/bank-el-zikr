@@ -55,7 +55,8 @@ extension ContextExtension on BuildContext {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
-        duration: Duration(milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
+        duration: Duration(
+            milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
       ),
     );
   }

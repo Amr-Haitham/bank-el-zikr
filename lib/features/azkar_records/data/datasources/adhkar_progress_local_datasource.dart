@@ -8,6 +8,7 @@ abstract class AdhkarProgressLocalDataSource {
     required DateTime lastReadAt,
     required int completedCount,
     required int totalCount,
+    required Map<int, int> repsByZikrId,
   });
 }
 
@@ -38,12 +39,15 @@ class AdhkarProgressLocalDataSourceImpl
     required DateTime lastReadAt,
     required int completedCount,
     required int totalCount,
+    required Map<int, int> repsByZikrId,
   }) async {
     final all = _readAll();
     all[category] = {
       'lastReadAt': lastReadAt.millisecondsSinceEpoch,
       'completedCount': completedCount,
       'totalCount': totalCount,
+      'repsByZikrId':
+          repsByZikrId.map((zikrId, reps) => MapEntry(zikrId.toString(), reps)),
     };
     await sharedPreferences.setString(_storageKey, jsonEncode(all));
   }

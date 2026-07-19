@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
 import 'package:bank_el_ziker/features/home/presentation/cubit/get_random_prayer_cubit.dart';
 import 'package:flutter/material.dart';
@@ -55,8 +56,7 @@ class VerseOfDayCardWidget extends StatelessWidget {
             onTap: () =>
                 context.read<GetRandomPrayerCubit>().reExecutePastRequest(),
             child: Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
@@ -68,7 +68,7 @@ class VerseOfDayCardWidget extends StatelessWidget {
                       size: 16, color: Theme.of(context).primaryColor),
                   const SizedBox(width: 6),
                   Text(
-                    "Another verse",
+                    AppLocalizations.of(context).anotherVerse,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,

@@ -51,14 +51,13 @@ class CustomAppTextField extends StatelessWidget {
           TextField(
             textDirection: TextDirection.rtl,
             controller: controller,
-          style: Theme.of(context).textTheme.bodySmall,
+            style: Theme.of(context).textTheme.bodySmall,
             inputFormatters: inputFormatters,
             keyboardType: keyboardType,
             textAlign: TextAlign.right,
-          
             decoration: InputDecoration(
               hintText: title,
-              
+
               // hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(color: appGray),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8),

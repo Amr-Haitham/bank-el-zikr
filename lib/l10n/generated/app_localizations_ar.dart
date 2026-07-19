@@ -1,0 +1,278 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Arabic (`ar`).
+class AppLocalizationsAr extends AppLocalizations {
+  AppLocalizationsAr([String locale = 'ar']) : super(locale);
+
+  @override
+  String get navHome => 'الرئيسية';
+
+  @override
+  String get navTasbih => 'المسبحة';
+
+  @override
+  String get navAdhkar => 'الأذكار';
+
+  @override
+  String get navJourney => 'رصدي';
+
+  @override
+  String get homeTitle => 'بنك الذكر';
+
+  @override
+  String get homeSubtitle => 'حصنك اليومي';
+
+  @override
+  String get totalHasanatBalance => 'إجمالي رصيد الحسنات';
+
+  @override
+  String depositedToday(String count) {
+    return 'تم الإيداع اليوم +$count';
+  }
+
+  @override
+  String get depositMore => 'أضف المزيد +';
+
+  @override
+  String get morningAdhkar => 'أذكار الصباح';
+
+  @override
+  String get eveningAdhkar => 'أذكار المساء';
+
+  @override
+  String get incomplete => 'غير مكتمل';
+
+  @override
+  String get done => 'مكتمل';
+
+  @override
+  String get streakLabel => 'التتابع';
+
+  @override
+  String dayStreakCount(String count) {
+    return 'تتابع $count يوم';
+  }
+
+  @override
+  String get streakDescription => 'حافظت على أذكارك اليومية دون انقطاع';
+
+  @override
+  String get viewStats => 'عرض الإحصائيات';
+
+  @override
+  String get supportTheApp => 'ادعم التطبيق';
+
+  @override
+  String get supportSubtitle => 'ساعد في إبقاء بنك الذكر مجانيًا للجميع';
+
+  @override
+  String get donate => 'تبرع';
+
+  @override
+  String get anotherVerse => 'آية أخرى';
+
+  @override
+  String get shareReward => 'شارك الأجر مع أصدقاءك';
+
+  @override
+  String get digitalTasbih => 'السبحة الرقمية';
+
+  @override
+  String get errorLoadingCounter => 'حدث خطأ في تحميل العداد';
+
+  @override
+  String get resetLabel => 'إعادة تعيين';
+
+  @override
+  String get balanceLabel => 'الرصيد';
+
+  @override
+  String get lapsLabel => 'الأشواط';
+
+  @override
+  String get goalLabel => 'الهدف';
+
+  @override
+  String get tapAnywhere => '⚡ اضغط في أي مكان';
+
+  @override
+  String get setGoal => 'تحديد الهدف';
+
+  @override
+  String get vibrateAtLap => 'يهتز الهاتف عند إتمام كل شوط';
+
+  @override
+  String get saveLabel => 'حفظ';
+
+  @override
+  String get removeGoal => 'إزالة الهدف';
+
+  @override
+  String get adhkarList => 'قائمة الأذكار';
+
+  @override
+  String get searchAdhkar => 'ابحث عن الأذكار...';
+
+  @override
+  String get notTrackedYet => 'غير مُتابَع بعد';
+
+  @override
+  String get statusNotStarted => 'الحالة: لم يبدأ';
+
+  @override
+  String lastRead(String value) {
+    return 'آخر قراءة: $value';
+  }
+
+  @override
+  String get sleepAdhkar => 'أذكار النوم';
+
+  @override
+  String get afterPrayerAdhkar => 'أذكار بعد الصلاة';
+
+  @override
+  String get ruqyah => 'الرقية';
+
+  @override
+  String get justNow => 'الآن';
+
+  @override
+  String minutesAgo(int count) {
+    return 'منذ $count د';
+  }
+
+  @override
+  String hoursAgo(int count) {
+    return 'منذ $count س';
+  }
+
+  @override
+  String get am => 'ص';
+
+  @override
+  String get pm => 'م';
+
+  @override
+  String today(String time) {
+    return 'اليوم، $time';
+  }
+
+  @override
+  String yesterday(String time) {
+    return 'أمس، $time';
+  }
+
+  @override
+  String get mySpiritualJourney => 'رحلتي الروحية';
+
+  @override
+  String get dhikrBreakdown => 'تفصيل الأذكار';
+
+  @override
+  String get weekLabel => 'الأسبوع';
+
+  @override
+  String get monthLabel => 'الشهر';
+
+  @override
+  String get yearLabel => 'السنة';
+
+  @override
+  String get noDhikrRecorded => 'لا يوجد ذكر مسجل بعد';
+
+  @override
+  String get hasanatGrowth => 'نمو الحسنات';
+
+  @override
+  String get overallAdhkarStreak => 'التتابع العام للأذكار';
+
+  @override
+  String consecutiveDays(String count) {
+    return '$count يوم متتالي';
+  }
+
+  @override
+  String longestOverall(String count) {
+    return 'الأطول إجمالاً: $count يوم';
+  }
+
+  @override
+  String get thisWeek => 'هذا الأسبوع';
+
+  @override
+  String adhkarOutOf21(String count) {
+    return '$count / 21 ذكر';
+  }
+
+  @override
+  String get settingsTitle => 'الإعدادات';
+
+  @override
+  String get appTheme => 'مظهر التطبيق';
+
+  @override
+  String get vibration => 'الاهتزاز';
+
+  @override
+  String get dhikrFont => 'خط الذكر';
+
+  @override
+  String get clearFont => 'واضح';
+
+  @override
+  String get uthmaniFont => 'عثماني';
+
+  @override
+  String get textSize => 'حجم الخط';
+
+  @override
+  String get numerals => 'الأرقام';
+
+  @override
+  String get languageLabel => 'اللغة';
+
+  @override
+  String get errorLoadingAdhkar => 'حدث خطأ في تحميل الأذكار';
+
+  @override
+  String get noAdhkarFound => 'لا توجد أذكار';
+
+  @override
+  String get listViewLabel => 'قائمة';
+
+  @override
+  String get singleViewLabel => 'ذكر واحد';
+
+  @override
+  String get repetitionCountLabel => 'عدد التكرار';
+
+  @override
+  String ofCount(String count) {
+    return 'من $count';
+  }
+
+  @override
+  String get completedLabel => 'اكتمل';
+
+  @override
+  String get tapToCount => 'اضغط للعد';
+
+  @override
+  String get virtueAndSource => 'الفضل والمصدر';
+
+  @override
+  String get shareLabel => 'مشاركة';
+
+  @override
+  String get copyLabel => 'نسخ';
+
+  @override
+  String get copied => 'تم النسخ';
+
+  @override
+  String get swipeHint => 'اسحب يمينًا أو يسارًا للتنقل بين الأذكار';
+}

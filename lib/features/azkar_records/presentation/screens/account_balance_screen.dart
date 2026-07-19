@@ -7,6 +7,7 @@ import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_sta
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -34,7 +35,7 @@ class AccountBalanceScreen extends StatelessWidget {
               children: [
                 const SizedBox(height: ConstantValues.appTopPadding),
                 Text(
-                  "My Spiritual Journey",
+                  AppLocalizations.of(context).mySpiritualJourney,
                   textAlign: TextAlign.center,
                   style: Theme.of(context)
                       .textTheme
@@ -64,7 +65,7 @@ class AccountBalanceScreen extends StatelessWidget {
                   children: [
                     Expanded(
                       child: CategoryStreakRing(
-                        title: "Evening Adhkar",
+                        title: AppLocalizations.of(context).eveningAdhkar,
                         currentStreak: stats.eveningCurrentStreak,
                         color: const Color(0xff5E5CE6),
                       ),
@@ -72,7 +73,7 @@ class AccountBalanceScreen extends StatelessWidget {
                     const SizedBox(width: 12),
                     Expanded(
                       child: CategoryStreakRing(
-                        title: "Morning Adhkar",
+                        title: AppLocalizations.of(context).morningAdhkar,
                         currentStreak: stats.morningCurrentStreak,
                         color: const Color(0xffFF9F43),
                       ),

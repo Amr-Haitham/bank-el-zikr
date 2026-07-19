@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class JourneyStreakCard extends StatelessWidget {
@@ -33,13 +35,14 @@ class JourneyStreakCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  "Overall adhkar streak",
-                  style: TextStyle(color: Colors.white70, fontSize: 13),
+                Text(
+                  AppLocalizations.of(context).overallAdhkarStreak,
+                  style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  "$currentStreak consecutive days",
+                  AppLocalizations.of(context)
+                      .consecutiveDays(formatNumber(context, currentStreak)),
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 22,
@@ -48,7 +51,8 @@ class JourneyStreakCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 Text(
-                  "Longest overall: $longestStreak days",
+                  AppLocalizations.of(context)
+                      .longestOverall(formatNumber(context, longestStreak)),
                   style: const TextStyle(color: Colors.white70, fontSize: 13),
                 ),
               ],

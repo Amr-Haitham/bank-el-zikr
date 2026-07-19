@@ -648,7 +648,8 @@ class InitialData {
   ];
 
   static List<PrayerEntity> prayers = [
-    const PrayerEntity(id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),
+    const PrayerEntity(
+        id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),
     const PrayerEntity(
         id: 1,
         content:
@@ -770,8 +771,10 @@ class InitialData {
         id: 31,
         content:
             "اللهم إني أسألك يا الله بأنك الواحد الأحد الصمد الذي لم يلد ولم يولد ولم يكن له كفوا أحد أن تغفر لي ذنوبي إنك أنت الغفور الرحيم"),
-    const PrayerEntity(id: 32, content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى"),
-    const PrayerEntity(id: 33, content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك"),
+    const PrayerEntity(
+        id: 32, content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى"),
+    const PrayerEntity(
+        id: 33, content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك"),
     const PrayerEntity(
         id: 34,
         content:

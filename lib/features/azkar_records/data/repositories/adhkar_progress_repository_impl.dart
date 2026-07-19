@@ -14,18 +14,23 @@ class AdhkarProgressRepositoryImpl implements AdhkarProgressRepository {
       getAllProgress() async {
     return safeAwait(() async {
       final raw = await localDataSource.getAllProgress();
-      return raw.map((category, value) => MapEntry(
-            category,
-            AdhkarProgressEntity(
-              category: category,
-              lastReadAt: value['lastReadAt'] != null
-                  ? DateTime.fromMillisecondsSinceEpoch(
-                      value['lastReadAt'] as int)
-                  : null,
-              completedCount: value['completedCount'] as int? ?? 0,
-              totalCount: value['totalCount'] as int? ?? 0,
-            ),
-          ));
+      return raw.map((category, value) {
+        final rawReps = Map<String, dynamic>.from(value['repsByZikrId'] ?? {});
+        return MapEntry(
+          category,
+          AdhkarProgressEntity(
+            category: category,
+            lastReadAt: value['lastReadAt'] != null
+                ? DateTime.fromMillisecondsSinceEpoch(
+                    value['lastReadAt'] as int)
+                : null,
+            completedCount: value['completedCount'] as int? ?? 0,
+            totalCount: value['totalCount'] as int? ?? 0,
+            repsByZikrId: rawReps.map((zikrIdString, reps) =>
+                MapEntry(int.parse(zikrIdString), reps as int)),
+          ),
+        );
+      });
     });
   }
 
@@ -38,6 +43,7 @@ class AdhkarProgressRepositoryImpl implements AdhkarProgressRepository {
         lastReadAt: progress.lastReadAt ?? DateTime.now(),
         completedCount: progress.completedCount,
         totalCount: progress.totalCount,
+        repsByZikrId: progress.repsByZikrId,
       );
     });
   }

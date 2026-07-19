@@ -6,14 +6,15 @@ import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/core/utils/haptics.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
-import 'package:bank_el_ziker/features/settings/presentation/cubit/get_settings_cubit.dart';
+import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:confetti/confetti.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
-import 'package:flutter/services.dart';
 
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
@@ -61,7 +62,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
       _controllerTopCenter.play();
       setState(() => _laps++);
       if (isVibrating) {
-        HapticFeedback.vibrate();
+        vibrateCelebration();
       }
     }
 
@@ -100,7 +101,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetSettingsCubit, RequestState<Settings>>(
+    return BlocBuilder<SettingsCubit, RequestState<Settings>>(
       builder: (context, settingsState) {
         final isVibrating =
             settingsState.whenOrNull(success: (s) => s.isVibrating) ?? true;
@@ -122,8 +123,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
                             const Center(child: CircularProgressIndicator()),
                         loading: () =>
                             const Center(child: CircularProgressIndicator()),
-                        failure: (f) =>
-                            const Center(child: Text("Error loading counter")),
+                        failure: (f) => Center(
+                            child: Text(AppLocalizations.of(context)
+                                .errorLoadingCounter)),
                         success: (counter) {
                           final goalText =
                               counter.currentGoal?.toString() ?? "";
@@ -137,7 +139,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
                               Text(
-                                "Digital Tasbih",
+                                AppLocalizations.of(context).digitalTasbih,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context)
                                     .textTheme
@@ -279,8 +281,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
           ),
         ),
         icon: const Icon(Icons.refresh, size: 18),
-        label:
-            const Text("Reset", style: TextStyle(fontWeight: FontWeight.w700)),
+        label: Text(AppLocalizations.of(context).resetLabel,
+            style: const TextStyle(fontWeight: FontWeight.w700)),
       ),
     );
   }

@@ -1,9 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:bank_el_ziker/core/di/service_locator.dart';
-import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'settings_screen.dart';
 
 @RoutePage()
@@ -12,11 +9,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getService<SettingsCubit>()),
-      ],
-      child: const SettingsScreen(),
-    );
+    // SettingsCubit is a global singleton, already provided at the app root
+    // in main.dart — no need to (re)provide it here.
+    return const SettingsScreen();
   }
 }

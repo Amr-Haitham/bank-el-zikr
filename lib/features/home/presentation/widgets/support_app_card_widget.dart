@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -38,7 +39,7 @@ class SupportAppCardWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Support the app",
+                  AppLocalizations.of(context).supportTheApp,
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
@@ -46,7 +47,7 @@ class SupportAppCardWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  "Help keep Bank el Dhikr free for everyone",
+                  AppLocalizations.of(context).supportSubtitle,
                   style: TextStyle(
                     fontSize: 12,
                     color: Theme.of(context)
@@ -70,9 +71,9 @@ class SupportAppCardWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: const Text(
-              "Donate",
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+            child: Text(
+              AppLocalizations.of(context).donate,
+              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
             ),
           ),
         ],

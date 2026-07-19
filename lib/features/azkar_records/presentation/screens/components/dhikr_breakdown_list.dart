@@ -1,4 +1,5 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,7 @@ class DhikrBreakdownList extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Dhikr breakdown",
+                AppLocalizations.of(context).dhikrBreakdown,
                 style: Theme.of(context)
                     .textTheme
                     .bodyMedium!
@@ -60,9 +61,10 @@ class DhikrBreakdownList extends StatelessWidget {
               ),
               Row(
                 children: [
-                  _headerLabel(context, "Week"),
+                  _headerLabel(context, AppLocalizations.of(context).weekLabel),
                   const SizedBox(width: 16),
-                  _headerLabel(context, "Month"),
+                  _headerLabel(
+                      context, AppLocalizations.of(context).monthLabel),
                 ],
               ),
             ],
@@ -72,7 +74,7 @@ class DhikrBreakdownList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
-                "No dhikr recorded yet",
+                AppLocalizations.of(context).noDhikrRecorded,
                 style: TextStyle(
                   fontSize: 13,
                   color: Theme.of(context)
@@ -124,7 +126,7 @@ class DhikrBreakdownList extends StatelessWidget {
             SizedBox(
               width: 40,
               child: Text(
-                ArabicNumbers().convert(row.weekCount),
+                formatNumber(context, row.weekCount),
                 textAlign: TextAlign.center,
                 style: const TextStyle(
                   fontSize: 13,
@@ -136,7 +138,7 @@ class DhikrBreakdownList extends StatelessWidget {
             SizedBox(
               width: 40,
               child: Text(
-                ArabicNumbers().convert(row.monthCount),
+                formatNumber(context, row.monthCount),
                 textAlign: TextAlign.center,
                 style:
                     const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),

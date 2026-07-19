@@ -13,16 +13,22 @@ import 'package:bank_el_ziker/features/azkar_management/presentation/screens/azk
 import 'package:bank_el_ziker/features/azkar_management/presentation/screens/select_zikr_route.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/screens/daily_azkar_route.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/screens/account_balance_route.dart';
+import 'package:bank_el_ziker/features/onboarding/presentation/screens/onboarding_route.dart';
 
 part 'app_router.gr.dart';
 
 @AutoRouterConfig()
 class AppRouter extends RootStackRouter {
+  AppRouter({this.showOnboarding = false});
+
+  final bool showOnboarding;
+
   @override
   List<AutoRoute> get routes => [
+        AutoRoute(page: OnboardingRoute.page, initial: showOnboarding),
         AutoRoute(
           page: DashboardRoute.page,
-          initial: true,
+          initial: !showOnboarding,
           children: [
             AutoRoute(page: HomeRoute.page, initial: true),
             AutoRoute(page: TasbeehWerdRoute.page),

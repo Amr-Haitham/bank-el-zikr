@@ -13,4 +13,3 @@ const appLightGreen = Color(0xffF4FBF4);
 const appLight = Color(0xffF3F3F3);
 const appGold = Color.fromRGBO(255, 184, 0, 1);
 const appInactiveSwitch = Color(0xff787880);
-

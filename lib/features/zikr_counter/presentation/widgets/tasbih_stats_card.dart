@@ -1,4 +1,5 @@
-import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class TasbihStatsCard extends StatelessWidget {
@@ -27,24 +28,24 @@ class TasbihStatsCard extends StatelessWidget {
         children: [
           Expanded(
             child: _StatColumn(
-              label: "Balance",
-              value: ArabicNumbers().convert(balance),
+              label: AppLocalizations.of(context).balanceLabel,
+              value: formatNumber(context, balance),
               valueColor: Theme.of(context).primaryColor,
             ),
           ),
           _divider(context),
           Expanded(
             child: _StatColumn(
-              label: "Laps",
-              value: ArabicNumbers().convert(laps),
+              label: AppLocalizations.of(context).lapsLabel,
+              value: formatNumber(context, laps),
               valueColor: Theme.of(context).textTheme.bodyLarge!.color,
             ),
           ),
           _divider(context),
           Expanded(
             child: _StatColumn(
-              label: "Goal",
-              value: goal != null ? ArabicNumbers().convert(goal!) : "-",
+              label: AppLocalizations.of(context).goalLabel,
+              value: goal != null ? formatNumber(context, goal!) : "-",
               valueColor: const Color(0xffFFB800),
               onEdit: onEditGoal,
             ),
@@ -58,7 +59,8 @@ class TasbihStatsCard extends StatelessWidget {
     return Container(
       width: 1,
       height: 34,
-      color: Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.15),
+      color:
+          Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.15),
     );
   }
 }
