@@ -83,6 +83,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 mainLabel: "English",
                 mainLabelDirection: TextDirection.ltr,
                 subtitle: "Adds translation & transliteration",
+                boldOnLeft: true,
               ),
               const Spacer(flex: 3),
               Text(
@@ -128,6 +129,7 @@ class _LanguageOption extends StatelessWidget {
     required this.mainLabel,
     required this.mainLabelDirection,
     this.subtitle,
+    this.boldOnLeft = false,
   });
 
   final bool isSelected;
@@ -136,9 +138,41 @@ class _LanguageOption extends StatelessWidget {
   final String mainLabel;
   final TextDirection mainLabelDirection;
   final String? subtitle;
+  final bool boldOnLeft;
 
   @override
   Widget build(BuildContext context) {
+    final fadedStyle = TextStyle(
+      fontSize: 13,
+      color: Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.5),
+    );
+    final boldColumn = Column(
+      textDirection: TextDirection.ltr,
+      crossAxisAlignment: boldOnLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      children: [
+        Text(
+          mainLabel,
+          textDirection: mainLabelDirection,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontSize: 17, fontWeight: FontWeight.w700),
+        ),
+        if (subtitle != null) ...[
+          const SizedBox(height: 2),
+          Text(
+            subtitle!,
+            style: TextStyle(
+              fontSize: 11,
+              fontWeight: FontWeight.w600,
+              color: Theme.of(context).primaryColor,
+            ),
+          ),
+        ],
+      ],
+    );
+    final fadedText = Text(smallLabel, style: fadedStyle);
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -158,44 +192,9 @@ class _LanguageOption extends StatelessWidget {
           textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              smallLabel,
-              style: TextStyle(
-                fontSize: 13,
-                color: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .color!
-                    .withValues(alpha: 0.5),
-              ),
-            ),
-            Column(
-              textDirection: TextDirection.ltr,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  mainLabel,
-                  textDirection: mainLabelDirection,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 17, fontWeight: FontWeight.w700),
-                ),
-                if (subtitle != null) ...[
-                  const SizedBox(height: 2),
-                  Text(
-                    subtitle!,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
-              ],
-            ),
-          ],
+          children: boldOnLeft
+              ? [boldColumn, fadedText]
+              : [fadedText, boldColumn],
         ),
       ),
     );
