@@ -14,6 +14,7 @@ class DashboardScreen extends StatelessWidget {
         TasbeehWerdRoute(),
         AzkarRoute(),
         AccountBalanceRoute(),
+        SettingsRoute(),
       ],
       builder: (context, child) {
         final tabsRouter = AutoTabsRouter.of(context);

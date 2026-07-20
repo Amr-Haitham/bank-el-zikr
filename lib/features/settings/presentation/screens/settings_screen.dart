@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
@@ -30,32 +29,14 @@ class SettingsScreen extends StatelessWidget {
               return ListView(
                 children: [
                   const SizedBox(height: ConstantValues.appTopPadding),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () => AutoRouter.of(context).maybePop(),
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Theme.of(context)
-                                .primaryColor
-                                .withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: Icon(Icons.chevron_left,
-                              color: Theme.of(context).primaryColor),
-                        ),
-                      ),
-                      Text(
-                        l10n.settingsTitle,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
-                            .copyWith(fontSize: 22),
-                      ),
-                      const SizedBox(width: 40),
-                    ],
+                  Center(
+                    child: Text(
+                      l10n.settingsTitle,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(fontSize: 22),
+                    ),
                   ),
                   const SizedBox(height: 24),
                   if (settings != null) ...[

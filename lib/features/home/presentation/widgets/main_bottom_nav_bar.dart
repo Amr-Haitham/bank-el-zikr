@@ -16,6 +16,7 @@ class MainBottomNavBar extends StatelessWidget {
       _NavItemData(icon: Icons.track_changes_outlined, label: l10n.navTasbih),
       _NavItemData(icon: Icons.menu_book_outlined, label: l10n.navAdhkar),
       _NavItemData(icon: Icons.insights_outlined, label: l10n.navJourney),
+      _NavItemData(icon: Icons.settings_outlined, label: l10n.settings),
     ];
 
     final isLight = GeneralUtils.isLightTheme(context);
