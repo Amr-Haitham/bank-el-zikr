@@ -128,10 +128,10 @@ class DhikrBreakdownList extends StatelessWidget {
               child: Text(
                 formatNumber(context, row.weekCount),
                 textAlign: TextAlign.center,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
-                  color: Color(0xff34C759),
+                  color: Theme.of(context).colorScheme.primary,
                 ),
               ),
             ),
@@ -169,7 +169,8 @@ class DhikrBreakdownList extends StatelessWidget {
                 .bodySmall!
                 .color!
                 .withValues(alpha: 0.08),
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xff34C759)),
+            valueColor: AlwaysStoppedAnimation<Color>(
+                Theme.of(context).colorScheme.primary),
           ),
         ),
       ],

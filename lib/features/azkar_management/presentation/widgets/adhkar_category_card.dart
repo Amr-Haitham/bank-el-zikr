@@ -49,19 +49,16 @@ class AdhkarCategoryCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                if (isCompleted) ...[
-                  Container(
-                    width: 26,
-                    height: 26,
-                    decoration: const BoxDecoration(
-                      color: Color(0xff34C759),
-                      shape: BoxShape.circle,
-                    ),
-                    child:
-                        const Icon(Icons.check, color: Colors.white, size: 16),
+                Container(
+                  width: 52,
+                  height: 52,
+                  decoration: BoxDecoration(
+                    color: iconBackgroundColor,
+                    borderRadius: BorderRadius.circular(14),
                   ),
-                  const SizedBox(width: 10),
-                ],
+                  child: Icon(icon, color: iconColor, size: 26),
+                ),
+                const SizedBox(width: 14),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,16 +83,8 @@ class AdhkarCategoryCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 14),
-                Container(
-                  width: 52,
-                  height: 52,
-                  decoration: BoxDecoration(
-                    color: iconBackgroundColor,
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Icon(icon, color: iconColor, size: 26),
-                ),
+                const SizedBox(width: 10),
+                _CompletionBadge(isCompleted: isCompleted),
               ],
             ),
             if (progress != null) ...[
@@ -110,12 +99,48 @@ class AdhkarCategoryCard extends StatelessWidget {
                       .bodySmall!
                       .color!
                       .withValues(alpha: 0.08),
-                  valueColor:
-                      const AlwaysStoppedAnimation<Color>(Color(0xff34C759)),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      Theme.of(context).colorScheme.primary),
                 ),
               ),
             ],
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CompletionBadge extends StatelessWidget {
+  const _CompletionBadge({required this.isCompleted});
+
+  final bool isCompleted;
+
+  @override
+  Widget build(BuildContext context) {
+    if (isCompleted) {
+      return Container(
+        width: 26,
+        height: 26,
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
+          shape: BoxShape.circle,
+        ),
+        child: const Icon(Icons.check, color: Colors.white, size: 16),
+      );
+    }
+    return Container(
+      width: 26,
+      height: 26,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(
+          color: Theme.of(context)
+              .textTheme
+              .bodySmall!
+              .color!
+              .withValues(alpha: 0.25),
+          width: 1.5,
         ),
       ),
     );

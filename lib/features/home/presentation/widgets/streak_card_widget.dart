@@ -108,12 +108,13 @@ class StreakCardWidget extends StatelessWidget {
               Container(
                 width: 44,
                 height: 44,
-                decoration: const BoxDecoration(
-                  color: Colors.white24,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).colorScheme.secondary
+                      .withValues(alpha: 0.25),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.local_fire_department,
-                    color: Colors.white, size: 24),
+                child: Icon(Icons.local_fire_department,
+                    color: Theme.of(context).colorScheme.secondary, size: 24),
               ),
             ],
           ),

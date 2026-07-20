@@ -36,8 +36,8 @@ class TasbihProgressCircle extends StatelessWidget {
                 strokeWidth: 8,
                 strokeCap: StrokeCap.round,
                 backgroundColor: Theme.of(context).cardColor,
-                valueColor:
-                    const AlwaysStoppedAnimation<Color>(Color(0xffFFB800)),
+                valueColor: AlwaysStoppedAnimation<Color>(
+                    Theme.of(context).colorScheme.secondary),
               ),
             ),
             Container(
@@ -48,7 +48,10 @@ class TasbihProgressCircle extends StatelessWidget {
                 gradient: RadialGradient(
                   colors: [
                     Theme.of(context).primaryColor.withValues(alpha: 0.55),
-                    const Color(0xffE8D96A).withValues(alpha: 0.55),
+                    Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.55),
                   ],
                 ),
               ),
@@ -62,7 +65,7 @@ class TasbihProgressCircle extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 56,
                         fontWeight: FontWeight.w800,
-                        color: Colors.black,
+                        color: Colors.black87,
                       ),
                     ),
                     if (goal != null) ...[

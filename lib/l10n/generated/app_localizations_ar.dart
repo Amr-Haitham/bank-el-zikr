@@ -27,15 +27,15 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeSubtitle => 'حصنك اليومي';
 
   @override
-  String get totalHasanatBalance => 'إجمالي رصيد الحسنات';
+  String get totalHasanatBalance => 'رصيد الحسنات الكلي';
 
   @override
   String depositedToday(String count) {
-    return 'تم الإيداع اليوم +$count';
+    return 'أودعت اليوم +$count';
   }
 
   @override
-  String get depositMore => 'أضف المزيد +';
+  String get depositMore => 'أودع المزيد +';
 
   @override
   String get morningAdhkar => 'أذكار الصباح';
@@ -50,11 +50,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get done => 'مكتمل';
 
   @override
-  String get streakLabel => 'التتابع';
+  String get streakLabel => 'سلسلة الالتزام';
 
   @override
   String dayStreakCount(String count) {
-    return 'تتابع $count يوم';
+    return '$count يوم متتالي';
   }
 
   @override
@@ -275,4 +275,31 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get swipeHint => 'اسحب يمينًا أو يسارًا للتنقل بين الأذكار';
+
+  @override
+  String get appName => 'بنك الذكر';
+
+  @override
+  String get save => 'حفظ';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get ok => 'موافق';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get home => 'الرئيسية';
+
+  @override
+  String get welcomeBack => 'مرحبا بعودتك';
+
+  @override
+  String get shareRewardWithFriends => 'شارك الأجر مع أصدقاءك';
+
+  @override
+  String get language => 'اللغة';
 }

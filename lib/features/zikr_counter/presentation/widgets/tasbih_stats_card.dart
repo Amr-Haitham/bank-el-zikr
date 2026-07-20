@@ -28,9 +28,10 @@ class TasbihStatsCard extends StatelessWidget {
         children: [
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).balanceLabel,
-              value: formatNumber(context, balance),
-              valueColor: Theme.of(context).primaryColor,
+              label: AppLocalizations.of(context).goalLabel,
+              value: goal != null ? formatNumber(context, goal!) : "-",
+              valueColor: Theme.of(context).colorScheme.secondary,
+              onEdit: onEditGoal,
             ),
           ),
           _divider(context),
@@ -44,10 +45,9 @@ class TasbihStatsCard extends StatelessWidget {
           _divider(context),
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).goalLabel,
-              value: goal != null ? formatNumber(context, goal!) : "-",
-              valueColor: const Color(0xffFFB800),
-              onEdit: onEditGoal,
+              label: AppLocalizations.of(context).balanceLabel,
+              value: formatNumber(context, balance),
+              valueColor: Theme.of(context).primaryColor,
             ),
           ),
         ],

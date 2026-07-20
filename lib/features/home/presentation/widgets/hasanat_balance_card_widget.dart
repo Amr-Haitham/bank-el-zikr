@@ -23,16 +23,31 @@ class HasanatBalanceCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(
-            AppLocalizations.of(context).totalHasanatBalance,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                  fontSize: 14,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
-                      .withValues(alpha: 0.6),
-                ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                AppLocalizations.of(context).totalHasanatBalance,
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontSize: 14,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .color!
+                          .withValues(alpha: 0.6),
+                    ),
+              ),
+              const SizedBox(width: 6),
+              Icon(
+                Icons.credit_card_outlined,
+                size: 16,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .color!
+                    .withValues(alpha: 0.6),
+              ),
+            ],
           ),
           const SizedBox(height: 6),
           BlocBuilder<CounterCubit, RequestState<CounterStateEntity>>(

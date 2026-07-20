@@ -20,7 +20,7 @@ class CategoryStreakRingRow extends StatelessWidget {
           child: CategoryStreakRing(
             title: AppLocalizations.of(context).eveningAdhkar,
             currentStreak: eveningCurrentStreak,
-            color: const Color(0xff5E5CE6),
+            color: const Color(0xff6C63FF),
           ),
         ),
         const SizedBox(width: 12),
@@ -28,7 +28,7 @@ class CategoryStreakRingRow extends StatelessWidget {
           child: CategoryStreakRing(
             title: AppLocalizations.of(context).morningAdhkar,
             currentStreak: morningCurrentStreak,
-            color: const Color(0xffFF9F43),
+            color: const Color(0xffFB8C3C),
           ),
         ),
       ],

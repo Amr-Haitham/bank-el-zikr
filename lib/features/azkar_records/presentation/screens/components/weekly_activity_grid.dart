@@ -13,8 +13,8 @@ class WeeklyActivityGrid extends StatelessWidget {
   final List<WeeklyGridDay> days;
   final int activeCount;
 
-  static const _morningColor = Color(0xffFF9F43);
-  static const _eveningColor = Color(0xff5E5CE6);
+  static const _morningColor = Color(0xffFB8C3C);
+  static const _eveningColor = Color(0xff6C63FF);
   static const _zikrColor = Color(0xff34C759);
 
   @override
@@ -62,13 +62,13 @@ class WeeklyActivityGrid extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: days.map((day) {
-              return Column(
+              final column = Column(
                 children: [
-                  _dot(day.hasMorning ? _morningColor : null),
+                  _cell(day.hasMorning ? _morningColor : null),
                   const SizedBox(height: 6),
-                  _dot(day.hasEvening ? _eveningColor : null),
+                  _cell(day.hasEvening ? _eveningColor : null),
                   const SizedBox(height: 6),
-                  _dot(day.hasZikr ? _zikrColor : null),
+                  _cell(day.hasZikr ? _zikrColor : null),
                   const SizedBox(height: 8),
                   Text(
                     day.label,
@@ -86,6 +86,20 @@ class WeeklyActivityGrid extends StatelessWidget {
                     ),
                   ),
                 ],
+              );
+
+              if (!day.isToday) return column;
+
+              return Container(
+                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: Theme.of(context).primaryColor,
+                    width: 1.5,
+                  ),
+                ),
+                child: column,
               );
             }).toList(),
           ),
@@ -108,13 +122,13 @@ class WeeklyActivityGrid extends StatelessWidget {
     );
   }
 
-  Widget _dot(Color? color) {
+  Widget _cell(Color? color) {
     return Container(
       width: 22,
-      height: 10,
+      height: 16,
       decoration: BoxDecoration(
         color: color ?? Colors.grey.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(6),
       ),
     );
   }

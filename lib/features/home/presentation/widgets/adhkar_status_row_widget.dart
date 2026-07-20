@@ -14,7 +14,7 @@ class AdhkarStatusRowWidget extends StatelessWidget {
         Expanded(
           child: _AdhkarStatusCard(
             icon: Icons.nightlight_round,
-            iconColor: const Color(0xff5E5CE6),
+            iconColor: const Color(0xff6C63FF),
             title: l10n.eveningAdhkar,
             status: l10n.incomplete,
             statusColor: Theme.of(context)
@@ -29,7 +29,7 @@ class AdhkarStatusRowWidget extends StatelessWidget {
         Expanded(
           child: _AdhkarStatusCard(
             icon: Icons.wb_sunny_outlined,
-            iconColor: const Color(0xffFFB800),
+            iconColor: const Color(0xffFB8C3C),
             title: l10n.morningAdhkar,
             status: l10n.done,
             statusColor: Theme.of(context).primaryColor,

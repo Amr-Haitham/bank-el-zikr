@@ -12,37 +12,110 @@ class AppTheme {
     );
   }
 
+  static const _lightColorScheme = ColorScheme.light(
+    primary: primaryGreen,
+    onPrimary: surfaceLight,
+    secondary: secondaryGold,
+    onSecondary: onSurfaceLight,
+    surface: surfaceLight,
+    onSurface: onSurfaceLight,
+    surfaceContainerHighest: surfaceMutedLight,
+    primaryContainer: primaryContainerLight,
+    outline: outlineLight,
+    error: appRed,
+  );
+
+  static const _darkColorScheme = ColorScheme.dark(
+    primary: primaryGreen,
+    onPrimary: onSurfaceDark,
+    secondary: secondaryGold,
+    onSecondary: onSurfaceDark,
+    surface: surfaceDark,
+    onSurface: onSurfaceDark,
+    surfaceContainerHighest: surfaceMutedDark,
+    primaryContainer: primaryContainerDark,
+    outline: outlineDark,
+    error: appRed,
+  );
+
+  static TextTheme _textTheme(Color onSurface, Color onSurfaceMuted) {
+    return TextTheme(
+      headlineLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 24,
+        fontWeight: FontWeight.w900,
+        color: onSurface,
+      ),
+      headlineMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 20,
+        fontWeight: FontWeight.w900,
+        color: onSurface,
+      ),
+      headlineSmall: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 24,
+        fontWeight: FontWeight.w900,
+        color: onSurface,
+      ),
+      titleLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 20,
+        fontWeight: FontWeight.w800,
+        color: onSurface,
+      ),
+      titleMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 16,
+        fontWeight: FontWeight.w800,
+        color: onSurface,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 16,
+        fontWeight: FontWeight.w600,
+        color: onSurface,
+      ),
+      bodyMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: onSurfaceMuted,
+      ),
+      labelLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 12,
+        fontWeight: FontWeight.w800,
+        color: onSurface,
+      ),
+      labelMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 12,
+        fontWeight: FontWeight.w700,
+        color: onSurfaceMuted,
+      ),
+    );
+  }
+
   static final ThemeData lightTheme = ThemeData(
-    primaryColor: const Color(0xff34C759),
+    colorScheme: _lightColorScheme,
+    primaryColor: primaryGreen,
     brightness: Brightness.light,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: appDark,
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
         selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
-    scaffoldBackgroundColor: const Color(0xffffffff),
+    scaffoldBackgroundColor: backgroundLight,
     fontFamily: 'Tajawal',
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Colors.white,
+      backgroundColor: surfaceLight,
     ),
     iconTheme: const IconThemeData(color: appWhite),
-    textTheme: const TextTheme(
-      headlineLarge: TextStyle(
-        fontSize: 40,
-        fontWeight: FontWeight.bold,
-        color: Colors.black,
-      ),
-      headlineMedium: TextStyle(
-          fontSize: 32, fontWeight: FontWeight.bold, color: Colors.black),
-      headlineSmall: TextStyle(
-          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
-      bodyLarge: TextStyle(fontSize: 24, color: Colors.black),
-      bodyMedium: TextStyle(fontSize: 20, color: Colors.black),
-      bodySmall: TextStyle(fontSize: 16, color: Colors.black),
-    ),
-    cardColor: const Color.fromRGBO(237, 250, 237, 1),
+    textTheme: _textTheme(onSurfaceLight, onSurfaceMutedLight),
+    cardColor: surfaceLight,
     dialogTheme: DialogThemeData(
       shape: AppTheme.dialogShape(),
-      backgroundColor: Colors.white,
+      backgroundColor: surfaceLight,
     ),
   ).copyWith(
     pageTransitionsTheme: const PageTransitionsTheme(
@@ -55,34 +128,25 @@ class AppTheme {
   );
 
   static final ThemeData darkTheme = ThemeData(
+    colorScheme: _darkColorScheme,
     brightness: Brightness.dark,
-    primaryColor: const Color(0xff30D158),
+    primaryColor: primaryGreen,
     textSelectionTheme: const TextSelectionThemeData(
         cursorColor: appWhite,
         selectionColor: Color.fromRGBO(52, 199, 89, 0.438),
         selectionHandleColor: Color.fromRGBO(52, 199, 89, 1.0)),
-    scaffoldBackgroundColor: const Color.fromARGB(255, 0, 0, 0),
+    scaffoldBackgroundColor: backgroundDark,
     fontFamily: 'Tajawal',
     inputDecorationTheme: const InputDecorationTheme(
         focusedBorder:
             OutlineInputBorder(borderSide: BorderSide(color: Colors.black)),
         border: OutlineInputBorder(borderSide: BorderSide(color: Colors.grey))),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: Color(0xff000000),
+      backgroundColor: surfaceDark,
     ),
     iconTheme: const IconThemeData(color: Colors.black),
-    textTheme: const TextTheme(
-      headlineLarge: TextStyle(
-          fontSize: 40, fontWeight: FontWeight.bold, color: Colors.white),
-      headlineMedium: TextStyle(
-          fontSize: 32, fontWeight: FontWeight.bold, color: Colors.white),
-      headlineSmall: TextStyle(
-          fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
-      bodyLarge: TextStyle(fontSize: 24, color: Colors.white),
-      bodyMedium: TextStyle(fontSize: 20, color: Colors.white),
-      bodySmall: TextStyle(fontSize: 16, color: Colors.white),
-    ),
-    cardColor: const Color.fromRGBO(29, 57, 33, 1),
+    textTheme: _textTheme(onSurfaceDark, onSurfaceMutedDark),
+    cardColor: surfaceDark,
     dialogTheme: DialogThemeData(
       shape: AppTheme.dialogShape(),
       backgroundColor: const Color(0xff1E1E1E),

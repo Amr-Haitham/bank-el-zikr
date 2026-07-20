@@ -276,4 +276,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get swipeHint => 'Swipe right or left to move between adhkar';
+
+  @override
+  String get appName => 'Bank El Zikr';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get home => 'Home';
+
+  @override
+  String get welcomeBack => 'Welcome back';
+
+  @override
+  String get shareRewardWithFriends => 'Share the reward with your friends';
+
+  @override
+  String get language => 'Language';
 }

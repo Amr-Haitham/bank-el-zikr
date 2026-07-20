@@ -137,19 +137,19 @@ abstract class AppLocalizations {
   /// No description provided for @totalHasanatBalance.
   ///
   /// In ar, this message translates to:
-  /// **'إجمالي رصيد الحسنات'**
+  /// **'رصيد الحسنات الكلي'**
   String get totalHasanatBalance;
 
   /// No description provided for @depositedToday.
   ///
   /// In ar, this message translates to:
-  /// **'تم الإيداع اليوم +{count}'**
+  /// **'أودعت اليوم +{count}'**
   String depositedToday(String count);
 
   /// No description provided for @depositMore.
   ///
   /// In ar, this message translates to:
-  /// **'أضف المزيد +'**
+  /// **'أودع المزيد +'**
   String get depositMore;
 
   /// No description provided for @morningAdhkar.
@@ -179,13 +179,13 @@ abstract class AppLocalizations {
   /// No description provided for @streakLabel.
   ///
   /// In ar, this message translates to:
-  /// **'التتابع'**
+  /// **'سلسلة الالتزام'**
   String get streakLabel;
 
   /// No description provided for @dayStreakCount.
   ///
   /// In ar, this message translates to:
-  /// **'تتابع {count} يوم'**
+  /// **'{count} يوم متتالي'**
   String dayStreakCount(String count);
 
   /// No description provided for @streakDescription.
@@ -589,6 +589,60 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'اسحب يمينًا أو يسارًا للتنقل بين الأذكار'**
   String get swipeHint;
+
+  /// The application name shown on splash/about screens
+  ///
+  /// In ar, this message translates to:
+  /// **'بنك الذكر'**
+  String get appName;
+
+  /// Generic save action button label
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ'**
+  String get save;
+
+  /// Generic cancel action button label
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cancel;
+
+  /// Generic confirmation button label
+  ///
+  /// In ar, this message translates to:
+  /// **'موافق'**
+  String get ok;
+
+  /// Settings screen title
+  ///
+  /// In ar, this message translates to:
+  /// **'الإعدادات'**
+  String get settings;
+
+  /// Home screen title / nav label
+  ///
+  /// In ar, this message translates to:
+  /// **'الرئيسية'**
+  String get home;
+
+  /// Home screen welcome-back greeting
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحبا بعودتك'**
+  String get welcomeBack;
+
+  /// Home screen share-app-with-friends prompt
+  ///
+  /// In ar, this message translates to:
+  /// **'شارك الأجر مع أصدقاءك'**
+  String get shareRewardWithFriends;
+
+  /// Settings screen language toggle label
+  ///
+  /// In ar, this message translates to:
+  /// **'اللغة'**
+  String get language;
 }
 
 class _AppLocalizationsDelegate

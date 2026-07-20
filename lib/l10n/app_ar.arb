@@ -8,18 +8,18 @@
 
   "homeTitle": "بنك الذكر",
   "homeSubtitle": "حصنك اليومي",
-  "totalHasanatBalance": "إجمالي رصيد الحسنات",
-  "depositedToday": "تم الإيداع اليوم +{count}",
+  "totalHasanatBalance": "رصيد الحسنات الكلي",
+  "depositedToday": "أودعت اليوم +{count}",
   "@depositedToday": {
     "placeholders": { "count": { "type": "String" } }
   },
-  "depositMore": "أضف المزيد +",
+  "depositMore": "أودع المزيد +",
   "morningAdhkar": "أذكار الصباح",
   "eveningAdhkar": "أذكار المساء",
   "incomplete": "غير مكتمل",
   "done": "مكتمل",
-  "streakLabel": "التتابع",
-  "dayStreakCount": "تتابع {count} يوم",
+  "streakLabel": "سلسلة الالتزام",
+  "dayStreakCount": "{count} يوم متتالي",
   "@dayStreakCount": {
     "placeholders": { "count": { "type": "String" } }
   },

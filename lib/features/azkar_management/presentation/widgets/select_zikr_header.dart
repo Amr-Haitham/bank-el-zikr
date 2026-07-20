@@ -1,6 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bank_el_ziker/core/constants/colors.dart';
-import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:flutter/material.dart';
 
 class SelectZikrHeader extends StatelessWidget {
@@ -20,7 +18,7 @@ class SelectZikrHeader extends StatelessWidget {
               backgroundColor: Theme.of(context).primaryColor),
           icon: Icon(
             Icons.add,
-            color: GeneralUtils.isLightTheme(context) ? appWhite : appDark,
+            color: Theme.of(context).colorScheme.onPrimary,
           ),
         ),
         Text(
