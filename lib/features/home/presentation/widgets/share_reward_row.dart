@@ -12,22 +12,30 @@ class ShareRewardRow extends StatelessWidget {
       onTap: () {
         SharePlus.instance.share(ShareParams(text: ThirdPartyValues.appLink));
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.share_outlined,
-            color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(width: 10),
-          Text(
-            AppLocalizations.of(context).shareReward,
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
-          ),
-        ],
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(vertical: 14),
+        decoration: BoxDecoration(
+          color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.share_outlined,
+              color: Theme.of(context).primaryColor,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              AppLocalizations.of(context).shareReward,
+              style: TextStyle(
+                  color: Theme.of(context).primaryColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w700),
+            ),
+          ],
+        ),
       ),
     );
   }
