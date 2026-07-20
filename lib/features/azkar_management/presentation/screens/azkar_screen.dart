@@ -1,7 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bank_el_ziker/core/constants/colors.dart';
-
-import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
@@ -14,6 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/widgets/list_tile_of_zikr.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/widgets/select_zikr_header.dart';
 import 'sub_screens/adding_new_ziker_popup.dart';
 
 class AzkarScreen extends StatelessWidget {
@@ -54,23 +52,8 @@ class AzkarScreen extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _buildAddButton(context),
-                      Text(
-                        "اختر الذكر",
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      GestureDetector(
-                        onTap: () => context.router.maybePop(),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          color: Theme.of(context).textTheme.bodyLarge!.color,
-                        ),
-                      ),
-                    ],
+                  child: SelectZikrHeader(
+                    onAddPressed: () => _showAddZikrSheet(context),
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 52)),
@@ -83,35 +66,25 @@ class AzkarScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAddButton(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+  void _showAddZikrSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (dialogContext) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(dialogContext).viewInsets.bottom,
           ),
-          builder: (dialogContext) {
-            return Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(dialogContext).viewInsets.bottom,
-              ),
-              child: BlocProvider.value(
-                value: context.read<AddCustomZikrCubit>(),
-                child: const AddNewZikrPopUp(),
-              ),
-            );
-          },
+          child: BlocProvider.value(
+            value: context.read<AddCustomZikrCubit>(),
+            child: const AddNewZikrPopUp(),
+          ),
         );
       },
-      style:
-          IconButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
-      icon: Icon(
-        Icons.add,
-        color: GeneralUtils.isLightTheme(context) ? appWhite : appDark,
-      ),
     );
   }
 

@@ -1,8 +1,5 @@
 import 'dart:math';
 
-import 'package:auto_route/auto_route.dart';
-import 'package:auto_size_text/auto_size_text.dart';
-import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
@@ -18,10 +15,10 @@ import 'package:bank_el_ziker/core/constants/constant_values.dart';
 
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_stats_card.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_progress_circle.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_zikr_switcher_row.dart';
+import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_reset_button.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/goal_setting_bottom_sheet.dart';
 
 class ZikerScreen extends StatefulWidget {
@@ -157,8 +154,8 @@ class _ZikerScreenState extends State<ZikerScreen> {
                               const SizedBox(height: 44),
                               SizedBox(
                                 height: 88,
-                                child: _buildZikrRow(
-                                    context, counter.currentZikrId),
+                                child: TasbihZikrSwitcherRow(
+                                    currentZikrId: counter.currentZikrId),
                               ),
                               const SizedBox(height: 20),
                               Expanded(
@@ -173,7 +170,13 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              _buildResetButton(context),
+                              TasbihResetButton(
+                                onPressed: () {
+                                  context.read<CounterCubit>().setCounter(0);
+                                  context.read<CounterCubit>().setGoal(null);
+                                  setState(() => _laps = 0);
+                                },
+                              ),
                               const SizedBox(
                                   height: ConstantValues.appBottomPadding),
                             ],
@@ -212,78 +215,6 @@ class _ZikerScreenState extends State<ZikerScreen> {
           ),
         );
       },
-    );
-  }
-
-  Widget _buildZikrRow(BuildContext context, int currentZikrId) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child:
-                BlocBuilder<GetAllAzkarCubit, RequestState<List<ZikrEntity>>>(
-              builder: (context, azkarState) {
-                return azkarState.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => const SizedBox.shrink(),
-                  failure: (f) => const SizedBox.shrink(),
-                  success: (azkar) {
-                    if (azkar.isEmpty) return const SizedBox.shrink();
-                    final currentZikr = azkar.firstWhere(
-                      (z) => z.id == currentZikrId,
-                      orElse: () => azkar.first,
-                    );
-                    return AutoSizeText(
-                      currentZikr.content,
-                      textAlign: TextAlign.center,
-                      textDirection: TextDirection.rtl,
-                      maxLines: 2,
-                      minFontSize: 18,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
-                          .copyWith(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 34),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-          const SizedBox(width: 8),
-          GestureDetector(
-            onTap: () => AutoRouter.of(context).push(const SelectZikrRoute()),
-            child: Icon(Icons.swap_horiz_rounded,
-                color: Theme.of(context).primaryColor, size: 34),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildResetButton(BuildContext context) {
-    return Center(
-      child: OutlinedButton.icon(
-        onPressed: () {
-          context.read<CounterCubit>().setCounter(0);
-          context.read<CounterCubit>().setGoal(null);
-          setState(() => _laps = 0);
-        },
-        style: OutlinedButton.styleFrom(
-          foregroundColor: Theme.of(context).primaryColor,
-          side: BorderSide(color: Theme.of(context).primaryColor),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(30),
-          ),
-        ),
-        icon: const Icon(Icons.refresh, size: 18),
-        label: Text(AppLocalizations.of(context).resetLabel,
-            style: const TextStyle(fontWeight: FontWeight.w700)),
-      ),
     );
   }
 }
