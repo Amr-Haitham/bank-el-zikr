@@ -1,5 +1,4 @@
-import 'package:bank_el_ziker/core/constants/colors.dart';
-import 'package:bank_el_ziker/core/utils/general_utils.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
@@ -11,8 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
-import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/features/azkar_management/presentation/widgets/list_tile_of_zikr.dart';
+import 'package:bank_el_ziker/features/azkar_management/presentation/widgets/select_zikr_header.dart';
 import 'sub_screens/adding_new_ziker_popup.dart';
 
 class AzkarScreen extends StatelessWidget {
@@ -48,14 +47,13 @@ class AzkarScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           body: Padding(
-            padding: const EdgeInsets.only(
-                top: 30, right: 30, left: 30, bottom: 10),
+            padding:
+                const EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 10),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
-                  child: TitleWithBackButton(
-                    trailing: _buildAddButton(context),
-                    title: "اختر الذكر",
+                  child: SelectZikrHeader(
+                    onAddPressed: () => _showAddZikrSheet(context),
                   ),
                 ),
                 const SliverToBoxAdapter(child: SizedBox(height: 52)),
@@ -68,41 +66,30 @@ class AzkarScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildAddButton(BuildContext context) {
-    return IconButton(
-      onPressed: () {
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+  void _showAddZikrSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
+      ),
+      builder: (dialogContext) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(dialogContext).viewInsets.bottom,
           ),
-          builder: (dialogContext) {
-            return Padding(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(dialogContext).viewInsets.bottom,
-              ),
-              child: BlocProvider.value(
-                value: context.read<AddCustomZikrCubit>(),
-                child: const AddNewZikrPopUp(),
-              ),
-            );
-          },
+          child: BlocProvider.value(
+            value: context.read<AddCustomZikrCubit>(),
+            child: const AddNewZikrPopUp(),
+          ),
         );
       },
-      style:
-          IconButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),
-      icon: Icon(
-        Icons.add,
-        color: GeneralUtils.isLightTheme(context) ? appWhite : appDark,
-      ),
     );
   }
 
   Widget _buildAzkarList(BuildContext context) {
-    return BlocBuilder<CounterCubit,
-        RequestState<CounterStateEntity>>(
+    return BlocBuilder<CounterCubit, RequestState<CounterStateEntity>>(
       builder: (context, counterState) {
         return counterState.when(
           initial: () => const SliverToBoxAdapter(
@@ -133,7 +120,7 @@ class AzkarScreen extends StatelessWidget {
                             context
                                 .read<CounterCubit>()
                                 .setCurrentZikr(azkar[index].id);
-                            Navigator.pop(context);
+                            context.router.maybePop();
                           },
                           zikr: azkar[index],
                           isSelected: selectedZikrId == azkar[index].id,

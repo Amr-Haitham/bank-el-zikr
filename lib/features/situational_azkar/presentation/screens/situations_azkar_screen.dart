@@ -130,9 +130,7 @@ class _SituationsAzkarScreenState extends State<SituationsAzkarScreen> {
                           color: showFavourites
                               ? appGold
                               : Theme.of(context).scaffoldBackgroundColor,
-                          border: Border.all(
-                              width: 1,
-                              color: appGold),
+                          border: Border.all(width: 1, color: appGold),
                         ),
                         child: Center(
                           child: Icon(

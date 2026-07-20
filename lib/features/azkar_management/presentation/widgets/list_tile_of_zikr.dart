@@ -115,14 +115,10 @@ class ListTileOfZikr extends StatelessWidget {
           ),
           child: MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                  value: context.read<UpdateCustomZikrCubit>()),
-              BlocProvider.value(
-                  value: context.read<DeleteCustomZikrCubit>()),
-              BlocProvider.value(
-                  value: context.read<UpdateCurrentZikrCubit>()),
-              BlocProvider.value(
-                  value: context.read<DeleteZikrRecordCubit>()),
+              BlocProvider.value(value: context.read<UpdateCustomZikrCubit>()),
+              BlocProvider.value(value: context.read<DeleteCustomZikrCubit>()),
+              BlocProvider.value(value: context.read<UpdateCurrentZikrCubit>()),
+              BlocProvider.value(value: context.read<DeleteZikrRecordCubit>()),
             ],
             child: EditCustomZikerPopup(
               zikr: zikr,

@@ -67,6 +67,25 @@ class DailyAzkarRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [DashboardPage]
+class DashboardRoute extends PageRouteInfo<void> {
+  const DashboardRoute({List<PageRouteInfo>? children})
+      : super(
+          DashboardRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DashboardRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const DashboardPage();
+    },
+  );
+}
+
+/// generated route for
 /// [HomePage]
 class HomeRoute extends PageRouteInfo<void> {
   const HomeRoute({List<PageRouteInfo>? children})
@@ -119,6 +138,44 @@ class NightAzkarRoute extends PageRouteInfo<void> {
     name,
     builder: (data) {
       return const NightAzkarPage();
+    },
+  );
+}
+
+/// generated route for
+/// [OnboardingPage]
+class OnboardingRoute extends PageRouteInfo<void> {
+  const OnboardingRoute({List<PageRouteInfo>? children})
+      : super(
+          OnboardingRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'OnboardingRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const OnboardingPage();
+    },
+  );
+}
+
+/// generated route for
+/// [SelectZikrPage]
+class SelectZikrRoute extends PageRouteInfo<void> {
+  const SelectZikrRoute({List<PageRouteInfo>? children})
+      : super(
+          SelectZikrRoute.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectZikrRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      return const SelectZikrPage();
     },
   );
 }

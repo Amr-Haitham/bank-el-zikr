@@ -6,14 +6,28 @@ class Settings extends Equatable {
   final TimeOfDay? morningZikrAlarm;
   final TimeOfDay? nightZikrAlarm;
   final bool isVibrating;
-  final Locale locale;
+  final String selectedLanguage;
+  final bool hasSeenOnboarding;
+
+  /// 'clear' or 'uthmani'.
+  final String dhikrFont;
+
+  /// 'small', 'medium', or 'large'.
+  final String textSize;
+
+  /// true = Arabic-Indic digits (١٢٣), false = Western digits (123).
+  final bool useArabicNumerals;
 
   const Settings({
     required this.isLightTheme,
     this.morningZikrAlarm,
     this.nightZikrAlarm,
     required this.isVibrating,
-    this.locale = const Locale('ar'),
+    this.selectedLanguage = 'ar',
+    this.hasSeenOnboarding = false,
+    this.dhikrFont = 'clear',
+    this.textSize = 'medium',
+    this.useArabicNumerals = true,
   });
 
   @override
@@ -22,7 +36,11 @@ class Settings extends Equatable {
         morningZikrAlarm,
         nightZikrAlarm,
         isVibrating,
-        locale,
+        selectedLanguage,
+        hasSeenOnboarding,
+        dhikrFont,
+        textSize,
+        useArabicNumerals,
       ];
 
   Settings copyWith({
@@ -30,14 +48,22 @@ class Settings extends Equatable {
     TimeOfDay? morningZikrAlarm,
     TimeOfDay? nightZikrAlarm,
     bool? isVibrating,
-    Locale? locale,
+    String? selectedLanguage,
+    bool? hasSeenOnboarding,
+    String? dhikrFont,
+    String? textSize,
+    bool? useArabicNumerals,
   }) {
     return Settings(
       isLightTheme: isLightTheme ?? this.isLightTheme,
       morningZikrAlarm: morningZikrAlarm ?? this.morningZikrAlarm,
       nightZikrAlarm: nightZikrAlarm ?? this.nightZikrAlarm,
       isVibrating: isVibrating ?? this.isVibrating,
-      locale: locale ?? this.locale,
+      selectedLanguage: selectedLanguage ?? this.selectedLanguage,
+      hasSeenOnboarding: hasSeenOnboarding ?? this.hasSeenOnboarding,
+      dhikrFont: dhikrFont ?? this.dhikrFont,
+      textSize: textSize ?? this.textSize,
+      useArabicNumerals: useArabicNumerals ?? this.useArabicNumerals,
     );
   }
 }

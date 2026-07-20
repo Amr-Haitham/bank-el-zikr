@@ -648,7 +648,8 @@ class InitialData {
   ];
 
   static List<PrayerEntity> prayers = [
-    const PrayerEntity(id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),
+    const PrayerEntity(
+        id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),
     const PrayerEntity(
         id: 1,
         content:
@@ -770,8 +771,10 @@ class InitialData {
         id: 31,
         content:
             "اللهم إني أسألك يا الله بأنك الواحد الأحد الصمد الذي لم يلد ولم يولد ولم يكن له كفوا أحد أن تغفر لي ذنوبي إنك أنت الغفور الرحيم"),
-    const PrayerEntity(id: 32, content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى"),
-    const PrayerEntity(id: 33, content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك"),
+    const PrayerEntity(
+        id: 32, content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى"),
+    const PrayerEntity(
+        id: 33, content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك"),
     const PrayerEntity(
         id: 34,
         content:
@@ -802,5 +805,11 @@ class InitialData {
         id: 42,
         content:
             "اللهم اهدني فيمن هديت، وعافني فيمن عافيت، وتولني فيمن توليت، وبارك لي فيما أعطيت وقني شر ما قضيت، إنك تقضي ولا يقضى عليك، وإنه لا يذل من واليت ولا يعز من عاديت تباركت ربنا وتعاليت"),
+    const PrayerEntity(
+        id: 43,
+        content: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+        transliteration: "Alā bidhikrillāhi taṭma'innul-qulūb.",
+        translation: "Verily, in the remembrance of Allah do hearts find rest.",
+        reference: "الرعد ٢٨"),
   ];
 }

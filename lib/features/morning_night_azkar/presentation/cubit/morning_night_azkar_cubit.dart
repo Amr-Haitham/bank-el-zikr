@@ -4,7 +4,8 @@ import 'package:bank_el_ziker/features/morning_night_azkar/domain/entities/morni
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/usecases/get_morning_azkar.dart';
 import 'package:bank_el_ziker/features/morning_night_azkar/domain/usecases/get_night_azkar.dart';
 
-class MorningNightAzkarCubit extends RequestCubit<List<MorningNightZikrEntity>> {
+class MorningNightAzkarCubit
+    extends RequestCubit<List<MorningNightZikrEntity>> {
   final GetMorningAzkar getMorningAzkar;
   final GetNightAzkar getNightAzkar;
 

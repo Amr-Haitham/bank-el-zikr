@@ -9,7 +9,8 @@ class GetNightAzkar implements UseCase<List<MorningNightZikrEntity>, NoParams> {
   GetNightAzkar(this.repository);
 
   @override
-  Future<RequestResult<List<MorningNightZikrEntity>>> call(NoParams params) async {
+  Future<RequestResult<List<MorningNightZikrEntity>>> call(
+      NoParams params) async {
     return await repository.getNightAzkar();
   }
 }

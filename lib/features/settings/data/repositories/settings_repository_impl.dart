@@ -18,14 +18,22 @@ class SettingsRepositoryImpl implements SettingsRepository {
       final isVibrating = await localDataSource.getIsVibrating();
       final morningZikrAlarm = await localDataSource.getMorningZikrAlarm();
       final nightZikrAlarm = await localDataSource.getNightZikrAlarm();
-      final languageCode = await localDataSource.getLanguageCode();
+      final selectedLanguage = await localDataSource.getSelectedLanguage();
+      final hasSeenOnboarding = await localDataSource.getHasSeenOnboarding();
+      final dhikrFont = await localDataSource.getDhikrFont();
+      final textSize = await localDataSource.getTextSize();
+      final useArabicNumerals = await localDataSource.getUseArabicNumerals();
 
       return Right(Settings(
         isLightTheme: isLightTheme,
         isVibrating: isVibrating,
         morningZikrAlarm: morningZikrAlarm,
         nightZikrAlarm: nightZikrAlarm,
-        locale: Locale(languageCode),
+        selectedLanguage: selectedLanguage,
+        hasSeenOnboarding: hasSeenOnboarding,
+        dhikrFont: dhikrFont,
+        textSize: textSize,
+        useArabicNumerals: useArabicNumerals,
       ));
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -73,9 +81,49 @@ class SettingsRepositoryImpl implements SettingsRepository {
   }
 
   @override
-  Future<RequestResult<void>> setLocale(Locale locale) async {
+  Future<RequestResult<void>> setSelectedLanguage(String language) async {
     try {
-      await localDataSource.setLanguageCode(locale.languageCode);
+      await localDataSource.setSelectedLanguage(language);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setHasSeenOnboarding(bool value) async {
+    try {
+      await localDataSource.setHasSeenOnboarding(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setDhikrFont(String value) async {
+    try {
+      await localDataSource.setDhikrFont(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setTextSize(String value) async {
+    try {
+      await localDataSource.setTextSize(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setUseArabicNumerals(bool value) async {
+    try {
+      await localDataSource.setUseArabicNumerals(value);
       return const Right(null);
     } catch (e) {
       return Left(Failure(message: e.toString()));

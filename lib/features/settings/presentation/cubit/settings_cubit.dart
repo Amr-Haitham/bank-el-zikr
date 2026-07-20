@@ -57,9 +57,52 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
   }
 
-  Future<void> setLocale(Locale locale) async {
+  Future<void> completeOnboarding(String selectedLanguage) async {
     final result = await updateSettings(
-      UpdateSettingsParams(locale: locale),
+      UpdateSettingsParams(
+        selectedLanguage: selectedLanguage,
+        hasSeenOnboarding: true,
+      ),
+    );
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(),
+    );
+  }
+
+  Future<void> setLanguage(String language) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(selectedLanguage: language),
+    );
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(),
+    );
+  }
+
+  Future<void> setDhikrFont(String font) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(dhikrFont: font),
+    );
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(),
+    );
+  }
+
+  Future<void> setTextSize(String size) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(textSize: size),
+    );
+    result.fold(
+      (failure) => null,
+      (_) => reExecutePastRequest(),
+    );
+  }
+
+  Future<void> setUseArabicNumerals(bool value) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(useArabicNumerals: value),
     );
     result.fold(
       (failure) => null,

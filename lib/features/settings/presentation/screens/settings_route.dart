@@ -9,6 +9,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // SettingsCubit is a global singleton, already provided at the app root
+    // in main.dart — no need to (re)provide it here.
     return const SettingsScreen();
   }
 }

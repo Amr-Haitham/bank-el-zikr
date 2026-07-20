@@ -21,9 +21,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        
-      },
+      onTap: () {},
       child: Column(
         children: [
           Container(
@@ -36,9 +34,10 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
                     width: 1, color: const Color.fromRGBO(255, 214, 0, 1))),
             child: Center(
               child: Text(
-               ArabicNumbers().convert(count),
+                ArabicNumbers().convert(count),
                 style: Theme.of(context).textTheme.bodyLarge,
-                strutStyle: const StrutStyle(height: 1.2, forceStrutHeight: true),
+                strutStyle:
+                    const StrutStyle(height: 1.2, forceStrutHeight: true),
               ),
             ),
           ),

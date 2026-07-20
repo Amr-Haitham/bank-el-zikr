@@ -15,7 +15,8 @@ class CacheClient {
   /// [key] - The key to store the value under
   /// [value] - The value to store
   /// [expiryDuration] - Optional duration after which the value should expire
-  Future<void> put(String key, dynamic value, {Duration? expiryDuration}) async {
+  Future<void> put(String key, dynamic value,
+      {Duration? expiryDuration}) async {
     if (expiryDuration != null) {
       final expiryTime = DateTime.now().add(expiryDuration);
       await _box.put(key, {
@@ -36,7 +37,8 @@ class CacheClient {
 
     final expiryTime = data['expiryTime'];
     if (expiryTime != null) {
-      final expired = DateTime.fromMillisecondsSinceEpoch(expiryTime).isBefore(DateTime.now());
+      final expired = DateTime.fromMillisecondsSinceEpoch(expiryTime)
+          .isBefore(DateTime.now());
       if (expired) {
         _box.delete(key);
         return null;

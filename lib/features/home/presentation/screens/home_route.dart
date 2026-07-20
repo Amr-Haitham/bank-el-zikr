@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:bank_el_ziker/core/di/service_locator.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'package:bank_el_ziker/features/home/presentation/cubit/get_random_prayer_cubit.dart';
 import 'home_screen.dart';
 
@@ -12,8 +13,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getService<GetRandomPrayerCubit>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => getService<GetRandomPrayerCubit>()),
+        BlocProvider(
+            create: (context) => getService<GetWeekAzkarRecordsCubit>()),
+      ],
       child: const HomeScreen(),
     );
   }

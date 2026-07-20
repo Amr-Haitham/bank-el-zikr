@@ -1,76 +1,49 @@
-import 'package:bank_el_ziker/core/constants/third_party_values.dart';
-import 'package:bank_el_ziker/features/home/presentation/widgets/azkar_home_widgets.dart';
-import 'package:bank_el_ziker/features/home/presentation/widgets/date_settings_welcome_widget.dart';
-import 'package:bank_el_ziker/features/home/presentation/widgets/random_ziker_container.dart';
-import 'package:bank_el_ziker/features/home/presentation/widgets/ziker_balance_widget.dart';
-import 'package:bank_el_ziker/l10n/app_localizations.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/adhkar_status_row_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/hasanat_balance_card_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/home_header_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/share_reward_row.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/streak_card_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/support_app_card_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/verse_of_day_card_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-            horizontal: ConstantValues.appHorizontalPadding),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const SizedBox(
-                height: ConstantValues.appTopPadding,
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: ConstantValues.appHorizontalPadding),
+              sliver: SliverList.list(
+                children: const [
+                  SizedBox(height: ConstantValues.appTopPadding),
+                  HomeHeaderWidget(),
+                  SizedBox(height: 20),
+                  HasanatBalanceCardWidget(),
+                  SizedBox(height: 16),
+                  AdhkarStatusRowWidget(),
+                  SizedBox(height: 16),
+                  StreakCardWidget(),
+                  SizedBox(height: 16),
+                  VerseOfDayCardWidget(),
+                  SizedBox(height: 16),
+                  SupportAppCardWidget(),
+                  SizedBox(height: 24),
+                  ShareRewardRow(),
+                  SizedBox(height: ConstantValues.appBottomPadding),
+                ],
               ),
-              const DateSettingsWelcomeWidget(),
-              const ZikerBalanceWidget(),
-              const SizedBox(height: 20),
-              const AzkarHomeWidgets(),
-              const SizedBox(height: 20),
-              const RandomZikerContainer(),
-              const SizedBox(height: 40),
-              shareWithFriends(),
-              const SizedBox(height: 20),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
-    );
-  }
-
-  Widget shareWithFriends() {
-    return GestureDetector(
-      onTap: () {
-        SharePlus.instance.share(ShareParams(text: ThirdPartyValues.appLink));
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.share_outlined,
-            color: Theme.of(context).primaryColor,
-          ),
-          const SizedBox(
-            width: 10,
-          ),
-          Text(
-            AppLocalizations.of(context)!.shareRewardWithFriends,
-            style: TextStyle(
-                color: Theme.of(context).primaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.w700),
-          )
-        ],
       ),
     );
   }

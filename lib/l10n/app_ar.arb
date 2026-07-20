@@ -1,5 +1,132 @@
 {
   "@@locale": "ar",
+
+  "navHome": "الرئيسية",
+  "navTasbih": "المسبحة",
+  "navAdhkar": "الأذكار",
+  "navJourney": "رصدي",
+
+  "homeTitle": "بنك الذكر",
+  "homeSubtitle": "حصنك اليومي",
+  "totalHasanatBalance": "رصيد الحسنات الكلي",
+  "depositedToday": "أودعت اليوم +{count}",
+  "@depositedToday": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "depositMore": "أودع المزيد +",
+  "morningAdhkar": "أذكار الصباح",
+  "eveningAdhkar": "أذكار المساء",
+  "incomplete": "غير مكتمل",
+  "done": "مكتمل",
+  "streakLabel": "سلسلة الالتزام",
+  "dayStreakCount": "{count} يوم متتالي",
+  "@dayStreakCount": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "streakDescription": "أكملت أذكارك اليومية دون أن تفوّت يومًا",
+  "streakSince": "منذ {date}",
+  "@streakSince": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "viewStats": "شاهد الإحصائيات",
+  "supportTheApp": "ادعم التطبيق",
+  "supportSubtitle": "ساعد في إبقاء بنك الذكر مجانيًا للجميع",
+  "donate": "تبرع",
+  "anotherVerse": "آية أخرى",
+  "shareReward": "شارك الأجر مع أصدقاءك",
+
+  "digitalTasbih": "السبحة الرقمية",
+  "errorLoadingCounter": "حدث خطأ في تحميل العداد",
+  "resetLabel": "إعادة تعيين",
+  "balanceLabel": "الرصيد",
+  "lapsLabel": "الأشواط",
+  "goalLabel": "الهدف",
+  "tapAnywhere": "⚡ اضغط في أي مكان",
+  "setGoal": "تحديد الهدف",
+  "vibrateAtLap": "يهتز الهاتف عند إتمام كل شوط",
+  "saveLabel": "حفظ",
+  "removeGoal": "إزالة الهدف",
+
+  "adhkarList": "قائمة الأذكار",
+  "searchAdhkar": "ابحث عن الأذكار...",
+  "notTrackedYet": "غير مُتابَع بعد",
+  "statusNotStarted": "الحالة: لم يبدأ",
+  "lastRead": "آخر قراءة: {value}",
+  "@lastRead": {
+    "placeholders": { "value": { "type": "String" } }
+  },
+  "sleepAdhkar": "أذكار النوم",
+  "afterPrayerAdhkar": "أذكار بعد الصلاة",
+  "ruqyah": "الرقية",
+  "justNow": "الآن",
+  "minutesAgo": "منذ {count} د",
+  "@minutesAgo": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "hoursAgo": "منذ {count} س",
+  "@hoursAgo": {
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "am": "ص",
+  "pm": "م",
+  "today": "اليوم، {time}",
+  "@today": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+  "yesterday": "أمس، {time}",
+  "@yesterday": {
+    "placeholders": { "time": { "type": "String" } }
+  },
+
+  "mySpiritualJourney": "رحلتي الروحية",
+  "dhikrBreakdown": "تفصيل الأذكار",
+  "weekLabel": "الأسبوع",
+  "monthLabel": "الشهر",
+  "yearLabel": "السنة",
+  "noDhikrRecorded": "لا يوجد ذكر مسجل بعد",
+  "hasanatGrowth": "نمو الحسنات",
+  "overallAdhkarStreak": "التتابع العام للأذكار",
+  "consecutiveDays": "{count} يوم متتالي",
+  "@consecutiveDays": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "longestOverall": "الأطول إجمالاً: {count} يوم",
+  "@longestOverall": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "thisWeek": "هذا الأسبوع",
+  "adhkarOutOf21": "{count} / 21 ذكر",
+  "@adhkarOutOf21": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+
+  "settingsTitle": "الإعدادات",
+  "appTheme": "مظهر التطبيق",
+  "vibration": "الاهتزاز",
+  "dhikrFont": "خط الذكر",
+  "clearFont": "واضح",
+  "uthmaniFont": "عثماني",
+  "textSize": "حجم الخط",
+  "numerals": "الأرقام",
+  "languageLabel": "اللغة",
+
+  "errorLoadingAdhkar": "حدث خطأ في تحميل الأذكار",
+  "noAdhkarFound": "لا توجد أذكار",
+  "listViewLabel": "قائمة",
+  "singleViewLabel": "ذكر واحد",
+  "repetitionCountLabel": "عدد التكرار",
+  "ofCount": "من {count}",
+  "@ofCount": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "completedLabel": "اكتمل",
+  "tapToCount": "اضغط للعد",
+  "virtueAndSource": "الفضل والمصدر",
+  "shareLabel": "مشاركة",
+  "copyLabel": "نسخ",
+  "copied": "تم النسخ",
+  "swipeHint": "اسحب يمينًا أو يسارًا للتنقل بين الأذكار",
+
   "appName": "بنك الذكر",
   "@appName": {
     "description": "The application name shown on splash/about screens"

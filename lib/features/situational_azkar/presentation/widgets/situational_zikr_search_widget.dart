@@ -11,7 +11,8 @@ class SituationalZikrSearchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       onChanged: onChanged,
-      textDirection: TextDirection.rtl,style: Theme.of(context).textTheme.bodySmall,
+      textDirection: TextDirection.rtl,
+      style: Theme.of(context).textTheme.bodySmall,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.bodySmall!.copyWith(
