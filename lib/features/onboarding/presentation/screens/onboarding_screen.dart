@@ -155,6 +155,7 @@ class _LanguageOption extends StatelessWidget {
           ),
         ),
         child: Row(
+          textDirection: TextDirection.ltr,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
