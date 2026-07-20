@@ -13,7 +13,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  String? _selectedLanguage;
+  String? _selectedLanguage = 'ar';
 
   void _selectLanguage(String language) {
     setState(() => _selectedLanguage = language);
@@ -34,15 +34,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             children: [
               const Spacer(flex: 2),
               Center(
-                child: Container(
-                  width: 68,
-                  height: 68,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
-                    borderRadius: BorderRadius.circular(20),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: Image.asset(
+                    'assets/images/logo.png',
+                    width: 88,
+                    height: 88,
+                    fit: BoxFit.cover,
                   ),
-                  child: const Icon(Icons.translate,
-                      color: Colors.white, size: 32),
                 ),
               ),
               const SizedBox(height: 24),
