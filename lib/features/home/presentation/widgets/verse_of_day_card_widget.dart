@@ -22,17 +22,22 @@ class VerseOfDayCardWidget extends StatelessWidget {
               ),
             ),
           ),
-          success: (prayer) => _verseCard(context, prayer.content),
+          success: (prayer) => _verseCard(context, prayer),
           failure: (failure) => _verseCard(
             context,
-            "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+            const PrayerEntity(
+              id: -1,
+              content:
+                  "ﺭﺑﻨﺎ ﻭﻻ ﺗﺤﻤﻠﻨﺎ ﻣﺎ ﻻ ﻃﺎﻗﺔ ﻟﻨﺎ ﺑﻪ ﻭﺍﻋﻒ ﻋﻨﺎ ﻭﺍﻏﻔﺮ ﻟﻨﺎ ﻭﺍﺭﺣﻤﻨﺎ ﺃﻧﺖ ﻣﻮﻻﻧﺎ ﻓﺎﻧﺼﺮﻧﺎ ﻋﻠﻰ ﺍﻟﻘﻮﻡ ﺍﻟﻜﺎﻓﺮﻳﻦ.",
+            ),
           ),
         );
       },
     );
   }
 
-  Widget _verseCard(BuildContext context, String verse) {
+  Widget _verseCard(BuildContext context, PrayerEntity prayer) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
@@ -42,8 +47,21 @@ class VerseOfDayCardWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
+          Container(
+            width: 36,
+            height: 4,
+            decoration: BoxDecoration(
+              color: Theme.of(context)
+                  .textTheme
+                  .bodySmall!
+                  .color!
+                  .withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ),
+          const SizedBox(height: 16),
           Text(
-            verse,
+            prayer.content,
             textAlign: TextAlign.center,
             textDirection: TextDirection.rtl,
             style: Theme.of(context)
@@ -51,6 +69,60 @@ class VerseOfDayCardWidget extends StatelessWidget {
                 .bodyLarge!
                 .copyWith(color: Theme.of(context).primaryColor, fontSize: 20),
           ),
+          if (isEnglish && prayer.transliteration != null) ...[
+            const SizedBox(height: 12),
+            Text(
+              prayer.transliteration!,
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+                fontStyle: FontStyle.italic,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
+          if (isEnglish && prayer.translation != null) ...[
+            const SizedBox(height: 8),
+            Text(
+              prayer.translation!,
+              textDirection: TextDirection.ltr,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 13,
+                color: Theme.of(context)
+                    .textTheme
+                    .bodySmall!
+                    .color!
+                    .withValues(alpha: 0.7),
+              ),
+            ),
+          ],
+          if (prayer.reference != null) ...[
+            const SizedBox(height: 12),
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                prayer.reference!,
+                textDirection: TextDirection.rtl,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  color: Theme.of(context)
+                      .textTheme
+                      .bodySmall!
+                      .color!
+                      .withValues(alpha: 0.7),
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 16),
           GestureDetector(
             onTap: () =>

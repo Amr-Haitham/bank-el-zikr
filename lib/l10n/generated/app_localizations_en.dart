@@ -59,10 +59,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get streakDescription =>
-      'You\'ve kept up your daily adhkar without missing a day';
+      'You\'ve completed your daily adhkar without missing a day';
 
   @override
-  String get viewStats => 'View stats';
+  String streakSince(String date) {
+    return 'Since $date';
+  }
+
+  @override
+  String get viewStats => 'View statistics';
 
   @override
   String get supportTheApp => 'Support the app';

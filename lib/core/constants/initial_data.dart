@@ -805,5 +805,11 @@ class InitialData {
         id: 42,
         content:
             "اللهم اهدني فيمن هديت، وعافني فيمن عافيت، وتولني فيمن توليت، وبارك لي فيما أعطيت وقني شر ما قضيت، إنك تقضي ولا يقضى عليك، وإنه لا يذل من واليت ولا يعز من عاديت تباركت ربنا وتعاليت"),
+    const PrayerEntity(
+        id: 43,
+        content: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",
+        transliteration: "Alā bidhikrillāhi taṭma'innul-qulūb.",
+        translation: "Verily, in the remembrance of Allah do hearts find rest.",
+        reference: "الرعد ٢٨"),
   ];
 }

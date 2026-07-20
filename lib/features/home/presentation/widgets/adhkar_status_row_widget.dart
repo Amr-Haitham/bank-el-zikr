@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -71,25 +72,13 @@ class _AdhkarStatusCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: iconColor.withValues(alpha: 0.15),
-                    shape: BoxShape.circle,
-                  ),
-                  child: Icon(icon, color: iconColor, size: 20),
-                ),
-                Icon(Icons.chevron_right,
-                    size: 18,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .color!
-                        .withValues(alpha: 0.4)),
-              ],
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: iconColor.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(icon, color: iconColor, size: 20),
             ),
             const SizedBox(height: 14),
             Text(
@@ -97,16 +86,28 @@ class _AdhkarStatusCard extends StatelessWidget {
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
-                  .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
+                  .copyWith(fontSize: 17, fontWeight: FontWeight.w800),
             ),
-            const SizedBox(height: 4),
-            Text(
-              status,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-                color: statusColor,
-              ),
+            const SizedBox(height: 6),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  status,
+                  style: TextStyle(
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600,
+                    color: statusColor,
+                  ),
+                ),
+                DirectionalChevron(
+                    size: 18,
+                    color: Theme.of(context)
+                        .textTheme
+                        .bodySmall!
+                        .color!
+                        .withValues(alpha: 0.4)),
+              ],
             ),
           ],
         ),

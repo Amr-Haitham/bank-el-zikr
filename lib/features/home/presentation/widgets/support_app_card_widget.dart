@@ -15,68 +15,77 @@ class SupportAppCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Row(
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.15),
-              shape: BoxShape.circle,
+    return GestureDetector(
+      onTap: _openDonateLink,
+      child: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 40,
+              height: 40,
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              child:
+                  Icon(Icons.favorite, color: Theme.of(context).primaryColor),
             ),
-            child: Icon(Icons.favorite, color: Theme.of(context).primaryColor),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  AppLocalizations.of(context).supportTheApp,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
-                      .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(height: 2),
-                Text(
-                  AppLocalizations.of(context).supportSubtitle,
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: Theme.of(context)
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppLocalizations.of(context).supportTheApp,
+                    style: Theme.of(context)
                         .textTheme
-                        .bodySmall!
-                        .color!
-                        .withValues(alpha: 0.6),
+                        .bodyMedium!
+                        .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
                   ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(width: 8),
-          ElevatedButton(
-            onPressed: _openDonateLink,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+                  const SizedBox(height: 2),
+                  Text(
+                    AppLocalizations.of(context).supportSubtitle,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .color!
+                          .withValues(alpha: 0.6),
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Text(
-              AppLocalizations.of(context).donate,
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+            const SizedBox(width: 8),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                AppLocalizations.of(context).donate,
+                strutStyle: const StrutStyle(
+                  fontSize: 13,
+                  height: 1,
+                  forceStrutHeight: true,
+                ),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

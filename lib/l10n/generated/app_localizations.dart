@@ -191,13 +191,19 @@ abstract class AppLocalizations {
   /// No description provided for @streakDescription.
   ///
   /// In ar, this message translates to:
-  /// **'حافظت على أذكارك اليومية دون انقطاع'**
+  /// **'أكملت أذكارك اليومية دون أن تفوّت يومًا'**
   String get streakDescription;
+
+  /// No description provided for @streakSince.
+  ///
+  /// In ar, this message translates to:
+  /// **'منذ {date}'**
+  String streakSince(String date);
 
   /// No description provided for @viewStats.
   ///
   /// In ar, this message translates to:
-  /// **'عرض الإحصائيات'**
+  /// **'شاهد الإحصائيات'**
   String get viewStats;
 
   /// No description provided for @supportTheApp.

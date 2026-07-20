@@ -8,13 +8,28 @@ class Prayer extends HiveObject {
   final int id;
   @HiveField(1)
   final String content;
+  @HiveField(2)
+  final String? transliteration;
+  @HiveField(3)
+  final String? translation;
+  @HiveField(4)
+  final String? reference;
 
-  Prayer({required this.id, required this.content});
+  Prayer({
+    required this.id,
+    required this.content,
+    this.transliteration,
+    this.translation,
+    this.reference,
+  });
 
   PrayerEntity toEntity() {
     return PrayerEntity(
       id: id,
       content: content,
+      transliteration: transliteration,
+      translation: translation,
+      reference: reference,
     );
   }
 
@@ -22,6 +37,9 @@ class Prayer extends HiveObject {
     return Prayer(
       id: entity.id,
       content: entity.content,
+      transliteration: entity.transliteration,
+      translation: entity.translation,
+      reference: entity.reference,
     );
   }
 }

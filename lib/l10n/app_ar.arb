@@ -23,8 +23,12 @@
   "@dayStreakCount": {
     "placeholders": { "count": { "type": "String" } }
   },
-  "streakDescription": "حافظت على أذكارك اليومية دون انقطاع",
-  "viewStats": "عرض الإحصائيات",
+  "streakDescription": "أكملت أذكارك اليومية دون أن تفوّت يومًا",
+  "streakSince": "منذ {date}",
+  "@streakSince": {
+    "placeholders": { "date": { "type": "String" } }
+  },
+  "viewStats": "شاهد الإحصائيات",
   "supportTheApp": "ادعم التطبيق",
   "supportSubtitle": "ساعد في إبقاء بنك الذكر مجانيًا للجميع",
   "donate": "تبرع",

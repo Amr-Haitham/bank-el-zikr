@@ -19,17 +19,26 @@ class PrayerAdapter extends TypeAdapter<Prayer> {
     return Prayer(
       id: fields[0] as int,
       content: fields[1] as String,
+      transliteration: fields[2] as String?,
+      translation: fields[3] as String?,
+      reference: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Prayer obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.content);
+      ..write(obj.content)
+      ..writeByte(2)
+      ..write(obj.transliteration)
+      ..writeByte(3)
+      ..write(obj.translation)
+      ..writeByte(4)
+      ..write(obj.reference);
   }
 
   @override

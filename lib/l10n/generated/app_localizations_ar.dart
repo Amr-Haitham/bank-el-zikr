@@ -58,10 +58,15 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get streakDescription => 'حافظت على أذكارك اليومية دون انقطاع';
+  String get streakDescription => 'أكملت أذكارك اليومية دون أن تفوّت يومًا';
 
   @override
-  String get viewStats => 'عرض الإحصائيات';
+  String streakSince(String date) {
+    return 'منذ $date';
+  }
+
+  @override
+  String get viewStats => 'شاهد الإحصائيات';
 
   @override
   String get supportTheApp => 'ادعم التطبيق';
