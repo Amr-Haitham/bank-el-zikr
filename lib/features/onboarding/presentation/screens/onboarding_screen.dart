@@ -171,6 +171,7 @@ class _LanguageOption extends StatelessWidget {
               ),
             ),
             Column(
+              textDirection: TextDirection.ltr,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(
