@@ -17,51 +17,94 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Flexible(
-            child:
-                BlocBuilder<GetAllAzkarCubit, RequestState<List<ZikrEntity>>>(
-              builder: (context, azkarState) {
-                return azkarState.when(
-                  initial: () => const SizedBox.shrink(),
-                  loading: () => const SizedBox.shrink(),
-                  failure: (f) => const SizedBox.shrink(),
-                  success: (azkar) {
-                    if (azkar.isEmpty) return const SizedBox.shrink();
-                    final currentZikr = azkar.firstWhere(
-                      (z) => z.id == currentZikrId,
-                      orElse: () => azkar.first,
-                    );
-                    return AutoSizeText(
-                      currentZikr.content,
-                      textAlign: TextAlign.center,
-                      textDirection: TextDirection.rtl,
-                      maxLines: 2,
-                      minFontSize: 18,
-                      style: Theme.of(context)
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
+
+    return BlocBuilder<GetAllAzkarCubit, RequestState<List<ZikrEntity>>>(
+      builder: (context, azkarState) {
+        return azkarState.when(
+          initial: () => const SizedBox.shrink(),
+          loading: () => const SizedBox.shrink(),
+          failure: (f) => const SizedBox.shrink(),
+          success: (azkar) {
+            if (azkar.isEmpty) return const SizedBox.shrink();
+            final currentZikr = azkar.firstWhere(
+              (z) => z.id == currentZikrId,
+              orElse: () => azkar.first,
+            );
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const SizedBox(width: 42),
+                    Flexible(
+                      child: AutoSizeText(
+                        currentZikr.content,
+                        textAlign: TextAlign.center,
+                        textDirection: TextDirection.rtl,
+                        maxLines: 2,
+                        minFontSize: 18,
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 34),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    GestureDetector(
+                      onTap: () => AutoRouter.of(context)
+                          .push(const SelectZikrRoute()),
+                      child: Container(
+                        width: 34,
+                        height: 34,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .surfaceContainerHighest,
+                          borderRadius: BorderRadius.circular(11),
+                        ),
+                        child: Icon(Icons.swap_horiz_rounded,
+                            color: Theme.of(context).primaryColor, size: 20),
+                      ),
+                    ),
+                  ],
+                ),
+                if (isEnglish) ...[
+                  const SizedBox(height: 4),
+                  // Placeholder only — no transliteration/meaning data
+                  // model exists yet. Swap for real fields once added.
+                  Text(
+                    "Al-hamdu lillah",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                  Text(
+                    "Praise be to Allah",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: Theme.of(context)
                           .textTheme
-                          .headlineSmall!
-                          .copyWith(
-                              color: Theme.of(context).primaryColor,
-                              fontSize: 34),
-                    );
-                  },
-                );
-              },
-            ),
-          ),
-          const SizedBox(width: 8),
-          GestureDetector(
-            onTap: () => AutoRouter.of(context).push(const SelectZikrRoute()),
-            child: Icon(Icons.swap_horiz_rounded,
-                color: Theme.of(context).primaryColor, size: 34),
-          ),
-        ],
-      ),
+                          .bodySmall!
+                          .color!
+                          .withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              ],
+              );
+            },
+          );
+        },
     );
   }
 }
+

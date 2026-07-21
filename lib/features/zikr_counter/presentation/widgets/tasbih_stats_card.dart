@@ -8,12 +8,14 @@ class TasbihStatsCard extends StatelessWidget {
     required this.balance,
     required this.laps,
     required this.goal,
+    required this.currentCounter,
     required this.onEditGoal,
   });
 
   final int balance;
   final int laps;
   final int? goal;
+  final int currentCounter;
   final VoidCallback onEditGoal;
 
   @override
@@ -28,10 +30,9 @@ class TasbihStatsCard extends StatelessWidget {
         children: [
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).goalLabel,
-              value: goal != null ? formatNumber(context, goal!) : "-",
-              valueColor: Theme.of(context).colorScheme.secondary,
-              onEdit: onEditGoal,
+              label: AppLocalizations.of(context).balanceLabel,
+              value: formatNumber(context, balance),
+              valueColor: Theme.of(context).primaryColor,
             ),
           ),
           _divider(context),
@@ -39,15 +40,18 @@ class TasbihStatsCard extends StatelessWidget {
             child: _StatColumn(
               label: AppLocalizations.of(context).lapsLabel,
               value: formatNumber(context, laps),
-              valueColor: Theme.of(context).textTheme.bodyLarge!.color,
+              valueColor: Theme.of(context).primaryColor,
             ),
           ),
           _divider(context),
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).balanceLabel,
-              value: formatNumber(context, balance),
+              label: AppLocalizations.of(context).goalLabel,
+              value: goal != null
+                  ? "${formatNumber(context, currentCounter)}/${formatNumber(context, goal!)}"
+                  : "-",
               valueColor: Theme.of(context).primaryColor,
+              onEdit: onEditGoal,
             ),
           ),
         ],
@@ -111,14 +115,7 @@ class _StatColumn extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 6),
-        Text(
-          value,
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.w800,
-            color: valueColor,
-          ),
-        ),
+        _buildValue(context),
       ],
     );
 
@@ -130,6 +127,35 @@ class _StatColumn extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: column,
+      ),
+    );
+  }
+
+  Widget _buildValue(BuildContext context) {
+    final slashIndex = value.indexOf('/');
+    if (slashIndex == -1) {
+      return Text(
+        value,
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w800,
+          color: valueColor,
+        ),
+      );
+    }
+
+    final mutedColor = Theme.of(context)
+        .textTheme
+        .bodySmall!
+        .color!
+        .withValues(alpha: 0.6);
+
+    return Text(
+      value,
+      style: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w800,
+        color: mutedColor,
       ),
     );
   }

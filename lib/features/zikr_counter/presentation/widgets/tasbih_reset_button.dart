@@ -9,12 +9,14 @@ class TasbihResetButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: OutlinedButton.icon(
+      child: ElevatedButton.icon(
         onPressed: onPressed,
-        style: OutlinedButton.styleFrom(
+        style: ElevatedButton.styleFrom(
           foregroundColor: Theme.of(context).primaryColor,
-          side: BorderSide(color: Theme.of(context).primaryColor),
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+          backgroundColor: Theme.of(context).cardColor,
+          elevation: 3,
+          shadowColor: Colors.black.withValues(alpha: 0.15),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),

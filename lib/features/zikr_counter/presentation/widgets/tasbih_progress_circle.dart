@@ -23,21 +23,55 @@ class TasbihProgressCircle extends StatelessWidget {
 
     return Center(
       child: SizedBox(
-        width: size,
-        height: size,
+        width: size + 24,
+        height: size + 24,
         child: Stack(
           alignment: Alignment.center,
           children: [
+            Container(
+              width: size + 24,
+              height: size + 24,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                gradient: RadialGradient(
+                  center: const Alignment(0, 0.2),
+                  colors: [
+                    Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0.35),
+                    Theme.of(context).colorScheme.secondary.withValues(
+                        alpha: 0),
+                  ],
+                  stops: const [0.0, 0.7],
+                ),
+              ),
+            ),
             SizedBox(
               width: size,
               height: size,
               child: CircularProgressIndicator(
                 value: progress,
-                strokeWidth: 8,
+                strokeWidth: 6,
                 strokeCap: StrokeCap.round,
                 backgroundColor: Theme.of(context).cardColor,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).colorScheme.secondary),
+                    Theme.of(context).primaryColor),
+              ),
+            ),
+            Container(
+              width: size - 12,
+              height: size - 12,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Theme.of(context).cardColor,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.18),
+                    blurRadius: 40,
+                    offset: const Offset(0, 18),
+                  ),
+                ],
               ),
             ),
             Container(
@@ -46,6 +80,7 @@ class TasbihProgressCircle extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: RadialGradient(
+                  center: const Alignment(-0.3, -0.4),
                   colors: [
                     Theme.of(context).primaryColor.withValues(alpha: 0.55),
                     Theme.of(context)
@@ -80,10 +115,18 @@ class TasbihProgressCircle extends StatelessWidget {
                       ),
                     ],
                     const SizedBox(height: 8),
-                    Text(
-                      AppLocalizations.of(context).tapAnywhere,
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.black45),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(Icons.bolt_rounded,
+                            size: 14, color: Colors.black45),
+                        const SizedBox(width: 4),
+                        Text(
+                          AppLocalizations.of(context).tapAnywhere,
+                          style: const TextStyle(
+                              fontSize: 12, color: Colors.black45),
+                        ),
+                      ],
                     ),
                   ],
                 ),

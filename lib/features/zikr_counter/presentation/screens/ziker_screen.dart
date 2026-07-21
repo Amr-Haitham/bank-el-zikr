@@ -148,15 +148,13 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 balance: counter.accountBalance,
                                 laps: _laps,
                                 goal: counter.currentGoal,
+                                currentCounter: counter.currentCounter,
                                 onEditGoal: () =>
                                     _showGoalSettingSheet(context),
                               ),
                               const SizedBox(height: 44),
-                              SizedBox(
-                                height: 88,
-                                child: TasbihZikrSwitcherRow(
-                                    currentZikrId: counter.currentZikrId),
-                              ),
+                              TasbihZikrSwitcherRow(
+                                  currentZikrId: counter.currentZikrId),
                               const SizedBox(height: 20),
                               Expanded(
                                 child: GestureDetector(
