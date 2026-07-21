@@ -12,7 +12,7 @@ class DashboardScreen extends StatelessWidget {
       routes: const [
         HomeRoute(),
         TasbeehWerdRoute(),
-        AzkarRoute(),
+        AdhkarRoute(),
         AccountBalanceRoute(),
         SettingsRoute(),
       ],

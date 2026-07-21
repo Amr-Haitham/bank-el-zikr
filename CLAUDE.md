@@ -226,6 +226,14 @@ feature/widget strings are still hardcoded Arabic. When adding new user-facing t
 migrated (e.g. Home), add the string to both ARB files and use `AppLocalizations.of(context)!.key`. Don't
 block unrelated work on migrating an entire screen's strings unless that's the actual task.
 
+## Comments
+
+Do not write comments in code in this repo — no doc comments (`///`), no inline explanations, no
+file-header blocks. This overrides the general default of adding a comment when something is
+non-obvious; here, prefer clear naming/structure over a comment, even for genuinely non-obvious logic.
+When editing a file that already has comments, leave existing ones alone unless the edit specifically
+asks for cleanup — don't strip them incidentally as a side effect of an unrelated change.
+
 ## Testing / verification
 
 Before considering a change done:

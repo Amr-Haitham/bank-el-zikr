@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/features/morning_night_azkar/data/models/morning_night_zikr_model.dart';
+import 'package:bank_el_ziker/features/adhkar/data/models/morning_night_zikr_model.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_model.dart';
 import 'package:bank_el_ziker/features/settings/data/models/version_model.dart';
 import 'package:bank_el_ziker/features/azkar_records/data/models/day_zikr_record_model.dart';
@@ -100,8 +100,11 @@ class HiveDB {
           .addAll(InitialData.prayers.map((e) => Prayer.fromEntity(e)));
     }
     if (conditionalAzkarBox.isEmpty) {
-      await conditionalAzkarBox
-          .addAll(InitialData.conditionAzkar.map((e) => Zikr.fromEntity(e)));
+      await conditionalAzkarBox.addAll([
+        ...InitialData.conditionAzkar,
+        ...InitialData.ruqyahAzkar,
+        ...InitialData.afterPrayerAzkar,
+      ].map((e) => Zikr.fromEntity(e)));
     }
 
     if (generalDataBox.isEmpty) {
