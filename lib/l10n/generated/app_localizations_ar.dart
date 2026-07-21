@@ -193,16 +193,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hasanatGrowth => 'نمو الحسنات';
 
   @override
-  String get overallAdhkarStreak => 'التتابع العام للأذكار';
-
-  @override
-  String consecutiveDays(String count) {
-    return '$count يوم متتالي';
-  }
-
-  @override
-  String longestOverall(String count) {
-    return 'الأطول إجمالاً: $count يوم';
+  String longestStreakLabel(String count) {
+    return 'الأطول: $count يوم';
   }
 
   @override

@@ -434,23 +434,11 @@ abstract class AppLocalizations {
   /// **'نمو الحسنات'**
   String get hasanatGrowth;
 
-  /// No description provided for @overallAdhkarStreak.
+  /// No description provided for @longestStreakLabel.
   ///
   /// In ar, this message translates to:
-  /// **'التتابع العام للأذكار'**
-  String get overallAdhkarStreak;
-
-  /// No description provided for @consecutiveDays.
-  ///
-  /// In ar, this message translates to:
-  /// **'{count} يوم متتالي'**
-  String consecutiveDays(String count);
-
-  /// No description provided for @longestOverall.
-  ///
-  /// In ar, this message translates to:
-  /// **'الأطول إجمالاً: {count} يوم'**
-  String longestOverall(String count);
+  /// **'الأطول: {count} يوم'**
+  String longestStreakLabel(String count);
 
   /// No description provided for @thisWeek.
   ///
