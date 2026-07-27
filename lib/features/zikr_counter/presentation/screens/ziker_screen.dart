@@ -52,7 +52,12 @@ class _ZikerScreenState extends State<ZikerScreen> {
   }
 
   void _handleIncrement(CounterStateEntity counterState, bool isVibrating) {
-    final newCounter = counterState.currentCounter + 1;
+    int newCounter = counterState.currentCounter + 1;
+
+    if (counterState.currentGoal != null &&
+        newCounter > counterState.currentGoal!) {
+      newCounter = 1;
+    }
 
     if (counterState.currentGoal != null &&
         newCounter == counterState.currentGoal) {
@@ -63,12 +68,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
       }
     }
 
-    if (counterState.currentGoal != null &&
-        newCounter > counterState.currentGoal!) {
-      context.read<CounterCubit>().setCounter(1);
-    } else {
-      context.read<CounterCubit>().setCounter(newCounter);
-    }
+    context.read<CounterCubit>().setCounter(newCounter);
 
     context.read<CounterCubit>().addToBalance();
 
@@ -132,52 +132,63 @@ class _ZikerScreenState extends State<ZikerScreen> {
                             });
                           }
 
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.stretch,
-                            children: [
-                              Text(
-                                AppLocalizations.of(context).digitalTasbih,
-                                textAlign: TextAlign.center,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall!
-                                    .copyWith(fontSize: 22),
-                              ),
-                              const SizedBox(height: 20),
-                              TasbihStatsCard(
-                                balance: counter.accountBalance,
-                                laps: _laps,
-                                goal: counter.currentGoal,
-                                currentCounter: counter.currentCounter,
-                                onEditGoal: () =>
-                                    _showGoalSettingSheet(context),
-                              ),
-                              const SizedBox(height: 44),
-                              TasbihZikrSwitcherRow(
-                                  currentZikrId: counter.currentZikrId),
-                              const SizedBox(height: 20),
-                              Expanded(
-                                child: GestureDetector(
-                                  behavior: HitTestBehavior.opaque,
-                                  onTap: () =>
-                                      _handleIncrement(counter, isVibrating),
-                                  child: TasbihProgressCircle(
-                                    currentCounter: counter.currentCounter,
-                                    goal: counter.currentGoal,
+                          return GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () => _handleIncrement(counter, isVibrating),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  AppLocalizations.of(context).digitalTasbih,
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .headlineSmall!
+                                      .copyWith(fontSize: 22),
+                                ),
+                                const SizedBox(height: 6),
+                                TasbihStatsCard(
+                                  balance: counter.accountBalance,
+                                  laps: _laps,
+                                  goal: counter.currentGoal,
+                                  currentCounter: counter.currentCounter,
+                                  onEditGoal: () =>
+                                      _showGoalSettingSheet(context),
+                                ),
+                                const SizedBox(height: 24),
+                                TasbihZikrSwitcherRow(
+                                    currentZikrId: counter.currentZikrId),
+                                const SizedBox(height: 4),
+                                Expanded(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TasbihProgressCircle(
+                                        currentCounter: counter.currentCounter,
+                                        goal: counter.currentGoal,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Transform.translate(
+                                        offset: const Offset(0, 12),
+                                        child: TasbihResetButton(
+                                          onPressed: () {
+                                            context
+                                                .read<CounterCubit>()
+                                                .setCounter(0);
+                                            context
+                                                .read<CounterCubit>()
+                                                .setGoal(null);
+                                            setState(() => _laps = 0);
+                                          },
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 16),
-                              TasbihResetButton(
-                                onPressed: () {
-                                  context.read<CounterCubit>().setCounter(0);
-                                  context.read<CounterCubit>().setGoal(null);
-                                  setState(() => _laps = 0);
-                                },
-                              ),
-                              const SizedBox(
-                                  height: ConstantValues.appBottomPadding),
-                            ],
+                                const SizedBox(
+                                    height: ConstantValues.appBottomPadding),
+                              ],
+                            ),
                           );
                         },
                       );

@@ -251,7 +251,7 @@ abstract class AppLocalizations {
   /// No description provided for @resetLabel.
   ///
   /// In ar, this message translates to:
-  /// **'إعادة تعيين'**
+  /// **'تصفير'**
   String get resetLabel;
 
   /// No description provided for @balanceLabel.
@@ -275,7 +275,7 @@ abstract class AppLocalizations {
   /// No description provided for @tapAnywhere.
   ///
   /// In ar, this message translates to:
-  /// **'⚡ اضغط في أي مكان'**
+  /// **'اضغط في أي مكان'**
   String get tapAnywhere;
 
   /// No description provided for @setGoal.
@@ -649,6 +649,36 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'اللغة'**
   String get language;
+
+  /// Tasbih zikr-picker bottom sheet title
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر الذكر'**
+  String get chooseZikr;
+
+  /// Placeholder text for the inline add-custom-zikr text field
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ذكرًا مخصصًا...'**
+  String get addCustomZikrHint;
+
+  /// Title of the add-custom-zikr popup
+  ///
+  /// In ar, this message translates to:
+  /// **'أضف ذكرًا مخصصًا'**
+  String get addCustomZikrTitle;
+
+  /// Submit button label on the add-custom-zikr popup
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة الذكر'**
+  String get addCustomZikrButton;
+
+  /// Validation message when submitting an empty custom zikr
+  ///
+  /// In ar, this message translates to:
+  /// **'الرجاء إدخال نص الذكر'**
+  String get emptyZikrError;
 }
 
 class _AppLocalizationsDelegate

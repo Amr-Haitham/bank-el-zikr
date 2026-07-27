@@ -7,16 +7,40 @@ class ZikrEntity extends Equatable {
   final String? description;
   final bool isCustomZikr;
 
+  /// Latin-script transliteration of [content] (e.g. "Subhan Allah"). Null
+  /// for custom user-added azkar, which have no transliteration data.
+  final String? transliteration;
+
+  /// English translation of [content] (e.g. "Glory be to Allah"). Null for
+  /// custom user-added azkar, which have no translation data.
+  final String? translation;
+
+  /// English translation of [description] (the virtue/hadith text). Null
+  /// for custom user-added azkar, which have no translation data.
+  final String? descriptionTranslation;
+
   const ZikrEntity({
     required this.id,
     required this.content,
     this.title,
     this.description,
     this.isCustomZikr = false,
+    this.transliteration,
+    this.translation,
+    this.descriptionTranslation,
   });
 
   @override
-  List<Object?> get props => [id, content, title, description, isCustomZikr];
+  List<Object?> get props => [
+        id,
+        content,
+        title,
+        description,
+        isCustomZikr,
+        transliteration,
+        translation,
+        descriptionTranslation,
+      ];
 
   ZikrEntity copyWith({
     int? id,
@@ -24,6 +48,9 @@ class ZikrEntity extends Equatable {
     String? title,
     String? description,
     bool? isCustomZikr,
+    String? transliteration,
+    String? translation,
+    String? descriptionTranslation,
   }) {
     return ZikrEntity(
       id: id ?? this.id,
@@ -31,6 +58,10 @@ class ZikrEntity extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       isCustomZikr: isCustomZikr ?? this.isCustomZikr,
+      transliteration: transliteration ?? this.transliteration,
+      translation: translation ?? this.translation,
+      descriptionTranslation:
+          descriptionTranslation ?? this.descriptionTranslation,
     );
   }
 }

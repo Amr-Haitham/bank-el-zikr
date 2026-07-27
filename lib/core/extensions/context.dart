@@ -48,7 +48,11 @@ extension ContextExtension on BuildContext {
                         color: color,
                       ),
                     ),
-                  Text(message),
+                  Text(
+                    message,
+                    style:
+                        TextStyle(color: Theme.of(this).colorScheme.onSurface),
+                  ),
                 ],
               ),
             ),

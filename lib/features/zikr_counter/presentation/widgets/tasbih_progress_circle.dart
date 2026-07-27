@@ -40,8 +40,10 @@ class TasbihProgressCircle extends StatelessWidget {
                         .colorScheme
                         .secondary
                         .withValues(alpha: 0.35),
-                    Theme.of(context).colorScheme.secondary.withValues(
-                        alpha: 0),
+                    Theme.of(context)
+                        .colorScheme
+                        .secondary
+                        .withValues(alpha: 0),
                   ],
                   stops: const [0.0, 0.7],
                 ),
@@ -79,57 +81,81 @@ class TasbihProgressCircle extends StatelessWidget {
               height: size - 26,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                gradient: RadialGradient(
-                  center: const Alignment(-0.3, -0.4),
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
                   colors: [
-                    Theme.of(context).primaryColor.withValues(alpha: 0.55),
+                    Theme.of(context).primaryColor.withValues(alpha: 0.75),
+                    Theme.of(context).primaryColor.withValues(alpha: 0.4),
                     Theme.of(context)
                         .colorScheme
                         .secondary
                         .withValues(alpha: 0.55),
                   ],
+                  stops: const [0.0, 0.35, 1.0],
                 ),
               ),
-              child: Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    AutoSizeText(
-                      formatNumber(context, currentCounter),
-                      maxLines: 1,
-                      style: const TextStyle(
-                        fontSize: 56,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.black87,
-                      ),
-                    ),
-                    if (goal != null) ...[
-                      const SizedBox(height: 4),
-                      Text(
-                        AppLocalizations.of(context)
-                            .ofCount(formatNumber(context, goal!)),
-                        style: const TextStyle(
-                          fontSize: 14,
-                          color: Colors.black54,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Align(
+                    alignment: const Alignment(-0.2, -0.3),
+                    child: Container(
+                      width: (size - 26) * 0.6,
+                      height: (size - 26) * 0.6,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: RadialGradient(
+                          colors: [
+                            Colors.white.withValues(alpha: 0.65),
+                            Colors.white.withValues(alpha: 0.0),
+                          ],
                         ),
                       ),
-                    ],
-                    const SizedBox(height: 8),
-                    Row(
+                    ),
+                  ),
+                  Center(
+                    child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.bolt_rounded,
-                            size: 14, color: Colors.black45),
-                        const SizedBox(width: 4),
-                        Text(
-                          AppLocalizations.of(context).tapAnywhere,
+                        AutoSizeText(
+                          formatNumber(context, currentCounter),
+                          maxLines: 1,
                           style: const TextStyle(
-                              fontSize: 12, color: Colors.black45),
+                            fontSize: 56,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        if (goal != null) ...[
+                          const SizedBox(height: 4),
+                          Text(
+                            AppLocalizations.of(context)
+                                .ofCount(formatNumber(context, goal!)),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
+                        const SizedBox(height: 8),
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Icon(Icons.bolt_rounded,
+                                size: 14, color: Colors.black45),
+                            const SizedBox(width: 2),
+                            Text(
+                              AppLocalizations.of(context).tapAnywhere,
+                              style: const TextStyle(
+                                  fontSize: 12, color: Colors.black45),
+                            ),
+                          ],
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],

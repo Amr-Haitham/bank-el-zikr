@@ -115,7 +115,14 @@ class _StatColumn extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 6),
-        _buildValue(context),
+        Text(
+          value,
+          style: TextStyle(
+            fontSize: 20,
+            fontWeight: FontWeight.w800,
+            color: valueColor,
+          ),
+        ),
       ],
     );
 
@@ -127,35 +134,6 @@ class _StatColumn extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8),
         child: column,
-      ),
-    );
-  }
-
-  Widget _buildValue(BuildContext context) {
-    final slashIndex = value.indexOf('/');
-    if (slashIndex == -1) {
-      return Text(
-        value,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.w800,
-          color: valueColor,
-        ),
-      );
-    }
-
-    final mutedColor = Theme.of(context)
-        .textTheme
-        .bodySmall!
-        .color!
-        .withValues(alpha: 0.6);
-
-    return Text(
-      value,
-      style: TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w800,
-        color: mutedColor,
       ),
     );
   }
