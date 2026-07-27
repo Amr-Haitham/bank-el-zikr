@@ -152,6 +152,22 @@ class ListTileOfZikr extends StatelessWidget {
               ),
             ),
           ],
+          if (isEnglish && zikr.translation != null) ...[
+            const SizedBox(height: 4),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                zikr.translation!,
+                textDirection: TextDirection.ltr,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 14,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appGray
+                          : appLightGrey,
+                    ),
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           Text(
             descriptionText,
