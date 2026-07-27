@@ -61,6 +61,7 @@ class HiveDB {
       await versionBox.clear();
       await versionBox.add(Version(currentVersion: ReleaseVersion.version));
 
+      await zikrBox.clear();
       await morningAzkarBox.clear();
       await nightAzkarBox.clear();
       await conditionalAzkarBox.clear();

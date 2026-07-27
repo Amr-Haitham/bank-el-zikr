@@ -26,7 +26,12 @@ class AzkarRepositoryImpl implements AzkarRepository {
   @override
   Future<RequestResult<void>> addCustomZikr(ZikrEntity zikr) async {
     return safeAwait(() async {
-      final model = Zikr.fromEntity(zikr);
+      // Custom azkar are always submitted with id: 0 by the caller — assign
+      // a real unique id here, otherwise every custom zikr would be stored
+      // under the same Hive key and overwrite the previous one.
+      final model = Zikr.fromEntity(
+        zikr.copyWith(id: DateTime.now().microsecondsSinceEpoch),
+      );
       await localDataSource.addCustomZikr(model);
     });
   }
