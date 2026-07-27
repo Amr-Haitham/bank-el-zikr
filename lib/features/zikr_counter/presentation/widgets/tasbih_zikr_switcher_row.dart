@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
+import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/zikr_picker_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,32 +86,32 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (isEnglish && currentZikr.transliteration != null) ...[
+                if (isEnglish && currentZikr.contentTransliteration != null) ...[
                   const SizedBox(height: 4),
                   Text(
-                    currentZikr.transliteration!,
+                    currentZikr.contentTransliteration!,
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.ltr,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: _captionFontSize(currentZikr.transliteration!),
+                      fontSize: _captionFontSize(currentZikr.contentTransliteration!),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.italic,
                       color: Theme.of(context).primaryColor,
                     ),
                   ),
                 ],
-                if (isEnglish && currentZikr.translation != null) ...[
+                if (isEnglish && currentZikr.contentEn != null) ...[
                   const SizedBox(height: 2),
                   Text(
-                    currentZikr.translation!,
+                    currentZikr.contentEn!,
                     textAlign: TextAlign.center,
                     textDirection: TextDirection.ltr,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      fontSize: _captionFontSize(currentZikr.translation!),
+                      fontSize: _captionFontSize(currentZikr.contentEn!),
                       color: Theme.of(context)
                           .textTheme
                           .bodySmall!

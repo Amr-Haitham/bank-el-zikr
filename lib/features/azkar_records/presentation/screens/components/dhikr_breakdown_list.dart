@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 
 class DhikrBreakdownRow {

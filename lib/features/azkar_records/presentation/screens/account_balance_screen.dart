@@ -1,7 +1,7 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
+import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/daily_activity_entry.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';

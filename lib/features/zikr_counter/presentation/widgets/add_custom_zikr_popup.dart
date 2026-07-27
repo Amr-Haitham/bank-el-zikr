@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/extensions/context.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
+import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,13 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
       return;
     }
     context.read<AddCustomZikrCubit>().addZikr(
-          ZikrEntity(id: 0, content: text, isCustomZikr: true, title: null),
+          ZikrEntity(
+            id: 0,
+            content: text,
+            isCustomZikr: true,
+            title: null,
+            category: 'custom',
+          ),
         );
     Navigator.of(context).maybePop();
   }
