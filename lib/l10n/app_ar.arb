@@ -37,11 +37,11 @@
 
   "digitalTasbih": "السبحة الرقمية",
   "errorLoadingCounter": "حدث خطأ في تحميل العداد",
-  "resetLabel": "إعادة تعيين",
+  "resetLabel": "تصفير",
   "balanceLabel": "الرصيد",
   "lapsLabel": "الأشواط",
   "goalLabel": "الهدف",
-  "tapAnywhere": "⚡ اضغط في أي مكان",
+  "tapAnywhere": "اضغط في أي مكان",
   "setGoal": "تحديد الهدف",
   "vibrateAtLap": "يهتز الهاتف عند إتمام كل شوط",
   "saveLabel": "حفظ",
@@ -162,5 +162,25 @@
   "language": "اللغة",
   "@language": {
     "description": "Settings screen language toggle label"
+  },
+  "chooseZikr": "اختر الذكر",
+  "@chooseZikr": {
+    "description": "Tasbih zikr-picker bottom sheet title"
+  },
+  "addCustomZikrHint": "أضف ذكرًا مخصصًا...",
+  "@addCustomZikrHint": {
+    "description": "Placeholder text for the inline add-custom-zikr text field"
+  },
+  "addCustomZikrTitle": "أضف ذكرًا مخصصًا",
+  "@addCustomZikrTitle": {
+    "description": "Title of the add-custom-zikr popup"
+  },
+  "addCustomZikrButton": "إضافة الذكر",
+  "@addCustomZikrButton": {
+    "description": "Submit button label on the add-custom-zikr popup"
+  },
+  "emptyZikrError": "الرجاء إدخال نص الذكر",
+  "@emptyZikrError": {
+    "description": "Validation message when submitting an empty custom zikr"
   }
 }

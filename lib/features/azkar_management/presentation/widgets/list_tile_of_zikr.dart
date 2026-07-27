@@ -16,14 +16,32 @@ class ListTileOfZikr extends StatelessWidget {
     required this.zikr,
     required this.onTap,
     required this.isSelected,
+    this.useGreenCheckIndicator = false,
+    this.onDeleteCustomZikr,
   });
 
   final bool isSelected;
   final ZikrEntity zikr;
   final Function() onTap;
 
+  /// When true, renders the selection circle as a filled green check
+  /// (used by the tasbih zikr-picker sheet) instead of the default gold
+  /// filled/outlined circle used by the Azkar library screen.
+  final bool useGreenCheckIndicator;
+
+  /// When set, a custom zikr row shows a red trash icon that calls this
+  /// instead of the gear icon that opens the edit popup (used by the
+  /// tasbih zikr-picker sheet, which only needs quick delete, not edit).
+  final VoidCallback? onDeleteCustomZikr;
+
   @override
   Widget build(BuildContext context) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
+    final showTranslation = isEnglish && zikr.descriptionTranslation != null;
+    final descriptionText = showTranslation
+        ? zikr.descriptionTranslation!
+        : (zikr.description ?? "");
+
     return ListTile(
       splashColor: Colors.transparent,
       onTap: onTap,
@@ -39,7 +57,15 @@ class ListTileOfZikr extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    if (zikr.isCustomZikr == true)
+                    if (zikr.isCustomZikr == true && onDeleteCustomZikr != null)
+                      GestureDetector(
+                        onTap: onDeleteCustomZikr,
+                        child: const Icon(
+                          Icons.delete_outline,
+                          color: Colors.red,
+                        ),
+                      )
+                    else if (zikr.isCustomZikr == true)
                       GestureDetector(
                         onTap: () => _showEditPopup(context),
                         child: Icon(
@@ -53,43 +79,102 @@ class ListTileOfZikr extends StatelessWidget {
                       child: AutoSizeText(
                         zikr.content,
                         textDirection: TextDirection.rtl,
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodyMedium!
-                            .copyWith(fontWeight: FontWeight.bold),
+                        style:
+                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(
-                            width: 1,
-                            color: GeneralUtils.isLightTheme(context)
-                                ? appLightGold
-                                : appDarkGold,
-                          ),
-                          color: isSelected
-                              ? (GeneralUtils.isLightTheme(context)
-                                  ? appLightGold
-                                  : appDarkGold)
-                              : Colors.transparent,
-                        ),
-                        height: 16,
-                        width: 16,
-                      ),
+                      child: useGreenCheckIndicator
+                          ? Container(
+                              height: 20,
+                              width: 20,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: isSelected
+                                    ? Theme.of(context).primaryColor
+                                    : Colors.transparent,
+                                border: isSelected
+                                    ? null
+                                    : Border.all(
+                                        width: 1,
+                                        color:
+                                            GeneralUtils.isLightTheme(context)
+                                                ? appGray
+                                                : appLightGrey,
+                                      ),
+                              ),
+                              child: isSelected
+                                  ? const Icon(Icons.check,
+                                      size: 14, color: Colors.white)
+                                  : null,
+                            )
+                          : Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  width: 1,
+                                  color: GeneralUtils.isLightTheme(context)
+                                      ? appLightGold
+                                      : appDarkGold,
+                                ),
+                                color: isSelected
+                                    ? (GeneralUtils.isLightTheme(context)
+                                        ? appLightGold
+                                        : appDarkGold)
+                                    : Colors.transparent,
+                              ),
+                              height: 16,
+                              width: 16,
+                            ),
                     ),
                   ],
                 ),
               ),
             ],
           ),
+          if (isEnglish && zikr.transliteration != null) ...[
+            const SizedBox(height: 6),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                zikr.transliteration!,
+                textDirection: TextDirection.ltr,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).primaryColor,
+                    ),
+              ),
+            ),
+          ],
+          if (isEnglish && zikr.translation != null) ...[
+            const SizedBox(height: 4),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                zikr.translation!,
+                textDirection: TextDirection.ltr,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 14,
+                      color: GeneralUtils.isLightTheme(context)
+                          ? appGray
+                          : appLightGrey,
+                    ),
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           Text(
-            zikr.description ?? "",
-            textDirection: TextDirection.rtl,
+            descriptionText,
+            textDirection:
+                showTranslation ? TextDirection.ltr : TextDirection.rtl,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                  fontSize: 14,
                   color: GeneralUtils.isLightTheme(context)
                       ? appGray
                       : appLightGrey,

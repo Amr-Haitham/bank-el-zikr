@@ -90,7 +90,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get errorLoadingCounter => 'حدث خطأ في تحميل العداد';
 
   @override
-  String get resetLabel => 'إعادة تعيين';
+  String get resetLabel => 'تصفير';
 
   @override
   String get balanceLabel => 'الرصيد';
@@ -102,7 +102,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get goalLabel => 'الهدف';
 
   @override
-  String get tapAnywhere => '⚡ اضغط في أي مكان';
+  String get tapAnywhere => 'اضغط في أي مكان';
 
   @override
   String get setGoal => 'تحديد الهدف';
@@ -307,4 +307,19 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get language => 'اللغة';
+
+  @override
+  String get chooseZikr => 'اختر الذكر';
+
+  @override
+  String get addCustomZikrHint => 'أضف ذكرًا مخصصًا...';
+
+  @override
+  String get addCustomZikrTitle => 'أضف ذكرًا مخصصًا';
+
+  @override
+  String get addCustomZikrButton => 'إضافة الذكر';
+
+  @override
+  String get emptyZikrError => 'الرجاء إدخال نص الذكر';
 }

@@ -32,7 +32,7 @@
   "balanceLabel": "Balance",
   "lapsLabel": "Laps",
   "goalLabel": "Goal",
-  "tapAnywhere": "⚡ Tap anywhere",
+  "tapAnywhere": "Tap anywhere",
   "setGoal": "Set goal",
   "vibrateAtLap": "The phone vibrates at each completed lap",
   "saveLabel": "Save",
@@ -99,5 +99,10 @@
   "home": "Home",
   "welcomeBack": "Welcome back",
   "shareRewardWithFriends": "Share the reward with your friends",
-  "language": "Language"
+  "language": "Language",
+  "chooseZikr": "Choose a Zikr",
+  "addCustomZikrHint": "Add a custom zikr...",
+  "addCustomZikrTitle": "Add a Custom Zikr",
+  "addCustomZikrButton": "Add Zikr",
+  "emptyZikrError": "Please enter the zikr text"
 }

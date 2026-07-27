@@ -22,13 +22,16 @@ class ZikrAdapter extends TypeAdapter<Zikr> {
       description: fields[3] as String?,
       title: fields[2] as String?,
       isCustomZikr: fields[4] as bool?,
+      transliteration: fields[5] as String?,
+      translation: fields[6] as String?,
+      descriptionTranslation: fields[7] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Zikr obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -38,7 +41,13 @@ class ZikrAdapter extends TypeAdapter<Zikr> {
       ..writeByte(3)
       ..write(obj.description)
       ..writeByte(4)
-      ..write(obj.isCustomZikr);
+      ..write(obj.isCustomZikr)
+      ..writeByte(5)
+      ..write(obj.transliteration)
+      ..writeByte(6)
+      ..write(obj.translation)
+      ..writeByte(7)
+      ..write(obj.descriptionTranslation);
   }
 
   @override
