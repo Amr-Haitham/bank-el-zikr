@@ -7,67 +7,101 @@ class InitialData {
     const ZikrEntity(
         id: 1,
         content: "سبحان الله",
+        transliteration: "Subhan Allah",
+        translation: "Glory be to Allah",
         description:
             "قال رَسُولَ اللَّهِ ﷺ: ( أَيَعْجِزُ أَحَدُكُمْ أَنْ يَكْسِبَ كُلَّ يَومٍ أَلْفَ حَسَنَةٍ؟ فَسَأَلَهُ سَائِلٌ مِن جُلَسَائِهِ: كيفَ يَكْسِبُ أَحَدُنَا أَلْفَ حَسَنَةٍ؟ قالَ: يُسَبِّحُ مِائَةَ تَسْبِيحَةٍ، فيُكْتَبُ له أَلْفُ حَسَنَةٍ، أَوْ يُحَطُّ عنْه أَلْفُ خَطِيئَةٍ). رواه مسلم"),
     const ZikrEntity(
         id: 2,
         content: "الحمد لله",
+        transliteration: "Alhamdu lillah",
+        translation: "Praise be to Allah",
         description:
             "قال الله تعالى: (وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ). ابراهيم 7.و قال رَسُولَ اللَّهِ ﷺ: (الطُّهُورُ شَطْرُ الإيمانِ، والْحَمْدُ لِلَّهِ تَمْلأُ المِيزانَ). رواه مسلم"),
     const ZikrEntity(
         id: 3,
         content: "لا إله إلا الله",
+        transliteration: "La ilaha illa Allah",
+        translation: "There is no god but Allah",
         description:
             "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). رواه البخاري"),
     const ZikrEntity(
         id: 4,
         content: "الله أكبر",
+        transliteration: "Allahu Akbar",
+        translation: "Allah is the Greatest",
         description:
             "التكبير جزم وإعلان عن عظمة الله وتعظيم لشعائره. قال الله تعالى: (وَرَبَّكَ فَكَبِّرْ). المدثر 3. و قال: (وَقُلِ اِلْحَمْدُ لِلَّهِ اِلذِي لَمْ يَتَّخِذْ وَلَدًا وَلَمْ يَكُن لَّهُ شَرِيكٌ فِي اِلْمُلْكِ وَلَمْ يَكُن لَّهُ وَلِيٌّ مِّنَ اَلذُّلِّ. وَكَبِّرْهُ تَكْبِيرًا). الإسراء 111"),
     const ZikrEntity(
         id: 5,
         content: "سبحان الله والحمد لله ولا إله إلا الله و الله أكبر",
+        transliteration:
+            "Subhan Allah, wal hamdu lillah, wa la ilaha illa Allah, wa Allahu Akbar",
+        translation:
+            "Glory be to Allah, praise be to Allah, there is no god but Allah, and Allah is the Greatest",
         description:
             "الأذكار السابقة مجمعة. قال فيهن النبي ﷺ الكثير من الأحاديث. فقال ﷺ : (أَحَبُّ الكَلامِ إلى اللهِ أرْبَعٌ: سُبْحانَ اللهِ، والْحَمْدُ لِلَّهِ، ولا إلَهَ إلَّا اللَّهُ، واللَّهُ أكْبَرُ) رواه مسلم. و قال: ( لَأنْ أقولَ : سُبحانَ اللهِ والحمدُ للهِ ولا إلهَ إلَّا اللهُ واللهُ أكبَرُ أحَبُّ إليَّ ممَّا طلَعَتْ عليه الشَّمسُ). رواه ابن حبان"),
     const ZikrEntity(
         id: 6,
         content: "سبحان الله وبحمده",
+        transliteration: "Subhan Allahi wa bihamdih",
+        translation: "Glory be to Allah and praise Him",
         description:
             "في حديث أبي هريرة يقول رسول الله ﷺ: (من قال : سبحان اللهِ وبحمدِه مائةَ مرةٍ غُفرَتْ له ذنوبُه وإنْ كانتْ مثلَ زبَدِ البحرِ). رواه الترمذي"),
     const ZikrEntity(
         id: 7,
         content: "أستغفر الله",
+        transliteration: "Astaghfirullah",
+        translation: "I seek forgiveness from Allah",
         description:
             "قال الله عز وجل: (فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا*يُرْسِلِ السَّمَاءَ عَلَيْكُم مِّدْرَارًا*وَيُمْدِدْكُم بِأَمْوَالٍ وَبَنِينَ وَيَجْعَل لَّكُمْ جَنَّاتٍ وَيَجْعَل لَّكُمْ أَنْهَارًا). سورة نوح : 10 - 12"),
     const ZikrEntity(
         id: 8,
         content: "حسبي الله ونعم الوكيل",
+        transliteration: "Hasbunallahu wa ni'mal wakeel",
+        translation:
+            "Allah is sufficient for us, and He is the best disposer of affairs",
         description:
             "يقول الله تعالى: ( الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُواْ لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَاناً وَقَالُواْ حَسْبُنَا اللّهُ وَنِعْمَ الْوَكِيلُ. فَانقَلَبُواْ بِنِعْمَةٍ مِّنَ اللّهِ وَفَضْلٍ لَّمْ يَمْسَسْهُمْ سُوءٌ وَاتَّبَعُواْ رِضْوَانَ اللّهِ ).  سورة آل عمران : 173 – 174"),
     const ZikrEntity(
         id: 9,
         content: "لا إله إلا أنت سبحانك إني كنت من الظالمين",
+        transliteration:
+            "La ilaha illa anta subhanaka inni kuntu minaz-zalimin",
+        translation:
+            "There is no god but You, glory be to You, I have indeed been of the wrongdoers",
         description:
             "قال رسول الله ﷺ:(دعوةُ ذي النُّونِ إذ دعا وهو في بطنِ الحوتِ لا إلهَ إلَّا أنتَ سبحانَك إنِّي كنتُ من الظالمينَ فإنَّه لم يدعُ بها رجلٌ مسلمٌ في شيءٍ قطُّ إلَّا استجاب اللهُ له). رواه الترمذي"),
     const ZikrEntity(
         id: 10,
         content: "اللهم صل على سيدنا محمد",
+        transliteration: "Allahumma salli ala sayyidina Muhammad",
+        translation: "O Allah, send blessings upon our master Muhammad",
         description:
             "عَنْ أَبِي هُرَيْرَةَ،أَنَّ رَسُولَ اللهِ ﷺ قَالَ: (مَنْ صَلَّى عَلَيَّ وَاحِدَةً صَلَّى الله عَلَيْهِ عَشْرًا). رواه مسلم"),
     const ZikrEntity(
         id: 11,
         content:
             "لا إله إلا الله وحده لا شريك له له الملك وله الحمد وهو على كل شيء قدير",
+        transliteration:
+            "La ilaha illa Allah wahdahu la sharika lah, lahul mulku wa lahul hamdu wa huwa ala kulli shay'in qadir",
+        translation:
+            "There is no god but Allah, alone, without partner; His is the dominion and His is the praise, and He is over all things competent",
         description:
             "في حديث أبي هريرة يقول رسول الله ﷺ:(لا إلَهَ إلَّا اللَّهُ، وحْدَهُ لا شَرِيكَ له، له المُلْكُ وله الحَمْدُ، وهو علَى كُلِّ شَيءٍ قَدِيرٌ، في يَومٍ مِئَةَ مَرَّةٍ؛ كانَتْ له عَدْلَ عَشْرِ رِقابٍ، وكُتِبَتْ له مِئَةُ حَسَنَةٍ، ومُحِيَتْ عنْه مِئَةُ سَيِّئَةٍ، وكانَتْ له حِرْزًا مِنَ الشَّيْطانِ يَومَهُ ذلكَ حتَّى يُمْسِيَ، ولَمْ يَأْتِ أحَدٌ بأَفْضَلَ ممَّا جاءَ به، إلَّا أحَدٌ عَمِلَ أكْثَرَ مِن ذلكَ). رواه البخاري"),
     const ZikrEntity(
         id: 12,
         content: "سبحان الله وبحمده، سبحان الله العظيم",
+        transliteration: "Subhan Allahi wa bihamdih, Subhan Allahil azim",
+        translation:
+            "Glory be to Allah and praise Him, glory be to Allah the Almighty",
         description:
             "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). رواه البخاري"),
     const ZikrEntity(
         id: 13,
         content: "لا حول ولا قوة إلا بالله",
+        transliteration: "La hawla wa la quwwata illa billah",
+        translation: "There is no might nor power except with Allah",
         description:
             "قال النبي ﷺ لأبي موسى الأشعري: (أَلَا أَدُلُّكَ عَلَى كَنْزٍ مِنْ كُنُوزِ الْجَنَّةِ؟ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ). مُتَّفَقٌ عَلَيْهِ"),
   ];

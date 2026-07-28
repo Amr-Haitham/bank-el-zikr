@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 class DhikrBreakdownRow {
   final String title;
+  final String? transliteration;
+  final String? translation;
   final int weekCount;
   final int monthCount;
 
@@ -12,6 +14,8 @@ class DhikrBreakdownRow {
     required this.title,
     required this.weekCount,
     required this.monthCount,
+    this.transliteration,
+    this.translation,
   });
 }
 
@@ -29,10 +33,13 @@ class DhikrBreakdownList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final rows = allAzkar
         .where((zikr) => (monthTotals[zikr.id] ?? 0) > 0)
         .map((zikr) => DhikrBreakdownRow(
               title: zikr.content,
+              transliteration: isEnglish ? zikr.transliteration : null,
+              translation: isEnglish ? zikr.translation : null,
               weekCount: weekTotals[zikr.id] ?? 0,
               monthCount: monthTotals[zikr.id] ?? 0,
             ))
@@ -52,13 +59,18 @@ class DhikrBreakdownList extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                AppLocalizations.of(context).dhikrBreakdown,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).dhikrBreakdown,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+                ),
               ),
+              const SizedBox(width: 8),
               Row(
                 children: [
                   _headerLabel(context, AppLocalizations.of(context).weekLabel),
@@ -125,24 +137,64 @@ class DhikrBreakdownList extends StatelessWidget {
         ),
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Expanded(
-            child: Text(
-              row.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  row.title,
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+                if (row.transliteration != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    row.transliteration!,
+                    textDirection: TextDirection.ltr,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
+                if (row.translation != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    row.translation!,
+                    textDirection: TextDirection.ltr,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .color!
+                          .withValues(alpha: 0.6),
+                    ),
+                  ),
+                ],
+              ],
             ),
           ),
           const SizedBox(width: 12),
           _countChip(
             context,
             formatNumber(context, row.weekCount),
-            background: Theme.of(context).colorScheme.primary.withValues(
-                alpha: 0.12),
+            background:
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
             color: Theme.of(context).colorScheme.primary,
           ),
           const SizedBox(width: 8),

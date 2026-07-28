@@ -11,7 +11,9 @@ class Zikr extends HiveObject {
       required this.content,
       this.description,
       this.title,
-      this.isCustomZikr = false});
+      this.isCustomZikr = false,
+      this.transliteration,
+      this.translation});
   @HiveField(0)
   int id;
 
@@ -23,6 +25,10 @@ class Zikr extends HiveObject {
   String? description;
   @HiveField(4)
   bool? isCustomZikr;
+  @HiveField(5)
+  String? transliteration;
+  @HiveField(6)
+  String? translation;
 
   ZikrEntity toEntity() {
     return ZikrEntity(
@@ -31,6 +37,8 @@ class Zikr extends HiveObject {
       title: title,
       description: description,
       isCustomZikr: isCustomZikr ?? false,
+      transliteration: transliteration,
+      translation: translation,
     );
   }
 
@@ -41,6 +49,8 @@ class Zikr extends HiveObject {
       title: entity.title,
       description: entity.description,
       isCustomZikr: entity.isCustomZikr,
+      transliteration: entity.transliteration,
+      translation: entity.translation,
     );
   }
 }

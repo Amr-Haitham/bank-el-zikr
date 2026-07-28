@@ -206,6 +206,27 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
+  String get weekdayMon => 'ن';
+
+  @override
+  String get weekdayTue => 'ث';
+
+  @override
+  String get weekdayWed => 'ر';
+
+  @override
+  String get weekdayThu => 'خ';
+
+  @override
+  String get weekdayFri => 'ج';
+
+  @override
+  String get weekdaySat => 'س';
+
+  @override
+  String get weekdaySun => 'ح';
+
+  @override
   String get settingsTitle => 'الإعدادات';
 
   @override

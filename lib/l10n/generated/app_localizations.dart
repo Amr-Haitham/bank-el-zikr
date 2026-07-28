@@ -452,6 +452,48 @@ abstract class AppLocalizations {
   /// **'{count} / 21 ذكر'**
   String adhkarOutOf21(String count);
 
+  /// No description provided for @weekdayMon.
+  ///
+  /// In ar, this message translates to:
+  /// **'ن'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In ar, this message translates to:
+  /// **'ث'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In ar, this message translates to:
+  /// **'ر'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In ar, this message translates to:
+  /// **'خ'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In ar, this message translates to:
+  /// **'ج'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In ar, this message translates to:
+  /// **'س'**
+  String get weekdaySat;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In ar, this message translates to:
+  /// **'ح'**
+  String get weekdaySun;
+
   /// No description provided for @settingsTitle.
   ///
   /// In ar, this message translates to:
