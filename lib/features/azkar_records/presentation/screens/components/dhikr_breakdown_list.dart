@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/azkar_management/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 
 class DhikrBreakdownRow {
@@ -38,8 +38,8 @@ class DhikrBreakdownList extends StatelessWidget {
         .where((zikr) => (monthTotals[zikr.id] ?? 0) > 0)
         .map((zikr) => DhikrBreakdownRow(
               title: zikr.content,
-              transliteration: isEnglish ? zikr.transliteration : null,
-              translation: isEnglish ? zikr.translation : null,
+              transliteration: isEnglish ? zikr.contentTransliteration : null,
+              translation: isEnglish ? zikr.contentEn : null,
               weekCount: weekTotals[zikr.id] ?? 0,
               monthCount: monthTotals[zikr.id] ?? 0,
             ))

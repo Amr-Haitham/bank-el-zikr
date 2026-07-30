@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
 
 // zikr_counter imports
@@ -21,19 +22,19 @@ import '../../features/zikr_counter/presentation/cubit/increment_balance_cubit.d
 import '../../features/zikr_counter/presentation/cubit/get_current_zikr_id_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/counter_cubit.dart';
 
-// azkar_management imports
-import '../../features/azkar_management/data/datasources/azkar_local_datasource.dart';
+// adhkar imports
+import '../../features/adhkar/data/datasources/azkar_local_datasource.dart';
 import '../../core/layers/data/models/zikr_model.dart';
-import '../../features/azkar_management/data/repositories/azkar_repository_impl.dart';
-import '../../features/azkar_management/domain/repositories/azkar_repository.dart';
-import '../../features/azkar_management/domain/usecases/add_custom_zikr.dart';
-import '../../features/azkar_management/domain/usecases/delete_custom_zikr.dart';
-import '../../features/azkar_management/domain/usecases/get_all_azkar.dart';
-import '../../features/azkar_management/domain/usecases/update_custom_zikr.dart';
-import '../../features/azkar_management/presentation/cubit/get_all_azkar_cubit.dart';
-import '../../features/azkar_management/presentation/cubit/add_custom_zikr_cubit.dart';
-import '../../features/azkar_management/presentation/cubit/update_custom_zikr_cubit.dart';
-import '../../features/azkar_management/presentation/cubit/delete_custom_zikr_cubit.dart';
+import '../../features/adhkar/data/repositories/azkar_repository_impl.dart';
+import '../../features/adhkar/domain/repositories/azkar_repository.dart';
+import '../../features/adhkar/domain/usecases/add_custom_zikr.dart';
+import '../../features/adhkar/domain/usecases/delete_custom_zikr.dart';
+import '../../features/adhkar/domain/usecases/get_all_azkar.dart';
+import '../../features/adhkar/domain/usecases/update_custom_zikr.dart';
+import '../../features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
+import '../../features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
+import '../../features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
+import '../../features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 
 // azkar_records imports
 import '../../features/azkar_records/data/datasources/azkar_records_local_datasource.dart';
@@ -62,28 +63,20 @@ import '../../features/azkar_records/domain/usecases/mark_adhkar_completed.dart'
 import '../../features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
 
 // morning_night_azkar imports
-import '../../features/morning_night_azkar/data/datasources/morning_night_azkar_local_datasource.dart';
-import '../../features/morning_night_azkar/data/models/morning_night_zikr_model.dart';
-import '../../features/morning_night_azkar/data/repositories/morning_night_azkar_repository_impl.dart';
-import '../../features/morning_night_azkar/domain/repositories/morning_night_azkar_repository.dart';
-import '../../features/morning_night_azkar/domain/usecases/get_morning_azkar.dart';
-import '../../features/morning_night_azkar/domain/usecases/get_night_azkar.dart';
-import '../../features/morning_night_azkar/presentation/cubit/get_morning_azkar_cubit.dart';
-import '../../features/morning_night_azkar/presentation/cubit/get_night_azkar_cubit.dart';
-import '../../features/morning_night_azkar/presentation/cubit/morning_night_azkar_cubit.dart';
+import '../../features/adhkar/data/datasources/morning_night_azkar_local_datasource.dart';
+import '../../features/adhkar/data/models/morning_night_zikr_model.dart';
+import '../../features/adhkar/data/repositories/morning_night_azkar_repository_impl.dart';
+import '../../features/adhkar/domain/repositories/morning_night_azkar_repository.dart';
+import '../../features/adhkar/domain/usecases/get_morning_azkar.dart';
+import '../../features/adhkar/domain/usecases/get_night_azkar.dart';
+import '../../features/adhkar/presentation/cubit/morning_night_azkar_cubit.dart';
 
-// situational_azkar imports
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../features/situational_azkar/data/datasources/situational_azkar_local_datasource.dart';
-import '../../features/situational_azkar/data/repositories/situational_azkar_repository_impl.dart';
-import '../../features/situational_azkar/domain/repositories/situational_azkar_repository.dart';
-import '../../features/situational_azkar/domain/usecases/get_favorites.dart';
-import '../../features/situational_azkar/domain/usecases/get_situational_azkar.dart';
-import '../../features/situational_azkar/domain/usecases/toggle_favorite.dart';
-import '../../features/situational_azkar/presentation/cubit/get_situational_azkar_cubit.dart';
-import '../../features/situational_azkar/presentation/cubit/get_favorites_cubit.dart';
-import '../../features/situational_azkar/presentation/cubit/toggle_favorite_cubit.dart';
-import '../../features/situational_azkar/presentation/cubit/situational_azkar_cubit.dart';
+// zikr category imports
+import '../../features/adhkar/data/datasources/zikr_category_local_datasource.dart';
+import '../../features/adhkar/data/repositories/zikr_category_repository_impl.dart';
+import '../../features/adhkar/domain/repositories/zikr_category_repository.dart';
+import '../../features/adhkar/domain/usecases/get_zikr_by_category.dart';
+import '../../features/adhkar/presentation/cubit/zikr_category_cubit.dart';
 
 // settings imports
 import '../../features/settings/data/datasources/settings_local_datasource.dart';
@@ -122,10 +115,10 @@ Future<void> setupServiceLocator() async {
   _setUpZikrCounterUseCases();
   _setUpZikrCounterBlocs();
 
-  _setUpAzkarManagementDataSources();
-  _setUpAzkarManagementRepositories();
-  _setUpAzkarManagementUseCases();
-  _setUpAzkarManagementBlocs();
+  _setUpAdhkarDataSources();
+  _setUpAdhkarRepositories();
+  _setUpAdhkarUseCases();
+  _setUpAdhkarBlocs();
 
   _setUpAzkarRecordsDataSources();
   _setUpAzkarRecordsRepositories();
@@ -147,10 +140,10 @@ Future<void> setupServiceLocator() async {
   _setUpMorningNightAzkarUseCases();
   _setUpMorningNightAzkarBlocs();
 
-  _setUpSituationalAzkarDataSources();
-  _setUpSituationalAzkarRepositories();
-  _setUpSituationalAzkarUseCases();
-  _setUpSituationalAzkarBlocs();
+  _setUpZikrCategoryDataSources();
+  _setUpZikrCategoryRepositories();
+  _setUpZikrCategoryUseCases();
+  _setUpZikrCategoryBlocs();
 
   _setUpSettingsDataSources();
   _setUpSettingsRepositories();
@@ -172,7 +165,7 @@ Future<void> _setUpExternalDependencies() async {
     instanceName: 'counterBox',
   );
 
-  // azkar_management
+  // adhkar
   final defaultAzkarBox = Hive.box<Zikr>(zikrHiveBox);
   final customAzkarBox = Hive.box<Zikr>(customAzkarHiveBox);
   _getIt.registerLazySingleton<Box<Zikr>>(
@@ -210,11 +203,11 @@ Future<void> _setUpExternalDependencies() async {
     instanceName: 'prayerBox',
   );
 
-  // situational_azkar
-  final situationalAzkarBox = Hive.box<Zikr>(conditionalAzkarHiveBox);
+  // zikr category
+  final zikrCategoryBox = Hive.box<Zikr>(conditionalAzkarHiveBox);
   _getIt.registerLazySingleton<Box<Zikr>>(
-    () => situationalAzkarBox,
-    instanceName: 'situationalAzkarBox',
+    () => zikrCategoryBox,
+    instanceName: 'zikrCategoryBox',
   );
   // shared_preferences
   final sharedPreferences = await SharedPreferences.getInstance();
@@ -297,10 +290,10 @@ void _setUpZikrCounterBlocs() {
 }
 
 // ============================================================================
-// azkar_management
+// adhkar
 // ============================================================================
 
-void _setUpAzkarManagementDataSources() {
+void _setUpAdhkarDataSources() {
   _getIt.registerLazySingleton<AzkarLocalDataSource>(
     () => AzkarLocalDataSourceImpl(
       defaultAzkarBox: getService<Box<Zikr>>(instanceName: 'defaultAzkarBox'),
@@ -309,7 +302,7 @@ void _setUpAzkarManagementDataSources() {
   );
 }
 
-void _setUpAzkarManagementRepositories() {
+void _setUpAdhkarRepositories() {
   _getIt.registerLazySingleton<AzkarRepository>(
     () => AzkarRepositoryImpl(
       localDataSource: getService<AzkarLocalDataSource>(),
@@ -317,7 +310,7 @@ void _setUpAzkarManagementRepositories() {
   );
 }
 
-void _setUpAzkarManagementUseCases() {
+void _setUpAdhkarUseCases() {
   _getIt.registerLazySingleton<GetAllAzkar>(
     () => GetAllAzkar(getService<AzkarRepository>()),
   );
@@ -332,7 +325,7 @@ void _setUpAzkarManagementUseCases() {
   );
 }
 
-void _setUpAzkarManagementBlocs() {
+void _setUpAdhkarBlocs() {
   _getIt.registerFactory<GetAllAzkarCubit>(
     () => GetAllAzkarCubit(
       getAllAzkar: getService<GetAllAzkar>(),
@@ -527,64 +520,40 @@ void _setUpMorningNightAzkarBlocs() {
       getNightAzkar: getService<GetNightAzkar>(),
     ),
   );
-  _getIt.registerFactory<GetMorningAzkarCubit>(
-    () => GetMorningAzkarCubit(getMorningAzkar: getService<GetMorningAzkar>()),
-  );
-  _getIt.registerFactory<GetNightAzkarCubit>(
-    () => GetNightAzkarCubit(getNightAzkar: getService<GetNightAzkar>()),
-  );
 }
 
 // ============================================================================
-// situational_azkar
+// zikr category
 // ============================================================================
 
-void _setUpSituationalAzkarDataSources() {
-  _getIt.registerLazySingleton<SituationalAzkarLocalDataSource>(
-    () => SituationalAzkarLocalDataSourceImpl(
-      box: getService<Box<Zikr>>(instanceName: 'situationalAzkarBox'),
-      sharedPreferences: getService<SharedPreferences>(),
+void _setUpZikrCategoryDataSources() {
+  _getIt.registerLazySingleton<ZikrCategoryLocalDataSource>(
+    () => ZikrCategoryLocalDataSourceImpl(
+      box: getService<Box<Zikr>>(instanceName: 'zikrCategoryBox'),
     ),
   );
 }
 
-void _setUpSituationalAzkarRepositories() {
-  _getIt.registerLazySingleton<SituationalAzkarRepository>(
-    () => SituationalAzkarRepositoryImpl(
-      localDataSource: getService<SituationalAzkarLocalDataSource>(),
+void _setUpZikrCategoryRepositories() {
+  _getIt.registerLazySingleton<ZikrCategoryRepository>(
+    () => ZikrCategoryRepositoryImpl(
+      localDataSource: getService<ZikrCategoryLocalDataSource>(),
+      morningNightDataSource: getService<MorningNightAzkarLocalDataSource>(),
     ),
   );
 }
 
-void _setUpSituationalAzkarUseCases() {
-  _getIt.registerLazySingleton<GetSituationalAzkar>(
-    () => GetSituationalAzkar(getService<SituationalAzkarRepository>()),
-  );
-  _getIt.registerLazySingleton<GetFavorites>(
-    () => GetFavorites(getService<SituationalAzkarRepository>()),
-  );
-  _getIt.registerLazySingleton<ToggleFavorite>(
-    () => ToggleFavorite(getService<SituationalAzkarRepository>()),
+void _setUpZikrCategoryUseCases() {
+  _getIt.registerLazySingleton<GetZikrByCategory>(
+    () => GetZikrByCategory(getService<ZikrCategoryRepository>()),
   );
 }
 
-void _setUpSituationalAzkarBlocs() {
-  _getIt.registerFactory<SituationalAzkarCubit>(
-    () => SituationalAzkarCubit(
-      getSituationalAzkar: getService<GetSituationalAzkar>(),
-      getFavorites: getService<GetFavorites>(),
-      toggleFavorite: getService<ToggleFavorite>(),
+void _setUpZikrCategoryBlocs() {
+  _getIt.registerFactory<ZikrCategoryCubit>(
+    () => ZikrCategoryCubit(
+      getZikrByCategory: getService<GetZikrByCategory>(),
     ),
-  );
-  _getIt.registerFactory<GetSituationalAzkarCubit>(
-    () => GetSituationalAzkarCubit(
-        getSituationalAzkar: getService<GetSituationalAzkar>()),
-  );
-  _getIt.registerFactory<GetFavoritesCubit>(
-    () => GetFavoritesCubit(getFavorites: getService<GetFavorites>()),
-  );
-  _getIt.registerFactory<ToggleFavoriteCubit>(
-    () => ToggleFavoriteCubit(toggleFavorite: getService<ToggleFavorite>()),
   );
 }
 

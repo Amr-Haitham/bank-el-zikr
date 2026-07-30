@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Cairo:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; --font-title:'Tajawal',sans-serif; --font-body:'IBM Plex Sans Arabic','Tajawal',sans-serif; --font-quran:'Cairo',serif; }
+  [data-theme="light"]{ --bg:#E9ECF1; --card:#FFFFFF; --soft:#F3F5F8; --text:#16211B; --muted:#7C877F; --line:#E7EBEE;
+    --green:#34C759; --green-deep:#0E5C33; --green-mid:#1E9E55; --orange:#FB8C3C; --orange-bg:#FFF0E4;
+    --purple:#6C63FF; --purple-bg:#ECEAFF; --gold:#FFC02E; --chip:#F2F5F3; --nav:#FFFFFF;
+    --sh-card:0 12px 34px rgba(16,40,28,.08); --sh-soft:0 6px 18px rgba(16,40,28,.06); --sh-btn:0 12px 24px rgba(52,199,89,.32); }
+  [data-theme="dark"]{ --bg:#080C0A; --card:#121A15; --soft:#0E1511; --text:#EAF1EC; --muted:#8A968C; --line:#1E2823;
+    --green:#34C759; --green-deep:#0B4A29; --green-mid:#27A35A; --orange:#FB8C3C; --orange-bg:#2A1D11;
+    --purple:#8B83FF; --purple-bg:#1A1730; --gold:#FFC02E; --chip:#1A241E; --nav:#0E1511;
+    --sh-card:0 14px 36px rgba(0,0,0,.55); --sh-soft:0 6px 18px rgba(0,0,0,.4); --sh-btn:0 12px 26px rgba(52,199,89,.28); }
+  @keyframes popc { 0%{transform:scale(1)} 35%{transform:scale(1.1)} 100%{transform:scale(1)} }
+</style>
+</helmet>
+<div style="min-height:100vh; background:radial-gradient(120% 80% at 50% 0%, #f3f5f9 0%, #e3e7ee 55%, #d9dee6 100%); display:flex; flex-direction:column; align-items:center; gap:20px; padding:40px 24px 64px; font-family:var(--font-body);">
+
+  <div style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:1180px;">
+    <div style="display:flex; flex-direction:column; gap:4px;">
+      <div style="font-family:var(--font-title); font-size:18px; font-weight:800; color:#16211B;">Bank el Dhikr — iPad / tablet layout</div>
+      <div style="font-size:13px; color:#8A93A2; font-weight:600;">Interactive · same design tokens, wide breakpoint · بنك الذكر</div>
+    </div>
+    <div style="display:flex; background:#fff; border-radius:999px; padding:4px; box-shadow:0 6px 16px rgba(16,40,28,.10);">
+      <button onClick="{{ setLight }}" style="{{ lightTab }}">فاتح</button>
+      <button onClick="{{ setDark }}" style="{{ darkTab }}">داكن</button>
+    </div>
+  </div>
+
+  <div data-theme="{{ theme }}" dir="rtl" style="width:1180px; height:820px; background:var(--bg); border-radius:38px; position:relative; overflow:hidden; box-shadow:0 40px 90px -30px rgba(16,30,24,.55), 0 0 0 12px #11161f, 0 0 0 14px #2a3140; color:var(--text); display:flex;">
+
+    <div style="width:112px; background:var(--nav); border-inline-start:1px solid var(--line); display:flex; flex-direction:column; align-items:center; padding:30px 0; gap:10px; flex-shrink:0;">
+      <div style="width:48px; height:48px; border-radius:15px; background:linear-gradient(180deg,var(--green),var(--green-mid)); display:flex; align-items:center; justify-content:center; box-shadow:var(--sh-btn); margin-bottom:16px;">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="3" stroke="#fff" stroke-width="1.9"/><path d="M3 10h18" stroke="#fff" stroke-width="1.9"/><circle cx="17" cy="14" r="1.3" fill="#fff"/></svg>
+      </div>
+      <button onClick="{{ goHome }}" style="{{ navHomeStyle }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="2" fill="{{ navHomeColor }}"/><rect x="13.5" y="3.5" width="7" height="7" rx="2" fill="{{ navHomeColor }}"/><rect x="3.5" y="13.5" width="7" height="7" rx="2" fill="{{ navHomeColor }}"/><rect x="13.5" y="13.5" width="7" height="7" rx="2" fill="{{ navHomeColor }}"/></svg>
+        <span style="font-size:11px; font-weight:800; color:{{ navHomeColor }};">الرئيسية</span>
+      </button>
+      <button onClick="{{ goMasbaha }}" style="{{ navMasbahaStyle }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="{{ navMasbahaColor }}" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="{{ navMasbahaColor }}"/></svg>
+        <span style="font-size:11px; font-weight:800; color:{{ navMasbahaColor }};">المسبحة</span>
+      </button>
+      <button onClick="{{ goAzkar }}" style="{{ navAzkarStyle }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z" stroke="{{ navAzkarColor }}" stroke-width="2" stroke-linejoin="round"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5A2.5 2.5 0 0 1 20 21.5V5.5Z" stroke="{{ navAzkarColor }}" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span style="font-size:11px; font-weight:800; color:{{ navAzkarColor }};">الأذكار</span>
+      </button>
+      <button onClick="{{ goJourney }}" style="{{ navJourneyStyle }}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 13h3l2.5-7 4 14 2.5-7H21" stroke="{{ navJourneyColor }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size:11px; font-weight:800; color:{{ navJourneyColor }};">رحلتي</span>
+      </button>
+    </div>
+
+    <div style="flex:1; overflow:hidden; padding:34px; display:flex; flex-direction:column; gap:22px;">
+
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:22px; height:100%; min-height:0;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+            <div>
+              <div style="font-family:var(--font-title); font-size:28px; font-weight:900; line-height:1.1;">بنك الذكر</div>
+              <div style="font-size:15px; font-weight:700; color:var(--green-mid); margin-top:3px;">حصنك اليومي</div>
+            </div>
+          </div>
+          <div style="flex:1; display:grid; grid-template-columns:1.15fr 1fr; gap:22px; min-height:0;">
+            <div style="display:flex; flex-direction:column; gap:22px; min-height:0;">
+              <div style="position:relative; background:var(--card); border-radius:28px; padding:28px; box-shadow:var(--sh-card); overflow:hidden;">
+                <div style="position:absolute; top:-46px; inset-inline-start:-30px; width:160px; height:160px; border-radius:50%; background:radial-gradient(circle at 40% 40%, rgba(52,199,89,.16), rgba(52,199,89,0));"></div>
+                <div style="position:relative; display:flex; align-items:flex-start; justify-content:space-between;">
+                  <div>
+                    <div style="font-size:14px; font-weight:700; color:var(--muted);">رصيد الحسنات الكلي</div>
+                    <div style="font-family:var(--font-title); font-size:56px; font-weight:900; color:var(--green-deep); letter-spacing:1px; line-height:1.1; margin-top:4px;">{{ bankStr }}</div>
+                    <span style="display:inline-flex; align-items:center; gap:6px; background:var(--chip); color:var(--green-mid); font-size:12px; font-weight:800; padding:6px 13px; border-radius:999px; margin-top:10px;">أودعت اليوم ‎+٣٢٠</span>
+                  </div>
+                  <button onClick="{{ goMasbaha }}" style="display:flex; align-items:center; gap:10px; padding:15px 26px; border:none; border-radius:18px; background:linear-gradient(180deg,var(--green),var(--green-mid)); color:#fff; font-family:var(--font-title); font-size:16px; font-weight:800; cursor:pointer; box-shadow:var(--sh-btn);">أودِع المزيد <span style="font-size:20px; line-height:1;">+</span></button>
+                </div>
+              </div>
+              <div style="flex:1; background:var(--card); border-radius:28px; padding:26px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:18px; min-height:0;">
+                <div style="display:flex; align-items:center; justify-content:space-between;">
+                  <span style="font-family:var(--font-title); font-size:19px; font-weight:900;">نمو رصيد الحسنات</span>
+                  <div style="display:flex; background:var(--chip); border-radius:999px; padding:3px; gap:3px;">
+                    <button onClick="{{ setWeek }}" style="{{ segWeek }}">أسبوع</button>
+                    <button onClick="{{ setMonth }}" style="{{ segMonth }}">شهر</button>
+                    <button onClick="{{ setYear }}" style="{{ segYear }}">سنة</button>
+                  </div>
+                </div>
+                <svg viewBox="0 0 520 150" preserveAspectRatio="none" style="width:100%; flex:1; min-height:0; display:block;">
+                  <defs><linearGradient id="ta" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="var(--green)" stop-opacity=".22"/><stop offset="1" stop-color="var(--green)" stop-opacity="0"/></linearGradient></defs>
+                  <path d="{{ chartArea }}" fill="url(#ta)"/>
+                  <path d="{{ chartLine }}" fill="none" stroke="var(--green)" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  <circle cx="510" cy="{{ chartDotY }}" r="8" fill="var(--green)"/>
+                </svg>
+                <div style="display:flex; flex-direction:row-reverse; justify-content:space-between; color:var(--muted); font-size:11px; font-weight:700;">
+                  <sc-for list="{{ chartLabels }}" as="l" hint-placeholder-count="7"><span>{{ l.t }}</span></sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="display:flex; flex-direction:column; gap:22px; min-height:0;">
+              <div style="position:relative; border-radius:28px; padding:26px; overflow:hidden; background:linear-gradient(120deg,var(--green-deep),var(--green-mid) 55%,var(--green)); box-shadow:0 16px 34px -10px rgba(14,92,51,.5); display:flex; align-items:center; justify-content:space-between; color:#fff; cursor:pointer;" onClick="{{ goJourney }}">
+                <div>
+                  <div style="font-size:13px; font-weight:700; opacity:.85;">سلسلة الالتزام</div>
+                  <div style="display:flex; align-items:baseline; gap:8px; margin-top:4px;">
+                    <span style="font-family:var(--font-title); font-size:42px; font-weight:900; line-height:1;">{{ streakStr }}</span>
+                    <span style="font-size:16px; font-weight:700; opacity:.9;">يوم متتالي</span>
+                  </div>
+                </div>
+                <div style="width:72px; height:72px; border-radius:50%; background:rgba(255,255,255,.16); display:flex; align-items:center; justify-content:center;">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a2 2 0 0 0 4 0c0-1 1-1.6 1.4-1 1.6 2 2.6 3.6 2.6 5.8A6 6 0 1 1 6 14c0-1.2.4-2.2 1-3 .2 1 .9 1.7 1.8 1.7C10.4 12.7 8.6 8 12 3Z" fill="#fff"/></svg>
+                </div>
+              </div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+                <div onClick="{{ goAzkar }}" style="background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:14px; cursor:pointer;">
+                  <div style="width:46px; height:46px; border-radius:14px; background:var(--orange-bg); display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.4" fill="var(--orange)"/><g stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7 17 17M7 7 5.3 5.3"/></g></svg>
+                  </div>
+                  <div style="font-family:var(--font-title); font-size:18px; font-weight:800;">أذكار الصباح</div>
+                  <span style="align-self:flex-start; font-size:12px; font-weight:800; color:var(--green-mid); background:var(--chip); padding:5px 12px; border-radius:999px;">مكتمل</span>
+                </div>
+                <div onClick="{{ goAzkar }}" style="background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:14px; cursor:pointer;">
+                  <div style="width:46px; height:46px; border-radius:14px; background:var(--purple-bg); display:flex; align-items:center; justify-content:center;">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="var(--purple)"/></svg>
+                  </div>
+                  <div style="font-family:var(--font-title); font-size:18px; font-weight:800;">أذكار المساء</div>
+                  <span style="align-self:flex-start; font-size:12px; font-weight:700; color:var(--muted);">غير مكتمل</span>
+                </div>
+              </div>
+              <div style="flex:1; background:var(--card); border-radius:28px; padding:26px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; justify-content:center; gap:16px; min-height:0;">
+                <div style="width:42px; height:4px; border-radius:99px; background:var(--line); align-self:center;"></div>
+                <div style="font-family:var(--font-quran); font-size:24px; font-weight:700; color:var(--green-deep); text-align:center; line-height:2;">أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ</div>
+                <div style="font-size:14px; font-weight:500; color:var(--muted); text-align:center; direction:ltr;">Verily, in the remembrance of Allah do hearts find rest.</div>
+                <span style="align-self:center; font-size:12px; font-weight:800; color:var(--green-mid); background:var(--chip); padding:5px 13px; border-radius:999px;">الرعد ٢٨</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isMasbaha }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:22px; height:100%; min-height:0;">
+          <div style="font-family:var(--font-title); font-size:26px; font-weight:900;">المسبحة الإلكترونية</div>
+          <div style="flex:1; display:grid; grid-template-columns:1fr 1.3fr; gap:26px; min-height:0;">
+            <div style="display:flex; flex-direction:column; gap:18px; min-height:0;">
+              <div style="background:var(--card); border-radius:24px; padding:22px; box-shadow:var(--sh-soft); display:flex; align-items:center; gap:14px;">
+                <div style="width:44px; height:44px; border-radius:13px; background:var(--chip); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4 8h11M4 8l3-3M4 8l3 3" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16H9M20 16l-3-3M20 16l-3 3" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-size:11px; font-weight:700; color:var(--muted);">الذكر الحالي</div>
+                  <div style="font-family:var(--font-quran); font-size:20px; font-weight:700; color:var(--green-deep);">سُبْحَانَ الله</div>
+                </div>
+              </div>
+              <div style="background:var(--card); border-radius:24px; padding:22px; box-shadow:var(--sh-soft); text-align:center;">
+                <div style="font-size:12px; font-weight:700; color:var(--muted);">رصيد البنك</div>
+                <div style="font-family:var(--font-title); font-size:34px; font-weight:900; color:var(--green-mid);">{{ bankStr }}</div>
+              </div>
+              <div style="display:flex; gap:16px;">
+                <div style="flex:1; background:var(--card); border-radius:24px; padding:20px; box-shadow:var(--sh-soft); text-align:center;">
+                  <div style="font-size:12px; font-weight:700; color:var(--muted);">الجلسة</div>
+                  <div style="font-family:var(--font-title); font-size:28px; font-weight:900; color:var(--text);">{{ sessionStr }}</div>
+                </div>
+                <div style="flex:1; background:var(--card); border-radius:24px; padding:20px; box-shadow:var(--sh-soft); text-align:center;">
+                  <div style="font-size:12px; font-weight:700; color:var(--muted);">الجولات</div>
+                  <div style="font-family:var(--font-title); font-size:28px; font-weight:900; color:var(--text);">{{ lapsStr }}</div>
+                </div>
+              </div>
+              <button onClick="{{ resetCount }}" style="display:flex; align-items:center; justify-content:center; gap:8px; background:var(--chip); border:none; border-radius:18px; padding:16px; cursor:pointer; font-family:var(--font-title); font-size:15px; font-weight:800; color:var(--green-mid);">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4v4h-4" stroke="var(--green-mid)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                تصفير
+              </button>
+            </div>
+            <div style="background:var(--card); border-radius:28px; box-shadow:var(--sh-soft); display:flex; align-items:center; justify-content:center; min-height:0;">
+              <button onClick="{{ tapCount }}" style="position:relative; width:400px; height:400px; border-radius:50%; border:none; cursor:pointer; background:none; padding:0;">
+                <svg width="400" height="400" viewBox="0 0 400 400" style="position:absolute; inset:0; transform:rotate(-90deg);">
+                  <circle cx="200" cy="200" r="190" fill="none" stroke="var(--chip)" stroke-width="8"/>
+                  <circle cx="200" cy="200" r="190" fill="none" stroke="var(--green-mid)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1194" stroke-dashoffset="{{ ringOffset }}"/>
+                </svg>
+                <div style="position:absolute; inset:26px; border-radius:50%; background:var(--card); box-shadow:0 18px 40px rgba(16,40,28,.18), inset 0 2px 4px rgba(255,255,255,.6);"></div>
+                <div key="{{ countStr }}" style="position:absolute; inset:52px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #b9f0c8 0%, #7fe0a0 35%, #ffe08a 78%, #ffcf5e 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; box-shadow:inset 0 -10px 28px rgba(20,120,60,.25), inset 0 8px 20px rgba(255,255,255,.55); animation:popc .25s ease;">
+                  <span style="font-family:var(--font-quran); font-size:110px; font-weight:900; color:#16321f; line-height:1;">{{ countStr }}</span>
+                  <span style="font-family:var(--font-quran); font-size:20px; font-weight:700; color:#0e6b39;">من ١٠٠</span>
+                  <span style="font-size:13px; font-weight:700; color:rgba(22,50,31,.55);">المس للعد</span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:22px; height:100%; min-height:0;">
+          <div style="font-family:var(--font-title); font-size:26px; font-weight:900;">رحلتي الروحية</div>
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px;">
+            <div style="background:var(--card); border-radius:24px; padding:24px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <div style="position:relative; width:120px; height:120px;">
+                <svg width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--chip)" stroke-width="11"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--green)" stroke-width="11" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="63"/></svg>
+                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <span style="font-family:var(--font-title); font-size:34px; font-weight:900;">١٢</span>
+                  <span style="font-size:11px; font-weight:700; color:var(--muted);">يوم متتالي</span>
+                </div>
+              </div>
+              <div style="font-family:var(--font-title); font-size:16px; font-weight:800;">إجمالي الأذكار</div>
+            </div>
+            <div style="background:var(--card); border-radius:24px; padding:24px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <div style="position:relative; width:120px; height:120px;">
+                <svg width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--orange-bg)" stroke-width="11"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--orange)" stroke-width="11" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="90"/></svg>
+                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <span style="font-family:var(--font-title); font-size:34px; font-weight:900;">٥</span>
+                  <span style="font-size:11px; font-weight:700; color:var(--muted);">يوم متتالي</span>
+                </div>
+              </div>
+              <div style="font-family:var(--font-title); font-size:16px; font-weight:800;">أذكار الصباح</div>
+            </div>
+            <div style="background:var(--card); border-radius:24px; padding:24px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <div style="position:relative; width:120px; height:120px;">
+                <svg width="120" height="120" viewBox="0 0 120 120" style="transform:rotate(-90deg);"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--purple-bg)" stroke-width="11"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--purple)" stroke-width="11" stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="126"/></svg>
+                <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center;">
+                  <span style="font-family:var(--font-title); font-size:34px; font-weight:900;">٣</span>
+                  <span style="font-size:11px; font-weight:700; color:var(--muted);">يوم متتالي</span>
+                </div>
+              </div>
+              <div style="font-family:var(--font-title); font-size:16px; font-weight:800;">أذكار المساء</div>
+            </div>
+          </div>
+          <div style="flex:1; background:var(--card); border-radius:28px; padding:26px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:18px; min-height:0;">
+            <div style="font-family:var(--font-title); font-size:19px; font-weight:900;">خارطة الالتزام</div>
+            <div style="flex:1; display:grid; grid-template-columns:repeat(14,1fr); grid-auto-rows:1fr; gap:10px; min-height:0;">
+              <sc-for list="{{ heatCells }}" as="c" hint-placeholder-count="42"><div style="{{ c.style }}"></div></sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isAzkar }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:22px; height:100%; min-height:0;">
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div style="font-family:var(--font-title); font-size:26px; font-weight:900;">قائمة الأذكار</div>
+            <div style="display:flex; align-items:center; gap:10px; background:var(--card); border-radius:16px; padding:12px 18px; box-shadow:var(--sh-soft); width:320px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="var(--muted)" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"/></svg>
+              <span style="flex:1; color:var(--muted); font-size:14px; font-weight:600;">ابحث في الأذكار...</span>
+            </div>
+          </div>
+          <div style="flex:1; display:grid; grid-template-columns:1fr 1fr; grid-auto-rows:min-content; gap:18px; align-content:start; overflow:auto; min-height:0;">
+            <sc-for list="{{ azkarCards }}" as="a" hint-placeholder-count="5">
+              <div style="background:var(--card); border-radius:22px; padding:22px; box-shadow:var(--sh-soft);">
+                <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:16px;">
+                  <div style="width:52px; height:52px; border-radius:15px; background:{{ a.iconBg }}; display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                    <div style="width:22px; height:22px; border-radius:50%; background:{{ a.iconColor }};"></div>
+                  </div>
+                  <div style="flex:1; text-align:start;">
+                    <div style="font-family:var(--font-title); font-size:18px; font-weight:800;">{{ a.title }}</div>
+                    <div style="font-size:12px; font-weight:700; color:var(--muted);">{{ a.sub }}</div>
+                  </div>
+                </div>
+                <div style="height:9px; border-radius:99px; background:var(--soft); overflow:hidden;"><div style="{{ a.barStyle }}"></div></div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen:'home', theme:'light', count:33, session:33, bank:14850, laps:0, period:'week' };
+
+  ar(n){ return String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); }
+  arGroup(n){ return this.ar(Number(n).toLocaleString('en-US')).replace(/,/g,'٬'); }
+
+  navStyle(active){
+    return 'display:flex; flex-direction:column; align-items:center; gap:5px; width:100%; padding:13px 0; border:none; cursor:pointer; border-radius:16px; transition:all .2s; background:'
+      + (active ? 'var(--chip)' : 'transparent') + ';';
+  }
+  seg(active){
+    return 'padding:7px 16px; border-radius:999px; border:none; cursor:pointer; font-family:var(--font-title); font-size:13px; font-weight:800; transition:all .2s; '
+      + (active ? 'background:var(--green); color:#fff;' : 'background:transparent; color:var(--muted);');
+  }
+  themeTab(active){
+    return 'border:none; cursor:pointer; font-family:var(--font-title); font-size:13px; font-weight:800; padding:8px 16px; border-radius:999px; transition:all .2s; '
+      + (active ? 'background:var(--green,#34C759); color:#fff;' : 'background:transparent; color:#8A93A2;');
+  }
+
+  renderVals(){
+    const s = this.state;
+    const P = {
+      week:  { line:'M10,128 C90,122 120,108 180,96 C250,82 270,44 330,38 C400,31 450,26 510,18', dotY:18, labels:['السبت','الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'] },
+      month: { line:'M10,134 C80,130 130,120 190,104 C260,86 290,64 350,50 C410,37 460,30 510,20', dotY:20, labels:['١','٨','١٥','٢٢','٣٠'] },
+      year:  { line:'M10,138 C80,134 130,120 190,98 C260,74 300,50 350,40 C420,26 470,20 510,14', dotY:14, labels:['يناير','مارس','مايو','يوليو','سبتمبر','نوفمبر'] },
+    };
+    const pc = P[s.period] || P.week;
+    const heat = [3,2,3,3,1,3,0,3,3,3,1,3,3,2,3,3,0,3,2,3,3,1,3,3,3,2,3,3,3,3,1,3,0,3,3,2,3,3,3,1,3,2];
+    const heatColor = v => v===0 ? 'var(--chip)' : v===1 ? 'rgba(52,199,89,.4)' : v===2 ? 'rgba(52,199,89,.7)' : 'var(--green)';
+    const azkar = [
+      { title:'أذكار الصباح', sub:'آخر قراءة: اليوم ٧:٣٠ ص', iconBg:'var(--orange-bg)', iconColor:'var(--orange)', pct:80, done:false },
+      { title:'أذكار المساء', sub:'لم تبدأ بعد', iconBg:'var(--purple-bg)', iconColor:'var(--purple)', pct:0, done:false },
+      { title:'أذكار النوم', sub:'أمس ١١:١٥ م', iconBg:'rgba(52,199,89,.14)', iconColor:'var(--green-mid)', pct:25, done:false },
+      { title:'أذكار بعد الصلاة', sub:'منذ ساعة', iconBg:'rgba(52,199,89,.14)', iconColor:'var(--green-mid)', pct:100, done:true },
+      { title:'الرقية الشرعية', sub:'٥ أذكار', iconBg:'rgba(52,199,89,.14)', iconColor:'var(--green-mid)', pct:0, done:false },
+    ];
+    const goalOffset = Math.round(1194 * (1 - Math.min(1, s.count/100)));
+    return {
+      theme: s.theme,
+      lightTab: this.themeTab(s.theme==='light'),
+      darkTab: this.themeTab(s.theme==='dark'),
+      setLight: () => this.setState({ theme:'light' }),
+      setDark: () => this.setState({ theme:'dark' }),
+
+      isHome: s.screen==='home', isMasbaha: s.screen==='masbaha', isJourney: s.screen==='journey', isAzkar: s.screen==='azkar',
+      goHome: () => this.setState({ screen:'home' }),
+      goMasbaha: () => this.setState({ screen:'masbaha' }),
+      goJourney: () => this.setState({ screen:'journey' }),
+      goAzkar: () => this.setState({ screen:'azkar' }),
+
+      navHomeStyle: this.navStyle(s.screen==='home'), navHomeColor: s.screen==='home'?'var(--green-mid)':'var(--muted)',
+      navMasbahaStyle: this.navStyle(s.screen==='masbaha'), navMasbahaColor: s.screen==='masbaha'?'var(--green-mid)':'var(--muted)',
+      navAzkarStyle: this.navStyle(s.screen==='azkar'), navAzkarColor: s.screen==='azkar'?'var(--green-mid)':'var(--muted)',
+      navJourneyStyle: this.navStyle(s.screen==='journey'), navJourneyColor: s.screen==='journey'?'var(--green-mid)':'var(--muted)',
+
+      bankStr: this.arGroup(s.bank),
+      sessionStr: this.ar(s.session),
+      lapsStr: this.ar(s.laps),
+      countStr: this.ar(s.count),
+      streakStr: this.ar(12),
+      ringOffset: goalOffset,
+      tapCount: () => this.setState(p => {
+        let count = p.count+1, laps = p.laps;
+        if (count >= 100){ laps = p.laps+1; count = 0; }
+        return { count, laps, session:p.session+1, bank:p.bank+1 };
+      }),
+      resetCount: () => this.setState({ count:0, laps:0 }),
+
+      period: s.period,
+      segWeek: this.seg(s.period==='week'), segMonth: this.seg(s.period==='month'), segYear: this.seg(s.period==='year'),
+      setWeek: () => this.setState({ period:'week' }),
+      setMonth: () => this.setState({ period:'month' }),
+      setYear: () => this.setState({ period:'year' }),
+      chartArea: pc.line + ' L510,150 L10,150 Z',
+      chartLine: pc.line,
+      chartDotY: pc.dotY,
+      chartLabels: pc.labels.map(t => ({ t })),
+
+      heatCells: heat.map(v => ({ style: 'border-radius:8px; background:' + heatColor(v) + ';' })),
+      azkarCards: azkar.map(a => ({
+        title:a.title, sub:a.sub, iconBg:a.iconBg, iconColor:a.iconColor,
+        barStyle: 'width:' + a.pct + '%; height:100%; border-radius:99px; background:var(--green); margin-inline-start:auto;',
+      })),
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -29,20 +29,20 @@ class AccountBalanceRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [AzkarPage]
-class AzkarRoute extends PageRouteInfo<void> {
-  const AzkarRoute({List<PageRouteInfo>? children})
+/// [AdhkarPage]
+class AdhkarRoute extends PageRouteInfo<void> {
+  const AdhkarRoute({List<PageRouteInfo>? children})
       : super(
-          AzkarRoute.name,
+          AdhkarRoute.name,
           initialChildren: children,
         );
 
-  static const String name = 'AzkarRoute';
+  static const String name = 'AdhkarRoute';
 
   static PageInfo page = PageInfo(
     name,
     builder: (data) {
-      return const AzkarPage();
+      return const AdhkarPage();
     },
   );
 }
@@ -105,44 +105,6 @@ class HomeRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [MorningAzkarPage]
-class MorningAzkarRoute extends PageRouteInfo<void> {
-  const MorningAzkarRoute({List<PageRouteInfo>? children})
-      : super(
-          MorningAzkarRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'MorningAzkarRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const MorningAzkarPage();
-    },
-  );
-}
-
-/// generated route for
-/// [NightAzkarPage]
-class NightAzkarRoute extends PageRouteInfo<void> {
-  const NightAzkarRoute({List<PageRouteInfo>? children})
-      : super(
-          NightAzkarRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'NightAzkarRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const NightAzkarPage();
-    },
-  );
-}
-
-/// generated route for
 /// [OnboardingPage]
 class OnboardingRoute extends PageRouteInfo<void> {
   const OnboardingRoute({List<PageRouteInfo>? children})
@@ -200,25 +162,6 @@ class SettingsRoute extends PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [SituationsAzkarPage]
-class SituationsAzkarRoute extends PageRouteInfo<void> {
-  const SituationsAzkarRoute({List<PageRouteInfo>? children})
-      : super(
-          SituationsAzkarRoute.name,
-          initialChildren: children,
-        );
-
-  static const String name = 'SituationsAzkarRoute';
-
-  static PageInfo page = PageInfo(
-    name,
-    builder: (data) {
-      return const SituationsAzkarPage();
-    },
-  );
-}
-
-/// generated route for
 /// [TasbeehWerdPage]
 class TasbeehWerdRoute extends PageRouteInfo<void> {
   const TasbeehWerdRoute({List<PageRouteInfo>? children})
@@ -235,6 +178,58 @@ class TasbeehWerdRoute extends PageRouteInfo<void> {
       return const TasbeehWerdPage();
     },
   );
+}
+
+/// generated route for
+/// [ZikrCategoryPage]
+class ZikrCategoryRoute extends PageRouteInfo<ZikrCategoryRouteArgs> {
+  ZikrCategoryRoute({
+    Key? key,
+    required String category,
+    required String title,
+    List<PageRouteInfo>? children,
+  }) : super(
+          ZikrCategoryRoute.name,
+          args: ZikrCategoryRouteArgs(
+            key: key,
+            category: category,
+            title: title,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'ZikrCategoryRoute';
+
+  static PageInfo page = PageInfo(
+    name,
+    builder: (data) {
+      final args = data.argsAs<ZikrCategoryRouteArgs>();
+      return ZikrCategoryPage(
+        key: args.key,
+        category: args.category,
+        title: args.title,
+      );
+    },
+  );
+}
+
+class ZikrCategoryRouteArgs {
+  const ZikrCategoryRouteArgs({
+    this.key,
+    required this.category,
+    required this.title,
+  });
+
+  final Key? key;
+
+  final String category;
+
+  final String title;
+
+  @override
+  String toString() {
+    return 'ZikrCategoryRouteArgs{key: $key, category: $category, title: $title}';
+  }
 }
 
 /// generated route for

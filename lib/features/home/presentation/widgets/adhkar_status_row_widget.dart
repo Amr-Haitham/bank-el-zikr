@@ -23,7 +23,8 @@ class AdhkarStatusRowWidget extends StatelessWidget {
                 .bodySmall!
                 .color!
                 .withValues(alpha: 0.5),
-            onTap: () => AutoRouter.of(context).push(const NightAzkarRoute()),
+            onTap: () => AutoRouter.of(context).push(
+                ZikrCategoryRoute(category: 'evening', title: l10n.eveningAdhkar)),
           ),
         ),
         const SizedBox(width: 12),
@@ -34,7 +35,8 @@ class AdhkarStatusRowWidget extends StatelessWidget {
             title: l10n.morningAdhkar,
             status: l10n.done,
             statusColor: Theme.of(context).primaryColor,
-            onTap: () => AutoRouter.of(context).push(const MorningAzkarRoute()),
+            onTap: () => AutoRouter.of(context).push(
+                ZikrCategoryRoute(category: 'morning', title: l10n.morningAdhkar)),
           ),
         ),
       ],

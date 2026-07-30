@@ -103,7 +103,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get goalLabel => 'Goal';
 
   @override
-  String get tapAnywhere => '⚡ Tap anywhere';
+  String get tapAnywhere => 'Tap anywhere';
 
   @override
   String get setGoal => 'Set goal';
@@ -321,4 +321,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get language => 'Language';
+
+  @override
+  String get chooseZikr => 'Choose a Zikr';
+
+  @override
+  String get addCustomZikrHint => 'Add a custom zikr...';
+
+  @override
+  String get addCustomZikrTitle => 'Add a Custom Zikr';
+
+  @override
+  String get addCustomZikrButton => 'Add Zikr';
+
+  @override
+  String get emptyZikrError => 'Please enter the zikr text';
 }

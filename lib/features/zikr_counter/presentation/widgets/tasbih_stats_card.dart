@@ -8,12 +8,14 @@ class TasbihStatsCard extends StatelessWidget {
     required this.balance,
     required this.laps,
     required this.goal,
+    required this.currentCounter,
     required this.onEditGoal,
   });
 
   final int balance;
   final int laps;
   final int? goal;
+  final int currentCounter;
   final VoidCallback onEditGoal;
 
   @override
@@ -28,10 +30,9 @@ class TasbihStatsCard extends StatelessWidget {
         children: [
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).goalLabel,
-              value: goal != null ? formatNumber(context, goal!) : "-",
-              valueColor: Theme.of(context).colorScheme.secondary,
-              onEdit: onEditGoal,
+              label: AppLocalizations.of(context).balanceLabel,
+              value: formatNumber(context, balance),
+              valueColor: Theme.of(context).primaryColor,
             ),
           ),
           _divider(context),
@@ -39,15 +40,18 @@ class TasbihStatsCard extends StatelessWidget {
             child: _StatColumn(
               label: AppLocalizations.of(context).lapsLabel,
               value: formatNumber(context, laps),
-              valueColor: Theme.of(context).textTheme.bodyLarge!.color,
+              valueColor: Theme.of(context).primaryColor,
             ),
           ),
           _divider(context),
           Expanded(
             child: _StatColumn(
-              label: AppLocalizations.of(context).balanceLabel,
-              value: formatNumber(context, balance),
+              label: AppLocalizations.of(context).goalLabel,
+              value: goal != null
+                  ? "${formatNumber(context, currentCounter)}/${formatNumber(context, goal!)}"
+                  : "-",
               valueColor: Theme.of(context).primaryColor,
+              onEdit: onEditGoal,
             ),
           ),
         ],
