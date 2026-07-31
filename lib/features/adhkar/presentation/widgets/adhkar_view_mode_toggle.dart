@@ -69,11 +69,9 @@ class _ToggleButton extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          textDirection: TextDirection.rtl,
           children: [
             Text(
               label,
-              textDirection: TextDirection.rtl,
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w700,

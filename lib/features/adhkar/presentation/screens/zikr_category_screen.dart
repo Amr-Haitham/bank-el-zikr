@@ -201,6 +201,21 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
     }
   }
 
+  void _handleComplete(ZikrEntity zikr) {
+    if (_readingCubit.isCompleted(zikr)) return;
+
+    _readingCubit.completeZikr(zikr);
+
+    final isVibrating = context
+            .read<SettingsCubit>()
+            .state
+            .whenOrNull(success: (s) => s.isVibrating) ??
+        true;
+    if (isVibrating) {
+      vibrateOnce();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
@@ -246,6 +261,7 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
           zikr: zikr,
           reps: readingState.repsByZikrId[zikr.id] ?? 0,
           onTap: () => _handleIncrement(zikr),
+          onComplete: () => _handleComplete(zikr),
         );
       },
     );

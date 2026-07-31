@@ -34,6 +34,31 @@ const eveningPurple = Color(0xff6C63FF);
 const eveningBgLight = Color(0xffECEAFF);
 const eveningBgDark = Color(0xff1A1730);
 
+// Situational-category icon accents.
+const categorySleepBlue = Color(0xff3E7BFA);
+const categoryAlarmAmber = Color(0xffE8A33D);
+const categoryClothesTeal = Color(0xff2BA8A0);
+const categoryDoorBrown = Color(0xffA0724A);
+const categoryBathroomCyan = Color(0xff2F9BB0);
+const categoryMosqueGreen = Color(0xff2E8B57);
+const categoryAdhanIndigo = Color(0xff5C6BC0);
+const categoryDistressRed = Color(0xffE0524B);
+const categorySadnessSlate = Color(0xff6B7A8F);
+const categoryFearViolet = Color(0xff8859C4);
+const categoryEnemyMaroon = Color(0xffB0453E);
+const categoryOverwhelmedYellow = Color(0xffD6A419);
+const categorySinGray = Color(0xff7C8B99);
+const categoryDebtOlive = Color(0xff8A9A3B);
+const categoryAngerCrimson = Color(0xffC23B4E);
+const categoryGatheringPlum = Color(0xff9457A6);
+const categoryAfflictedPink = Color(0xffD97EA8);
+const categoryPleasingRose = Color(0xffE0607E);
+const categoryTravelSky = Color(0xff37A6D9);
+const categoryMountBrown = Color(0xffB5772F);
+const categoryGravesGreen = Color(0xff5A7D5E);
+const categoryAfterPrayerGreen = Color(0xff2FA366);
+const categoryRuqyahTeal = Color(0xff1E9E8E);
+
 // Neutrals.
 const backgroundLight = Color(0xffE9ECF1);
 const backgroundDark = Color(0xff080C0A);

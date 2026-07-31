@@ -33,10 +33,17 @@ class HiveDB {
   }
 
   Future<Box<T>> openAndGetBox<T>({required String boxName}) async {
-    if (!(Hive.isBoxOpen(boxName))) {
-      return await Hive.openBox<T>(boxName);
-    } else {
+    if (Hive.isBoxOpen(boxName)) {
       return Hive.box<T>(boxName);
+    }
+    try {
+      return await Hive.openBox<T>(boxName);
+    } catch (_) {
+      // Box on disk is incompatible with the current schema (e.g. leftover
+      // data from before a model change) — drop it and start fresh rather
+      // than crashing on startup.
+      await Hive.deleteBoxFromDisk(boxName);
+      return await Hive.openBox<T>(boxName);
     }
   }
 

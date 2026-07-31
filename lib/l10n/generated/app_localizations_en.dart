@@ -268,6 +268,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tapToCount => 'Tap to count';
 
   @override
+  String get markCompleted => 'Mark as completed';
+
+  @override
   String get virtueAndSource => 'Virtue & source';
 
   @override

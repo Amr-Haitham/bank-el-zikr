@@ -53,8 +53,7 @@ class AdhkarReadingCubit extends Cubit<AdhkarReadingState> {
 
   int repsFor(int zikrId) => state.repsByZikrId[zikrId] ?? 0;
 
-  bool isCompleted(ZikrEntity zikr) =>
-      repsFor(zikr.id) >= zikr.count;
+  bool isCompleted(ZikrEntity zikr) => repsFor(zikr.id) >= zikr.count;
 
   int get completedItemsCount => azkar.where(isCompleted).length;
 
@@ -68,6 +67,18 @@ class AdhkarReadingCubit extends Cubit<AdhkarReadingState> {
 
     final updatedReps = Map<int, int>.from(state.repsByZikrId);
     updatedReps[zikr.id] = current + 1;
+    emit(state.copyWith(repsByZikrId: updatedReps));
+
+    final completedCount =
+        azkar.where((z) => (updatedReps[z.id] ?? 0) >= z.count).length;
+    onProgress(completedCount, azkar.length);
+  }
+
+  void completeZikr(ZikrEntity zikr) {
+    if (isCompleted(zikr)) return;
+
+    final updatedReps = Map<int, int>.from(state.repsByZikrId);
+    updatedReps[zikr.id] = zikr.count;
     emit(state.copyWith(repsByZikrId: updatedReps));
 
     final completedCount =

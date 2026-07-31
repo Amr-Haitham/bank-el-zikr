@@ -58,14 +58,9 @@ class AdhkarCategoryListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
 
-    final String subtitle;
-    if (category.progressKey == null) {
-      subtitle = l10n.notTrackedYet;
-    } else if (progress?.lastReadAt == null) {
-      subtitle = l10n.statusNotStarted;
-    } else {
-      subtitle = l10n.lastRead(formatLastRead(context, progress!.lastReadAt!));
-    }
+    final String subtitle = progress?.lastReadAt == null
+        ? l10n.statusNotStarted
+        : l10n.lastRead(formatLastRead(context, progress!.lastReadAt!));
 
     return AdhkarCategoryCard(
       title: category.title,
@@ -73,6 +68,7 @@ class AdhkarCategoryListItem extends StatelessWidget {
       icon: category.icon,
       iconBackgroundColor: category.iconBackgroundColor,
       iconColor: category.iconColor,
+      progress: progress?.progress ?? 0.0,
       onTap: onTap,
     );
   }

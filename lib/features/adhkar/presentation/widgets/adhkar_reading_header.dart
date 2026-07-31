@@ -17,18 +17,17 @@ class AdhkarReadingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      textDirection: TextDirection.rtl,
       children: [
         GestureDetector(
           onTap: onBack,
-          child: Icon(Icons.chevron_right,
+          child: Icon(isEnglish ? Icons.chevron_left : Icons.chevron_right,
               color: Theme.of(context).textTheme.bodyLarge!.color),
         ),
         Text(
           title,
-          textDirection: TextDirection.rtl,
           style:
               Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),
         ),

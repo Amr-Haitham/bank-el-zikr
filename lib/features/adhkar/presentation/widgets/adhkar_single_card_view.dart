@@ -3,10 +3,10 @@ import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'adhkar_counter_ring.dart';
+import 'zikr_category_icon.dart';
 
 class AdhkarSingleCardView extends StatelessWidget {
   const AdhkarSingleCardView({
@@ -20,16 +20,7 @@ class AdhkarSingleCardView extends StatelessWidget {
   final int reps;
   final VoidCallback onTap;
 
-  IconData get _icon {
-    switch (zikr.isMorning) {
-      case true:
-        return Icons.wb_sunny_outlined;
-      case false:
-        return Icons.nightlight_round;
-      case null:
-        return Icons.self_improvement_outlined;
-    }
-  }
+  IconData get _icon => zikrCategoryIcon(zikr.category);
 
   Color get _iconColor {
     switch (zikr.isMorning) {
@@ -42,9 +33,13 @@ class AdhkarSingleCardView extends StatelessWidget {
     }
   }
 
-  void _showFavor(BuildContext context) {
-    final favor = zikr.description;
+  void _showFavor(BuildContext context, bool isEnglish) {
+    final favor = isEnglish && zikr.descriptionEn != null
+        ? zikr.descriptionEn!
+        : zikr.description;
     if (favor == null || favor.isEmpty) return;
+    final source = isEnglish ? (zikr.sourceEn ?? zikr.source) : zikr.source;
+    final favorDirection = isEnglish ? TextDirection.ltr : TextDirection.rtl;
     showModalBottomSheet(
       context: context,
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -59,7 +54,6 @@ class AdhkarSingleCardView extends StatelessWidget {
           children: [
             Text(
               AppLocalizations.of(context).virtueAndSource,
-              textDirection: TextDirection.rtl,
               style: Theme.of(context)
                   .textTheme
                   .bodyMedium!
@@ -69,9 +63,18 @@ class AdhkarSingleCardView extends StatelessWidget {
             Text(
               favor,
               textAlign: TextAlign.center,
-              textDirection: TextDirection.rtl,
+              textDirection: favorDirection,
               style: Theme.of(context).textTheme.bodyMedium,
             ),
+            if (source != null && source.isNotEmpty) ...[
+              const SizedBox(height: 12),
+              Text(
+                source,
+                textAlign: TextAlign.center,
+                textDirection: favorDirection,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ],
             const SizedBox(height: 12),
           ],
         ),
@@ -81,6 +84,14 @@ class AdhkarSingleCardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
+    final favorText = isEnglish && zikr.descriptionEn != null
+        ? zikr.descriptionEn
+        : zikr.description;
+    final secondaryTextColor = Theme.of(context).textTheme.bodySmall!.color!;
+    final shareText =
+        isEnglish && zikr.contentEn != null ? zikr.contentEn! : zikr.content;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: onTap,
@@ -100,27 +111,71 @@ class AdhkarSingleCardView extends StatelessWidget {
                   const SizedBox(height: 16),
                   Expanded(
                     child: Center(
-                      child: AutoSizeText(
-                        zikr.content,
-                        textAlign: TextAlign.center,
-                        textDirection: TextDirection.rtl,
-                        minFontSize: 13,
-                        maxLines: 12,
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                            fontWeight: FontWeight.w600, fontSize: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            AutoSizeText(
+                              zikr.content,
+                              textAlign: TextAlign.center,
+                              textDirection: TextDirection.rtl,
+                              minFontSize: 13,
+                              maxLines: 12,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 20,
+                                    color:
+                                        Theme.of(context).colorScheme.onSurface,
+                                  ),
+                            ),
+                            if (isEnglish &&
+                                zikr.contentTransliteration != null) ...[
+                              const SizedBox(height: 12),
+                              Text(
+                                zikr.contentTransliteration!,
+                                textAlign: TextAlign.center,
+                                textDirection: TextDirection.ltr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      fontStyle: FontStyle.italic,
+                                      color: Theme.of(context).primaryColor,
+                                    ),
+                              ),
+                            ],
+                            if (isEnglish && zikr.contentEn != null) ...[
+                              const SizedBox(height: 8),
+                              Text(
+                                zikr.contentEn!,
+                                textAlign: TextAlign.center,
+                                textDirection: TextDirection.ltr,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium!
+                                    .copyWith(
+                                        fontSize: 14,
+                                        color: secondaryTextColor),
+                              ),
+                            ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                  if (zikr.description != null && zikr.description!.isNotEmpty)
+                  if (favorText != null && favorText.isNotEmpty)
                     GestureDetector(
-                      onTap: () => _showFavor(context),
+                      onTap: () => _showFavor(context, isEnglish),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        textDirection: TextDirection.rtl,
                         children: [
                           Text(
                             AppLocalizations.of(context).virtueAndSource,
-                            textDirection: TextDirection.rtl,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
@@ -138,52 +193,46 @@ class AdhkarSingleCardView extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 14),
-          Row(
-            children: [
-              Expanded(
-                child: _ActionButton(
-                  label: AppLocalizations.of(context).shareLabel,
-                  icon: Icons.ios_share,
-                  onTap: () =>
-                      SharePlus.instance.share(ShareParams(text: zikr.content)),
+          Center(
+            child: GestureDetector(
+              onTap: () =>
+                  SharePlus.instance.share(ShareParams(text: shareText)),
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
+                decoration: BoxDecoration(
+                  color: primaryGreen.withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: _ActionButton(
-                  label: AppLocalizations.of(context).copyLabel,
-                  icon: Icons.copy_rounded,
-                  onTap: () {
-                    Clipboard.setData(ClipboardData(text: zikr.content));
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(AppLocalizations.of(context).copied,
-                            textDirection: TextDirection.rtl),
-                        duration: const Duration(seconds: 1),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).shareLabel,
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w700,
+                        color: primaryGreen,
                       ),
-                    );
-                  },
+                    ),
+                    const SizedBox(width: 8),
+                    const Icon(Icons.ios_share, size: 17, color: primaryGreen),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
           const SizedBox(height: 16),
           AdhkarCounterRing(reps: reps, target: zikr.count),
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            textDirection: TextDirection.rtl,
             children: [
               Text(
                 AppLocalizations.of(context).swipeHint,
-                textDirection: TextDirection.rtl,
                 style: TextStyle(
                   fontSize: 12,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
-                      .withValues(alpha: 0.5),
+                  color: Theme.of(context).textTheme.bodySmall!.color!,
                 ),
               ),
               const SizedBox(width: 6),
@@ -197,50 +246,6 @@ class AdhkarSingleCardView extends StatelessWidget {
             ],
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _ActionButton extends StatelessWidget {
-  const _ActionButton({
-    required this.label,
-    required this.icon,
-    required this.onTap,
-  });
-
-  final String label;
-  final IconData icon;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    final color = Theme.of(context).textTheme.bodyMedium!.color;
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          textDirection: TextDirection.rtl,
-          children: [
-            Text(
-              label,
-              textDirection: TextDirection.rtl,
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.w700,
-                color: color,
-              ),
-            ),
-            const SizedBox(width: 6),
-            Icon(icon, size: 15, color: color),
-          ],
-        ),
       ),
     );
   }

@@ -10,6 +10,7 @@ class AdhkarListItemCard extends StatelessWidget {
     required this.zikr,
     required this.reps,
     required this.onTap,
+    required this.onComplete,
   });
 
   final int index;
@@ -17,11 +18,17 @@ class AdhkarListItemCard extends StatelessWidget {
   final int reps;
   final VoidCallback onTap;
 
+  /// Instantly marks this zikr as fully completed, skipping the remaining
+  /// taps — only offered in the list view, not the single-zikr view.
+  final VoidCallback onComplete;
+
   @override
   Widget build(BuildContext context) {
     final isCompleted = reps >= zikr.count;
     final progress =
         zikr.count == 0 ? 0.0 : (reps / zikr.count).clamp(0.0, 1.0);
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
+    final secondaryTextColor = Theme.of(context).textTheme.bodySmall!.color!;
 
     return GestureDetector(
       onTap: isCompleted ? null : onTap,
@@ -38,7 +45,6 @@ class AdhkarListItemCard extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              textDirection: TextDirection.rtl,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
@@ -46,10 +52,11 @@ class AdhkarListItemCard extends StatelessWidget {
                     zikr.content,
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.rtl,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyMedium!
-                        .copyWith(fontSize: 15, fontWeight: FontWeight.w600),
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -58,15 +65,35 @@ class AdhkarListItemCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .color!
-                        .withValues(alpha: 0.4),
+                    color: Theme.of(context).textTheme.bodySmall!.color!,
                   ),
                 ),
               ],
             ),
+            if (isEnglish && zikr.contentTransliteration != null) ...[
+              const SizedBox(height: 8),
+              Text(
+                zikr.contentTransliteration!,
+                textDirection: TextDirection.ltr,
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).primaryColor,
+                    ),
+              ),
+            ],
+            if (isEnglish && zikr.contentEn != null) ...[
+              const SizedBox(height: 6),
+              Text(
+                zikr.contentEn!,
+                textDirection: TextDirection.ltr,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium!
+                    .copyWith(fontSize: 13, color: secondaryTextColor),
+              ),
+            ],
             const SizedBox(height: 12),
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
@@ -85,7 +112,6 @@ class AdhkarListItemCard extends StatelessWidget {
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              textDirection: TextDirection.rtl,
               children: [
                 if (isCompleted)
                   Container(
@@ -96,11 +122,9 @@ class AdhkarListItemCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(
-                      textDirection: TextDirection.rtl,
                       children: [
                         Text(
                           AppLocalizations.of(context).completedLabel,
-                          textDirection: TextDirection.rtl,
                           style: const TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w700,
@@ -115,11 +139,9 @@ class AdhkarListItemCard extends StatelessWidget {
                   )
                 else
                   Row(
-                    textDirection: TextDirection.rtl,
                     children: [
                       Text(
                         AppLocalizations.of(context).tapToCount,
-                        textDirection: TextDirection.rtl,
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
@@ -143,15 +165,44 @@ class AdhkarListItemCard extends StatelessWidget {
                   "${formatNumber(context, reps)}/${formatNumber(context, zikr.count)}",
                   style: TextStyle(
                     fontSize: 12,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .color!
-                        .withValues(alpha: 0.5),
+                    color: Theme.of(context).textTheme.bodySmall!.color!,
                   ),
                 ),
               ],
             ),
+            if (!isCompleted) ...[
+              const SizedBox(height: 10),
+              GestureDetector(
+                onTap: onComplete,
+                behavior: HitTestBehavior.opaque,
+                child: Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: const Color(0xff34C759).withValues(alpha: 0.4),
+                    ),
+                    borderRadius: BorderRadius.circular(14),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context).markCompleted,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xff34C759),
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+                      const Icon(Icons.check_circle_outline,
+                          size: 15, color: Color(0xff34C759)),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ],
         ),
       ),

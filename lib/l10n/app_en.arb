@@ -109,6 +109,7 @@
   "ofCount": "of {count}",
   "completedLabel": "Completed",
   "tapToCount": "Tap to count",
+  "markCompleted": "Mark as completed",
   "virtueAndSource": "Virtue & source",
   "shareLabel": "Share",
   "copyLabel": "Copy",
