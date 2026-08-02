@@ -39,9 +39,10 @@ class AdhkarCounterRing extends StatelessWidget {
               ),
               Text(
                 formatNumber(context, reps),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w800,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],
@@ -53,11 +54,7 @@ class AdhkarCounterRing extends StatelessWidget {
           textDirection: TextDirection.rtl,
           style: TextStyle(
             fontSize: 13,
-            color: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
-                .withValues(alpha: 0.6),
+            color: Theme.of(context).colorScheme.onSurface,
           ),
         ),
         const SizedBox(height: 4),

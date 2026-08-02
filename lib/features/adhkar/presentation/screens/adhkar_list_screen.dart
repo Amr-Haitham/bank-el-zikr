@@ -5,6 +5,7 @@ import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category_list_item.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_list_search_field.dart';
+import 'package:bank_el_ziker/features/adhkar/presentation/widgets/zikr_category_icon.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -12,82 +13,89 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class _ZikrCategoryTileSpec {
-  const _ZikrCategoryTileSpec(this.category, this.title);
+  const _ZikrCategoryTileSpec(this.category, this.title, this.titleEn);
   final String category;
   final String title;
+  final String titleEn;
 }
 
 const _zikrCategoryTiles = [
-  _ZikrCategoryTileSpec('sleep', 'أذكار النوم'),
-  _ZikrCategoryTileSpec('wakingUp', 'عند الاستيقاظ'),
-  _ZikrCategoryTileSpec('newClothes', 'لبس ثوب جديد'),
-  _ZikrCategoryTileSpec('leavingHome', 'الخروج من البيت'),
-  _ZikrCategoryTileSpec('enteringBathroom', 'دخول دورة المياة'),
-  _ZikrCategoryTileSpec('leavingBathroom', 'الخروج من دورة المياة'),
-  _ZikrCategoryTileSpec('enteringMosque', 'دخول المسجد'),
-  _ZikrCategoryTileSpec('leavingMosque', 'الخروج من المسجد'),
-  _ZikrCategoryTileSpec('hearingAdhan', 'سماع الأذان'),
-  _ZikrCategoryTileSpec('afterAdhan', 'بعد سماع الأذان'),
-  _ZikrCategoryTileSpec('distress', 'عند الكرب'),
-  _ZikrCategoryTileSpec('sadness', 'عند الهَمّ أو الحزن'),
-  _ZikrCategoryTileSpec('fearOfPeople', 'عند الخوف من قوم'),
-  _ZikrCategoryTileSpec('meetingEnemy', 'عند لقاء العدو'),
-  _ZikrCategoryTileSpec('overwhelmed', 'إذا غلبك أمر'),
-  _ZikrCategoryTileSpec('afterSin', 'عند فعل ذنب'),
-  _ZikrCategoryTileSpec('unpaidDebt', 'من عليه دين عجز عنه'),
-  _ZikrCategoryTileSpec('anger', 'عند الغضب'),
-  _ZikrCategoryTileSpec('leavingGathering', 'عند القيام من المجلس'),
-  _ZikrCategoryTileSpec('seeingAfflicted', 'إذا رأى مبتلى بمرض أو غيره'),
-  _ZikrCategoryTileSpec('seeingSomethingPleasing', 'عند رؤية ما يعجبك'),
-  _ZikrCategoryTileSpec('leavingHomeDua', 'دعاء الخروج من المنزل'),
-  _ZikrCategoryTileSpec('travel', 'دعـاء السفـر'),
-  _ZikrCategoryTileSpec('ridingMount', 'دعاء ركوب الدابة'),
-  _ZikrCategoryTileSpec('visitingGraves', 'دعاء زيارة القبور'),
+  _ZikrCategoryTileSpec('sleep', 'أذكار النوم', 'Sleep'),
+  _ZikrCategoryTileSpec('wakingUp', 'عند الاستيقاظ', 'Waking Up'),
+  _ZikrCategoryTileSpec('newClothes', 'لبس ثوب جديد', 'New Clothes'),
+  _ZikrCategoryTileSpec('leavingHome', 'الخروج من البيت', 'Leaving Home'),
+  _ZikrCategoryTileSpec(
+      'enteringBathroom', 'دخول دورة المياة', 'Entering the Bathroom'),
+  _ZikrCategoryTileSpec(
+      'leavingBathroom', 'الخروج من دورة المياة', 'Leaving the Bathroom'),
+  _ZikrCategoryTileSpec('enteringMosque', 'دخول المسجد', 'Entering the Mosque'),
+  _ZikrCategoryTileSpec(
+      'leavingMosque', 'الخروج من المسجد', 'Leaving the Mosque'),
+  _ZikrCategoryTileSpec('hearingAdhan', 'سماع الأذان', 'Hearing the Adhan'),
+  _ZikrCategoryTileSpec('afterAdhan', 'بعد سماع الأذان', 'After the Adhan'),
+  _ZikrCategoryTileSpec('distress', 'عند الكرب', 'At Distress'),
+  _ZikrCategoryTileSpec('sadness', 'عند الهَمّ أو الحزن', 'Sadness or Grief'),
+  _ZikrCategoryTileSpec('fearOfPeople', 'عند الخوف من قوم', 'Fear of People'),
+  _ZikrCategoryTileSpec('meetingEnemy', 'عند لقاء العدو', 'Meeting an Enemy'),
+  _ZikrCategoryTileSpec('overwhelmed', 'إذا غلبك أمر', 'When Overwhelmed'),
+  _ZikrCategoryTileSpec('afterSin', 'عند فعل ذنب', 'After a Sin'),
+  _ZikrCategoryTileSpec('unpaidDebt', 'من عليه دين عجز عنه', 'Unpaid Debt'),
+  _ZikrCategoryTileSpec('anger', 'عند الغضب', 'Anger'),
+  _ZikrCategoryTileSpec(
+      'leavingGathering', 'عند القيام من المجلس', 'Leaving a Gathering'),
+  _ZikrCategoryTileSpec(
+      'seeingAfflicted', 'إذا رأى مبتلى بمرض أو غيره', 'Seeing the Afflicted'),
+  _ZikrCategoryTileSpec('seeingSomethingPleasing', 'عند رؤية ما يعجبك',
+      'Seeing Something Pleasing'),
+  _ZikrCategoryTileSpec(
+      'leavingHomeDua', 'دعاء الخروج من المنزل', 'Leaving the House'),
+  _ZikrCategoryTileSpec('travel', 'دعـاء السفـر', 'Travel'),
+  _ZikrCategoryTileSpec('ridingMount', 'دعاء ركوب الدابة', 'Riding a Mount'),
+  _ZikrCategoryTileSpec(
+      'visitingGraves', 'دعاء زيارة القبور', 'Visiting Graves'),
 ];
 
 List<AdhkarCategory> _buildCategories(BuildContext context) {
   final l10n = AppLocalizations.of(context);
+  final isEnglish = Localizations.localeOf(context).languageCode == 'en';
   return [
     AdhkarCategory(
       title: l10n.morningAdhkar,
       category: 'morning',
-      progressKey: 'morning',
-      icon: Icons.wb_sunny_outlined,
+      icon: zikrCategoryIcon('morning'),
       iconBackgroundColor: morningBgLight,
       iconColor: morningOrange,
     ),
     AdhkarCategory(
       title: l10n.eveningAdhkar,
       category: 'evening',
-      progressKey: 'evening',
-      icon: Icons.nightlight_round,
+      icon: zikrCategoryIcon('evening'),
       iconBackgroundColor: eveningBgLight,
       iconColor: eveningPurple,
     ),
     for (final tile in _zikrCategoryTiles)
       AdhkarCategory(
-        title: tile.title,
+        title: isEnglish ? tile.titleEn : tile.title,
         category: tile.category,
-        progressKey: null,
-        icon: Icons.bed_outlined,
-        iconBackgroundColor: primaryContainerLight,
-        iconColor: primaryGreen,
+        icon: zikrCategoryIcon(tile.category),
+        iconBackgroundColor:
+            zikrCategoryColor(tile.category).withValues(alpha: 0.14),
+        iconColor: zikrCategoryColor(tile.category),
       ),
     AdhkarCategory(
       title: l10n.afterPrayerAdhkar,
       category: 'afterPrayer',
-      progressKey: null,
-      icon: Icons.flag_outlined,
-      iconBackgroundColor: primaryContainerLight,
-      iconColor: primaryGreen,
+      icon: zikrCategoryIcon('afterPrayer'),
+      iconBackgroundColor:
+          zikrCategoryColor('afterPrayer').withValues(alpha: 0.14),
+      iconColor: zikrCategoryColor('afterPrayer'),
     ),
     AdhkarCategory(
       title: l10n.ruqyah,
       category: 'ruqyah',
-      progressKey: null,
-      icon: Icons.shield_outlined,
-      iconBackgroundColor: primaryContainerLight,
-      iconColor: primaryGreen,
+      icon: zikrCategoryIcon('ruqyah'),
+      iconBackgroundColor: zikrCategoryColor('ruqyah').withValues(alpha: 0.14),
+      iconColor: zikrCategoryColor('ruqyah'),
     ),
   ];
 }
@@ -150,9 +158,7 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
                       final category = filtered[index];
                       return AdhkarCategoryListItem(
                         category: category,
-                        progress: category.progressKey != null
-                            ? progressByCategory[category.progressKey]
-                            : null,
+                        progress: progressByCategory[category.category],
                         onTap: () => AutoRouter.of(context).push(
                           ZikrCategoryRoute(
                             category: category.category,

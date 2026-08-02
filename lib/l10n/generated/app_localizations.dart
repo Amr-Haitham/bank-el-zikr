@@ -596,6 +596,12 @@ abstract class AppLocalizations {
   /// **'اضغط للعد'**
   String get tapToCount;
 
+  /// No description provided for @markCompleted.
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع علامة كمكتمل'**
+  String get markCompleted;
+
   /// No description provided for @virtueAndSource.
   ///
   /// In ar, this message translates to:

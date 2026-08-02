@@ -16,15 +16,18 @@ class AdhkarListSearchField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hintColor = context.textTheme.bodySmall!.color!.withValues(alpha: 0.5);
+    final hintColor =
+        context.textTheme.bodySmall!.color!.withValues(alpha: 0.5);
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
+    final textDirection = isEnglish ? TextDirection.ltr : TextDirection.rtl;
 
     return TextField(
       onChanged: onChanged,
-      textDirection: TextDirection.rtl,
+      textDirection: textDirection,
       style: context.textTheme.bodySmall,
       decoration: InputDecoration(
         hintText: hintText,
-        hintTextDirection: TextDirection.rtl,
+        hintTextDirection: textDirection,
         hintStyle: context.textTheme.bodySmall!.copyWith(color: hintColor),
         prefixIcon: Icon(Icons.search, color: hintColor),
         filled: true,

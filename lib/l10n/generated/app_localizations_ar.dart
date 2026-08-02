@@ -280,6 +280,9 @@ class AppLocalizationsAr extends AppLocalizations {
   String get tapToCount => 'اضغط للعد';
 
   @override
+  String get markCompleted => 'وضع علامة كمكتمل';
+
+  @override
   String get virtueAndSource => 'الفضل والمصدر';
 
   @override
