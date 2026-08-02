@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&family=Cairo:wght@500;600;700;800;900&family=Amiri:wght@400;700&family=Amiri+Quran&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; }
+  [data-theme], [data-theme] * { font-family: 'Tajawal', sans-serif; }
+  body { margin: 0; font-family:'Tajawal', sans-serif; --font-title:'Tajawal', sans-serif; --font-body:'Tajawal', sans-serif; --font-quran:'Amiri', serif; }
+  [data-theme="light"]{
+    --bg:#E9ECF1; --card:#FFFFFF; --soft:#F3F5F8; --text:#16211B; --muted:#7C877F;
+    --line:#E7EBEE; --green:#12C97A; --green-deep:#0B7A45; --green-mid:#0FA85E;
+    --orange:#FB8C3C; --orange-bg:#FFF0E4; --purple:#6C63FF; --purple-bg:#ECEAFF;
+    --gold:#FFC02E; --nav:#FFFFFF; --chip:#F2F5F3;
+    --sh-card:0 12px 34px rgba(16,40,28,.08); --sh-soft:0 6px 18px rgba(16,40,28,.06);
+    --sh-btn:0 12px 24px rgba(52,199,89,.32); --grain:.10;
+  }
+  [data-theme="dark"]{
+    --bg:#080C0A; --card:#121A15; --soft:#0E1511; --text:#EAF1EC; --muted:#8A968C;
+    --line:#1E2823; --green:#12C97A; --green-deep:#084A2A; --green-mid:#0C7A45;
+    --orange:#FB8C3C; --orange-bg:#2A1D11; --purple:#8B83FF; --purple-bg:#1A1730;
+    --gold:#FFC02E; --nav:#0E1511; --chip:#1A241E;
+    --sh-card:0 14px 36px rgba(0,0,0,.55); --sh-soft:0 6px 18px rgba(0,0,0,.4);
+    --sh-btn:0 12px 26px rgba(52,199,89,.28); --grain:.16;
+  }
+  @keyframes popcount { 0%{transform:scale(1)} 35%{transform:scale(1.14)} 100%{transform:scale(1)} }
+  @keyframes flamepulse { 0%,100%{transform:scale(1); box-shadow:0 0 0 0 rgba(255,255,255,.25)} 50%{transform:scale(1.06); box-shadow:0 0 0 6px rgba(255,255,255,0)} }
+  @keyframes glowpulse { 0%,100%{opacity:.55} 50%{opacity:.9} }
+  @keyframes fadeup { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:translateY(0)} }
+  @keyframes ringspin { to { transform: rotate(360deg) } }
+  .scrollarea::-webkit-scrollbar{ width:0; height:0; }
+  @media (max-width: 640px) {
+    .page-shell { padding:0 !important; gap:0 !important; background:#11161f !important; min-height:100vh; min-height:100dvh; }
+    .page-header { display:none !important; }
+    .device-frame {
+      width:100vw !important; height:100vh !important; height:100dvh !important;
+      max-width:none !important; border-radius:0 !important; box-shadow:none !important;
+    }
+  }
+</style>
+</helmet>
+<template id="__bundler_thumbnail" data-bg-color="#0B7A45">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0B7A45"/>
+    <circle cx="600" cy="360" r="150" fill="none" stroke="#12C97A" stroke-width="18"/>
+    <path d="M600 300v120M540 360h120" stroke="#fff" stroke-width="20" stroke-linecap="round"/>
+    <text x="600" y="600" text-anchor="middle" fill="#EAF5EE" font-family="sans-serif" font-size="72" font-weight="800">بنك الذكر</text>
+  </svg>
+</template>
+<div class="page-shell" style="min-height:100vh; background:radial-gradient(120% 80% at 50% 0%, #f3f5f9 0%, #e3e7ee 55%, #d9dee6 100%); display:flex; flex-direction:column; align-items:center; gap:22px; padding:34px 16px 56px; font-family:var(--font-body);">
+
+  <div class="page-header" style="display:flex; align-items:center; justify-content:space-between; width:100%; max-width:430px;">
+    <div style="display:flex; flex-direction:column; gap:2px;">
+      <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:#16211B; letter-spacing:.2px;">Bank el Dhikr</div>
+      <div style="font-size:calc(12px * var(--ts,1)); color:#8A93A2; font-weight:600;">Interactive redesign · بنك الذكر</div>
+    </div>
+    <div style="display:flex; background:#fff; border-radius:999px; padding:4px; box-shadow:0 6px 16px rgba(16,40,28,.10);">
+      <button onClick="{{ setLight }}" style="{{ lightTabStyle }}">فاتح</button>
+      <button onClick="{{ setDark }}" style="{{ darkTabStyle }}">داكن</button>
+    </div>
+  </div>
+
+  <div class="device-frame" data-theme="{{ theme }}" dir="{{ dir }}" style="width:390px; height:800px; background:var(--bg); border-radius:46px; position:relative; overflow:hidden; box-shadow:0 40px 90px -30px rgba(16,30,24,.55), 0 0 0 10px #11161f, 0 0 0 12px #2a3140; color:var(--text); font-family:var(--font-body);">
+
+    <div style="position:absolute; top:0; left:0; right:0; height:50px; display:flex; align-items:center; justify-content:space-between; padding:0 30px; z-index:40; font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--text);">
+      <span style="letter-spacing:.5px;">{{ clock }}</span>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800;">●●●</span>
+        <svg width="17" height="12" viewBox="0 0 17 12" fill="none"><path d="M8.5 2.5C11 2.5 13.2 3.5 14.8 5.1" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8.5 6C9.9 6 11.2 6.6 12.1 7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="8.5" cy="9.6" r="1.1" fill="currentColor"/></svg>
+        <div style="width:24px; height:12px; border:1.6px solid var(--text); border-radius:3px; padding:1.6px; opacity:.9;"><div style="width:70%; height:100%; background:var(--text); border-radius:1px;"></div></div>
+      </div>
+    </div>
+
+    <div class="scrollarea" style="position:absolute; inset:0; overflow-y:auto; padding:84px 20px 112px;">
+
+      <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+
+          <div style="display:flex; align-items:flex-start; justify-content:space-between;">
+            <div style="display:flex; flex-direction:column; gap:3px; text-align:start;">
+              <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.1; white-space:nowrap;">{{ tBrand }}</div>
+              <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--green-mid);">{{ tTagline }}</div>
+            </div>
+          </div>
+
+          <div style="position:relative; background:var(--card); border-radius:30px; padding:26px 24px 24px; box-shadow:var(--sh-card); overflow:hidden;">
+            <div style="position:absolute; top:-46px; left:-30px; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle at 40% 40%, rgba(52,199,89,.18), rgba(52,199,89,0)); "></div>
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:calc(12px * var(--ts,1)); font-weight:700; margin-bottom:6px;">
+              <span>{{ tBalanceLabel }}</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="6" width="18" height="13" rx="3" stroke="var(--muted)" stroke-width="1.8"/><path d="M3 10h18" stroke="var(--muted)" stroke-width="1.8"/><circle cx="17" cy="14" r="1.3" fill="var(--muted)"/></svg>
+            </div>
+            <div style="font-family:var(--font-title); text-align:center; font-size:calc(54px * var(--ts,1)); font-weight:900; color:var(--green-deep); letter-spacing:1px; line-height:1.05;">{{ bankStr }}</div>
+            <div style="display:flex; align-items:center; justify-content:center; margin-top:9px;">
+              <span style="font-family:var(--font-title); display:flex; align-items:center; gap:6px; background:var(--chip); color:var(--green-mid); font-size:calc(12px * var(--ts,1)); font-weight:800; padding:6px 13px; border-radius:999px; white-space:nowrap;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 17L11 11l3 3 5-6" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8h4v4" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="white-space:nowrap;">{{ tDepositedToday }} ‎+{{ todayDepositStr }}</span>
+              </span>
+            </div>
+            <button onClick="{{ goDeposit }}" style="margin:20px auto 0; display:flex; align-items:center; justify-content:center; gap:10px; width:80%; padding:16px; border:none; border-radius:20px; background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff; font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; cursor:pointer; box-shadow:var(--sh-btn); white-space:nowrap;">
+              <span>{{ tDepositMore }}</span>
+              <span style="font-size:calc(20px * var(--ts,1)); line-height:1;">+</span>
+            </button>
+          </div>
+
+          <div style="display:flex; gap:16px;">
+            <div onClick="{{ goAzkar }}" style="flex:1; background:var(--card); border-radius:24px; padding:18px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:14px; cursor:pointer;">
+              <div style="width:46px; height:46px; border-radius:14px; background:var(--purple-bg); display:flex; align-items:center; justify-content:center; align-self:flex-start;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="var(--purple)"/></svg>
+              </div>
+              <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text); text-align:start;">{{ tEvening }}</div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tIncomplete }}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="transform:{{ chevronFlip }};"><path d="M14 6l-6 6 6 6" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div onClick="{{ goAzkar }}" style="flex:1; background:var(--card); border-radius:24px; padding:18px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:14px; cursor:pointer;">
+              <div style="width:46px; height:46px; border-radius:14px; background:var(--orange-bg); display:flex; align-items:center; justify-content:center; align-self:flex-start;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.4" fill="var(--orange)"/><g stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M21.5 12h-2.4M4.9 12H2.5M18.7 5.3l-1.7 1.7M7 17l-1.7 1.7M18.7 18.7 17 17M7 7 5.3 5.3"/></g></svg>
+              </div>
+              <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text); text-align:start;">{{ tMorning }}</div>
+              <div style="display:flex; align-items:center; justify-content:space-between;">
+                <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--orange);">{{ tComplete }}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="transform:{{ chevronFlip }};"><path d="M14 6l-6 6 6 6" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div onClick="{{ goJourney }}" style="position:relative; border-radius:26px; overflow:hidden; cursor:pointer; background:linear-gradient(120deg, var(--green-deep) 0%, var(--green-mid) 55%, var(--green) 100%); box-shadow:0 16px 34px -10px rgba(30,158,99,.5);">
+            <div style="position:absolute; inset:0; opacity:var(--grain); background-image:url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC45IiBudW1PY3RhdmVzPSIyIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbHRlcj0idXJsKCNuKSIvPjwvc3ZnPg=='); mix-blend-mode:overlay; pointer-events:none;"></div>
+            <div style="position:relative; padding:22px 22px 18px; display:flex; flex-direction:column; gap:16px;">
+              <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; color:#fff; text-align:start;">
+                <div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; opacity:.85; margin-bottom:6px;">{{ tStreakLabel }}</div>
+                  <div style="display:flex; align-items:baseline; gap:8px;">
+                    <span style="font-family:var(--font-title); font-size:calc(40px * var(--ts,1)); font-weight:900; line-height:1;">{{ streakStr }}</span>
+                    <span style="font-size:calc(15px * var(--ts,1)); font-weight:700; opacity:.9;">{{ tDayStreak }}</span>
+                  </div>
+                  <div style="font-size:calc(11px * var(--ts,1)); font-weight:600; opacity:.75; line-height:1.5; margin-top:2px;">{{ tStreakHint }}<br/>{{ tStreakSince }}</div>
+                </div>
+                <div style="flex-shrink:0; width:50px; height:50px; border-radius:50%; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; animation:flamepulse 2.2s ease-in-out infinite;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a2 2 0 0 0 4 0c0-1 1-1.6 1.4-1 1.6 2 2.6 3.6 2.6 5.8A6 6 0 1 1 6 14c0-1.2.4-2.2 1-3 .2 1 .9 1.7 1.8 1.7C10.4 12.7 8.6 8 12 3Z" fill="#fff"/></svg>
+                </div>
+              </div>
+              <button onClick="{{ goJourney }}" style="font-family:var(--font-title); display:flex; align-items:center; justify-content:space-between; font-size:calc(13px * var(--ts,1)); font-weight:800; color:#fff; background:rgba(255,255,255,.16); border:none; padding:12px 16px; border-radius:14px; cursor:pointer; width:100%;">
+                <span>{{ tViewStats }}</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style="transform:{{ chevronFlip }};"><path d="M10 6l6 6-6 6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div style="background:var(--card); border-radius:24px; padding:22px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:14px;">
+            <div style="width:42px; height:4px; border-radius:99px; background:var(--line); align-self:center;"></div>
+            <div style="font-family:var(--font-quran); font-size:calc(24px * var(--ts,1)); font-weight:700; color:var(--green-deep); text-align:center; line-height:2; direction:rtl;">{{ randomZikr }}</div>
+            <div style="font-size:calc(12px * var(--ts,1)); font-weight:600; font-style:italic; color:var(--green-mid); text-align:center; line-height:1.7; direction:ltr;">{{ quoteTr }}</div>
+            <div style="font-size:calc(12px * var(--ts,1)); font-weight:500; color:var(--muted); text-align:center; line-height:1.7; direction:ltr;">{{ quoteEn }}</div>
+            <div style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--green-mid); background:var(--chip); padding:5px 13px; border-radius:999px; align-self:center;">{{ quoteRef }}</div>
+            <button onClick="{{ nextQuote }}" style="display:flex; align-items:center; justify-content:center; gap:8px; color:var(--green-mid); font-size:calc(12px * var(--ts,1)); font-weight:800; background:rgba(52,199,89,.12); border:none; cursor:pointer; font-family:var(--font-title); padding:9px 18px; border-radius:999px; align-self:center;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0 1 13.7-5.6M20 12A8 8 0 0 1 6.3 17.6" stroke="var(--green-mid)" stroke-width="1.8" stroke-linecap="round"/><path d="M17 3v3.5h-3.5M7 21v-3.5h3.5" stroke="var(--green-mid)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{{ tAnotherVerse }}</span>
+            </button>
+          </div>
+
+          <button onClick="{{ openDonate }}" style="position:relative; width:100%; background:var(--card); border:none; border-radius:24px; padding:20px; box-shadow:var(--sh-soft); display:flex; align-items:center; gap:16px; overflow:hidden; cursor:pointer; text-align:start;" style-active="transform:scale(.985);">
+            <div style="position:absolute; top:-30px; inset-inline-end:-24px; width:110px; height:110px; border-radius:50%; background:radial-gradient(circle, rgba(52,199,89,.16), transparent 70%);"></div>
+            <div style="position:relative; width:52px; height:52px; border-radius:16px; background:rgba(52,199,89,.14); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M12 20s-6.5-4.2-9-8.2C1.3 8.9 2.6 5.5 6 5.5c2 0 3.2 1.3 4 2.6.8-1.3 2-2.6 4-2.6 3.4 0 4.7 3.4 3 6.3-2.5 4-9 8.2-9 8.2Z" fill="var(--green-mid)"/></svg>
+            </div>
+            <div style="position:relative; flex:1; min-width:0; text-align:start;">
+              <div style="font-family:var(--font-title); font-size:calc(18px * var(--ts,1)); font-weight:900; color:var(--text); margin-bottom:2px;">{{ tSupport }}</div>
+              <div style="font-size:calc(12px * var(--ts,1)); font-weight:600; color:var(--muted); line-height:1.5;">{{ tSupportSub }}</div>
+            </div>
+            <div style="position:relative; flex-shrink:0; display:flex; align-items:center; gap:6px; padding:12px 18px; border-radius:16px; background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff; font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; box-shadow:var(--sh-btn); white-space:nowrap;">
+              <span>{{ tDonate }}</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="transform:{{ chevronFlip }};"><path d="M9 6l6 6-6 6" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </button>
+
+          <button onClick="{{ shareApp }}" style="font-family:var(--font-title); display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; margin-top:2px; border:none; border-radius:18px; background:var(--chip); cursor:pointer; color:var(--green-mid); font-size:calc(16px * var(--ts,1)); font-weight:800;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="2.6" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="6" cy="12" r="2.6" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="18" cy="19" r="2.6" stroke="var(--green-mid)" stroke-width="1.8"/><path d="M8.2 10.8l7.6-4.2M8.2 13.2l7.6 4.2" stroke="var(--green-mid)" stroke-width="1.8"/></svg>
+            <span>{{ tShare }}</span>
+          </button>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isJourney }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:20px;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div style="width:44px;"></div>
+            <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">{{ tJourneyTitle }}</div>
+            <div style="width:44px;"></div>
+          </div>
+
+          <div style="position:relative; border-radius:30px; padding:24px 22px 18px; overflow:hidden; background:linear-gradient(150deg, var(--green-deep) 0%, var(--green-mid) 60%, var(--green) 100%); box-shadow:0 20px 40px -14px rgba(14,92,51,.6);">
+            <div style="position:relative; display:flex; align-items:flex-end; justify-content:space-between;">
+              <span style="font-family:var(--font-title); display:flex; align-items:center; gap:6px; background:rgba(255,255,255,.16); color:#fff; font-size:calc(12px * var(--ts,1)); font-weight:800; padding:7px 12px; border-radius:999px; margin-bottom:4px; white-space:nowrap;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M4 16l5-5 4 3 7-8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 6h4v4" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                ‎{{ chartDelta }}
+              </span>
+              <div style="text-align:start; color:#fff;">
+                <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; opacity:.85; margin-bottom:4px;">{{ tGrowth }}</div>
+                <div style="font-family:var(--font-title); font-size:calc(40px * var(--ts,1)); font-weight:900; letter-spacing:1px; line-height:1;">{{ chartValue }}</div>
+              </div>
+            </div>
+            <div style="display:flex; background:rgba(255,255,255,.14); border-radius:999px; padding:3px; gap:3px; margin-top:18px;">
+              <button onClick="{{ setWeek }}" style="{{ segWeek }}">{{ tWeek }}</button>
+              <button onClick="{{ setMonth }}" style="{{ segMonth }}">{{ tMonth }}</button>
+              <button onClick="{{ setYear }}" style="{{ segYear }}">{{ tYear }}</button>
+            </div>
+            <svg viewBox="0 0 320 130" preserveAspectRatio="none" style="width:100%; height:120px; margin-top:6px; display:block;">
+              <defs>
+                <linearGradient id="jarea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".28"/><stop offset="1" stop-color="#ffffff" stop-opacity="0"/></linearGradient>
+              </defs>
+              <path d="{{ chartArea }}" fill="url(#jarea)"/>
+              <path d="{{ chartLine }}" fill="none" stroke="#ffffff" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="312" cy="{{ chartDotY }}" r="8.5" fill="#fff"/>
+            </svg>
+            <div style="display:flex; flex-direction:row-reverse; justify-content:space-between; color:rgba(255,255,255,.78); font-size:calc(12px * var(--ts,1)); font-weight:700; padding:0 2px;">
+              <sc-for list="{{ chartLabels }}" as="l" hint-placeholder-count="7"><span>{{ l.t }}</span></sc-for>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:16px;">
+            <div style="flex:1; background:var(--card); border-radius:24px; padding:22px 16px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:34px; height:34px; border-radius:11px; background:var(--purple-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a2 2 0 0 0 4 0c0-1 1-1.6 1.4-1 1.6 2 2.6 3.6 2.6 5.8A6 6 0 1 1 6 14c0-1.2.4-2.2 1-3 .2 1 .9 1.7 1.8 1.7C10.4 12.7 8.6 8 12 3Z" fill="var(--purple)"/></svg>
+                </div>
+                <div style="font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tEvening }}</div>
+              </div>
+              <span style="font-family:var(--font-title); font-size:calc(40px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1;">{{ evStreakStr }}</span>
+              <span style="font-family:var(--font-title); font-size:calc(11px * var(--ts,1)); font-weight:800; color:var(--purple); background:var(--purple-bg); padding:5px 11px; border-radius:999px; white-space:nowrap;">{{ evBest }}</span>
+            </div>
+            <div style="flex:1; background:var(--card); border-radius:24px; padding:22px 16px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; align-items:center; gap:10px;">
+              <div style="display:flex; align-items:center; gap:8px;">
+                <div style="width:34px; height:34px; border-radius:11px; background:var(--orange-bg); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 3c1 3-2 4-2 7a2 2 0 0 0 4 0c0-1 1-1.6 1.4-1 1.6 2 2.6 3.6 2.6 5.8A6 6 0 1 1 6 14c0-1.2.4-2.2 1-3 .2 1 .9 1.7 1.8 1.7C10.4 12.7 8.6 8 12 3Z" fill="var(--orange)"/></svg>
+                </div>
+                <div style="font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tMorning }}</div>
+              </div>
+              <span style="font-family:var(--font-title); font-size:calc(40px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1;">{{ amStreakStr }}</span>
+              <span style="font-family:var(--font-title); font-size:calc(11px * var(--ts,1)); font-weight:800; color:var(--orange); background:var(--orange-bg); padding:5px 11px; border-radius:999px; white-space:nowrap;">{{ amBest }}</span>
+            </div>
+          </div>
+
+          <div style="background:var(--card); border-radius:24px; padding:20px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:18px;">
+            <div style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-family:var(--font-title); display:flex; align-items:center; gap:6px; font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--green-mid); background:var(--chip); padding:6px 12px; border-radius:999px;">{{ weekDone }}</span>
+              <span style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text);">{{ tWeekCommit }}</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(7,1fr); gap:9px;">
+              <sc-for list="{{ weekStrip }}" as="d" hint-placeholder-count="7">
+                <div style="display:flex; flex-direction:column; align-items:center; gap:8px;">
+                  <div style="{{ d.wrapStyle }}">
+                    <div style="flex:1; border-radius:7px; background:{{ d.c1 }};"></div>
+                    <div style="flex:1; border-radius:7px; background:{{ d.c2 }};"></div>
+                    <div style="flex:1; border-radius:7px; background:{{ d.c3 }};"></div>
+                  </div>
+                  <span style="{{ d.labelStyle }}">{{ d.label }}</span>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="display:flex; align-items:center; justify-content:center; gap:18px; padding-top:4px; border-top:1px solid var(--line);">
+              <div style="display:flex; align-items:center; gap:6px;"><div style="width:11px; height:11px; border-radius:4px; background:var(--orange);"></div><span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tMorningShort }}</span></div>
+              <div style="display:flex; align-items:center; gap:6px;"><div style="width:11px; height:11px; border-radius:4px; background:var(--purple);"></div><span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tEveningShort }}</span></div>
+              <div style="display:flex; align-items:center; gap:6px;"><div style="width:11px; height:11px; border-radius:4px; background:var(--green);"></div><span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tSleepShort }}</span></div>
+            </div>
+          </div>
+
+          <div style="background:var(--card); border-radius:24px; padding:20px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:6px;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; flex-direction:{{ breakdownRowDir }};">
+              <div style="display:flex; align-items:center; gap:14px;">
+                <span style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--muted); width:40px; text-align:center;">{{ tThisWeek }}</span>
+                <span style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--muted); width:44px; text-align:center;">{{ tThisMonth }}</span>
+              </div>
+              <span style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text);">{{ tDhikrBreakdown }}</span>
+            </div>
+            <sc-for list="{{ dhikrStats }}" as="d" hint-placeholder-count="5">
+              <div style="display:flex; align-items:center; gap:14px; padding:9px 0; border-top:1px solid var(--line); flex-direction:{{ breakdownRowDir }};">
+                <div style="display:flex; align-items:center; gap:8px; flex-shrink:0;">
+                  <span style="font-family:var(--font-title); font-size:calc(15px * var(--ts,1)); font-weight:900; color:var(--green-mid); background:var(--chip); border-radius:10px; padding:5px 0; width:40px; text-align:center;">{{ d.week }}</span>
+                  <span style="font-family:var(--font-title); font-size:calc(15px * var(--ts,1)); font-weight:900; color:var(--text); background:var(--chip); border-radius:10px; padding:5px 0; width:44px; text-align:center;">{{ d.month }}</span>
+                </div>
+                <div style="flex:1; display:flex; flex-direction:column; gap:2px; min-width:0;">
+                  <div style="{{ d.nameStyle }}">{{ d.name }}</div>
+                  <sc-if value="{{ isEnglish }}" hint-placeholder-val="{{ false }}">
+                    <div style="font-size:calc(12px * var(--ts,1)); font-weight:500; color:var(--muted); text-align:start;">{{ d.meaning }}</div>
+                  </sc-if>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMasbaha }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:18px; height:100%;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+            <div style="width:44px;"></div>
+            <div style="text-align:center;">
+              <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">{{ tMasbahaTitle }}</div>
+            </div>
+            <div style="width:44px;"></div>
+          </div>
+
+          <div style="display:flex; align-items:stretch; background:var(--card); border:1px solid var(--line); border-radius:20px; box-shadow:var(--sh-soft); padding:14px 8px; flex-shrink:0;">
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;">
+              <div style="font-size:calc(11px * var(--ts,1)); font-weight:700; color:var(--muted); white-space:nowrap;">{{ tBalance }}</div>
+              <div style="font-family:var(--font-title); font-size:calc(17px * var(--ts,1)); font-weight:900; color:var(--green-mid); white-space:nowrap;">{{ bankStr }}</div>
+            </div>
+            <div style="width:1px; background:var(--line);"></div>
+            <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:3px;">
+              <div style="font-size:calc(11px * var(--ts,1)); font-weight:700; color:var(--muted); white-space:nowrap;">{{ tLaps }}</div>
+              <div style="font-family:var(--font-title); font-size:calc(17px * var(--ts,1)); font-weight:900; color:var(--green-mid); white-space:nowrap;">{{ lapsStr }}</div>
+            </div>
+            <div style="width:1px; background:var(--line);"></div>
+            <button onClick="{{ openGoalSheet }}" style="flex:1; background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:3px; padding:0;">
+              <div style="font-size:calc(11px * var(--ts,1)); font-weight:700; color:var(--muted); display:flex; align-items:center; gap:4px; white-space:nowrap;">{{ tGoal }} <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M14 5l5 5M4 20l1-4L16 5l3 3L8 19l-4 1Z" stroke="var(--muted)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              <div style="font-family:var(--font-title); font-size:calc(17px * var(--ts,1)); font-weight:900; color:var(--green-mid); white-space:nowrap; direction:ltr;">{{ goalFraction }}</div>
+            </button>
+          </div>
+
+          <div style="flex-shrink:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; padding:4px 0;">
+          <div onClick="{{ tap }}" style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:16px; cursor:pointer; -webkit-tap-highlight-color:transparent;">
+            <div style="min-height:68px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0 8px;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                <div style="{{ zikrPhraseStyle }}">{{ zikrText }}</div>
+                <button onClick="{{ openSheetStop }}" style="width:34px; height:34px; border-radius:11px; background:var(--chip); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M4 8h11M4 8l3-3M4 8l3 3" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 16H9M20 16l-3-3M20 16l-3 3" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              </div>
+              <sc-if value="{{ isEnglish }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:calc(13px * var(--ts,1)); font-weight:600; font-style:italic; color:var(--green-mid); text-align:center;">{{ zikrTr }}</div>
+                <div style="font-size:calc(13px * var(--ts,1)); font-weight:500; color:var(--muted); text-align:center;">{{ zikrEn }}</div>
+              </sc-if>
+            </div>
+            <div style="position:relative; width:272px; height:272px; transform:scale(var(--ts,1));">
+              <div style="position:absolute; inset:6px; border-radius:50%; background:radial-gradient(circle at 50% 60%, rgba(255,192,46,.4), rgba(255,192,46,0) 70%); animation:glowpulse 3s ease-in-out infinite;"></div>
+              <svg width="272" height="272" viewBox="0 0 248 248" style="position:absolute; inset:0; transform:rotate(-90deg);">
+                <circle cx="124" cy="124" r="118" fill="none" stroke="var(--chip)" stroke-width="6"/>
+                <circle cx="124" cy="124" r="118" fill="none" stroke="var(--green-mid)" stroke-width="6" stroke-linecap="round" stroke-dasharray="741" stroke-dashoffset="{{ goalRingOffset }}"/>
+              </svg>
+              <div style="position:absolute; inset:14px; border-radius:50%; background:var(--card); box-shadow:0 18px 40px rgba(16,40,28,.18), inset 0 2px 4px rgba(255,255,255,.6);"></div>
+              <div key="{{ countStr }}" style="position:absolute; inset:26px; border-radius:50%; background:radial-gradient(circle at 35% 30%, #b9f0c8 0%, #7fe0a0 35%, #ffe08a 78%, #ffcf5e 100%); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0 14px; text-align:center; box-shadow:inset 0 -10px 28px rgba(20,120,60,.25), inset 0 8px 20px rgba(255,255,255,.55); animation:popcount .25s ease;">
+                <span style="font-size:72px; font-weight:900; color:#16321f; line-height:1; font-family:var(--font-quran); text-align:center; width:100%; direction:ltr; font-variant-numeric:tabular-nums;">{{ countStr }}</span>
+                <span style="font-family:{{ dhikrFontFam }}; font-size:16px; font-weight:700; color:#0e6b39; text-align:center; width:100%; line-height:1;">{{ orbSub }}</span>
+                <span style="display:flex; align-items:center; justify-content:center; gap:5px; font-size:12px; font-weight:700; color:rgba(22,50,31,.55); text-align:center; line-height:1; white-space:nowrap;">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M13 3l-1 9h6l-8 9 1-9H5l8-9Z" stroke="rgba(22,50,31,.55)" stroke-width="1.7" stroke-linejoin="round"/></svg>
+                  {{ tTapAnywhere }}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1; min-height:0; display:flex; align-items:center; justify-content:center;">
+            <button onClick="{{ reset }}" style="flex-shrink:0; display:flex; align-items:center; gap:8px; padding:11px 22px; border:none; border-radius:999px; background:var(--card); box-shadow:var(--sh-soft); color:var(--green-mid); font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; cursor:pointer;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19 12a7 7 0 1 1-2.05-4.95M19 4v4h-4" stroke="var(--green-mid)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{{ tReset }}</span>
+            </button>
+          </div>
+          </div>
+
+        </div>
+      </sc-if>
+      <sc-if value="{{ isAzkar }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:18px;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <div style="width:44px;"></div>
+            <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">{{ tAdhkarList }}</div>
+            <div style="width:44px;"></div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:10px; background:var(--card); border-radius:18px; padding:16px 18px; box-shadow:var(--sh-soft);">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="var(--muted)" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"/></svg>
+            <input value="{{ azkarSearch }}" onInput="{{ updateAzkarSearch }}" placeholder="{{ tSearch }}" style="flex:1; border:none; outline:none; background:none; text-align:start; color:var(--text); font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:600;" />
+          </div>
+
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <sc-if value="{{ azMatchMorning }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openMorning }}" style="position:relative; background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); overflow:hidden; cursor:pointer;">
+              <div style="position:absolute; top:-30px; left:-20px; width:90px; height:90px; border-radius:50%; background:var(--orange-bg); opacity:.7;"></div>
+              <div style="position:relative; display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:14px;">
+                <div style="width:50px; height:50px; border-radius:15px; background:var(--orange-bg); display:flex; align-items:center; justify-content:center;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.6" fill="var(--orange)"/><g stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1 5.6 5.6"/></g></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tMorning }}</div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ azMorningSub }}</div>
+                </div>
+                <button onClick="{{ markMorningDone }}" aria-label="mark done" style="width:26px; height:26px; border-radius:50%; border:1.6px solid var(--line); background:var(--card); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <div style="height:9px; border-radius:99px; background:var(--soft); overflow:hidden;"><div style="width:80%; height:100%; border-radius:99px; background:var(--green); margin-right:auto; width:80%;"></div></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ azMatchEvening }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openEvening }}" style="background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); cursor:pointer;">
+              <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:14px;">
+                <div style="width:50px; height:50px; border-radius:15px; background:var(--purple-bg); display:flex; align-items:center; justify-content:center;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="var(--purple)"/></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tEvening }}</div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ azEveningSub }}</div>
+                </div>
+                <button onClick="{{ markEveningDone }}" aria-label="mark done" style="width:26px; height:26px; border-radius:50%; border:1.6px solid var(--line); background:var(--card); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <div style="height:9px; border-radius:99px; background:var(--soft);"></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ azMatchSleep }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openSleep }}" style="background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); cursor:pointer;">
+              <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:14px;">
+                <div style="width:50px; height:50px; border-radius:15px; background:rgba(52,199,89,.14); display:flex; align-items:center; justify-content:center;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 18v-4a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v4" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round"/><path d="M6 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M3 18h18" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round"/></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tSleep }}</div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ azSleepSub }}</div>
+                </div>
+                <button onClick="{{ markSleepDone }}" aria-label="mark done" style="width:26px; height:26px; border-radius:50%; border:1.6px solid var(--line); background:var(--card); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+              <div style="height:9px; border-radius:99px; background:var(--soft); overflow:hidden;"><div style="width:25%; height:100%; border-radius:99px; background:var(--green); margin-right:auto;"></div></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ azMatchAfter }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openAfter }}" style="background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); cursor:pointer;">
+              <div style="display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:14px;">
+                <div style="width:50px; height:50px; border-radius:15px; background:var(--chip); display:flex; align-items:center; justify-content:center;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M6 3v18M6 4h11l-2.5 3.5L17 11H6" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tAfter }}</div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ azAfterSub }}</div>
+                </div>
+                <div style="width:26px; height:26px; border-radius:50%; background:var(--green); display:flex; align-items:center; justify-content:center;">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="height:9px; border-radius:99px; background:var(--green);"></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ azMatchRuqya }}" hint-placeholder-val="{{ true }}">
+            <div onClick="{{ openRuqya }}" style="position:relative; background:var(--card); border-radius:22px; padding:20px; box-shadow:var(--sh-soft); overflow:hidden; cursor:pointer;">
+              <div style="position:absolute; top:-30px; right:-20px; width:90px; height:90px; border-radius:50%; background:var(--chip); opacity:.7;"></div>
+              <div style="position:relative; display:flex; flex-direction:row-reverse; align-items:center; gap:14px; margin-bottom:14px;">
+                <div style="width:50px; height:50px; border-radius:15px; background:rgba(52,199,89,.14); display:flex; align-items:center; justify-content:center;">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6l7-3Z" stroke="var(--green-mid)" stroke-width="1.9" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div style="flex:1; text-align:start;">
+                  <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tRuqya }}</div>
+                  <div style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tRuqyaSub }}</div>
+                </div>
+                <button onClick="{{ markRuqyaDone }}" aria-label="mark done" style="width:26px; height:26px; border-radius:50%; border:1.6px solid var(--line); background:var(--card); flex-shrink:0; cursor:pointer; display:flex; align-items:center; justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="flex-shrink:0; transform:{{ chevronFlip }};"><path d="M9 6l6 6-6 6" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div style="height:9px; border-radius:99px; background:var(--soft);"></div>
+            </div>
+            </sc-if>
+
+            <sc-if value="{{ azNoResults }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:44px 24px; text-align:center;">
+                <div style="width:72px; height:72px; border-radius:24px; background:var(--chip); display:flex; align-items:center; justify-content:center;">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="var(--muted)" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="var(--muted)" stroke-width="2" stroke-linecap="round"/></svg>
+                </div>
+                <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tNoResults }}</div>
+                <div style="font-size:calc(12px * var(--ts,1)); font-weight:600; color:var(--muted);">{{ tNoResultsHint }}</div>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isDetail }}" hint-placeholder-val="{{ false }}">
+        <div onPointerDown="{{ swipeStart }}" onPointerUp="{{ swipeEnd }}" style="display:flex; flex-direction:column; gap:16px; touch-action:pan-y; user-select:none;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between;">
+            <button onClick="{{ goAzkar }}" style="width:44px; height:44px; border-radius:14px; background:var(--card); border:none; box-shadow:var(--sh-soft); display:flex; align-items:center; justify-content:center; cursor:pointer;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style="transform:{{ chevronFlip }};"><path d="M10 6l6 6-6 6" stroke="var(--green-mid)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+            <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">{{ detailTitle }}</div>
+            <span style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--green-mid); background:var(--chip); padding:7px 14px; border-radius:999px; letter-spacing:.5px;">{{ detailPos }}</span>
+          </div>
+
+          <div style="display:flex; gap:4px; background:var(--soft); border-radius:15px; padding:4px;">
+            <button onClick="{{ setModeSingle }}" style="{{ modeSingleStyle }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3.5" stroke="currentColor" stroke-width="1.9"/><path d="M8 12h8M8 15.5h5" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+              <span>{{ tSingleView }}</span>
+            </button>
+            <button onClick="{{ setModeList }}" style="{{ modeListStyle }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M8 6h12M8 12h12M8 18h12" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/><circle cx="4" cy="6" r="1.3" fill="currentColor"/><circle cx="4" cy="12" r="1.3" fill="currentColor"/><circle cx="4" cy="18" r="1.3" fill="currentColor"/></svg>
+              <span>{{ tListView }}</span>
+            </button>
+          </div>
+
+          <sc-if value="{{ detailSingle }}" hint-placeholder-val="{{ true }}">
+          <div style="position:relative; background:var(--card); border-radius:28px; padding:32px 26px; box-shadow:var(--sh-card); display:flex; flex-direction:column; align-items:center; gap:20px; overflow:hidden; min-height:250px;">
+            <div style="position:absolute; top:-44px; right:-34px; width:140px; height:140px; border-radius:50%; background:radial-gradient(circle, rgba(52,199,89,.13), transparent 70%);"></div>
+            <div style="position:absolute; bottom:-50px; left:-40px; width:150px; height:150px; border-radius:50%; background:radial-gradient(circle, rgba(255,192,46,.10), transparent 70%);"></div>
+            <div style="position:relative; opacity:.85;">
+              <sc-if value="{{ catMorning }}" hint-placeholder-val="{{ true }}">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.6" fill="var(--orange)"/><g stroke="var(--orange)" stroke-width="2" stroke-linecap="round"><path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1 5.6 5.6"/></g></svg>
+              </sc-if>
+              <sc-if value="{{ catEvening }}" hint-placeholder-val="{{ false }}">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z" fill="var(--purple)"/></svg>
+              </sc-if>
+              <sc-if value="{{ catSleep }}" hint-placeholder-val="{{ false }}">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M3 18v-4a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v4" stroke="var(--purple)" stroke-width="1.9" stroke-linecap="round"/><path d="M6 11V8a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v3M3 18h18" stroke="var(--purple)" stroke-width="1.9" stroke-linecap="round"/></svg>
+              </sc-if>
+              <sc-if value="{{ catAfter }}" hint-placeholder-val="{{ false }}">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="var(--green-mid)"><circle cx="12" cy="3.6" r="1.7"/><circle cx="17.9" cy="6.1" r="1.7"/><circle cx="20.4" cy="12" r="1.7"/><circle cx="6.1" cy="6.1" r="1.7"/><circle cx="3.6" cy="12" r="1.7"/><circle cx="7.2" cy="17.2" r="1.7"/><circle cx="16.8" cy="17.2" r="1.7"/><path d="M12 19.2v3.2M10.4 22.4h3.2" stroke="var(--green-mid)" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg>
+              </sc-if>
+              <sc-if value="{{ catRuqya }}" hint-placeholder-val="{{ false }}">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v5c0 4.4-3 8-7 10-4-2-7-5.6-7-10V6l7-3Z" stroke="var(--green-mid)" stroke-width="1.7" stroke-linejoin="round"/><path d="M9 12l2 2 4-4.5" stroke="var(--green-mid)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </sc-if>
+            </div>
+            <div style="font-family:{{ dhikrFontFam }}; font-size:calc(24px * var(--ts,1)); font-weight:600; line-height:2.55; color:var(--text); text-align:center; position:relative; direction:rtl;">{{ detailText }}</div>
+            <sc-if value="{{ showTranslit }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:calc(16px * var(--ts,1)); font-weight:600; font-style:italic; line-height:1.9; color:var(--green-mid); text-align:center; position:relative; direction:ltr;">{{ detailTr }}</div>
+            </sc-if>
+            <sc-if value="{{ showTranslation }}" hint-placeholder-val="{{ false }}">
+              <div style="font-size:calc(16px * var(--ts,1)); font-weight:500; line-height:1.85; color:var(--muted); text-align:center; position:relative; direction:ltr;">{{ detailEn }}</div>
+            </sc-if>
+            <div style="width:100%; display:flex; flex-direction:column;">
+              <button onClick="{{ toggleBenefit }}" style="display:flex; align-items:center; justify-content:center; gap:7px; background:none; border:none; cursor:pointer; padding:4px; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--green-mid); position:relative;">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--green-mid)" stroke-width="1.8"/><path d="M12 11v5" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.6" r="1.15" fill="var(--green-mid)"/></svg>
+                <span>{{ benefitLabel }}</span>
+              </button>
+              <sc-if value="{{ benefitOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="margin-top:8px; background:var(--chip); border-radius:18px; padding:15px 17px; text-align:start; border-inline-start:3px solid var(--green);">
+                  <div style="font-family:var(--font-body); font-size:calc(16px * var(--ts,1)); font-weight:600; line-height:2; color:var(--text);">{{ benefitText }}</div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+
+          <sc-if value="{{ isEnglish }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+            <button onClick="{{ toggleTranslit }}" style="{{ translitChip }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 7V5h16v2M9 5v14M7 19h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{{ tTranslit }}</span>
+            </button>
+            <button onClick="{{ toggleTranslation }}" style="{{ translationChip }}">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M4 5h7M7.5 5c0 5-2.5 8-5 9M5 9c0 2.5 3 4.5 6 5M13 19l4-9 4 9M14.5 16h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>{{ tTranslation }}</span>
+            </button>
+          </div>
+          </sc-if>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+            <button onClick="{{ copyDhikr }}" style="display:flex; align-items:center; gap:7px; padding:9px 18px; border-radius:999px; border:1px solid var(--line); background:var(--card); cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--text); box-shadow:var(--sh-soft);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="13" rx="2.5" stroke="var(--green-mid)" stroke-width="1.8"/><path d="M16 5.5V4A1.5 1.5 0 0 0 14.5 2.5h-9A2.5 2.5 0 0 0 3 5v10a1.5 1.5 0 0 0 1.5 1.5H6" stroke="var(--green-mid)" stroke-width="1.8" stroke-linecap="round"/></svg>
+              <span>{{ copyLabel }}</span>
+            </button>
+            <button onClick="{{ shareDhikr }}" style="display:flex; align-items:center; gap:7px; padding:9px 18px; border-radius:999px; border:1px solid var(--line); background:var(--card); cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--text); box-shadow:var(--sh-soft);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="6" cy="12" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="18" cy="19" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><path d="M8.1 10.9l7.8-4.3M8.1 13.1l7.8 4.3" stroke="var(--green-mid)" stroke-width="1.8"/></svg>
+              <span>{{ tShareDhikr }}</span>
+            </button>
+          </div>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:18px; margin-top:4px;">
+            <button onClick="{{ tapDhikr }}" style="position:relative; width:134px; height:134px; border:none; background:none; cursor:pointer; padding:0;">
+              <div style="position:absolute; inset:0; border-radius:50%; background:radial-gradient(circle, rgba(255,192,46,.30), transparent 68%); animation:glowpulse 3s ease-in-out infinite;"></div>
+              <svg width="134" height="134" viewBox="0 0 134 134" style="transform:rotate(-90deg); position:relative; display:block;">
+                <circle cx="67" cy="67" r="56" fill="none" stroke="var(--chip)" stroke-width="9"/>
+                <circle cx="67" cy="67" r="56" fill="none" stroke="{{ ringColor }}" stroke-width="9" stroke-linecap="round" stroke-dasharray="352" stroke-dashoffset="{{ ringOffset }}"/>
+              </svg>
+              <div style="position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+                <span style="font-family:var(--font-quran); font-size:calc(44px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1; text-align:center; font-variant-numeric:tabular-nums;">{{ repCount }}</span>
+                <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">{{ tOf }} {{ repTarget }}</span>
+              </div>
+            </button>
+          </div>
+
+          <div style="font-family:var(--font-title); text-align:center; font-size:calc(12px * var(--ts,1)); font-weight:800; color:{{ repLabelColor }};">{{ repLabel }}</div>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:7px; margin-top:2px;">
+            <sc-for list="{{ dDots }}" as="d" hint-placeholder-count="5"><div style="{{ d.style }}"></div></sc-for>
+          </div>
+
+          <button onClick="{{ markDoneSingle }}" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:12px; border-radius:14px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(13px * var(--ts,1)); font-weight:800; background:var(--chip); color:var(--green-mid);">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="var(--green-mid)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>{{ tMarkDoneSingle }}</span>
+          </button>
+
+          <div style="display:flex; align-items:center; justify-content:center; gap:7px; color:var(--muted); font-size:calc(12px * var(--ts,1)); font-weight:600; margin-top:2px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" stroke="var(--muted)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>{{ tSwipeHint }}</span>
+          </div>
+          </sc-if>
+
+          <sc-if value="{{ detailList }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; flex-direction:column; gap:14px;">
+            <sc-for list="{{ detailItems }}" as="it" hint-placeholder-count="4">
+              <div onClick="{{ it.inc }}" style="background:var(--card); border-radius:22px; padding:18px 18px 16px; box-shadow:var(--sh-soft); display:flex; flex-direction:column; gap:12px; cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;" style-active="transform:scale(.985);">
+                <div style="display:flex; align-items:flex-start; gap:12px; flex-direction:row-reverse;">
+                  <div style="position:relative; width:34px; height:34px; flex-shrink:0;">
+                    <svg width="34" height="34" viewBox="0 0 34 34" style="transform:rotate(-90deg); display:block;">
+                      <circle cx="17" cy="17" r="14" fill="none" stroke="var(--chip)" stroke-width="3.5"></circle>
+                      <circle cx="17" cy="17" r="14" fill="none" stroke="{{ it.ringColor }}" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="{{ it.ringDash }}" stroke-dashoffset="{{ it.ringOffset }}"></circle>
+                    </svg>
+                    <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:900; color:{{ it.ringColor }};">{{ it.num }}</div>
+                  </div>
+                  <div style="flex:1; font-family:{{ dhikrFontFam }}; font-size:calc(20px * var(--ts,1)); font-weight:600; line-height:2.2; color:var(--text); text-align:start; direction:rtl;">{{ it.text }}</div>
+                </div>
+                <div style="font-size:calc(14px * var(--ts,1)); font-weight:600; font-style:italic; line-height:1.7; color:var(--green-mid); text-align:start; direction:ltr; padding-inline-start:42px;">{{ it.tr }}</div>
+                <div style="font-size:calc(14px * var(--ts,1)); font-weight:500; line-height:1.7; color:var(--muted); text-align:start; direction:ltr; padding-inline-start:42px;">{{ it.en }}</div>
+                <div style="display:flex; align-items:center; justify-content:space-between; flex-direction:row-reverse;">
+                  <div style="display:flex; align-items:center; gap:10px; flex-direction:row-reverse; pointer-events:none;">
+                    <div style="{{ it.incStyle }}">{{ it.incIcon }}</div>
+                    <span style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; color:{{ it.tapColor }};">{{ it.tapLabel }}</span>
+                  </div>
+                  <div style="display:flex; align-items:center; gap:12px; flex-direction:row-reverse;">
+                    <div style="font-family:var(--font-quran); font-size:calc(18px * var(--ts,1)); font-weight:900; color:{{ it.countColor }};">{{ it.rep }} <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted);">/ {{ it.target }}</span></div>
+                    <button onClick="{{ it.share }}" aria-label="share" style="pointer-events:auto; width:34px; height:34px; border-radius:11px; border:1px solid var(--line); background:var(--card); display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;" style-active="transform:scale(.92);">
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="6" cy="12" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><circle cx="18" cy="19" r="2.4" stroke="var(--green-mid)" stroke-width="1.8"/><path d="M15.7 6.3 8.3 10.7M8.3 13.3l7.4 4.4" stroke="var(--green-mid)" stroke-width="1.8"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+          </sc-if>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isSettings }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex; flex-direction:column; gap:14px;">
+
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:18px;">
+            <div style="width:44px;"></div>
+            <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">{{ tSettings }}</div>
+<div style="width:44px;"></div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <button onClick="{{ toggleTheme }}" style="position:relative; width:74px; height:36px; border-radius:30px; border:none; cursor:pointer; padding:0; transition:background .25s; background:{{ themeTrack }};">
+              <div style="position:absolute; top:3px; right:{{ themeKnobRight }}; left:{{ themeKnobLeft }}; width:30px; height:30px; border-radius:50%; background:#fff; display:flex; align-items:center; justify-content:center; transition:all .25s; box-shadow:0 2px 6px rgba(0,0,0,.25);">{{ themeKnobIcon }}</div>
+            </button>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tTheme }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <button onClick="{{ toggleVibe }}" style="position:relative; width:74px; height:36px; border-radius:30px; border:none; cursor:pointer; padding:0; transition:background .25s; background:{{ vibeTrack }};">
+              <div style="position:absolute; top:3px; right:{{ vibeKnobRight }}; left:{{ vibeKnobLeft }}; width:30px; height:30px; border-radius:50%; background:#fff; transition:all .25s; box-shadow:0 2px 6px rgba(0,0,0,.25);"></div>
+            </button>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tVibration }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <div style="display:flex; background:var(--chip); border-radius:13px; padding:3px;">
+              <button onClick="{{ setLangAr }}" style="{{ langSegAr }}">العربية</button>
+              <button onClick="{{ setLangEn }}" style="{{ langSegEn }}">English</button>
+            </div>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tLanguage }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <div style="display:flex; background:var(--chip); border-radius:13px; padding:3px;">
+              <button onClick="{{ setFontClear }}" style="{{ fontSegClear }}">{{ tFontClear }}</button>
+              <button onClick="{{ setFontMushaf }}" style="{{ fontSegMushaf }}">{{ tFontMushaf }}</button>
+            </div>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tDhikrFont }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <div style="display:flex; align-items:center; background:var(--chip); border-radius:13px; padding:3px; gap:2px; width:150px;">
+              <sc-for list="{{ tsItems }}" as="ts" hint-placeholder-count="4">
+                <button onClick="{{ ts.set }}" style="{{ ts.style }}">A</button>
+              </sc-for>
+            </div>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tTextSize }}</div>
+          </div>
+
+          <div style="display:flex; flex-direction:row-reverse; align-items:center; justify-content:space-between; background:var(--card); border-radius:22px; padding:18px 20px; box-shadow:var(--sh-soft);">
+            <div style="display:flex; background:var(--chip); border-radius:13px; padding:3px;">
+              <button onClick="{{ setWestern }}" style="{{ numSegWest }}">123</button>
+              <button onClick="{{ setArabic }}" style="{{ numSegArab }}">١٢٣</button>
+            </div>
+            <div style="font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--text);">{{ tNumerals }}</div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ isZikrPicker }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeSheet }}" style="position:absolute; inset:0; background:rgba(8,12,10,.5); z-index:60;"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; max-height:82%; background:var(--card); border-radius:30px 30px 0 0; z-index:61; padding:14px 20px 26px; display:flex; flex-direction:column; gap:14px; box-shadow:0 -16px 44px rgba(0,0,0,.32); overflow:hidden;">
+        <div style="width:46px; height:5px; border-radius:99px; background:var(--line); align-self:center; flex-shrink:0;"></div>
+        <div style="display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+          <div style="width:36px;"></div>
+          <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text);">{{ tChooseDhikr }}</div>
+          <button onClick="{{ closeSheet }}" style="width:36px; height:36px; border-radius:12px; background:var(--chip); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="var(--green-mid)" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+
+        <div style="overflow-y:auto; display:flex; flex-direction:column; gap:16px; padding-bottom:2px;">
+          <div style="background:var(--soft); border-radius:24px; padding:6px 16px; display:flex; flex-direction:column;">
+            <sc-for list="{{ zikrItems }}" as="z" hint-placeholder-count="6">
+              <div onClick="{{ z.sel }}" style="{{ z.rowStyle }}">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <span style="flex:1; font-family:var(--font-title); font-size:calc(19px * var(--ts,1)); font-weight:900; color:var(--text); text-align:start;">{{ z.t }}</span>
+                  <div style="{{ z.radioStyle }}"><sc-if value="{{ z.selected }}" hint-placeholder-val="{{ false }}"><svg width="13" height="13" viewBox="0 0 24 24" fill="none"><path d="M6 12.5l3.5 3.5L18 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></sc-if></div>
+                  <sc-if value="{{ z.custom }}" hint-placeholder-val="{{ false }}">
+                    <button onClick="{{ z.del }}" style="width:30px; height:30px; border-radius:10px; background:transparent; border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 7h14M10 7V5h4v2M6.5 7l1 13h9l1-13" stroke="#e0564f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                  </sc-if>
+                </div>
+                <sc-if value="{{ z.benefit }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-family:var(--font-body); font-size:calc(14px * var(--ts,1)); font-weight:600; line-height:2; color:var(--muted); text-align:start;">{{ z.benefit }}</div>
+                </sc-if>
+              </div>
+            </sc-for>
+          </div>
+
+          <div style="display:flex; gap:10px; align-items:center; background:var(--soft); border-radius:20px; padding:14px; flex-shrink:0;">
+            <button onClick="{{ addZikr }}" style="width:46px; height:46px; border-radius:14px; background:var(--green); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer; flex-shrink:0; box-shadow:var(--sh-btn);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="#fff" stroke-width="2.4" stroke-linecap="round"/></svg>
+            </button>
+            <input value="{{ draft }}" onInput="{{ updateDraft }}" placeholder="{{ tAddCustom }}" style="flex:1; border:1px solid var(--line); background:var(--card); border-radius:14px; padding:13px 16px; font-family:{{ dhikrFontFam }}; font-size:calc(16px * var(--ts,1)); font-weight:700; color:var(--text); text-align:start; outline:none;" />
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ goalSheetOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeGoalSheet }}" style="position:absolute; inset:0; background:rgba(8,12,10,.5); z-index:60;"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; background:var(--card); border-radius:30px 30px 0 0; z-index:61; padding:18px 20px 26px; display:flex; flex-direction:column; gap:15px; box-shadow:0 -16px 44px rgba(0,0,0,.32);">
+        <div style="width:46px; height:5px; border-radius:99px; background:var(--line); align-self:center;"></div>
+        <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text); text-align:center;">{{ tSetGoal }}</div>
+        <div style="display:flex; align-items:center; justify-content:center; gap:8px; color:var(--muted); font-size:calc(12px * var(--ts,1)); font-weight:700;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 14c0-4 3-7 7-7s7 3 7 7M9 17h6M10.5 20h3" stroke="var(--muted)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span>{{ tVibrateHint }}</span>
+        </div>
+        <input value="{{ goalDraft }}" onInput="{{ updateGoalDraft }}" inputmode="numeric" placeholder="{{ tRepsPerLap }}" style="border:1px solid var(--line); background:var(--soft); border-radius:16px; padding:16px; font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); text-align:center; outline:none;" />
+        <div style="display:flex; gap:8px;">
+          <sc-for list="{{ goalPresets }}" as="g" hint-placeholder-count="4">
+            <button onClick="{{ g.set }}" style="flex:1; padding:11px 0; border-radius:13px; background:var(--chip); border:none; cursor:pointer; font-family:var(--font-quran); font-size:calc(16px * var(--ts,1)); font-weight:800; color:var(--green-mid);">{{ g.label }}</button>
+          </sc-for>
+        </div>
+        <button onClick="{{ saveGoal }}" style="padding:16px; border:none; border-radius:18px; background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff; font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; cursor:pointer; box-shadow:var(--sh-btn);">{{ tSave }}</button>
+        <button onClick="{{ clearGoal }}" style="padding:4px; border:none; background:none; color:var(--muted); font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:700; cursor:pointer;">{{ tRemoveGoal }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ shareOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeShare }}" style="position:absolute; inset:0; background:rgba(8,12,10,.6); z-index:72; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:20px; padding:30px;">
+        <div onClick="{{ stop }}" style="width:100%; max-width:300px; border-radius:24px; overflow:hidden; box-shadow:0 30px 70px rgba(0,0,0,.5);">
+          {{ shareCardEl }}
+        </div>
+        <div onClick="{{ stop }}" style="display:flex; gap:12px; width:100%; max-width:300px;">
+          <button onClick="{{ downloadCard }}" style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px; border:none; border-radius:16px; background:var(--card); color:var(--text); font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; cursor:pointer; box-shadow:var(--sh-soft);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14" stroke="var(--green-mid)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            {{ tSaveImage }}
+          </button>
+          <button onClick="{{ shareCardNative }}" style="flex:1; display:flex; align-items:center; justify-content:center; gap:8px; padding:15px; border:none; border-radius:16px; background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff; font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; cursor:pointer; box-shadow:var(--sh-btn);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="18" cy="5" r="2.4" stroke="#fff" stroke-width="1.9"/><circle cx="6" cy="12" r="2.4" stroke="#fff" stroke-width="1.9"/><circle cx="18" cy="19" r="2.4" stroke="#fff" stroke-width="1.9"/><path d="M8.1 10.9l7.8-4.3M8.1 13.1l7.8 4.3" stroke="#fff" stroke-width="1.9"/></svg>
+            {{ tShareImage }}
+          </button>
+        </div>
+        <button onClick="{{ closeShare }}" style="background:none; border:none; cursor:pointer; color:rgba(255,255,255,.85); font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:700;">{{ tMaybeLater }}</button>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ reviewOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeReview }}" style="position:absolute; inset:0; background:rgba(8,12,10,.55); z-index:70; display:flex; align-items:center; justify-content:center; padding:26px;">
+        <div onClick="{{ stop }}" style="background:var(--card); border-radius:28px; padding:26px 22px 22px; width:100%; box-shadow:0 24px 60px rgba(0,0,0,.4); display:flex; flex-direction:column; align-items:center; gap:14px; position:relative;">
+          <button onClick="{{ closeReview }}" style="position:absolute; top:14px; inset-inline-end:14px; width:32px; height:32px; border-radius:10px; background:var(--soft); border:none; display:flex; align-items:center; justify-content:center; cursor:pointer;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6 6 18" stroke="var(--muted)" stroke-width="2.2" stroke-linecap="round"/></svg>
+          </button>
+          <img src="assets/logo.png" alt="Bank el Dhikr" style="width:64px; height:64px; border-radius:20px; box-shadow:var(--sh-btn); object-fit:cover;" />
+          <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); text-align:center;">{{ tReviewTitle }}</div>
+          <div style="font-size:calc(12px * var(--ts,1)); font-weight:600; color:var(--muted); text-align:center; line-height:1.7;">{{ tReviewBody }}</div>
+          <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin:2px 0 4px;">
+            <sc-for list="{{ reviewStarItems }}" as="st" hint-placeholder-count="5">
+              <button onClick="{{ st.set }}" style="background:none; border:none; cursor:pointer; padding:2px;">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="{{ st.fill }}"><path d="M12 3l2.6 6.3 6.8.5-5.2 4.4 1.6 6.6L12 17.8 6.2 21.3l1.6-6.6L2.6 9.8l6.8-.5L12 3Z" stroke="{{ st.stroke }}" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </button>
+            </sc-for>
+          </div>
+          <button onClick="{{ rateStore }}" style="{{ reviewCtaStyle }}; width:100%;">
+            <span>{{ tRateOnStore }}</span>
+          </button>
+          <button onClick="{{ closeReview }}" style="background:none; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:700; color:var(--muted); padding:2px;">{{ tMaybeLater }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ langAsk }}" hint-placeholder-val="{{ true }}">
+      <div style="position:absolute; inset:0; z-index:90; background:var(--bg); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:28px; padding:34px;">
+        <img src="assets/logo.png" alt="Bank el Dhikr" style="width:78px; height:78px; border-radius:24px; box-shadow:var(--sh-btn); object-fit:cover;" />
+        <div style="text-align:center; display:flex; flex-direction:column; gap:7px;">
+          <div style="font-family:var(--font-title); font-size:calc(24px * var(--ts,1)); font-weight:900; color:var(--text); line-height:1.3;">اختر لغتك</div>
+          <div style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:800; color:var(--muted);">Choose your language</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:12px; width:100%; max-width:300px;">
+          <button onClick="{{ pickArabic }}" style="display:flex; align-items:center; justify-content:space-between; padding:18px 22px; border:2px solid var(--green); border-radius:20px; background:var(--card); box-shadow:var(--sh-soft); cursor:pointer;">
+            <span style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text);">العربية</span>
+            <span style="font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:700; color:var(--muted);">Arabic</span>
+          </button>
+          <button onClick="{{ pickEnglish }}" style="display:flex; flex-direction:column; align-items:stretch; gap:12px; padding:18px 22px; border:2px solid var(--line); border-radius:20px; background:var(--card); box-shadow:var(--sh-soft); cursor:pointer; text-align:start;">
+            <span style="display:flex; align-items:center; justify-content:space-between;">
+              <span style="font-family:var(--font-title); font-size:calc(20px * var(--ts,1)); font-weight:900; color:var(--text);">English</span>
+              <span style="font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:700; color:var(--muted);">الإنجليزية</span>
+            </span>
+            <span style="display:flex; align-items:center; justify-content:center; gap:6px; align-self:center; font-family:var(--font-title); font-size:calc(11px * var(--ts,1)); font-weight:800; color:var(--green-mid); background:var(--chip); padding:6px 13px; border-radius:999px; white-space:nowrap;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" style="flex-shrink:0;"><path d="M4 5h9M8.5 5v-2M6 9c1.8 3.8 5 6 8 7M11 5c-.6 4-3 8-7 10M13 19l4-9 4 9M14.4 16.5h5.2" stroke="var(--green-mid)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span>Adds translation &amp; transliteration</span>
+            </span>
+          </button>
+          </button>
+        </div>
+        <div style="font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:600; color:var(--muted); text-align:center; line-height:1.6; max-width:270px;">يمكنك تغييرها لاحقًا من الإعدادات · Change it anytime in Settings</div>
+      </div>
+    </sc-if>
+
+    <div style="position:absolute; bottom:0; left:0; right:0; background:var(--nav); border-top:1px solid var(--line); padding:10px 14px 22px; display:flex; align-items:flex-start; justify-content:space-around; z-index:40; box-shadow:0 -8px 24px rgba(16,30,24,.06);">
+      <button onClick="{{ goHome }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3.5" y="3.5" width="7" height="7" rx="2" fill="{{ navHome }}"/><rect x="13.5" y="3.5" width="7" height="7" rx="2" fill="{{ navHome }}"/><rect x="3.5" y="13.5" width="7" height="7" rx="2" fill="{{ navHome }}"/><rect x="13.5" y="13.5" width="7" height="7" rx="2" fill="{{ navHome }}"/></svg>
+        <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:{{ navHome }};">{{ tNavHome }}</span>
+        <div style="width:5px; height:5px; border-radius:50%; background:{{ navHomeDot }};"></div>
+      </button>
+      <button onClick="{{ goMasbaha }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="{{ navMasbaha }}" stroke-width="2"/><circle cx="12" cy="12" r="2" fill="{{ navMasbaha }}"/></svg>
+        <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:{{ navMasbaha }};">{{ tNavMasbaha }}</span>
+        <div style="width:5px; height:5px; border-radius:50%; background:{{ navMasbahaDot }};"></div>
+      </button>
+      <button onClick="{{ goAzkar }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H12v16H6.5A2.5 2.5 0 0 0 4 21.5V5.5Z" stroke="{{ navAzkar }}" stroke-width="2" stroke-linejoin="round"/><path d="M20 5.5A2.5 2.5 0 0 0 17.5 3H12v16h5.5A2.5 2.5 0 0 1 20 21.5V5.5Z" stroke="{{ navAzkar }}" stroke-width="2" stroke-linejoin="round"/></svg>
+        <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:{{ navAzkar }};">{{ tNavAzkar }}</span>
+        <div style="width:5px; height:5px; border-radius:50%; background:{{ navAzkarDot }};"></div>
+      </button>
+      <button onClick="{{ goJourney }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M3 13h3l2.5-7 4 14 2.5-7H21" stroke="{{ navJourney }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:{{ navJourney }};">{{ tNavJourney }}</span>
+        <div style="width:5px; height:5px; border-radius:50%; background:{{ navJourneyDot }};"></div>
+      </button>
+      <button onClick="{{ goSettings }}" style="background:none; border:none; cursor:pointer; display:flex; flex-direction:column; align-items:center; gap:5px; flex:1;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z" stroke="{{ navSettings }}" stroke-width="2"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1.08-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1.08 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z" stroke="{{ navSettings }}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span style="font-size:calc(12px * var(--ts,1)); font-weight:700; color:{{ navSettings }};">{{ tNavSettings }}</span>
+        <div style="width:5px; height:5px; border-radius:50%; background:{{ navSettingsDot }};"></div>
+      </button>
+    </div>
+  </div>
+</div>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#0e6b39"/><g transform="translate(50 50)"><circle r="21" fill="none" stroke="#ffcf5e" stroke-width="5"/><path d="M0 -22c3 8-6 11-6 19a6 6 0 0 0 12 0c0-3 2.5-4.5 3.8-2.8 4 5 6.5 9 6.5 15A16 16 0 1 1-15 3c0-3.2 1-5.6 2.6-7.8.5 2.6 2.4 4.4 4.8 4.4C-4 -3-9-16 0-22Z" fill="#fff"/></g></svg></template></x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { screen: 'home', theme: 'light', count: 33, session: 33, bank: 14850, todayDeposit: 320, freezes: 2, reps: [0,0,0,0,0,0], detailIndex: 0, detailTitle: 'أذكار الصباح', vibrate: true,
+    zikrOptions: [
+      {t:'سُبْحَانَ الله', tr:'Subḥān Allah', en:'Glory be to Allah', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ قَالَ سُبْحَانَ اللَّهِ وَبِحَمْدِهِ فِي يَوْمٍ مِائَةَ مَرَّةٍ، حُطَّتْ خَطَايَاهُ وَإِنْ كَانَتْ مِثْلَ زَبَدِ الْبَحْرِ. رواه البخاري ومسلم', benefitEn:'The Prophet ﷺ said: Whoever says "Glory be to Allah and praise Him" a hundred times a day, his sins are wiped away even if they are like the foam of the sea. (Bukhari & Muslim)'},
+      {t:'الْحَمْدُ لله', tr:'Al-ḥamdu lillah', en:'Praise be to Allah', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: الطُّهُورُ شَطْرُ الْإِيمَانِ، وَالْحَمْدُ لِلَّهِ تَمْلَأُ الْمِيزَانَ. رواه مسلم', benefitEn:'The Prophet ﷺ said: Purity is half of faith, and "Praise be to Allah" fills the scale. (Muslim)'},
+      {t:'اللهُ أَكْبَر', tr:'Allāhu akbar', en:'Allah is the Greatest', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: لَأَنْ أَقُولَ سُبْحَانَ اللَّهِ وَالْحَمْدُ لِلَّهِ وَلَا إِلَٰهَ إِلَّا اللَّهُ وَاللَّهُ أَكْبَرُ أَحَبُّ إِلَيَّ مِمَّا طَلَعَتْ عَلَيْهِ الشَّمْسُ. رواه مسلم', benefitEn:'The Prophet ﷺ said: For me to say "Glory be to Allah, praise be to Allah, there is no god but Allah, Allah is greatest" is dearer to me than all the sun rises upon. (Muslim)'},
+      {t:'لَا إِلٰهَ إِلَّا الله', tr:'Lā ilāha illā Allah', en:'There is no god but Allah', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: فَإِنَّ اللَّهَ قَدْ حَرَّمَ عَلَى النَّارِ مَنْ قَالَ: لَا إِلَٰهَ إِلَّا اللَّهُ، يَبْتَغِي بِذَٰلِكَ وَجْهَ اللَّهِ. رواه البخاري ومسلم', benefitEn:'The Prophet ﷺ said: Allah has forbidden the Fire to whoever says "there is no god but Allah", seeking thereby the Face of Allah. (Bukhari & Muslim)'},
+      {t:'أَسْتَغْفِرُ الله', tr:'Astaghfirullah', en:'I seek forgiveness from Allah', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: مَنْ لَزِمَ الِاسْتِغْفَارَ جَعَلَ اللَّهُ لَهُ مِنْ كُلِّ هَمٍّ فَرَجًا، وَمِنْ كُلِّ ضِيقٍ مَخْرَجًا، وَرَزَقَهُ مِنْ حَيْثُ لَا يَحْتَسِبُ. رواه أبو داود', benefitEn:'The Prophet ﷺ said: Whoever persists in seeking forgiveness, Allah grants relief from every worry and a way out of every hardship. (Abu Dawud)'},
+      {t:'لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِالله', tr:'Lā ḥawla wa lā quwwata illā billah', en:'There is no power nor strength except with Allah', benefit:'قَالَ رَسُولُ اللَّهِ ﷺ: أَلَا أَدُلُّكَ عَلَى كَنْزٍ مِنْ كُنُوزِ الْجَنَّةِ؟ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ. متفق عليه', benefitEn:'The Prophet ﷺ said: Shall I not guide you to a treasure from the treasures of Paradise? "There is no power nor strength except with Allah." (Agreed upon)'},
+    ],
+    selectedZikr: 0, sheetOpen: false, draft: '', goal: 100, laps: 0, goalSheetOpen: false, goalDraft: '100', period: 'week', quoteIdx: 0, benefitOpen: false, numerals: 'western', lang: 'ar', langChosen: false, dhikrFontt: 'clear', showTranslit: false, showTranslation: false, reviewOpen: false, reviewShown: false, reviewStars: 0, azkarSearch: '', copiedFlash: false, textScale: 1, shareOpen: false, shareImg: '', donateOpen: false, donateRecurring: false, donateAmount: 50, donateCustom: '', detailMode: 'single' };
+
+  componentDidMount(){ this._applyTS(); this._logoImg = new Image(); this._logoImg.src = 'assets/logo.png'; }
+  componentDidUpdate(){ this._applyTS(); }
+  _applyTS(){ try { const el = document.querySelector('[data-theme]'); if (el) el.style.setProperty('--ts', this.state.textScale); } catch(e){} }
+
+  _wrapCentered(x, text, cx, y, maxW, lh){
+    const words = String(text).split(' ');
+    let line = '', lines = [];
+    for (let i=0;i<words.length;i++){
+      const test = line ? line + ' ' + words[i] : words[i];
+      if (x.measureText(test).width > maxW && line){ lines.push(line); line = words[i]; }
+      else line = test;
+    }
+    if (line) lines.push(line);
+    for (let i=0;i<lines.length;i++){ x.fillText(lines[i], cx, y + i*lh); }
+    return y + lines.length*lh;
+  }
+
+  _renderShareCanvas(dCur, en){
+    const W=1080, H=1080, cx=W/2;
+    const c=document.createElement('canvas'); c.width=W; c.height=H;
+    const x=c.getContext('2d');
+    // background
+    x.fillStyle='#FBFAF6'; x.fillRect(0,0,W,H);
+    // subtle corner glow
+    const rg=x.createRadialGradient(cx,-80,40,cx,-80,620);
+    rg.addColorStop(0,'rgba(52,199,89,0.14)'); rg.addColorStop(1,'rgba(52,199,89,0)');
+    x.fillStyle=rg; x.fillRect(0,0,W,700);
+    // top accent bar
+    const g=x.createLinearGradient(0,0,W,0); g.addColorStop(0,'#0B7A45'); g.addColorStop(1,'#12C97A');
+    x.fillStyle=g; x.fillRect(0,0,W,16);
+    // logo mark
+    const lx=cx-52, ly=112, ls=104, r=30;
+    x.save();
+    x.beginPath();
+    x.moveTo(lx+r,ly); x.arcTo(lx+ls,ly,lx+ls,ly+ls,r); x.arcTo(lx+ls,ly+ls,lx,ly+ls,r);
+    x.arcTo(lx,ly+ls,lx,ly,r); x.arcTo(lx,ly,lx+ls,ly,r); x.closePath(); x.clip();
+    if (this._logoImg && this._logoImg.complete && this._logoImg.naturalWidth) {
+      x.drawImage(this._logoImg, lx, ly, ls, ls);
+    } else {
+      const lg=x.createLinearGradient(0,104,0,204); lg.addColorStop(0,'#12C97A'); lg.addColorStop(1,'#0FA85E');
+      x.fillStyle=lg; x.fillRect(lx,ly,ls,ls);
+    }
+    x.restore();
+    // brand name
+    x.direction='rtl'; x.textAlign='center';
+    x.fillStyle='#0B7A45'; x.font='800 46px Tajawal, sans-serif';
+    x.fillText('بنك الذكر', cx, 292);
+    // divider
+    x.fillStyle='#E7EBEE'; x.fillRect(cx-46,320,92,4);
+    // dhikr text
+    x.fillStyle='#12261A'; x.font='700 58px Cairo, serif';
+    let yy = this._wrapCentered(x, dCur.text, cx, 430, W-200, 84);
+    yy += 30;
+    // transliteration
+    if (dCur.tr){ x.direction='ltr'; x.fillStyle='#0FA85E'; x.font='italic 600 34px "IBM Plex Sans Arabic", sans-serif';
+      yy = this._wrapCentered(x, dCur.tr, cx, yy, W-220, 46) + 14; }
+    // translation
+    const enText = en ? dCur.en : (dCur.en || '');
+    if (enText){ x.direction='ltr'; x.fillStyle='#7C877F'; x.font='500 32px "IBM Plex Sans Arabic", sans-serif';
+      yy = this._wrapCentered(x, enText, cx, yy, W-220, 44) + 20; }
+    // reference pill
+    const refT = en ? dCur.refEn : dCur.ref;
+    x.font='800 30px Tajawal, sans-serif'; x.direction=en?'ltr':'rtl';
+    const pw = x.measureText(refT).width + 60, ph=58, py=Math.min(yy, 900);
+    x.fillStyle='#F2F5F3';
+    x.beginPath(); x.moveTo(cx-pw/2+ph/2,py); x.arcTo(cx+pw/2,py,cx+pw/2,py+ph,ph/2);
+    x.arcTo(cx+pw/2,py+ph,cx-pw/2,py+ph,ph/2); x.arcTo(cx-pw/2,py+ph,cx-pw/2,py,ph/2);
+    x.arcTo(cx-pw/2,py,cx+pw/2,py,ph/2); x.closePath(); x.fill();
+    x.fillStyle='#0FA85E'; x.textAlign='center'; x.fillText(refT, cx, py+38);
+    // footer tagline
+    x.direction='ltr'; x.fillStyle='#B4BDB6'; x.font='600 26px "IBM Plex Sans Arabic", sans-serif';
+    x.fillText('Bank el Dhikr · بنك الذكر', cx, 1012);
+    return c.toDataURL('image/png');
+  }
+
+  ar(n){ if(this.state && this.state.numerals==='western') return String(n); return String(n).replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]); }
+  arGroup(n){ const g = Number(n).toLocaleString('en-US'); if(this.state && this.state.numerals==='western') return g; return g.replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]).replace(/,/g,'٬'); }
+
+  catNames(ar){ const m={'أذكار الصباح':'Morning Adhkar','أذكار المساء':'Evening Adhkar','أذكار النوم':'Sleep Adhkar','أذكار بعد الصلاة':'After-Prayer Adhkar','الرقية الشرعية':'Ruqyah'}; return m[ar]||ar; }
+
+  navColor(name){ return this.state.screen === name ? 'var(--green)' : 'var(--muted)'; }
+  navDot(name){ return this.state.screen === name ? 'var(--green)' : 'transparent'; }
+
+  tab(active){
+    return 'border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; padding:8px 16px; border-radius:999px; transition:all .2s; '
+      + (active ? 'background:var(--green,#12C97A); color:#fff;' : 'background:transparent; color:#8A93A2;');
+  }
+
+  catData(title){
+    const C = {
+      'أذكار الصباح': [
+        {text:'أَعُوذُ بِاللَّهِ مِنَ الشَّيْطَانِ الرَّجِيمِ، اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', tr:"A'ūdhu billāhi minash-shayṭānir-rajīm. Allāhu lā ilāha illā huwal-ḥayyul-qayyūm, lā ta'khudhuhu sinatun wa lā nawm, lahu mā fis-samāwāti wa mā fil-arḍ.", en:'Allah — there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness nor sleep overtakes Him. To Him belongs whatever is in the heavens and the earth.', ref:'آية الكرسي · البقرة ٢٥٥', refEn:'Ayat al-Kursi · Al-Baqarah 255', benefit:'من قرأها حين يُصبح أُجير من الجن حتى يُمسي، ومن قرأها حين يُمسي أُجير منهم حتى يُصبح.', benefitEn:'Whoever recites it in the morning is protected from jinn until evening, and whoever recites it in the evening is protected until morning.', target:1},
+        {text:'قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ', tr:'Qul huwa Allāhu aḥad, Allāhuṣ-ṣamad, lam yalid wa lam yūlad, wa lam yakun lahu kufuwan aḥad.', en:'Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.', ref:'سورة الإخلاص', refEn:'Surat al-Ikhlas', benefit:'تعدل ثلث القرآن، ومن قرأها مع المعوذتين ثلاثًا حين يُصبح وحين يُمسي كفته من كل شيء.', benefitEn:'It equals a third of the Quran; recited with the last two surahs three times morning and evening, it suffices against all things.', target:3},
+        {text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ', tr:"Bismillāhilladhī lā yaḍurru ma'asmihi shay'un fil-arḍi wa lā fis-samā', wa huwas-samī'ul-'alīm.", en:'In the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, the All-Knowing.', ref:'حصن المسلم', refEn:'Hisn al-Muslim', benefit:'من قالها ثلاثًا لم يُصبه فجأةُ بلاءٍ حتى يُمسي.', benefitEn:'Whoever says it three times, no sudden affliction will strike him until evening.', target:3},
+        {text:'اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ النُّشُورُ', tr:'Allāhumma bika aṣbaḥnā, wa bika amsaynā, wa bika naḥyā, wa bika namūt, wa ilaykan-nushūr.', en:'O Allah, by You we enter the morning and the evening, by You we live and die, and to You is the resurrection.', ref:'الترمذي', refEn:'Tirmidhi', benefit:'إقرارٌ بأن الحياة والموت والنشور بيد الله، من أدعية الصباح المأثورة عن النبي ﷺ.', benefitEn:'An affirmation that life, death and resurrection are in Allah\u2019s hands — a morning supplication of the Prophet ﷺ.', target:1},
+        {text:'سُبْحَانَ اللَّهِ وَبِحَمْدِهِ', tr:'Subḥānallāhi wa biḥamdih.', en:'Glory be to Allah and praise be to Him.', ref:'مسلم · ١٠٠ مرة', refEn:'Muslim · 100 times', benefit:'من قالها مئة مرة حين يُصبح حُطّت خطاياه وإن كانت مثل زبد البحر.', benefitEn:'Whoever says it 100 times in the morning, his sins are erased even if like the foam of the sea.', target:100},
+        {text:'رَضِيتُ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ ﷺ نَبِيًّا', tr:'Raḍītu billāhi rabban, wa bil-islāmi dīnan, wa bi-Muḥammadin ﷺ nabiyyā.', en:'I am pleased with Allah as Lord, Islam as religion, and Muhammad ﷺ as Prophet.', ref:'أحمد', refEn:'Ahmad', benefit:'من قالها حين يُصبح وحين يُمسي كان حقًّا على الله أن يُرضيه يوم القيامة.', benefitEn:'Whoever says it morning and evening, Allah has promised to please him on the Day of Resurrection.', target:3},
+      ],
+      'أذكار المساء': [
+        {text:'اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ الْمَصِيرُ', tr:'Allāhumma bika amsaynā, wa bika aṣbaḥnā, wa bika naḥyā, wa bika namūt, wa ilaykal-maṣīr.', en:'O Allah, by You we enter the evening and the morning, by You we live and die, and to You is the return.', ref:'الترمذي', refEn:'Tirmidhi', benefit:'فيه تفويض الأمر كله لله والإقرار بالمصير إليه، من أذكار المساء الثابتة.', benefitEn:'It entrusts all affairs to Allah and affirms the return to Him — an established evening remembrance.', target:1},
+        {text:'أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ', tr:'Amsaynā wa amsal-mulku lillāh, wal-ḥamdu lillāh, lā ilāha illallāhu waḥdahu lā sharīka lah.', en:'We have reached the evening and at this time dominion belongs to Allah. Praise be to Allah. There is no deity but Allah alone, without partner.', ref:'مسلم', refEn:'Muslim', benefit:'يسأل العبد فيه خير هذه الليلة وما بعدها، ويستعيذ من شرها.', benefitEn:'In it the servant asks for the good of this night and what follows, and seeks refuge from its evil.', target:1},
+        {text:'أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ', tr:"A'ūdhu bikalimātillāhit-tāmmāti min sharri mā khalaq.", en:'I seek refuge in the perfect words of Allah from the evil of what He has created.', ref:'مسلم · ٣ مرات', refEn:'Muslim · 3 times', benefit:'من قالها ثلاثًا حين يُمسي لم تضره حُمَةٌ تلك الليلة.', benefitEn:'Whoever says it three times in the evening, no venomous creature will harm him that night.', target:3},
+        {text:'بِسْمِ اللَّهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ', tr:"Bismillāhilladhī lā yaḍurru ma'asmihi shay'un fil-arḍi wa lā fis-samā', wa huwas-samī'ul-'alīm.", en:'In the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, the All-Knowing.', ref:'حصن المسلم', refEn:'Hisn al-Muslim', benefit:'من قالها ثلاثًا لم يُصبه فجأةُ بلاءٍ حتى يُصبح.', benefitEn:'Whoever says it three times, no sudden affliction will strike him until morning.', target:3},
+      ],
+      'أذكار النوم': [
+        {text:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا', tr:'Bismika Allāhumma amūtu wa aḥyā.', en:'In Your name, O Allah, I die and I live.', ref:'البخاري', refEn:'Bukhari', benefit:'سنةٌ ثابتة عن النبي ﷺ يقولها عند أخذ مضجعه للنوم.', benefitEn:'An established practice of the Prophet ﷺ said when lying down to sleep.', target:1},
+        {text:'اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ', tr:"Allāhumma qinī 'adhābaka yawma tab'athu 'ibādak.", en:'O Allah, protect me from Your punishment on the Day You resurrect Your servants.', ref:'أبو داود · ٣ مرات', refEn:'Abu Dawud · 3 times', benefit:'كان النبي ﷺ يقولها ثلاثًا إذا أراد أن ينام واضعًا يده تحت خدّه.', benefitEn:'The Prophet ﷺ said it three times, placing his hand under his cheek before sleeping.', target:3},
+        {text:'سُبْحَانَ اللَّهِ (٣٣)، وَالْحَمْدُ لِلَّهِ (٣٣)، وَاللَّهُ أَكْبَرُ (٣٤)', tr:'Subḥānallāh (33), wal-ḥamdu lillāh (33), wallāhu akbar (34).', en:'Glory be to Allah (33), praise be to Allah (33), Allah is the Greatest (34).', ref:'متفق عليه', refEn:'Agreed upon', benefit:'علّمها النبي ﷺ فاطمة رضي الله عنها وقال: هو خيرٌ لكما من خادم.', benefitEn:'The Prophet ﷺ taught it to Fatimah, saying: it is better for you than a servant.', target:1},
+      ],
+      'أذكار بعد الصلاة': [
+        {text:'أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ، أَسْتَغْفِرُ اللَّهَ', tr:'Astaghfirullāh, astaghfirullāh, astaghfirullāh.', en:'I seek Allah\u2019s forgiveness (three times).', ref:'مسلم', refEn:'Muslim', benefit:'كان النبي ﷺ إذا انصرف من صلاته استغفر الله ثلاثًا.', benefitEn:'The Prophet ﷺ would seek forgiveness three times after finishing his prayer.', target:1},
+        {text:'اللَّهُمَّ أَنْتَ السَّلَامُ، وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ', tr:'Allāhumma antas-salāmu wa minkas-salām, tabārakta yā dhal-jalāli wal-ikrām.', en:'O Allah, You are Peace and from You is peace. Blessed are You, O Owner of majesty and honor.', ref:'مسلم', refEn:'Muslim', benefit:'يُقال عقب السلام من الصلاة تعظيمًا لله ذي الجلال والإكرام.', benefitEn:'Said right after the closing salam, exalting Allah, the Owner of majesty and honor.', target:1},
+        {text:'سُبْحَانَ اللَّهِ، وَالْحَمْدُ لِلَّهِ، وَاللَّهُ أَكْبَرُ', tr:'Subḥānallāh, wal-ḥamdu lillāh, wallāhu akbar.', en:'Glory be to Allah, praise be to Allah, Allah is the Greatest.', ref:'٣٣ مرة', refEn:'33 times', benefit:'من سبّح وحمّد وكبّر ثلاثًا وثلاثين عقب كل صلاة غُفرت خطاياه وإن كانت مثل زبد البحر.', benefitEn:'Whoever glorifies, praises and magnifies Allah 33 times after each prayer, his sins are forgiven even if like the foam of the sea.', target:33},
+        {text:'لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ، وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ', tr:"Lā ilāha illallāhu waḥdahu lā sharīka lah, lahul-mulku wa lahul-ḥamd, wa huwa 'alā kulli shay'in qadīr.", en:'There is no deity but Allah alone, without partner. His is the dominion and His is the praise, and He is over all things competent.', ref:'مسلم', refEn:'Muslim', benefit:'تُقال عقب الصلاة، فيها توحيدٌ وإقرارٌ بقدرة الله على كل شيء.', benefitEn:'Said after prayer — an affirmation of Allah\u2019s oneness and power over all things.', target:1},
+      ],
+      'الرقية الشرعية': [
+        {text:'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ، الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ، الرَّحْمَٰنِ الرَّحِيمِ، مَالِكِ يَوْمِ الدِّينِ، إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ، اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ، صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ', tr:"Bismillāhir-raḥmānir-raḥīm. Al-ḥamdu lillāhi rabbil-'ālamīn, ar-raḥmānir-raḥīm, māliki yawmid-dīn, iyyāka na'budu wa iyyāka nasta'īn, ihdinaṣ-ṣirāṭal-mustaqīm, ṣirāṭalladhīna an'amta 'alayhim ghayril-maghḍūbi 'alayhim wa laḍ-ḍāllīn.", en:'In the name of Allah, the Most Gracious, the Most Merciful. All praise is for Allah, Lord of the worlds, the Most Gracious, the Most Merciful, Master of the Day of Judgment. You alone we worship, and You alone we ask for help. Guide us to the straight path — the path of those You have blessed, not of those who earned anger or went astray.', ref:'سورة الفاتحة', refEn:'Surat al-Fatihah', benefit:'أمّ القرآن وأعظم سورة فيه، وهي رقية كما ثبت عن النبي ﷺ.', benefitEn:'The Mother of the Quran and its greatest chapter; an established means of ruqyah from the Prophet ﷺ.', target:1},
+        {text:'اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ، لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ، لَهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ', tr:"Allāhu lā ilāha illā huwal-ḥayyul-qayyūm, lā ta'khudhuhu sinatun wa lā nawm, lahu mā fis-samāwāti wa mā fil-arḍ.", en:'Allah — there is no deity except Him, the Ever-Living, the Sustainer. Neither drowsiness nor sleep overtakes Him. To Him belongs whatever is in the heavens and the earth.', ref:'آية الكرسي', refEn:'Ayat al-Kursi', benefit:'أعظم آية في القرآن، ومن قرأها لم يزل عليه من الله حافظ.', benefitEn:'The greatest verse in the Quran; whoever recites it remains under Allah\u2019s protection.', target:1},
+        {text:'قُلْ هُوَ اللَّهُ أَحَدٌ، اللَّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ', tr:'Qul huwa Allāhu aḥad, Allāhuṣ-ṣamad, lam yalid wa lam yūlad, wa lam yakun lahu kufuwan aḥad.', en:'Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent.', ref:'سورة الإخلاص', refEn:'Surat al-Ikhlas', benefit:'تعدل ثلث القرآن، ومن أعظم سور الرقية والحفظ.', benefitEn:'Equals a third of the Quran; among the greatest surahs for ruqyah and protection.', target:3},
+        {text:'قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ', tr:"Qul a'ūdhu birabbil-falaq, min sharri mā khalaq, wa min sharri ghāsiqin idhā waqab, wa min sharrin-naffāthāti fil-'uqad, wa min sharri ḥāsidin idhā ḥasad.", en:'Say: I seek refuge in the Lord of daybreak, from the evil of what He created, from the evil of darkness when it settles, from the evil of those who blow on knots, and from the evil of the envier when he envies.', ref:'سورة الفلق', refEn:'Surat al-Falaq', benefit:'من المعوذتين، تُقرأ للحفظ والرقية من الحسد والسحر.', benefitEn:'One of the two surahs of refuge — recited for protection and ruqyah from envy and magic.', target:3},
+        {text:'قُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ، إِلَٰهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ، الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ', tr:"Qul a'ūdhu birabbin-nās, malikin-nās, ilāhin-nās, min sharril-waswāsil-khannās, alladhī yuwaswisu fī ṣudūrin-nās, minal-jinnati wan-nās.", en:'Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer who whispers in the hearts of mankind — from among jinn and mankind.', ref:'سورة الناس', refEn:'Surat an-Nas', benefit:'خاتمة المعوذتين، تُقرأ للحفظ من وسوسة الشيطان.', benefitEn:'The last of the surahs of refuge — recited for protection from the whisperings of Satan.', target:3},
+      ],
+    };
+    return C[title] || C['أذكار الصباح'];
+  }
+  openCat(title){ const len = this.catData(title).length; this.setState({ screen:'detail', detailTitle:title, detailIndex:0, detailMode:'list', reps:new Array(len).fill(0), benefitOpen:false, showTranslit:false, showTranslation: this.state.lang==='en' }); }
+  detailNext(){ this.setState(p => { const len = this.catData(p.detailTitle).length; return { detailIndex:(p.detailIndex+1)%len, benefitOpen:false }; }); }
+  detailPrev(){ this.setState(p => { const len = this.catData(p.detailTitle).length; return { detailIndex:(p.detailIndex-1+len)%len, benefitOpen:false }; }); }
+  tapDhikr(){ this.setState(p => { const items=this.catData(p.detailTitle); const i=p.detailIndex; const tg=items[i].target; const reps=[...p.reps]; let b=0; if((reps[i]||0)<tg){ reps[i]=(reps[i]||0)+1; b=1; } const justDone = b===1 && reps[i]>=tg; if(justDone){ const len=items.length; if(this._advTimer) clearTimeout(this._advTimer); this._advTimer=setTimeout(()=>this.setState(q=>({ detailIndex:(q.detailIndex+1)%len, benefitOpen:false })), 650); } return { reps, bank:p.bank+b, todayDeposit:p.todayDeposit+b }; }); }
+  incRepAt(i){ this.setState(p => { const items=this.catData(p.detailTitle); const tg=items[i].target; const reps=[...p.reps]; let b=0; if((reps[i]||0)<tg){ reps[i]=(reps[i]||0)+1; b=1; } return { reps, bank:p.bank+b, todayDeposit:p.todayDeposit+b }; }); }
+  openDhikrAt(i){ this.setState({ detailMode:'single', detailIndex:i, benefitOpen:false }); }
+  markDoneAt(i){ this.setState(p => { const items=this.catData(p.detailTitle); const tg=items[i].target; const reps=[...p.reps]; const cur=reps[i]||0; const b=Math.max(0,tg-cur); reps[i]=tg; return { reps, bank:p.bank+b, todayDeposit:p.todayDeposit+b }; }); }
+  markAllDone(){ this.setState(p => { const items=this.catData(p.detailTitle); const reps=[...p.reps]; let b=0; items.forEach((it,i) => { const cur=reps[i]||0; const add=Math.max(0,it.target-cur); b+=add; reps[i]=it.target; }); return { reps, bank:p.bank+b, todayDeposit:p.todayDeposit+b }; }); }
+  markCatAllDone(title){ this.setState(p => { const items=this.catData(title); const reps=items.map(it=>it.target); const total=items.reduce((a,it)=>a+it.target,0); const sameCat = p.detailTitle===title; const prevTotal = sameCat ? p.reps.reduce((a,r)=>a+(r||0),0) : 0; const add = Math.max(0, total-prevTotal); return { reps, detailTitle:title, bank:p.bank+add, todayDeposit:p.todayDeposit+add }; }); }
+  _donChip(on){ return 'display:flex; align-items:center; justify-content:center; padding:15px 0; border-radius:16px; cursor:pointer; font-family:var(--font-title); font-weight:900; font-size:calc(18px * var(--ts,1)); border:2px solid '+(on?'var(--green)':'var(--line)')+'; background:'+(on?'rgba(52,199,89,.12)':'var(--card)')+'; color:'+(on?'var(--green-mid)':'var(--text)')+';'; }
+  _donSeg(on){ return 'flex:1; padding:11px 0; border-radius:12px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; background:'+(on?'var(--card)':'transparent')+'; color:'+(on?'var(--green-mid)':'var(--muted)')+'; box-shadow:'+(on?'var(--sh-soft)':'none')+';'; }
+  _modeSeg(on){ return 'display:flex; align-items:center; justify-content:center; gap:6px; flex:1; padding:10px 0; border-radius:12px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(14px * var(--ts,1)); font-weight:800; background:'+(on?'var(--card)':'transparent')+'; color:'+(on?'var(--green-mid)':'var(--muted)')+'; box-shadow:'+(on?'var(--sh-soft)':'none')+';'; }
+  swipeStart(e){ this._sx = (e.touches ? e.touches[0].clientX : e.clientX); }
+  swipeEnd(e){ const x = (e.changedTouches ? e.changedTouches[0].clientX : e.clientX); if(this._sx==null) return; const dx = x - this._sx; this._sx=null; if(dx<-45) this.detailNext(); else if(dx>45) this.detailPrev(); }
+
+  renderVals(){
+    const s = this.state;
+    const lang = s.lang || 'ar';
+    const en = lang === 'en';
+    const tt = (a,b) => en ? b : a;
+    const _q = (s.azkarSearch || '').trim().toLowerCase();
+    const _match = (ar, enT) => !_q || ar.toLowerCase().includes(_q) || (enT||'').toLowerCase().includes(_q);
+    const azMatch = {
+      morning: _match('أذكار الصباح', 'morning adhkar'),
+      evening: _match('أذكار المساء', 'evening adhkar'),
+      sleep: _match('أذكار النوم', 'sleep adhkar'),
+      after: _match('أذكار بعد الصلاة', 'after-prayer adhkar'),
+      ruqya: _match('الرقية الشرعية', 'ruqyah'),
+    };
+    const azAnyMatch = azMatch.morning || azMatch.evening || azMatch.sleep || azMatch.after || azMatch.ruqya;
+    const zikrText = (s.zikrOptions[s.selectedZikr] || s.zikrOptions[0]).t;
+    const goalProg = s.goal ? Math.min(1, s.count / s.goal) : 0;
+    const dItems = this.catData(s.detailTitle);
+    const allCatDoneVal = dItems.every((it,i)=>(s.reps[i]||0)>=it.target);
+    const dIdx = Math.min(s.detailIndex, dItems.length - 1);
+    const dCur = dItems[dIdx];
+    const dRep = s.reps[dIdx] || 0;
+    const dComplete = dRep >= dCur.target;
+    const dPct = Math.min(1, dRep / dCur.target);
+    const dDots = dItems.map((_, i) => ({ style: 'width:'+(i===dIdx?'24px':'7px')+'; height:7px; border-radius:99px; transition:all .25s; background:'+(i===dIdx?'var(--green)':'var(--line)')+';' }));
+    const P = {
+      week:  { line:'M8,108 C50,104 70,96 104,86 C140,75 150,46 196,40 C236,35 270,30 312,22', dotY:22, labels: en?['Sat','Sun','Mon','Tue','Wed','Thu','Fri']:['السبت','الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة'], delta:'+'+this.ar(12)+(en?'% this week':'٪ هذا الأسبوع'), value: this.arGroup(s.bank) },
+      month: { line:'M8,116 C46,113 80,108 112,98 C152,86 168,70 208,58 C248,47 280,38 312,24', dotY:24, labels:[this.ar(1),this.ar(8),this.ar(15),this.ar(22),this.ar(30)], delta:'+'+this.ar(34)+(en?'% this month':'٪ هذا الشهر'), value: this.arGroup(s.bank) },
+      year:  { line:'M8,122 C46,119 82,110 114,94 C152,76 172,56 208,46 C250,33 282,26 312,16', dotY:16, labels: en?['Jan','Mar','May','Jul','Sep','Nov']:['ينا','مار','مايو','يول','سبت','نوف'], delta:'+'+this.ar(148)+(en?'% this year':'٪ هذا العام'), value: this.arGroup(s.bank) },
+    };
+    const col = (k)=>({o:'var(--orange)',p:'var(--purple)',g:'var(--green)',x:'var(--chip)'}[k]);
+    const wkAr=['س','ح','ن','ث','ر','خ']; const wkEn=['Sa','Su','Mo','Tu','We','Th'];
+    const wkData=[['o','p','g'],['o','p','g'],['o','p','x'],['o','p','g'],['o','p','g'],['o','p','x']];
+    const weekStrip = wkData.map((d,i)=>({ c1:col(d[0]), c2:col(d[1]), c3:col(d[2]), label: en?wkEn[i]:wkAr[i], wrapStyle:'width:100%; display:flex; flex-direction:column; gap:4px; height:78px;', labelStyle:'font-size:calc(12px * var(--ts,1)); font-weight:800; color:var(--muted);' }));
+    weekStrip.push({ c1:col('o'), c2:col('p'), c3:col('x'), label: en?'Today':'اليوم', wrapStyle:'width:100%; display:flex; flex-direction:column; gap:4px; height:78px; outline:2.5px solid var(--green); outline-offset:3px; border-radius:9px;', labelStyle:'font-size:calc(12px * var(--ts,1)); font-weight:900; color:var(--green-mid);' });
+    const pc = P[s.period] || P.week;
+    const segBase = 'flex:1; padding:8px 0; border-radius:999px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; transition:all .2s; ';
+    const segOn = segBase + 'background:#fff; color:var(--green-deep);';
+    const segOff = segBase + 'background:transparent; color:rgba(255,255,255,.85);';
+    const quotes = [
+      { ar:'أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ', tr:"Alā bidhikrillāhi taṭma'innul-qulūb.", en:'Verily, in the remembrance of Allah do hearts find rest.', ref:'الرعد ٢٨', refEn:'Ar-Ra’d 28' },
+      { ar:'فَاذْكُرُونِي أَذْكُرْكُمْ وَاشْكُرُوا لِي', tr:"Fadhkurūnī adhkurkum washkurū lī.", en:'So remember Me; I will remember you. And be grateful to Me.', ref:'البقرة ١٥٢', refEn:'Al-Baqarah 152' },
+      { ar:'وَاذْكُرْ رَبَّكَ كَثِيرًا وَسَبِّحْ بِالْعَشِيِّ وَالْإِبْكَارِ', tr:"Wadhkur rabbaka kathīran wa sabbiḥ bil-'ashiyyi wal-ibkār.", en:'Remember your Lord much, and exalt Him in the evening and the morning.', ref:'آل عمران ٤١', refEn:'Aal ‘Imran 41' },
+      { ar:'وَلَذِكْرُ اللَّهِ أَكْبَرُ', tr:"Wa ladhikrullāhi akbar.", en:'And the remembrance of Allah is greater.', ref:'العنكبوت ٤٥', refEn:'Al-‘Ankabut 45' },
+      { ar:'الَّذِينَ آمَنُوا وَتَطْمَئِنُّ قُلُوبُهُم بِذِكْرِ اللَّهِ', tr:"Alladhīna āmanū wa taṭma'innu qulūbuhum bidhikrillāh.", en:'Those who believe, and whose hearts find rest in the remembrance of Allah.', ref:'الرعد ٢٨', refEn:'Ar-Ra’d 28' }
+    ];
+    const curQuote = quotes[s.quoteIdx % quotes.length];
+    return {
+      theme: s.theme,
+      randomZikr: curQuote.ar,
+      zikrText: zikrText,
+      zikrTr: (s.zikrOptions[s.selectedZikr] || s.zikrOptions[0]).tr,
+      zikrEn: (s.zikrOptions[s.selectedZikr] || s.zikrOptions[0]).en,
+      zikrPhraseStyle: (() => {
+        const n = (zikrText || '').length;
+        const fs = n <= 16 ? 27 : n <= 30 ? 24 : n <= 50 ? 20 : n <= 80 ? 18 : 16;
+        const lh = fs >= 28 ? 1.5 : 1.75;
+        return 'font-family:' + (s.dhikrFont === 'mushaf' ? "'Amiri Quran','Amiri',serif" : "'Amiri', serif") + '; font-size:calc(' + fs + 'px * var(--ts,1)); font-weight:700; color:var(--green-deep); text-align:center; line-height:' + lh + '; direction:rtl; max-width:330px; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden;';
+      })(),
+      quoteTr: curQuote.tr,
+      quoteEn: curQuote.en,
+      quoteRef: en ? curQuote.refEn : curQuote.ref,
+      stop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); },
+      todayDepositStr: this.ar(s.todayDeposit),
+      freezesStr: this.ar(s.freezes),
+      dir: en ? 'ltr' : 'rtl',
+      uiAlign: en ? 'left' : 'right',
+      chevronFlip: en ? 'scaleX(-1)' : 'scaleX(1)',
+      dhikrFontFam: s.dhikrFont==='mushaf' ? "'Amiri Quran','Amiri',serif" : "'Amiri', serif",
+      weekStrip: weekStrip,
+      tStreakSince: (() => {
+        const today = new Date();
+        const start = new Date(today); start.setDate(today.getDate() - 11);
+        const monEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const monAr = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+        return en ? 'Since '+monEn[start.getMonth()]+' '+start.getDate() : 'منذ '+this.ar(start.getDate())+' '+monAr[start.getMonth()];
+      })(),
+      tStreakRange: (() => {
+        const arr = wkData.concat([['o','p','g']]);
+        const today = new Date();
+        const start = new Date(today); start.setDate(today.getDate() - (arr.length - 1));
+        const monEn = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const monAr = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+        if (en) return monEn[start.getMonth()]+' '+start.getDate()+' – '+monEn[today.getMonth()]+' '+today.getDate();
+        const sameMonth = start.getMonth() === today.getMonth();
+        return sameMonth
+          ? this.ar(start.getDate())+' – '+this.ar(today.getDate())+' '+monAr[today.getMonth()]
+          : this.ar(start.getDate())+' '+monAr[start.getMonth()]+' – '+this.ar(today.getDate())+' '+monAr[today.getMonth()];
+      })(),
+      homeStreakDots: (() => {
+        const arr = wkData.concat([['o','p','g']]);
+        const today = new Date();
+        return arr.map((d,i) => {
+          const isToday = i === arr.length - 1;
+          const kept = !d.includes('x');
+          const dt = new Date(today); dt.setDate(today.getDate() - (arr.length - 1 - i));
+          return {
+            label: en ? String(dt.getDate()) : this.ar(dt.getDate()),
+            style: 'width:'+(isToday?'11px':'8px')+'; height:'+(isToday?'11px':'8px')+'; border-radius:50%; background:'+(isToday?'#fff':kept?'rgba(255,255,255,.9)':'rgba(255,255,255,.3)')+'; box-shadow:'+(isToday?'0 0 0 3px rgba(255,255,255,.35)':'none')+';'
+          };
+        });
+      })(),
+      setLangAr: () => this.setState({ lang:'ar' }),
+      setLangEn: () => this.setState({ lang:'en', showTranslation:true }),
+      langAsk: !s.langChosen,
+      pickArabic: () => this.setState({ lang:'ar', langChosen:true }),
+      pickEnglish: () => this.setState({ lang:'en', langChosen:true, showTranslation:true, showTranslit:true }),
+      setFontClear: () => this.setState({ dhikrFont:'clear' }),
+      setFontMushaf: () => this.setState({ dhikrFont:'mushaf' }),
+      langSegAr: 'padding:7px 16px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; font-size:calc(12px * var(--ts,1)); transition:all .2s; '+(lang==='ar'?'background:var(--green); color:#fff;':'background:transparent; color:var(--muted);'),
+      langSegEn: 'padding:7px 16px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; font-size:calc(12px * var(--ts,1)); transition:all .2s; '+(lang==='en'?'background:var(--green); color:#fff;':'background:transparent; color:var(--muted);'),
+      fontSegClear: 'padding:7px 14px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; font-size:calc(12px * var(--ts,1)); transition:all .2s; '+(s.dhikrFont==='clear'?'background:var(--green); color:#fff;':'background:transparent; color:var(--muted);'),
+      fontSegMushaf: 'padding:7px 14px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; font-size:calc(12px * var(--ts,1)); transition:all .2s; '+(s.dhikrFont==='mushaf'?'background:var(--green); color:#fff;':'background:transparent; color:var(--muted);'),
+      tLangAr: 'العربية', tLangEn: 'English',
+      tFontClear: en?'Clear':'واضح', tFontMushaf: en?'Uthmani':'مصحف',
+      tBrand: en?'Bank el Dhikr':'بنك الذكر',
+      tTagline: en?'Your daily fortress':'حصنك اليومي',
+      tBalanceLabel: en?'Total hasanat balance':'رصيد الحسنات الكلي',
+      tDepositedToday: en?'Deposited today':'أودعت اليوم',
+      tDepositMore: en?'Deposit more':'أودِع المزيد',
+      tMorning: en?'Morning Adhkar':'أذكار الصباح',
+      tEvening: en?'Evening Adhkar':'أذكار المساء',
+      tSleep: en?'Sleep Adhkar':'أذكار النوم',
+      tAfter: en?'After-Prayer Adhkar':'أذكار بعد الصلاة',
+      tRuqya: en?'Ruqyah':'الرقية الشرعية',
+      tIncomplete: en?'Incomplete':'غير مكتمل',
+      tComplete: en?'Done':'مكتمل',
+      tFreeze: en?'freezes':'تجميد',
+      tStreakLabel: en?'Streak':'سلسلة الالتزام',
+      tStreakHint: en?"You've kept up your daily adhkar without missing a day":'أكملت أذكارك اليومية دون أن تفوّت يومًا',
+      tDayStreak: en?'day streak':'يوم متتالي',
+      tViewStats: en?'View stats':'شاهد الإحصائيات',
+      tAnotherVerse: en?'Another verse':'آية أخرى',
+      tShare: en?'Share the reward with friends':'شارك الأجر مع أصدقائك',
+      tSupport: en?'Support the app':'ادعم التطبيق',
+      tSupportSub: en?'Help keep Bank el Dhikr free for everyone':'ساعدنا في إبقاء بنك الذكر مجانياً للجميع',
+      tDonate: en?'Donate':'تبرّع',
+      openDonate: () => {},
+      tJourneyTitle: en?'My Spiritual Journey':'رحلتي الروحية',
+      tOverallStreak: en?'Overall adhkar streak':'سلسلة الأذكار الكلية',
+      tDaysUnit: en?'consecutive days':'يوم متتالي',
+      tBestOverall: (en?'Longest overall: ':'أطول سلسلة كلية: ')+this.ar(21)+(en?' days':' يوم'),
+      tGrowth: en?'Hasanat growth':'نمو رصيد الحسنات',
+      tWeek: en?'Week':'أسبوع', tMonth: en?'Month':'شهر', tYear: en?'Year':'سنة',
+      tWeekCommit: en?'This week':'التزام هذا الأسبوع',
+      tDhikrBreakdown: en?'Dhikr breakdown':'تفصيل الأذكار',
+      breakdownRowDir: en ? 'row-reverse' : 'row',
+      tThisWeek: en?'Week':'الأسبوع',
+      tThisMonth: en?'Month':'الشهر',
+      dhikrStats: [
+        { ar:'سُبْحَانَ الله', en:'Subhan Allah', meaning:'Glory be to Allah', week:412, month:1680 },
+        { ar:'الْحَمْدُ لله', en:'Alhamdulillah', meaning:'Praise be to Allah', week:388, month:1544 },
+        { ar:'اللهُ أَكْبَر', en:'Allahu Akbar', meaning:'Allah is the Greatest', week:351, month:1420 },
+        { ar:'لَا إِلٰهَ إِلَّا الله', en:'La ilaha illa Allah', meaning:'There is no god but Allah', week:206, month:900 },
+        { ar:'أَسْتَغْفِرُ الله', en:'Astaghfirullah', meaning:'I seek forgiveness from Allah', week:174, month:760 },
+      ].map(d => ({
+        name: en ? d.en : d.ar,
+        meaning: d.meaning,
+        nameStyle: 'font-family:' + (en ? 'Tajawal, sans-serif' : 'Cairo, serif') + '; font-size:calc(16px * var(--ts,1)); font-weight:700; color:var(--text); text-align:' + (en ? 'left' : 'right') + ';',
+        week: this.ar(d.week),
+        month: this.ar(d.month),
+      })),
+      tMorningShort: en?'Morning':'الصباح', tEveningShort: en?'Evening':'المساء', tSleepShort: en?'Sleep':'النوم',
+      tMasbahaTitle: en?'Digital Tasbih':'المسبحة الإلكترونية',
+      tCurrentDhikr: en?'Current dhikr · tap to change':'الذكر الحالي · اضغط للتغيير',
+      tBalance: en?'Balance':'الرصيد',
+      tLaps: en?'Laps':'الجولات',
+      tGoal: en?'Goal':'الهدف',
+      tTapAnywhere: en?'Tap anywhere':'المس في أي مكان',
+      tReset: en?'Reset':'تصفير',
+      tAdhkarList: en?'Adhkar List':'قائمة الأذكار',
+      tSearch: en?'Search adhkar...':'ابحث في الأذكار...',
+      azkarSearch: s.azkarSearch,
+      updateAzkarSearch: (e) => this.setState({ azkarSearch: e.target.value }),
+      tNoResults: en?'No adhkar match your search':'لا توجد أذكار تطابق بحثك',
+      tNoResultsHint: en?'Try a different word':'جرّب كلمة أخرى',
+      azMatchMorning: azMatch.morning,
+      azMatchEvening: azMatch.evening,
+      azMatchSleep: azMatch.sleep,
+      azMatchAfter: azMatch.after,
+      azMatchRuqya: azMatch.ruqya,
+      azNoResults: !azAnyMatch,
+      tOf: en?'of':'من',
+      tSwipeHint: en?'Swipe left or right to move between adhkar':'اسحب يمينًا أو يسارًا للتنقل بين الأذكار',
+      tSettings: en?'Settings':'الإعدادات',
+      tTheme: en?'App theme':'سمة البرنامج',
+      tVibration: en?'Vibration':'الاهتزاز',
+      tNumerals: en?'Numerals':'نظام الأرقام',
+      tLanguage: en?'Language':'اللغة',
+      tDhikrFont: en?'Dhikr font':'خط الذكر',
+      tTextSize: en?'Text size':'حجم الخط',
+      textScale: s.textScale,
+      tsItems: [{v:0.9,l:'A'},{v:1,l:'A'},{v:1.15,l:'A'},{v:1.3,l:'A'}].map((it,i) => ({
+        set: () => this.setState({ textScale: it.v }),
+        style: 'flex:1; display:flex; align-items:center; justify-content:center; padding:8px 0; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; line-height:1; font-size:' + [12,15,18,22][i] + 'px; transition:all .2s; ' + (Math.abs(s.textScale - it.v) < 0.001 ? 'background:var(--green); color:#fff;' : 'background:transparent; color:var(--muted);'),
+      })),
+      tChooseDhikr: en?'Choose dhikr':'اختر الذكر',
+      tAddCustom: en?'Add a custom dhikr...':'أضف ذكرًا مخصصًا...',
+      tSetGoal: en?'Set goal':'تعيين الهدف',
+      tVibrateHint: en?'The phone vibrates at each completed lap':'سيهتز الهاتف عند بلوغ كل جولة',
+      tRepsPerLap: en?'Reps per lap':'عدد التكرار في الجولة',
+      tSave: en?'Save':'حفظ',
+      tRemoveGoal: en?'Remove goal':'إزالة الهدف',
+      tTranslit: en?'Pronunciation':'النُطق',
+      tTranslation: en?'Meaning':'المعنى',
+      tRuqyaSub: en?'Protection, by Allah’s will':'حصنٌ بإذن الله',
+      tNavHome: en?'Home':'الرئيسية',
+      tNavMasbaha: en?'Tasbih':'المسبحة',
+      tNavAzkar: en?'Adhkar':'الأذكار',
+      tNavJourney: en?'Journey':'رحلتي',
+      tNavSettings: en?'Settings':'الإعدادات',
+      tReviewTitle: en?'Enjoying Bank el Dhikr?':'هل يعجبك بنك الذكر؟',
+      tReviewBody: en?'Your rating helps more people build a daily habit of dhikr. It only takes a moment.':'تقييمك يساعد المزيد من الناس على المداومة على الذكر. لن يستغرق سوى لحظة.',
+      tRateOnStore: en?'Rate on the store':'قيّمنا على المتجر',
+      tMaybeLater: en?'Maybe later':'لاحقًا',
+      tAppStore: 'App Store',
+      tGooglePlay: 'Google Play',
+      azMorningSub: (en?'Last read: Today, ':'آخر قراءة: اليوم، ')+this.ar('7:30')+(en?' AM':' ص'),
+      azEveningSub: en?'Status: Not started':'الحالة: لم تبدأ بعد',
+      azSleepSub: (en?'Last read: Yesterday, ':'آخر قراءة: أمس، ')+this.ar('11:15')+(en?' PM':' م'),
+      azAfterSub: (en?'Last read: 1h ago':'آخر قراءة: منذ ساعة'),
+      clock: this.ar('9:41'),
+      streakStr: this.ar(12),
+      evStreakStr: this.ar(3),
+      amStreakStr: this.ar(5),
+      evBest: (en?'Longest: ':'أطول سلسلة: ')+this.ar(8)+(en?' days':' أيام'),
+      amBest: (en?'Longest: ':'أطول سلسلة: ')+this.ar(12)+(en?' days':' يوم'),
+      weekDone: this.ar(18)+' / '+this.ar(21)+(en?' adhkar':' ذكرًا'),
+      setWestern: () => this.setState({ numerals: 'western' }),
+      setArabic: () => this.setState({ numerals: 'arabic' }),
+      numSegWest: 'padding:7px 16px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-title); font-weight:800; font-size:calc(16px * var(--ts,1)); transition:all .2s; ' + (s.numerals==='western' ? 'background:var(--green); color:#fff;' : 'background:transparent; color:var(--muted);'),
+      numSegArab: 'padding:7px 16px; border-radius:10px; border:none; cursor:pointer; font-family:var(--font-quran); font-weight:800; font-size:calc(16px * var(--ts,1)); transition:all .2s; ' + (s.numerals==='arabic' ? 'background:var(--green); color:#fff;' : 'background:transparent; color:var(--muted);'),
+      nextQuote: () => this.setState(p => ({ quoteIdx: (p.quoteIdx + 1) % quotes.length })),
+      orbSub: s.goal ? ((en?'of ':'من ') + this.ar(s.goal)) : (en?'Tasbih':'تسبيح'),
+      goalLabel: s.goal ? this.ar(s.goal) : (en?'Set':'تعيين'),
+      goalFraction: s.goal ? (this.ar(Math.min(s.count, s.goal)) + ' / ' + this.ar(s.goal)) : (en?'Set':'تعيين'),
+      lapsStr: this.ar(s.laps),
+      goalRingOffset: Math.round(741 * (1 - goalProg)),
+      chartArea: pc.line + ' L312,130 L8,130 Z',
+      chartLine: pc.line,
+      chartDotY: pc.dotY,
+      chartDelta: pc.delta,
+      chartValue: pc.value,
+      chartLabels: pc.labels.map(t => ({ t })),
+      segWeek: s.period === 'week' ? segOn : segOff,
+      segMonth: s.period === 'month' ? segOn : segOff,
+      segYear: s.period === 'year' ? segOn : segOff,
+      setWeek: () => this.setState({ period: 'week' }),
+      setMonth: () => this.setState({ period: 'month' }),
+      setYear: () => this.setState({ period: 'year' }),
+      sheetOpen: s.sheetOpen,
+      isZikrPicker: s.screen === 'zikrPicker',
+      openSheet: () => this.setState({ screen: 'zikrPicker' }),
+      openSheetStop: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState({ screen: 'zikrPicker' }); },
+      closeSheet: () => this.setState({ screen: 'home' }),
+      draft: s.draft,
+      updateDraft: (e) => this.setState({ draft: e.target.value }),
+      addZikr: () => this.setState(p => { const t = (p.draft || '').trim(); if (!t) return {}; return { zikrOptions: [...p.zikrOptions, { t, custom: true }], draft: '' }; }),
+      zikrItems: s.zikrOptions.map((o, i) => ({
+        t: o.t,
+        benefit: en ? o.benefitEn : o.benefit,
+        selected: i === s.selectedZikr,
+        custom: !!o.custom,
+        rowStyle: 'display:flex; flex-direction:column; gap:12px; padding:18px 6px; cursor:pointer; border-bottom:' + (i === s.zikrOptions.length - 1 ? 'none' : '1px solid var(--line)') + ';',
+        radioStyle: 'width:24px; height:24px; border-radius:50%; flex-shrink:0; display:flex; align-items:center; justify-content:center; border:2px solid ' + (i === s.selectedZikr ? 'var(--green)' : 'var(--line)') + '; background:' + (i === s.selectedZikr ? 'var(--green)' : 'transparent') + ';',
+        sel: () => this.setState({ selectedZikr: i, count: 0, laps: 0, screen: 'home' }),
+        del: (e) => { if (e && e.stopPropagation) e.stopPropagation(); this.setState(p => { const arr = [...p.zikrOptions]; arr.splice(i, 1); let sel = p.selectedZikr; if (i < sel) sel--; else if (i === sel) sel = 0; return { zikrOptions: arr, selectedZikr: Math.max(0, Math.min(sel, arr.length - 1)) }; }); },
+      })),
+      goalSheetOpen: s.goalSheetOpen,
+      openGoalSheet: () => this.setState({ goalSheetOpen: true, goalDraft: s.goal ? String(s.goal) : '' }),
+      closeGoalSheet: () => this.setState({ goalSheetOpen: false }),
+      goalDraft: s.goalDraft,
+      updateGoalDraft: (e) => this.setState({ goalDraft: (e.target.value || '').replace(/[^0-9]/g, '') }),
+      goalPresets: [33, 99, 100, 1000].map(n => ({ label: this.ar(n), set: () => this.setState({ goalDraft: String(n) }) })),
+      saveGoal: () => this.setState(p => { const n = parseInt(p.goalDraft, 10); if (!n || n < 1) return {}; return { goal: n, count: 0, laps: 0, goalSheetOpen: false }; }),
+      clearGoal: () => this.setState({ goal: null, count: 0, laps: 0, goalSheetOpen: false }),
+      tap: () => this.setState(p => {
+        let count = p.count + 1, laps = p.laps;
+        let extra = {};
+        if (p.goal && count >= p.goal) { laps = p.laps + 1; count = 0; if (!p.reviewShown) { extra = { reviewOpen: true, reviewShown: true }; } }
+        return Object.assign({ count, laps, session: p.session + 1, bank: p.bank + 1, todayDeposit: p.todayDeposit + 1 }, extra);
+      }),
+      reviewOpen: s.reviewOpen,
+      reviewStars: s.reviewStars,
+      closeReview: () => this.setState({ reviewOpen: false }),
+      shareApp: async () => {
+        const shareText = en ? 'Bank el Dhikr — build a daily habit of dhikr.' : 'بنك الذكر — طبّق عادة الذكر اليومية.';
+        const shareUrl = 'https://bankeldhikr.app';
+        try {
+          if (navigator.share) { await navigator.share({ title: 'Bank el Dhikr', text: shareText, url: shareUrl }); }
+          else if (navigator.clipboard) { await navigator.clipboard.writeText(shareText + ' ' + shareUrl); }
+        } catch(e){}
+      },
+      rateStore: () => {
+        const ua = navigator.userAgent || '';
+        const url = /iPhone|iPad|iPod/i.test(ua) ? 'https://apps.apple.com/app/id0000000000'
+          : /Android/i.test(ua) ? 'https://play.google.com/store/apps/details?id=com.bankeldhikr.app'
+          : 'https://apps.apple.com/app/id0000000000';
+        window.open(url, '_blank');
+        this.setState({ reviewOpen: false });
+      },
+      reviewStarItems: [1,2,3,4,5].map(n => ({
+        fill: n <= s.reviewStars ? 'var(--gold)' : 'none',
+        stroke: n <= s.reviewStars ? 'var(--gold)' : 'var(--line)',
+        set: () => this.setState({ reviewStars: n }),
+      })),
+      reviewCanSubmit: s.reviewStars > 0,
+      reviewCtaStyle: 'display:flex; align-items:center; justify-content:center; gap:10px; padding:15px; border:none; border-radius:18px; font-family:var(--font-title); font-size:calc(16px * var(--ts,1)); font-weight:800; cursor:pointer; ' + (s.reviewStars > 0 ? 'background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff; box-shadow:var(--sh-btn);' : 'background:var(--chip); color:var(--muted); cursor:default;'),
+      reset: () => this.setState({ count: 0, laps: 0 }),
+      isDetail: s.screen === 'detail',
+      detailTitle: en ? this.catNames(s.detailTitle) : s.detailTitle,
+      catMorning: s.detailTitle === 'أذكار الصباح',
+      catEvening: s.detailTitle === 'أذكار المساء',
+      catSleep: s.detailTitle === 'أذكار النوم',
+      catAfter: s.detailTitle === 'أذكار بعد الصلاة',
+      catRuqya: s.detailTitle === 'الرقية الشرعية',
+      detailText: dCur.text,
+      detailRef: en ? dCur.refEn : dCur.ref,
+      detailTr: dCur.tr,
+      detailEn: dCur.en,
+      isEnglish: en,
+      showTranslit: s.showTranslit && en,
+      showTranslation: s.showTranslation && en,
+      toggleTranslit: () => this.setState(p=>({ showTranslit: !p.showTranslit })),
+      copyLabel: s.copiedFlash ? (en?'Copied ✓':'تم النسخ ✓') : (en?'Copy':'نسخ'),
+      tShareDhikr: en?'Share':'مشاركة',
+      copyDhikr: () => {
+        const parts = [dCur.text];
+        if (dCur.tr) parts.push(dCur.tr);
+        if (en && dCur.en) parts.push(dCur.en);
+        parts.push('— ' + (en ? dCur.refEn : dCur.ref) + ' · ' + (en?'Bank el Dhikr':'بنك الذكر'));
+        const txt = parts.join('\n');
+        try { navigator.clipboard && navigator.clipboard.writeText(txt); } catch(e){}
+        this.setState({ copiedFlash: true });
+        if (this._copyT) clearTimeout(this._copyT);
+        this._copyT = setTimeout(() => this.setState({ copiedFlash: false }), 1600);
+      },
+      shareDhikr: () => {
+        try {
+          const url = this._renderShareCanvas(dCur, en);
+          this.setState({ shareOpen: true, shareImg: url });
+        } catch(e){}
+      },
+      shareOpen: s.shareOpen,
+      shareImg: s.shareImg,
+      shareCardEl: s.shareImg ? React.createElement('img', { src: s.shareImg, alt: 'share card', style: { width: '100%', display: 'block' } }) : null,
+      closeShare: () => this.setState({ shareOpen: false }),
+      downloadCard: () => {
+        try { const a=document.createElement('a'); a.href=this.state.shareImg; a.download='bank-el-dhikr.png'; document.body.appendChild(a); a.click(); a.remove(); } catch(e){}
+      },
+      shareCardNative: async () => {
+        try {
+          const res = await fetch(this.state.shareImg); const blob = await res.blob();
+          const file = new File([blob], 'bank-el-dhikr.png', { type:'image/png' });
+          if (navigator.canShare && navigator.canShare({ files:[file] })) { await navigator.share({ files:[file], title:'بنك الذكر' }); }
+          else { const a=document.createElement('a'); a.href=this.state.shareImg; a.download='bank-el-dhikr.png'; a.click(); }
+        } catch(e){}
+      },
+      tShareCardTitle: en?'Share this dhikr':'شارك هذا الذكر',
+      tSaveImage: en?'Save image':'حفظ الصورة',
+      tShareImage: en?'Share':'مشاركة',
+      toggleTranslation: () => this.setState(p=>({ showTranslation: !p.showTranslation })),
+      translitChip: 'display:flex; align-items:center; gap:7px; padding:10px 20px; border-radius:999px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; transition:all .2s; '+(s.showTranslit?'background:var(--green); color:#fff;':'background:var(--chip); color:var(--muted);'),
+      translationChip: 'display:flex; align-items:center; gap:7px; padding:10px 20px; border-radius:999px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(12px * var(--ts,1)); font-weight:800; transition:all .2s; '+(s.showTranslation?'background:var(--green); color:#fff;':'background:var(--chip); color:var(--muted);'),
+      benefitText: en ? dCur.benefitEn : dCur.benefit,
+      benefitOpen: s.benefitOpen,
+      benefitLabel: s.benefitOpen ? (en?'Hide virtue':'إخفاء الفضل') : (en?'Virtue & source':'الفضل والمصدر'),
+      toggleBenefit: () => this.setState(p => ({ benefitOpen: !p.benefitOpen })),
+      detailPos: this.ar(dIdx + 1) + ' / ' + this.ar(dItems.length),
+      repCount: this.ar(dRep),
+      repTarget: this.ar(dCur.target),
+      ringColor: dComplete ? 'var(--green)' : 'var(--green-mid)',
+      ringOffset: Math.round(352 * (1 - dPct)),
+      repLabel: dComplete ? (en?'Completed ✓':'تمّ التكرار ✓') : (en?'Repetitions':'عدد التكرار'),
+      repLabelColor: dComplete ? 'var(--green-mid)' : 'var(--muted)',
+      dDots: dDots,
+      tapDhikr: () => this.tapDhikr(),
+      detailNext: () => this.detailNext(),
+      detailPrev: () => this.detailPrev(),
+      swipeStart: (e) => this.swipeStart(e),
+      swipeEnd: (e) => this.swipeEnd(e),
+      openMorning: () => this.openCat('أذكار الصباح'),
+      openEvening: () => this.openCat('أذكار المساء'),
+      openSleep: () => this.openCat('أذكار النوم'),
+      openAfter: () => this.openCat('أذكار بعد الصلاة'),
+      openRuqya: () => this.openCat('الرقية الشرعية'),
+      markMorningDone: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); this.markCatAllDone('أذكار الصباح'); },
+      markEveningDone: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); this.markCatAllDone('أذكار المساء'); },
+      markSleepDone: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); this.markCatAllDone('أذكار النوم'); },
+      markRuqyaDone: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); this.markCatAllDone('الرقية الشرعية'); },
+      bankStr: this.arGroup(s.bank),
+      sessionStr: this.ar(s.session),
+      countStr: this.ar(s.count),
+      isHome: s.screen === 'home',
+      isJourney: s.screen === 'journey',
+      isMasbaha: s.screen === 'masbaha',
+      isAzkar: s.screen === 'azkar',
+      lightTabStyle: this.tab(s.theme === 'light'),
+      darkTabStyle: this.tab(s.theme === 'dark'),
+      setLight: () => this.setState({ theme: 'light' }),
+      setDark: () => this.setState({ theme: 'dark' }),
+      goHome: () => this.setState({ screen: 'home' }),
+      goJourney: () => this.setState({ screen: 'journey' }),
+      goMasbaha: () => this.setState({ screen: 'masbaha' }),
+      goAzkar: () => this.setState({ screen: 'azkar' }),
+      goSettings: () => this.setState({ screen: 'settings' }),
+      isSettings: s.screen === 'settings',
+      toggleTheme: () => this.setState(p => ({ theme: p.theme === 'light' ? 'dark' : 'light' })),
+      toggleVibe: () => this.setState(p => ({ vibrate: !p.vibrate })),
+      themeTrack: s.theme === 'light' ? 'var(--green)' : 'var(--chip)',
+      themeKnobRight: s.theme === 'light' ? '3px' : 'auto',
+      themeKnobLeft: s.theme === 'light' ? 'auto' : '3px',
+      themeKnobIcon: s.theme === 'light'
+        ? React.createElement('svg', {width:17,height:17,viewBox:'0 0 24 24',fill:'none'}, React.createElement('circle',{cx:12,cy:12,r:4,fill:'#FFC02E'}), React.createElement('path',{d:'M12 3v2M12 19v2M21 12h-2M5 12H3M18 6l-1.4 1.4M7.4 16.6 6 18M18 18l-1.4-1.4M7.4 7.4 6 6',stroke:'#FFC02E','strokeWidth':2,'strokeLinecap':'round'}))
+        : React.createElement('svg', {width:16,height:16,viewBox:'0 0 24 24',fill:'none'}, React.createElement('path',{d:'M20 14.5A8 8 0 1 1 9.5 4a6.3 6.3 0 0 0 10.5 10.5Z',fill:'#5B6472'})),
+      vibeTrack: s.vibrate ? 'var(--green)' : 'var(--chip)',
+      vibeKnobRight: s.vibrate ? '3px' : 'auto',
+      vibeKnobLeft: s.vibrate ? 'auto' : '3px',
+      goDeposit: () => this.setState({ screen: 'masbaha' }),
+      tSingleView: en ? 'Single' : 'ذِكر واحد',
+      tListView: en ? 'List' : 'قائمة',
+      detailSingle: s.detailMode === 'single',
+      detailList: s.detailMode === 'list',
+      setModeSingle: () => this.setState({ detailMode: 'single' }),
+      setModeList: () => this.setState({ detailMode: 'list' }),
+      modeSingleStyle: this._modeSeg(s.detailMode === 'single'),
+      modeListStyle: this._modeSeg(s.detailMode === 'list'),
+      markAllDone: () => this.markAllDone(),
+      markAllStyle: 'display:flex; align-items:center; justify-content:center; gap:8px; padding:13px; border-radius:16px; border:none; cursor:pointer; font-family:var(--font-title); font-size:calc(13px * var(--ts,1)); font-weight:800; '+(allCatDoneVal ? 'background:var(--chip); color:var(--green-mid);' : 'background:linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%); color:#fff;'),
+      markAllLabel: allCatDoneVal ? (en?'All done ✓':'اكتمل الكل ✓') : (en?'Mark all as done':'إتمام الكل'),
+      markDoneSingle: () => this.markDoneAt(dIdx),
+      tMarkDoneSingle: dComplete ? (en?'Completed ✓':'اكتمل ✓') : (en?'Mark as done':'إتمام'),
+      detailItems: dItems.map((it, i) => {
+        const rep = s.reps[i] || 0; const tg = it.target; const done = rep >= tg;
+        const pct = tg ? Math.min(100, Math.round(rep / tg * 100)) : 0;
+        const C = 2 * Math.PI * 14;
+        return {
+          num: this.ar(i + 1),
+          text: it.text,
+          tr: it.tr, en: it.en,
+          rep: this.ar(rep), target: this.ar(tg),
+          countColor: done ? 'var(--green-mid)' : 'var(--text)',
+          tapColor: done ? 'var(--green-mid)' : 'var(--muted)',
+          tapLabel: done ? (en ? 'Completed' : 'اكتمل') : (en ? 'Tap to count' : 'اضغط للعدّ'),
+          ringColor: done ? 'var(--green)' : 'var(--green-mid)',
+          ringDash: C.toFixed(2),
+          ringOffset: (C * (1 - pct / 100)).toFixed(2),
+          incStyle: 'width:44px; height:44px; border-radius:15px; display:flex; align-items:center; justify-content:center; font-size:calc(24px * var(--ts,1)); font-weight:700; line-height:1; box-shadow:var(--sh-soft); background:' + (done ? 'rgba(52,199,89,.15)' : 'linear-gradient(180deg, var(--green) 0%, var(--green-mid) 100%)') + '; color:' + (done ? 'var(--green-mid)' : '#fff') + ';',
+          incIcon: done ? '✓' : '+',
+          inc: () => this.incRepAt(i),
+          open: () => this.openDhikrAt(i),
+          markDone: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); this.markDoneAt(i); },
+          done: done,
+          share: (e) => { if(e&&e.stopPropagation)e.stopPropagation(); try { const url=this._renderShareCanvas(it, en); this.setState({ shareOpen:true, shareImg:url }); } catch(err){} },
+        };
+      }),
+      navHome: this.navColor('home'), navHomeDot: this.navDot('home'),
+      navJourney: this.navColor('journey'), navJourneyDot: this.navDot('journey'),
+      navMasbaha: this.navColor('masbaha'), navMasbahaDot: this.navDot('masbaha'),
+      navAzkar: (s.screen==='azkar'||s.screen==='detail') ? 'var(--green)' : 'var(--muted)', navAzkarDot: (s.screen==='azkar'||s.screen==='detail') ? 'var(--green)' : 'transparent',
+      navSettings: this.navColor('settings'), navSettingsDot: this.navDot('settings'),
+    };
+  }
+}
+</script>
+</body>
+</html>

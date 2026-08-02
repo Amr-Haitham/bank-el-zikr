@@ -434,23 +434,11 @@ abstract class AppLocalizations {
   /// **'نمو الحسنات'**
   String get hasanatGrowth;
 
-  /// No description provided for @overallAdhkarStreak.
+  /// No description provided for @longestStreakLabel.
   ///
   /// In ar, this message translates to:
-  /// **'التتابع العام للأذكار'**
-  String get overallAdhkarStreak;
-
-  /// No description provided for @consecutiveDays.
-  ///
-  /// In ar, this message translates to:
-  /// **'{count} يوم متتالي'**
-  String consecutiveDays(String count);
-
-  /// No description provided for @longestOverall.
-  ///
-  /// In ar, this message translates to:
-  /// **'الأطول إجمالاً: {count} يوم'**
-  String longestOverall(String count);
+  /// **'الأطول: {count} يوم'**
+  String longestStreakLabel(String count);
 
   /// No description provided for @thisWeek.
   ///
@@ -463,6 +451,48 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'{count} / 21 ذكر'**
   String adhkarOutOf21(String count);
+
+  /// No description provided for @weekdayMon.
+  ///
+  /// In ar, this message translates to:
+  /// **'ن'**
+  String get weekdayMon;
+
+  /// No description provided for @weekdayTue.
+  ///
+  /// In ar, this message translates to:
+  /// **'ث'**
+  String get weekdayTue;
+
+  /// No description provided for @weekdayWed.
+  ///
+  /// In ar, this message translates to:
+  /// **'ر'**
+  String get weekdayWed;
+
+  /// No description provided for @weekdayThu.
+  ///
+  /// In ar, this message translates to:
+  /// **'خ'**
+  String get weekdayThu;
+
+  /// No description provided for @weekdayFri.
+  ///
+  /// In ar, this message translates to:
+  /// **'ج'**
+  String get weekdayFri;
+
+  /// No description provided for @weekdaySat.
+  ///
+  /// In ar, this message translates to:
+  /// **'س'**
+  String get weekdaySat;
+
+  /// No description provided for @weekdaySun.
+  ///
+  /// In ar, this message translates to:
+  /// **'ح'**
+  String get weekdaySun;
 
   /// No description provided for @settingsTitle.
   ///

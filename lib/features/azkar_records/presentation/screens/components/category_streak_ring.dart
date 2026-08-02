@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/utils/number_formatting.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class CategoryStreakRing extends StatelessWidget {
@@ -5,61 +7,80 @@ class CategoryStreakRing extends StatelessWidget {
     super.key,
     required this.title,
     required this.currentStreak,
+    required this.longestStreak,
     required this.color,
+    required this.icon,
   });
 
   final String title;
   final int currentStreak;
+  final int longestStreak;
   final Color color;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
-    final progress = (currentStreak / 7).clamp(0.0, 1.0);
-
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(
-            width: 76,
-            height: 76,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                SizedBox(
-                  width: 76,
-                  height: 76,
-                  child: CircularProgressIndicator(
-                    value: progress == 0 ? 1 : progress,
-                    strokeWidth: 6,
-                    strokeCap: StrokeCap.round,
-                    backgroundColor: color.withValues(alpha: 0.15),
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                        progress == 0 ? color.withValues(alpha: 0.15) : color),
-                  ),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                width: 34,
+                height: 34,
+                decoration: BoxDecoration(
+                  color: color.withValues(alpha: 0.14),
+                  borderRadius: BorderRadius.circular(11),
                 ),
-                Text(
-                  "$currentStreak",
-                  style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w800,
-                    color: color,
-                  ),
+                child: Icon(icon, size: 16, color: color),
+              ),
+              const SizedBox(width: 8),
+              Flexible(
+                child: Text(
+                  title,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w800,
+                      ),
                 ),
-              ],
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Text(
+            formatNumber(context, currentStreak),
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.w900,
+              color: Theme.of(context).textTheme.bodyLarge!.color,
+              height: 1,
             ),
           ),
-          const SizedBox(height: 12),
-          Text(
-            title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(fontSize: 14, fontWeight: FontWeight.w700),
+          const SizedBox(height: 10),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 11, vertical: 5),
+            decoration: BoxDecoration(
+              color: color.withValues(alpha: 0.14),
+              borderRadius: BorderRadius.circular(999),
+            ),
+            child: Text(
+              AppLocalizations.of(context)
+                  .longestStreakLabel(formatNumber(context, longestStreak)),
+              style: TextStyle(
+                fontSize: 11,
+                fontWeight: FontWeight.w800,
+                color: color,
+              ),
+            ),
           ),
         ],
       ),

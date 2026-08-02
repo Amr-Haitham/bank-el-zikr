@@ -10,7 +10,6 @@ class GrowthPoint {
 
 class WeeklyGridDay {
   final DateTime date;
-  final String label;
   final bool hasMorning;
   final bool hasEvening;
   final bool hasZikr;
@@ -18,7 +17,6 @@ class WeeklyGridDay {
 
   const WeeklyGridDay({
     required this.date,
-    required this.label,
     required this.hasMorning,
     required this.hasEvening,
     required this.hasZikr,
@@ -120,7 +118,6 @@ class JourneyStats {
       final entry = _entryForDate(date);
       return WeeklyGridDay(
         date: date,
-        label: _weekdayLabels[date.weekday] ?? "",
         hasMorning: entry?.morningCompleted ?? false,
         hasEvening: entry?.eveningCompleted ?? false,
         hasZikr: (entry?.totalZikrCount ?? 0) > 0,

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 
 class DhikrBreakdownRow {
   final String title;
+  final String? transliteration;
+  final String? translation;
   final int weekCount;
   final int monthCount;
 
@@ -12,6 +14,8 @@ class DhikrBreakdownRow {
     required this.title,
     required this.weekCount,
     required this.monthCount,
+    this.transliteration,
+    this.translation,
   });
 }
 
@@ -29,10 +33,13 @@ class DhikrBreakdownList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final rows = allAzkar
         .where((zikr) => (monthTotals[zikr.id] ?? 0) > 0)
         .map((zikr) => DhikrBreakdownRow(
               title: zikr.content,
+              transliteration: isEnglish ? zikr.contentTransliteration : null,
+              translation: isEnglish ? zikr.contentEn : null,
               weekCount: weekTotals[zikr.id] ?? 0,
               monthCount: monthTotals[zikr.id] ?? 0,
             ))
@@ -44,7 +51,7 @@ class DhikrBreakdownList extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,17 +59,22 @@ class DhikrBreakdownList extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                AppLocalizations.of(context).dhikrBreakdown,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).dhikrBreakdown,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
+                ),
               ),
+              const SizedBox(width: 8),
               Row(
                 children: [
                   _headerLabel(context, AppLocalizations.of(context).weekLabel),
-                  const SizedBox(width: 16),
+                  const SizedBox(width: 8),
                   _headerLabel(
                       context, AppLocalizations.of(context).monthLabel),
                 ],
@@ -86,10 +98,7 @@ class DhikrBreakdownList extends StatelessWidget {
               ),
             )
           else
-            for (final row in rows) ...[
-              _breakdownRow(context, row),
-              const SizedBox(height: 14),
-            ],
+            for (final row in rows) _breakdownRow(context, row),
         ],
       ),
     );
@@ -97,7 +106,7 @@ class DhikrBreakdownList extends StatelessWidget {
 
   Widget _headerLabel(BuildContext context, String label) {
     return SizedBox(
-      width: 40,
+      width: 44,
       child: Text(
         label,
         textAlign: TextAlign.center,
@@ -114,66 +123,118 @@ class DhikrBreakdownList extends StatelessWidget {
   }
 
   Widget _breakdownRow(BuildContext context, DhikrBreakdownRow row) {
-    final progress = row.monthCount == 0
-        ? 0.0
-        : (row.weekCount / row.monthCount).clamp(0.0, 1.0);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            SizedBox(
-              width: 40,
-              child: Text(
-                formatNumber(context, row.weekCount),
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w700,
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: 40,
-              child: Text(
-                formatNumber(context, row.monthCount),
-                textAlign: TextAlign.center,
-                style:
-                    const TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
-              ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Text(
-                row.title,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
-              ),
-            ),
-          ],
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 9),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Theme.of(context)
+                .textTheme
+                .bodySmall!
+                .color!
+                .withValues(alpha: 0.1),
+          ),
         ),
-        const SizedBox(height: 6),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: LinearProgressIndicator(
-            value: progress,
-            minHeight: 6,
-            backgroundColor: Theme.of(context)
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  row.title,
+                  textDirection: TextDirection.rtl,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
+                ),
+                if (row.transliteration != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    row.transliteration!,
+                    textDirection: TextDirection.ltr,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(context).colorScheme.primary,
+                    ),
+                  ),
+                ],
+                if (row.translation != null) ...[
+                  const SizedBox(height: 2),
+                  Text(
+                    row.translation!,
+                    textDirection: TextDirection.ltr,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Theme.of(context)
+                          .textTheme
+                          .bodySmall!
+                          .color!
+                          .withValues(alpha: 0.6),
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          ),
+          const SizedBox(width: 12),
+          _countChip(
+            context,
+            formatNumber(context, row.weekCount),
+            background:
+                Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
+            color: Theme.of(context).colorScheme.primary,
+          ),
+          const SizedBox(width: 8),
+          _countChip(
+            context,
+            formatNumber(context, row.monthCount),
+            background: Theme.of(context)
                 .textTheme
                 .bodySmall!
                 .color!
                 .withValues(alpha: 0.08),
-            valueColor: AlwaysStoppedAnimation<Color>(
-                Theme.of(context).colorScheme.primary),
+            color: Theme.of(context).textTheme.bodyLarge!.color!,
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget _countChip(
+    BuildContext context,
+    String text, {
+    required Color background,
+    required Color color,
+  }) {
+    return Container(
+      width: 44,
+      padding: const EdgeInsets.symmetric(vertical: 5),
+      decoration: BoxDecoration(
+        color: background,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        text,
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          fontSize: 15,
+          fontWeight: FontWeight.w900,
+          color: color,
         ),
-      ],
+      ),
     );
   }
 }

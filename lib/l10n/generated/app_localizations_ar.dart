@@ -193,16 +193,8 @@ class AppLocalizationsAr extends AppLocalizations {
   String get hasanatGrowth => 'نمو الحسنات';
 
   @override
-  String get overallAdhkarStreak => 'التتابع العام للأذكار';
-
-  @override
-  String consecutiveDays(String count) {
-    return '$count يوم متتالي';
-  }
-
-  @override
-  String longestOverall(String count) {
-    return 'الأطول إجمالاً: $count يوم';
+  String longestStreakLabel(String count) {
+    return 'الأطول: $count يوم';
   }
 
   @override
@@ -212,6 +204,27 @@ class AppLocalizationsAr extends AppLocalizations {
   String adhkarOutOf21(String count) {
     return '$count / 21 ذكر';
   }
+
+  @override
+  String get weekdayMon => 'ن';
+
+  @override
+  String get weekdayTue => 'ث';
+
+  @override
+  String get weekdayWed => 'ر';
+
+  @override
+  String get weekdayThu => 'خ';
+
+  @override
+  String get weekdayFri => 'ج';
+
+  @override
+  String get weekdaySat => 'س';
+
+  @override
+  String get weekdaySun => 'ح';
 
   @override
   String get settingsTitle => 'الإعدادات';

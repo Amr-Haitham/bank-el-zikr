@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'components/category_streak_ring_row.dart';
 import 'components/dhikr_breakdown_list.dart';
 import 'components/hasanat_growth_card.dart';
-import 'components/journey_streak_card.dart';
 import 'components/weekly_activity_grid.dart';
 
 class AccountBalanceScreen extends StatelessWidget {
@@ -46,11 +45,6 @@ class AccountBalanceScreen extends StatelessWidget {
                             .copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: 20),
-                      JourneyStreakCard(
-                        currentStreak: stats.overallCurrentStreak,
-                        longestStreak: stats.overallLongestStreak,
-                      ),
-                      const SizedBox(height: 16),
                       BlocBuilder<CounterCubit,
                           RequestState<CounterStateEntity>>(
                         builder: (context, counterState) {
@@ -67,7 +61,9 @@ class AccountBalanceScreen extends StatelessWidget {
                       const SizedBox(height: 16),
                       CategoryStreakRingRow(
                         eveningCurrentStreak: stats.eveningCurrentStreak,
+                        eveningLongestStreak: stats.eveningLongestStreak,
                         morningCurrentStreak: stats.morningCurrentStreak,
+                        morningLongestStreak: stats.morningLongestStreak,
                       ),
                       const SizedBox(height: 16),
                       WeeklyActivityGrid(

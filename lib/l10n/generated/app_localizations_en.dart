@@ -194,16 +194,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hasanatGrowth => 'Hasanat growth';
 
   @override
-  String get overallAdhkarStreak => 'Overall adhkar streak';
-
-  @override
-  String consecutiveDays(String count) {
-    return '$count consecutive days';
-  }
-
-  @override
-  String longestOverall(String count) {
-    return 'Longest overall: $count days';
+  String longestStreakLabel(String count) {
+    return 'Longest: $count days';
   }
 
   @override
@@ -213,6 +205,27 @@ class AppLocalizationsEn extends AppLocalizations {
   String adhkarOutOf21(String count) {
     return '$count / 21 adhkar';
   }
+
+  @override
+  String get weekdayMon => 'Mon';
+
+  @override
+  String get weekdayTue => 'Tue';
+
+  @override
+  String get weekdayWed => 'Wed';
+
+  @override
+  String get weekdayThu => 'Thu';
+
+  @override
+  String get weekdayFri => 'Fri';
+
+  @override
+  String get weekdaySat => 'Sat';
+
+  @override
+  String get weekdaySun => 'Sun';
 
   @override
   String get settingsTitle => 'Settings';

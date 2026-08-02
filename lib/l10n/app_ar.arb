@@ -85,13 +85,8 @@
   "yearLabel": "السنة",
   "noDhikrRecorded": "لا يوجد ذكر مسجل بعد",
   "hasanatGrowth": "نمو الحسنات",
-  "overallAdhkarStreak": "التتابع العام للأذكار",
-  "consecutiveDays": "{count} يوم متتالي",
-  "@consecutiveDays": {
-    "placeholders": { "count": { "type": "String" } }
-  },
-  "longestOverall": "الأطول إجمالاً: {count} يوم",
-  "@longestOverall": {
+  "longestStreakLabel": "الأطول: {count} يوم",
+  "@longestStreakLabel": {
     "placeholders": { "count": { "type": "String" } }
   },
   "thisWeek": "هذا الأسبوع",
@@ -99,6 +94,13 @@
   "@adhkarOutOf21": {
     "placeholders": { "count": { "type": "String" } }
   },
+  "weekdayMon": "ن",
+  "weekdayTue": "ث",
+  "weekdayWed": "ر",
+  "weekdayThu": "خ",
+  "weekdayFri": "ج",
+  "weekdaySat": "س",
+  "weekdaySun": "ح",
 
   "settingsTitle": "الإعدادات",
   "appTheme": "مظهر التطبيق",

@@ -17,6 +17,19 @@ class WeeklyActivityGrid extends StatelessWidget {
   static const _eveningColor = Color(0xff6C63FF);
   static const _zikrColor = Color(0xff34C759);
 
+  String _weekdayLabel(BuildContext context, int weekday) {
+    final l10n = AppLocalizations.of(context);
+    return switch (weekday) {
+      DateTime.monday => l10n.weekdayMon,
+      DateTime.tuesday => l10n.weekdayTue,
+      DateTime.wednesday => l10n.weekdayWed,
+      DateTime.thursday => l10n.weekdayThu,
+      DateTime.friday => l10n.weekdayFri,
+      DateTime.saturday => l10n.weekdaySat,
+      _ => l10n.weekdaySun,
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +37,7 @@ class WeeklyActivityGrid extends StatelessWidget {
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -37,7 +50,7 @@ class WeeklyActivityGrid extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
                   color: Theme.of(context).primaryColor.withValues(alpha: 0.12),
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
                   AppLocalizations.of(context)
@@ -60,46 +73,57 @@ class WeeklyActivityGrid extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: days.map((day) {
-              final column = Column(
-                children: [
-                  _cell(day.hasMorning ? _morningColor : null),
-                  const SizedBox(height: 6),
-                  _cell(day.hasEvening ? _eveningColor : null),
-                  const SizedBox(height: 6),
-                  _cell(day.hasZikr ? _zikrColor : null),
-                  const SizedBox(height: 8),
-                  Text(
-                    day.label,
-                    style: TextStyle(
-                      fontSize: 11,
-                      fontWeight:
-                          day.isToday ? FontWeight.w800 : FontWeight.w500,
-                      color: day.isToday
-                          ? Theme.of(context).primaryColor
-                          : Theme.of(context)
-                              .textTheme
-                              .bodySmall!
-                              .color!
-                              .withValues(alpha: 0.6),
-                    ),
-                  ),
-                ],
-              );
-
-              if (!day.isToday) return column;
-
-              return Container(
-                padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+              final cellsColumn = Container(
+                padding: const EdgeInsets.all(3),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: Theme.of(context).primaryColor,
+                    color: day.isToday
+                        ? Theme.of(context).primaryColor
+                        : Colors.transparent,
                     width: 1.5,
                   ),
                 ),
-                child: column,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _cell(day.hasMorning ? _morningColor : null),
+                    const SizedBox(height: 3),
+                    _cell(day.hasEvening ? _eveningColor : null),
+                    const SizedBox(height: 3),
+                    _cell(day.hasZikr ? _zikrColor : null),
+                  ],
+                ),
+              );
+
+              return Expanded(
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 1),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      cellsColumn,
+                      const SizedBox(height: 8),
+                      Text(
+                        _weekdayLabel(context, day.date.weekday),
+                        style: TextStyle(
+                          fontSize: 11,
+                          fontWeight: day.isToday
+                              ? FontWeight.w800
+                              : FontWeight.w500,
+                          color: day.isToday
+                              ? Theme.of(context).primaryColor
+                              : Theme.of(context)
+                                  .textTheme
+                                  .bodySmall!
+                                  .color!
+                                  .withValues(alpha: 0.6),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               );
             }).toList(),
           ),
@@ -124,11 +148,11 @@ class WeeklyActivityGrid extends StatelessWidget {
 
   Widget _cell(Color? color) {
     return Container(
-      width: 22,
-      height: 16,
+      width: double.infinity,
+      height: 24,
       decoration: BoxDecoration(
         color: color ?? Colors.grey.withValues(alpha: 0.15),
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(10),
       ),
     );
   }

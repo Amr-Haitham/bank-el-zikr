@@ -85,11 +85,19 @@
   "yearLabel": "Year",
   "noDhikrRecorded": "No dhikr recorded yet",
   "hasanatGrowth": "Hasanat growth",
-  "overallAdhkarStreak": "Overall adhkar streak",
-  "consecutiveDays": "{count} consecutive days",
-  "longestOverall": "Longest overall: {count} days",
+  "longestStreakLabel": "Longest: {count} days",
+  "@longestStreakLabel": {
+    "placeholders": { "count": { "type": "String" } }
+  },
   "thisWeek": "This week",
   "adhkarOutOf21": "{count} / 21 adhkar",
+  "weekdayMon": "Mon",
+  "weekdayTue": "Tue",
+  "weekdayWed": "Wed",
+  "weekdayThu": "Thu",
+  "weekdayFri": "Fri",
+  "weekdaySat": "Sat",
+  "weekdaySun": "Sun",
 
   "settingsTitle": "Settings",
   "appTheme": "App theme",
