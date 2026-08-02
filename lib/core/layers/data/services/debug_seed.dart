@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
-import 'package:bank_el_ziker/features/azkar_records/data/models/day_zikr_record_model.dart';
+import 'package:bank_el_ziker/features/azkar_records/data/models/day_record_model.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_model.dart';
 import 'package:bank_el_ziker/features/zikr_counter/data/models/general_data_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -15,25 +15,28 @@ Future<void> seedDebugHomeData() async {
   await generalDataBox.put(
     "generalData",
     GeneralData(
-      currentZikrId: 1,
+      currentZikrKey: 'general_001',
       currentCounter: 0,
       currentGoal: null,
       accountBalance: 14850,
     ),
   );
 
-  final dayZikrRecordBox =
-      await Hive.openBox<DayZikrRecord>(dayZikrRecordHiveBox);
-  await dayZikrRecordBox.clear();
+  final dayRecordBox = await Hive.openBox<DayRecord>(dayRecordHiveBox);
+  await dayRecordBox.clear();
   final today = DateTime.now();
   final todayOnly = DateTime(today.year, today.month, today.day);
   for (var i = 0; i < 12; i++) {
     final d = todayOnly.subtract(Duration(days: i));
-    await dayZikrRecordBox.add(DayZikrRecord(
-      id: dateIdGenerator(d),
-      dateTime: d,
-      azkarRecordById: {1: i == 0 ? 320 : 50},
-    ));
+    final id = dateIdGenerator(d);
+    await dayRecordBox.put(
+      id,
+      DayRecord(
+        id: id,
+        date: d,
+        repsByZikrKey: {'general_001': i == 0 ? 320 : 50},
+      ),
+    );
   }
 
   // TODO revert: forces the verse-of-the-day card to always show the one

@@ -1,5 +1,5 @@
 import '../../../../core/constants/type_definitions.dart';
-import '../entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 
 abstract class AzkarRepository {
   /// Get all azkar

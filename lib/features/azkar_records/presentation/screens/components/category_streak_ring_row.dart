@@ -9,17 +9,31 @@ class CategoryStreakRingRow extends StatelessWidget {
     required this.eveningLongestStreak,
     required this.morningCurrentStreak,
     required this.morningLongestStreak,
+    required this.sleepCurrentStreak,
+    required this.sleepLongestStreak,
   });
 
   final int eveningCurrentStreak;
   final int eveningLongestStreak;
   final int morningCurrentStreak;
   final int morningLongestStreak;
+  final int sleepCurrentStreak;
+  final int sleepLongestStreak;
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
+        Expanded(
+          child: CategoryStreakRing(
+            title: AppLocalizations.of(context).morningAdhkar,
+            currentStreak: morningCurrentStreak,
+            longestStreak: morningLongestStreak,
+            color: const Color(0xffFB8C3C),
+            icon: Icons.wb_sunny_rounded,
+          ),
+        ),
+        const SizedBox(width: 12),
         Expanded(
           child: CategoryStreakRing(
             title: AppLocalizations.of(context).eveningAdhkar,
@@ -32,11 +46,11 @@ class CategoryStreakRingRow extends StatelessWidget {
         const SizedBox(width: 12),
         Expanded(
           child: CategoryStreakRing(
-            title: AppLocalizations.of(context).morningAdhkar,
-            currentStreak: morningCurrentStreak,
-            longestStreak: morningLongestStreak,
-            color: const Color(0xffFB8C3C),
-            icon: Icons.wb_sunny_rounded,
+            title: AppLocalizations.of(context).sleepAdhkar,
+            currentStreak: sleepCurrentStreak,
+            longestStreak: sleepLongestStreak,
+            color: const Color(0xff3E7BFA),
+            icon: Icons.bedtime_outlined,
           ),
         ),
       ],

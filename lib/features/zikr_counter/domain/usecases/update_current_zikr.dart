@@ -10,12 +10,12 @@ class UpdateCurrentZikr implements UseCase<void, UpdateCurrentZikrParams> {
 
   @override
   Future<RequestResult<void>> call(UpdateCurrentZikrParams params) async {
-    return await repository.updateCurrentZikr(params.zikrId);
+    return await repository.updateCurrentZikr(params.zikrKey);
   }
 }
 
 class UpdateCurrentZikrParams {
-  final int zikrId;
+  final String zikrKey;
 
-  UpdateCurrentZikrParams({required this.zikrId});
+  UpdateCurrentZikrParams({required this.zikrKey});
 }

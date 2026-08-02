@@ -1,6 +1,6 @@
 import '../../../../core/layers/presentation/request_cubit/request_cubit.dart';
 import '../../../../core/layers/domain/usecases/usecase.dart';
-import '../../domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import '../../domain/usecases/add_custom_zikr.dart';
 import '../../domain/usecases/delete_custom_zikr.dart';
 import '../../domain/usecases/get_all_azkar.dart';

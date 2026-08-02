@@ -8,7 +8,7 @@ import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cub
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/list_tile_of_zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/select_zikr_header.dart';
@@ -99,7 +99,7 @@ class AzkarScreen extends StatelessWidget {
             child: Center(child: CircularProgressIndicator()),
           ),
           success: (counter) {
-            final selectedZikrId = counter.currentZikrId;
+            final selectedZikrKey = counter.currentZikrKey;
 
             return BlocBuilder<GetAllAzkarCubit,
                 RequestState<List<ZikrEntity>>>(
@@ -119,11 +119,11 @@ class AzkarScreen extends StatelessWidget {
                           onTap: () {
                             context
                                 .read<CounterCubit>()
-                                .setCurrentZikr(azkar[index].id);
+                                .setCurrentZikr(azkar[index].key);
                             context.router.maybePop();
                           },
                           zikr: azkar[index],
-                          isSelected: selectedZikrId == azkar[index].id,
+                          isSelected: selectedZikrKey == azkar[index].key,
                         );
                       },
                       separatorBuilder: (BuildContext context, int index) {

@@ -11,7 +11,7 @@ abstract class CounterRepository {
   Future<RequestResult<void>> updateCounter(int counter);
 
   /// Update the current active zikr
-  Future<RequestResult<void>> updateCurrentZikr(int zikrId);
+  Future<RequestResult<void>> updateCurrentZikr(String zikrKey);
 
   /// Update the goal for current zikr
   Future<RequestResult<void>> updateGoal(int? goal);

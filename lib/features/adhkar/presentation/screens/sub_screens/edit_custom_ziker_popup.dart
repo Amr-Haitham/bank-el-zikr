@@ -1,5 +1,6 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/initial_data.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/popup_functions.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_current_zikr_cubit.dart';
@@ -8,7 +9,7 @@ import 'package:bank_el_ziker/features/adhkar/presentation/cubit/update_custom_z
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -138,13 +139,17 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
             // Delete the zikr itself
             context.read<DeleteCustomZikrCubit>().deleteZikr(widget.zikr.id);
 
-            // If it was selected, reset to a default zikr (ID 1)
+            // If it was selected, reset to the first general zikr
             if (widget.isSelected) {
-              context.read<UpdateCurrentZikrCubit>().executeUpdate(1);
+              context
+                  .read<UpdateCurrentZikrCubit>()
+                  .executeUpdate(InitialData.generalAzkar.first.key);
             }
 
             // Delete associated records
-            context.read<DeleteZikrRecordCubit>().executeDelete(widget.zikr.id);
+            context
+                .read<DeleteZikrRecordCubit>()
+                .executeDelete(widget.zikr.key);
 
             Navigator.of(context).pop(); // Close dialog
             Navigator.of(context).pop(); // Close popup

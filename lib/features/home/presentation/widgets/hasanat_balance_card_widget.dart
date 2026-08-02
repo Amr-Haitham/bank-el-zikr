@@ -92,7 +92,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                     builder: (context, state) {
                       final depositedToday = state.whenOrNull(
                             success: (record) => record
-                                .todayCountsByZikrId.values
+                                .todayCountsByZikrKey.values
                                 .fold<int>(0, (sum, v) => sum + v),
                           ) ??
                           0;

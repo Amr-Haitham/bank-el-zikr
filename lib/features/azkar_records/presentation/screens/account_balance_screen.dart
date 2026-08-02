@@ -1,10 +1,10 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/domain/entities/daily_activity_entry.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/domain/entities/counter_state.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -24,8 +24,10 @@ class AccountBalanceScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: SafeArea(
-        child: BlocBuilder<DailyActivityLogCubit, List<DailyActivityEntry>>(
-          builder: (context, entries) {
+        child: BlocBuilder<DayRecordCubit, RequestState<List<DayRecordEntity>>>(
+          builder: (context, state) {
+            final entries = state.whenOrNull(success: (e) => e) ??
+                const <DayRecordEntity>[];
             final stats = JourneyStats(entries);
 
             return CustomScrollView(
@@ -64,6 +66,8 @@ class AccountBalanceScreen extends StatelessWidget {
                         eveningLongestStreak: stats.eveningLongestStreak,
                         morningCurrentStreak: stats.morningCurrentStreak,
                         morningLongestStreak: stats.morningLongestStreak,
+                        sleepCurrentStreak: stats.sleepCurrentStreak,
+                        sleepLongestStreak: stats.sleepLongestStreak,
                       ),
                       const SizedBox(height: 16),
                       WeeklyActivityGrid(

@@ -8,9 +8,9 @@ class UpdateCurrentZikrCubit extends RequestCubit<void> {
     required this.updateCurrentZikr,
   }) : super();
 
-  Future<void> executeUpdate(int zikrId) async {
+  Future<void> executeUpdate(String zikrKey) async {
     execute(
         request: () =>
-            updateCurrentZikr(UpdateCurrentZikrParams(zikrId: zikrId)));
+            updateCurrentZikr(UpdateCurrentZikrParams(zikrKey: zikrKey)));
   }
 }

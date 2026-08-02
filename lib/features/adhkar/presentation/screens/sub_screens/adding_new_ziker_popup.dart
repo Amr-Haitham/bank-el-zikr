@@ -1,10 +1,11 @@
 import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -90,6 +91,7 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
         // Create new ZikrEntity entity
         final newZikr = ZikrEntity(
           id: 0, // Will be assigned by repository
+          key: generateCustomZikrKey(),
           content: newZikerController.text.trim(),
           description: newZikrDescription.text.trim().isNotEmpty
               ? newZikrDescription.text.trim()

@@ -1,4 +1,4 @@
-import 'package:bank_el_ziker/core/layers/data/models/zikr_model.dart';
+import 'package:bank_el_ziker/core/data/models/zikr_model.dart';
 import 'package:hive/hive.dart';
 
 abstract class ZikrCategoryLocalDataSource {

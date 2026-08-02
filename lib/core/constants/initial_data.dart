@@ -1,10 +1,14 @@
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr_category.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
+import 'package:flutter/material.dart';
 
 class InitialData {
   static List<ZikrEntity> generalAzkar = [
     const ZikrEntity(
         id: 1,
+        key: 'general_001',
         category: 'general',
         content: "سبحان الله",
         contentTransliteration: "Subhan Allah",
@@ -15,6 +19,7 @@ class InitialData {
             "قال رَسُولَ اللَّهِ ﷺ: ( أَيَعْجِزُ أَحَدُكُمْ أَنْ يَكْسِبَ كُلَّ يَومٍ أَلْفَ حَسَنَةٍ؟ فَسَأَلَهُ سَائِلٌ مِن جُلَسَائِهِ: كيفَ يَكْسِبُ أَحَدُنَا أَلْفَ حَسَنَةٍ؟ قالَ: يُسَبِّحُ مِائَةَ تَسْبِيحَةٍ، فيُكْتَبُ له أَلْفُ حَسَنَةٍ، أَوْ يُحَطُّ عنْه أَلْفُ خَطِيئَةٍ). رواه مسلم"),
     const ZikrEntity(
         id: 2,
+        key: 'general_002',
         category: 'general',
         content: "الحمد لله",
         contentTransliteration: "Alhamdu lillah",
@@ -25,6 +30,7 @@ class InitialData {
             "قال الله تعالى: (وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِن شَكَرْتُمْ لَأَزِيدَنَّكُمْ ۖ وَلَئِن كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ). ابراهيم 7.و قال رَسُولَ اللَّهِ ﷺ: (الطُّهُورُ شَطْرُ الإيمانِ، والْحَمْدُ لِلَّهِ تَمْلأُ المِيزانَ). رواه مسلم"),
     const ZikrEntity(
         id: 3,
+        key: 'general_003',
         category: 'general',
         content: "لا إله إلا الله",
         contentTransliteration: "La ilaha illa Allah",
@@ -35,6 +41,7 @@ class InitialData {
             "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). رواه البخاري"),
     const ZikrEntity(
         id: 4,
+        key: 'general_004',
         category: 'general',
         content: "الله أكبر",
         contentTransliteration: "Allahu Akbar",
@@ -45,6 +52,7 @@ class InitialData {
             "التكبير جزم وإعلان عن عظمة الله وتعظيم لشعائره. قال الله تعالى: (وَرَبَّكَ فَكَبِّرْ). المدثر 3. و قال: (وَقُلِ اِلْحَمْدُ لِلَّهِ اِلذِي لَمْ يَتَّخِذْ وَلَدًا وَلَمْ يَكُن لَّهُ شَرِيكٌ فِي اِلْمُلْكِ وَلَمْ يَكُن لَّهُ وَلِيٌّ مِّنَ اَلذُّلِّ. وَكَبِّرْهُ تَكْبِيرًا). الإسراء 111"),
     const ZikrEntity(
         id: 5,
+        key: 'general_005',
         category: 'general',
         content: "سبحان الله والحمد لله ولا إله إلا الله و الله أكبر",
         contentTransliteration:
@@ -57,6 +65,7 @@ class InitialData {
             "الأذكار السابقة مجمعة. قال فيهن النبي ﷺ الكثير من الأحاديث. فقال ﷺ : (أَحَبُّ الكَلامِ إلى اللهِ أرْبَعٌ: سُبْحانَ اللهِ، والْحَمْدُ لِلَّهِ، ولا إلَهَ إلَّا اللَّهُ، واللَّهُ أكْبَرُ) رواه مسلم. و قال: ( لَأنْ أقولَ : سُبحانَ اللهِ والحمدُ للهِ ولا إلهَ إلَّا اللهُ واللهُ أكبَرُ أحَبُّ إليَّ ممَّا طلَعَتْ عليه الشَّمسُ). رواه ابن حبان"),
     const ZikrEntity(
         id: 6,
+        key: 'general_006',
         category: 'general',
         content: "سبحان الله وبحمده",
         contentTransliteration: "Subhan Allahi wa bihamdih",
@@ -67,6 +76,7 @@ class InitialData {
             "في حديث أبي هريرة يقول رسول الله ﷺ: (من قال : سبحان اللهِ وبحمدِه مائةَ مرةٍ غُفرَتْ له ذنوبُه وإنْ كانتْ مثلَ زبَدِ البحرِ). رواه الترمذي"),
     const ZikrEntity(
         id: 7,
+        key: 'general_007',
         category: 'general',
         content: "أستغفر الله",
         contentTransliteration: "Astaghfirullah",
@@ -77,6 +87,7 @@ class InitialData {
             "قال الله عز وجل: (فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا*يُرْسِلِ السَّمَاءَ عَلَيْكُم مِّدْرَارًا*وَيُمْدِدْكُم بِأَمْوَالٍ وَبَنِينَ وَيَجْعَل لَّكُمْ جَنَّاتٍ وَيَجْعَل لَّكُمْ أَنْهَارًا). سورة نوح : 10 - 12"),
     const ZikrEntity(
         id: 8,
+        key: 'general_008',
         category: 'general',
         content: "حسبي الله ونعم الوكيل",
         contentTransliteration: "Hasbunallahu wa ni'mal wakeel",
@@ -88,6 +99,7 @@ class InitialData {
             "يقول الله تعالى: ( الَّذِينَ قَالَ لَهُمُ النَّاسُ إِنَّ النَّاسَ قَدْ جَمَعُواْ لَكُمْ فَاخْشَوْهُمْ فَزَادَهُمْ إِيمَاناً وَقَالُواْ حَسْبُنَا اللّهُ وَنِعْمَ الْوَكِيلُ. فَانقَلَبُواْ بِنِعْمَةٍ مِّنَ اللّهِ وَفَضْلٍ لَّمْ يَمْسَسْهُمْ سُوءٌ وَاتَّبَعُواْ رِضْوَانَ اللّهِ ).  سورة آل عمران : 173 – 174"),
     const ZikrEntity(
         id: 9,
+        key: 'general_009',
         category: 'general',
         content: "لا إله إلا أنت سبحانك إني كنت من الظالمين",
         contentTransliteration:
@@ -100,6 +112,7 @@ class InitialData {
             "قال رسول الله ﷺ:(دعوةُ ذي النُّونِ إذ دعا وهو في بطنِ الحوتِ لا إلهَ إلَّا أنتَ سبحانَك إنِّي كنتُ من الظالمينَ فإنَّه لم يدعُ بها رجلٌ مسلمٌ في شيءٍ قطُّ إلَّا استجاب اللهُ له). رواه الترمذي"),
     const ZikrEntity(
         id: 10,
+        key: 'general_010',
         category: 'general',
         content: "اللهم صل على سيدنا محمد",
         contentTransliteration: "Allahumma salli ala sayyidina Muhammad",
@@ -110,6 +123,7 @@ class InitialData {
             "عَنْ أَبِي هُرَيْرَةَ،أَنَّ رَسُولَ اللهِ ﷺ قَالَ: (مَنْ صَلَّى عَلَيَّ وَاحِدَةً صَلَّى الله عَلَيْهِ عَشْرًا). رواه مسلم"),
     const ZikrEntity(
         id: 11,
+        key: 'general_011',
         category: 'general',
         content:
             "لا إله إلا الله وحده لا شريك له له الملك وله الحمد وهو على كل شيء قدير",
@@ -123,6 +137,7 @@ class InitialData {
             "في حديث أبي هريرة يقول رسول الله ﷺ:(لا إلَهَ إلَّا اللَّهُ، وحْدَهُ لا شَرِيكَ له، له المُلْكُ وله الحَمْدُ، وهو علَى كُلِّ شَيءٍ قَدِيرٌ، في يَومٍ مِئَةَ مَرَّةٍ؛ كانَتْ له عَدْلَ عَشْرِ رِقابٍ، وكُتِبَتْ له مِئَةُ حَسَنَةٍ، ومُحِيَتْ عنْه مِئَةُ سَيِّئَةٍ، وكانَتْ له حِرْزًا مِنَ الشَّيْطانِ يَومَهُ ذلكَ حتَّى يُمْسِيَ، ولَمْ يَأْتِ أحَدٌ بأَفْضَلَ ممَّا جاءَ به، إلَّا أحَدٌ عَمِلَ أكْثَرَ مِن ذلكَ). رواه البخاري"),
     const ZikrEntity(
         id: 12,
+        key: 'general_012',
         category: 'general',
         content: "سبحان الله وبحمده، سبحان الله العظيم",
         contentTransliteration:
@@ -135,6 +150,7 @@ class InitialData {
             "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). رواه البخاري"),
     const ZikrEntity(
         id: 13,
+        key: 'general_013',
         category: 'general',
         content: "لا حول ولا قوة إلا بالله",
         contentTransliteration: "La hawla wa la quwwata illa billah",
@@ -148,6 +164,7 @@ class InitialData {
   static List<ZikrEntity> morningAzkar = [
     const ZikrEntity(
         id: 1,
+        key: 'morning_001',
         category: 'morning',
         content: """
 أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ  بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيم {اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ} [آية الكرسى - البقرة 255]. """,
@@ -161,6 +178,7 @@ class InitialData {
             "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great."),
     const ZikrEntity(
         id: 2,
+        key: 'morning_002',
         category: 'morning',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
 قُلْ هُوَ ٱللَّهُ أَحَدٌ، ٱللَّهُ ٱلصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ، وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ""",
@@ -174,6 +192,7 @@ class InitialData {
             "Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent."),
     const ZikrEntity(
         id: 3,
+        key: 'morning_003',
         category: 'morning',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
 قُلْ أَعُوذُ بِرَبِّ ٱلْفَلَقِ، مِن شَرِّ مَا خَلَقَ، وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِن شَرِّ ٱلنَّفَّٰثَٰتِ فِى ٱلْعُقَدِ، وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ""",
@@ -187,6 +206,7 @@ class InitialData {
             "Say: I seek refuge in the Lord of daybreak, from the evil of that which He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies."),
     const ZikrEntity(
         id: 4,
+        key: 'morning_004',
         category: 'morning',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
 قُلْ أَعُوذُ بِرَبِّ ٱلنَّاسِ، مَلِكِ ٱلنَّاسِ، إِلَٰهِ ٱلنَّاسِ، مِن شَرِّ ٱلْوَسْوَاسِ ٱلْخَنَّاسِ، ٱلَّذِى يُوَسْوِسُ فِى صُدُورِ ٱلنَّاسِ، مِنَ ٱلْجِنَّةِ وَٱلنَّاسِ.""",
@@ -200,6 +220,7 @@ class InitialData {
             "Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer who whispers [evil] into the breasts of mankind, from among the jinn and mankind."),
     const ZikrEntity(
         id: 5,
+        key: 'morning_005',
         category: 'morning',
         content:
             """أَصْـبَحْنا وَأَصْـبَحَ المُـلْكُ لله وَالحَمدُ لله ، لا إلهَ إلاّ اللّهُ وَحدَهُ لا شَريكَ لهُ، لهُ المُـلكُ ولهُ الحَمْـد، وهُوَ على كلّ شَيءٍ قدير ، رَبِّ أسْـأَلُـكَ خَـيرَ ما في هـذا اليوم وَخَـيرَ ما بَعْـدَه ، وَأَعـوذُ بِكَ مِنْ شَـرِّ ما في هـذا اليوم وَشَرِّ ما بَعْـدَه، رَبِّ أَعـوذُبِكَ مِنَ الْكَسَـلِ وَسـوءِ الْكِـبَر ، رَبِّ أَعـوذُ بِكَ مِنْ عَـذابٍ في النّـارِ وَعَـذابٍ في القَـبْر.""",
@@ -210,6 +231,7 @@ class InitialData {
             "We have reached the morning and at this very time all sovereignty belongs to Allah, and all praise is for Allah. None has the right to be worshipped except Allah, alone, without partner, to Him belongs all sovereignty and praise and He is over all things omnipotent. My Lord, I ask You for the good of this day and the good of what follows it and I take refuge in You from the evil of this day and the evil of what follows it. My Lord, I take refuge in You from laziness and senility. My Lord, I take refuge in You from torment in the Fire and punishment in the grave."),
     const ZikrEntity(
         id: 6,
+        key: 'morning_006',
         category: 'morning',
         title: 'سيد الاستغفار',
         titleEn: "The Master of Seeking Forgiveness",
@@ -222,6 +244,7 @@ class InitialData {
             "O Allah, You are my Lord, none has the right to be worshipped except You. You created me and I am Your servant, and I abide by Your covenant and promise as best I can. I take refuge in You from the evil of what I have done. I acknowledge Your favor upon me, and I acknowledge my sin, so forgive me, for none forgives sins except You."),
     const ZikrEntity(
         id: 7,
+        key: 'morning_007',
         category: 'morning',
         content:
             """رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً.""",
@@ -232,6 +255,7 @@ class InitialData {
             "I am pleased with Allah as my Lord, with Islam as my religion and with Muhammad ﷺ as my Prophet."),
     const ZikrEntity(
         id: 8,
+        key: 'morning_008',
         category: 'morning',
         content:
             """اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.""",
@@ -242,6 +266,7 @@ class InitialData {
             "O Allah, I have reached the morning and call upon You, the bearers of Your Throne, Your angels and all creation to witness that You are Allah, none has the right to be worshipped except You alone, without partner, and that Muhammad is Your servant and Messenger."),
     const ZikrEntity(
         id: 9,
+        key: 'morning_009',
         category: 'morning',
         content:
             """اللّهُـمَّ ما أَصْبَـَحَ بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر.""",
@@ -252,6 +277,7 @@ class InitialData {
             "O Allah, whatever blessing I or any of Your creation have risen upon, is from You alone, without partner, so for You is all praise and unto You all thanks."),
     const ZikrEntity(
         id: 10,
+        key: 'morning_010',
         category: 'morning',
         content: """
 حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم. """,
@@ -262,6 +288,7 @@ class InitialData {
             "Allah is sufficient for me, none has the right to be worshipped except Him, upon Him I rely, and He is Lord of the mighty Throne."),
     const ZikrEntity(
         id: 11,
+        key: 'morning_011',
         category: 'morning',
         content:
             """بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم.""",
@@ -274,6 +301,7 @@ class InitialData {
             "In the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, the All-Knowing."),
     const ZikrEntity(
         id: 12,
+        key: 'morning_012',
         category: 'morning',
         content:
             """اللّهُـمَّ بِكَ أَصْـبَحْنا وَبِكَ أَمْسَـينا ، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ النُّـشُور. """,
@@ -284,6 +312,7 @@ class InitialData {
             "O Allah, by You we enter the morning and by You we enter the evening, by You we live and by You we die, and to You is the resurrection."),
     const ZikrEntity(
         id: 13,
+        key: 'morning_013',
         category: 'morning',
         content:
             """أَصْبَـحْـنا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ. """,
@@ -294,6 +323,7 @@ class InitialData {
             "We have risen upon the natural religion of Islam, the word of sincere devotion, the religion of our Prophet Muhammad ﷺ, and the way of our father Abraham, who was upright in submission and was not of those who associate partners with Allah."),
     const ZikrEntity(
         id: 14,
+        key: 'morning_014',
         category: 'morning',
         content:
             """سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه.  """,
@@ -304,6 +334,7 @@ class InitialData {
             "Glory is to Allah and praise is to Him, by the number of His creation, in accordance with His pleasure, by the weight of His Throne, and equal to the ink of His words."),
     const ZikrEntity(
         id: 15,
+        key: 'morning_015',
         category: 'morning',
         content:
             """اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ.  """,
@@ -314,6 +345,7 @@ class InitialData {
             "O Allah, grant my body health. O Allah, grant my hearing health. O Allah, grant my sight health. None has the right to be worshipped except You."),
     const ZikrEntity(
         id: 16,
+        key: 'morning_016',
         category: 'morning',
         content:
             """اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ.""",
@@ -324,6 +356,7 @@ class InitialData {
             "O Allah, I take refuge in You from disbelief and poverty, and I take refuge in You from the punishment of the grave. None has the right to be worshipped except You."),
     const ZikrEntity(
         id: 17,
+        key: 'morning_017',
         category: 'morning',
         content:
             """اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي.""",
@@ -334,6 +367,7 @@ class InitialData {
             "O Allah, I ask You for pardon and well-being in this life and the next. O Allah, I ask You for pardon and well-being in my religious and worldly affairs, and my family and my wealth. O Allah, veil my faults and calm my fears. O Allah, guard me from before me and behind me, from my right and my left, and from above me, and I take refuge in Your greatness from being taken unaware from beneath me."),
     const ZikrEntity(
         id: 18,
+        key: 'morning_018',
         category: 'morning',
         content:
             """يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ. """,
@@ -344,6 +378,7 @@ class InitialData {
             "O Ever-Living, O Self-Subsisting and Supporter of all, by Your mercy I seek relief. Rectify all my affairs and do not leave me to myself, even for the blink of an eye."),
     const ZikrEntity(
         id: 19,
+        key: 'morning_019',
         category: 'morning',
         content:
             """أَصْبَـحْـنا وَأَصْبَـحْ المُـلكُ للهِ رَبِّ العـالَمـين ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ خَـيْرَ هـذا الـيَوْم ، فَـتْحَهُ ، وَنَصْـرَهُ ، وَنـورَهُ وَبَـرَكَتَـهُ ، وَهُـداهُ ، وَأَعـوذُ بِـكَ مِـنْ شَـرِّ ما فـيهِ وَشَـرِّ ما بَعْـدَه. """,
@@ -354,6 +389,7 @@ class InitialData {
             "We have reached the morning and at this very time all sovereignty belongs to Allah, Lord of the worlds. O Allah, I ask You for the good of this day: its triumph, its help, its light, its blessings, and its guidance, and I take refuge in You from the evil in it and the evil that follows it."),
     const ZikrEntity(
         id: 20,
+        key: 'morning_020',
         category: 'morning',
         content:
             """اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم. """,
@@ -364,6 +400,7 @@ class InitialData {
             "O Allah, Knower of the unseen and the seen, Creator of the heavens and the earth, Lord and Sovereign of all things, I bear witness that none has the right to be worshipped except You. I take refuge in You from the evil of my soul and from the evil and shirk of Satan, and from committing wrong against myself or bringing such upon another Muslim."),
     const ZikrEntity(
         id: 21,
+        key: 'morning_021',
         category: 'morning',
         content:
             """أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق. """,
@@ -374,6 +411,7 @@ class InitialData {
             "I take refuge in the perfect words of Allah from the evil of what He has created."),
     const ZikrEntity(
         id: 22,
+        key: 'morning_022',
         category: 'morning',
         content:
             """اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ على نَبِيِّنَا مُحمَّد. """,
@@ -384,6 +422,7 @@ class InitialData {
             "O Allah, send prayers, peace, and blessings upon our Prophet Muhammad."),
     const ZikrEntity(
         id: 23,
+        key: 'morning_023',
         category: 'morning',
         content:
             """اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ. """,
@@ -394,6 +433,7 @@ class InitialData {
             "O Allah, we take refuge in You from associating anything with You knowingly, and we seek Your forgiveness for that which we do not know."),
     const ZikrEntity(
         id: 24,
+        key: 'morning_024',
         category: 'morning',
         content:
             """اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ.  """,
@@ -404,6 +444,7 @@ class InitialData {
             "O Allah, I take refuge in You from anxiety and sorrow, weakness and laziness, cowardice and miserliness, the burden of debts and being overpowered by men."),
     const ZikrEntity(
         id: 25,
+        key: 'morning_025',
         category: 'morning',
         content:
             """أسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لاَ إلَهَ إلاَّ هُوَ، الحَيُّ القَيُّومُ، وَأتُوبُ إلَيهِ.  """,
@@ -414,6 +455,7 @@ class InitialData {
             "I seek the forgiveness of Allah, the Mighty, whom there is none worthy of worship except Him, the Ever-Living, the Self-Subsisting, and I repent unto Him."),
     const ZikrEntity(
         id: 26,
+        key: 'morning_026',
         category: 'morning',
         content:
             """يَا رَبِّ , لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ , وَلِعَظِيمِ سُلْطَانِكَ. """,
@@ -424,6 +466,7 @@ class InitialData {
             "O my Lord, praise be to You as befits the majesty of Your Face and the greatness of Your power."),
     const ZikrEntity(
         id: 27,
+        key: 'morning_027',
         category: 'morning',
         content:
             """اللَّهُمَّ إِنِّي أَسْأَلُكَ عِلْمًا نَافِعًا، وَرِزْقًا طَيِّبًا، وَعَمَلًا مُتَقَبَّلًا. """,
@@ -434,6 +477,7 @@ class InitialData {
             "O Allah, I ask You for beneficial knowledge, good provision, and acceptable deeds."),
     const ZikrEntity(
         id: 28,
+        key: 'morning_028',
         category: 'morning',
         content:
             """اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ ، عَلَيْكَ تَوَكَّلْتُ ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ , مَا شَاءَ اللَّهُ كَانَ ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ ، وَلا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ , أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا , اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا ، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ.  """,
@@ -444,6 +488,7 @@ class InitialData {
             "O Allah, You are my Lord, none has the right to be worshipped except You, upon You I rely and You are Lord of the mighty Throne. Whatever Allah wills happens and whatever He does not will does not happen. There is no might nor power except with Allah, the Most High, the Most Great. I know that Allah is over all things competent, and that Allah has encompassed all things in knowledge. O Allah, I take refuge in You from the evil of myself and from the evil of every creature whose forelock You hold. Indeed my Lord is on a straight path."),
     const ZikrEntity(
         id: 29,
+        key: 'morning_029',
         category: 'morning',
         content:
             """لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءِ قَدِيرِ. """,
@@ -454,6 +499,7 @@ class InitialData {
             "There is no god but Allah, alone, without partner; His is the dominion and His is the praise, and He is over all things competent."),
     const ZikrEntity(
         id: 30,
+        key: 'morning_030',
         category: 'morning',
         content: """سُبْحـانَ اللهِ وَبِحَمْـدِهِ. """,
         count: 100,
@@ -461,6 +507,7 @@ class InitialData {
         contentEn: "Glory be to Allah and praise Him."),
     const ZikrEntity(
         id: 31,
+        key: 'morning_031',
         category: 'morning',
         content: """أسْتَغْفِرُ اللهَ وَأتُوبُ إلَيْهِ""",
         count: 100,
@@ -471,6 +518,7 @@ class InitialData {
   static List<ZikrEntity> nightAzkar = [
     const ZikrEntity(
         id: 1,
+        key: 'evening_001',
         category: 'evening',
         title: 'آية الكرسى',
         content: """
@@ -484,6 +532,7 @@ class InitialData {
             "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great."),
     const ZikrEntity(
         id: 2,
+        key: 'evening_002',
         category: 'evening',
         title: 'آخر سورة البقرة',
         content: """أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ
@@ -495,6 +544,7 @@ class InitialData {
             "I seek refuge in Allah from the accursed Satan. The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers, [saying], 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.' Allah does not charge a soul except with that within its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. 'Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.'"),
     const ZikrEntity(
         id: 3,
+        key: 'evening_003',
         category: 'evening',
         title: 'سورة الإخلاص',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
@@ -506,6 +556,7 @@ class InitialData {
             "Say: He is Allah, the One. Allah, the Eternal Refuge. He neither begets nor is born, nor is there to Him any equivalent."),
     const ZikrEntity(
         id: 4,
+        key: 'evening_004',
         category: 'evening',
         title: 'سورة الفلق',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
@@ -517,6 +568,7 @@ class InitialData {
             "Say: I seek refuge in the Lord of daybreak, from the evil of that which He created, and from the evil of darkness when it settles, and from the evil of the blowers in knots, and from the evil of an envier when he envies."),
     const ZikrEntity(
         id: 5,
+        key: 'evening_005',
         category: 'evening',
         title: 'سورة الناس',
         content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
@@ -528,6 +580,7 @@ class InitialData {
             "Say: I seek refuge in the Lord of mankind, the Sovereign of mankind, the God of mankind, from the evil of the retreating whisperer who whispers [evil] into the breasts of mankind, from among the jinn and mankind."),
     const ZikrEntity(
         id: 6,
+        key: 'evening_006',
         category: 'evening',
         content:
             """أَمْسَيْـنا وَأَمْسـى المـلكُ لله وَالحَمدُ لله ، لا إلهَ إلاّ اللّهُ وَحدَهُ لا شَريكَ لهُ، لهُ المُـلكُ ولهُ الحَمْـد، وهُوَ على كلّ شَيءٍ قدير ، رَبِّ أسْـأَلُـكَ خَـيرَ ما في هـذهِ اللَّـيْلَةِ وَخَـيرَ ما بَعْـدَهـا ، وَأَعـوذُ بِكَ مِنْ شَـرِّ ما في هـذهِ اللَّـيْلةِ وَشَرِّ ما بَعْـدَهـا ، رَبِّ أَعـوذُبِكَ مِنَ الْكَسَـلِ وَسـوءِ الْكِـبَر ، رَبِّ أَعـوذُ بِكَ مِنْ عَـذابٍ في النّـارِ وَعَـذابٍ في القَـبْر. """,
@@ -538,6 +591,7 @@ class InitialData {
             "We have reached the evening and at this very time all sovereignty belongs to Allah, and all praise is for Allah. None has the right to be worshipped except Allah, alone, without partner, to Him belongs all sovereignty and praise and He is over all things omnipotent. My Lord, I ask You for the good of this night and the good of what follows it and I take refuge in You from the evil of this night and the evil of what follows it. My Lord, I take refuge in You from laziness and senility. My Lord, I take refuge in You from torment in the Fire and punishment in the grave."),
     const ZikrEntity(
         id: 7,
+        key: 'evening_007',
         category: 'evening',
         title: 'سيد الاستغفار',
         titleEn: "The Master of Seeking Forgiveness",
@@ -550,6 +604,7 @@ class InitialData {
             "O Allah, You are my Lord, none has the right to be worshipped except You. You created me and I am Your servant, and I abide by Your covenant and promise as best I can. I take refuge in You from the evil of what I have done. I acknowledge Your favor upon me, and I acknowledge my sin, so forgive me, for none forgives sins except You."),
     const ZikrEntity(
         id: 8,
+        key: 'evening_008',
         category: 'evening',
         content:
             """رَضيـتُ بِاللهِ رَبَّـاً وَبِالإسْلامِ ديـناً وَبِمُحَـمَّدٍ صلى الله عليه وسلم نَبِيّـاً.""",
@@ -560,6 +615,7 @@ class InitialData {
             "I am pleased with Allah as my Lord, with Islam as my religion and with Muhammad ﷺ as my Prophet."),
     const ZikrEntity(
         id: 9,
+        key: 'evening_009',
         category: 'evening',
         content:
             """اللّهُـمَّ إِنِّـي أَمسيتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك. """,
@@ -570,6 +626,7 @@ class InitialData {
             "O Allah, I have reached the evening and call upon You, the bearers of Your Throne, Your angels and all creation to witness that You are Allah, none has the right to be worshipped except You alone, without partner, and that Muhammad is Your servant and Messenger."),
     const ZikrEntity(
         id: 10,
+        key: 'evening_010',
         category: 'evening',
         content:
             """اللّهُـمَّ ما أَمسى بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر. """,
@@ -580,6 +637,7 @@ class InitialData {
             "O Allah, whatever blessing has come to me or any of Your creation this evening is from You alone, without partner, so for You is all praise and unto You all thanks."),
     const ZikrEntity(
         id: 11,
+        key: 'evening_011',
         category: 'evening',
         content:
             """حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم.  """,
@@ -590,6 +648,7 @@ class InitialData {
             "Allah is sufficient for me, none has the right to be worshipped except Him, upon Him I rely, and He is Lord of the mighty Throne."),
     const ZikrEntity(
         id: 12,
+        key: 'evening_012',
         category: 'evening',
         content:
             """بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم. """,
@@ -602,6 +661,7 @@ class InitialData {
             "In the name of Allah, with whose name nothing on earth or in heaven can cause harm, and He is the All-Hearing, the All-Knowing."),
     const ZikrEntity(
         id: 13,
+        key: 'evening_013',
         category: 'evening',
         content:
             """اللّهُـمَّ بِكَ أَمْسَـينا وَبِكَ أَصْـبَحْنا، وَبِكَ نَحْـيا وَبِكَ نَمُـوتُ وَإِلَـيْكَ الْمَصِيرُ. """,
@@ -612,6 +672,7 @@ class InitialData {
             "O Allah, by You we enter the evening and by You we enter the morning, by You we live and by You we die, and unto You is the return."),
     const ZikrEntity(
         id: 14,
+        key: 'evening_014',
         category: 'evening',
         content:
             """أَمْسَيْنَا عَلَى فِطْرَةِ الإسْلاَمِ، وَعَلَى كَلِمَةِ الإِخْلاَصِ، وَعَلَى دِينِ نَبِيِّنَا مُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ، وَعَلَى مِلَّةِ أَبِينَا إبْرَاهِيمَ حَنِيفاً مُسْلِماً وَمَا كَانَ مِنَ المُشْرِكِينَ.  """,
@@ -622,6 +683,7 @@ class InitialData {
             "We have entered the evening upon the natural religion of Islam, the word of sincere devotion, the religion of our Prophet Muhammad ﷺ, and the way of our father Abraham, who was upright in submission and was not of those who associate partners with Allah."),
     const ZikrEntity(
         id: 15,
+        key: 'evening_015',
         category: 'evening',
         content:
             """سُبْحـانَ اللهِ وَبِحَمْـدِهِ عَدَدَ خَلْـقِه ، وَرِضـا نَفْسِـه ، وَزِنَـةَ عَـرْشِـه ، وَمِـدادَ كَلِمـاتِـه. """,
@@ -632,6 +694,7 @@ class InitialData {
             "Glory is to Allah and praise is to Him, by the number of His creation, in accordance with His pleasure, by the weight of His Throne, and equal to the ink of His words."),
     const ZikrEntity(
         id: 16,
+        key: 'evening_016',
         category: 'evening',
         content:
             """اللّهُـمَّ عافِـني في بَدَنـي ، اللّهُـمَّ عافِـني في سَمْـعي ، اللّهُـمَّ عافِـني في بَصَـري ، لا إلهَ إلاّ أَنْـتَ. """,
@@ -642,6 +705,7 @@ class InitialData {
             "O Allah, grant my body health. O Allah, grant my hearing health. O Allah, grant my sight health. None has the right to be worshipped except You."),
     const ZikrEntity(
         id: 17,
+        key: 'evening_017',
         category: 'evening',
         content:
             """اللّهُـمَّ إِنّـي أَعـوذُ بِكَ مِنَ الْكُـفر ، وَالفَـقْر ، وَأَعـوذُ بِكَ مِنْ عَذابِ القَـبْر ، لا إلهَ إلاّ أَنْـتَ. """,
@@ -652,6 +716,7 @@ class InitialData {
             "O Allah, I take refuge in You from disbelief and poverty, and I take refuge in You from the punishment of the grave. None has the right to be worshipped except You."),
     const ZikrEntity(
         id: 18,
+        key: 'evening_018',
         category: 'evening',
         content:
             """اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في الدُّنْـيا وَالآخِـرَة ، اللّهُـمَّ إِنِّـي أسْـأَلُـكَ العَـفْوَ وَالعـافِـيةَ في ديني وَدُنْـيايَ وَأهْـلي وَمالـي ، اللّهُـمَّ اسْتُـرْ عـوْراتي وَآمِـنْ رَوْعاتـي ، اللّهُـمَّ احْفَظْـني مِن بَـينِ يَدَيَّ وَمِن خَلْفـي وَعَن يَمـيني وَعَن شِمـالي ، وَمِن فَوْقـي ، وَأَعـوذُ بِعَظَمَـتِكَ أَن أُغْـتالَ مِن تَحْتـي. """,
@@ -662,6 +727,7 @@ class InitialData {
             "O Allah, I ask You for pardon and well-being in this life and the next. O Allah, I ask You for pardon and well-being in my religious and worldly affairs, and my family and my wealth. O Allah, veil my faults and calm my fears. O Allah, guard me from before me and behind me, from my right and my left, and from above me, and I take refuge in Your greatness from being taken unaware from beneath me."),
     const ZikrEntity(
         id: 19,
+        key: 'evening_019',
         category: 'evening',
         content: """
 يَا حَيُّ يَا قيُّومُ بِرَحْمَتِكَ أسْتَغِيثُ أصْلِحْ لِي شَأنِي كُلَّهُ وَلاَ تَكِلْنِي إلَى نَفْسِي طَـرْفَةَ عَيْنٍ.
@@ -673,6 +739,7 @@ class InitialData {
             "O Ever-Living, O Self-Subsisting and Supporter of all, by Your mercy I seek relief. Rectify all my affairs and do not leave me to myself, even for the blink of an eye."),
     const ZikrEntity(
         id: 20,
+        key: 'evening_020',
         category: 'evening',
         content:
             """أَمْسَيْنا وَأَمْسَى الْمُلْكُ للهِ رَبِّ الْعَالَمَيْنِ، اللَّهُمَّ إِنَّي أسْأَلُكَ خَيْرَ هَذَه اللَّيْلَةِ فَتْحَهَا ونَصْرَهَا، ونُوْرَهَا وبَرَكَتهَا، وَهُدَاهَا، وَأَعُوذُ بِكَ مِنْ شَرِّ مَا فيهِا وَشَرَّ مَا بَعْدَهَا. """,
@@ -683,6 +750,7 @@ class InitialData {
             "We have reached the evening and at this very time all sovereignty belongs to Allah, Lord of the worlds. O Allah, I ask You for the good of this night: its triumph, its help, its light, its blessings, and its guidance, and I take refuge in You from the evil in it and the evil that follows it."),
     const ZikrEntity(
         id: 21,
+        key: 'evening_021',
         category: 'evening',
         content:
             """اللّهُـمَّ عالِـمَ الغَـيْبِ وَالشّـهادَةِ فاطِـرَ السّماواتِ وَالأرْضِ رَبَّ كـلِّ شَـيءٍ وَمَليـكَه ، أَشْهَـدُ أَنْ لا إِلـهَ إِلاّ أَنْت ، أَعـوذُ بِكَ مِن شَـرِّ نَفْسـي وَمِن شَـرِّ الشَّيْـطانِ وَشِرْكِهِ ، وَأَنْ أَقْتَـرِفَ عَلـى نَفْسـي سوءاً أَوْ أَجُـرَّهُ إِلـى مُسْـلِم. """,
@@ -693,6 +761,7 @@ class InitialData {
             "O Allah, Knower of the unseen and the seen, Creator of the heavens and the earth, Lord and Sovereign of all things, I bear witness that none has the right to be worshipped except You. I take refuge in You from the evil of my soul and from the evil and shirk of Satan, and from committing wrong against myself or bringing such upon another Muslim."),
     const ZikrEntity(
         id: 22,
+        key: 'evening_022',
         category: 'evening',
         content:
             """أَعـوذُ بِكَلِمـاتِ اللّهِ التّـامّـاتِ مِنْ شَـرِّ ما خَلَـق. """,
@@ -703,6 +772,7 @@ class InitialData {
             "I take refuge in the perfect words of Allah from the evil of what He has created."),
     const ZikrEntity(
         id: 23,
+        key: 'evening_023',
         category: 'evening',
         content:
             """اللَّهُمَّ صَلِّ وَسَلِّمْ وَبَارِكْ على نَبِيِّنَا مُحمَّد. """,
@@ -713,6 +783,7 @@ class InitialData {
             "O Allah, send prayers, peace, and blessings upon our Prophet Muhammad."),
     const ZikrEntity(
         id: 24,
+        key: 'evening_024',
         category: 'evening',
         content:
             """اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ أَنْ نُشْرِكَ بِكَ شَيْئًا نَعْلَمُهُ ، وَنَسْتَغْفِرُكَ لِمَا لَا نَعْلَمُهُ. """,
@@ -723,6 +794,7 @@ class InitialData {
             "O Allah, we take refuge in You from associating anything with You knowingly, and we seek Your forgiveness for that which we do not know."),
     const ZikrEntity(
         id: 25,
+        key: 'evening_025',
         category: 'evening',
         content:
             """اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنْ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنْ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ. """,
@@ -733,6 +805,7 @@ class InitialData {
             "O Allah, I take refuge in You from anxiety and sorrow, weakness and laziness, cowardice and miserliness, the burden of debts and being overpowered by men."),
     const ZikrEntity(
         id: 26,
+        key: 'evening_026',
         category: 'evening',
         content:
             """أسْتَغْفِرُ اللهَ العَظِيمَ الَّذِي لاَ إلَهَ إلاَّ هُوَ، الحَيُّ القَيُّومُ، وَأتُوبُ إلَيهِ. """,
@@ -743,6 +816,7 @@ class InitialData {
             "I seek the forgiveness of Allah, the Mighty, whom there is none worthy of worship except Him, the Ever-Living, the Self-Subsisting, and I repent unto Him."),
     const ZikrEntity(
         id: 27,
+        key: 'evening_027',
         category: 'evening',
         content:
             """يَا رَبِّ , لَكَ الْحَمْدُ كَمَا يَنْبَغِي لِجَلَالِ وَجْهِكَ , وَلِعَظِيمِ سُلْطَانِكَ. """,
@@ -753,6 +827,7 @@ class InitialData {
             "O my Lord, praise be to You as befits the majesty of Your Face and the greatness of Your power."),
     const ZikrEntity(
         id: 28,
+        key: 'evening_028',
         category: 'evening',
         content:
             """لَا إلَه إلّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءِ قَدِيرِ. """,
@@ -763,6 +838,7 @@ class InitialData {
             "There is no god but Allah, alone, without partner; His is the dominion and His is the praise, and He is over all things competent."),
     const ZikrEntity(
         id: 29,
+        key: 'evening_029',
         category: 'evening',
         content:
             """اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ ، عَلَيْكَ تَوَكَّلْتُ ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ , مَا شَاءَ اللَّهُ كَانَ ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ ، وَلا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ , أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا , اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا ، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ. """,
@@ -773,6 +849,7 @@ class InitialData {
             "O Allah, You are my Lord, none has the right to be worshipped except You, upon You I rely and You are Lord of the mighty Throne. Whatever Allah wills happens and whatever He does not will does not happen. There is no might nor power except with Allah, the Most High, the Most Great. I know that Allah is over all things competent, and that Allah has encompassed all things in knowledge. O Allah, I take refuge in You from the evil of myself and from the evil of every creature whose forelock You hold. Indeed my Lord is on a straight path."),
     const ZikrEntity(
         id: 30,
+        key: 'evening_030',
         category: 'evening',
         content: """سُبْحـانَ اللهِ وَبِحَمْـدِهِ. """,
         count: 100,
@@ -783,6 +860,7 @@ class InitialData {
   static List<ZikrEntity> conditionAzkar = [
     const ZikrEntity(
         id: 1,
+        key: 'condition_001',
         category: 'newClothes',
         titleEn: "New Clothes",
         count: 1,
@@ -800,6 +878,7 @@ class InitialData {
         sourceEn: "Abu Dawud and at-Tirmidhi"),
     const ZikrEntity(
         id: 2,
+        key: 'condition_002',
         category: 'leavingHome',
         titleEn: "Leaving Home",
         count: 1,
@@ -818,6 +897,7 @@ class InitialData {
             "Umm Salamah (may Allah be pleased with her) reported that whenever the Prophet ﷺ left his house he would say the above. Reported by at-Tirmidhi and an-Nasa'i. And Anas ibn Malik (may Allah be pleased with him) reported that the Prophet ﷺ said: \"When a man leaves his house and says: 'In the name of Allah, I place my trust in Allah, there is no might nor power except with Allah,' it is said to him: You are guided, sufficed, and protected, and the devils turn away from him.\" Reported by Abu Dawud and at-Tirmidhi."),
     const ZikrEntity(
         id: 3,
+        key: 'condition_003',
         category: 'enteringBathroom',
         titleEn: "Entering the Bathroom",
         count: 1,
@@ -832,6 +912,7 @@ class InitialData {
             "Anas (may Allah be pleased with him) reported that whenever the Prophet ﷺ entered the toilet, he would say the above. Agreed upon (Bukhari and Muslim)."),
     const ZikrEntity(
         id: 4,
+        key: 'condition_004',
         category: 'leavingBathroom',
         titleEn: "Leaving the Bathroom",
         count: 1,
@@ -846,6 +927,7 @@ class InitialData {
             "A'ishah (may Allah be pleased with her) reported that whenever the Prophet ﷺ came out of the toilet he would say: \"I ask You for forgiveness.\" Reported by Abu Dawud and at-Tirmidhi."),
     const ZikrEntity(
         id: 5,
+        key: 'condition_005',
         category: 'enteringMosque',
         titleEn: "Entering the Mosque",
         count: 1,
@@ -859,6 +941,7 @@ class InitialData {
             "When one of you enters the mosque, let him send prayers upon the Prophet ﷺ, then say: \"O Allah, open the doors of Your mercy for me,\" and when he leaves let him say: \"O Allah, I ask You of Your bounty.\" Reported by Ibn Majah (this wording) and Muslim with slight variation."),
     const ZikrEntity(
         id: 6,
+        key: 'condition_006',
         category: 'leavingMosque',
         titleEn: "Leaving the Mosque",
         count: 1,
@@ -874,6 +957,7 @@ class InitialData {
             "When one of you enters the mosque let him say: \"O Allah, open the doors of Your mercy for me,\" and when he leaves let him say: \"O Allah, I ask You of Your bounty.\" Narrated by Abu Humayd or Abu Usayd as-Sa'idi; authentic hadith reported by Muslim."),
     const ZikrEntity(
         id: 7,
+        key: 'condition_007',
         category: 'hearingAdhan',
         titleEn: "Hearing the Adhan",
         count: 1,
@@ -887,6 +971,7 @@ class InitialData {
             "Abdullah ibn 'Amr ibn al-'As (may Allah be pleased with them both) reported that he heard the Prophet ﷺ say: \"When you hear the caller to prayer, say what he says, then send prayers upon me, for whoever sends one prayer upon me, Allah sends ten prayers upon him. Then ask Allah to grant me al-Wasilah, for it is a station in Paradise fitting for only one of Allah's servants, and I hope that I am he. Whoever asks Allah to grant me al-Wasilah, intercession becomes permissible for him.\" Reported by Muslim."),
     const ZikrEntity(
         id: 8,
+        key: 'condition_008',
         category: 'hearingAdhan',
         titleEn: "Hearing the Adhan",
         count: 1,
@@ -904,6 +989,7 @@ class InitialData {
             "Sa'd ibn Abi Waqqas (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said: \"Whoever says upon hearing the caller to prayer: [the above], his sins will be forgiven.\" Reported by Muslim."),
     const ZikrEntity(
         id: 9,
+        key: 'condition_009',
         category: 'afterAdhan',
         titleEn: "After the Adhan",
         count: 1,
@@ -920,6 +1006,7 @@ class InitialData {
             "Jabir ibn Abdullah (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ said: \"Whoever, upon hearing the call to prayer, says: [the above], my intercession will be permitted for him on the Day of Resurrection.\" Reported by al-Bukhari."),
     const ZikrEntity(
         id: 10,
+        key: 'condition_010',
         category: 'distress',
         titleEn: "At Distress",
         count: 1,
@@ -936,6 +1023,7 @@ class InitialData {
             "Ibn Abbas (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ used to say the above at times of distress. Agreed upon."),
     const ZikrEntity(
         id: 11,
+        key: 'condition_011',
         category: 'sadness',
         titleEn: "Sadness or Grief",
         count: 1,
@@ -953,6 +1041,7 @@ class InitialData {
             "Abdullah ibn Mas'ud (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said: \"No one is afflicted with anxiety or sorrow and says [the above] except that Allah removes his anxiety and sorrow and replaces it with joy.\" It was said: O Messenger of Allah, should we not learn it? He said: \"Yes, it is fitting for whoever hears it to learn it.\" Reported by Ahmad."),
     const ZikrEntity(
         id: 12,
+        key: 'condition_012',
         category: 'fearOfPeople',
         titleEn: "Fear of People",
         count: 1,
@@ -969,6 +1058,7 @@ class InitialData {
             "Abu Musa al-Ash'ari (may Allah be pleased with him) reported that when the Prophet ﷺ feared a people, he would say the above. Reported by Abu Dawud, and by Ahmad with slight variation; its chain is authentic."),
     const ZikrEntity(
         id: 13,
+        key: 'condition_013',
         category: 'meetingEnemy',
         titleEn: "Meeting an Enemy",
         count: 1,
@@ -985,6 +1075,7 @@ class InitialData {
             "Ibn Abbas (may Allah be pleased with them both) said: \"Allah is sufficient for us, and He is the best disposer of affairs\" was said by Abraham (peace be upon him) when he was thrown into the fire, and it was said by Muhammad ﷺ when they said: \"The people have gathered against you, so fear them,\" but it increased them in faith and they said: \"Allah is sufficient for us, and He is the best disposer of affairs.\" Reported by al-Bukhari."),
     const ZikrEntity(
         id: 14,
+        key: 'condition_014',
         category: 'overwhelmed',
         titleEn: "When Overwhelmed",
         count: 1,
@@ -998,6 +1089,7 @@ class InitialData {
             "Abu Hurairah (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said: \"The strong believer is better and more beloved to Allah than the weak believer, though there is good in both. Cherish what benefits you, seek help from Allah, and do not be overcome by helplessness. If something befalls you, do not say: 'If only I had done such and such,' but rather say: 'It is the decree of Allah, and what He wills, He does,' for 'if only' opens the door to the work of Satan.\" Reported by Muslim."),
     const ZikrEntity(
         id: 15,
+        key: 'condition_015',
         category: 'afterSin',
         titleEn: "After a Sin",
         count: 1,
@@ -1013,6 +1105,7 @@ class InitialData {
             "Abu Bakr (may Allah be pleased with him) said: I heard the Messenger of Allah ﷺ say: \"There is no servant who commits a sin, then performs ablution well, stands and prays two rak'ahs, then seeks Allah's forgiveness, except that Allah forgives him.\" Then he recited: \"And those who, when they commit an immorality or wrong themselves, remember Allah...\" to the end of the verse. Reported by Abu Dawud and at-Tirmidhi."),
     const ZikrEntity(
         id: 16,
+        key: 'condition_016',
         category: 'unpaidDebt',
         titleEn: "Unpaid Debt",
         count: 1,
@@ -1029,6 +1122,7 @@ class InitialData {
             "Ali (may Allah be pleased with him) reported that a slave under a contract of manumission came to him and said: I am unable to pay off my contract, so help me. Ali said: Shall I not teach you words that the Messenger of Allah ﷺ taught me, such that even if you owed a debt like Mount Thabir, Allah would settle it for you? Say: [the above]. Reported by at-Tirmidhi."),
     const ZikrEntity(
         id: 17,
+        key: 'condition_017',
         category: 'anger',
         titleEn: "Anger",
         count: 1,
@@ -1044,6 +1138,7 @@ class InitialData {
             "Sulayman ibn Surad (may Allah be pleased with him) said: Two men insulted each other in front of the Prophet ﷺ while we were sitting with him, and one of them was cursing his companion in anger, his face reddened. The Prophet ﷺ said: \"I know a word which, if he said it, what he feels would leave him: if he said, 'I take refuge in Allah from the accursed Satan.'\" Reported by al-Bukhari."),
     const ZikrEntity(
         id: 18,
+        key: 'condition_018',
         category: 'leavingGathering',
         titleEn: "Leaving a Gathering",
         count: 1,
@@ -1061,6 +1156,7 @@ class InitialData {
             "Abu Hurairah (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said: \"Whoever sits in a gathering where there is much clamor, and before rising says: [the above], will be forgiven for whatever occurred in that gathering.\" Reported by Ahmad and at-Tirmidhi."),
     const ZikrEntity(
         id: 19,
+        key: 'condition_019',
         category: 'seeingAfflicted',
         titleEn: "Seeing the Afflicted",
         count: 1,
@@ -1078,6 +1174,7 @@ class InitialData {
             "Ibn Umar (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ said: \"Whoever sees a person afflicted and says: [the above], will not be struck by that affliction.\" Reported by at-Tabarani in al-Awsat."),
     const ZikrEntity(
         id: 20,
+        key: 'condition_020',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1095,6 +1192,7 @@ class InitialData {
             "Abu Hurairah (may Allah be pleased with him): The Prophet ﷺ said: \"When one of you goes to his bed, let him dust it off with the inside of his garment, for he does not know what came onto it after he left it; then let him say: [the above].\" Reported by al-Bukhari."),
     const ZikrEntity(
         id: 21,
+        key: 'condition_021',
         category: 'wakingUp',
         titleEn: "Waking Up",
         count: 1,
@@ -1112,6 +1210,7 @@ class InitialData {
             "Whenever the Prophet ﷺ wanted to sleep he would say: \"In Your name, O Allah, I die and I live,\" and when he woke from his sleep he would say: [the above]. Narrated by Hudhayfah ibn al-Yaman, reported by al-Bukhari."),
     const ZikrEntity(
         id: 22,
+        key: 'condition_022',
         category: 'seeingSomethingPleasing',
         titleEn: "Seeing Something Pleasing",
         count: 1,
@@ -1125,6 +1224,7 @@ class InitialData {
             "\"[Why did you not say, when you entered your garden, 'What Allah willed [has occurred]; there is no power except in Allah'].\" (Al-Kahf 39). And in the hadith: \"If one of you sees something that pleases him in himself or his wealth, let him invoke a blessing upon it, for the evil eye is real.\""),
     const ZikrEntity(
         id: 23,
+        key: 'condition_023',
         category: 'leavingHomeDua',
         titleEn: "Leaving the House",
         count: 1,
@@ -1142,6 +1242,7 @@ class InitialData {
             "Umm Salamah (may Allah be pleased with her) said: The Prophet ﷺ never left my house without raising his eyes to the sky and saying the above."),
     const ZikrEntity(
         id: 24,
+        key: 'condition_024',
         category: 'travel',
         titleEn: "Travel",
         count: 1,
@@ -1159,6 +1260,7 @@ class InitialData {
             "Ibn Umar (may Allah be pleased with them both) reported that whenever the Messenger of Allah ﷺ mounted his camel setting out on a journey, he would say Takbir three times, then say: \"Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves, and to our Lord we will surely return.\" [the above]. Reported by Muslim."),
     const ZikrEntity(
         id: 25,
+        key: 'condition_025',
         category: 'ridingMount',
         titleEn: "Riding a Mount",
         count: 1,
@@ -1176,6 +1278,7 @@ class InitialData {
             "\"That you may settle yourselves upon their backs and then remember the favor of your Lord when you have settled upon them and say: 'Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves. And indeed we, to our Lord, will return.'\" (Az-Zukhruf 13-14)"),
     const ZikrEntity(
         id: 26,
+        key: 'condition_026',
         category: 'visitingGraves',
         titleEn: "Visiting Graves",
         count: 1,
@@ -1196,6 +1299,7 @@ class InitialData {
   static List<ZikrEntity> ruqyahAzkar = [
     const ZikrEntity(
         id: 27,
+        key: 'ruqyah_001',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 1,
@@ -1212,6 +1316,7 @@ class InitialData {
             "The greatest surah in the Qur'an, and it is a ruqyah by Allah's permission, as in the hadith of Abu Sa'id al-Khudri (may Allah be pleased with him) regarding the story of performing ruqyah with it. Agreed upon."),
     const ZikrEntity(
         id: 28,
+        key: 'ruqyah_002',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 1,
@@ -1228,6 +1333,7 @@ class InitialData {
             "One of the greatest verses in the Qur'an for protection and ruqyah; whoever recites it in the morning is protected from the jinn until evening. Reported by al-Hakim and authenticated by al-Albani."),
     const ZikrEntity(
         id: 29,
+        key: 'ruqyah_003',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 1,
@@ -1244,6 +1350,7 @@ class InitialData {
             "Whoever recites them at night, they will suffice him; they are among the treasures given exclusively to the Prophet ﷺ. Reported by al-Bukhari and Muslim."),
     const ZikrEntity(
         id: 30,
+        key: 'ruqyah_004',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 3,
@@ -1260,6 +1367,7 @@ class InitialData {
             "Recited three times as part of the legislated ruqyah with al-Mu'awwidhat, following the example of the Prophet ﷺ when performing ruqyah upon himself. Agreed upon."),
     const ZikrEntity(
         id: 31,
+        key: 'ruqyah_005',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 3,
@@ -1276,6 +1384,7 @@ class InitialData {
             "Recited three times as part of the legislated ruqyah with al-Mu'awwidhat, following the example of the Prophet ﷺ when performing ruqyah upon himself. Agreed upon."),
     const ZikrEntity(
         id: 32,
+        key: 'ruqyah_006',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 3,
@@ -1292,6 +1401,7 @@ class InitialData {
             "Recited three times as part of the legislated ruqyah with al-Mu'awwidhat, following the example of the Prophet ﷺ when performing ruqyah upon himself. Agreed upon."),
     const ZikrEntity(
         id: 33,
+        key: 'ruqyah_007',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 1,
@@ -1308,6 +1418,7 @@ class InitialData {
             "The Prophet ﷺ used to perform ruqyah upon some of his family, wiping with his right hand and saying the above. Agreed upon."),
     const ZikrEntity(
         id: 34,
+        key: 'ruqyah_008',
         category: 'ruqyah',
         titleEn: "Ruqyah",
         count: 1,
@@ -1327,6 +1438,7 @@ class InitialData {
   static List<ZikrEntity> afterPrayerAzkar = [
     const ZikrEntity(
         id: 35,
+        key: 'afterPrayer_001',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 3,
@@ -1340,6 +1452,7 @@ class InitialData {
             "Whenever the Prophet ﷺ finished his prayer he would seek Allah's forgiveness three times. Reported by Muslim from Thawban (may Allah be pleased with him)."),
     const ZikrEntity(
         id: 36,
+        key: 'afterPrayer_002',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 1,
@@ -1356,6 +1469,7 @@ class InitialData {
             "The Prophet ﷺ would say this after seeking forgiveness following every prayer. Reported by Muslim from Thawban (may Allah be pleased with him)."),
     const ZikrEntity(
         id: 37,
+        key: 'afterPrayer_003',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 1,
@@ -1372,6 +1486,7 @@ class InitialData {
             "Whoever recites it after every obligatory prayer, nothing prevents him from entering Paradise except death. Reported by an-Nasa'i and authenticated by al-Albani."),
     const ZikrEntity(
         id: 38,
+        key: 'afterPrayer_004',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 33,
@@ -1385,6 +1500,7 @@ class InitialData {
             "Whoever glorifies Allah thirty-three times after every prayer, praises Allah thirty-three times, and magnifies Allah thirty-three times, that is ninety-nine, and completes a hundred by saying: \"There is no god but Allah, alone, without partner; His is the dominion and His is the praise, and He is over all things competent,\" his sins will be forgiven even if they are like the foam of the sea. Reported by Muslim from Abu Hurairah (may Allah be pleased with him)."),
     const ZikrEntity(
         id: 39,
+        key: 'afterPrayer_005',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 33,
@@ -1398,6 +1514,7 @@ class InitialData {
             "Part of the tasbih recited after prayer, as mentioned in the hadith of Abu Hurairah (may Allah be pleased with him). Reported by Muslim."),
     const ZikrEntity(
         id: 40,
+        key: 'afterPrayer_006',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 34,
@@ -1411,6 +1528,7 @@ class InitialData {
             "The completion of the tasbih, tahmid, and takbir after every prayer, thirty-four times. Reported by Muslim from Abu Hurairah (may Allah be pleased with him)."),
     const ZikrEntity(
         id: 41,
+        key: 'afterPrayer_007',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 1,
@@ -1427,6 +1545,7 @@ class InitialData {
             "In the hadith of Abu Hurairah, the Messenger of Allah ﷺ said: \"Whoever says [the above] a hundred times in a day, it is equal to freeing ten slaves, a hundred good deeds are recorded for him, a hundred bad deeds are wiped away from him...\" Reported by al-Bukhari."),
     const ZikrEntity(
         id: 42,
+        key: 'afterPrayer_008',
         category: 'afterPrayer',
         titleEn: "After Prayer",
         count: 3,
@@ -1609,5 +1728,240 @@ class InitialData {
         transliteration: "Alā bidhikrillāhi taṭma'innul-qulūb.",
         translation: "Verily, in the remembrance of Allah do hearts find rest.",
         reference: "الرعد ٢٨"),
+  ];
+
+  static List<ZikrCategory> categories = [
+    const ZikrCategory(
+      key: 'morning',
+      title: 'أذكار الصباح',
+      titleEn: 'Morning Adhkar',
+      icon: Icons.wb_sunny_outlined,
+      color: morningOrange,
+      isTrackedDaily: true,
+    ),
+    const ZikrCategory(
+      key: 'evening',
+      title: 'أذكار المساء',
+      titleEn: 'Evening Adhkar',
+      icon: Icons.nightlight_round,
+      color: eveningPurple,
+      isTrackedDaily: true,
+    ),
+    const ZikrCategory(
+      key: 'sleep',
+      title: 'أذكار النوم',
+      titleEn: 'Sleep',
+      icon: Icons.bedtime_outlined,
+      color: categorySleepBlue,
+      isTrackedDaily: true,
+    ),
+    const ZikrCategory(
+      key: 'wakingUp',
+      title: 'عند الاستيقاظ',
+      titleEn: 'Waking Up',
+      icon: Icons.alarm_outlined,
+      color: categoryAlarmAmber,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'newClothes',
+      title: 'لبس ثوب جديد',
+      titleEn: 'New Clothes',
+      icon: Icons.checkroom_outlined,
+      color: categoryClothesTeal,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'leavingHome',
+      title: 'الخروج من البيت',
+      titleEn: 'Leaving Home',
+      icon: Icons.logout_outlined,
+      color: categoryDoorBrown,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'enteringBathroom',
+      title: 'دخول دورة المياة',
+      titleEn: 'Entering the Bathroom',
+      icon: Icons.wc_outlined,
+      color: categoryBathroomCyan,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'leavingBathroom',
+      title: 'الخروج من دورة المياة',
+      titleEn: 'Leaving the Bathroom',
+      icon: Icons.wc_outlined,
+      color: categoryBathroomCyan,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'enteringMosque',
+      title: 'دخول المسجد',
+      titleEn: 'Entering the Mosque',
+      icon: Icons.mosque_outlined,
+      color: categoryMosqueGreen,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'leavingMosque',
+      title: 'الخروج من المسجد',
+      titleEn: 'Leaving the Mosque',
+      icon: Icons.exit_to_app_outlined,
+      color: categoryMosqueGreen,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'hearingAdhan',
+      title: 'سماع الأذان',
+      titleEn: 'Hearing the Adhan',
+      icon: Icons.volume_up_outlined,
+      color: categoryAdhanIndigo,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'afterAdhan',
+      title: 'بعد سماع الأذان',
+      titleEn: 'After the Adhan',
+      icon: Icons.campaign_outlined,
+      color: categoryAdhanIndigo,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'distress',
+      title: 'عند الكرب',
+      titleEn: 'At Distress',
+      icon: Icons.sos_outlined,
+      color: categoryDistressRed,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'sadness',
+      title: 'عند الهَمّ أو الحزن',
+      titleEn: 'Sadness or Grief',
+      icon: Icons.sentiment_dissatisfied_outlined,
+      color: categorySadnessSlate,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'fearOfPeople',
+      title: 'عند الخوف من قوم',
+      titleEn: 'Fear of People',
+      icon: Icons.visibility_off_outlined,
+      color: categoryFearViolet,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'meetingEnemy',
+      title: 'عند لقاء العدو',
+      titleEn: 'Meeting an Enemy',
+      icon: Icons.gpp_maybe_outlined,
+      color: categoryEnemyMaroon,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'overwhelmed',
+      title: 'إذا غلبك أمر',
+      titleEn: 'When Overwhelmed',
+      icon: Icons.bolt_outlined,
+      color: categoryOverwhelmedYellow,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'afterSin',
+      title: 'عند فعل ذنب',
+      titleEn: 'After a Sin',
+      icon: Icons.undo_outlined,
+      color: categorySinGray,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'unpaidDebt',
+      title: 'من عليه دين عجز عنه',
+      titleEn: 'Unpaid Debt',
+      icon: Icons.payments_outlined,
+      color: categoryDebtOlive,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'anger',
+      title: 'عند الغضب',
+      titleEn: 'Anger',
+      icon: Icons.mood_bad_outlined,
+      color: categoryAngerCrimson,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'leavingGathering',
+      title: 'عند القيام من المجلس',
+      titleEn: 'Leaving a Gathering',
+      icon: Icons.groups_outlined,
+      color: categoryGatheringPlum,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'seeingAfflicted',
+      title: 'إذا رأى مبتلى بمرض أو غيره',
+      titleEn: 'Seeing the Afflicted',
+      icon: Icons.healing_outlined,
+      color: categoryAfflictedPink,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'seeingSomethingPleasing',
+      title: 'عند رؤية ما يعجبك',
+      titleEn: 'Seeing Something Pleasing',
+      icon: Icons.favorite_outline,
+      color: categoryPleasingRose,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'leavingHomeDua',
+      title: 'دعاء الخروج من المنزل',
+      titleEn: 'Leaving the House',
+      icon: Icons.door_front_door_outlined,
+      color: categoryDoorBrown,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'travel',
+      title: 'دعـاء السفـر',
+      titleEn: 'Travel',
+      icon: Icons.flight_outlined,
+      color: categoryTravelSky,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'ridingMount',
+      title: 'دعاء ركوب الدابة',
+      titleEn: 'Riding a Mount',
+      icon: Icons.pets_outlined,
+      color: categoryMountBrown,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'visitingGraves',
+      title: 'دعاء زيارة القبور',
+      titleEn: 'Visiting Graves',
+      icon: Icons.park_outlined,
+      color: categoryGravesGreen,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'afterPrayer',
+      title: 'أذكار بعد الصلاة',
+      titleEn: 'After-Prayer Adhkar',
+      icon: Icons.flag_outlined,
+      color: categoryAfterPrayerGreen,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'ruqyah',
+      title: 'الرقية',
+      titleEn: 'Ruqyah',
+      icon: Icons.shield_outlined,
+      color: categoryRuqyahTeal,
+      isTrackedDaily: false,
+    ),
   ];
 }

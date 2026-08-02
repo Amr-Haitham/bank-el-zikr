@@ -17,7 +17,7 @@ class GeneralDataAdapter extends TypeAdapter<GeneralData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return GeneralData(
-      currentZikrId: fields[0] as int,
+      currentZikrKey: fields[0] as String,
       currentCounter: fields[1] as int,
       currentGoal: fields[2] as int?,
       accountBalance: fields[3] as int,
@@ -29,7 +29,7 @@ class GeneralDataAdapter extends TypeAdapter<GeneralData> {
     writer
       ..writeByte(4)
       ..writeByte(0)
-      ..write(obj.currentZikrId)
+      ..write(obj.currentZikrKey)
       ..writeByte(1)
       ..write(obj.currentCounter)
       ..writeByte(2)

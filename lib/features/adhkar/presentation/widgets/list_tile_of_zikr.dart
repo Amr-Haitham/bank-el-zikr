@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/screens/sub_screens/edit_custom_ziker_popup.dart';

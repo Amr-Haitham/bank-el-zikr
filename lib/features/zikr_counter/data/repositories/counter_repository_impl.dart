@@ -3,6 +3,7 @@ import '../../../../core/constants/type_definitions.dart';
 import '../../domain/entities/counter_state.dart';
 import '../../domain/repositories/counter_repository.dart';
 import '../datasources/counter_local_datasource.dart';
+import '../models/general_data_mapper.dart';
 
 /// Implementation of CounterRepository
 /// Handles data operations and error handling using safeAwait
@@ -15,7 +16,7 @@ class CounterRepositoryImpl implements CounterRepository {
   Future<RequestResult<CounterStateEntity>> getCounterState() async {
     return safeAwait(() async {
       final counterStateModel = await localDataSource.getCounterState();
-      return counterStateModel.toEntity();
+      return GeneralDataMapper.toEntity(counterStateModel);
     });
   }
 
@@ -34,10 +35,10 @@ class CounterRepositoryImpl implements CounterRepository {
   }
 
   @override
-  Future<RequestResult<void>> updateCurrentZikr(int zikrId) async {
+  Future<RequestResult<void>> updateCurrentZikr(String zikrKey) async {
     return safeAwait(() async {
       final currentModel = await localDataSource.getCounterState();
-      currentModel.currentZikrId = zikrId;
+      currentModel.currentZikrKey = zikrKey;
       await localDataSource.updateCounterState(currentModel);
     });
   }

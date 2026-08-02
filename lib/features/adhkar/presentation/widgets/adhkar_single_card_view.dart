@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/initial_data.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 
 import 'adhkar_counter_ring.dart';
-import 'zikr_category_icon.dart';
 
 class AdhkarSingleCardView extends StatelessWidget {
   const AdhkarSingleCardView({
@@ -20,7 +20,12 @@ class AdhkarSingleCardView extends StatelessWidget {
   final int reps;
   final VoidCallback onTap;
 
-  IconData get _icon => zikrCategoryIcon(zikr.category);
+  IconData get _icon {
+    for (final category in InitialData.categories) {
+      if (category.key == zikr.category) return category.icon;
+    }
+    return Icons.self_improvement_outlined;
+  }
 
   Color get _iconColor {
     switch (zikr.isMorning) {

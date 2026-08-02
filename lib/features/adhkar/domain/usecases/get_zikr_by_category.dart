@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
 import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/domain/repositories/zikr_category_repository.dart';
 
 class GetZikrByCategoryParams {

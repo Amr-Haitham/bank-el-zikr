@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category_card.dart';
-import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/reading_progress.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class AdhkarCategoryListItem extends StatelessWidget {
   });
 
   final AdhkarCategory category;
-  final AdhkarProgressEntity? progress;
+  final ReadingProgressEntity? progress;
   final VoidCallback onTap;
 
   static String formatLastRead(BuildContext context, DateTime dateTime) {
