@@ -185,5 +185,9 @@
   "emptyZikrError": "الرجاء إدخال نص الذكر",
   "@emptyZikrError": {
     "description": "Validation message when submitting an empty custom zikr"
+  },
+  "chooseAdhkarCategory": "اختر فئة",
+  "@chooseAdhkarCategory": {
+    "description": "Title of the category picker shown before adding a custom zikr from the home screen"
   }
 }

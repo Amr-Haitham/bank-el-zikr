@@ -715,6 +715,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الرجاء إدخال نص الذكر'**
   String get emptyZikrError;
+
+  /// Title of the category picker shown before adding a custom zikr from the home screen
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فئة'**
+  String get chooseAdhkarCategory;
 }
 
 class _AppLocalizationsDelegate

@@ -338,4 +338,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'الرجاء إدخال نص الذكر';
+
+  @override
+  String get chooseAdhkarCategory => 'اختر فئة';
 }

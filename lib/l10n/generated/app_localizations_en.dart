@@ -339,4 +339,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'Please enter the zikr text';
+
+  @override
+  String get chooseAdhkarCategory => 'Choose a category';
 }

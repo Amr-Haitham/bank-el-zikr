@@ -10,12 +10,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// button in [ZikrPickerBottomSheet]'s header. Replaces the old always-visible
 /// inline search-bar field.
 class AddCustomZikrPopup extends StatefulWidget {
-  const AddCustomZikrPopup({super.key});
+  const AddCustomZikrPopup({super.key, this.category = 'custom'});
+
+  final String category;
 
   @override
   State<AddCustomZikrPopup> createState() => _AddCustomZikrPopupState();
 
-  static Future<void> show(BuildContext context) {
+  static Future<void> show(BuildContext context, {String category = 'custom'}) {
     final addCustomZikrCubit = context.read<AddCustomZikrCubit>();
     return showModalBottomSheet(
       context: context,
@@ -27,7 +29,7 @@ class AddCustomZikrPopup extends StatefulWidget {
         ),
         child: BlocProvider.value(
           value: addCustomZikrCubit,
-          child: const AddCustomZikrPopup(),
+          child: AddCustomZikrPopup(category: category),
         ),
       ),
     );
@@ -68,7 +70,7 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
             content: text,
             isCustomZikr: true,
             title: null,
-            category: 'custom',
+            category: widget.category,
           ),
         );
     Navigator.of(context).maybePop();

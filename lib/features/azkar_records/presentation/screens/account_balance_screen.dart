@@ -66,8 +66,6 @@ class AccountBalanceScreen extends StatelessWidget {
                         eveningLongestStreak: stats.eveningLongestStreak,
                         morningCurrentStreak: stats.morningCurrentStreak,
                         morningLongestStreak: stats.morningLongestStreak,
-                        sleepCurrentStreak: stats.sleepCurrentStreak,
-                        sleepLongestStreak: stats.sleepLongestStreak,
                       ),
                       const SizedBox(height: 16),
                       WeeklyActivityGrid(

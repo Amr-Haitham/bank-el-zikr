@@ -137,5 +137,6 @@
   "addCustomZikrHint": "Add a custom zikr...",
   "addCustomZikrTitle": "Add a Custom Zikr",
   "addCustomZikrButton": "Add Zikr",
-  "emptyZikrError": "Please enter the zikr text"
+  "emptyZikrError": "Please enter the zikr text",
+  "chooseAdhkarCategory": "Choose a category"
 }

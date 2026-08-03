@@ -16,7 +16,6 @@ class WeeklyActivityGrid extends StatelessWidget {
   static const _morningColor = Color(0xffFB8C3C);
   static const _eveningColor = Color(0xff6C63FF);
   static const _sleepColor = Color(0xff3E7BFA);
-  static const _zikrColor = Color(0xff34C759);
 
   String _weekdayLabel(BuildContext context, int weekday) {
     final l10n = AppLocalizations.of(context);
@@ -94,8 +93,6 @@ class WeeklyActivityGrid extends StatelessWidget {
                     _cell(day.hasEvening ? _eveningColor : null),
                     const SizedBox(height: 3),
                     _cell(day.hasSleep ? _sleepColor : null),
-                    const SizedBox(height: 3),
-                    _cell(day.hasZikr ? _zikrColor : null),
                   ],
                 ),
               );
@@ -131,20 +128,17 @@ class WeeklyActivityGrid extends StatelessWidget {
             }).toList(),
           ),
           const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+          Wrap(
+            alignment: WrapAlignment.start,
+            spacing: 14,
+            runSpacing: 8,
             children: [
               _legendItem(context, AppLocalizations.of(context).morningAdhkar,
                   _morningColor),
-              const SizedBox(width: 14),
               _legendItem(context, AppLocalizations.of(context).eveningAdhkar,
                   _eveningColor),
-              const SizedBox(width: 14),
               _legendItem(context, AppLocalizations.of(context).sleepAdhkar,
                   _sleepColor),
-              const SizedBox(width: 14),
-              _legendItem(
-                  context, AppLocalizations.of(context).navTasbih, _zikrColor),
             ],
           ),
         ],

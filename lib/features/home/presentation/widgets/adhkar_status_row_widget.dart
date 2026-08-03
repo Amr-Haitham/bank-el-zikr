@@ -1,52 +1,85 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/add_zikr_category_picker.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class AdhkarStatusRowWidget extends StatelessWidget {
   const AdhkarStatusRowWidget({super.key});
 
+  static const double _cardWidth = 160;
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     final incompleteColor =
         Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.5);
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Expanded(
-          child: _AdhkarStatusCard(
-            icon: Icons.wb_sunny_outlined,
-            iconColor: const Color(0xffFB8C3C),
-            title: l10n.morningAdhkar,
-            status: l10n.done,
-            statusColor: Theme.of(context).primaryColor,
-            onTap: () => AutoRouter.of(context).push(
-                ZikrCategoryRoute(category: 'morning', title: l10n.morningAdhkar)),
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              l10n.navAdhkar,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(fontSize: 17, fontWeight: FontWeight.w800),
+            ),
+            IconButton(
+              onPressed: () => AddZikrCategoryPicker.show(context),
+              icon: Icon(Icons.add_circle_outline,
+                  color: Theme.of(context).primaryColor),
+              tooltip: l10n.addCustomZikrTitle,
+            ),
+          ],
         ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _AdhkarStatusCard(
-            icon: Icons.nightlight_round,
-            iconColor: const Color(0xff6C63FF),
-            title: l10n.eveningAdhkar,
-            status: l10n.incomplete,
-            statusColor: incompleteColor,
-            onTap: () => AutoRouter.of(context).push(
-                ZikrCategoryRoute(category: 'evening', title: l10n.eveningAdhkar)),
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: _AdhkarStatusCard(
-            icon: Icons.bedtime_outlined,
-            iconColor: const Color(0xff3E7BFA),
-            title: l10n.sleepAdhkar,
-            status: l10n.incomplete,
-            statusColor: incompleteColor,
-            onTap: () => AutoRouter.of(context).push(
-                ZikrCategoryRoute(category: 'sleep', title: l10n.sleepAdhkar)),
+        SizedBox(
+          height: 132,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              SizedBox(
+                width: _cardWidth,
+                child: _AdhkarStatusCard(
+                  icon: Icons.wb_sunny_outlined,
+                  iconColor: const Color(0xffFB8C3C),
+                  title: l10n.morningAdhkar,
+                  status: l10n.done,
+                  statusColor: Theme.of(context).primaryColor,
+                  onTap: () => AutoRouter.of(context).push(ZikrCategoryRoute(
+                      category: 'morning', title: l10n.morningAdhkar)),
+                ),
+              ),
+              const SizedBox(width: 12),
+              SizedBox(
+                width: _cardWidth,
+                child: _AdhkarStatusCard(
+                  icon: Icons.nightlight_round,
+                  iconColor: const Color(0xff6C63FF),
+                  title: l10n.eveningAdhkar,
+                  status: l10n.incomplete,
+                  statusColor: incompleteColor,
+                  onTap: () => AutoRouter.of(context).push(ZikrCategoryRoute(
+                      category: 'evening', title: l10n.eveningAdhkar)),
+                ),
+              ),
+              const SizedBox(width: 12),
+              SizedBox(
+                width: _cardWidth,
+                child: _AdhkarStatusCard(
+                  icon: Icons.bedtime_outlined,
+                  iconColor: const Color(0xff3E7BFA),
+                  title: l10n.sleepAdhkar,
+                  status: l10n.incomplete,
+                  statusColor: incompleteColor,
+                  onTap: () => AutoRouter.of(context).push(ZikrCategoryRoute(
+                      category: 'sleep', title: l10n.sleepAdhkar)),
+                ),
+              ),
+            ],
           ),
         ),
       ],
