@@ -168,7 +168,12 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                             loading: () => const Center(
                                 child: CircularProgressIndicator()),
                             failure: (f) => const SizedBox.shrink(),
-                            success: (azkar) {
+                            success: (allAzkar) {
+                              final azkar = allAzkar
+                                  .where((zikr) =>
+                                      zikr.category == 'general' ||
+                                      zikr.isCustomZikr)
+                                  .toList();
                               return ScrollbarTheme(
                                 data: const ScrollbarThemeData(
                                   crossAxisMargin: 4,

@@ -289,6 +289,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareLabel => 'مشاركة';
 
   @override
+  String get shareAsText => 'مشاركة كنص';
+
+  @override
+  String get shareAsImage => 'مشاركة كصورة';
+
+  @override
   String get copyLabel => 'نسخ';
 
   @override
@@ -338,7 +344,4 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'الرجاء إدخال نص الذكر';
-
-  @override
-  String get chooseAdhkarCategory => 'اختر فئة';
 }

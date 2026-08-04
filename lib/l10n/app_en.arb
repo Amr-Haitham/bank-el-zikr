@@ -120,6 +120,8 @@
   "markCompleted": "Mark as completed",
   "virtueAndSource": "Virtue & source",
   "shareLabel": "Share",
+  "shareAsText": "Share as text",
+  "shareAsImage": "Share as image",
   "copyLabel": "Copy",
   "copied": "Copied",
   "swipeHint": "Swipe right or left to move between adhkar",
@@ -137,6 +139,5 @@
   "addCustomZikrHint": "Add a custom zikr...",
   "addCustomZikrTitle": "Add a Custom Zikr",
   "addCustomZikrButton": "Add Zikr",
-  "emptyZikrError": "Please enter the zikr text",
-  "chooseAdhkarCategory": "Choose a category"
+  "emptyZikrError": "Please enter the zikr text"
 }

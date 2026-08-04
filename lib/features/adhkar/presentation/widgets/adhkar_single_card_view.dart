@@ -1,10 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/initial_data.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_sheet.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'adhkar_counter_ring.dart';
 
@@ -94,8 +94,6 @@ class AdhkarSingleCardView extends StatelessWidget {
         ? zikr.descriptionEn
         : zikr.description;
     final secondaryTextColor = Theme.of(context).textTheme.bodySmall!.color!;
-    final shareText =
-        isEnglish && zikr.contentEn != null ? zikr.contentEn! : zikr.content;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -200,8 +198,11 @@ class AdhkarSingleCardView extends StatelessWidget {
           const SizedBox(height: 14),
           Center(
             child: GestureDetector(
-              onTap: () =>
-                  SharePlus.instance.share(ShareParams(text: shareText)),
+              onTap: () => ZikrShareSheet.show(
+                context,
+                content: zikr.content,
+                translation: isEnglish ? zikr.contentEn : null,
+              ),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 44, vertical: 10),

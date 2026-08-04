@@ -35,14 +35,14 @@ class _ChevronPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = size.width * 0.11
+      ..strokeWidth = size.width * 0.14
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..style = PaintingStyle.stroke;
 
     final midY = size.height / 2;
-    final horizontalInset = size.width * 0.32;
-    final verticalInset = size.height * 0.25;
+    final horizontalInset = size.width * 0.38;
+    final verticalInset = size.height * 0.32;
     final tipX = pointLeft ? horizontalInset : size.width - horizontalInset;
     final backX = pointLeft ? size.width - horizontalInset : horizontalInset;
 

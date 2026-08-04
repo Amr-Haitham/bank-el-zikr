@@ -126,6 +126,8 @@
   "markCompleted": "وضع علامة كمكتمل",
   "virtueAndSource": "الفضل والمصدر",
   "shareLabel": "مشاركة",
+  "shareAsText": "مشاركة كنص",
+  "shareAsImage": "مشاركة كصورة",
   "copyLabel": "نسخ",
   "copied": "تم النسخ",
   "swipeHint": "اسحب يمينًا أو يسارًا للتنقل بين الأذكار",
@@ -185,9 +187,5 @@
   "emptyZikrError": "الرجاء إدخال نص الذكر",
   "@emptyZikrError": {
     "description": "Validation message when submitting an empty custom zikr"
-  },
-  "chooseAdhkarCategory": "اختر فئة",
-  "@chooseAdhkarCategory": {
-    "description": "Title of the category picker shown before adding a custom zikr from the home screen"
   }
 }

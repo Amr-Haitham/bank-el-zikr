@@ -614,6 +614,18 @@ abstract class AppLocalizations {
   /// **'مشاركة'**
   String get shareLabel;
 
+  /// No description provided for @shareAsText.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة كنص'**
+  String get shareAsText;
+
+  /// No description provided for @shareAsImage.
+  ///
+  /// In ar, this message translates to:
+  /// **'مشاركة كصورة'**
+  String get shareAsImage;
+
   /// No description provided for @copyLabel.
   ///
   /// In ar, this message translates to:
@@ -715,12 +727,6 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الرجاء إدخال نص الذكر'**
   String get emptyZikrError;
-
-  /// Title of the category picker shown before adding a custom zikr from the home screen
-  ///
-  /// In ar, this message translates to:
-  /// **'اختر فئة'**
-  String get chooseAdhkarCategory;
 }
 
 class _AppLocalizationsDelegate

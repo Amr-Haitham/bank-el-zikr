@@ -4,9 +4,7 @@ import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
-import 'package:bank_el_ziker/core/layers/data/services/debug_seed.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
@@ -23,11 +21,6 @@ void main() async {
   // Initialize Hive (still needed for local data sources)
   await HiveDB.initHiveDB();
   await HiveDB().setupInitHiveDbDataIfNonExisting();
-
-  // TODO revert: dev-only sample data for visually checking the Home screen
-  if (kDebugMode) {
-    await seedDebugHomeData();
-  }
 
   // Initialize service locator
   await setupServiceLocator();

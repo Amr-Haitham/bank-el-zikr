@@ -290,6 +290,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareLabel => 'Share';
 
   @override
+  String get shareAsText => 'Share as text';
+
+  @override
+  String get shareAsImage => 'Share as image';
+
+  @override
   String get copyLabel => 'Copy';
 
   @override
@@ -339,7 +345,4 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'Please enter the zikr text';
-
-  @override
-  String get chooseAdhkarCategory => 'Choose a category';
 }

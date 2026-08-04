@@ -29,10 +29,12 @@ class AzkarRepositoryImpl implements AzkarRepository {
     return safeAwait(() async {
       // Custom azkar are always submitted with id: 0 by the caller — assign
       // a real unique id here, otherwise every custom zikr would be stored
-      // under the same Hive key and overwrite the previous one.
+      // under the same Hive key and overwrite the previous one. Hive integer
+      // keys must fit in 0-0xFFFFFFFF, so the raw epoch timestamp (which
+      // overflows that range) is folded down with modulo.
       final model = ZikrMapper.toModel(
         zikr.copyWith(
-          id: DateTime.now().microsecondsSinceEpoch,
+          id: DateTime.now().microsecondsSinceEpoch % 0xFFFFFFFF,
           key: generateCustomZikrKey(),
         ),
       );
