@@ -14,11 +14,13 @@ class AdhkarSingleCardView extends StatelessWidget {
     required this.zikr,
     required this.reps,
     required this.onTap,
+    required this.onComplete,
   });
 
   final ZikrEntity zikr;
   final int reps;
   final VoidCallback onTap;
+  final VoidCallback onComplete;
 
   IconData get _icon {
     for (final category in InitialData.categories) {
@@ -230,6 +232,39 @@ class AdhkarSingleCardView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           AdhkarCounterRing(reps: reps, target: zikr.count),
+          if (reps < zikr.count) ...[
+            const SizedBox(height: 14),
+            GestureDetector(
+              onTap: onComplete,
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 44, vertical: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(0xff34C759).withValues(alpha: 0.4),
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).markCompleted,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff34C759),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    const Icon(Icons.check_circle_outline,
+                        size: 16, color: Color(0xff34C759)),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

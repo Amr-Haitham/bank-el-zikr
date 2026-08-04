@@ -188,54 +188,53 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                     padding: const EdgeInsetsDirectional.only(
                                         end: 14),
                                     children: [
-                                      Container(
-                                        width: double.infinity,
-                                        padding: const EdgeInsets.all(16),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surfaceContainerHighest
-                                              .withValues(alpha: 0.5),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            for (final zikr in azkar) ...[
-                                              ListTileOfZikr(
-                                                zikr: zikr,
-                                                isSelected: zikr.key ==
-                                                    currentZikrKey,
-                                                useGreenCheckIndicator: true,
-                                                onDeleteCustomZikr: zikr
-                                                        .isCustomZikr
-                                                    ? () => context
-                                                        .read<
-                                                            DeleteCustomZikrCubit>()
-                                                        .deleteZikr(zikr.id)
-                                                    : null,
-                                                onTap: () {
-                                                  context
-                                                      .read<CounterCubit>()
-                                                      .setCurrentZikr(
-                                                          zikr.key);
-                                                  Navigator.of(context)
-                                                      .maybePop();
-                                                },
-                                              ),
-                                              if (zikr != azkar.last) ...[
-                                                const SizedBox(height: 16),
-                                                Divider(
-                                                  height: 1,
-                                                  thickness: 1,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .outline,
+                                      Material(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surfaceContainerHighest
+                                            .withValues(alpha: 0.5),
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Column(
+                                            children: [
+                                              for (final zikr in azkar) ...[
+                                                ListTileOfZikr(
+                                                  zikr: zikr,
+                                                  isSelected: zikr.key ==
+                                                      currentZikrKey,
+                                                  useGreenCheckIndicator: true,
+                                                  onDeleteCustomZikr: zikr
+                                                          .isCustomZikr
+                                                      ? () => context
+                                                          .read<
+                                                              DeleteCustomZikrCubit>()
+                                                          .deleteZikr(zikr.id)
+                                                      : null,
+                                                  onTap: () {
+                                                    context
+                                                        .read<CounterCubit>()
+                                                        .setCurrentZikr(
+                                                            zikr.key);
+                                                    Navigator.of(context)
+                                                        .maybePop();
+                                                  },
                                                 ),
-                                                const SizedBox(height: 16),
+                                                if (zikr != azkar.last) ...[
+                                                  const SizedBox(height: 16),
+                                                  Divider(
+                                                    height: 1,
+                                                    thickness: 1,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .outline,
+                                                  ),
+                                                  const SizedBox(height: 16),
+                                                ],
                                               ],
                                             ],
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ],

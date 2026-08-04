@@ -155,6 +155,8 @@ class HiveDB {
         }
       }
 
+      await prayerAzkarBox.clear();
+
       await versionBox.clear();
       await versionBox.add(Version(currentVersion: ReleaseVersion.version));
 

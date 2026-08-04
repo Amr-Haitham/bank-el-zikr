@@ -33,6 +33,8 @@
   "supportSubtitle": "ساعد في إبقاء بنك الذكر مجانيًا للجميع",
   "donate": "تبرع",
   "anotherVerse": "آية أخرى",
+  "showTranslation": "إظهار الترجمة",
+  "hideTranslation": "إخفاء الترجمة",
   "shareReward": "شارك الأجر مع أصدقاءك",
 
   "digitalTasbih": "السبحة الرقمية",
@@ -128,6 +130,8 @@
   "shareLabel": "مشاركة",
   "shareAsText": "مشاركة كنص",
   "shareAsImage": "مشاركة كصورة",
+  "saveImage": "حفظ الصورة",
+  "imageSaved": "تم حفظ الصورة",
   "copyLabel": "نسخ",
   "copied": "تم النسخ",
   "swipeHint": "اسحب يمينًا أو يسارًا للتنقل بين الأذكار",

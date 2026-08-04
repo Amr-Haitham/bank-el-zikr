@@ -1,14 +1,15 @@
-import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
 class ZikrShareCard extends StatelessWidget {
   const ZikrShareCard({
     super.key,
     required this.content,
+    required this.appName,
     this.translation,
   });
 
   final String content;
+  final String appName;
   final String? translation;
 
   @override
@@ -53,7 +54,7 @@ class ZikrShareCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Text(
-            AppLocalizations.of(context).homeTitle,
+            appName,
             style: const TextStyle(
               fontFamily: 'Tajawal',
               fontSize: 14,

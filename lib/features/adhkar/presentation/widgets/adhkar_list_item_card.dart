@@ -60,17 +60,19 @@ class AdhkarListItemCard extends StatelessWidget {
                         ),
                   ),
                 ),
-                const SizedBox(width: 8),
                 GestureDetector(
                   onTap: () => ZikrShareSheet.show(
                     context,
                     content: zikr.content,
                     translation: isEnglish ? zikr.contentEn : null,
                   ),
-                  child: Icon(Icons.ios_share,
-                      size: 16, color: secondaryTextColor),
+                  behavior: HitTestBehavior.opaque,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Icon(Icons.ios_share,
+                        size: 18, color: secondaryTextColor),
+                  ),
                 ),
-                const SizedBox(width: 10),
                 Text(
                   formatNumber(context, index + 1),
                   style: TextStyle(

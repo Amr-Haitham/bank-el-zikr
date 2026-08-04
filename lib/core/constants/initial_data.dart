@@ -1566,162 +1566,337 @@ class InitialData {
 
   static List<PrayerEntity> prayers = [
     const PrayerEntity(
-        id: 0, content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني"),
+        id: 0,
+        content: "اللهم إنك عفو كريم تحب العفو، فاعفُ عني",
+        transliteration:
+            "Allahumma innaka 'afuwwun karim tuhibbul-'afwa fa'fu 'anni",
+        translation:
+            "O Allah, You are Forgiving and Generous, You love to forgive, so forgive me."),
     const PrayerEntity(
         id: 1,
         content:
-            "اللهم ربنا لك الحمد أنت قيّم السماوات والأرض، ولك الحمد أنت رب السماوات والأرض ومن فيهن، ولك الحمد أنت نور السماوات والأرض ومن فيهن، أنت الحق، وقولك الحق، ووعدك الحق، ولقاؤك الحق، والجنة حق، والنار حق، والساعة حق، اللهم: لك أسلمت، وبك آمنت، وعليك توكلت، وإليك خاصمت، وبك حاكمت، فاغفر لي: ما قدمت، وما أخرت، وأسررت، وأعلنت، وما أنت أعلم به مني، لا إله إلا أنت"),
+            "اللهم ربنا لك الحمد أنت قيّم السماوات والأرض، ولك الحمد أنت رب السماوات والأرض ومن فيهن، ولك الحمد أنت نور السماوات والأرض ومن فيهن، أنت الحق، وقولك الحق، ووعدك الحق، ولقاؤك الحق، والجنة حق، والنار حق، والساعة حق، اللهم: لك أسلمت، وبك آمنت، وعليك توكلت، وإليك خاصمت، وبك حاكمت، فاغفر لي: ما قدمت، وما أخرت، وأسررت، وأعلنت، وما أنت أعلم به مني، لا إله إلا أنت",
+        transliteration:
+            "Allahumma rabbana lakal-hamd, anta qayyimus-samawati wal-ard, wa lakal-hamd, anta rabbus-samawati wal-ard wa man fihinn, wa lakal-hamd, anta nurus-samawati wal-ard wa man fihinn, antal-haqq, wa qawluka haqq, wa wa'duka haqq, wa liqa'uka haqq, wal-jannatu haqq, wan-naru haqq, was-sa'atu haqq, Allahumma laka aslamt, wa bika amant, wa 'alayka tawakkalt, wa ilayka khasamt, wa bika hakamt, faghfir li ma qaddamt, wa ma akhkhart, wa ma asrart, wa ma a'lant, wa ma anta a'lamu bihi minni, la ilaha illa anta",
+        translation:
+            "O Allah, our Lord, praise be to You, You are the Sustainer of the heavens and the earth. Praise be to You, You are the Lord of the heavens and the earth and all within them. Praise be to You, You are the Light of the heavens and the earth and all within them. You are the Truth, Your word is the truth, Your promise is the truth, meeting You is the truth, Paradise is true, the Fire is true, the Hour is true. O Allah, to You I submit, in You I believe, upon You I rely, to You I turn in dispute, and by You I judge. So forgive me for what I have done and what I have left undone, what I have done secretly and openly, and what You know better than I. There is no god but You."),
     const PrayerEntity(
         id: 2,
         content:
-            "اللهم إني أعوذ بك من العجز والكسل والجبن والهرم والبخل، وأعوذ بك من عذاب القبر، ومن فتنة المحيا والممات"),
+            "اللهم إني أعوذ بك من العجز والكسل والجبن والهرم والبخل، وأعوذ بك من عذاب القبر، ومن فتنة المحيا والممات",
+        transliteration:
+            "Allahumma inni a'udhu bika minal-'ajzi wal-kasal, wal-jubni wal-haram, wal-bukhl, wa a'udhu bika min 'adhabil-qabr, wa min fitnatil-mahya wal-mamat",
+        translation:
+            "O Allah, I seek refuge in You from helplessness, laziness, cowardice, senility, and miserliness. And I seek refuge in You from the punishment of the grave, and from the trial of life and death."),
     const PrayerEntity(
         id: 3,
         content:
-            "اللهم إني أعوذ بك من فتنة النار، وعذاب النار، وفتنة القبر، وعذاب القبر، ومن شر فتنة الغنى، ومن شر فتنة الفقر، وأعوذ بك من شر فتنة المسيح الدجال، اللهم اغسل خطاياي بماء الثلج والبرد، ونقِّ قلبي من الخطايا كما نقيت الثوب الأبيض من الدنس، وباعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم إني أعوذ بك من الكسل والهرم والمأثم والمغرم"),
+            "اللهم إني أعوذ بك من فتنة النار، وعذاب النار، وفتنة القبر، وعذاب القبر، ومن شر فتنة الغنى، ومن شر فتنة الفقر، وأعوذ بك من شر فتنة المسيح الدجال، اللهم اغسل خطاياي بماء الثلج والبرد، ونقِّ قلبي من الخطايا كما نقيت الثوب الأبيض من الدنس، وباعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللهم إني أعوذ بك من الكسل والهرم والمأثم والمغرم",
+        transliteration:
+            "Allahumma inni a'udhu bika min fitnatin-nar, wa 'adhabin-nar, wa fitnatil-qabr, wa 'adhabil-qabr, wa min sharri fitnatil-ghina, wa min sharri fitnatil-faqr, wa a'udhu bika min sharri fitnatil-masihid-dajjal. Allahummaghsil khatayaya bi ma'ith-thalji wal-barad, wa naqqi qalbi minal-khataya kama naqqaytath-thawbal-abyada minad-danas, wa ba'id bayni wa bayna khatayaya kama ba'adta baynal-mashriqi wal-maghrib. Allahumma inni a'udhu bika minal-kasali wal-harami wal-ma'thami wal-maghram",
+        translation:
+            "O Allah, I seek refuge in You from the trial of the Fire, the punishment of the Fire, the trial of the grave, the punishment of the grave, the evil of the trial of riches, and the evil of the trial of poverty. And I seek refuge in You from the evil of the trial of the False Messiah (al-Masih ad-Dajjal). O Allah, wash away my sins with the water of snow and hail, and cleanse my heart of sins as a white garment is cleansed of dirt, and put a great distance between me and my sins as You have put a great distance between the East and the West. O Allah, I seek refuge in You from laziness, senility, sin, and debt."),
     const PrayerEntity(
         id: 4,
         content:
-            " أعوذ برضاك من سخطك، وبمعافاتك من عقوبتك، وأعوذ بك منك، لا أحصي ثناء عليك أنت كما أثنيت على نفسك"),
+            " أعوذ برضاك من سخطك، وبمعافاتك من عقوبتك، وأعوذ بك منك، لا أحصي ثناء عليك أنت كما أثنيت على نفسك",
+        transliteration:
+            "A'udhu biridaka min sakhatik, wa bimu'afatika min 'uqubatik, wa a'udhu bika mink, la uhsi thana'an 'alayk, anta kama athnayta 'ala nafsik",
+        translation:
+            "I seek refuge in Your pleasure from Your anger, and in Your forgiveness from Your punishment, and I seek refuge in You from You. I cannot praise You enough; You are as You have praised Yourself."),
     const PrayerEntity(
         id: 5,
         content:
-            "اللهم إني أعوذ بك من علم لا ينفع، وقلب لا يخشع، ودعاء لا يُسمع، ونفس لا تشبع"),
+            "اللهم إني أعوذ بك من علم لا ينفع، وقلب لا يخشع، ودعاء لا يُسمع، ونفس لا تشبع",
+        transliteration:
+            "Allahumma inni a'udhu bika min 'ilmin la yanfa', wa min qalbin la yakhsha', wa min du'ain la yusma', wa min nafsin la tashba'",
+        translation:
+            "O Allah, I seek refuge in You from knowledge that does not benefit, a heart that does not fear (You), a supplication that is not heard, and a soul that is not satisfied."),
     const PrayerEntity(
         id: 6,
         content:
-            "اللهم رحمتك أرجو فلا تكلني إلى نفسي طرفة عين، وأصلح لي شأني كله لا إله إلا أنت"),
+            "اللهم رحمتك أرجو فلا تكلني إلى نفسي طرفة عين، وأصلح لي شأني كله لا إله إلا أنت",
+        transliteration:
+            "Allahumma rahmataka arju fala takilni ila nafsi tarfata 'ayn, wa aslih li sha'ni kullah, la ilaha illa anta",
+        translation:
+            "O Allah, it is Your mercy that I hope for, so do not leave me to myself even for the blink of an eye, and set right all of my affairs. There is no god but You."),
     const PrayerEntity(
         id: 7,
-        content: "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار"),
+        content: "ربنا آتنا في الدنيا حسنة وفي الآخرة حسنة وقنا عذاب النار",
+        transliteration:
+            "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+        translation:
+            "Our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."),
     const PrayerEntity(
         id: 8,
         content:
-            "اللهم إني أسألك من الخير كله عاجله وآجله ما علمتُ منه وما لم أعلم، وأعوذ بك من الشر كله عاجله وآجله ما علمتُ منه وما لم أعلم، اللهم إني أسألك من خير ما سألك عبدك ونبيك، وأعوذ بك من شر ما عاذ به عبدك ونبيك، اللهم إني أسألك الجنة وما قرب إليها من قول أو عمل، وأعوذ بك من النار وما قرب إليها من قول أو عمل، وأسألك أن تجعل كل قضاء قضيته لي خيرا"),
+            "اللهم إني أسألك من الخير كله عاجله وآجله ما علمتُ منه وما لم أعلم، وأعوذ بك من الشر كله عاجله وآجله ما علمتُ منه وما لم أعلم، اللهم إني أسألك من خير ما سألك عبدك ونبيك، وأعوذ بك من شر ما عاذ به عبدك ونبيك، اللهم إني أسألك الجنة وما قرب إليها من قول أو عمل، وأعوذ بك من النار وما قرب إليها من قول أو عمل، وأسألك أن تجعل كل قضاء قضيته لي خيرا",
+        transliteration:
+            "Allahumma inni as'aluka minal-khayri kullihi, 'ajilihi wa ajilih, ma 'alimtu minhu wa ma lam a'lam, wa a'udhu bika minash-sharri kullihi, 'ajilihi wa ajilih, ma 'alimtu minhu wa ma lam a'lam. Allahumma inni as'aluka min khayri ma sa'alaka 'abduka wa nabiyyuk, wa a'udhu bika min sharri ma 'adha bihi 'abduka wa nabiyyuk. Allahumma inni as'alukal-jannata wa ma qarraba ilayha min qawlin aw 'amal, wa a'udhu bikan-nara wa ma qarraba ilayha min qawlin aw 'amal, wa as'aluka an tuj'ala kulla qada'in qadaytahu li khayra",
+        translation:
+            "O Allah, I ask You for all that is good, in this life and the next, what I know of it and what I do not know, and I seek refuge in You from all that is evil, in this life and the next, what I know of it and what I do not know. O Allah, I ask You for the good that Your servant and Prophet asked You for, and I seek refuge in You from the evil that Your servant and Prophet sought refuge from. O Allah, I ask You for Paradise and whatever word or deed brings me closer to it, and I seek refuge in You from the Fire and whatever word or deed brings me closer to it, and I ask that You make every decree You ordain for me good."),
     const PrayerEntity(
         id: 9,
         content:
-            "اللهم بعلمك الغيب، وقدرتك على الخلق أحيني ما علمتَ الحياة خيراً لي، وتوفني إذا علمت الوفاة خيراً لي، اللهم وأسألك خشيتك في الغيب والشهادة، وأسألك كلمة الحق في الرضا والغضب، وأسألك القصد في الفقر والغنى، وأسألك نعيماً لا ينفد، وأسألك قرة عين لا تنقطع، وأسألك الرضاء بعد القضاء، وأسألك بَرْد العيش بعد الموت، وأسألك لذة النظر إلى وجهك والشوق إلى لقائك في غير ضراء مضرة، ولا فتنة مضلة، اللهم زينا بزينة الإيمان، واجعلنا هداة مهتدين"),
+            "اللهم بعلمك الغيب، وقدرتك على الخلق أحيني ما علمتَ الحياة خيراً لي، وتوفني إذا علمت الوفاة خيراً لي، اللهم وأسألك خشيتك في الغيب والشهادة، وأسألك كلمة الحق في الرضا والغضب، وأسألك القصد في الفقر والغنى، وأسألك نعيماً لا ينفد، وأسألك قرة عين لا تنقطع، وأسألك الرضاء بعد القضاء، وأسألك بَرْد العيش بعد الموت، وأسألك لذة النظر إلى وجهك والشوق إلى لقائك في غير ضراء مضرة، ولا فتنة مضلة، اللهم زينا بزينة الإيمان، واجعلنا هداة مهتدين",
+        transliteration:
+            "Allahumma bi'ilmikal-ghayba, wa qudratika 'alal-khalq, ahyini ma 'alimtal-hayata khayral-li, wa tawaffani idha 'alimtal-wafata khayral-li. Allahumma wa as'aluka khashyataka fil-ghaybi wash-shahadah, wa as'aluka kalimatal-haqqi fir-rida wal-ghadab, wa as'alukal-qasda fil-faqri wal-ghina, wa as'aluka na'iman la yanfad, wa as'aluka qurrata 'aynin la tanqati', wa as'alukar-rida ba'dal-qada, wa as'aluka barda-l'aysh ba'dal-mawt, wa as'aluka ladhdhatan-nazari ila wajhika wash-shawqa ila liqa'ika fi ghayri darra'a mudirratin wa la fitnatin mudillah. Allahumma zayyinna bi zinatil-imani, waj'alna hudatan muhtadin",
+        translation:
+            "O Allah, by Your knowledge of the unseen and Your power over creation, keep me alive as long as You know life is good for me, and take my life when You know death is better for me. O Allah, I ask You for the fear of You in private and in public, I ask You for the word of truth in contentment and in anger, I ask You for moderation in poverty and in wealth, I ask You for bliss that never ends, I ask You for the comfort of the eye that never fades, I ask You for satisfaction after the decree, I ask You for a cool life after death, and I ask You for the pleasure of looking at Your face and the longing to meet You, without any distressing adversity or misguiding trial. O Allah, adorn us with the ornament of faith, and make us guides who are rightly guided."),
     const PrayerEntity(
         id: 10,
         content:
-            "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْمُعَافَاةَ فِي الدُّنْيَا وَالْآخِرَةِ"),
+            "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْمُعَافَاةَ فِي الدُّنْيَا وَالْآخِرَةِ",
+        transliteration:
+            "Allahumma inni as'alukal-mu'afata fid-dunya wal-akhirah",
+        translation:
+            "O Allah, I ask You for well-being in this world and in the Hereafter."),
     const PrayerEntity(
         id: 11,
         content:
-            "اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك، وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء لك بذنبي فاغفر لي، فإنه لا يغفر الذنوب إلا أنت"),
+            "اللهم أنت ربي لا إله إلا أنت، خلقتني وأنا عبدك، وأنا على عهدك ووعدك ما استطعت، أعوذ بك من شر ما صنعت، أبوء لك بنعمتك علي، وأبوء لك بذنبي فاغفر لي، فإنه لا يغفر الذنوب إلا أنت",
+        transliteration:
+            "Allahumma anta rabbi la ilaha illa anta, khalaqtani wa ana 'abduk, wa ana 'ala 'ahdika wa wa'dika mastata't, a'udhu bika min sharri ma sana't, abu'u laka bini'matika 'alayya, wa abu'u laka bidhanbi faghfir li, fa'innahu la yaghfirudh-dhunuba illa anta",
+        translation:
+            "O Allah, You are my Lord, there is no god but You. You created me and I am Your servant, and I remain on Your covenant and promise as much as I am able. I seek refuge in You from the evil of what I have done. I acknowledge Your favor upon me, and I acknowledge my sin, so forgive me, for none forgives sins except You."),
     const PrayerEntity(
         id: 12,
         content:
-            " {رَبَّنَا ءاتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ}[البقرة: 201]"),
+            " {رَبَّنَا ءاتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ}[البقرة: 201]",
+        transliteration:
+            "Rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+        translation:
+            "Our Lord, give us good in this world and good in the Hereafter, and save us from the punishment of the Fire. [Al-Baqarah: 201]"),
     const PrayerEntity(
         id: 13,
         content:
-            "{رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنْ الْخَاسِرِينَ}[الأعراف: 23]"),
+            "{رَبَّنَا ظَلَمْنَا أَنفُسَنَا وَإِنْ لَمْ تَغْفِرْ لَنَا وَتَرْحَمْنَا لَنَكُونَنَّ مِنْ الْخَاسِرِينَ}[الأعراف: 23]",
+        transliteration:
+            "Rabbana zalamna anfusana wa in lam taghfir lana wa tarhamna lanakunanna minal-khasirin",
+        translation:
+            "Our Lord, we have wronged ourselves, and if You do not forgive us and have mercy upon us, we will surely be among the losers. [Al-A'raf: 23]"),
     const PrayerEntity(
         id: 14,
         content:
-            " {رَبَّنَا لا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلا تُحَمِّلْنَا مَا لا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ}[البقرة: 286]"),
+            " {رَبَّنَا لا تُؤَاخِذْنَا إِنْ نَسِينَا أَوْ أَخْطَأْنَا رَبَّنَا وَلا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلا تُحَمِّلْنَا مَا لا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلانَا فَانصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ}[البقرة: 286]",
+        transliteration:
+            "Rabbana la tu'akhidhna in nasina aw akhta'na, Rabbana wa la tahmil 'alayna isran kama hamaltahu 'alal-ladhina min qablina, Rabbana wa la tuhammilna ma la taqata lana bih, wa'fu 'anna waghfir lana warhamna, anta mawlana fansurna 'alal-qawmil-kafirin",
+        translation:
+            "Our Lord, do not hold us accountable if we forget or make a mistake. Our Lord, do not lay upon us a burden like that which You laid upon those before us. Our Lord, do not burden us with more than we have the strength to bear. Pardon us, forgive us, and have mercy upon us. You are our protector, so grant us victory over the disbelieving people. [Al-Baqarah: 286]"),
     const PrayerEntity(
         id: 15,
         content:
-            "{رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا}[الفرقان: 74] "),
+            "{رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا}[الفرقان: 74] ",
+        transliteration:
+            "Rabbana hab lana min azwajina wa dhurriyyatina qurrata a'yunin waj'alna lil-muttaqina imama",
+        translation:
+            "Our Lord, grant us from among our spouses and offspring comfort to our eyes, and make us an example for the righteous. [Al-Furqan: 74]"),
     const PrayerEntity(
         id: 16,
         content:
-            "{رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَلِمَنْ دَخَلَ بَيْتِي مُؤْمِنًا وَلِلْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ}[نوح: 28] "),
+            "{رَبِّ اغْفِرْ لِي وَلِوَالِدَيَّ وَلِمَنْ دَخَلَ بَيْتِي مُؤْمِنًا وَلِلْمُؤْمِنِينَ وَالْمُؤْمِنَاتِ}[نوح: 28] ",
+        transliteration:
+            "Rabbighfir li wa liwalidayya wa liman dakhala baytiya mu'minan wa lil-mu'minina wal-mu'minat",
+        translation:
+            "My Lord, forgive me and my parents, and whoever enters my house as a believer, and the believing men and believing women. [Nuh: 28]"),
     const PrayerEntity(
         id: 17,
         content:
-            " {رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ}[القصص: 24]"),
+            " {رَبِّ إِنِّي لِمَا أَنزَلْتَ إِلَيَّ مِنْ خَيْرٍ فَقِيرٌ}[القصص: 24]",
+        transliteration: "Rabbi inni lima anzalta ilayya min khayrin faqir",
+        translation:
+            "My Lord, indeed I am in need of whatever good You would send down to me. [Al-Qasas: 24]"),
     const PrayerEntity(
         id: 18,
         content:
-            "{رَبَّنَا ءاتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا}[الكهف: 10] "),
+            "{رَبَّنَا ءاتِنَا مِنْ لَدُنْكَ رَحْمَةً وَهَيِّئْ لَنَا مِنْ أَمْرِنَا رَشَدًا}[الكهف: 10] ",
+        transliteration:
+            "Rabbana atina min ladunka rahmatan wa hayyi' lana min amrina rashada",
+        translation:
+            "Our Lord, grant us mercy from Yourself and facilitate for us our affair in the right way. [Al-Kahf: 10]"),
     const PrayerEntity(
         id: 19,
         content:
-            "{رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ * وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ}[المؤمنون: 97-98] "),
+            "{رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ * وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ}[المؤمنون: 97-98] ",
+        transliteration:
+            "Rabbi a'udhu bika min hamazatish-shayatin, wa a'udhu bika rabbi an yahdurun",
+        translation:
+            "My Lord, I seek refuge in You from the incitements of the devils, and I seek refuge in You, my Lord, lest they be present with me. [Al-Mu'minun: 97-98]"),
     const PrayerEntity(
         id: 20,
         content:
-            "{رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ}[التحريم: 8] "),
+            "{رَبَّنَا أَتْمِمْ لَنَا نُورَنَا وَاغْفِرْ لَنَا إِنَّكَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ}[التحريم: 8] ",
+        transliteration:
+            "Rabbana atmim lana nurana waghfir lana innaka 'ala kulli shay'in qadir",
+        translation:
+            "Our Lord, perfect for us our light and forgive us. Indeed, You are over all things competent. [At-Tahrim: 8]"),
     const PrayerEntity(
         id: 21,
         content:
-            "{رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ}[آل عمران: 16] "),
+            "{رَبَّنَا إِنَّنَا آمَنَّا فَاغْفِرْ لَنَا ذُنُوبَنَا وَقِنَا عَذَابَ النَّارِ}[آل عمران: 16] ",
+        transliteration:
+            "Rabbana innana amanna faghfir lana dhunubana wa qina 'adhaban-nar",
+        translation:
+            "Our Lord, we have believed, so forgive us our sins and protect us from the punishment of the Fire. [Al 'Imran: 16]"),
     const PrayerEntity(
         id: 22,
         content:
-            "{رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ}[آل عمران: 38] "),
+            "{رَبِّ هَبْ لِي مِنْ لَدُنْكَ ذُرِّيَّةً طَيِّبَةً إِنَّكَ سَمِيعُ الدُّعَاءِ}[آل عمران: 38] ",
+        transliteration:
+            "Rabbi hab li min ladunka dhurriyyatan tayyibatan innaka sami'ud-du'a",
+        translation:
+            "My Lord, grant me from Yourself righteous offspring. Indeed, You are the Hearer of supplication. [Al 'Imran: 38]"),
     const PrayerEntity(
         id: 23,
         content:
-            "اللهم إني ظلمت نفسي ظلما كثيرا ولا يغفر الذنوب إلا أنت، فاغفر لي مغفرة من عندك وارحمني، إنك أنت الغفور الرحيم"),
+            "اللهم إني ظلمت نفسي ظلما كثيرا ولا يغفر الذنوب إلا أنت، فاغفر لي مغفرة من عندك وارحمني، إنك أنت الغفور الرحيم",
+        transliteration:
+            "Allahumma inni zalamtu nafsi zulman kathiran, wa la yaghfirudh-dhunuba illa anta, faghfir li maghfiratan min 'indika warhamni, innaka antal-ghafurur-rahim",
+        translation:
+            "O Allah, I have wronged myself greatly, and none forgives sins except You. So forgive me with a forgiveness from You, and have mercy on me. Indeed, You are the Forgiving, the Merciful."),
     const PrayerEntity(
         id: 24,
         content:
-            "{رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ}[النمل: 19]"),
+            "{رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ}[النمل: 19]",
+        transliteration:
+            "Rabbi awzi'ni an ashkura ni'mataka-llati an'amta 'alayya wa 'ala walidayya wa an a'mala salihan tardahu wa adkhilni birahmatika fi 'ibadikas-salihin",
+        translation:
+            "My Lord, enable me to be grateful for Your favor which You have bestowed upon me and upon my parents, and to do righteous deeds that please You, and admit me by Your mercy into the ranks of Your righteous servants. [An-Naml: 19]"),
     const PrayerEntity(
         id: 25,
         content:
-            "اللهم صل على محمد وعلى آل محمد، كما صليت على إبراهيم، وعلى آل إبراهيم، إنك حميد مجيد، اللهم بارك على محمد وعلى آل محمد، كما باركت على إبراهيم وعلى آل إبراهيم، إنك حميد مجيد"),
+            "اللهم صل على محمد وعلى آل محمد، كما صليت على إبراهيم، وعلى آل إبراهيم، إنك حميد مجيد، اللهم بارك على محمد وعلى آل محمد، كما باركت على إبراهيم وعلى آل إبراهيم، إنك حميد مجيد",
+        transliteration:
+            "Allahumma salli 'ala Muhammadin wa 'ala ali Muhammad, kama sallayta 'ala Ibrahima wa 'ala ali Ibrahim, innaka hamidun majid. Allahumma barik 'ala Muhammadin wa 'ala ali Muhammad, kama barakta 'ala Ibrahima wa 'ala ali Ibrahim, innaka hamidun majid",
+        translation:
+            "O Allah, send prayers upon Muhammad and the family of Muhammad, as You sent prayers upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious. O Allah, send blessings upon Muhammad and the family of Muhammad, as You sent blessings upon Ibrahim and the family of Ibrahim. Indeed, You are Praiseworthy and Glorious."),
     const PrayerEntity(
         id: 26,
         content:
-            "اللهم إني أعوذ بك من الهم والحزن، والعجز والكسل، والجبن والبخل، وضلع الدين، وغلبة الرجال"),
+            "اللهم إني أعوذ بك من الهم والحزن، والعجز والكسل، والجبن والبخل، وضلع الدين، وغلبة الرجال",
+        transliteration:
+            "Allahumma inni a'udhu bika minal-hammi wal-hazan, wal-'ajzi wal-kasal, wal-jubni wal-bukhl, wa dala'id-dayni wa ghalabatir-rijal",
+        translation:
+            "O Allah, I seek refuge in You from worry and grief, from helplessness and laziness, from cowardice and miserliness, from being overcome by debt and overpowered by men."),
     const PrayerEntity(
         id: 27,
         content:
-            "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك وفجاءة نقمتك، وجميع سخطك"),
+            "اللهم إني أعوذ بك من زوال نعمتك، وتحول عافيتك وفجاءة نقمتك، وجميع سخطك",
+        transliteration:
+            "Allahumma inni a'udhu bika min zawali ni'matik, wa tahawwuli 'afiyatik, wa fuja'ati niqmatik, wa jami'i sakhatik",
+        translation:
+            "O Allah, I seek refuge in You from the decline of Your blessing, the turning away of the well-being You have granted, Your sudden punishment, and all that displeases You."),
     const PrayerEntity(
         id: 28,
-        content: "اللهم إني أعوذ بك من البرص والجنون والجذام ومن سيئ الأسقام"),
+        content: "اللهم إني أعوذ بك من البرص والجنون والجذام ومن سيئ الأسقام",
+        transliteration:
+            "Allahumma inni a'udhu bika minal-barasi wal-jununi wal-judham, wa min sayyi'il-asqam",
+        translation:
+            "O Allah, I seek refuge in You from leprosy, insanity, elephantiasis, and evil diseases."),
     const PrayerEntity(
         id: 29,
-        content: "اللهم إني أعوذ بك من منكرات الأخلاق والأعمال والأهواء"),
+        content: "اللهم إني أعوذ بك من منكرات الأخلاق والأعمال والأهواء",
+        transliteration:
+            "Allahumma inni a'udhu bika min munkaratil-akhlaqi wal-a'mali wal-ahwa'",
+        translation:
+            "O Allah, I seek refuge in You from bad character, deeds, and desires."),
     const PrayerEntity(
         id: 30,
         content:
-            "اللهم إني أعوذ بك من الهدم وأعوذ بك من التردي وأعوذ بك من الغرق والحرق والهرم وأعوذ بك أن يتخبطني الشيطان عند الموت وأعوذ بك أن أموت في سبيلك مدبرا وأعوذ بك أن أموت لديغا"),
+            "اللهم إني أعوذ بك من الهدم وأعوذ بك من التردي وأعوذ بك من الغرق والحرق والهرم وأعوذ بك أن يتخبطني الشيطان عند الموت وأعوذ بك أن أموت في سبيلك مدبرا وأعوذ بك أن أموت لديغا",
+        transliteration:
+            "Allahumma inni a'udhu bika minal-hadmi, wa a'udhu bika minat-taraddi, wa a'udhu bika minal-gharaqi wal-harqi wal-haram, wa a'udhu bika an yatakhabbatanish-shaytanu 'indal-mawt, wa a'udhu bika an amuta fi sabilika mudabbiran, wa a'udhu bika an amuta ladigha",
+        translation:
+            "O Allah, I seek refuge in You from being crushed by a falling structure, and I seek refuge in You from falling from a height, and I seek refuge in You from drowning, burning, and senility, and I seek refuge in You from being touched by Satan at the time of death, and I seek refuge in You from dying while fleeing in Your cause, and I seek refuge in You from dying from a sting or bite."),
     const PrayerEntity(
         id: 31,
         content:
-            "اللهم إني أسألك يا الله بأنك الواحد الأحد الصمد الذي لم يلد ولم يولد ولم يكن له كفوا أحد أن تغفر لي ذنوبي إنك أنت الغفور الرحيم"),
+            "اللهم إني أسألك يا الله بأنك الواحد الأحد الصمد الذي لم يلد ولم يولد ولم يكن له كفوا أحد أن تغفر لي ذنوبي إنك أنت الغفور الرحيم",
+        transliteration:
+            "Allahumma inni as'aluka ya Allahu bi'annakal-wahidul-ahadus-samad, alladhi lam yalid wa lam yulad, wa lam yakun lahu kufuwan ahad, an taghfira li dhunubi, innaka antal-ghafurur-rahim",
+        translation:
+            "O Allah, I ask You, O Allah, the One, the Unique, the Self-Sufficient Master, Who was not born and does not give birth, and Who has no equal, to forgive my sins. Indeed, You are the Forgiving, the Merciful."),
     const PrayerEntity(
-        id: 32, content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى"),
+        id: 32,
+        content: "اللهم إني أسألك الهدى والتقى والعفاف والغنى",
+        transliteration:
+            "Allahumma inni as'alukal-huda wat-tuqa wal-'afafa wal-ghina",
+        translation:
+            "O Allah, I ask You for guidance, piety, chastity, and contentment."),
     const PrayerEntity(
-        id: 33, content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك"),
+        id: 33,
+        content: "اللهم أعني على ذكرك وشكرك وحسن عبادتك",
+        transliteration:
+            "Allahumma a'inni 'ala dhikrika wa shukrika wa husni 'ibadatik",
+        translation:
+            "O Allah, help me to remember You, thank You, and worship You in the best way."),
     const PrayerEntity(
         id: 34,
         content:
-            "اللهم اغفر لي خطيئتي، وجهلي وإسرافي، في أمري وما أنت أعلم به مني، اللهم اغفر لي جدي وهزلي وخطئي وعمدي وكل ذلك عندي، اللهم اغفر لي ما قدمت وما أخرت وما أسررت وما أعلنت وما أنت أعلم به مني أنت المقدم وأنت المؤخر، وأنت على كل شيء قدير"),
+            "اللهم اغفر لي خطيئتي، وجهلي وإسرافي، في أمري وما أنت أعلم به مني، اللهم اغفر لي جدي وهزلي وخطئي وعمدي وكل ذلك عندي، اللهم اغفر لي ما قدمت وما أخرت وما أسررت وما أعلنت وما أنت أعلم به مني أنت المقدم وأنت المؤخر، وأنت على كل شيء قدير",
+        transliteration:
+            "Allahummaghfir li khati'ati wa jahli wa israfi fi amri, wa ma anta a'lamu bihi minni. Allahummaghfir li jiddi wa hazli wa khati'i wa 'amdi, wa kullu dhalika 'indi. Allahummaghfir li ma qaddamtu wa ma akhkhartu wa ma asrartu wa ma a'lantu, wa ma anta a'lamu bihi minni, anta-l-muqaddimu wa anta-l-mu'akhkhiru, wa anta 'ala kulli shay'in qadir",
+        translation:
+            "O Allah, forgive me my errors, my ignorance, and my excess in my affairs, and what You know better than I. O Allah, forgive me my seriousness and my jesting, my errors and my intentional acts — all of these are within me. O Allah, forgive me what I have done before and what I have left, what I have done secretly and openly, and what You know better than I. You are the One who brings forward and puts back, and You are able to do all things."),
     const PrayerEntity(
         id: 35,
         content:
-            "اللهم حبب إلينا الإيمان وزينه في قلوبنا، وكره إلينا الكفر والفسوق والعصيان، واجعلنا من الراشدين، اللهم توفنا مسلمين وأحينا مسلمين وألحقنا بالصالحين غير خزايا ولا مفتونين"),
+            "اللهم حبب إلينا الإيمان وزينه في قلوبنا، وكره إلينا الكفر والفسوق والعصيان، واجعلنا من الراشدين، اللهم توفنا مسلمين وأحينا مسلمين وألحقنا بالصالحين غير خزايا ولا مفتونين",
+        transliteration:
+            "Allahumma habbib ilaynal-imana wa zayyinhu fi qulubina, wa karrih ilaynal-kufra wal-fusuqa wal-'isyan, waj'alna minar-rashidin. Allahumma tawaffana muslimina wa ahyina muslimina wa alhiqna bis-salihina ghayra khazaya wa la maftunin",
+        translation:
+            "O Allah, make faith beloved to us and beautify it in our hearts, and make disbelief, wickedness, and disobedience detestable to us, and make us of those who are rightly guided. O Allah, let us die as Muslims and live as Muslims, and join us with the righteous, not disgraced nor tried by trials."),
     const PrayerEntity(
         id: 36,
-        content:
-            "اللهم اغفر لي ذنبي كله، دقه وجله، وأوله وآخره، وعلانيته وسره"),
+        content: "اللهم اغفر لي ذنبي كله، دقه وجله، وأوله وآخره، وعلانيته وسره",
+        transliteration:
+            "Allahummaghfir li dhanbi kullah, diqqahu wa jillahu, wa awwalahu wa akhirahu, wa 'alaniyatahu wa sirrahu",
+        translation:
+            "O Allah, forgive me all of my sins, the small and the great, the first and the last, the open and the secret."),
     const PrayerEntity(
         id: 37,
         content:
-            "اللهم ربنا آتنا في الدنيا حسنة، وفي الآخرة حسنة، وقنا عذاب النار"),
-    const PrayerEntity(id: 38, content: "يا مقلب القلوب ثبت قلبي على دينك"),
-    const PrayerEntity(id: 39, content: "اللهم أحسنت خَلقي فأحسن خُلقي"),
+            "اللهم ربنا آتنا في الدنيا حسنة، وفي الآخرة حسنة، وقنا عذاب النار",
+        transliteration:
+            "Allahumma rabbana atina fid-dunya hasanatan wa fil-akhirati hasanatan wa qina 'adhaban-nar",
+        translation:
+            "O Allah, our Lord, give us good in this world and good in the Hereafter, and protect us from the punishment of the Fire."),
+    const PrayerEntity(
+        id: 38,
+        content: "يا مقلب القلوب ثبت قلبي على دينك",
+        transliteration: "Ya muqallibal-qulub, thabbit qalbi 'ala dinik",
+        translation:
+            "O Turner of hearts, make my heart firm upon Your religion."),
+    const PrayerEntity(
+        id: 39,
+        content: "اللهم أحسنت خَلقي فأحسن خُلقي",
+        transliteration: "Allahumma ahsanta khalqi fa-ahsin khuluqi",
+        translation:
+            "O Allah, You have made my physical form good, so make my character good too."),
     const PrayerEntity(
         id: 40,
         content:
-            "اللهم أعوذ برضاك من سخطك، وبمعافاتك من عقوبتك، وأعوذ بك منك، لا أحصي ثناء عليك، أنت كما أثنيت على نفسك"),
+            "اللهم أعوذ برضاك من سخطك، وبمعافاتك من عقوبتك، وأعوذ بك منك، لا أحصي ثناء عليك، أنت كما أثنيت على نفسك",
+        transliteration:
+            "Allahumma a'udhu biridaka min sakhatik, wa bimu'afatika min 'uqubatik, wa a'udhu bika mink, la uhsi thana'an 'alayk, anta kama athnayta 'ala nafsik",
+        translation:
+            "O Allah, I seek refuge in Your pleasure from Your anger, and in Your forgiveness from Your punishment, and I seek refuge in You from You. I cannot praise You enough; You are as You have praised Yourself."),
     const PrayerEntity(
         id: 41,
         content:
-            "اللهم اغفر لي ما قدمت وما أخرت، وما أسررت وما أعلنت، وما أسرفت، وما أنت أعلم به مني، أنت المقدم وأنت المؤخر، لا إله إلا أنت"),
+            "اللهم اغفر لي ما قدمت وما أخرت، وما أسررت وما أعلنت، وما أسرفت، وما أنت أعلم به مني، أنت المقدم وأنت المؤخر، لا إله إلا أنت",
+        transliteration:
+            "Allahummaghfir li ma qaddamtu wa ma akhkhart, wa ma asrartu wa ma a'lant, wa ma asraft, wa ma anta a'lamu bihi minni, antal-muqaddimu wa antal-mu'akhkhir, la ilaha illa anta",
+        translation:
+            "O Allah, forgive me what I have done and what I have left, what I have done secretly and openly, and my excesses, and what You know better than I. You are the One who brings forward and puts back. There is no god but You."),
     const PrayerEntity(
         id: 42,
         content:
-            "اللهم اهدني فيمن هديت، وعافني فيمن عافيت، وتولني فيمن توليت، وبارك لي فيما أعطيت وقني شر ما قضيت، إنك تقضي ولا يقضى عليك، وإنه لا يذل من واليت ولا يعز من عاديت تباركت ربنا وتعاليت"),
+            "اللهم اهدني فيمن هديت، وعافني فيمن عافيت، وتولني فيمن توليت، وبارك لي فيما أعطيت وقني شر ما قضيت، إنك تقضي ولا يقضى عليك، وإنه لا يذل من واليت ولا يعز من عاديت تباركت ربنا وتعاليت",
+        transliteration:
+            "Allahummahdini fiman hadayt, wa 'afini fiman 'afayt, wa tawallani fiman tawallayt, wa barik li fima a'tayt, wa qini sharra ma qadayt, innaka taqdi wa la yuqda 'alayk, wa innahu la yadhillu man walayta wa la ya'izzu man 'adayt, tabarakta rabbana wa ta'alayt",
+        translation:
+            "O Allah, guide me among those You have guided, grant me safety among those You have granted safety, take care of me among those You have taken care of, bless what You have given me, and protect me from the evil You have decreed. Indeed, You decree and none can decree over You. He whom You have befriended is not humiliated, and he whom You have made an enemy is not honored. Blessed are You, our Lord, and Exalted."),
     const PrayerEntity(
         id: 43,
         content: "أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ",

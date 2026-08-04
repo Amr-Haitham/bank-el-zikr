@@ -217,6 +217,10 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
     if (isVibrating) {
       vibrateOnce();
     }
+
+    if (_readingCubit.state.viewMode == AdhkarViewMode.single) {
+      _goToPage(_readingCubit.state.currentPage + 1);
+    }
   }
 
   @override
@@ -279,6 +283,7 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
         zikr: zikr,
         reps: readingState.repsByZikrKey[zikr.key] ?? 0,
         onTap: () => _handleIncrement(zikr),
+        onComplete: () => _handleComplete(zikr),
       ),
     );
   }

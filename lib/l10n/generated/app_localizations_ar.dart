@@ -81,6 +81,12 @@ class AppLocalizationsAr extends AppLocalizations {
   String get anotherVerse => 'آية أخرى';
 
   @override
+  String get showTranslation => 'إظهار الترجمة';
+
+  @override
+  String get hideTranslation => 'إخفاء الترجمة';
+
+  @override
   String get shareReward => 'شارك الأجر مع أصدقاءك';
 
   @override
@@ -293,6 +299,12 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get shareAsImage => 'مشاركة كصورة';
+
+  @override
+  String get saveImage => 'حفظ الصورة';
+
+  @override
+  String get imageSaved => 'تم حفظ الصورة';
 
   @override
   String get copyLabel => 'نسخ';

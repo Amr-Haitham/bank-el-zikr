@@ -51,7 +51,7 @@ class AdhkarReadingCubit extends Cubit<AdhkarReadingState> {
     required this.incrementBalance,
     Map<String, int> initialReps = const {},
   }) : super(AdhkarReadingState(
-          viewMode: AdhkarViewMode.single,
+          viewMode: AdhkarViewMode.list,
           currentPage: 0,
           repsByZikrKey: initialReps,
         ));

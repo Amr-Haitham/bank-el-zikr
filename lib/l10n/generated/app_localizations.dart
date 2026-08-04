@@ -230,6 +230,18 @@ abstract class AppLocalizations {
   /// **'آية أخرى'**
   String get anotherVerse;
 
+  /// No description provided for @showTranslation.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار الترجمة'**
+  String get showTranslation;
+
+  /// No description provided for @hideTranslation.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء الترجمة'**
+  String get hideTranslation;
+
   /// No description provided for @shareReward.
   ///
   /// In ar, this message translates to:
@@ -625,6 +637,18 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'مشاركة كصورة'**
   String get shareAsImage;
+
+  /// No description provided for @saveImage.
+  ///
+  /// In ar, this message translates to:
+  /// **'حفظ الصورة'**
+  String get saveImage;
+
+  /// No description provided for @imageSaved.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم حفظ الصورة'**
+  String get imageSaved;
 
   /// No description provided for @copyLabel.
   ///
