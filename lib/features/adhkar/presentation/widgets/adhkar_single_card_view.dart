@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/initial_data.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_sheet.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 
 import 'adhkar_counter_ring.dart';
-import 'zikr_category_icon.dart';
 
 class AdhkarSingleCardView extends StatelessWidget {
   const AdhkarSingleCardView({
@@ -14,13 +14,20 @@ class AdhkarSingleCardView extends StatelessWidget {
     required this.zikr,
     required this.reps,
     required this.onTap,
+    required this.onComplete,
   });
 
   final ZikrEntity zikr;
   final int reps;
   final VoidCallback onTap;
+  final VoidCallback onComplete;
 
-  IconData get _icon => zikrCategoryIcon(zikr.category);
+  IconData get _icon {
+    for (final category in InitialData.categories) {
+      if (category.key == zikr.category) return category.icon;
+    }
+    return Icons.self_improvement_outlined;
+  }
 
   Color get _iconColor {
     switch (zikr.isMorning) {
@@ -89,8 +96,6 @@ class AdhkarSingleCardView extends StatelessWidget {
         ? zikr.descriptionEn
         : zikr.description;
     final secondaryTextColor = Theme.of(context).textTheme.bodySmall!.color!;
-    final shareText =
-        isEnglish && zikr.contentEn != null ? zikr.contentEn! : zikr.content;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -195,8 +200,11 @@ class AdhkarSingleCardView extends StatelessWidget {
           const SizedBox(height: 14),
           Center(
             child: GestureDetector(
-              onTap: () =>
-                  SharePlus.instance.share(ShareParams(text: shareText)),
+              onTap: () => ZikrShareSheet.show(
+                context,
+                content: zikr.content,
+                translation: isEnglish ? zikr.contentEn : null,
+              ),
               child: Container(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
@@ -224,6 +232,39 @@ class AdhkarSingleCardView extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           AdhkarCounterRing(reps: reps, target: zikr.count),
+          if (reps < zikr.count) ...[
+            const SizedBox(height: 14),
+            GestureDetector(
+              onTap: onComplete,
+              behavior: HitTestBehavior.opaque,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 44, vertical: 10),
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color(0xff34C759).withValues(alpha: 0.4),
+                  ),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      AppLocalizations.of(context).markCompleted,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xff34C759),
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                    const Icon(Icons.check_circle_outline,
+                        size: 16, color: Color(0xff34C759)),
+                  ],
+                ),
+              ),
+            ),
+          ],
           const SizedBox(height: 14),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

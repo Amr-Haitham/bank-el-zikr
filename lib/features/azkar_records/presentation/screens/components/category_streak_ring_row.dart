@@ -22,21 +22,21 @@ class CategoryStreakRingRow extends StatelessWidget {
       children: [
         Expanded(
           child: CategoryStreakRing(
-            title: AppLocalizations.of(context).eveningAdhkar,
-            currentStreak: eveningCurrentStreak,
-            longestStreak: eveningLongestStreak,
-            color: const Color(0xff6C63FF),
-            icon: Icons.nightlight_round,
-          ),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: CategoryStreakRing(
             title: AppLocalizations.of(context).morningAdhkar,
             currentStreak: morningCurrentStreak,
             longestStreak: morningLongestStreak,
             color: const Color(0xffFB8C3C),
             icon: Icons.wb_sunny_rounded,
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: CategoryStreakRing(
+            title: AppLocalizations.of(context).eveningAdhkar,
+            currentStreak: eveningCurrentStreak,
+            longestStreak: eveningLongestStreak,
+            color: const Color(0xff6C63FF),
+            icon: Icons.nightlight_round,
           ),
         ),
       ],

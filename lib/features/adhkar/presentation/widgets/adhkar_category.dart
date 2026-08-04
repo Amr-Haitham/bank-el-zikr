@@ -13,7 +13,7 @@ class AdhkarCategory {
 
   /// The zikr category slug (matches [ZikrEntity.category]) — the route
   /// pushed by tapping this tile always loads by this key, and the key into
-  /// the progress map from [AdhkarProgressCubit].
+  /// the progress map from [ReadingProgressCubit].
   final String category;
 
   final IconData icon;

@@ -28,14 +28,31 @@ or `domain/usecases`, not in cubits or widgets. Cubits orchestrate; they don't c
 `lib/features/azkar_records/domain/entities/journey_stats.dart` for the reference example — it's a pure
 class over a list of entities with no Flutter/Bloc dependency, computing streaks and growth stats.
 
-**Rule**: mapping is the data model's job, not the domain entity's. Every persisted data model
-(`data/models/*.dart`) owns its own `toEntity()` instance method and `fromEntity(entity)` factory
-constructor converting to/from its matching `domain/entities` class — see
-`lib/features/azkar_records/data/models/day_zikr_record_model.dart` (`DayZikrRecord.toEntity()` /
-`DayZikrRecord.fromEntity(...)`) for the reference shape. There is no separate `*_mapper.dart` file in
-this codebase — don't introduce one. Domain entities must stay free of any mapping/serialization code,
-Hive/JSON annotations, or knowledge that a data model exists — they hold state and business logic only
-(verified: zero `toEntity`/`fromEntity` references anywhere under any `domain/entities/` directory).
+**Rule** (changed 2026-08-02 — supersedes any earlier note that mapping lives on the data model itself):
+mapping is a dedicated mapper's job, not the data model's and not the domain entity's. Every persisted
+data model that has a matching `domain/entities` class gets a sibling `<model>_mapper.dart` in the same
+`data/models/` directory, holding a single class `<Model>Mapper` with **static** methods covering every
+direction of conversion:
+
+```dart
+class ZikrMapper {
+  static ZikrEntity toEntity(Zikr model) { ... }
+  static Zikr toModel(ZikrEntity entity) { ... }
+  static Zikr fromParams(AddCustomZikrParams params) { ... }
+}
+```
+
+- `toEntity(model)` — data model → domain entity.
+- `toModel(entity)` — domain entity → data model.
+- `fromParams(params)` — a use-case's `Params` input → data model, when a use case constructs/persists a
+  model directly from caller-supplied fields rather than from an existing entity. Not every model needs
+  this direction; add it only when a real `Params` class feeds that model.
+- The data model itself (`Zikr`, `GeneralData`, `DayRecord`, etc.) holds only its fields and Hive
+  annotations — no `toEntity()`/`fromEntity()` methods on the model, no conversion logic of any kind.
+- Domain entities must stay free of any mapping/serialization code, Hive/JSON annotations, or knowledge
+  that a data model exists — they hold state and business logic only.
+- One mapper class per model, not one per feature and not one shared catch-all mapper — keep the 1:1
+  file-to-model relationship so a mapper is always easy to find next to the model it serves.
 
 ## State management: `RequestCubit<T>` is the standard
 
@@ -56,9 +73,10 @@ class GetSettingsCubit extends RequestCubit<Settings> {
   add a method that calls `execute(() => useCase(params))` internally instead.
 - **Do not** extend plain `Cubit<T>` for request-shaped work just because the state is a list/map instead
   of a single object — wrap it in `RequestState<List<T>>` etc. so failures surface instead of being
-  silently swallowed. (Two cubits in the current codebase — `DailyActivityLogCubit`,
-  `AdhkarProgressCubit` — deviate from this and hold raw `Cubit<List<...>>` state with `result.fold((_) {},
-  ...)` discarding failures; treat this as a known gap, not a pattern to copy.)
+  silently swallowed. Fixed 2026-08-02: the two cubits that used to deviate from this
+  (`DailyActivityLogCubit`, `AdhkarProgressCubit`) were replaced by `DayRecordCubit` and
+  `ReadingProgressCubit` respectively, both proper `RequestCubit<T>` subclasses — see Local persistence
+  below for what replaced the models behind them.
 
 ## Use cases
 
@@ -166,7 +184,8 @@ static helper is legacy, not a second sanctioned pattern.
 `lib/core/layers/data/services/hive_db.dart` (`HiveDB`) owns all Hive setup: registers every
 `@HiveType`-annotated model's adapter in `initHiveDB()`, and seeds/migrates box contents in
 `setupInitHiveDbDataIfNonExisting()` (also handles wiping stale boxes on app version bump, keyed off
-`ReleaseVersion.version`). Both are called once from `main()` before `setupServiceLocator()`.
+`ReleaseVersion.version` in `lib/core/constants/version.dart`). Both are called once from `main()` before
+`setupServiceLocator()`.
 
 Data-layer models that persist via Hive live in each feature's `data/models/` (e.g.
 `lib/features/settings/data/models/version_model.dart`) and follow:
@@ -180,9 +199,46 @@ class Version {
   Version({required this.currentVersion});
 }
 ```
+Conversion to/from `Version`'s matching domain entity (if any) lives in a sibling `version_mapper.dart`
+per the mapping rule above — not on `Version` itself.
+
 Run `dart run build_runner build` after adding/changing a `@HiveType`/`@HiveField` model to regenerate the
 `.g.dart` adapter. **Every `typeId` must be unique across the whole app** (Hive has no per-box namespacing)
-— check `hive_db.dart`'s registered adapters and existing models before picking a new one.
+— check `hive_db.dart`'s registered adapters and existing models before picking a new one. Registered as
+of 2026-08-02: `Zikr` (0), `GeneralData` (2), `DayRecord` (6), `ReadingProgress` (7), `Prayer` (4),
+`Version` (5), plus `LegacyDayZikrRecord` (1, migration-only — see below).
+
+**`Zikr` and `ZikrCategory` intentionally live in `lib/core/`** (`core/data/models/zikr_model.dart`,
+`core/domain/entities/zikr.dart`, `core/domain/entities/zikr_category.dart`), a deliberate exception to
+data-models-live-in-their-feature: both are genuinely shared across `adhkar`, `zikr_counter`, and
+`azkar_records`, not owned by any single one. `ZikrCategory` is plain seeded data (title/icon/color per
+category, inline bilingual fields matching `Zikr`'s own pattern — not routed through the ARB/l10n system,
+which is still scaffolding elsewhere in the app), defined as a static list in
+`lib/core/constants/initial_data.dart`, not Hive-persisted and not hardcoded into any screen.
+
+**Every `Zikr` has a permanent `zikrKey: String`**, assigned once in `initial_data.dart` (e.g.
+`'morning_014'`, or `'custom_<id>'` for user-added zikr via `generateCustomZikrKey()` in
+`core/constants/general_functions.dart`) and never reused or reassigned. All cross-feature references to
+a specific zikr (`GeneralData.currentZikrKey`, `DayRecord.repsByZikrKey`, `ReadingProgress.repsByZikrKey`)
+use this key, not `Zikr.id` (an `int`, Hive-internal only, not a stable identifier — the content box is
+still fully cleared and reseeded on every version bump, so `id` value/ordering is not preserved across
+releases).
+
+**`DayRecord`** (`azkar_records`, typeId 6) is the single unbounded per-day history record — one row per
+calendar date, feeding streaks, the growth chart, and the weekly grid via
+`lib/features/azkar_records/domain/entities/journey_stats.dart`. Tracks `repsByZikrKey` plus
+`morningCompleted`/`eveningCompleted`/`sleepCompleted` (the three daily-tracked categories). Replaced two
+formerly-parallel, duplicate-writing structures: `DayZikrRecord` (a Hive box pruned to a 7-day rolling
+window) and `daily_activity_log` (hand-rolled JSON in SharedPreferences, unbounded). If you're migrating
+old data, `lib/core/layers/data/services/legacy_day_zikr_record_model.dart` (typeId 1) is a read-only
+shape of the old `DayZikrRecord` kept solely so `HiveDB` can fold existing users' history into the new
+box on the version-11 upgrade — don't build on it, it's not a live pattern.
+
+**`ReadingProgress`** (`azkar_records`, typeId 7) is per-category (not per-day) resume state for the
+adhkar reading screen — which zikr was last tapped in a category's list, and when. Resets automatically
+when the stored row's `date` isn't today (see `ReadingProgressLocalDataSourceImpl._isToday`), so a
+half-finished session never resumes into a new calendar day. Replaced `adhkar_progress`, formerly
+hand-rolled JSON in SharedPreferences with no Hive model at all.
 
 ## Known inconsistencies (don't copy these; don't assume they're fixed)
 

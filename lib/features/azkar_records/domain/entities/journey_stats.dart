@@ -1,4 +1,4 @@
-import 'daily_activity_entry.dart';
+import 'day_record.dart';
 
 enum GrowthPeriod { week, month, year }
 
@@ -12,6 +12,7 @@ class WeeklyGridDay {
   final DateTime date;
   final bool hasMorning;
   final bool hasEvening;
+  final bool hasSleep;
   final bool hasZikr;
   final bool isToday;
 
@@ -19,16 +20,17 @@ class WeeklyGridDay {
     required this.date,
     required this.hasMorning,
     required this.hasEvening,
+    required this.hasSleep,
     required this.hasZikr,
     required this.isToday,
   });
 }
 
-/// Pure computation over the full (unpruned) [DailyActivityEntry] history,
+/// Pure computation over the full (unpruned) [DayRecordEntity] history,
 /// used to feed the Journey screen with real streaks / longest-streaks /
 /// weekly grid / growth-chart data instead of hardcoded numbers.
 class JourneyStats {
-  final List<DailyActivityEntry> entries;
+  final List<DayRecordEntity> entries;
 
   JourneyStats(this.entries);
 
@@ -62,7 +64,7 @@ class JourneyStats {
     return DateTime(now.year, now.month, now.day);
   }
 
-  int _currentStreak(bool Function(DailyActivityEntry) predicate) {
+  int _currentStreak(bool Function(DayRecordEntity) predicate) {
     final activeDates = entries.where(predicate).map((e) => e.date).toSet();
     DateTime cursor = _today;
     if (!activeDates.contains(cursor)) {
@@ -76,7 +78,7 @@ class JourneyStats {
     return streak;
   }
 
-  int _longestStreak(bool Function(DailyActivityEntry) predicate) {
+  int _longestStreak(bool Function(DayRecordEntity) predicate) {
     final activeDates =
         entries.where(predicate).map((e) => e.date).toSet().toList()..sort();
     int longest = 0;
@@ -103,7 +105,10 @@ class JourneyStats {
   int get eveningCurrentStreak => _currentStreak((e) => e.eveningCompleted);
   int get eveningLongestStreak => _longestStreak((e) => e.eveningCompleted);
 
-  DailyActivityEntry? _entryForDate(DateTime date) {
+  int get sleepCurrentStreak => _currentStreak((e) => e.sleepCompleted);
+  int get sleepLongestStreak => _longestStreak((e) => e.sleepCompleted);
+
+  DayRecordEntity? _entryForDate(DateTime date) {
     for (final e in entries) {
       if (e.date == date) return e;
     }
@@ -120,15 +125,17 @@ class JourneyStats {
         date: date,
         hasMorning: entry?.morningCompleted ?? false,
         hasEvening: entry?.eveningCompleted ?? false,
+        hasSleep: entry?.sleepCompleted ?? false,
         hasZikr: (entry?.totalZikrCount ?? 0) > 0,
         isToday: date == today,
       );
     });
   }
 
-  /// Count of active days (morning/evening/zikr) within the last 7 days.
-  int get activeDaysThisWeek =>
-      weeklyGrid.where((d) => d.hasMorning || d.hasEvening || d.hasZikr).length;
+  /// Count of active days (morning/evening/sleep/zikr) within the last 7 days.
+  int get activeDaysThisWeek => weeklyGrid
+      .where((d) => d.hasMorning || d.hasEvening || d.hasSleep || d.hasZikr)
+      .length;
 
   int _totalZikrOn(DateTime date) => _entryForDate(date)?.totalZikrCount ?? 0;
 
@@ -202,14 +209,14 @@ class JourneyStats {
     return ((currentTotal - previousTotal) / previousTotal) * 100;
   }
 
-  /// zikrId -> total count, summed over the last [days] days.
-  Map<int, int> zikrTotalsOverLastDays(int days) {
+  /// zikrKey -> total count, summed over the last [days] days.
+  Map<String, int> zikrTotalsOverLastDays(int days) {
     final today = _today;
     final cutoff = today.subtract(Duration(days: days - 1));
-    final Map<int, int> totals = {};
+    final Map<String, int> totals = {};
     for (final e in entries) {
       if (e.date.isBefore(cutoff)) continue;
-      for (final entry in e.zikrCounts.entries) {
+      for (final entry in e.repsByZikrKey.entries) {
         totals[entry.key] = (totals[entry.key] ?? 0) + entry.value;
       }
     }

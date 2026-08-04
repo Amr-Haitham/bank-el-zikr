@@ -1,6 +1,7 @@
+import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_sheet.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 
 class AdhkarListItemCard extends StatelessWidget {
@@ -59,7 +60,19 @@ class AdhkarListItemCard extends StatelessWidget {
                         ),
                   ),
                 ),
-                const SizedBox(width: 8),
+                GestureDetector(
+                  onTap: () => ZikrShareSheet.show(
+                    context,
+                    content: zikr.content,
+                    translation: isEnglish ? zikr.contentEn : null,
+                  ),
+                  behavior: HitTestBehavior.opaque,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Icon(Icons.ios_share,
+                        size: 18, color: secondaryTextColor),
+                  ),
+                ),
                 Text(
                   formatNumber(context, index + 1),
                   style: TextStyle(

@@ -7,7 +7,6 @@ import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_c
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
 import 'azkar_screen.dart';
 
 @RoutePage()
@@ -22,7 +21,6 @@ class SelectZikrPage extends StatelessWidget {
         BlocProvider(create: (context) => getService<AddCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<UpdateCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<DeleteCustomZikrCubit>()),
-        BlocProvider(create: (context) => getService<AzkarRecordsCubit>()),
       ],
       child: const AzkarScreen(),
     );

@@ -1,8 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/zikr_picker_bottom_sheet.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -10,9 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Reads live from [GetAllAzkarCubit] so it stays in sync without the
 /// parent screen needing to thread azkar data down manually.
 class TasbihZikrSwitcherRow extends StatelessWidget {
-  const TasbihZikrSwitcherRow({super.key, required this.currentZikrId});
+  const TasbihZikrSwitcherRow({super.key, required this.currentZikrKey});
 
-  final int currentZikrId;
+  final String currentZikrKey;
 
   /// Shrinks the caption font a bit once the text gets long enough that a
   /// fixed 13px would risk overflowing its 2-line budget.
@@ -28,62 +29,68 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
           initial: () => const SizedBox.shrink(),
           loading: () => const SizedBox.shrink(),
           failure: (f) => const SizedBox.shrink(),
-          success: (azkar) {
+          success: (allAzkar) {
+            final azkar = allAzkar
+                .where((z) => z.category == 'general' || z.isCustomZikr)
+                .toList();
             if (azkar.isEmpty) return const SizedBox.shrink();
             final currentZikr = azkar.firstWhere(
-              (z) => z.id == currentZikrId,
+              (z) => z.key == currentZikrKey,
               orElse: () => azkar.first,
             );
             void openPicker() => ZikrPickerBottomSheet.show(context,
-                currentZikrId: currentZikrId);
+                currentZikrKey: currentZikrKey);
 
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Directionality(
-                  textDirection: TextDirection.ltr,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: GestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          onTap: openPicker,
-                          child: Transform.translate(
-                            offset: Offset(0, isEnglish ? 0 : 15),
-                            child: AutoSizeText(
-                              currentZikr.content,
-                              textAlign: TextAlign.center,
-                              textDirection: TextDirection.rtl,
-                              maxLines: 2,
-                              minFontSize: 18,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .headlineSmall!
-                                  .copyWith(
-                                      color: Theme.of(context).primaryColor,
-                                      fontSize: 34),
+                GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: openPicker,
+                  child: AutoSizeText(
+                    currentZikr.content,
+                    textAlign: TextAlign.center,
+                    textDirection: TextDirection.rtl,
+                    maxLines: 4,
+                    minFontSize: 14,
+                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        color: Theme.of(context).primaryColor,
+                        fontSize: 26,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Center(
+                  child: GestureDetector(
+                    behavior: HitTestBehavior.opaque,
+                    onTap: openPicker,
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 14, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context)
+                            .primaryColor
+                            .withValues(alpha: 0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(Icons.swap_horiz_rounded,
+                              color: Theme.of(context).primaryColor, size: 18),
+                          const SizedBox(width: 6),
+                          Text(
+                            AppLocalizations.of(context).chooseZikr,
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).primaryColor,
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                      const SizedBox(width: 4),
-                      GestureDetector(
-                        behavior: HitTestBehavior.opaque,
-                        onTap: openPicker,
-                        child: Transform.translate(
-                          offset: Offset(-3, isEnglish ? -7 : 8),
-                          child: SizedBox(
-                            width: 34,
-                            height: 34,
-                            child: Icon(Icons.swap_horiz_rounded,
-                                color: Theme.of(context).primaryColor,
-                                size: 44),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
                 if (isEnglish && currentZikr.contentTransliteration != null) ...[

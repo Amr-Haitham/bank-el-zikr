@@ -1,6 +1,6 @@
 import '../../../../core/constants/type_definitions.dart';
 import '../../../../core/layers/domain/usecases/usecase.dart';
-import '../entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import '../repositories/azkar_repository.dart';
 
 class AddCustomZikr implements UseCase<void, AddCustomZikrParams> {

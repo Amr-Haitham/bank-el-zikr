@@ -82,6 +82,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get anotherVerse => 'Another verse';
 
   @override
+  String get showTranslation => 'Show translation';
+
+  @override
+  String get hideTranslation => 'Hide translation';
+
+  @override
   String get shareReward => 'Share the reward with friends';
 
   @override
@@ -288,6 +294,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shareLabel => 'Share';
+
+  @override
+  String get shareAsText => 'Share as text';
+
+  @override
+  String get shareAsImage => 'Share as image';
+
+  @override
+  String get saveImage => 'Save image';
+
+  @override
+  String get imageSaved => 'Image saved';
 
   @override
   String get copyLabel => 'Copy';

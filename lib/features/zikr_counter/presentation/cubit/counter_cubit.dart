@@ -2,7 +2,7 @@ import '../../../../core/layers/presentation/request_cubit/request_cubit.dart';
 import '../../../../core/layers/domain/usecases/usecase.dart';
 import '../../domain/entities/counter_state.dart';
 import '../../domain/usecases/get_counter_state.dart';
-import '../../domain/usecases/get_current_zikr_id.dart';
+import '../../domain/usecases/get_current_zikr_key.dart';
 import '../../domain/usecases/increment_balance.dart';
 import '../../domain/usecases/update_counter.dart';
 import '../../domain/usecases/update_current_zikr.dart';
@@ -12,7 +12,7 @@ import '../../domain/usecases/update_goal.dart';
 /// Replaces the old GetGeneralDataCubit, UpdateGeneralDataCubit, and GetCurrentZikrCubit
 class CounterCubit extends RequestCubit<CounterStateEntity> {
   final GetCounterState getCounterState;
-  final GetCurrentZikrId getCurrentZikrId;
+  final GetCurrentZikrKey getCurrentZikrKey;
   final UpdateCounter updateCounter;
   final UpdateCurrentZikr updateCurrentZikr;
   final UpdateGoal updateGoal;
@@ -20,7 +20,7 @@ class CounterCubit extends RequestCubit<CounterStateEntity> {
 
   CounterCubit({
     required this.getCounterState,
-    required this.getCurrentZikrId,
+    required this.getCurrentZikrKey,
     required this.updateCounter,
     required this.updateCurrentZikr,
     required this.updateGoal,
@@ -35,12 +35,12 @@ class CounterCubit extends RequestCubit<CounterStateEntity> {
     await execute(request: () => getCounterState(const NoParams()));
   }
 
-  /// Get just the current zikr ID (convenience method)
-  Future<int?> getCurrentZikr() async {
-    final result = await getCurrentZikrId(const NoParams());
+  /// Get just the current zikr key (convenience method)
+  Future<String?> getCurrentZikr() async {
+    final result = await getCurrentZikrKey(const NoParams());
     return result.fold(
       (failure) => null,
-      (zikrId) => zikrId,
+      (zikrKey) => zikrKey,
     );
   }
 
@@ -55,9 +55,9 @@ class CounterCubit extends RequestCubit<CounterStateEntity> {
   }
 
   /// Update the current active zikr and reload state
-  Future<void> setCurrentZikr(int zikrId) async {
+  Future<void> setCurrentZikr(String zikrKey) async {
     final result =
-        await updateCurrentZikr(UpdateCurrentZikrParams(zikrId: zikrId));
+        await updateCurrentZikr(UpdateCurrentZikrParams(zikrKey: zikrKey));
 
     result.fold(
       (failure) => null,

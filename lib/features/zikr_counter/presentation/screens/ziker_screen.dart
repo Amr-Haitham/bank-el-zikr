@@ -1,8 +1,6 @@
 import 'dart:math';
 
-import 'package:bank_el_ziker/features/azkar_records/domain/usecases/fix_and_increment_record.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/core/utils/haptics.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
@@ -38,10 +36,6 @@ class _ZikerScreenState extends State<ZikerScreen> {
     super.initState();
     _controllerTopCenter =
         ConfettiController(duration: const Duration(seconds: 3));
-
-    context
-        .read<FixAndIncrementRecordCubit>()
-        .executeFixAndIncrement(FixAndIncrementRecordParams(zikrId: null));
   }
 
   @override
@@ -72,11 +66,9 @@ class _ZikerScreenState extends State<ZikerScreen> {
 
     context.read<CounterCubit>().addToBalance();
 
-    context.read<FixAndIncrementRecordCubit>().executeFixAndIncrement(
-        FixAndIncrementRecordParams(zikrId: counterState.currentZikrId));
     context
-        .read<DailyActivityLogCubit>()
-        .logZikrIncrement(counterState.currentZikrId);
+        .read<DayRecordCubit>()
+        .logZikrIncrement(counterState.currentZikrKey);
   }
 
   void _showGoalSettingSheet(BuildContext parentContext) {
@@ -157,7 +149,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 ),
                                 const SizedBox(height: 24),
                                 TasbihZikrSwitcherRow(
-                                    currentZikrId: counter.currentZikrId),
+                                    currentZikrKey: counter.currentZikrKey),
                                 const SizedBox(height: 4),
                                 Expanded(
                                   child: Column(

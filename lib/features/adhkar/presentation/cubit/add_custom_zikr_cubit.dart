@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/domain/usecases/add_custom_zikr.dart';
 
 /// Cubit responsible ONLY for adding custom zikr

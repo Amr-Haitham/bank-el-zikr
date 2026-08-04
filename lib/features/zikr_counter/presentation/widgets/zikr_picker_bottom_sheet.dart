@@ -1,7 +1,7 @@
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
@@ -16,11 +16,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 /// Lightweight in-place list for switching the active tasbih zikr, shown
 /// as a bottom sheet instead of pushing the full Azkar library screen.
 class ZikrPickerBottomSheet extends StatelessWidget {
-  const ZikrPickerBottomSheet({super.key, required this.currentZikrId});
+  const ZikrPickerBottomSheet({super.key, required this.currentZikrKey});
 
-  final int currentZikrId;
+  final String currentZikrKey;
 
-  static Future<void> show(BuildContext context, {required int currentZikrId}) {
+  static Future<void> show(BuildContext context,
+      {required String currentZikrKey}) {
     // showModalBottomSheet mounts its content as a sibling overlay entry,
     // not a descendant of the calling route's widget tree — so cubits that
     // are only provided locally within that route (like GetAllAzkarCubit,
@@ -46,7 +47,7 @@ class ZikrPickerBottomSheet extends StatelessWidget {
           BlocProvider(create: (_) => getService<DeleteCustomZikrCubit>()),
           BlocProvider(create: (_) => getService<AddCustomZikrCubit>()),
         ],
-        child: ZikrPickerBottomSheet(currentZikrId: currentZikrId),
+        child: ZikrPickerBottomSheet(currentZikrKey: currentZikrKey),
       ),
     );
   }
@@ -167,7 +168,12 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                             loading: () => const Center(
                                 child: CircularProgressIndicator()),
                             failure: (f) => const SizedBox.shrink(),
-                            success: (azkar) {
+                            success: (allAzkar) {
+                              final azkar = allAzkar
+                                  .where((zikr) =>
+                                      zikr.category == 'general' ||
+                                      zikr.isCustomZikr)
+                                  .toList();
                               return ScrollbarTheme(
                                 data: const ScrollbarThemeData(
                                   crossAxisMargin: 4,
@@ -182,53 +188,53 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                     padding: const EdgeInsetsDirectional.only(
                                         end: 14),
                                     children: [
-                                      Container(
-                                        width: double.infinity,
-                                        padding: const EdgeInsets.all(16),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .surfaceContainerHighest
-                                              .withValues(alpha: 0.5),
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            for (final zikr in azkar) ...[
-                                              ListTileOfZikr(
-                                                zikr: zikr,
-                                                isSelected:
-                                                    zikr.id == currentZikrId,
-                                                useGreenCheckIndicator: true,
-                                                onDeleteCustomZikr: zikr
-                                                        .isCustomZikr
-                                                    ? () => context
-                                                        .read<
-                                                            DeleteCustomZikrCubit>()
-                                                        .deleteZikr(zikr.id)
-                                                    : null,
-                                                onTap: () {
-                                                  context
-                                                      .read<CounterCubit>()
-                                                      .setCurrentZikr(zikr.id);
-                                                  Navigator.of(context)
-                                                      .maybePop();
-                                                },
-                                              ),
-                                              if (zikr != azkar.last) ...[
-                                                const SizedBox(height: 16),
-                                                Divider(
-                                                  height: 1,
-                                                  thickness: 1,
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .outline,
+                                      Material(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .surfaceContainerHighest
+                                            .withValues(alpha: 0.5),
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(16),
+                                          child: Column(
+                                            children: [
+                                              for (final zikr in azkar) ...[
+                                                ListTileOfZikr(
+                                                  zikr: zikr,
+                                                  isSelected: zikr.key ==
+                                                      currentZikrKey,
+                                                  useGreenCheckIndicator: true,
+                                                  onDeleteCustomZikr: zikr
+                                                          .isCustomZikr
+                                                      ? () => context
+                                                          .read<
+                                                              DeleteCustomZikrCubit>()
+                                                          .deleteZikr(zikr.id)
+                                                      : null,
+                                                  onTap: () {
+                                                    context
+                                                        .read<CounterCubit>()
+                                                        .setCurrentZikr(
+                                                            zikr.key);
+                                                    Navigator.of(context)
+                                                        .maybePop();
+                                                  },
                                                 ),
-                                                const SizedBox(height: 16),
+                                                if (zikr != azkar.last) ...[
+                                                  const SizedBox(height: 16),
+                                                  Divider(
+                                                    height: 1,
+                                                    thickness: 1,
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .outline,
+                                                  ),
+                                                  const SizedBox(height: 16),
+                                                ],
                                               ],
                                             ],
-                                          ],
+                                          ),
                                         ),
                                       ),
                                     ],

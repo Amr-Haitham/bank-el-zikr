@@ -1,6 +1,6 @@
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
 
 class DhikrBreakdownRow {
@@ -28,20 +28,20 @@ class DhikrBreakdownList extends StatelessWidget {
   });
 
   final List<ZikrEntity> allAzkar;
-  final Map<int, int> weekTotals;
-  final Map<int, int> monthTotals;
+  final Map<String, int> weekTotals;
+  final Map<String, int> monthTotals;
 
   @override
   Widget build(BuildContext context) {
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final rows = allAzkar
-        .where((zikr) => (monthTotals[zikr.id] ?? 0) > 0)
+        .where((zikr) => (monthTotals[zikr.key] ?? 0) > 0)
         .map((zikr) => DhikrBreakdownRow(
               title: zikr.content,
               transliteration: isEnglish ? zikr.contentTransliteration : null,
               translation: isEnglish ? zikr.contentEn : null,
-              weekCount: weekTotals[zikr.id] ?? 0,
-              monthCount: monthTotals[zikr.id] ?? 0,
+              weekCount: weekTotals[zikr.key] ?? 0,
+              monthCount: monthTotals[zikr.key] ?? 0,
             ))
         .toList()
       ..sort((a, b) => b.monthCount.compareTo(a.monthCount));

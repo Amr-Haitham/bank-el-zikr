@@ -1,5 +1,5 @@
 import 'package:hive/hive.dart';
-import 'package:bank_el_ziker/core/layers/data/models/zikr_model.dart';
+import 'package:bank_el_ziker/core/data/models/zikr_model.dart';
 
 /// Abstract interface for azkar local data source
 abstract class AzkarLocalDataSource {

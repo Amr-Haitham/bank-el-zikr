@@ -10,24 +10,10 @@ class AdhkarStatusRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    final incompleteColor =
+        Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.5);
     return Row(
       children: [
-        Expanded(
-          child: _AdhkarStatusCard(
-            icon: Icons.nightlight_round,
-            iconColor: const Color(0xff6C63FF),
-            title: l10n.eveningAdhkar,
-            status: l10n.incomplete,
-            statusColor: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
-                .withValues(alpha: 0.5),
-            onTap: () => AutoRouter.of(context).push(
-                ZikrCategoryRoute(category: 'evening', title: l10n.eveningAdhkar)),
-          ),
-        ),
-        const SizedBox(width: 12),
         Expanded(
           child: _AdhkarStatusCard(
             icon: Icons.wb_sunny_outlined,
@@ -37,6 +23,18 @@ class AdhkarStatusRowWidget extends StatelessWidget {
             statusColor: Theme.of(context).primaryColor,
             onTap: () => AutoRouter.of(context).push(
                 ZikrCategoryRoute(category: 'morning', title: l10n.morningAdhkar)),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Expanded(
+          child: _AdhkarStatusCard(
+            icon: Icons.nightlight_round,
+            iconColor: const Color(0xff6C63FF),
+            title: l10n.eveningAdhkar,
+            status: l10n.incomplete,
+            statusColor: incompleteColor,
+            onTap: () => AutoRouter.of(context).push(
+                ZikrCategoryRoute(category: 'evening', title: l10n.eveningAdhkar)),
           ),
         ),
       ],

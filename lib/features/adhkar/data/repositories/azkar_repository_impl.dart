@@ -1,9 +1,10 @@
 import 'package:bank_el_ziker/core/utils/safe_await.dart';
 import '../../../../core/constants/type_definitions.dart';
-import '../../domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import '../../domain/repositories/azkar_repository.dart';
 import '../datasources/azkar_local_datasource.dart';
-import 'package:bank_el_ziker/core/layers/data/models/zikr_model.dart';
+import 'package:bank_el_ziker/core/data/models/zikr_mapper.dart';
 
 class AzkarRepositoryImpl implements AzkarRepository {
   final AzkarLocalDataSource localDataSource;
@@ -19,7 +20,7 @@ class AzkarRepositoryImpl implements AzkarRepository {
 
       // Combine and convert to entities
       final allAzkar = [...defaultAzkar, ...customAzkar];
-      return allAzkar.map((model) => model.toEntity()).toList();
+      return allAzkar.map((model) => ZikrMapper.toEntity(model)).toList();
     });
   }
 
@@ -28,9 +29,14 @@ class AzkarRepositoryImpl implements AzkarRepository {
     return safeAwait(() async {
       // Custom azkar are always submitted with id: 0 by the caller — assign
       // a real unique id here, otherwise every custom zikr would be stored
-      // under the same Hive key and overwrite the previous one.
-      final model = Zikr.fromEntity(
-        zikr.copyWith(id: DateTime.now().microsecondsSinceEpoch),
+      // under the same Hive key and overwrite the previous one. Hive integer
+      // keys must fit in 0-0xFFFFFFFF, so the raw epoch timestamp (which
+      // overflows that range) is folded down with modulo.
+      final model = ZikrMapper.toModel(
+        zikr.copyWith(
+          id: DateTime.now().microsecondsSinceEpoch % 0xFFFFFFFF,
+          key: generateCustomZikrKey(),
+        ),
       );
       await localDataSource.addCustomZikr(model);
     });
@@ -39,7 +45,7 @@ class AzkarRepositoryImpl implements AzkarRepository {
   @override
   Future<RequestResult<void>> updateCustomZikr(ZikrEntity zikr) async {
     return safeAwait(() async {
-      final model = Zikr.fromEntity(zikr);
+      final model = ZikrMapper.toModel(zikr);
       await localDataSource.updateCustomZikr(model);
     });
   }

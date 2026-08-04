@@ -9,7 +9,7 @@ import '../../features/zikr_counter/data/models/general_data_model.dart';
 import '../../features/zikr_counter/data/repositories/counter_repository_impl.dart';
 import '../../features/zikr_counter/domain/repositories/counter_repository.dart';
 import '../../features/zikr_counter/domain/usecases/get_counter_state.dart';
-import '../../features/zikr_counter/domain/usecases/get_current_zikr_id.dart';
+import '../../features/zikr_counter/domain/usecases/get_current_zikr_key.dart';
 import '../../features/zikr_counter/domain/usecases/increment_balance.dart';
 import '../../features/zikr_counter/domain/usecases/update_counter.dart';
 import '../../features/zikr_counter/domain/usecases/update_current_zikr.dart';
@@ -19,12 +19,12 @@ import '../../features/zikr_counter/presentation/cubit/update_counter_cubit.dart
 import '../../features/zikr_counter/presentation/cubit/update_current_zikr_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/update_goal_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/increment_balance_cubit.dart';
-import '../../features/zikr_counter/presentation/cubit/get_current_zikr_id_cubit.dart';
+import '../../features/zikr_counter/presentation/cubit/get_current_zikr_key_cubit.dart';
 import '../../features/zikr_counter/presentation/cubit/counter_cubit.dart';
 
 // adhkar imports
 import '../../features/adhkar/data/datasources/azkar_local_datasource.dart';
-import '../../core/layers/data/models/zikr_model.dart';
+import '../../core/data/models/zikr_model.dart';
 import '../../features/adhkar/data/repositories/azkar_repository_impl.dart';
 import '../../features/adhkar/domain/repositories/azkar_repository.dart';
 import '../../features/adhkar/domain/usecases/add_custom_zikr.dart';
@@ -37,39 +37,25 @@ import '../../features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
 import '../../features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 
 // azkar_records imports
-import '../../features/azkar_records/data/datasources/azkar_records_local_datasource.dart';
-import '../../features/azkar_records/data/models/day_zikr_record_model.dart';
-import '../../features/azkar_records/data/repositories/azkar_records_repository_impl.dart';
-import '../../features/azkar_records/domain/repositories/azkar_records_repository.dart';
-import '../../features/azkar_records/domain/usecases/fix_and_increment_record.dart';
+import '../../features/azkar_records/data/datasources/day_record_local_datasource.dart';
+import '../../features/azkar_records/data/models/day_record_model.dart';
+import '../../features/azkar_records/data/repositories/day_record_repository_impl.dart';
+import '../../features/azkar_records/domain/repositories/day_record_repository.dart';
+import '../../features/azkar_records/domain/usecases/get_all_day_records.dart';
 import '../../features/azkar_records/domain/usecases/get_week_azkar_records.dart';
+import '../../features/azkar_records/domain/usecases/log_zikr_increment.dart';
+import '../../features/azkar_records/domain/usecases/mark_category_completed.dart';
 import '../../features/azkar_records/domain/usecases/delete_zikr_record.dart';
 import '../../features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
-import '../../features/azkar_records/presentation/cubit/fix_and_increment_record_cubit.dart';
+import '../../features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import '../../features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
-import '../../features/azkar_records/presentation/cubit/azkar_records_cubit.dart';
-import '../../features/azkar_records/data/datasources/adhkar_progress_local_datasource.dart';
-import '../../features/azkar_records/data/repositories/adhkar_progress_repository_impl.dart';
-import '../../features/azkar_records/domain/repositories/adhkar_progress_repository.dart';
-import '../../features/azkar_records/domain/usecases/get_all_adhkar_progress.dart';
-import '../../features/azkar_records/domain/usecases/save_adhkar_progress.dart';
-import '../../features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
-import '../../features/azkar_records/data/datasources/daily_activity_log_local_datasource.dart';
-import '../../features/azkar_records/data/repositories/daily_activity_log_repository_impl.dart';
-import '../../features/azkar_records/domain/repositories/daily_activity_log_repository.dart';
-import '../../features/azkar_records/domain/usecases/get_daily_activity_log.dart';
-import '../../features/azkar_records/domain/usecases/log_zikr_increment.dart';
-import '../../features/azkar_records/domain/usecases/mark_adhkar_completed.dart';
-import '../../features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
-
-// morning_night_azkar imports
-import '../../features/adhkar/data/datasources/morning_night_azkar_local_datasource.dart';
-import '../../features/adhkar/data/models/morning_night_zikr_model.dart';
-import '../../features/adhkar/data/repositories/morning_night_azkar_repository_impl.dart';
-import '../../features/adhkar/domain/repositories/morning_night_azkar_repository.dart';
-import '../../features/adhkar/domain/usecases/get_morning_azkar.dart';
-import '../../features/adhkar/domain/usecases/get_night_azkar.dart';
-import '../../features/adhkar/presentation/cubit/morning_night_azkar_cubit.dart';
+import '../../features/azkar_records/data/models/reading_progress_model.dart';
+import '../../features/azkar_records/data/datasources/reading_progress_local_datasource.dart';
+import '../../features/azkar_records/data/repositories/reading_progress_repository_impl.dart';
+import '../../features/azkar_records/domain/repositories/reading_progress_repository.dart';
+import '../../features/azkar_records/domain/usecases/get_all_reading_progress.dart';
+import '../../features/azkar_records/domain/usecases/save_reading_progress.dart';
+import '../../features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
 
 // zikr category imports
 import '../../features/adhkar/data/datasources/zikr_category_local_datasource.dart';
@@ -120,25 +106,15 @@ Future<void> setupServiceLocator() async {
   _setUpAdhkarUseCases();
   _setUpAdhkarBlocs();
 
-  _setUpAzkarRecordsDataSources();
-  _setUpAzkarRecordsRepositories();
-  _setUpAzkarRecordsUseCases();
-  _setUpAzkarRecordsBlocs();
+  _setUpDayRecordDataSources();
+  _setUpDayRecordRepositories();
+  _setUpDayRecordUseCases();
+  _setUpDayRecordBlocs();
 
-  _setUpAdhkarProgressDataSources();
-  _setUpAdhkarProgressRepositories();
-  _setUpAdhkarProgressUseCases();
-  _setUpAdhkarProgressBlocs();
-
-  _setUpDailyActivityLogDataSources();
-  _setUpDailyActivityLogRepositories();
-  _setUpDailyActivityLogUseCases();
-  _setUpDailyActivityLogBlocs();
-
-  _setUpMorningNightAzkarDataSources();
-  _setUpMorningNightAzkarRepositories();
-  _setUpMorningNightAzkarUseCases();
-  _setUpMorningNightAzkarBlocs();
+  _setUpReadingProgressDataSources();
+  _setUpReadingProgressRepositories();
+  _setUpReadingProgressUseCases();
+  _setUpReadingProgressBlocs();
 
   _setUpZikrCategoryDataSources();
   _setUpZikrCategoryRepositories();
@@ -178,22 +154,16 @@ Future<void> _setUpExternalDependencies() async {
   );
 
   // azkar_records
-  final azkarRecordsBox = Hive.box<DayZikrRecord>(dayZikrRecordHiveBox);
-  _getIt.registerLazySingleton<Box<DayZikrRecord>>(
-    () => azkarRecordsBox,
-    instanceName: 'azkarRecordsBox',
+  final dayRecordBox = Hive.box<DayRecord>(dayRecordHiveBox);
+  _getIt.registerLazySingleton<Box<DayRecord>>(
+    () => dayRecordBox,
+    instanceName: 'dayRecordBox',
   );
-
-  // morning_night_azkar
-  final morningAzkarBox = Hive.box<MorningOrNightZikr>(morningAzkarHiveBox);
-  final nightAzkarBox = Hive.box<MorningOrNightZikr>(nightAzkarHiveBox);
-  _getIt.registerLazySingleton<Box<MorningOrNightZikr>>(
-    () => morningAzkarBox,
-    instanceName: 'morningAzkarBox',
-  );
-  _getIt.registerLazySingleton<Box<MorningOrNightZikr>>(
-    () => nightAzkarBox,
-    instanceName: 'nightAzkarBox',
+  final readingProgressBox =
+      Hive.box<ReadingProgress>(readingProgressHiveBox);
+  _getIt.registerLazySingleton<Box<ReadingProgress>>(
+    () => readingProgressBox,
+    instanceName: 'readingProgressBox',
   );
 
   // home (prayer)
@@ -203,10 +173,9 @@ Future<void> _setUpExternalDependencies() async {
     instanceName: 'prayerBox',
   );
 
-  // zikr category
-  final zikrCategoryBox = Hive.box<Zikr>(conditionalAzkarHiveBox);
+  // zikr category — reads from the same unified Zikr box as everything else
   _getIt.registerLazySingleton<Box<Zikr>>(
-    () => zikrCategoryBox,
+    () => defaultAzkarBox,
     instanceName: 'zikrCategoryBox',
   );
   // shared_preferences
@@ -250,8 +219,8 @@ void _setUpZikrCounterUseCases() {
   _getIt.registerLazySingleton<IncrementBalance>(
     () => IncrementBalance(getService<CounterRepository>()),
   );
-  _getIt.registerLazySingleton<GetCurrentZikrId>(
-    () => GetCurrentZikrId(getService<CounterRepository>()),
+  _getIt.registerLazySingleton<GetCurrentZikrKey>(
+    () => GetCurrentZikrKey(getService<CounterRepository>()),
   );
 }
 
@@ -259,7 +228,7 @@ void _setUpZikrCounterBlocs() {
   _getIt.registerLazySingleton<CounterCubit>(
     () => CounterCubit(
       getCounterState: getService<GetCounterState>(),
-      getCurrentZikrId: getService<GetCurrentZikrId>(),
+      getCurrentZikrKey: getService<GetCurrentZikrKey>(),
       updateCounter: getService<UpdateCounter>(),
       updateCurrentZikr: getService<UpdateCurrentZikr>(),
       updateGoal: getService<UpdateGoal>(),
@@ -283,9 +252,9 @@ void _setUpZikrCounterBlocs() {
     () =>
         IncrementBalanceCubit(incrementBalance: getService<IncrementBalance>()),
   );
-  _getIt.registerFactory<GetCurrentZikrIdCubit>(
-    () =>
-        GetCurrentZikrIdCubit(getCurrentZikrId: getService<GetCurrentZikrId>()),
+  _getIt.registerFactory<GetCurrentZikrKeyCubit>(
+    () => GetCurrentZikrKeyCubit(
+        getCurrentZikrKey: getService<GetCurrentZikrKey>()),
   );
 }
 
@@ -352,48 +321,51 @@ void _setUpAdhkarBlocs() {
 // azkar_records
 // ============================================================================
 
-void _setUpAzkarRecordsDataSources() {
-  _getIt.registerLazySingleton<AzkarRecordsLocalDataSource>(
-    () => AzkarRecordsLocalDataSourceImpl(
-      box: getService<Box<DayZikrRecord>>(instanceName: 'azkarRecordsBox'),
+void _setUpDayRecordDataSources() {
+  _getIt.registerLazySingleton<DayRecordLocalDataSource>(
+    () => DayRecordLocalDataSourceImpl(
+      box: getService<Box<DayRecord>>(instanceName: 'dayRecordBox'),
     ),
   );
 }
 
-void _setUpAzkarRecordsRepositories() {
-  _getIt.registerLazySingleton<AzkarRecordsRepository>(
-    () => AzkarRecordsRepositoryImpl(
-      localDataSource: getService<AzkarRecordsLocalDataSource>(),
+void _setUpDayRecordRepositories() {
+  _getIt.registerLazySingleton<DayRecordRepository>(
+    () => DayRecordRepositoryImpl(
+      localDataSource: getService<DayRecordLocalDataSource>(),
     ),
   );
 }
 
-void _setUpAzkarRecordsUseCases() {
+void _setUpDayRecordUseCases() {
+  _getIt.registerLazySingleton<GetAllDayRecords>(
+    () => GetAllDayRecords(getService<DayRecordRepository>()),
+  );
   _getIt.registerLazySingleton<GetWeekAzkarRecords>(
-    () => GetWeekAzkarRecords(getService<AzkarRecordsRepository>()),
+    () => GetWeekAzkarRecords(getService<DayRecordRepository>()),
   );
-  _getIt.registerLazySingleton<FixAndIncrementRecord>(
-    () => FixAndIncrementRecord(getService<AzkarRecordsRepository>()),
+  _getIt.registerLazySingleton<LogZikrIncrement>(
+    () => LogZikrIncrement(getService<DayRecordRepository>()),
+  );
+  _getIt.registerLazySingleton<MarkCategoryCompleted>(
+    () => MarkCategoryCompleted(getService<DayRecordRepository>()),
   );
   _getIt.registerLazySingleton<DeleteZikrRecord>(
-    () => DeleteZikrRecord(getService<AzkarRecordsRepository>()),
+    () => DeleteZikrRecord(getService<DayRecordRepository>()),
   );
 }
 
-void _setUpAzkarRecordsBlocs() {
-  _getIt.registerFactory<AzkarRecordsCubit>(
-    () => AzkarRecordsCubit(
-      getWeekAzkarRecords: getService<GetWeekAzkarRecords>(),
-      fixAndIncrementRecord: getService<FixAndIncrementRecord>(),
+void _setUpDayRecordBlocs() {
+  _getIt.registerLazySingleton<DayRecordCubit>(
+    () => DayRecordCubit(
+      getAllDayRecords: getService<GetAllDayRecords>(),
+      logZikrIncrementUseCase: getService<LogZikrIncrement>(),
+      markCategoryCompletedUseCase: getService<MarkCategoryCompleted>(),
     ),
   );
   _getIt.registerFactory<GetWeekAzkarRecordsCubit>(
     () => GetWeekAzkarRecordsCubit(
         getWeekAzkarRecords: getService<GetWeekAzkarRecords>()),
-  );
-  _getIt.registerFactory<FixAndIncrementRecordCubit>(
-    () => FixAndIncrementRecordCubit(
-        fixAndIncrementRecord: getService<FixAndIncrementRecord>()),
   );
   _getIt.registerFactory<DeleteZikrRecordCubit>(
     () =>
@@ -402,122 +374,40 @@ void _setUpAzkarRecordsBlocs() {
 }
 
 // ============================================================================
-// adhkar_progress
+// reading_progress
 // ============================================================================
 
-void _setUpAdhkarProgressDataSources() {
-  _getIt.registerLazySingleton<AdhkarProgressLocalDataSource>(
-    () => AdhkarProgressLocalDataSourceImpl(
-      sharedPreferences: getService<SharedPreferences>(),
+void _setUpReadingProgressDataSources() {
+  _getIt.registerLazySingleton<ReadingProgressLocalDataSource>(
+    () => ReadingProgressLocalDataSourceImpl(
+      box: getService<Box<ReadingProgress>>(
+          instanceName: 'readingProgressBox'),
     ),
   );
 }
 
-void _setUpAdhkarProgressRepositories() {
-  _getIt.registerLazySingleton<AdhkarProgressRepository>(
-    () => AdhkarProgressRepositoryImpl(
-      localDataSource: getService<AdhkarProgressLocalDataSource>(),
+void _setUpReadingProgressRepositories() {
+  _getIt.registerLazySingleton<ReadingProgressRepository>(
+    () => ReadingProgressRepositoryImpl(
+      localDataSource: getService<ReadingProgressLocalDataSource>(),
     ),
   );
 }
 
-void _setUpAdhkarProgressUseCases() {
-  _getIt.registerLazySingleton<GetAllAdhkarProgress>(
-    () => GetAllAdhkarProgress(getService<AdhkarProgressRepository>()),
+void _setUpReadingProgressUseCases() {
+  _getIt.registerLazySingleton<GetAllReadingProgress>(
+    () => GetAllReadingProgress(getService<ReadingProgressRepository>()),
   );
-  _getIt.registerLazySingleton<SaveAdhkarProgress>(
-    () => SaveAdhkarProgress(getService<AdhkarProgressRepository>()),
-  );
-}
-
-void _setUpAdhkarProgressBlocs() {
-  _getIt.registerLazySingleton<AdhkarProgressCubit>(
-    () => AdhkarProgressCubit(
-      getAllAdhkarProgress: getService<GetAllAdhkarProgress>(),
-      saveAdhkarProgressUseCase: getService<SaveAdhkarProgress>(),
-    ),
+  _getIt.registerLazySingleton<SaveReadingProgress>(
+    () => SaveReadingProgress(getService<ReadingProgressRepository>()),
   );
 }
 
-// ============================================================================
-// daily_activity_log
-// ============================================================================
-
-void _setUpDailyActivityLogDataSources() {
-  _getIt.registerLazySingleton<DailyActivityLogLocalDataSource>(
-    () => DailyActivityLogLocalDataSourceImpl(
-      sharedPreferences: getService<SharedPreferences>(),
-    ),
-  );
-}
-
-void _setUpDailyActivityLogRepositories() {
-  _getIt.registerLazySingleton<DailyActivityLogRepository>(
-    () => DailyActivityLogRepositoryImpl(
-      localDataSource: getService<DailyActivityLogLocalDataSource>(),
-    ),
-  );
-}
-
-void _setUpDailyActivityLogUseCases() {
-  _getIt.registerLazySingleton<GetDailyActivityLog>(
-    () => GetDailyActivityLog(getService<DailyActivityLogRepository>()),
-  );
-  _getIt.registerLazySingleton<LogZikrIncrement>(
-    () => LogZikrIncrement(getService<DailyActivityLogRepository>()),
-  );
-  _getIt.registerLazySingleton<MarkAdhkarCompleted>(
-    () => MarkAdhkarCompleted(getService<DailyActivityLogRepository>()),
-  );
-}
-
-void _setUpDailyActivityLogBlocs() {
-  _getIt.registerLazySingleton<DailyActivityLogCubit>(
-    () => DailyActivityLogCubit(
-      getDailyActivityLog: getService<GetDailyActivityLog>(),
-      logZikrIncrementUseCase: getService<LogZikrIncrement>(),
-      markAdhkarCompletedUseCase: getService<MarkAdhkarCompleted>(),
-    ),
-  );
-}
-
-// ============================================================================
-// morning_night_azkar
-// ============================================================================
-
-void _setUpMorningNightAzkarDataSources() {
-  _getIt.registerLazySingleton<MorningNightAzkarLocalDataSource>(
-    () => MorningNightAzkarLocalDataSourceImpl(
-      morningAzkarBox:
-          getService<Box<MorningOrNightZikr>>(instanceName: 'morningAzkarBox'),
-      nightAzkarBox:
-          getService<Box<MorningOrNightZikr>>(instanceName: 'nightAzkarBox'),
-    ),
-  );
-}
-
-void _setUpMorningNightAzkarRepositories() {
-  _getIt.registerLazySingleton<MorningNightAzkarRepository>(
-    () => MorningNightAzkarRepositoryImpl(
-      localDataSource: getService<MorningNightAzkarLocalDataSource>(),
-    ),
-  );
-}
-
-void _setUpMorningNightAzkarUseCases() {
-  _getIt.registerLazySingleton<GetMorningAzkar>(
-    () => GetMorningAzkar(getService<MorningNightAzkarRepository>()),
-  );
-  _getIt.registerLazySingleton<GetNightAzkar>(
-    () => GetNightAzkar(getService<MorningNightAzkarRepository>()),
-  );
-}
-
-void _setUpMorningNightAzkarBlocs() {
-  _getIt.registerFactory<MorningNightAzkarCubit>(
-    () => MorningNightAzkarCubit(
-      getMorningAzkar: getService<GetMorningAzkar>(),
-      getNightAzkar: getService<GetNightAzkar>(),
+void _setUpReadingProgressBlocs() {
+  _getIt.registerLazySingleton<ReadingProgressCubit>(
+    () => ReadingProgressCubit(
+      getAllReadingProgress: getService<GetAllReadingProgress>(),
+      saveReadingProgressUseCase: getService<SaveReadingProgress>(),
     ),
   );
 }
@@ -538,7 +428,6 @@ void _setUpZikrCategoryRepositories() {
   _getIt.registerLazySingleton<ZikrCategoryRepository>(
     () => ZikrCategoryRepositoryImpl(
       localDataSource: getService<ZikrCategoryLocalDataSource>(),
-      morningNightDataSource: getService<MorningNightAzkarLocalDataSource>(),
     ),
   );
 }

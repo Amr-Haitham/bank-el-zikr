@@ -1,5 +1,6 @@
+import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,7 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
     context.read<AddCustomZikrCubit>().addZikr(
           ZikrEntity(
             id: 0,
+            key: generateCustomZikrKey(),
             content: text,
             isCustomZikr: true,
             title: null,

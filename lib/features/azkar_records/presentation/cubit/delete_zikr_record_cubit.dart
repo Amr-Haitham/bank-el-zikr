@@ -8,7 +8,7 @@ class DeleteZikrRecordCubit extends RequestCubit<void> {
     required this.deleteZikrRecord,
   }) : super();
 
-  Future<void> executeDelete(int zikrId) async {
-    execute(request: () => deleteZikrRecord(zikrId));
+  Future<void> executeDelete(String zikrKey) async {
+    execute(request: () => deleteZikrRecord(zikrKey));
   }
 }

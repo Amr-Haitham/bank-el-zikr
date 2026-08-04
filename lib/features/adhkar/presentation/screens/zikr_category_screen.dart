@@ -1,10 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
-import 'package:bank_el_ziker/features/adhkar/domain/entities/zikr.dart';
-import 'package:bank_el_ziker/features/azkar_records/domain/entities/adhkar_progress.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/reading_progress.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
+import 'package:bank_el_ziker/features/zikr_counter/domain/usecases/increment_balance.dart';
 import 'package:bank_el_ziker/core/utils/haptics.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -20,8 +22,8 @@ import '../widgets/adhkar_view_mode_toggle.dart';
 /// Generic zikr-reading screen used by every category on the Adhkar List —
 /// morning, evening, sleep, ruqyah, after-prayer, and every other situational
 /// category. The screen itself doesn't care where the data comes from; a
-/// [RequestCubit]<List<ZikrEntity>>> (either [MorningNightAzkarCubit] or
-/// [ZikrCategoryCubit]) must already be provided above it in the widget tree.
+/// [RequestCubit]<List<ZikrEntity>>> ([ZikrCategoryCubit]) must already be
+/// provided above it in the widget tree.
 class ZikrCategoryScreen extends StatefulWidget {
   const ZikrCategoryScreen({
     super.key,
@@ -102,19 +104,21 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
     super.initState();
 
     final savedReps = context
-            .read<AdhkarProgressCubit>()
-            .state[widget.category]
-            ?.repsByZikrId ??
+            .read<ReadingProgressCubit>()
+            .state
+            .whenOrNull(success: (progress) => progress[widget.category])
+            ?.repsByZikrKey ??
         const {};
 
     _readingCubit = AdhkarReadingCubit(
       azkar: widget.azkar,
       onProgress: _onProgress,
+      incrementBalance: getService<IncrementBalance>(),
       initialReps: savedReps,
     );
 
     final firstUnfinishedIndex = widget.azkar
-        .indexWhere((zikr) => (savedReps[zikr.id] ?? 0) < zikr.count);
+        .indexWhere((zikr) => (savedReps[zikr.key] ?? 0) < zikr.count);
     if (firstUnfinishedIndex > 0) {
       _readingCubit.setPage(firstUnfinishedIndex);
     }
@@ -144,19 +148,18 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
   }
 
   void _onProgress(int completedCount, int totalCount) {
-    context.read<AdhkarProgressCubit>().saveProgress(
-          AdhkarProgressEntity(
+    context.read<ReadingProgressCubit>().saveProgress(
+          ReadingProgressEntity(
             category: widget.category,
+            date: DateTime.now(),
             lastReadAt: DateTime.now(),
             completedCount: completedCount,
             totalCount: totalCount,
-            repsByZikrId: _readingCubit.state.repsByZikrId,
+            repsByZikrKey: _readingCubit.state.repsByZikrKey,
           ),
         );
     if (completedCount >= totalCount) {
-      context
-          .read<DailyActivityLogCubit>()
-          .markAdhkarCompleted(widget.category);
+      context.read<DayRecordCubit>().markCategoryCompleted(widget.category);
 
       final isVibrating = context
               .read<SettingsCubit>()
@@ -214,6 +217,10 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
     if (isVibrating) {
       vibrateOnce();
     }
+
+    if (_readingCubit.state.viewMode == AdhkarViewMode.single) {
+      _goToPage(_readingCubit.state.currentPage + 1);
+    }
   }
 
   @override
@@ -259,7 +266,7 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
         return AdhkarListItemCard(
           index: index,
           zikr: zikr,
-          reps: readingState.repsByZikrId[zikr.id] ?? 0,
+          reps: readingState.repsByZikrKey[zikr.key] ?? 0,
           onTap: () => _handleIncrement(zikr),
           onComplete: () => _handleComplete(zikr),
         );
@@ -274,8 +281,9 @@ class _AdhkarReadingBodyState extends State<_AdhkarReadingBody> {
       onHorizontalDragEnd: _handleSwipe,
       child: AdhkarSingleCardView(
         zikr: zikr,
-        reps: readingState.repsByZikrId[zikr.id] ?? 0,
+        reps: readingState.repsByZikrKey[zikr.key] ?? 0,
         onTap: () => _handleIncrement(zikr),
+        onComplete: () => _handleComplete(zikr),
       ),
     );
   }

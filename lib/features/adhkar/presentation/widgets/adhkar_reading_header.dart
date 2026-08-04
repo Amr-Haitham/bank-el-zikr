@@ -26,10 +26,20 @@ class AdhkarReadingHeader extends StatelessWidget {
           child: Icon(isEnglish ? Icons.chevron_left : Icons.chevron_right,
               color: Theme.of(context).textTheme.bodyLarge!.color),
         ),
-        Text(
-          title,
-          style:
-              Theme.of(context).textTheme.headlineSmall!.copyWith(fontSize: 20),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineSmall!
+                  .copyWith(fontSize: 20),
+            ),
+          ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),

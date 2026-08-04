@@ -3,7 +3,7 @@ import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cub
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
-import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_zikr_record.dart';
+import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/week_azkar_record.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/get_week_azkar_records_cubit.dart';
 import 'package:flutter/material.dart';
@@ -19,19 +19,16 @@ class _Streak {
 class StreakCardWidget extends StatelessWidget {
   const StreakCardWidget({super.key});
 
-  static _Streak _computeStreak(List<DayZikrRecordEntity> dailyRecords) {
-    final sorted = [...dailyRecords]
-      ..sort((a, b) => b.dateTime.compareTo(a.dateTime));
+  static _Streak _computeStreak(List<DayRecordEntity> dailyRecords) {
+    final sorted = [...dailyRecords]..sort((a, b) => b.date.compareTo(a.date));
 
     int streak = 0;
     DateTime? expectedDay;
     DateTime? startDay;
     for (final day in sorted) {
-      final total = day.azkarRecordById.values.fold<int>(0, (s, v) => s + v);
-      if (total <= 0) break;
+      if (!day.isActive) break;
 
-      final dayOnly =
-          DateTime(day.dateTime.year, day.dateTime.month, day.dateTime.day);
+      final dayOnly = DateTime(day.date.year, day.date.month, day.date.day);
       expectedDay ??= dayOnly;
       if (dayOnly != expectedDay) break;
 

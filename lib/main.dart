@@ -4,12 +4,10 @@ import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
-import 'package:bank_el_ziker/core/layers/data/services/debug_seed.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
-import 'package:flutter/foundation.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/adhkar_progress_cubit.dart';
-import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/daily_activity_log_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
+import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -24,11 +22,6 @@ void main() async {
   await HiveDB.initHiveDB();
   await HiveDB().setupInitHiveDbDataIfNonExisting();
 
-  // TODO revert: dev-only sample data for visually checking the Home screen
-  if (kDebugMode) {
-    await seedDebugHomeData();
-  }
-
   // Initialize service locator
   await setupServiceLocator();
 
@@ -42,8 +35,8 @@ void main() async {
       providers: [
         BlocProvider(create: (context) => getService<SettingsCubit>()),
         BlocProvider.value(value: getService<CounterCubit>()),
-        BlocProvider.value(value: getService<AdhkarProgressCubit>()),
-        BlocProvider.value(value: getService<DailyActivityLogCubit>()),
+        BlocProvider.value(value: getService<ReadingProgressCubit>()),
+        BlocProvider.value(value: getService<DayRecordCubit>()),
       ],
       child: MyApp(
         appRouter: AppRouter(showOnboarding: true), // TODO revert: !hasSeenOnboarding

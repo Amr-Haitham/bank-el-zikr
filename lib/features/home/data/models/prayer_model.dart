@@ -1,4 +1,3 @@
-import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 part 'prayer_model.g.dart';
 
@@ -22,24 +21,4 @@ class Prayer extends HiveObject {
     this.translation,
     this.reference,
   });
-
-  PrayerEntity toEntity() {
-    return PrayerEntity(
-      id: id,
-      content: content,
-      transliteration: transliteration,
-      translation: translation,
-      reference: reference,
-    );
-  }
-
-  factory Prayer.fromEntity(PrayerEntity entity) {
-    return Prayer(
-      id: entity.id,
-      content: entity.content,
-      transliteration: entity.transliteration,
-      translation: entity.translation,
-      reference: entity.reference,
-    );
-  }
 }
