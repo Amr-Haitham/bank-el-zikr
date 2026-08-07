@@ -69,13 +69,47 @@ class AppLocalizationsAr extends AppLocalizations {
   String get viewStats => 'شاهد الإحصائيات';
 
   @override
-  String get supportTheApp => 'ادعم التطبيق';
+  String get supportTheApp => 'ادعم المطوّر';
 
   @override
   String get supportSubtitle => 'ساعد في إبقاء بنك الذكر مجانيًا للجميع';
 
   @override
-  String get donate => 'تبرع';
+  String get donate => 'دعم';
+
+  @override
+  String get supporterSheetTitle => 'ادعم بنك الذكر';
+
+  @override
+  String get supporterSheetBody =>
+      'هذا دعم شهري رمزي للمطوّر، وليس صدقة أو تبرعًا خيريًا، ولا يُعد تبرعًا معفى من الضريبة. هدفه فقط الإبقاء على التطبيق مجانيًا ومستمرًا في التطوير.';
+
+  @override
+  String get monthlySupporterTierName => 'داعم شهري';
+
+  @override
+  String get supporterActiveLabel => 'أنت تدعم هذا التطبيق';
+
+  @override
+  String get manageSubscription => 'إدارة الاشتراك';
+
+  @override
+  String get subscribeAction => 'اشترك';
+
+  @override
+  String subscribeActionWithPrice(Object price) {
+    return 'اشترك — $price/شهريًا';
+  }
+
+  @override
+  String get restorePurchases => 'استعادة المشتريات';
+
+  @override
+  String get supporterStatusUnavailable =>
+      'تعذّر تحميل حالة الدعم — اضغط لإعادة المحاولة';
+
+  @override
+  String get genericErrorMessage => 'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى';
 
   @override
   String get anotherVerse => 'آية أخرى';

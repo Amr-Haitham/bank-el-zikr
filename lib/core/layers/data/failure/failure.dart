@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -29,7 +30,7 @@ class Failure extends FailureBase {
 
   @override
   String getDisplayMessage(BuildContext context) {
-    return message ?? 'An error occurred';
+    return message ?? AppLocalizations.of(context).genericErrorMessage;
   }
 }
 

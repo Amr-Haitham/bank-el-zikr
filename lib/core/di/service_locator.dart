@@ -93,6 +93,17 @@ import '../../features/home/domain/repositories/home_repository.dart';
 import '../../features/home/domain/usecases/get_random_prayer.dart';
 import '../../features/home/presentation/cubit/get_random_prayer_cubit.dart';
 
+// donations imports
+import '../../features/donations/data/datasources/revenuecat_donation_datasource.dart';
+import '../../features/donations/data/repositories/donation_repository_impl.dart';
+import '../../features/donations/domain/repositories/donation_repository.dart';
+import '../../features/donations/domain/usecases/get_supporter_pricing.dart';
+import '../../features/donations/domain/usecases/get_supporter_status.dart';
+import '../../features/donations/domain/usecases/restore_purchases.dart';
+import '../../features/donations/domain/usecases/subscribe.dart';
+import '../../features/donations/presentation/cubit/supporter_pricing_cubit.dart';
+import '../../features/donations/presentation/cubit/supporter_status_cubit.dart';
+
 final _getIt = GetIt.instance;
 
 /// Get a registered service from the service locator
@@ -149,6 +160,11 @@ Future<void> setupServiceLocator() async {
   _setUpHomeRepositories();
   _setUpHomeUseCases();
   _setUpHomeBlocs();
+
+  _setUpDonationsDataSources();
+  _setUpDonationsRepositories();
+  _setUpDonationsUseCases();
+  _setUpDonationsBlocs();
 }
 
 /// Setup external dependencies like Hive boxes
@@ -593,5 +609,53 @@ void _setUpHomeUseCases() {
 void _setUpHomeBlocs() {
   _getIt.registerFactory<GetRandomPrayerCubit>(
     () => GetRandomPrayerCubit(getRandomPrayer: getService<GetRandomPrayer>()),
+  );
+}
+
+// ============================================================================
+// donations
+// ============================================================================
+
+void _setUpDonationsDataSources() {
+  _getIt.registerLazySingleton<RevenueCatDonationDataSource>(
+    () => RevenueCatDonationDataSourceImpl(),
+  );
+}
+
+void _setUpDonationsRepositories() {
+  _getIt.registerLazySingleton<DonationRepository>(
+    () => DonationRepositoryImpl(
+      dataSource: getService<RevenueCatDonationDataSource>(),
+    ),
+  );
+}
+
+void _setUpDonationsUseCases() {
+  _getIt.registerLazySingleton<GetSupporterStatus>(
+    () => GetSupporterStatus(getService<DonationRepository>()),
+  );
+  _getIt.registerLazySingleton<GetSupporterPricing>(
+    () => GetSupporterPricing(getService<DonationRepository>()),
+  );
+  _getIt.registerLazySingleton<Subscribe>(
+    () => Subscribe(getService<DonationRepository>()),
+  );
+  _getIt.registerLazySingleton<RestorePurchases>(
+    () => RestorePurchases(getService<DonationRepository>()),
+  );
+}
+
+void _setUpDonationsBlocs() {
+  _getIt.registerLazySingleton<SupporterStatusCubit>(
+    () => SupporterStatusCubit(
+      getSupporterStatus: getService<GetSupporterStatus>(),
+      subscribeUseCase: getService<Subscribe>(),
+      restorePurchasesUseCase: getService<RestorePurchases>(),
+    ),
+  );
+  _getIt.registerFactory<SupporterPricingCubit>(
+    () => SupporterPricingCubit(
+      getSupporterPricing: getService<GetSupporterPricing>(),
+    ),
   );
 }

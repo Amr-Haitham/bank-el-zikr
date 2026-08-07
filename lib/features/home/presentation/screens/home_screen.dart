@@ -4,7 +4,7 @@ import 'package:bank_el_ziker/features/home/presentation/widgets/home_header_wid
 import 'package:bank_el_ziker/features/home/presentation/widgets/next_reminder_banner.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/share_reward_row.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/streak_card_widget.dart';
-import 'package:bank_el_ziker/features/home/presentation/widgets/support_app_card_widget.dart';
+import 'package:bank_el_ziker/features/donations/presentation/screens/components/support_app_card_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/verse_of_day_card_widget.dart';
 import 'package:flutter/material.dart';
 

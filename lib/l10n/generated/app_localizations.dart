@@ -209,7 +209,7 @@ abstract class AppLocalizations {
   /// No description provided for @supportTheApp.
   ///
   /// In ar, this message translates to:
-  /// **'ادعم التطبيق'**
+  /// **'ادعم المطوّر'**
   String get supportTheApp;
 
   /// No description provided for @supportSubtitle.
@@ -221,8 +221,68 @@ abstract class AppLocalizations {
   /// No description provided for @donate.
   ///
   /// In ar, this message translates to:
-  /// **'تبرع'**
+  /// **'دعم'**
   String get donate;
+
+  /// No description provided for @supporterSheetTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ادعم بنك الذكر'**
+  String get supporterSheetTitle;
+
+  /// No description provided for @supporterSheetBody.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذا دعم شهري رمزي للمطوّر، وليس صدقة أو تبرعًا خيريًا، ولا يُعد تبرعًا معفى من الضريبة. هدفه فقط الإبقاء على التطبيق مجانيًا ومستمرًا في التطوير.'**
+  String get supporterSheetBody;
+
+  /// No description provided for @monthlySupporterTierName.
+  ///
+  /// In ar, this message translates to:
+  /// **'داعم شهري'**
+  String get monthlySupporterTierName;
+
+  /// No description provided for @supporterActiveLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنت تدعم هذا التطبيق'**
+  String get supporterActiveLabel;
+
+  /// No description provided for @manageSubscription.
+  ///
+  /// In ar, this message translates to:
+  /// **'إدارة الاشتراك'**
+  String get manageSubscription;
+
+  /// No description provided for @subscribeAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'اشترك'**
+  String get subscribeAction;
+
+  /// No description provided for @subscribeActionWithPrice.
+  ///
+  /// In ar, this message translates to:
+  /// **'اشترك — {price}/شهريًا'**
+  String subscribeActionWithPrice(Object price);
+
+  /// No description provided for @restorePurchases.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعادة المشتريات'**
+  String get restorePurchases;
+
+  /// No description provided for @supporterStatusUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحميل حالة الدعم — اضغط لإعادة المحاولة'**
+  String get supporterStatusUnavailable;
+
+  /// No description provided for @genericErrorMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى'**
+  String get genericErrorMessage;
 
   /// No description provided for @anotherVerse.
   ///

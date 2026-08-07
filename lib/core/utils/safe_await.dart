@@ -9,6 +9,6 @@ Future<Either<FailureBase, T>> safeAwait<T>(Future<T> Function() future) async {
   } on FailureBase catch (failure) {
     return Left(failure);
   } catch (e) {
-    return Left(Failure(exception: e, message: e.toString()));
+    return Left(Failure(exception: e));
   }
 }
