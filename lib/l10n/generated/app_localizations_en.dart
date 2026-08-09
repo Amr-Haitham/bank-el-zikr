@@ -302,6 +302,16 @@ class AppLocalizationsEn extends AppLocalizations {
       'Location access is required to turn on Adhkar reminders';
 
   @override
+  String get generalDhikrReminderTitle => 'Dhikr virtue reminder';
+
+  @override
+  String get generalDhikrReminderSubtitle =>
+      'A gentle daily nudge about the reward of dhikr';
+
+  @override
+  String get generalDhikrReminderLanguageLabel => 'Message language';
+
+  @override
   String nextReminderText(String adhkarName, String duration, String time) {
     return '$adhkarName in $duration · $time';
   }

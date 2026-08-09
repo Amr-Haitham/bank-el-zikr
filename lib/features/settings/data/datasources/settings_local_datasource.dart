@@ -15,6 +15,8 @@ abstract class SettingsLocalDataSource {
   Future<String> getReminderMode();
   Future<bool> getMorningReminderEnabled();
   Future<bool> getEveningReminderEnabled();
+  Future<bool> getGeneralDhikrReminderEnabled();
+  Future<String> getGeneralDhikrReminderLanguage();
   Future<void> setLightTheme(bool value);
   Future<void> setIsVibrating(bool value);
   Future<void> setMorningZikrAlarm(TimeOfDay time);
@@ -28,6 +30,8 @@ abstract class SettingsLocalDataSource {
   Future<void> setReminderMode(String value);
   Future<void> setMorningReminderEnabled(bool value);
   Future<void> setEveningReminderEnabled(bool value);
+  Future<void> setGeneralDhikrReminderEnabled(bool value);
+  Future<void> setGeneralDhikrReminderLanguage(String value);
 }
 
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
@@ -46,6 +50,10 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   static const String _reminderModeKey = 'reminderMode';
   static const String _morningReminderEnabledKey = 'morningReminderEnabled';
   static const String _eveningReminderEnabledKey = 'eveningReminderEnabled';
+  static const String _generalDhikrReminderEnabledKey =
+      'generalDhikrReminderEnabled';
+  static const String _generalDhikrReminderLanguageKey =
+      'generalDhikrReminderLanguage';
 
   SettingsLocalDataSourceImpl({required this.sharedPreferences});
 
@@ -181,6 +189,28 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   @override
   Future<void> setEveningReminderEnabled(bool value) async {
     await sharedPreferences.setBool(_eveningReminderEnabledKey, value);
+  }
+
+  @override
+  Future<bool> getGeneralDhikrReminderEnabled() async {
+    return sharedPreferences.getBool(_generalDhikrReminderEnabledKey) ??
+        false;
+  }
+
+  @override
+  Future<void> setGeneralDhikrReminderEnabled(bool value) async {
+    await sharedPreferences.setBool(_generalDhikrReminderEnabledKey, value);
+  }
+
+  @override
+  Future<String> getGeneralDhikrReminderLanguage() async {
+    return sharedPreferences.getString(_generalDhikrReminderLanguageKey) ??
+        'ar';
+  }
+
+  @override
+  Future<void> setGeneralDhikrReminderLanguage(String value) async {
+    await sharedPreferences.setString(_generalDhikrReminderLanguageKey, value);
   }
 
   // Helper methods for TimeOfDay conversion

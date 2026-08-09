@@ -17,4 +17,6 @@ abstract class SettingsRepository {
   Future<RequestResult<void>> setReminderMode(String value);
   Future<RequestResult<void>> setMorningReminderEnabled(bool value);
   Future<RequestResult<void>> setEveningReminderEnabled(bool value);
+  Future<RequestResult<void>> setGeneralDhikrReminderEnabled(bool value);
+  Future<RequestResult<void>> setGeneralDhikrReminderLanguage(String value);
 }

@@ -30,6 +30,10 @@ class SettingsRepositoryImpl implements SettingsRepository {
           await localDataSource.getMorningReminderEnabled();
       final eveningReminderEnabled =
           await localDataSource.getEveningReminderEnabled();
+      final generalDhikrReminderEnabled =
+          await localDataSource.getGeneralDhikrReminderEnabled();
+      final generalDhikrReminderLanguage =
+          await localDataSource.getGeneralDhikrReminderLanguage();
 
       return Right(Settings(
         isLightTheme: isLightTheme,
@@ -45,6 +49,8 @@ class SettingsRepositoryImpl implements SettingsRepository {
         reminderMode: reminderMode,
         morningReminderEnabled: morningReminderEnabled,
         eveningReminderEnabled: eveningReminderEnabled,
+        generalDhikrReminderEnabled: generalDhikrReminderEnabled,
+        generalDhikrReminderLanguage: generalDhikrReminderLanguage,
       ));
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -175,6 +181,28 @@ class SettingsRepositoryImpl implements SettingsRepository {
   Future<RequestResult<void>> setEveningReminderEnabled(bool value) async {
     try {
       await localDataSource.setEveningReminderEnabled(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setGeneralDhikrReminderEnabled(
+      bool value) async {
+    try {
+      await localDataSource.setGeneralDhikrReminderEnabled(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setGeneralDhikrReminderLanguage(
+      String value) async {
+    try {
+      await localDataSource.setGeneralDhikrReminderLanguage(value);
       return const Right(null);
     } catch (e) {
       return Left(Failure(message: e.toString()));

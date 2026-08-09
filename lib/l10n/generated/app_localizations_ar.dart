@@ -300,6 +300,15 @@ class AppLocalizationsAr extends AppLocalizations {
       'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار';
 
   @override
+  String get generalDhikrReminderTitle => 'تذكير بفضل الذكر';
+
+  @override
+  String get generalDhikrReminderSubtitle => 'تذكير لطيف يوميًا بأجر الذكر';
+
+  @override
+  String get generalDhikrReminderLanguageLabel => 'لغة الرسالة';
+
+  @override
   String nextReminderText(String adhkarName, String duration, String time) {
     return '$adhkarName خلال $duration · $time';
   }

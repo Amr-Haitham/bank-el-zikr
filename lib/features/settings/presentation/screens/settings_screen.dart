@@ -145,6 +145,32 @@ class SettingsScreen extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 12),
+                      NotificationToggleCard(
+                        title: l10n.generalDhikrReminderTitle,
+                        subtitle: settings.generalDhikrReminderEnabled
+                            ? l10n.generalDhikrReminderSubtitle
+                            : null,
+                        value: settings.generalDhikrReminderEnabled,
+                        onChanged: (value) => context
+                            .read<SettingsCubit>()
+                            .setGeneralDhikrReminderEnabled(value),
+                      ),
+                      if (settings.generalDhikrReminderEnabled) ...[
+                        const SizedBox(height: 12),
+                        SettingsSegmentedRow(
+                          label: l10n.generalDhikrReminderLanguageLabel,
+                          options: const ["العربية", "English"],
+                          selectedIndex:
+                              settings.generalDhikrReminderLanguage == 'en'
+                                  ? 1
+                                  : 0,
+                          onSelected: (index) => context
+                              .read<SettingsCubit>()
+                              .setGeneralDhikrReminderLanguage(
+                                  index == 1 ? 'en' : 'ar'),
+                        ),
+                      ],
+                      const SizedBox(height: 12),
                       if (settings.reminderMode == 'auto')
                         BlocBuilder<PrayerTimesCubit,
                             RequestState<PrayerTimesEntity>>(

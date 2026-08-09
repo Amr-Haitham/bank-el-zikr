@@ -25,6 +25,11 @@ class Settings extends Equatable {
   final bool morningReminderEnabled;
   final bool eveningReminderEnabled;
 
+  final bool generalDhikrReminderEnabled;
+
+  /// 'ar' or 'en'. Independent of [selectedLanguage].
+  final String generalDhikrReminderLanguage;
+
   const Settings({
     required this.isLightTheme,
     this.morningZikrAlarm,
@@ -39,6 +44,8 @@ class Settings extends Equatable {
     this.reminderMode = 'auto',
     this.morningReminderEnabled = true,
     this.eveningReminderEnabled = true,
+    this.generalDhikrReminderEnabled = false,
+    this.generalDhikrReminderLanguage = 'ar',
   });
 
   @override
@@ -56,6 +63,8 @@ class Settings extends Equatable {
         reminderMode,
         morningReminderEnabled,
         eveningReminderEnabled,
+        generalDhikrReminderEnabled,
+        generalDhikrReminderLanguage,
       ];
 
   Settings copyWith({
@@ -72,6 +81,8 @@ class Settings extends Equatable {
     String? reminderMode,
     bool? morningReminderEnabled,
     bool? eveningReminderEnabled,
+    bool? generalDhikrReminderEnabled,
+    String? generalDhikrReminderLanguage,
   }) {
     return Settings(
       isLightTheme: isLightTheme ?? this.isLightTheme,
@@ -90,6 +101,10 @@ class Settings extends Equatable {
           morningReminderEnabled ?? this.morningReminderEnabled,
       eveningReminderEnabled:
           eveningReminderEnabled ?? this.eveningReminderEnabled,
+      generalDhikrReminderEnabled:
+          generalDhikrReminderEnabled ?? this.generalDhikrReminderEnabled,
+      generalDhikrReminderLanguage:
+          generalDhikrReminderLanguage ?? this.generalDhikrReminderLanguage,
     );
   }
 }

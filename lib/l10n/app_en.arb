@@ -124,6 +124,9 @@
   "asr": "Asr",
   "fajrAndAsr": "Fajr & Asr",
   "locationRequiredForReminders": "Location access is required to turn on Adhkar reminders",
+  "generalDhikrReminderTitle": "Dhikr virtue reminder",
+  "generalDhikrReminderSubtitle": "A gentle daily nudge about the reward of dhikr",
+  "generalDhikrReminderLanguageLabel": "Message language",
   "nextReminderText": "{adhkarName} in {duration} · {time}",
   "@nextReminderText": {
     "placeholders": {

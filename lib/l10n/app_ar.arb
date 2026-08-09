@@ -127,6 +127,9 @@
   "asr": "العصر",
   "fajrAndAsr": "الفجر والعصر",
   "locationRequiredForReminders": "يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار",
+  "generalDhikrReminderTitle": "تذكير بفضل الذكر",
+  "generalDhikrReminderSubtitle": "تذكير لطيف يوميًا بأجر الذكر",
+  "generalDhikrReminderLanguageLabel": "لغة الرسالة",
   "nextReminderText": "{adhkarName} خلال {duration} · {time}",
   "@nextReminderText": {
     "placeholders": {

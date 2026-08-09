@@ -133,6 +133,32 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
   }
 
+  Future<void> setGeneralDhikrReminderEnabled(bool value) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(generalDhikrReminderEnabled: value),
+    );
+    result.fold(
+      (failure) => null,
+      (_) {
+        reExecutePastRequest();
+        scheduleAdhkarReminders(const NoParams());
+      },
+    );
+  }
+
+  Future<void> setGeneralDhikrReminderLanguage(String language) async {
+    final result = await updateSettings(
+      UpdateSettingsParams(generalDhikrReminderLanguage: language),
+    );
+    result.fold(
+      (failure) => null,
+      (_) {
+        reExecutePastRequest();
+        scheduleAdhkarReminders(const NoParams());
+      },
+    );
+  }
+
   Future<void> completeOnboarding(String selectedLanguage) async {
     final result = await updateSettings(
       UpdateSettingsParams(

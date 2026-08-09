@@ -19,6 +19,13 @@ const reminderNotificationIds = [
   2005,
   2006,
   2007,
+  3001,
+  3002,
+  3003,
+  3004,
+  3005,
+  3006,
+  3007,
 ];
 
 class CancelAdhkarReminders implements UseCase<void, NoParams> {

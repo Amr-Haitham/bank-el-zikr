@@ -84,6 +84,18 @@ class UpdateSettings implements UseCase<void, UpdateSettingsParams> {
       if (result.isLeft()) return result;
     }
 
+    if (params.generalDhikrReminderEnabled != null) {
+      final result = await repository.setGeneralDhikrReminderEnabled(
+          params.generalDhikrReminderEnabled!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.generalDhikrReminderLanguage != null) {
+      final result = await repository.setGeneralDhikrReminderLanguage(
+          params.generalDhikrReminderLanguage!);
+      if (result.isLeft()) return result;
+    }
+
     return const Right(null);
   }
 }
@@ -102,6 +114,8 @@ class UpdateSettingsParams extends Equatable {
   final String? reminderMode;
   final bool? morningReminderEnabled;
   final bool? eveningReminderEnabled;
+  final bool? generalDhikrReminderEnabled;
+  final String? generalDhikrReminderLanguage;
 
   const UpdateSettingsParams({
     this.isLightTheme,
@@ -117,6 +131,8 @@ class UpdateSettingsParams extends Equatable {
     this.reminderMode,
     this.morningReminderEnabled,
     this.eveningReminderEnabled,
+    this.generalDhikrReminderEnabled,
+    this.generalDhikrReminderLanguage,
   });
 
   @override
@@ -134,5 +150,7 @@ class UpdateSettingsParams extends Equatable {
         reminderMode,
         morningReminderEnabled,
         eveningReminderEnabled,
+        generalDhikrReminderEnabled,
+        generalDhikrReminderLanguage,
       ];
 }

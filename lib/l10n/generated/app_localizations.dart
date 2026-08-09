@@ -638,6 +638,24 @@ abstract class AppLocalizations {
   /// **'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار'**
   String get locationRequiredForReminders;
 
+  /// No description provided for @generalDhikrReminderTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير بفضل الذكر'**
+  String get generalDhikrReminderTitle;
+
+  /// No description provided for @generalDhikrReminderSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير لطيف يوميًا بأجر الذكر'**
+  String get generalDhikrReminderSubtitle;
+
+  /// No description provided for @generalDhikrReminderLanguageLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'لغة الرسالة'**
+  String get generalDhikrReminderLanguageLabel;
+
   /// No description provided for @nextReminderText.
   ///
   /// In ar, this message translates to:
