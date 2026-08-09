@@ -18,6 +18,13 @@ class Settings extends Equatable {
   /// true = Arabic-Indic digits (١٢٣), false = Western digits (123).
   final bool useArabicNumerals;
 
+  final bool adhkarRemindersEnabled;
+
+  /// 'manual' or 'auto'.
+  final String reminderMode;
+  final bool morningReminderEnabled;
+  final bool eveningReminderEnabled;
+
   const Settings({
     required this.isLightTheme,
     this.morningZikrAlarm,
@@ -28,6 +35,10 @@ class Settings extends Equatable {
     this.dhikrFont = 'clear',
     this.textSize = 'medium',
     this.useArabicNumerals = true,
+    this.adhkarRemindersEnabled = false,
+    this.reminderMode = 'auto',
+    this.morningReminderEnabled = true,
+    this.eveningReminderEnabled = true,
   });
 
   @override
@@ -41,6 +52,10 @@ class Settings extends Equatable {
         dhikrFont,
         textSize,
         useArabicNumerals,
+        adhkarRemindersEnabled,
+        reminderMode,
+        morningReminderEnabled,
+        eveningReminderEnabled,
       ];
 
   Settings copyWith({
@@ -53,6 +68,10 @@ class Settings extends Equatable {
     String? dhikrFont,
     String? textSize,
     bool? useArabicNumerals,
+    bool? adhkarRemindersEnabled,
+    String? reminderMode,
+    bool? morningReminderEnabled,
+    bool? eveningReminderEnabled,
   }) {
     return Settings(
       isLightTheme: isLightTheme ?? this.isLightTheme,
@@ -64,6 +83,13 @@ class Settings extends Equatable {
       dhikrFont: dhikrFont ?? this.dhikrFont,
       textSize: textSize ?? this.textSize,
       useArabicNumerals: useArabicNumerals ?? this.useArabicNumerals,
+      adhkarRemindersEnabled:
+          adhkarRemindersEnabled ?? this.adhkarRemindersEnabled,
+      reminderMode: reminderMode ?? this.reminderMode,
+      morningReminderEnabled:
+          morningReminderEnabled ?? this.morningReminderEnabled,
+      eveningReminderEnabled:
+          eveningReminderEnabled ?? this.eveningReminderEnabled,
     );
   }
 }

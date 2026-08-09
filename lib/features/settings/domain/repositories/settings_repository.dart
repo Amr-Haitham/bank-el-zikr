@@ -13,4 +13,8 @@ abstract class SettingsRepository {
   Future<RequestResult<void>> setDhikrFont(String value);
   Future<RequestResult<void>> setTextSize(String value);
   Future<RequestResult<void>> setUseArabicNumerals(bool value);
+  Future<RequestResult<void>> setAdhkarRemindersEnabled(bool value);
+  Future<RequestResult<void>> setReminderMode(String value);
+  Future<RequestResult<void>> setMorningReminderEnabled(bool value);
+  Future<RequestResult<void>> setEveningReminderEnabled(bool value);
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -72,6 +73,18 @@ import '../../features/settings/domain/usecases/get_settings.dart';
 import '../../features/settings/domain/usecases/update_settings.dart';
 import '../../features/settings/presentation/cubit/settings_cubit.dart';
 
+// notifications imports
+import '../../features/notifications/data/datasources/location_local_datasource.dart';
+import '../../features/notifications/data/datasources/notification_local_datasource.dart';
+import '../../features/notifications/data/repositories/location_repository_impl.dart';
+import '../../features/notifications/data/repositories/notification_scheduler_repository_impl.dart';
+import '../../features/notifications/domain/repositories/location_repository.dart';
+import '../../features/notifications/domain/repositories/notification_scheduler_repository.dart';
+import '../../features/notifications/domain/usecases/get_current_coordinates.dart';
+import '../../features/notifications/domain/usecases/get_prayer_times.dart';
+import '../../features/notifications/domain/usecases/schedule_adhkar_reminders.dart';
+import '../../features/notifications/presentation/cubit/prayer_times_cubit.dart';
+
 // home imports
 import '../../features/home/data/datasources/home_local_datasource.dart';
 import '../../features/home/data/models/prayer_model.dart';
@@ -124,6 +137,12 @@ Future<void> setupServiceLocator() async {
   _setUpSettingsDataSources();
   _setUpSettingsRepositories();
   _setUpSettingsUseCases();
+
+  _setUpNotificationsDataSources();
+  _setUpNotificationsRepositories();
+  _setUpNotificationsUseCases();
+  _setUpNotificationsBlocs();
+
   _setUpSettingsBlocs();
 
   _setUpHomeDataSources();
@@ -181,6 +200,11 @@ Future<void> _setUpExternalDependencies() async {
   // shared_preferences
   final sharedPreferences = await SharedPreferences.getInstance();
   _getIt.registerLazySingleton<SharedPreferences>(() => sharedPreferences);
+
+  // notifications plugin
+  _getIt.registerLazySingleton<FlutterLocalNotificationsPlugin>(
+    () => FlutterLocalNotificationsPlugin(),
+  );
 }
 
 // ============================================================================
@@ -480,6 +504,62 @@ void _setUpSettingsBlocs() {
     () => SettingsCubit(
       getSettings: getService<GetSettings>(),
       updateSettings: getService<UpdateSettings>(),
+      scheduleAdhkarReminders: getService<ScheduleAdhkarReminders>(),
+      getCurrentCoordinates: getService<GetCurrentCoordinates>(),
+    ),
+  );
+}
+
+// ============================================================================
+// notifications
+// ============================================================================
+
+void _setUpNotificationsDataSources() {
+  _getIt.registerLazySingleton<LocationLocalDataSource>(
+    () => LocationLocalDataSourceImpl(
+      sharedPreferences: getService<SharedPreferences>(),
+    ),
+  );
+  _getIt.registerLazySingleton<NotificationLocalDataSource>(
+    () => NotificationLocalDataSourceImpl(
+      plugin: getService<FlutterLocalNotificationsPlugin>(),
+    ),
+  );
+}
+
+void _setUpNotificationsRepositories() {
+  _getIt.registerLazySingleton<LocationRepository>(
+    () => LocationRepositoryImpl(
+      localDataSource: getService<LocationLocalDataSource>(),
+    ),
+  );
+  _getIt.registerLazySingleton<NotificationSchedulerRepository>(
+    () => NotificationSchedulerRepositoryImpl(
+      localDataSource: getService<NotificationLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpNotificationsUseCases() {
+  _getIt.registerLazySingleton<GetPrayerTimes>(() => GetPrayerTimes());
+  _getIt.registerLazySingleton<GetCurrentCoordinates>(
+    () => GetCurrentCoordinates(getService<LocationRepository>()),
+  );
+  _getIt.registerLazySingleton<ScheduleAdhkarReminders>(
+    () => ScheduleAdhkarReminders(
+      settingsRepository: getService<SettingsRepository>(),
+      locationRepository: getService<LocationRepository>(),
+      getPrayerTimes: getService<GetPrayerTimes>(),
+      schedulerRepository: getService<NotificationSchedulerRepository>(),
+    ),
+  );
+}
+
+void _setUpNotificationsBlocs() {
+  _getIt.registerFactory<PrayerTimesCubit>(
+    () => PrayerTimesCubit(
+      locationRepository: getService<LocationRepository>(),
+      getPrayerTimes: getService<GetPrayerTimes>(),
     ),
   );
 }

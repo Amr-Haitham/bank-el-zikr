@@ -111,6 +111,43 @@
   "numerals": "Numerals",
   "languageLabel": "Language",
 
+  "notificationsSection": "Notifications",
+  "adhkarReminders": "Adhkar reminders",
+  "adhkarRemindersSubtitleManual": "Set your own reminder times",
+  "adhkarRemindersSubtitleAuto": "Synced to Fajr / Asr for your location",
+  "timingLabel": "Timing",
+  "manualLabel": "Manual",
+  "autoLabel": "Auto",
+  "hoursLabel": "Hours",
+  "minutesLabel": "Minutes",
+  "fajr": "Fajr",
+  "asr": "Asr",
+  "fajrAndAsr": "Fajr & Asr",
+  "locationRequiredForReminders": "Location access is required to turn on Adhkar reminders",
+  "nextReminderText": "{adhkarName} in {duration} · {time}",
+  "@nextReminderText": {
+    "placeholders": {
+      "adhkarName": { "type": "String" },
+      "duration": { "type": "String" },
+      "time": { "type": "String" }
+    }
+  },
+  "durationMinutes": "{count}m",
+  "@durationMinutes": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "durationHours": "{count}h",
+  "@durationHours": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "durationHoursMinutes": "{hours}h {minutes}m",
+  "@durationHoursMinutes": {
+    "placeholders": {
+      "hours": { "type": "String" },
+      "minutes": { "type": "String" }
+    }
+  },
+
   "errorLoadingAdhkar": "Error loading adhkar",
   "noAdhkarFound": "No adhkar found",
   "listViewLabel": "List",

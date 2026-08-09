@@ -260,6 +260,66 @@ class AppLocalizationsAr extends AppLocalizations {
   String get languageLabel => 'اللغة';
 
   @override
+  String get notificationsSection => 'الإشعارات';
+
+  @override
+  String get adhkarReminders => 'تذكير الأذكار';
+
+  @override
+  String get adhkarRemindersSubtitleManual => 'حدد أوقات التذكير بنفسك';
+
+  @override
+  String get adhkarRemindersSubtitleAuto => 'متزامن مع الفجر والعصر حسب موقعك';
+
+  @override
+  String get timingLabel => 'التوقيت';
+
+  @override
+  String get manualLabel => 'يدوي';
+
+  @override
+  String get autoLabel => 'تلقائي';
+
+  @override
+  String get hoursLabel => 'ساعة';
+
+  @override
+  String get minutesLabel => 'دقيقة';
+
+  @override
+  String get fajr => 'الفجر';
+
+  @override
+  String get asr => 'العصر';
+
+  @override
+  String get fajrAndAsr => 'الفجر والعصر';
+
+  @override
+  String get locationRequiredForReminders =>
+      'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار';
+
+  @override
+  String nextReminderText(String adhkarName, String duration, String time) {
+    return '$adhkarName خلال $duration · $time';
+  }
+
+  @override
+  String durationMinutes(String count) {
+    return '$countد';
+  }
+
+  @override
+  String durationHours(String count) {
+    return '$countس';
+  }
+
+  @override
+  String durationHoursMinutes(String hours, String minutes) {
+    return '$hoursس $minutesد';
+  }
+
+  @override
   String get errorLoadingAdhkar => 'حدث خطأ في تحميل الأذكار';
 
   @override

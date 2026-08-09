@@ -560,6 +560,108 @@ abstract class AppLocalizations {
   /// **'اللغة'**
   String get languageLabel;
 
+  /// No description provided for @notificationsSection.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإشعارات'**
+  String get notificationsSection;
+
+  /// No description provided for @adhkarReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'تذكير الأذكار'**
+  String get adhkarReminders;
+
+  /// No description provided for @adhkarRemindersSubtitleManual.
+  ///
+  /// In ar, this message translates to:
+  /// **'حدد أوقات التذكير بنفسك'**
+  String get adhkarRemindersSubtitleManual;
+
+  /// No description provided for @adhkarRemindersSubtitleAuto.
+  ///
+  /// In ar, this message translates to:
+  /// **'متزامن مع الفجر والعصر حسب موقعك'**
+  String get adhkarRemindersSubtitleAuto;
+
+  /// No description provided for @timingLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'التوقيت'**
+  String get timingLabel;
+
+  /// No description provided for @manualLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'يدوي'**
+  String get manualLabel;
+
+  /// No description provided for @autoLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تلقائي'**
+  String get autoLabel;
+
+  /// No description provided for @hoursLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعة'**
+  String get hoursLabel;
+
+  /// No description provided for @minutesLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'دقيقة'**
+  String get minutesLabel;
+
+  /// No description provided for @fajr.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفجر'**
+  String get fajr;
+
+  /// No description provided for @asr.
+  ///
+  /// In ar, this message translates to:
+  /// **'العصر'**
+  String get asr;
+
+  /// No description provided for @fajrAndAsr.
+  ///
+  /// In ar, this message translates to:
+  /// **'الفجر والعصر'**
+  String get fajrAndAsr;
+
+  /// No description provided for @locationRequiredForReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار'**
+  String get locationRequiredForReminders;
+
+  /// No description provided for @nextReminderText.
+  ///
+  /// In ar, this message translates to:
+  /// **'{adhkarName} خلال {duration} · {time}'**
+  String nextReminderText(String adhkarName, String duration, String time);
+
+  /// No description provided for @durationMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count}د'**
+  String durationMinutes(String count);
+
+  /// No description provided for @durationHours.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count}س'**
+  String durationHours(String count);
+
+  /// No description provided for @durationHoursMinutes.
+  ///
+  /// In ar, this message translates to:
+  /// **'{hours}س {minutes}د'**
+  String durationHoursMinutes(String hours, String minutes);
+
   /// No description provided for @errorLoadingAdhkar.
   ///
   /// In ar, this message translates to:

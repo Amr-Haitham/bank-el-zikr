@@ -28,6 +28,8 @@
 	<true/>
 	<key>NSLocalNotificationUsageDescription</key>
 	<string>نستخدم الإشعارات في تذكيرك بذكر الله</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>نحتاج إلى موقعك لحساب مواقيت الفجر والعصر بدقة لتذكيرك بالأذكار</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>نحتاج إلى إذن الوصول لحفظ صور الأذكار في مكتبة الصور</string>
 	<key>UIApplicationSceneManifest</key>

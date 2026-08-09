@@ -261,6 +261,67 @@ class AppLocalizationsEn extends AppLocalizations {
   String get languageLabel => 'Language';
 
   @override
+  String get notificationsSection => 'Notifications';
+
+  @override
+  String get adhkarReminders => 'Adhkar reminders';
+
+  @override
+  String get adhkarRemindersSubtitleManual => 'Set your own reminder times';
+
+  @override
+  String get adhkarRemindersSubtitleAuto =>
+      'Synced to Fajr / Asr for your location';
+
+  @override
+  String get timingLabel => 'Timing';
+
+  @override
+  String get manualLabel => 'Manual';
+
+  @override
+  String get autoLabel => 'Auto';
+
+  @override
+  String get hoursLabel => 'Hours';
+
+  @override
+  String get minutesLabel => 'Minutes';
+
+  @override
+  String get fajr => 'Fajr';
+
+  @override
+  String get asr => 'Asr';
+
+  @override
+  String get fajrAndAsr => 'Fajr & Asr';
+
+  @override
+  String get locationRequiredForReminders =>
+      'Location access is required to turn on Adhkar reminders';
+
+  @override
+  String nextReminderText(String adhkarName, String duration, String time) {
+    return '$adhkarName in $duration · $time';
+  }
+
+  @override
+  String durationMinutes(String count) {
+    return '${count}m';
+  }
+
+  @override
+  String durationHours(String count) {
+    return '${count}h';
+  }
+
+  @override
+  String durationHoursMinutes(String hours, String minutes) {
+    return '${hours}h ${minutes}m';
+  }
+
+  @override
   String get errorLoadingAdhkar => 'Error loading adhkar';
 
   @override
