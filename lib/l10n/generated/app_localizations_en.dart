@@ -70,13 +70,48 @@ class AppLocalizationsEn extends AppLocalizations {
   String get viewStats => 'View statistics';
 
   @override
-  String get supportTheApp => 'Support the app';
+  String get supportTheApp => 'Support the Developer';
 
   @override
   String get supportSubtitle => 'Help keep Bank el Dhikr free for everyone';
 
   @override
-  String get donate => 'Donate';
+  String get donate => 'Support';
+
+  @override
+  String get supporterSheetTitle => 'Support Bank El Zikr';
+
+  @override
+  String get supporterSheetBody =>
+      'This is a monthly show of support for the developer — not a religious donation (sadaqah) and not tax-deductible. It simply helps keep this app free and maintained.';
+
+  @override
+  String get monthlySupporterTierName => 'Monthly Supporter';
+
+  @override
+  String get supporterActiveLabel => 'You\'re supporting this app';
+
+  @override
+  String get manageSubscription => 'Manage Subscription';
+
+  @override
+  String get subscribeAction => 'Subscribe';
+
+  @override
+  String subscribeActionWithPrice(Object price) {
+    return 'Subscribe — $price/month';
+  }
+
+  @override
+  String get restorePurchases => 'Restore Purchases';
+
+  @override
+  String get supporterStatusUnavailable =>
+      'Couldn\'t load supporter status — tap to try again';
+
+  @override
+  String get genericErrorMessage =>
+      'Something unexpected happened. Please try again.';
 
   @override
   String get anotherVerse => 'Another verse';
