@@ -5,6 +5,6 @@ import 'package:bank_el_ziker/features/donations/domain/entities/supporter_statu
 abstract class DonationRepository {
   Future<RequestResult<SupporterStatus>> getSupporterStatus();
   Future<RequestResult<SupporterPricing>> getSupporterPricing();
-  Future<RequestResult<SupporterStatus>> subscribe();
+  Future<RequestResult<SupporterStatus>> subscribe(String packageIdentifier);
   Future<RequestResult<SupporterStatus>> restorePurchases();
 }

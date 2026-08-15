@@ -16,8 +16,12 @@ class SupporterStatusCubit extends RequestCubit<SupporterStatus> {
     required this.restorePurchasesUseCase,
   }) : super(request: () => getSupporterStatus(const NoParams()));
 
-  Future<void> subscribe() {
-    return execute(request: () => subscribeUseCase(const NoParams()));
+  Future<void> subscribe(String packageIdentifier) {
+    return execute(
+      request: () => subscribeUseCase(
+        SubscribeParams(packageIdentifier: packageIdentifier),
+      ),
+    );
   }
 
   Future<void> restorePurchases() {

@@ -1,5 +1,7 @@
-class SupporterPricing {
-  final String? priceString;
+import 'package:bank_el_ziker/features/donations/domain/entities/supporter_package.dart';
 
-  const SupporterPricing({required this.priceString});
+class SupporterPricing {
+  final List<SupporterPackage> packages;
+
+  const SupporterPricing({required this.packages});
 }

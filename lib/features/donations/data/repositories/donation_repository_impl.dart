@@ -1,6 +1,7 @@
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
 import 'package:bank_el_ziker/core/utils/safe_await.dart';
 import 'package:bank_el_ziker/features/donations/data/datasources/revenuecat_donation_datasource.dart';
+import 'package:bank_el_ziker/features/donations/data/models/supporter_package_mapper.dart';
 import 'package:bank_el_ziker/features/donations/domain/entities/supporter_pricing.dart';
 import 'package:bank_el_ziker/features/donations/domain/entities/supporter_status.dart';
 import 'package:bank_el_ziker/features/donations/domain/repositories/donation_repository.dart';
@@ -21,16 +22,18 @@ class DonationRepositoryImpl implements DonationRepository {
   @override
   Future<RequestResult<SupporterPricing>> getSupporterPricing() {
     return safeAwait(() async {
-      final priceString = await dataSource.getSupporterPackagePriceString();
-      return SupporterPricing(priceString: priceString);
+      final packages = await dataSource.getSupporterPackages();
+      return SupporterPricing(
+        packages: packages.map(SupporterPackageMapper.toEntity).toList(),
+      );
     });
   }
 
   @override
-  Future<RequestResult<SupporterStatus>> subscribe() {
+  Future<RequestResult<SupporterStatus>> subscribe(String packageIdentifier) {
     return safeAwait(() async {
       try {
-        final isActive = await dataSource.subscribe();
+        final isActive = await dataSource.subscribe(packageIdentifier);
         return SupporterStatus(isActive: isActive);
       } on PurchaseCancelledException {
         return const SupporterStatus(isActive: false);

@@ -114,33 +114,63 @@ class SupporterSheet extends StatelessWidget {
                   BlocBuilder<SupporterPricingCubit,
                       RequestState<SupporterPricing>>(
                     builder: (context, pricingState) {
-                      final priceString = pricingState.whenOrNull(
-                        success: (pricing) => pricing.priceString,
-                      );
+                      final packages = pricingState.whenOrNull(
+                            success: (pricing) => pricing.packages,
+                          ) ??
+                          const [];
 
-                      final subscribeText = priceString != null
-                          ? localizations
-                              .subscribeActionWithPrice(priceString)
-                          : '${localizations.subscribeAction} — '
-                              '${localizations.monthlySupporterTierName}';
+                      if (packages.isEmpty) {
+                        return CustomAppButton(
+                          onPressed: () {},
+                          text: localizations.subscribeAction,
+                        );
+                      }
 
-                      return CustomAppButton(
-                        onPressed: isLoading
-                            ? () {}
-                            : () => context
-                                .read<SupporterStatusCubit>()
-                                .subscribe(),
-                        text: isLoading ? '' : subscribeText,
-                        trailing: isLoading
-                            ? const SizedBox(
-                                width: 20,
-                                height: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: Colors.white,
-                                ),
-                              )
-                            : null,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          for (final package in packages) ...[
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 6),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  if (package.description.isNotEmpty)
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 8),
+                                      child: Text(
+                                        package.description,
+                                        style: context.textTheme.bodySmall,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                  CustomAppButton(
+                                    onPressed: isLoading
+                                        ? () {}
+                                        : () => context
+                                            .read<SupporterStatusCubit>()
+                                            .subscribe(package.identifier),
+                                    text: isLoading
+                                        ? ''
+                                        : '${package.title} — '
+                                            '${package.priceString}',
+                                    trailing: isLoading
+                                        ? const SizedBox(
+                                            width: 20,
+                                            height: 20,
+                                            child: CircularProgressIndicator(
+                                              strokeWidth: 2,
+                                              color: Colors.white,
+                                            ),
+                                          )
+                                        : null,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ],
                       );
                     },
                   ),

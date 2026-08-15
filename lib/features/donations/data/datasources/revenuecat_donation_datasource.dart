@@ -12,8 +12,8 @@ class DonationsNotConfiguredException implements Exception {
 
 abstract class RevenueCatDonationDataSource {
   Future<bool> isSupporterActive();
-  Future<String?> getSupporterPackagePriceString();
-  Future<bool> subscribe();
+  Future<List<Package>> getSupporterPackages();
+  Future<bool> subscribe(String packageIdentifier);
   Future<bool> restorePurchases();
 }
 
@@ -24,15 +24,12 @@ class RevenueCatDonationDataSourceImpl implements RevenueCatDonationDataSource {
         .containsKey(ThirdPartyValues.supporterEntitlementId);
   }
 
-  Future<Package?> _getSupporterPackage() async {
+  Future<Offering?> _getSupporterOffering() async {
     final offerings = await Purchases.getOfferings();
-    final offering = offerings.getOffering(
+    return offerings.getOffering(
           ThirdPartyValues.monthlySupporterOfferingId,
         ) ??
         offerings.current;
-
-    if (offering == null || offering.availablePackages.isEmpty) return null;
-    return offering.availablePackages.first;
   }
 
   @override
@@ -44,20 +41,26 @@ class RevenueCatDonationDataSourceImpl implements RevenueCatDonationDataSource {
   }
 
   @override
-  Future<String?> getSupporterPackagePriceString() async {
-    if (!await Purchases.isConfigured) return null;
+  Future<List<Package>> getSupporterPackages() async {
+    if (!await Purchases.isConfigured) return [];
 
-    final package = await _getSupporterPackage();
-    return package?.storeProduct.priceString;
+    final offering = await _getSupporterOffering();
+    return offering?.availablePackages ?? [];
   }
 
   @override
-  Future<bool> subscribe() async {
+  Future<bool> subscribe(String packageIdentifier) async {
     if (!await Purchases.isConfigured) {
       throw const DonationsNotConfiguredException();
     }
 
-    final package = await _getSupporterPackage();
+    final offering = await _getSupporterOffering();
+    final package = offering?.availablePackages.firstWhere(
+      (package) => package.identifier == packageIdentifier,
+      orElse: () => throw Exception(
+        'No supporter subscription package is available.',
+      ),
+    );
     if (package == null) {
       throw Exception('No supporter subscription package is available.');
     }

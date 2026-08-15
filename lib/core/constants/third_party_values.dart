@@ -17,7 +17,7 @@ class ThirdPartyValues {
     'REVENUECAT_API_KEY_ANDROID',
     defaultValue: '',
   );
-  static const supporterEntitlementId = 'supporter';
+  static const supporterEntitlementId = 'support';
   static const monthlySupporterOfferingId = 'default';
 
   static String get manageSubscriptionLink => !kIsWeb && Platform.isIOS
