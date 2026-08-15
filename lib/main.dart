@@ -56,7 +56,8 @@ void main() async {
         BlocProvider.value(value: getService<DayRecordCubit>()),
       ],
       child: MyApp(
-        appRouter: AppRouter(showOnboarding: true), // TODO revert: !hasSeenOnboarding
+        appRouter:
+            AppRouter(showOnboarding: true), // TODO revert: !hasSeenOnboarding
       ),
     ),
   );
