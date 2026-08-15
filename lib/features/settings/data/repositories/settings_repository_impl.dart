@@ -23,6 +23,13 @@ class SettingsRepositoryImpl implements SettingsRepository {
       final dhikrFont = await localDataSource.getDhikrFont();
       final textSize = await localDataSource.getTextSize();
       final useArabicNumerals = await localDataSource.getUseArabicNumerals();
+      final adhkarRemindersEnabled =
+          await localDataSource.getAdhkarRemindersEnabled();
+      final reminderMode = await localDataSource.getReminderMode();
+      final morningReminderEnabled =
+          await localDataSource.getMorningReminderEnabled();
+      final eveningReminderEnabled =
+          await localDataSource.getEveningReminderEnabled();
 
       return Right(Settings(
         isLightTheme: isLightTheme,
@@ -34,6 +41,10 @@ class SettingsRepositoryImpl implements SettingsRepository {
         dhikrFont: dhikrFont,
         textSize: textSize,
         useArabicNumerals: useArabicNumerals,
+        adhkarRemindersEnabled: adhkarRemindersEnabled,
+        reminderMode: reminderMode,
+        morningReminderEnabled: morningReminderEnabled,
+        eveningReminderEnabled: eveningReminderEnabled,
       ));
     } catch (e) {
       return Left(Failure(message: e.toString()));
@@ -124,6 +135,46 @@ class SettingsRepositoryImpl implements SettingsRepository {
   Future<RequestResult<void>> setUseArabicNumerals(bool value) async {
     try {
       await localDataSource.setUseArabicNumerals(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setAdhkarRemindersEnabled(bool value) async {
+    try {
+      await localDataSource.setAdhkarRemindersEnabled(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setReminderMode(String value) async {
+    try {
+      await localDataSource.setReminderMode(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setMorningReminderEnabled(bool value) async {
+    try {
+      await localDataSource.setMorningReminderEnabled(value);
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<RequestResult<void>> setEveningReminderEnabled(bool value) async {
+    try {
+      await localDataSource.setEveningReminderEnabled(value);
       return const Right(null);
     } catch (e) {
       return Left(Failure(message: e.toString()));

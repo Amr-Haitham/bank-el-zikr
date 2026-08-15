@@ -114,6 +114,43 @@
   "numerals": "الأرقام",
   "languageLabel": "اللغة",
 
+  "notificationsSection": "الإشعارات",
+  "adhkarReminders": "تذكير الأذكار",
+  "adhkarRemindersSubtitleManual": "حدد أوقات التذكير بنفسك",
+  "adhkarRemindersSubtitleAuto": "متزامن مع الفجر والعصر حسب موقعك",
+  "timingLabel": "التوقيت",
+  "manualLabel": "يدوي",
+  "autoLabel": "تلقائي",
+  "hoursLabel": "ساعة",
+  "minutesLabel": "دقيقة",
+  "fajr": "الفجر",
+  "asr": "العصر",
+  "fajrAndAsr": "الفجر والعصر",
+  "locationRequiredForReminders": "يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار",
+  "nextReminderText": "{adhkarName} خلال {duration} · {time}",
+  "@nextReminderText": {
+    "placeholders": {
+      "adhkarName": { "type": "String" },
+      "duration": { "type": "String" },
+      "time": { "type": "String" }
+    }
+  },
+  "durationMinutes": "{count}د",
+  "@durationMinutes": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "durationHours": "{count}س",
+  "@durationHours": {
+    "placeholders": { "count": { "type": "String" } }
+  },
+  "durationHoursMinutes": "{hours}س {minutes}د",
+  "@durationHoursMinutes": {
+    "placeholders": {
+      "hours": { "type": "String" },
+      "minutes": { "type": "String" }
+    }
+  },
+
   "errorLoadingAdhkar": "حدث خطأ في تحميل الأذكار",
   "noAdhkarFound": "لا توجد أذكار",
   "listViewLabel": "قائمة",

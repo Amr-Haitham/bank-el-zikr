@@ -11,6 +11,10 @@ abstract class SettingsLocalDataSource {
   Future<String> getDhikrFont();
   Future<String> getTextSize();
   Future<bool> getUseArabicNumerals();
+  Future<bool> getAdhkarRemindersEnabled();
+  Future<String> getReminderMode();
+  Future<bool> getMorningReminderEnabled();
+  Future<bool> getEveningReminderEnabled();
   Future<void> setLightTheme(bool value);
   Future<void> setIsVibrating(bool value);
   Future<void> setMorningZikrAlarm(TimeOfDay time);
@@ -20,6 +24,10 @@ abstract class SettingsLocalDataSource {
   Future<void> setDhikrFont(String value);
   Future<void> setTextSize(String value);
   Future<void> setUseArabicNumerals(bool value);
+  Future<void> setAdhkarRemindersEnabled(bool value);
+  Future<void> setReminderMode(String value);
+  Future<void> setMorningReminderEnabled(bool value);
+  Future<void> setEveningReminderEnabled(bool value);
 }
 
 class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
@@ -34,6 +42,10 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   static const String _dhikrFontKey = 'dhikrFont';
   static const String _textSizeKey = 'textSize';
   static const String _useArabicNumeralsKey = 'useArabicNumerals';
+  static const String _adhkarRemindersEnabledKey = 'adhkarRemindersEnabled';
+  static const String _reminderModeKey = 'reminderMode';
+  static const String _morningReminderEnabledKey = 'morningReminderEnabled';
+  static const String _eveningReminderEnabledKey = 'eveningReminderEnabled';
 
   SettingsLocalDataSourceImpl({required this.sharedPreferences});
 
@@ -129,6 +141,46 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
   @override
   Future<void> setUseArabicNumerals(bool value) async {
     await sharedPreferences.setBool(_useArabicNumeralsKey, value);
+  }
+
+  @override
+  Future<bool> getAdhkarRemindersEnabled() async {
+    return sharedPreferences.getBool(_adhkarRemindersEnabledKey) ?? false;
+  }
+
+  @override
+  Future<void> setAdhkarRemindersEnabled(bool value) async {
+    await sharedPreferences.setBool(_adhkarRemindersEnabledKey, value);
+  }
+
+  @override
+  Future<String> getReminderMode() async {
+    return sharedPreferences.getString(_reminderModeKey) ?? 'auto';
+  }
+
+  @override
+  Future<void> setReminderMode(String value) async {
+    await sharedPreferences.setString(_reminderModeKey, value);
+  }
+
+  @override
+  Future<bool> getMorningReminderEnabled() async {
+    return sharedPreferences.getBool(_morningReminderEnabledKey) ?? true;
+  }
+
+  @override
+  Future<void> setMorningReminderEnabled(bool value) async {
+    await sharedPreferences.setBool(_morningReminderEnabledKey, value);
+  }
+
+  @override
+  Future<bool> getEveningReminderEnabled() async {
+    return sharedPreferences.getBool(_eveningReminderEnabledKey) ?? true;
+  }
+
+  @override
+  Future<void> setEveningReminderEnabled(bool value) async {
+    await sharedPreferences.setBool(_eveningReminderEnabledKey, value);
   }
 
   // Helper methods for TimeOfDay conversion

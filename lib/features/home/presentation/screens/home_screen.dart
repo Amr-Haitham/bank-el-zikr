@@ -1,6 +1,7 @@
 import 'package:bank_el_ziker/features/home/presentation/widgets/adhkar_status_row_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/hasanat_balance_card_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/home_header_widget.dart';
+import 'package:bank_el_ziker/features/home/presentation/widgets/next_reminder_banner.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/share_reward_row.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/streak_card_widget.dart';
 import 'package:bank_el_ziker/features/home/presentation/widgets/support_app_card_widget.dart';
@@ -26,7 +27,9 @@ class HomeScreen extends StatelessWidget {
                 children: const [
                   SizedBox(height: ConstantValues.appTopPadding),
                   HomeHeaderWidget(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 16),
+                  NextReminderBanner(),
+                  SizedBox(height: 16),
                   HasanatBalanceCardWidget(),
                   SizedBox(height: 16),
                   AdhkarStatusRowWidget(),

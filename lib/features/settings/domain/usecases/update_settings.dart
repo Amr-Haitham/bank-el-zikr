@@ -61,6 +61,29 @@ class UpdateSettings implements UseCase<void, UpdateSettingsParams> {
       if (result.isLeft()) return result;
     }
 
+    if (params.adhkarRemindersEnabled != null) {
+      final result = await repository
+          .setAdhkarRemindersEnabled(params.adhkarRemindersEnabled!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.reminderMode != null) {
+      final result = await repository.setReminderMode(params.reminderMode!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.morningReminderEnabled != null) {
+      final result = await repository
+          .setMorningReminderEnabled(params.morningReminderEnabled!);
+      if (result.isLeft()) return result;
+    }
+
+    if (params.eveningReminderEnabled != null) {
+      final result = await repository
+          .setEveningReminderEnabled(params.eveningReminderEnabled!);
+      if (result.isLeft()) return result;
+    }
+
     return const Right(null);
   }
 }
@@ -75,6 +98,10 @@ class UpdateSettingsParams extends Equatable {
   final String? dhikrFont;
   final String? textSize;
   final bool? useArabicNumerals;
+  final bool? adhkarRemindersEnabled;
+  final String? reminderMode;
+  final bool? morningReminderEnabled;
+  final bool? eveningReminderEnabled;
 
   const UpdateSettingsParams({
     this.isLightTheme,
@@ -86,6 +113,10 @@ class UpdateSettingsParams extends Equatable {
     this.dhikrFont,
     this.textSize,
     this.useArabicNumerals,
+    this.adhkarRemindersEnabled,
+    this.reminderMode,
+    this.morningReminderEnabled,
+    this.eveningReminderEnabled,
   });
 
   @override
@@ -99,5 +130,9 @@ class UpdateSettingsParams extends Equatable {
         dhikrFont,
         textSize,
         useArabicNumerals,
+        adhkarRemindersEnabled,
+        reminderMode,
+        morningReminderEnabled,
+        eveningReminderEnabled,
       ];
 }
