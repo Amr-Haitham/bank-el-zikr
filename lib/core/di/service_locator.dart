@@ -104,6 +104,13 @@ import '../../features/donations/domain/usecases/subscribe.dart';
 import '../../features/donations/presentation/cubit/supporter_pricing_cubit.dart';
 import '../../features/donations/presentation/cubit/supporter_status_cubit.dart';
 
+// engagement imports
+import '../../features/engagement/data/datasources/rate_prompt_local_datasource.dart';
+import '../../features/engagement/data/models/rate_prompt_state_model.dart';
+import '../../features/engagement/data/repositories/rate_prompt_repository_impl.dart';
+import '../../features/engagement/domain/repositories/rate_prompt_repository.dart';
+import '../../features/engagement/domain/usecases/check_and_request_review.dart';
+
 final _getIt = GetIt.instance;
 
 /// Get a registered service from the service locator
@@ -165,6 +172,10 @@ Future<void> setupServiceLocator() async {
   _setUpDonationsRepositories();
   _setUpDonationsUseCases();
   _setUpDonationsBlocs();
+
+  _setUpEngagementDataSources();
+  _setUpEngagementRepositories();
+  _setUpEngagementUseCases();
 }
 
 /// Setup external dependencies like Hive boxes
@@ -220,6 +231,14 @@ Future<void> _setUpExternalDependencies() async {
   // notifications plugin
   _getIt.registerLazySingleton<FlutterLocalNotificationsPlugin>(
     () => FlutterLocalNotificationsPlugin(),
+  );
+
+  // engagement
+  final ratePromptStateBox =
+      Hive.box<RatePromptState>(ratePromptStateHiveBox);
+  _getIt.registerLazySingleton<Box<RatePromptState>>(
+    () => ratePromptStateBox,
+    instanceName: 'ratePromptStateBox',
   );
 }
 
@@ -401,6 +420,7 @@ void _setUpDayRecordBlocs() {
       getAllDayRecords: getService<GetAllDayRecords>(),
       logZikrIncrementUseCase: getService<LogZikrIncrement>(),
       markCategoryCompletedUseCase: getService<MarkCategoryCompleted>(),
+      checkAndRequestReviewUseCase: getService<CheckAndRequestReview>(),
     ),
   );
   _getIt.registerFactory<GetWeekAzkarRecordsCubit>(
@@ -657,5 +677,31 @@ void _setUpDonationsBlocs() {
     () => SupporterPricingCubit(
       getSupporterPricing: getService<GetSupporterPricing>(),
     ),
+  );
+}
+
+// ============================================================================
+// engagement
+// ============================================================================
+
+void _setUpEngagementDataSources() {
+  _getIt.registerLazySingleton<RatePromptLocalDataSource>(
+    () => RatePromptLocalDataSourceImpl(
+      box: getService<Box<RatePromptState>>(instanceName: 'ratePromptStateBox'),
+    ),
+  );
+}
+
+void _setUpEngagementRepositories() {
+  _getIt.registerLazySingleton<RatePromptRepository>(
+    () => RatePromptRepositoryImpl(
+      localDataSource: getService<RatePromptLocalDataSource>(),
+    ),
+  );
+}
+
+void _setUpEngagementUseCases() {
+  _getIt.registerLazySingleton<CheckAndRequestReview>(
+    () => CheckAndRequestReview(getService<RatePromptRepository>()),
   );
 }

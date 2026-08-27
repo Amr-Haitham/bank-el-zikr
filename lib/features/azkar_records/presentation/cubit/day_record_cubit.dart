@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/features/azkar_records/domain/entities/day_record.
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/get_all_day_records.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/log_zikr_increment.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/usecases/mark_category_completed.dart';
+import 'package:bank_el_ziker/features/engagement/domain/usecases/check_and_request_review.dart';
 
 /// A single, app-wide shared cubit holding the full (unpruned) history of
 /// daily spiritual activity, used to compute real streaks / longest streaks
@@ -12,11 +13,13 @@ class DayRecordCubit extends RequestCubit<List<DayRecordEntity>> {
   final GetAllDayRecords getAllDayRecords;
   final LogZikrIncrement logZikrIncrementUseCase;
   final MarkCategoryCompleted markCategoryCompletedUseCase;
+  final CheckAndRequestReview checkAndRequestReviewUseCase;
 
   DayRecordCubit({
     required this.getAllDayRecords,
     required this.logZikrIncrementUseCase,
     required this.markCategoryCompletedUseCase,
+    required this.checkAndRequestReviewUseCase,
   }) : super(
           callOnCreate: true,
           request: () => getAllDayRecords(const NoParams()),
@@ -30,5 +33,10 @@ class DayRecordCubit extends RequestCubit<List<DayRecordEntity>> {
   Future<void> markCategoryCompleted(String category) async {
     await markCategoryCompletedUseCase(category);
     await reExecutePastRequest();
+
+    final dayRecords = state.whenOrNull(success: (records) => records);
+    if (dayRecords != null) {
+      await checkAndRequestReviewUseCase(dayRecords);
+    }
   }
 }

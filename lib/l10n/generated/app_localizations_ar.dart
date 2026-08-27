@@ -331,7 +331,7 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get locationRequiredForReminders =>
-      'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار';
+      'إذن الموقع غير مفعّل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار';
 
   @override
   String nextReminderText(String adhkarName, String duration, String time) {
@@ -450,4 +450,40 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'الرجاء إدخال نص الذكر';
+
+  @override
+  String get onboardingPurposeTitle => 'اجمع حسناتك يومًا بعد يوم';
+
+  @override
+  String get onboardingPurposeSubtitle =>
+      'سجّل أذكارك، حافظ على سلسلة الالتزام، وتابع رصيدك في مكان واحد';
+
+  @override
+  String get onboardingAdhkarBalanceLabel => 'رصيد أذكارك';
+
+  @override
+  String get onboardingAdhkarBalanceHint => 'كل ذكر تسجّله يضاف إلى رصيدك';
+
+  @override
+  String get onboardingStreakPreview => 'سلسلة الالتزام: ٧ أيام';
+
+  @override
+  String get onboardingNotificationTitle => 'لا تفوّت أذكار الصباح والمساء';
+
+  @override
+  String get onboardingNotificationSubtitle =>
+      'فعّل التنبيهات لتصلك تذكيرات لطيفة في مواعيد الصباح والمساء';
+
+  @override
+  String get onboardingEnableNotifications => 'تفعيل التنبيهات';
+
+  @override
+  String get onboardingSkipForNow => 'تخطي الآن';
+
+  @override
+  String get onboardingNext => 'التالي';
+
+  @override
+  String get onboardingNotificationEnableFailed =>
+      'التذكيرات تحتاج إلى إذن الموقع لتعمل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك في أي وقت';
 }

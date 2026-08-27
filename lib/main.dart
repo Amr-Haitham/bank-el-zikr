@@ -77,8 +77,7 @@ void main() async {
         BlocProvider.value(value: getService<SupporterStatusCubit>()),
       ],
       child: MyApp(
-        appRouter:
-            AppRouter(showOnboarding: true), // TODO revert: !hasSeenOnboarding
+        appRouter: AppRouter(showOnboarding: !hasSeenOnboarding),
       ),
     ),
   );

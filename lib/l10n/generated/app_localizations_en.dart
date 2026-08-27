@@ -334,7 +334,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get locationRequiredForReminders =>
-      'Location access is required to turn on Adhkar reminders';
+      'Location access is off. Enable it for Bank El Zikr in your phone\'s Settings app to turn on Adhkar reminders';
 
   @override
   String nextReminderText(String adhkarName, String duration, String time) {
@@ -453,4 +453,42 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get emptyZikrError => 'Please enter the zikr text';
+
+  @override
+  String get onboardingPurposeTitle => 'Grow your hasanat, day after day';
+
+  @override
+  String get onboardingPurposeSubtitle =>
+      'Track your Adhkar, build your streak, and watch your hasanat grow';
+
+  @override
+  String get onboardingAdhkarBalanceLabel => 'Your Adhkar balance';
+
+  @override
+  String get onboardingAdhkarBalanceHint =>
+      'Every zikr you log adds to your balance';
+
+  @override
+  String get onboardingStreakPreview => 'Streak: 7 days';
+
+  @override
+  String get onboardingNotificationTitle =>
+      'Never miss your morning & evening Adhkar';
+
+  @override
+  String get onboardingNotificationSubtitle =>
+      'Turn on notifications for gentle reminders at Sabah & Masaa\' time';
+
+  @override
+  String get onboardingEnableNotifications => 'Enable notifications';
+
+  @override
+  String get onboardingSkipForNow => 'Skip for now';
+
+  @override
+  String get onboardingNext => 'Next';
+
+  @override
+  String get onboardingNotificationEnableFailed =>
+      'Reminders need location access to work. Enable it for Bank El Zikr in your phone\'s Settings app anytime';
 }

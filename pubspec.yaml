@@ -70,6 +70,7 @@ dependencies:
   json_annotation: ^4.9.0
   auto_route: ^9.2.2
   purchases_flutter: ^8.4.0
+  in_app_review: ^2.0.9
 
 dev_dependencies:
   flutter_test:
