@@ -21,7 +21,24 @@ class SettingsCubit extends RequestCubit<Settings> {
   }) : super(
           callOnCreate: true,
           request: () => getSettings(const NoParams()),
-        );
+        ) {
+    _verifyRemindersOnLaunch();
+  }
+
+  /// On launch, if reminders were left on from a previous session, re-runs
+  /// scheduling once so a permission revoked outside the app (e.g. via OS
+  /// Settings while the app was closed) is caught immediately rather than
+  /// only the next time the user touches a reminder-related setting.
+  Future<void> _verifyRemindersOnLaunch() async {
+    await stream.firstWhere(
+      (state) => state is RequestStateSuccess<Settings> ||
+          state is RequestStateFailure<Settings>,
+    );
+    final settings = state.whenOrNull(success: (s) => s);
+    if (settings != null && settings.adhkarRemindersEnabled) {
+      await _rescheduleReminders();
+    }
+  }
 
   Future<void> setTheme(bool isLightTheme) async {
     final result = await updateSettings(
@@ -43,16 +60,27 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
   }
 
+  /// Runs [scheduleAdhkarReminders] and, if it fails, corrects
+  /// `adhkarRemindersEnabled` back to false so the Settings toggle never
+  /// claims reminders are on when scheduling actually failed (e.g. location
+  /// permission was revoked after reminders had already been turned on).
+  Future<void> _rescheduleReminders() async {
+    final result = await scheduleAdhkarReminders(const NoParams());
+    if (result.isLeft()) {
+      await updateSettings(
+        const UpdateSettingsParams(adhkarRemindersEnabled: false),
+      );
+    }
+    reExecutePastRequest();
+  }
+
   Future<void> setMorningAlarm(TimeOfDay time) async {
     final result = await updateSettings(
       UpdateSettingsParams(morningZikrAlarm: time),
     );
     result.fold(
       (failure) => null,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
-      },
+      (_) => _rescheduleReminders(),
     );
   }
 
@@ -62,10 +90,7 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
     result.fold(
       (failure) => null,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
-      },
+      (_) => _rescheduleReminders(),
     );
   }
 
@@ -86,9 +111,8 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
     return result.fold(
       (failure) => false,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
+      (_) async {
+        await _rescheduleReminders();
         return true;
       },
     );
@@ -100,10 +124,7 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
     result.fold(
       (failure) => null,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
-      },
+      (_) => _rescheduleReminders(),
     );
   }
 
@@ -113,10 +134,7 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
     result.fold(
       (failure) => null,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
-      },
+      (_) => _rescheduleReminders(),
     );
   }
 
@@ -126,10 +144,7 @@ class SettingsCubit extends RequestCubit<Settings> {
     );
     result.fold(
       (failure) => null,
-      (_) {
-        reExecutePastRequest();
-        scheduleAdhkarReminders(const NoParams());
-      },
+      (_) => _rescheduleReminders(),
     );
   }
 
@@ -144,6 +159,22 @@ class SettingsCubit extends RequestCubit<Settings> {
       (failure) => null,
       (_) => reExecutePastRequest(),
     );
+  }
+
+  /// Orchestrates the final step of onboarding: optionally attempts to turn
+  /// on Adhkar reminders, then always marks onboarding complete. Returns
+  /// false if [enableNotifications] was requested but failed (e.g. location
+  /// permission denied) — true otherwise (including when notifications
+  /// weren't requested at all).
+  Future<bool> completeOnboardingWithNotifications(
+    String selectedLanguage, {
+    required bool enableNotifications,
+  }) async {
+    final notificationsSucceeded = enableNotifications
+        ? await setAdhkarRemindersEnabled(true)
+        : true;
+    await completeOnboarding(selectedLanguage);
+    return notificationsSucceeded;
   }
 
   Future<void> setLanguage(String language) async {

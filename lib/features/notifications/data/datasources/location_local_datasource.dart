@@ -22,6 +22,11 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
       permission = await Geolocator.requestPermission();
     }
 
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      throw Exception('Location permission denied.');
+    }
+
     final permissionGranted = permission == LocationPermission.always ||
         permission == LocationPermission.whileInUse;
 
@@ -34,7 +39,7 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.medium,
         ),
-      );
+      ).timeout(const Duration(seconds: 8));
       await sharedPreferences.setDouble(_latitudeKey, position.latitude);
       await sharedPreferences.setDouble(_longitudeKey, position.longitude);
       return (latitude: position.latitude, longitude: position.longitude);

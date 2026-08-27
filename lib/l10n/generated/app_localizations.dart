@@ -695,7 +695,7 @@ abstract class AppLocalizations {
   /// No description provided for @locationRequiredForReminders.
   ///
   /// In ar, this message translates to:
-  /// **'يلزم الوصول إلى الموقع لتفعيل تذكير الأذكار'**
+  /// **'إذن الموقع غير مفعّل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار'**
   String get locationRequiredForReminders;
 
   /// No description provided for @nextReminderText.
@@ -913,6 +913,72 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الرجاء إدخال نص الذكر'**
   String get emptyZikrError;
+
+  /// No description provided for @onboardingPurposeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اجمع حسناتك يومًا بعد يوم'**
+  String get onboardingPurposeTitle;
+
+  /// No description provided for @onboardingPurposeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل أذكارك، حافظ على سلسلة الالتزام، وتابع رصيدك في مكان واحد'**
+  String get onboardingPurposeSubtitle;
+
+  /// No description provided for @onboardingAdhkarBalanceLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رصيد أذكارك'**
+  String get onboardingAdhkarBalanceLabel;
+
+  /// No description provided for @onboardingAdhkarBalanceHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'كل ذكر تسجّله يضاف إلى رصيدك'**
+  String get onboardingAdhkarBalanceHint;
+
+  /// No description provided for @onboardingStreakPreview.
+  ///
+  /// In ar, this message translates to:
+  /// **'سلسلة الالتزام: ٧ أيام'**
+  String get onboardingStreakPreview;
+
+  /// No description provided for @onboardingNotificationTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لا تفوّت أذكار الصباح والمساء'**
+  String get onboardingNotificationTitle;
+
+  /// No description provided for @onboardingNotificationSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'فعّل التنبيهات لتصلك تذكيرات لطيفة في مواعيد الصباح والمساء'**
+  String get onboardingNotificationSubtitle;
+
+  /// No description provided for @onboardingEnableNotifications.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفعيل التنبيهات'**
+  String get onboardingEnableNotifications;
+
+  /// No description provided for @onboardingSkipForNow.
+  ///
+  /// In ar, this message translates to:
+  /// **'تخطي الآن'**
+  String get onboardingSkipForNow;
+
+  /// No description provided for @onboardingNext.
+  ///
+  /// In ar, this message translates to:
+  /// **'التالي'**
+  String get onboardingNext;
+
+  /// No description provided for @onboardingNotificationEnableFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'التذكيرات تحتاج إلى إذن الموقع لتعمل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك في أي وقت'**
+  String get onboardingNotificationEnableFailed;
 }
 
 class _AppLocalizationsDelegate

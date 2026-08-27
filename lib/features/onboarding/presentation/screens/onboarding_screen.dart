@@ -1,9 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
+import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/app_purpose_step.dart';
+import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/language_step.dart';
+import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/notification_opt_in_step.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
+import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+const _stepCount = 3;
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -13,189 +19,216 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  String? _selectedLanguage = 'ar';
+  final _pageController = PageController();
+  int _currentPage = 0;
+  String _selectedLanguage = 'ar';
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _goToPage(int page) {
+    _pageController.animateToPage(
+      page,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
 
   void _selectLanguage(String language) {
     setState(() => _selectedLanguage = language);
-    context.read<SettingsCubit>().completeOnboarding(language);
-    AutoRouter.of(context).replaceAll([const DashboardRoute()]);
+    _goToPage(1);
   }
+
+  void _goBack() {
+    _goToPage(_currentPage - 1);
+  }
+
+  Future<void> _completeOnboarding({bool enableNotifications = false}) async {
+    final notificationsSucceeded = await context
+        .read<SettingsCubit>()
+        .completeOnboardingWithNotifications(
+          _selectedLanguage,
+          enableNotifications: enableNotifications,
+        );
+    if (!mounted) return;
+
+    if (!notificationsSucceeded) {
+      final messenger = ScaffoldMessenger.of(context);
+      final snackBar = context.buildSnackBar(
+        AppLocalizations.of(context).onboardingNotificationEnableFailed,
+        type: SnackBarType.error,
+      );
+      AutoRouter.of(context).replaceAll([const DashboardRoute()]);
+      messenger.showSnackBar(snackBar);
+    } else {
+      AutoRouter.of(context).replaceAll([const DashboardRoute()]);
+    }
+  }
+
+  Future<void> _enableNotifications() =>
+      _completeOnboarding(enableNotifications: true);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: ConstantValues.appHorizontalPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              const Spacer(flex: 2),
-              Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    width: 88,
-                    height: 88,
-                    fit: BoxFit.cover,
-                  ),
+    final isArabic = _selectedLanguage == 'ar';
+    return Localizations.override(
+      context: context,
+      locale: Locale(_selectedLanguage),
+      child: Builder(
+        builder: (context) {
+          return Directionality(
+            textDirection: isArabic ? TextDirection.rtl : TextDirection.ltr,
+            child: Scaffold(
+              backgroundColor: context.theme.scaffoldBackgroundColor,
+              body: SafeArea(
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 48,
+                      child: AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 200),
+                        child: _currentPage > 0
+                            ? Align(
+                                alignment: AlignmentDirectional.centerStart,
+                                child: IconButton(
+                                  onPressed: _goBack,
+                                  icon: const Icon(Icons.arrow_back_rounded),
+                                ),
+                              )
+                            : const SizedBox.shrink(),
+                      ),
+                    ),
+                    Expanded(
+                      child: AnimatedBuilder(
+                        animation: _pageController,
+                        builder: (context, child) {
+                          return PageView(
+                            controller: _pageController,
+                            onPageChanged: (page) =>
+                                setState(() => _currentPage = page),
+                            children: [
+                              _ParallaxPage(
+                                controller: _pageController,
+                                index: 0,
+                                child: LanguageStep(
+                                  selectedLanguage: _selectedLanguage,
+                                  onSelectLanguage: _selectLanguage,
+                                ),
+                              ),
+                              _ParallaxPage(
+                                controller: _pageController,
+                                index: 1,
+                                child: const AppPurposeStep(),
+                              ),
+                              _ParallaxPage(
+                                controller: _pageController,
+                                index: 2,
+                                child: NotificationOptInStep(
+                                  onEnable: _enableNotifications,
+                                  onSkip: _completeOnboarding,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
+                    _StepFooter(
+                      currentPage: _currentPage,
+                      onSkip: _currentPage == 1 ? () => _goToPage(2) : null,
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 24),
-              Text(
-                "اختر لغتك",
-                textAlign: TextAlign.center,
-                textDirection: TextDirection.rtl,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineSmall!
-                    .copyWith(fontSize: 24, fontWeight: FontWeight.w800),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                "Choose your language",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
-                      .withValues(alpha: 0.6),
-                ),
-              ),
-              const SizedBox(height: 32),
-              _LanguageOption(
-                isSelected: _selectedLanguage == 'ar',
-                onTap: () => _selectLanguage('ar'),
-                smallLabel: "Arabic",
-                mainLabel: "العربية",
-                mainLabelDirection: TextDirection.rtl,
-              ),
-              const SizedBox(height: 14),
-              _LanguageOption(
-                isSelected: _selectedLanguage == 'en',
-                onTap: () => _selectLanguage('en'),
-                smallLabel: "الإنجليزية",
-                mainLabel: "English",
-                mainLabelDirection: TextDirection.ltr,
-                subtitle: "Adds translation & transliteration",
-                boldOnLeft: true,
-              ),
-              const Spacer(flex: 3),
-              Text(
-                "Change it anytime in Settings",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
-                      .withValues(alpha: 0.5),
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                "يمكنك تغييرها لاحقًا من الإعدادات",
-                textAlign: TextAlign.center,
-                textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
-                      .withValues(alpha: 0.5),
-                ),
-              ),
-              const SizedBox(height: ConstantValues.appBottomPadding),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
 }
 
-class _LanguageOption extends StatelessWidget {
-  const _LanguageOption({
-    required this.isSelected,
-    required this.onTap,
-    required this.smallLabel,
-    required this.mainLabel,
-    required this.mainLabelDirection,
-    this.subtitle,
-    this.boldOnLeft = false,
+class _ParallaxPage extends StatelessWidget {
+  const _ParallaxPage({
+    required this.controller,
+    required this.index,
+    required this.child,
   });
 
-  final bool isSelected;
-  final VoidCallback onTap;
-  final String smallLabel;
-  final String mainLabel;
-  final TextDirection mainLabelDirection;
-  final String? subtitle;
-  final bool boldOnLeft;
+  final PageController controller;
+  final int index;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    final fadedStyle = TextStyle(
-      fontSize: 13,
-      color: Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.5),
+    var page = index.toDouble();
+    if (controller.position.haveDimensions) {
+      page = controller.page ?? index.toDouble();
+    }
+    final delta = (page - index).clamp(-1.0, 1.0);
+    final opacity = (1 - delta.abs()).clamp(0.0, 1.0);
+    return Opacity(
+      opacity: opacity,
+      child: Transform.translate(
+        offset: Offset(delta * 40, 0),
+        child: child,
+      ),
     );
-    final boldColumn = Column(
-      textDirection: TextDirection.ltr,
-      crossAxisAlignment: boldOnLeft ? CrossAxisAlignment.start : CrossAxisAlignment.end,
-      children: [
-        Text(
-          mainLabel,
-          textDirection: mainLabelDirection,
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontSize: 17, fontWeight: FontWeight.w700),
-        ),
-        if (subtitle != null) ...[
-          const SizedBox(height: 2),
-          Text(
-            subtitle!,
-            style: TextStyle(
-              fontSize: 11,
-              fontWeight: FontWeight.w600,
-              color: Theme.of(context).primaryColor,
-            ),
-          ),
-        ],
-      ],
-    );
-    final fadedText = Text(smallLabel, style: fadedStyle);
+  }
+}
 
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
-        decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
-          borderRadius: BorderRadius.circular(16),
-          border: Border.all(
-            color: isSelected
-                ? Theme.of(context).primaryColor
-                : Colors.transparent,
-            width: 1.5,
+class _StepFooter extends StatelessWidget {
+  const _StepFooter({
+    required this.currentPage,
+    this.onSkip,
+  });
+
+  final int currentPage;
+  final VoidCallback? onSkip;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24, top: 8),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(_stepCount, (index) {
+              final isActive = index == currentPage;
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                margin: const EdgeInsets.symmetric(horizontal: 4),
+                width: isActive ? 20 : 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  color: isActive
+                      ? context.colors.primary
+                      : context.colors.primary.withValues(alpha: 0.25),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              );
+            }),
           ),
-        ),
-        child: Row(
-          textDirection: TextDirection.ltr,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: boldOnLeft
-              ? [boldColumn, fadedText]
-              : [fadedText, boldColumn],
-        ),
+          if (onSkip != null) ...[
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: onSkip,
+              child: Text(
+                AppLocalizations.of(context).onboardingNext,
+                style: TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                  color: context.textTheme.bodySmall!.color!
+                      .withValues(alpha: 0.6),
+                ),
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }

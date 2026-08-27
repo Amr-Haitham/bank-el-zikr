@@ -1,8 +1,10 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
+import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/notifications/domain/entities/prayer_times.dart';
 import 'package:bank_el_ziker/features/notifications/presentation/cubit/prayer_times_cubit.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
@@ -14,8 +16,11 @@ import 'package:bank_el_ziker/features/settings/presentation/widgets/settings_se
 import 'package:bank_el_ziker/features/settings/presentation/widgets/settings_toggle_row.dart';
 import 'package:bank_el_ziker/features/settings/presentation/widgets/time_picker_bottom_sheet.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -264,6 +269,26 @@ class SettingsScreen extends StatelessWidget {
                     ],
                   ] else
                     const Center(child: CircularProgressIndicator()),
+                  if (kDebugMode) ...[
+                    const SizedBox(height: 24),
+                    Text(
+                      'Debug',
+                      style: context.textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 12),
+                    SettingsToggleRow(
+                      label: 'Replay onboarding',
+                      value: false,
+                      onChanged: (_) async {
+                        await getService<SharedPreferences>()
+                            .setBool('hasSeenOnboarding', false);
+                        if (context.mounted) {
+                          AutoRouter.of(context)
+                              .replaceAll([const OnboardingRoute()]);
+                        }
+                      },
+                    ),
+                  ],
                   const SizedBox(height: ConstantValues.appBottomPadding),
                 ],
               );

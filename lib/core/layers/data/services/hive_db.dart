@@ -9,6 +9,7 @@ import 'package:bank_el_ziker/core/data/models/zikr_mapper.dart';
 import 'package:bank_el_ziker/core/constants/initial_data.dart';
 import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import 'package:bank_el_ziker/core/layers/data/services/legacy_day_zikr_record_model.dart';
+import 'package:bank_el_ziker/features/engagement/data/models/rate_prompt_state_model.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:bank_el_ziker/core/constants/version.dart';
 
@@ -19,6 +20,7 @@ const dayRecordHiveBox = "dayRecordHiveBox";
 const readingProgressHiveBox = "readingProgressHiveBox";
 const prayerHiveBox = "prayerHiveBox";
 const versionCheckHiveBox = "versionCheckHiveBox";
+const ratePromptStateHiveBox = "ratePromptStateHiveBox";
 
 class HiveDB {
   static initHiveDB() async {
@@ -32,6 +34,7 @@ class HiveDB {
     Hive.registerAdapter<Prayer>(PrayerAdapter());
     Hive.registerAdapter<Version>(VersionAdapter());
     Hive.registerAdapter<LegacyDayZikrRecord>(LegacyDayZikrRecordAdapter());
+    Hive.registerAdapter<RatePromptState>(RatePromptStateAdapter());
   }
 
   Future<Box<T>> openAndGetBox<T>({required String boxName}) async {
@@ -78,6 +81,7 @@ class HiveDB {
     await openAndGetBox<ReadingProgress>(boxName: readingProgressHiveBox);
     var prayerAzkarBox = await openAndGetBox<Prayer>(boxName: prayerHiveBox);
     var versionBox = await openAndGetBox<Version>(boxName: versionCheckHiveBox);
+    await openAndGetBox<RatePromptState>(boxName: ratePromptStateHiveBox);
 
     final allSeedZikr = [
       ...InitialData.generalAzkar,

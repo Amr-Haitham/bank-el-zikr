@@ -10,7 +10,7 @@ extension ContextExtension on BuildContext {
     FocusManager.instance.primaryFocus?.unfocus();
   }
 
-  void showSnackBar(
+  SnackBar buildSnackBar(
     String message, {
     String? title,
     SnackBarType type = SnackBarType.success,
@@ -29,44 +29,50 @@ extension ContextExtension on BuildContext {
       SnackBarType.warning => Icons.warning_rounded,
     };
 
-    ScaffoldMessenger.of(this).showSnackBar(
-      SnackBar(
-        content: Row(
-          children: [
-            Icon(icon, color: color),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (title != null)
-                    Text(
-                      title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: color,
-                      ),
-                    ),
+    return SnackBar(
+      content: Row(
+        children: [
+          Icon(icon, color: color),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (title != null)
                   Text(
-                    message,
-                    style:
-                        TextStyle(color: Theme.of(this).colorScheme.onSurface),
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: color,
+                    ),
                   ),
-                ],
-              ),
+                Text(
+                  message,
+                  style: TextStyle(color: Theme.of(this).colorScheme.onSurface),
+                ),
+              ],
             ),
-          ],
-        ),
-        backgroundColor: Theme.of(this).colorScheme.surface,
-        behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        duration: Duration(
-            milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
+          ),
+        ],
       ),
+      backgroundColor: Theme.of(this).colorScheme.surface,
+      behavior: SnackBarBehavior.floating,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      duration: Duration(
+          milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
     );
+  }
+
+  void showSnackBar(
+    String message, {
+    String? title,
+    SnackBarType type = SnackBarType.success,
+  }) {
+    ScaffoldMessenger.of(this)
+        .showSnackBar(buildSnackBar(message, title: title, type: type));
   }
 
   void showSuccessNotification({String? title, required String message}) {

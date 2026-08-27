@@ -133,7 +133,7 @@
   "fajr": "Fajr",
   "asr": "Asr",
   "fajrAndAsr": "Fajr & Asr",
-  "locationRequiredForReminders": "Location access is required to turn on Adhkar reminders",
+  "locationRequiredForReminders": "Location access is off. Enable it for Bank El Zikr in your phone's Settings app to turn on Adhkar reminders",
   "nextReminderText": "{adhkarName} in {duration} · {time}",
   "@nextReminderText": {
     "placeholders": {
@@ -190,5 +190,17 @@
   "addCustomZikrHint": "Add a custom zikr...",
   "addCustomZikrTitle": "Add a Custom Zikr",
   "addCustomZikrButton": "Add Zikr",
-  "emptyZikrError": "Please enter the zikr text"
+  "emptyZikrError": "Please enter the zikr text",
+
+  "onboardingPurposeTitle": "Grow your hasanat, day after day",
+  "onboardingPurposeSubtitle": "Track your Adhkar, build your streak, and watch your hasanat grow",
+  "onboardingAdhkarBalanceLabel": "Your Adhkar balance",
+  "onboardingAdhkarBalanceHint": "Every zikr you log adds to your balance",
+  "onboardingStreakPreview": "Streak: 7 days",
+  "onboardingNotificationTitle": "Never miss your morning & evening Adhkar",
+  "onboardingNotificationSubtitle": "Turn on notifications for gentle reminders at Sabah & Masaa' time",
+  "onboardingEnableNotifications": "Enable notifications",
+  "onboardingSkipForNow": "Skip for now",
+  "onboardingNext": "Next",
+  "onboardingNotificationEnableFailed": "Reminders need location access to work. Enable it for Bank El Zikr in your phone's Settings app anytime"
 }

@@ -29,7 +29,7 @@
 	<key>NSLocalNotificationUsageDescription</key>
 	<string>نستخدم الإشعارات في تذكيرك بذكر الله</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>نحتاج إلى موقعك لحساب مواقيت الفجر والعصر بدقة لتذكيرك بالأذكار</string>
+	<string>To remind you of your morning and evening Adhkar at the right time, we need your location to accurately calculate Fajr and Asr times in your area</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>نحتاج إلى إذن الوصول لحفظ صور الأذكار في مكتبة الصور</string>
 	<key>UIApplicationSceneManifest</key>
