@@ -1,6 +1,8 @@
+import 'package:bank_el_ziker/core/layers/data/failure/failure.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/get_current_coordinates.dart';
+import 'package:bank_el_ziker/features/notifications/domain/usecases/open_location_settings.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/schedule_adhkar_reminders.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/settings/domain/usecases/get_settings.dart';
@@ -12,12 +14,14 @@ class SettingsCubit extends RequestCubit<Settings> {
   final UpdateSettings updateSettings;
   final ScheduleAdhkarReminders scheduleAdhkarReminders;
   final GetCurrentCoordinates getCurrentCoordinates;
+  final OpenLocationSettings openLocationSettings;
 
   SettingsCubit({
     required this.getSettings,
     required this.updateSettings,
     required this.scheduleAdhkarReminders,
     required this.getCurrentCoordinates,
+    required this.openLocationSettings,
   }) : super(
           callOnCreate: true,
           request: () => getSettings(const NoParams()),
@@ -97,12 +101,13 @@ class SettingsCubit extends RequestCubit<Settings> {
   /// Turning reminders on requires location access (used to compute
   /// prayer times for Auto mode, and kept as a hard requirement even in
   /// Manual mode so switching modes later doesn't silently fail).
-  /// Returns false — leaving the toggle off — if location isn't available.
-  Future<bool> setAdhkarRemindersEnabled(bool value) async {
+  /// Returns the failure that blocked it — leaving the toggle off — or null
+  /// on success.
+  Future<FailureBase?> setAdhkarRemindersEnabled(bool value) async {
     if (value) {
       final coordinatesResult = await getCurrentCoordinates(const NoParams());
       if (coordinatesResult.isLeft()) {
-        return false;
+        return coordinatesResult.fold((failure) => failure, (_) => null);
       }
     }
 
@@ -110,13 +115,15 @@ class SettingsCubit extends RequestCubit<Settings> {
       UpdateSettingsParams(adhkarRemindersEnabled: value),
     );
     return result.fold(
-      (failure) => false,
+      (failure) => Future.value(failure),
       (_) async {
         await _rescheduleReminders();
-        return true;
+        return null;
       },
     );
   }
+
+  Future<void> openLocationSettingsScreen() => openLocationSettings();
 
   Future<void> setReminderMode(String mode) async {
     final result = await updateSettings(
@@ -163,18 +170,16 @@ class SettingsCubit extends RequestCubit<Settings> {
 
   /// Orchestrates the final step of onboarding: optionally attempts to turn
   /// on Adhkar reminders, then always marks onboarding complete. Returns
-  /// false if [enableNotifications] was requested but failed (e.g. location
-  /// permission denied) — true otherwise (including when notifications
-  /// weren't requested at all).
-  Future<bool> completeOnboardingWithNotifications(
+  /// the failure that blocked [enableNotifications] (e.g. location services
+  /// off, permission denied) — null if it succeeded or wasn't requested.
+  Future<FailureBase?> completeOnboardingWithNotifications(
     String selectedLanguage, {
     required bool enableNotifications,
   }) async {
-    final notificationsSucceeded = enableNotifications
-        ? await setAdhkarRemindersEnabled(true)
-        : true;
+    final failure =
+        enableNotifications ? await setAdhkarRemindersEnabled(true) : null;
     await completeOnboarding(selectedLanguage);
-    return notificationsSucceeded;
+    return failure;
   }
 
   Future<void> setLanguage(String language) async {

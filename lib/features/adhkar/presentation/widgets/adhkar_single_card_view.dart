@@ -1,6 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/initial_data.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_sheet.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
@@ -49,21 +51,19 @@ class AdhkarSingleCardView extends StatelessWidget {
     final favorDirection = isEnglish ? TextDirection.ltr : TextDirection.rtl;
     showModalBottomSheet(
       context: context,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
       builder: (sheetContext) => Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.all(ConstantValues.spacingXl),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               AppLocalizations.of(context).virtueAndSource,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
+              style: context.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 16),
@@ -71,7 +71,7 @@ class AdhkarSingleCardView extends StatelessWidget {
               favor,
               textAlign: TextAlign.center,
               textDirection: favorDirection,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: context.textTheme.bodyMedium,
             ),
             if (source != null && source.isNotEmpty) ...[
               const SizedBox(height: 12),
@@ -79,7 +79,7 @@ class AdhkarSingleCardView extends StatelessWidget {
                 source,
                 textAlign: TextAlign.center,
                 textDirection: favorDirection,
-                style: Theme.of(context).textTheme.bodySmall,
+                style: context.textTheme.bodySmall,
               ),
             ],
             const SizedBox(height: 12),
@@ -95,7 +95,7 @@ class AdhkarSingleCardView extends StatelessWidget {
     final favorText = isEnglish && zikr.descriptionEn != null
         ? zikr.descriptionEn
         : zikr.description;
-    final secondaryTextColor = Theme.of(context).textTheme.bodySmall!.color!;
+    final secondaryTextColor = context.textTheme.bodySmall!.color!;
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -107,7 +107,7 @@ class AdhkarSingleCardView extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: context.theme.cardColor,
                 borderRadius: BorderRadius.circular(24),
               ),
               child: Column(
@@ -126,14 +126,11 @@ class AdhkarSingleCardView extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               minFontSize: 13,
                               maxLines: 12,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium!
+                              style: context.textTheme.bodyMedium!
                                   .copyWith(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 20,
-                                    color:
-                                        Theme.of(context).colorScheme.onSurface,
+                                    color: context.colors.onSurface,
                                   ),
                             ),
                             if (isEnglish &&
@@ -143,14 +140,12 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentTransliteration!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
+                                style: context.textTheme.bodyMedium!
                                     .copyWith(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
                                       fontStyle: FontStyle.italic,
-                                      color: Theme.of(context).primaryColor,
+                                      color: context.theme.primaryColor,
                                     ),
                               ),
                             ],
@@ -160,9 +155,7 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentEn!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium!
+                                style: context.textTheme.bodyMedium!
                                     .copyWith(
                                         fontSize: 14,
                                         color: secondaryTextColor),
@@ -184,12 +177,12 @@ class AdhkarSingleCardView extends StatelessWidget {
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
-                              color: Theme.of(context).primaryColor,
+                              color: context.theme.primaryColor,
                             ),
                           ),
                           const SizedBox(width: 6),
                           Icon(Icons.info_outline,
-                              size: 15, color: Theme.of(context).primaryColor),
+                              size: 15, color: context.theme.primaryColor),
                         ],
                       ),
                     ),
@@ -242,7 +235,7 @@ class AdhkarSingleCardView extends StatelessWidget {
                     horizontal: 44, vertical: 10),
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: const Color(0xff34C759).withValues(alpha: 0.4),
+                    color: primaryGreen.withValues(alpha: 0.4),
                   ),
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -254,12 +247,12 @@ class AdhkarSingleCardView extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w700,
-                        color: Color(0xff34C759),
+                        color: primaryGreen,
                       ),
                     ),
                     const SizedBox(width: 6),
                     const Icon(Icons.check_circle_outline,
-                        size: 16, color: Color(0xff34C759)),
+                        size: 16, color: primaryGreen),
                   ],
                 ),
               ),
@@ -271,18 +264,14 @@ class AdhkarSingleCardView extends StatelessWidget {
             children: [
               Text(
                 AppLocalizations.of(context).swipeHint,
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Theme.of(context).textTheme.bodySmall!.color!,
+                style: context.textTheme.labelSmall!.copyWith(
+                  color: context.textTheme.bodySmall!.color!,
                 ),
               ),
               const SizedBox(width: 6),
               Icon(Icons.swap_horiz,
                   size: 16,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
+                  color: context.textTheme.bodySmall!.color!
                       .withValues(alpha: 0.5)),
             ],
           ),

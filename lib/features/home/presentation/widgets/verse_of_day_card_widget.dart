@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/home/domain/entities/prayer.dart';
@@ -15,10 +17,10 @@ class VerseOfDayCardWidget extends StatelessWidget {
         return state.when(
           initial: () => const SizedBox.shrink(),
           loading: () => Padding(
-            padding: const EdgeInsets.symmetric(vertical: 24),
+            padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingXl),
             child: Center(
               child: CircularProgressIndicator(
-                color: Theme.of(context).primaryColor,
+                color: context.theme.primaryColor,
               ),
             ),
           ),
@@ -67,7 +69,7 @@ class _VerseCardState extends State<_VerseCard> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Column(
@@ -76,10 +78,7 @@ class _VerseCardState extends State<_VerseCard> {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .textTheme
-                  .bodySmall!
-                  .color!
+              color: context.textTheme.bodySmall!.color!
                   .withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(2),
             ),
@@ -89,10 +88,8 @@ class _VerseCardState extends State<_VerseCard> {
             prayer.content,
             textAlign: TextAlign.center,
             textDirection: TextDirection.rtl,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(color: Theme.of(context).primaryColor, fontSize: 20),
+            style: context.textTheme.bodyLarge!
+                .copyWith(color: context.theme.primaryColor, fontSize: 20),
           ),
           if (hasTranslation) ...[
             const SizedBox(height: 12),
@@ -106,13 +103,8 @@ class _VerseCardState extends State<_VerseCard> {
                     _showTranslation
                         ? AppLocalizations.of(context).hideTranslation
                         : AppLocalizations.of(context).showTranslation,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .color!
+                    style: context.textTheme.labelMedium!.copyWith(
+                      color: context.textTheme.bodySmall!.color!
                           .withValues(alpha: 0.7),
                     ),
                   ),
@@ -121,10 +113,7 @@ class _VerseCardState extends State<_VerseCard> {
                         ? Icons.keyboard_arrow_up
                         : Icons.keyboard_arrow_down,
                     size: 16,
-                    color: Theme.of(context)
-                        .textTheme
-                        .bodySmall!
-                        .color!
+                    color: context.textTheme.bodySmall!.color!
                         .withValues(alpha: 0.7),
                   ),
                 ],
@@ -147,7 +136,7 @@ class _VerseCardState extends State<_VerseCard> {
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.italic,
-                              color: Theme.of(context).primaryColor,
+                              color: context.theme.primaryColor,
                             ),
                           ),
                         ],
@@ -159,10 +148,7 @@ class _VerseCardState extends State<_VerseCard> {
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 13,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .color!
+                              color: context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.7),
                             ),
                           ),
@@ -177,19 +163,14 @@ class _VerseCardState extends State<_VerseCard> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: context.theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Text(
                 prayer.reference!,
                 textDirection: TextDirection.rtl,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
+                style: context.textTheme.labelMedium!.copyWith(
+                  color: context.textTheme.bodySmall!.color!
                       .withValues(alpha: 0.7),
                 ),
               ),
@@ -202,21 +183,21 @@ class _VerseCardState extends State<_VerseCard> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
               decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: context.theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Icon(Icons.refresh,
-                      size: 16, color: Theme.of(context).primaryColor),
+                      size: 16, color: context.theme.primaryColor),
                   const SizedBox(width: 6),
                   Text(
                     AppLocalizations.of(context).anotherVerse,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
-                      color: Theme.of(context).primaryColor,
+                      color: context.theme.primaryColor,
                     ),
                   ),
                 ],

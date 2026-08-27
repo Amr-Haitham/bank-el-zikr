@@ -1,4 +1,5 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 class ZikrRepetitonCountCircle extends StatefulWidget {
@@ -29,13 +30,13 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
             height: 72,
             decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).scaffoldBackgroundColor,
+                color: context.theme.scaffoldBackgroundColor,
                 border: Border.all(
                     width: 1, color: const Color.fromRGBO(255, 214, 0, 1))),
             child: Center(
               child: Text(
                 ArabicNumbers().convert(count),
-                style: Theme.of(context).textTheme.bodyLarge,
+                style: context.textTheme.bodyLarge,
                 strutStyle:
                     const StrutStyle(height: 1.2, forceStrutHeight: true),
               ),
@@ -46,7 +47,7 @@ class _ZikrRepetitonCountCircleState extends State<ZikrRepetitonCountCircle> {
           ),
           Text(
             "عدد التكرار",
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: context.textTheme.headlineSmall,
           ),
         ],
       ),

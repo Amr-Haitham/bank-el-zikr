@@ -1,4 +1,6 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
@@ -63,8 +65,8 @@ class StreakCardWidget extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Theme.of(context).primaryColor,
-                  const Color(0xff1D6B3A),
+                  context.theme.primaryColor,
+                  primaryGradientEnd,
                 ],
               ),
             ),

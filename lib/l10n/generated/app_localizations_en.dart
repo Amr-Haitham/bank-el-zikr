@@ -337,6 +337,17 @@ class AppLocalizationsEn extends AppLocalizations {
       'Location access is off. Enable it for Bank El Zikr in your phone\'s Settings app to turn on Adhkar reminders';
 
   @override
+  String get locationServicesOffForReminders =>
+      'Location services are off on your phone. Turn on Location in your phone\'s Settings to turn on Adhkar reminders';
+
+  @override
+  String get locationUnavailableForReminders =>
+      'Couldn\'t get your location. Check your connection and try again';
+
+  @override
+  String get openSettingsAction => 'Open Settings';
+
+  @override
   String nextReminderText(String adhkarName, String duration, String time) {
     return '$adhkarName in $duration · $time';
   }

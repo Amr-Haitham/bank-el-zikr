@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +11,7 @@ class TasbihResetButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Material(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(30),
         elevation: 0,
         child: InkWell(
@@ -19,7 +20,7 @@ class TasbihResetButton extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
             decoration: BoxDecoration(
-              color: Theme.of(context).cardColor,
+              color: context.theme.cardColor,
               borderRadius: BorderRadius.circular(30),
               boxShadow: [
                 BoxShadow(
@@ -33,13 +34,13 @@ class TasbihResetButton extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Icon(Icons.refresh,
-                    size: 18, color: Theme.of(context).primaryColor),
+                    size: 18, color: context.theme.primaryColor),
                 const SizedBox(width: 8),
                 Text(
                   AppLocalizations.of(context).resetLabel,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+                    color: context.theme.primaryColor,
                   ),
                 ),
               ],

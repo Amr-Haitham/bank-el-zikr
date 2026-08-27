@@ -33,7 +33,7 @@ class ZikrPickerBottomSheet extends StatelessWidget {
     return showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: context.colors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -94,10 +94,7 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                       width: 40,
                       height: 4,
                       decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .color!
+                        color: context.textTheme.bodySmall!.color!
                             .withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(999),
                       ),
@@ -114,22 +111,22 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                             width: 38,
                             height: 38,
                             decoration: BoxDecoration(
-                              color: Theme.of(context)
-                                  .colorScheme
+                              color: context
+                                  .colors
                                   .surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Icon(
                               Icons.close,
                               size: 20,
-                              color: Theme.of(context).primaryColor,
+                              color: context.theme.primaryColor,
                             ),
                           ),
                         ),
                       );
                       final title = Text(
                         AppLocalizations.of(context).chooseZikr,
-                        style: Theme.of(context).textTheme.headlineSmall,
+                        style: context.textTheme.headlineSmall,
                       );
                       final addZikrButton = Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -139,7 +136,7 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                             width: 38,
                             height: 38,
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: context.colors.primary,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: const Icon(
@@ -189,8 +186,8 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                         end: 14),
                                     children: [
                                       Material(
-                                        color: Theme.of(context)
-                                            .colorScheme
+                                        color: context
+                                            .colors
                                             .surfaceContainerHighest
                                             .withValues(alpha: 0.5),
                                         borderRadius:
@@ -226,8 +223,8 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                                   Divider(
                                                     height: 1,
                                                     thickness: 1,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
+                                                    color: context
+                                                        .colors
                                                         .outline,
                                                   ),
                                                   const SizedBox(height: 16),

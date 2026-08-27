@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
@@ -63,19 +64,14 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               height: 4,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(11),
-                color: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .color!
+                color: context.textTheme.bodyLarge!.color!
                     .withValues(alpha: 0.2),
               ),
             ),
             const SizedBox(height: 20),
             Text(
               AppLocalizations.of(context).setGoal,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
+              style: context.textTheme.bodyMedium!
                   .copyWith(fontSize: 18, fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 12),
@@ -84,10 +80,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,
-                color: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .color!
+                color: context.textTheme.bodySmall!.color!
                     .withValues(alpha: 0.6),
               ),
             ),
@@ -96,7 +89,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 16),
               decoration: BoxDecoration(
-                color: Theme.of(context).cardColor,
+                color: context.theme.cardColor,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: TextField(
@@ -127,7 +120,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                             child: Container(
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               decoration: BoxDecoration(
-                                color: Theme.of(context).cardColor,
+                                color: context.theme.cardColor,
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Center(
@@ -135,7 +128,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                                   preset.toString(),
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
-                                    color: Theme.of(context).primaryColor,
+                                    color: context.theme.primaryColor,
                                   ),
                                 ),
                               ),
@@ -151,7 +144,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               child: ElevatedButton(
                 onPressed: _save,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).primaryColor,
+                  backgroundColor: context.theme.primaryColor,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 14),
                   shape: RoundedRectangleBorder(
@@ -172,10 +165,7 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                 AppLocalizations.of(context).removeGoal,
                 style: TextStyle(
                   fontSize: 13,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
+                  color: context.textTheme.bodySmall!.color!
                       .withValues(alpha: 0.6),
                 ),
               ),

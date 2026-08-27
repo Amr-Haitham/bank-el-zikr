@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -19,7 +20,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
       child: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: context.theme.cardColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Stack(
@@ -34,8 +35,8 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                   shape: BoxShape.circle,
                   gradient: RadialGradient(
                     colors: [
-                      Theme.of(context).primaryColor.withValues(alpha: 0.12),
-                      Theme.of(context).primaryColor.withValues(alpha: 0.0),
+                      context.theme.primaryColor.withValues(alpha: 0.12),
+                      context.theme.primaryColor.withValues(alpha: 0.0),
                     ],
                   ),
                 ),
@@ -50,12 +51,9 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                     children: [
                       Text(
                         AppLocalizations.of(context).totalHasanatBalance,
-                        style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        style: context.textTheme.bodySmall!.copyWith(
                               fontSize: 14,
-                              color: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .color!
+                              color: context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.6),
                             ),
                       ),
@@ -63,10 +61,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                       Icon(
                         Icons.credit_card_outlined,
                         size: 16,
-                        color: Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .color!
+                        color: context.textTheme.bodySmall!.color!
                             .withValues(alpha: 0.6),
                       ),
                     ],
@@ -79,9 +74,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                               0;
                       return Text(
                         formatNumber(context, balance),
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineLarge!
+                        style: context.textTheme.headlineLarge!
                             .copyWith(fontSize: 36),
                       );
                     },
@@ -101,8 +94,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
-                          color: Theme.of(context)
-                              .primaryColor
+                          color: context.theme.primaryColor
                               .withValues(alpha: 0.12),
                           borderRadius: BorderRadius.circular(20),
                         ),
@@ -112,7 +104,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 13,
                             fontWeight: FontWeight.w600,
-                            color: Theme.of(context).primaryColor,
+                            color: context.theme.primaryColor,
                           ),
                         ),
                       );
@@ -128,7 +120,7 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 14),
                       decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColor,
+                        color: context.theme.primaryColor,
                         borderRadius: BorderRadius.circular(30),
                       ),
                       child: Text(

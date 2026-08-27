@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 class TitleWithBackButton extends StatelessWidget {
@@ -19,7 +20,7 @@ class TitleWithBackButton extends StatelessWidget {
             title != null
                 ? Text(
                     title!,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: context.textTheme.headlineSmall,
                   )
                 : const SizedBox.shrink(),
             const SizedBox(
@@ -31,7 +32,7 @@ class TitleWithBackButton extends StatelessWidget {
               },
               child: Icon(
                 Icons.arrow_forward,
-                color: Theme.of(context).textTheme.bodyLarge!.color,
+                color: context.textTheme.bodyLarge!.color,
               ),
             ),
           ],

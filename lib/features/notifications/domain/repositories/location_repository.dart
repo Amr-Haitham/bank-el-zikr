@@ -3,4 +3,5 @@ import 'package:bank_el_ziker/features/notifications/domain/entities/coordinates
 
 abstract class LocationRepository {
   Future<RequestResult<CoordinatesEntity>> getCurrentCoordinates();
+  Future<void> openLocationSettings();
 }

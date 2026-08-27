@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/screens/components/category_streak_ring.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +26,7 @@ class CategoryStreakRingRow extends StatelessWidget {
             title: AppLocalizations.of(context).morningAdhkar,
             currentStreak: morningCurrentStreak,
             longestStreak: morningLongestStreak,
-            color: const Color(0xffFB8C3C),
+            color: morningOrange,
             icon: Icons.wb_sunny_rounded,
           ),
         ),
@@ -35,7 +36,7 @@ class CategoryStreakRingRow extends StatelessWidget {
             title: AppLocalizations.of(context).eveningAdhkar,
             currentStreak: eveningCurrentStreak,
             longestStreak: eveningLongestStreak,
-            color: const Color(0xff6C63FF),
+            color: eveningPurple,
             icon: Icons.nightlight_round,
           ),
         ),

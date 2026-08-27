@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -36,14 +37,8 @@ class TasbihProgressCircle extends StatelessWidget {
                 gradient: RadialGradient(
                   center: const Alignment(0, 0.2),
                   colors: [
-                    Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withValues(alpha: 0.35),
-                    Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withValues(alpha: 0),
+                    context.colors.secondary.withValues(alpha: 0.35),
+                    context.colors.secondary.withValues(alpha: 0),
                   ],
                   stops: const [0.0, 0.7],
                 ),
@@ -56,9 +51,9 @@ class TasbihProgressCircle extends StatelessWidget {
                 value: progress,
                 strokeWidth: 6,
                 strokeCap: StrokeCap.round,
-                backgroundColor: Theme.of(context).cardColor,
+                backgroundColor: context.theme.cardColor,
                 valueColor: AlwaysStoppedAnimation<Color>(
-                    Theme.of(context).primaryColor),
+                    context.theme.primaryColor),
               ),
             ),
             Container(
@@ -66,7 +61,7 @@ class TasbihProgressCircle extends StatelessWidget {
               height: size - 12,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: Theme.of(context).cardColor,
+                color: context.theme.cardColor,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withValues(alpha: 0.18),
@@ -85,12 +80,9 @@ class TasbihProgressCircle extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                   colors: [
-                    Theme.of(context).primaryColor.withValues(alpha: 0.75),
-                    Theme.of(context).primaryColor.withValues(alpha: 0.4),
-                    Theme.of(context)
-                        .colorScheme
-                        .secondary
-                        .withValues(alpha: 0.55),
+                    context.theme.primaryColor.withValues(alpha: 0.75),
+                    context.theme.primaryColor.withValues(alpha: 0.4),
+                    context.colors.secondary.withValues(alpha: 0.55),
                   ],
                   stops: const [0.0, 0.35, 1.0],
                 ),
@@ -148,7 +140,7 @@ class TasbihProgressCircle extends StatelessWidget {
                             Text(
                               AppLocalizations.of(context).tapAnywhere,
                               style: const TextStyle(
-                                  fontSize: 12, color: Colors.black45),
+                                  fontSize: 13, color: Colors.black45),
                             ),
                           ],
                         ),

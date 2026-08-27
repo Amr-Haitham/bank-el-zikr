@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class CustomAppButton extends StatelessWidget {
     return OutlinedButton(
       onPressed: onPressed,
       style: OutlinedButton.styleFrom(
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: context.theme.primaryColor,
         side: const BorderSide(style: BorderStyle.none),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
@@ -30,7 +31,7 @@ class CustomAppButton extends StatelessWidget {
             trailing ?? const SizedBox.shrink(),
             Text(
               text,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              style: context.textTheme.bodyMedium!.copyWith(
                   color:
                       GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                   fontWeight: FontWeight.bold),

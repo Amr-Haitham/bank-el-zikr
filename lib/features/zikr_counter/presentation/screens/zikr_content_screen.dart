@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/title_with_back_button.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class ZikrContentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -34,10 +35,8 @@ class ZikrContentScreen extends StatelessWidget {
                         Text(
                           zikr.content,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall!
-                              .copyWith(color: Theme.of(context).primaryColor),
+                          style: context.textTheme.headlineSmall!
+                              .copyWith(color: context.theme.primaryColor),
                         ),
                         if (zikr.description != null &&
                             zikr.description!.isNotEmpty) ...[
@@ -45,8 +44,7 @@ class ZikrContentScreen extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                                 vertical: 50, horizontal: 16),
                             child: Divider(
-                              color:
-                                  Theme.of(context).textTheme.bodySmall!.color,
+                              color: context.textTheme.bodySmall!.color,
                               thickness: 1,
                             ),
                           ),

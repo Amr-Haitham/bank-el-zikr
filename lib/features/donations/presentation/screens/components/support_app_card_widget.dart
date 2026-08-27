@@ -74,8 +74,7 @@ class SupportAppCardWidget extends StatelessWidget {
                             : isSupporter
                                 ? localizations.supporterActiveLabel
                                 : localizations.supportSubtitle,
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(fontSize: 12),
+                        style: context.textTheme.bodyMedium,
                       ),
                     ],
                   ),
@@ -109,7 +108,6 @@ class SupportAppCardWidget extends StatelessWidget {
                   Text(
                     '💚 ${localizations.manageSubscription}',
                     style: context.textTheme.labelMedium!.copyWith(
-                      fontSize: 11,
                       color: context.colors.primary,
                     ),
                   ),

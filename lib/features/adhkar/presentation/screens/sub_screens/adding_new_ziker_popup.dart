@@ -2,6 +2,7 @@ import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_f
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/general_functions.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/utils/screen_utils.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr_cubit.dart';
@@ -82,9 +83,7 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
       onTap: () {
         // Validate input
         if (newZikerController.text.trim().isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('الرجاء إدخال نص الذكر')),
-          );
+          context.showWarningNotification(message: 'الرجاء إدخال نص الذكر');
           return;
         }
 
@@ -111,13 +110,13 @@ class _AddNewZikrPopUpState extends State<AddNewZikrPopUp> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(39),
-          color: Theme.of(context).primaryColor,
+          color: context.theme.primaryColor,
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(ConstantValues.spacingLg),
             child: Text('إضافة الذكر',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                style: context.textTheme.bodyMedium!.copyWith(
                     color:
                         GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                     fontWeight: FontWeight.w700)),

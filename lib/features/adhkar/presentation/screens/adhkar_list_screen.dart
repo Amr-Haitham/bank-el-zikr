@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/initial_data.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/widgets/adhkar_category_list_item.dart';
@@ -45,7 +46,7 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
         .toList();
 
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: BlocBuilder<ReadingProgressCubit,
             RequestState<Map<String, ReadingProgressEntity>>>(
@@ -65,9 +66,7 @@ class _AdhkarListScreenState extends State<AdhkarListScreen> {
                       Text(
                         l10n.adhkarList,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
+                        style: context.textTheme.headlineSmall!
                             .copyWith(fontSize: 24),
                       ),
                       const SizedBox(height: 22),

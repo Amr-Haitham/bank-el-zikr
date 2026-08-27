@@ -134,6 +134,9 @@
   "asr": "Asr",
   "fajrAndAsr": "Fajr & Asr",
   "locationRequiredForReminders": "Location access is off. Enable it for Bank El Zikr in your phone's Settings app to turn on Adhkar reminders",
+  "locationServicesOffForReminders": "Location services are off on your phone. Turn on Location in your phone's Settings to turn on Adhkar reminders",
+  "locationUnavailableForReminders": "Couldn't get your location. Check your connection and try again",
+  "openSettingsAction": "Open Settings",
   "nextReminderText": "{adhkarName} in {duration} · {time}",
   "@nextReminderText": {
     "placeholders": {

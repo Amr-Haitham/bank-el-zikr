@@ -89,8 +89,7 @@ class _LanguageStepState extends State<LanguageStep>
                   Text(
                     "Choose your language",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 14,
+                    style: context.textTheme.bodySmall!.copyWith(
                       color: context.textTheme.bodySmall!.color!
                           .withValues(alpha: 0.6),
                     ),
@@ -119,8 +118,7 @@ class _LanguageStepState extends State<LanguageStep>
           Text(
             "Change it anytime in Settings",
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12,
+            style: context.textTheme.labelSmall!.copyWith(
               color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.5),
             ),
           ),
@@ -129,8 +127,7 @@ class _LanguageStepState extends State<LanguageStep>
             "يمكنك تغييرها لاحقًا من الإعدادات",
             textAlign: TextAlign.center,
             textDirection: TextDirection.rtl,
-            style: TextStyle(
-              fontSize: 12,
+            style: context.textTheme.labelSmall!.copyWith(
               color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.5),
             ),
           ),
@@ -167,15 +164,14 @@ class _LanguageOption extends StatelessWidget {
         Text(
           mainLabel,
           textDirection: mainLabelDirection,
-          style: context.textTheme.bodyMedium!
+          style: context.textTheme.titleMedium!
               .copyWith(fontSize: 17, fontWeight: FontWeight.w700),
         ),
         if (subtitle != null) ...[
           const SizedBox(height: 2),
           Text(
             subtitle!,
-            style: TextStyle(
-              fontSize: 11,
+            style: context.textTheme.labelMedium!.copyWith(
               fontWeight: FontWeight.w600,
               color: context.theme.primaryColor,
             ),

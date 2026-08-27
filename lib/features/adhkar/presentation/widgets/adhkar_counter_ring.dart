@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -31,10 +32,10 @@ class AdhkarCounterRing extends StatelessWidget {
                   value: progress == 0 ? 1 : progress,
                   strokeWidth: 6,
                   strokeCap: StrokeCap.round,
-                  backgroundColor: Theme.of(context).cardColor,
+                  backgroundColor: context.theme.cardColor,
                   valueColor: AlwaysStoppedAnimation<Color>(progress == 0
-                      ? Theme.of(context).cardColor
-                      : Theme.of(context).primaryColor),
+                      ? context.theme.cardColor
+                      : context.theme.primaryColor),
                 ),
               ),
               Text(
@@ -42,7 +43,7 @@ class AdhkarCounterRing extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w800,
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: context.colors.onSurface,
                 ),
               ),
             ],
@@ -54,20 +55,15 @@ class AdhkarCounterRing extends StatelessWidget {
           textDirection: TextDirection.rtl,
           style: TextStyle(
             fontSize: 13,
-            color: Theme.of(context).colorScheme.onSurface,
+            color: context.colors.onSurface,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           AppLocalizations.of(context).repetitionCountLabel,
           textDirection: TextDirection.rtl,
-          style: TextStyle(
-            fontSize: 12,
-            color: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
-                .withValues(alpha: 0.45),
+          style: context.textTheme.labelSmall!.copyWith(
+            color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.45),
           ),
         ),
       ],

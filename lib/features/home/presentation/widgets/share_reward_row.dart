@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
@@ -16,7 +17,7 @@ class ShareRewardRow extends StatelessWidget {
         width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 14),
         decoration: BoxDecoration(
-          color: Theme.of(context).primaryColor.withValues(alpha: 0.1),
+          color: context.theme.primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -24,13 +25,13 @@ class ShareRewardRow extends StatelessWidget {
           children: [
             Icon(
               Icons.share_outlined,
-              color: Theme.of(context).primaryColor,
+              color: context.theme.primaryColor,
             ),
             const SizedBox(width: 10),
             Text(
               AppLocalizations.of(context).shareReward,
               style: TextStyle(
-                  color: Theme.of(context).primaryColor,
+                  color: context.theme.primaryColor,
                   fontSize: 16,
                   fontWeight: FontWeight.w700),
             ),

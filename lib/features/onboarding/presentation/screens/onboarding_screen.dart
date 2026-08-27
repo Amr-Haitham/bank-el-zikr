@@ -3,6 +3,7 @@ import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/app_purpose_step.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/language_step.dart';
+import 'package:bank_el_ziker/features/notifications/data/failure/location_failure.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/notification_opt_in_step.dart';
 import 'package:bank_el_ziker/features/settings/presentation/cubit/settings_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -47,19 +48,25 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _completeOnboarding({bool enableNotifications = false}) async {
-    final notificationsSucceeded = await context
-        .read<SettingsCubit>()
-        .completeOnboardingWithNotifications(
-          _selectedLanguage,
-          enableNotifications: enableNotifications,
-        );
+    final settingsCubit = context.read<SettingsCubit>();
+    final failure = await settingsCubit.completeOnboardingWithNotifications(
+      _selectedLanguage,
+      enableNotifications: enableNotifications,
+    );
     if (!mounted) return;
 
-    if (!notificationsSucceeded) {
+    if (failure != null) {
       final messenger = ScaffoldMessenger.of(context);
+      final isServiceDisabled = failure is LocationFailure &&
+          failure.reason == LocationFailureReason.serviceDisabled;
       final snackBar = context.buildSnackBar(
-        AppLocalizations.of(context).onboardingNotificationEnableFailed,
+        failure.getDisplayMessage(context),
         type: SnackBarType.error,
+        actionLabel:
+            isServiceDisabled ? AppLocalizations.of(context).openSettingsAction : null,
+        onAction: isServiceDisabled
+            ? settingsCubit.openLocationSettingsScreen
+            : null,
       );
       AutoRouter.of(context).replaceAll([const DashboardRoute()]);
       messenger.showSnackBar(snackBar);

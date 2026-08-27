@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -115,7 +116,7 @@ class _HasanatPreviewCard extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: [
             context.theme.primaryColor,
-            const Color(0xff1D6B3A),
+            primaryGradientEnd,
           ],
         ),
       ),

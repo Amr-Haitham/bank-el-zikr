@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +25,7 @@ class AdhkarReadingHeader extends StatelessWidget {
         GestureDetector(
           onTap: onBack,
           child: Icon(isEnglish ? Icons.chevron_left : Icons.chevron_right,
-              color: Theme.of(context).textTheme.bodyLarge!.color),
+              color: context.textTheme.bodyLarge!.color),
         ),
         Expanded(
           child: Padding(
@@ -34,9 +35,7 @@ class AdhkarReadingHeader extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
+              style: context.textTheme.headlineSmall!
                   .copyWith(fontSize: 20),
             ),
           ),
@@ -44,15 +43,13 @@ class AdhkarReadingHeader extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: context.theme.cardColor,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Text(
             "${formatNumber(context, completedCount)}/${formatNumber(context, totalCount)}",
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w700,
-              color: Theme.of(context).primaryColor,
+            style: context.textTheme.labelMedium!.copyWith(
+              color: context.theme.primaryColor,
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -11,17 +12,15 @@ class HomeHeaderWidget extends StatelessWidget {
       children: [
         Text(
           AppLocalizations.of(context).homeTitle,
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
+          style: context.textTheme.headlineSmall!
               .copyWith(fontSize: 24),
         ),
         const SizedBox(height: 4),
         Text(
           AppLocalizations.of(context).homeSubtitle,
-          style: Theme.of(context).textTheme.bodySmall!.copyWith(
+          style: context.textTheme.bodySmall!.copyWith(
                 fontSize: 14,
-                color: Theme.of(context).primaryColor,
+                color: context.theme.primaryColor,
                 fontWeight: FontWeight.w600,
               ),
         ),

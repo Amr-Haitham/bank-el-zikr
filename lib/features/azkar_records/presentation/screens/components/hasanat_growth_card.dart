@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
@@ -46,8 +48,8 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            Theme.of(context).primaryColor,
-            const Color(0xff1D6B3A),
+            context.theme.primaryColor,
+            primaryGradientEnd,
           ],
         ),
       ),
@@ -68,7 +70,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                   ),
                   child: Text(
                     "${percentChange >= 0 ? '+' : ''}${percentChange.round()}% ${periodLabels[_period]}",
-                    style: const TextStyle(color: Colors.white, fontSize: 11),
+                    style: const TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 )
               else
@@ -78,7 +80,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                 children: [
                   Text(
                     AppLocalizations.of(context).hasanatGrowth,
-                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                    style: const TextStyle(color: Colors.white70, fontSize: 13),
                   ),
                   Text(
                     formatNumber(context, widget.totalBalance),
@@ -118,7 +120,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                           fontSize: 13,
                           fontWeight: FontWeight.w700,
                           color: selected
-                              ? Theme.of(context).primaryColor
+                              ? context.theme.primaryColor
                               : Colors.white,
                         ),
                       ),
@@ -154,7 +156,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                           child: Text(
                             points[index].label,
                             style: const TextStyle(
-                                color: Colors.white70, fontSize: 10),
+                                color: Colors.white70, fontSize: 12),
                           ),
                         );
                       },

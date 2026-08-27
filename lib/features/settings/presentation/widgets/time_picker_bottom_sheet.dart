@@ -21,7 +21,7 @@ class TimePickerBottomSheet extends StatefulWidget {
     return showModalBottomSheet<TimeOfDay>(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: context.colors.surface,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
@@ -234,8 +234,7 @@ class _NumberWheel extends StatelessWidget {
       children: [
         Text(
           columnLabel,
-          style: context.textTheme.bodySmall?.copyWith(
-            fontSize: 11,
+          style: context.textTheme.labelSmall?.copyWith(
             fontWeight: FontWeight.w600,
           ),
         ),

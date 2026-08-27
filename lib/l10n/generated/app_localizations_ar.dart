@@ -334,6 +334,17 @@ class AppLocalizationsAr extends AppLocalizations {
       'إذن الموقع غير مفعّل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار';
 
   @override
+  String get locationServicesOffForReminders =>
+      'خدمة الموقع غير مفعّلة في هاتفك. فعّلها من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار';
+
+  @override
+  String get locationUnavailableForReminders =>
+      'تعذّر تحديد موقعك. تحقق من الاتصال وحاول مرة أخرى';
+
+  @override
+  String get openSettingsAction => 'فتح الإعدادات';
+
+  @override
   String nextReminderText(String adhkarName, String duration, String time) {
     return '$adhkarName خلال $duration · $time';
   }

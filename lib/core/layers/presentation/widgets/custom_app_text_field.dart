@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -30,14 +31,14 @@ class CustomAppTextField extends StatelessWidget {
             textDirection: TextDirection.rtl,
             text: TextSpan(
               text: title,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              style: context.textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
               children: optional
                   ? [
                       TextSpan(
                         text: ' (اختياري)',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        style: context.textTheme.bodyMedium!.copyWith(
                               fontSize:
                                   12.0, // Adjust the size to your preference
                               fontWeight: FontWeight.normal,
@@ -51,7 +52,7 @@ class CustomAppTextField extends StatelessWidget {
           TextField(
             textDirection: TextDirection.rtl,
             controller: controller,
-            style: Theme.of(context).textTheme.bodySmall,
+            style: context.textTheme.bodySmall,
             inputFormatters: inputFormatters,
             keyboardType: keyboardType,
             textAlign: TextAlign.right,
@@ -70,7 +71,7 @@ class CustomAppTextField extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 borderSide: BorderSide(
                   width: 2,
-                  color: Theme.of(context).primaryColor,
+                  color: context.theme.primaryColor,
                 ),
               ),
             ),
