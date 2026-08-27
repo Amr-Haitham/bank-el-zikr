@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
@@ -70,7 +71,7 @@ class ListTileOfZikr extends StatelessWidget {
                         onTap: () => _showEditPopup(context),
                         child: Icon(
                           Icons.settings_outlined,
-                          color: Theme.of(context).primaryColor,
+                          color: context.theme.primaryColor,
                         ),
                       )
                     else
@@ -80,7 +81,7 @@ class ListTileOfZikr extends StatelessWidget {
                         zikr.content,
                         textDirection: TextDirection.rtl,
                         style:
-                            Theme.of(context).textTheme.titleMedium!.copyWith(
+                            context.textTheme.titleMedium!.copyWith(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -95,7 +96,7 @@ class ListTileOfZikr extends StatelessWidget {
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: isSelected
-                                    ? Theme.of(context).primaryColor
+                                    ? context.theme.primaryColor
                                     : Colors.transparent,
                                 border: isSelected
                                     ? null
@@ -143,11 +144,11 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                style: context.textTheme.bodyMedium!.copyWith(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.italic,
-                      color: Theme.of(context).primaryColor,
+                      color: context.theme.primaryColor,
                     ),
               ),
             ),
@@ -159,7 +160,7 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                style: context.textTheme.bodyMedium!.copyWith(
                       fontSize: 14,
                       color: GeneralUtils.isLightTheme(context)
                           ? appGray
@@ -173,7 +174,7 @@ class ListTileOfZikr extends StatelessWidget {
             descriptionText,
             textDirection:
                 showTranslation ? TextDirection.ltr : TextDirection.rtl,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            style: context.textTheme.bodySmall!.copyWith(
                   fontSize: 14,
                   color: GeneralUtils.isLightTheme(context)
                       ? appGray
@@ -189,7 +190,7 @@ class ListTileOfZikr extends StatelessWidget {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),

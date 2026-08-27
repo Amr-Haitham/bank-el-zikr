@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -13,9 +15,9 @@ class WeeklyActivityGrid extends StatelessWidget {
   final List<WeeklyGridDay> days;
   final int activeCount;
 
-  static const _morningColor = Color(0xffFB8C3C);
-  static const _eveningColor = Color(0xff6C63FF);
-  static const _sleepColor = Color(0xff3E7BFA);
+  static const _morningColor = morningOrange;
+  static const _eveningColor = eveningPurple;
+  static const _sleepColor = categorySleepBlue;
 
   String _weekdayLabel(BuildContext context, int weekday) {
     final l10n = AppLocalizations.of(context);
@@ -36,7 +38,7 @@ class WeeklyActivityGrid extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -49,24 +51,20 @@ class WeeklyActivityGrid extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withValues(alpha: 0.12),
+                  color: context.theme.primaryColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(999),
                 ),
                 child: Text(
                   AppLocalizations.of(context)
                       .adhkarOutOf21(formatNumber(context, activeCount)),
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context).primaryColor,
+                  style: context.textTheme.labelMedium!.copyWith(
+                    color: context.theme.primaryColor,
                   ),
                 ),
               ),
               Text(
                 AppLocalizations.of(context).thisWeek,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
+                style: context.textTheme.bodyMedium!
                     .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
               ),
             ],
@@ -80,7 +78,7 @@ class WeeklyActivityGrid extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
                     color: day.isToday
-                        ? Theme.of(context).primaryColor
+                        ? context.theme.primaryColor
                         : Colors.transparent,
                     width: 1.5,
                   ),
@@ -107,17 +105,13 @@ class WeeklyActivityGrid extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         _weekdayLabel(context, day.date.weekday),
-                        style: TextStyle(
-                          fontSize: 11,
+                        style: context.textTheme.labelSmall!.copyWith(
                           fontWeight: day.isToday
                               ? FontWeight.w800
                               : FontWeight.w500,
                           color: day.isToday
-                              ? Theme.of(context).primaryColor
-                              : Theme.of(context)
-                                  .textTheme
-                                  .bodySmall!
-                                  .color!
+                              ? context.theme.primaryColor
+                              : context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.6),
                         ),
                       ),
@@ -169,12 +163,8 @@ class WeeklyActivityGrid extends StatelessWidget {
         const SizedBox(width: 5),
         Text(
           label,
-          style: TextStyle(
-            fontSize: 11,
-            color: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
+          style: context.textTheme.labelSmall!.copyWith(
+            color: context.textTheme.bodySmall!.color!
                 .withValues(alpha: 0.6),
           ),
         ),

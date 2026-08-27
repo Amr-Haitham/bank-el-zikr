@@ -5,6 +5,7 @@ import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
+import 'package:bank_el_ziker/features/notifications/data/failure/location_failure.dart';
 import 'package:bank_el_ziker/features/notifications/domain/entities/prayer_times.dart';
 import 'package:bank_el_ziker/features/notifications/presentation/cubit/prayer_times_cubit.dart';
 import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
@@ -31,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(
@@ -46,9 +47,7 @@ class SettingsScreen extends StatelessWidget {
                   Center(
                     child: Text(
                       l10n.settingsTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall!
+                      style: context.textTheme.headlineSmall!
                           .copyWith(fontSize: 22),
                     ),
                   ),
@@ -124,12 +123,22 @@ class SettingsScreen extends StatelessWidget {
                           : null,
                       value: settings.adhkarRemindersEnabled,
                       onChanged: (value) async {
-                        final succeeded = await context
-                            .read<SettingsCubit>()
-                            .setAdhkarRemindersEnabled(value);
-                        if (!succeeded && value && context.mounted) {
+                        final settingsCubit = context.read<SettingsCubit>();
+                        final failure =
+                            await settingsCubit.setAdhkarRemindersEnabled(value);
+                        if (failure != null && value && context.mounted) {
                           context.showErrorNotification(
-                            message: l10n.locationRequiredForReminders,
+                            message: failure.getDisplayMessage(context),
+                            actionLabel: failure is LocationFailure &&
+                                    failure.reason ==
+                                        LocationFailureReason.serviceDisabled
+                                ? l10n.openSettingsAction
+                                : null,
+                            onAction: failure is LocationFailure &&
+                                    failure.reason ==
+                                        LocationFailureReason.serviceDisabled
+                                ? settingsCubit.openLocationSettingsScreen
+                                : null,
                           );
                         }
                       },

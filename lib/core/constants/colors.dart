@@ -59,6 +59,13 @@ const categoryGravesGreen = Color(0xff5A7D5E);
 const categoryAfterPrayerGreen = Color(0xff2FA366);
 const categoryRuqyahTeal = Color(0xff1E9E8E);
 
+// Gradients & overlays.
+const primaryGradientEnd = Color(0xff1D6B3A);
+const dividerLight = Color(0xffE5E5E5);
+const mutedTextLight = Color(0xff5A5A5A);
+const dialogBackgroundDark = Color(0xff1E1E1E);
+const appBarBackgroundDark = Color(0xff27313D);
+
 // Neutrals.
 const backgroundLight = Color(0xffE9ECF1);
 const backgroundDark = Color(0xff080C0A);

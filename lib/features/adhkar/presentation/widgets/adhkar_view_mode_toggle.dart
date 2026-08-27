@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 
@@ -54,13 +55,13 @@ class _ToggleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final selectedColor = Theme.of(context).primaryColor;
+    final selectedColor = context.theme.primaryColor;
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: context.theme.cardColor,
           borderRadius: BorderRadius.circular(14),
           border: Border.all(
             color: isSelected ? selectedColor : Colors.transparent,
@@ -77,7 +78,7 @@ class _ToggleButton extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: isSelected
                     ? selectedColor
-                    : Theme.of(context).textTheme.bodySmall!.color,
+                    : context.textTheme.bodySmall!.color,
               ),
             ),
             const SizedBox(width: 6),
@@ -85,7 +86,7 @@ class _ToggleButton extends StatelessWidget {
                 size: 16,
                 color: isSelected
                     ? selectedColor
-                    : Theme.of(context).textTheme.bodySmall!.color),
+                    : context.textTheme.bodySmall!.color),
           ],
         ),
       ),

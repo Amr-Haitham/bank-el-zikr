@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_row_container.dart';
@@ -30,12 +31,9 @@ class SettingsToggleRow extends StatelessWidget {
         value: value,
         onChanged: onChanged,
         activeThumbColor: Colors.white,
-        activeTrackColor: Theme.of(context).primaryColor,
+        activeTrackColor: context.theme.primaryColor,
         inactiveThumbColor: Colors.white,
-        inactiveTrackColor: Theme.of(context)
-            .textTheme
-            .bodySmall!
-            .color!
+        inactiveTrackColor: context.textTheme.bodySmall!.color!
             .withValues(alpha: 0.25),
         thumbIcon: (activeIcon == null && inactiveIcon == null)
             ? null
@@ -47,8 +45,8 @@ class SettingsToggleRow extends StatelessWidget {
                   icon,
                   size: 14,
                   color: isOn
-                      ? Theme.of(context).primaryColor
-                      : Theme.of(context).textTheme.bodySmall!.color,
+                      ? context.theme.primaryColor
+                      : context.textTheme.bodySmall!.color,
                 );
               }),
       ),

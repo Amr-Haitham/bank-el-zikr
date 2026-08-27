@@ -137,6 +137,9 @@
   "asr": "العصر",
   "fajrAndAsr": "الفجر والعصر",
   "locationRequiredForReminders": "إذن الموقع غير مفعّل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار",
+  "locationServicesOffForReminders": "خدمة الموقع غير مفعّلة في هاتفك. فعّلها من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار",
+  "locationUnavailableForReminders": "تعذّر تحديد موقعك. تحقق من الاتصال وحاول مرة أخرى",
+  "openSettingsAction": "فتح الإعدادات",
   "nextReminderText": "{adhkarName} خلال {duration} · {time}",
   "@nextReminderText": {
     "placeholders": {

@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
@@ -22,7 +23,7 @@ class AccountBalanceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       body: SafeArea(
         child: BlocBuilder<DayRecordCubit, RequestState<List<DayRecordEntity>>>(
           builder: (context, state) {
@@ -41,9 +42,7 @@ class AccountBalanceScreen extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context).mySpiritualJourney,
                         textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall!
+                        style: context.textTheme.headlineSmall!
                             .copyWith(fontSize: 22),
                       ),
                       const SizedBox(height: 20),

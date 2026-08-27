@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ZikrShareCard extends StatelessWidget {
@@ -31,7 +32,7 @@ class ZikrShareCard extends StatelessWidget {
               fontFamily: 'Tajawal',
               fontSize: 24,
               fontWeight: FontWeight.w700,
-              color: Color(0xff1A1A1A),
+              color: appDark,
             ),
           ),
           if (translation != null) ...[
@@ -43,14 +44,14 @@ class ZikrShareCard extends StatelessWidget {
               style: const TextStyle(
                 fontSize: 15,
                 fontStyle: FontStyle.italic,
-                color: Color(0xff5A5A5A),
+                color: mutedTextLight,
               ),
             ),
           ],
           const SizedBox(height: 28),
           Container(
             height: 1,
-            color: const Color(0xffE5E5E5),
+            color: dividerLight,
           ),
           const SizedBox(height: 16),
           Text(
@@ -59,7 +60,7 @@ class ZikrShareCard extends StatelessWidget {
               fontFamily: 'Tajawal',
               fontSize: 14,
               fontWeight: FontWeight.w700,
-              color: Color(0xff34C759),
+              color: primaryGreen,
             ),
           ),
         ],

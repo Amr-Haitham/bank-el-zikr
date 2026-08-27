@@ -3,6 +3,7 @@ import 'package:bank_el_ziker/core/constants/colors.dart';
 import 'package:bank_el_ziker/core/constants/initial_data.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_text_field.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/popup_functions.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/update_current_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/delete_zikr_record_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
@@ -93,9 +94,7 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
     return GestureDetector(
       onTap: () {
         if (edittedZikerContentController.text.trim().isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('الرجاء إدخال نص الذكر')),
-          );
+          context.showWarningNotification(message: 'الرجاء إدخال نص الذكر');
           return;
         }
 
@@ -113,13 +112,13 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
         width: double.infinity,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(39),
-          color: Theme.of(context).primaryColor,
+          color: context.theme.primaryColor,
         ),
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(ConstantValues.spacingLg),
             child: Text('حفظ',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                style: context.textTheme.bodyMedium!.copyWith(
                     color:
                         GeneralUtils.isLightTheme(context) ? appWhite : appDark,
                     fontWeight: FontWeight.w700)),
@@ -163,7 +162,7 @@ class _EditCustomZikerPopupState extends State<EditCustomZikerPopup> {
             border: Border.all(width: 1, color: appRed)),
         child: const Center(
           child: Padding(
-            padding: EdgeInsets.all(16),
+            padding: EdgeInsets.all(ConstantValues.spacingLg),
             child: Text(
               'حذف الذكر',
               style: TextStyle(

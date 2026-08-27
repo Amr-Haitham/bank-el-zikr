@@ -82,6 +82,7 @@ import '../../features/notifications/domain/repositories/location_repository.dar
 import '../../features/notifications/domain/repositories/notification_scheduler_repository.dart';
 import '../../features/notifications/domain/usecases/get_current_coordinates.dart';
 import '../../features/notifications/domain/usecases/get_prayer_times.dart';
+import '../../features/notifications/domain/usecases/open_location_settings.dart';
 import '../../features/notifications/domain/usecases/schedule_adhkar_reminders.dart';
 import '../../features/notifications/presentation/cubit/prayer_times_cubit.dart';
 
@@ -542,6 +543,7 @@ void _setUpSettingsBlocs() {
       updateSettings: getService<UpdateSettings>(),
       scheduleAdhkarReminders: getService<ScheduleAdhkarReminders>(),
       getCurrentCoordinates: getService<GetCurrentCoordinates>(),
+      openLocationSettings: getService<OpenLocationSettings>(),
     ),
   );
 }
@@ -580,6 +582,9 @@ void _setUpNotificationsUseCases() {
   _getIt.registerLazySingleton<GetPrayerTimes>(() => GetPrayerTimes());
   _getIt.registerLazySingleton<GetCurrentCoordinates>(
     () => GetCurrentCoordinates(getService<LocationRepository>()),
+  );
+  _getIt.registerLazySingleton<OpenLocationSettings>(
+    () => OpenLocationSettings(getService<LocationRepository>()),
   );
   _getIt.registerLazySingleton<ScheduleAdhkarReminders>(
     () => ScheduleAdhkarReminders(

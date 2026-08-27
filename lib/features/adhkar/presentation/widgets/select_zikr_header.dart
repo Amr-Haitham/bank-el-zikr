@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 class SelectZikrHeader extends StatelessWidget {
@@ -15,21 +16,21 @@ class SelectZikrHeader extends StatelessWidget {
         IconButton(
           onPressed: onAddPressed,
           style: IconButton.styleFrom(
-              backgroundColor: Theme.of(context).primaryColor),
+              backgroundColor: context.theme.primaryColor),
           icon: Icon(
             Icons.add,
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: context.colors.onPrimary,
           ),
         ),
         Text(
           "اختر الذكر",
-          style: Theme.of(context).textTheme.headlineSmall,
+          style: context.textTheme.headlineSmall,
         ),
         GestureDetector(
           onTap: () => context.router.maybePop(),
           child: Icon(
             Icons.arrow_forward,
-            color: Theme.of(context).textTheme.bodyLarge!.color,
+            color: context.textTheme.bodyLarge!.color,
           ),
         ),
       ],

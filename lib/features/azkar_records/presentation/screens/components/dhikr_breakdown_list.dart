@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
@@ -50,7 +51,7 @@ class DhikrBreakdownList extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -64,9 +65,7 @@ class DhikrBreakdownList extends StatelessWidget {
                   AppLocalizations.of(context).dhikrBreakdown,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
+                  style: context.textTheme.bodyMedium!
                       .copyWith(fontSize: 16, fontWeight: FontWeight.w700),
                 ),
               ),
@@ -87,12 +86,8 @@ class DhikrBreakdownList extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: Text(
                 AppLocalizations.of(context).noDhikrRecorded,
-                style: TextStyle(
-                  fontSize: 13,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
+                style: context.textTheme.bodySmall!.copyWith(
+                  color: context.textTheme.bodySmall!.color!
                       .withValues(alpha: 0.5),
                 ),
               ),
@@ -110,12 +105,8 @@ class DhikrBreakdownList extends StatelessWidget {
       child: Text(
         label,
         textAlign: TextAlign.center,
-        style: TextStyle(
-          fontSize: 11,
-          color: Theme.of(context)
-              .textTheme
-              .bodySmall!
-              .color!
+        style: context.textTheme.labelSmall!.copyWith(
+          color: context.textTheme.bodySmall!.color!
               .withValues(alpha: 0.5),
         ),
       ),
@@ -128,10 +119,7 @@ class DhikrBreakdownList extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
+            color: context.textTheme.bodySmall!.color!
                 .withValues(alpha: 0.1),
           ),
         ),
@@ -149,9 +137,7 @@ class DhikrBreakdownList extends StatelessWidget {
                   textDirection: TextDirection.rtl,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
+                  style: context.textTheme.bodyMedium!
                       .copyWith(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
                 if (row.transliteration != null) ...[
@@ -161,11 +147,9 @@ class DhikrBreakdownList extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                    style: context.textTheme.labelMedium!.copyWith(
                       fontStyle: FontStyle.italic,
-                      color: Theme.of(context).colorScheme.primary,
+                      color: context.colors.primary,
                     ),
                   ),
                 ],
@@ -176,12 +160,8 @@ class DhikrBreakdownList extends StatelessWidget {
                     textDirection: TextDirection.ltr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .color!
+                    style: context.textTheme.labelMedium!.copyWith(
+                      color: context.textTheme.bodySmall!.color!
                           .withValues(alpha: 0.6),
                     ),
                   ),
@@ -194,19 +174,16 @@ class DhikrBreakdownList extends StatelessWidget {
             context,
             formatNumber(context, row.weekCount),
             background:
-                Theme.of(context).colorScheme.primary.withValues(alpha: 0.12),
-            color: Theme.of(context).colorScheme.primary,
+                context.colors.primary.withValues(alpha: 0.12),
+            color: context.colors.primary,
           ),
           const SizedBox(width: 8),
           _countChip(
             context,
             formatNumber(context, row.monthCount),
-            background: Theme.of(context)
-                .textTheme
-                .bodySmall!
-                .color!
+            background: context.textTheme.bodySmall!.color!
                 .withValues(alpha: 0.08),
-            color: Theme.of(context).textTheme.bodyLarge!.color!,
+            color: context.textTheme.bodyLarge!.color!,
           ),
         ],
       ),

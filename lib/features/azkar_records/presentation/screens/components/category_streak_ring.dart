@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class CategoryStreakRing extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(24),
       ),
       child: Column(
@@ -47,7 +48,7 @@ class CategoryStreakRing extends StatelessWidget {
                   title,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  style: context.textTheme.bodyMedium!.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w800,
                       ),
@@ -61,7 +62,7 @@ class CategoryStreakRing extends StatelessWidget {
             style: TextStyle(
               fontSize: 40,
               fontWeight: FontWeight.w900,
-              color: Theme.of(context).textTheme.bodyLarge!.color,
+              color: context.textTheme.bodyLarge!.color,
               height: 1,
             ),
           ),
@@ -75,9 +76,7 @@ class CategoryStreakRing extends StatelessWidget {
             child: Text(
               AppLocalizations.of(context)
                   .longestStreakLabel(formatNumber(context, longestStreak)),
-              style: TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w800,
+              style: context.textTheme.labelSmall!.copyWith(
                 color: color,
               ),
             ),

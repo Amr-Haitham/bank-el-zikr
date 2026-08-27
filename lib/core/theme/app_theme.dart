@@ -40,6 +40,24 @@ class AppTheme {
 
   static TextTheme _textTheme(Color onSurface, Color onSurfaceMuted) {
     return TextTheme(
+      displayLarge: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 34,
+        fontWeight: FontWeight.w900,
+        color: onSurface,
+      ),
+      displayMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 28,
+        fontWeight: FontWeight.w900,
+        color: onSurface,
+      ),
+      displaySmall: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 24,
+        fontWeight: FontWeight.w800,
+        color: onSurface,
+      ),
       headlineLarge: TextStyle(
         fontFamily: 'Tajawal',
         fontSize: 24,
@@ -54,13 +72,13 @@ class AppTheme {
       ),
       headlineSmall: TextStyle(
         fontFamily: 'Tajawal',
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: FontWeight.w900,
         color: onSurface,
       ),
       titleLarge: TextStyle(
         fontFamily: 'Tajawal',
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: FontWeight.w800,
         color: onSurface,
       ),
@@ -70,25 +88,43 @@ class AppTheme {
         fontWeight: FontWeight.w800,
         color: onSurface,
       ),
+      titleSmall: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 14,
+        fontWeight: FontWeight.w700,
+        color: onSurface,
+      ),
       bodyLarge: TextStyle(
         fontFamily: 'Tajawal',
         fontSize: 16,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w500,
         color: onSurface,
       ),
       bodyMedium: TextStyle(
         fontFamily: 'Tajawal',
-        fontSize: 12,
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        color: onSurface,
+      ),
+      bodySmall: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 13,
         fontWeight: FontWeight.w500,
         color: onSurfaceMuted,
       ),
       labelLarge: TextStyle(
         fontFamily: 'Tajawal',
-        fontSize: 12,
+        fontSize: 14,
         fontWeight: FontWeight.w800,
         color: onSurface,
       ),
       labelMedium: TextStyle(
+        fontFamily: 'Tajawal',
+        fontSize: 13,
+        fontWeight: FontWeight.w700,
+        color: onSurfaceMuted,
+      ),
+      labelSmall: TextStyle(
         fontFamily: 'Tajawal',
         fontSize: 12,
         fontWeight: FontWeight.w700,
@@ -149,13 +185,13 @@ class AppTheme {
     cardColor: surfaceDark,
     dialogTheme: DialogThemeData(
       shape: AppTheme.dialogShape(),
-      backgroundColor: const Color(0xff1E1E1E),
+      backgroundColor: dialogBackgroundDark,
     ),
     appBarTheme: const AppBarTheme(
       iconTheme: IconThemeData(
         color: appDark,
       ),
-      backgroundColor: Color(0xff27313D),
+      backgroundColor: appBarBackgroundDark,
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarIconBrightness: Brightness.light,
         statusBarBrightness: Brightness.dark,

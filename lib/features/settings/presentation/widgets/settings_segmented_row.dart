@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 import 'settings_row_container.dart';
@@ -33,7 +34,7 @@ class SettingsSegmentedRow extends StatelessWidget {
       control: Container(
         padding: const EdgeInsets.all(3),
         decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
+          color: context.theme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(20),
         ),
         child: Row(
@@ -48,7 +49,7 @@ class SettingsSegmentedRow extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
                 decoration: BoxDecoration(
                   color: isSelected
-                      ? Theme.of(context).primaryColor
+                      ? context.theme.primaryColor
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(18),
                 ),
@@ -60,10 +61,7 @@ class SettingsSegmentedRow extends StatelessWidget {
                     fontWeight: FontWeight.w700,
                     color: isSelected
                         ? Colors.white
-                        : Theme.of(context)
-                            .textTheme
-                            .bodySmall!
-                            .color!
+                        : context.textTheme.bodySmall!.color!
                             .withValues(alpha: 0.6),
                   ),
                 ),

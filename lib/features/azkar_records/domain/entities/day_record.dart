@@ -24,6 +24,13 @@ class DayRecordEntity extends Equatable {
 
   int get totalZikrCount => repsByZikrKey.values.fold(0, (a, b) => a + b);
 
+  bool get isToday {
+    final now = DateTime.now();
+    return date.year == now.year &&
+        date.month == now.month &&
+        date.day == now.day;
+  }
+
   bool get isActive =>
       totalZikrCount > 0 ||
       morningCompleted ||

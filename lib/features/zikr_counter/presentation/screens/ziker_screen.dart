@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/haptics.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
@@ -77,7 +78,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
       ),
-      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+      backgroundColor: context.theme.scaffoldBackgroundColor,
       context: context,
       builder: (context) {
         return GoalSettingBottomSheet(
@@ -96,7 +97,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
             settingsState.whenOrNull(success: (s) => s.isVibrating) ?? true;
 
         return Scaffold(
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: context.theme.scaffoldBackgroundColor,
           body: SafeArea(
             child: Padding(
               padding: const EdgeInsets.only(
@@ -133,9 +134,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                 Text(
                                   AppLocalizations.of(context).digitalTasbih,
                                   textAlign: TextAlign.center,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall!
+                                  style: context.textTheme.headlineSmall!
                                       .copyWith(fontSize: 22),
                                 ),
                                 const SizedBox(height: 6),

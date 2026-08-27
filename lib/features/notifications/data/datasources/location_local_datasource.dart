@@ -1,8 +1,21 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+class LocationPermissionDeniedException implements Exception {
+  const LocationPermissionDeniedException();
+}
+
+class LocationServiceDisabledException implements Exception {
+  const LocationServiceDisabledException();
+}
+
+class LocationUnavailableException implements Exception {
+  const LocationUnavailableException();
+}
+
 abstract class LocationLocalDataSource {
   Future<({double latitude, double longitude})> getCurrentCoordinates();
+  Future<void> openLocationSettings();
 }
 
 class LocationLocalDataSourceImpl implements LocationLocalDataSource {
@@ -18,20 +31,20 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
     var permission = await Geolocator.checkPermission();
 
-    if (permission == LocationPermission.denied) {
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.unableToDetermine) {
       permission = await Geolocator.requestPermission();
     }
 
     if (permission == LocationPermission.denied ||
         permission == LocationPermission.deniedForever) {
-      throw Exception('Location permission denied.');
+      throw const LocationPermissionDeniedException();
     }
 
-    final permissionGranted = permission == LocationPermission.always ||
-        permission == LocationPermission.whileInUse;
-
-    if (!serviceEnabled || !permissionGranted) {
-      return _lastKnownOrThrow();
+    if (!serviceEnabled) {
+      final cached = _cachedCoordinates();
+      if (cached != null) return cached;
+      throw const LocationServiceDisabledException();
     }
 
     try {
@@ -44,16 +57,21 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
       await sharedPreferences.setDouble(_longitudeKey, position.longitude);
       return (latitude: position.latitude, longitude: position.longitude);
     } catch (_) {
-      return _lastKnownOrThrow();
+      final cached = _cachedCoordinates();
+      if (cached != null) return cached;
+      throw const LocationUnavailableException();
     }
   }
 
-  ({double latitude, double longitude}) _lastKnownOrThrow() {
+  ({double latitude, double longitude})? _cachedCoordinates() {
     final latitude = sharedPreferences.getDouble(_latitudeKey);
     final longitude = sharedPreferences.getDouble(_longitudeKey);
-    if (latitude == null || longitude == null) {
-      throw Exception('Location unavailable and no cached location found.');
-    }
+    if (latitude == null || longitude == null) return null;
     return (latitude: latitude, longitude: longitude);
+  }
+
+  @override
+  Future<void> openLocationSettings() async {
+    await Geolocator.openLocationSettings();
   }
 }

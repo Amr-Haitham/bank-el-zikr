@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
 /// The dark rounded-card row shell shared by every settings row —
@@ -18,7 +19,7 @@ class SettingsRowContainer extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(18),
       ),
       child: Row(
@@ -26,9 +27,7 @@ class SettingsRowContainer extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
+            style: context.textTheme.bodyMedium!
                 .copyWith(fontSize: 15, fontWeight: FontWeight.w600),
           ),
           control,

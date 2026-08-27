@@ -1,3 +1,5 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -21,9 +23,9 @@ class TasbihStatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 12),
+      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: ConstantValues.spacingMd),
       decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
+        color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -32,7 +34,7 @@ class TasbihStatsCard extends StatelessWidget {
             child: _StatColumn(
               label: AppLocalizations.of(context).balanceLabel,
               value: formatNumber(context, balance),
-              valueColor: Theme.of(context).primaryColor,
+              valueColor: context.theme.primaryColor,
             ),
           ),
           _divider(context),
@@ -40,7 +42,7 @@ class TasbihStatsCard extends StatelessWidget {
             child: _StatColumn(
               label: AppLocalizations.of(context).lapsLabel,
               value: formatNumber(context, laps),
-              valueColor: Theme.of(context).primaryColor,
+              valueColor: context.theme.primaryColor,
             ),
           ),
           _divider(context),
@@ -50,7 +52,7 @@ class TasbihStatsCard extends StatelessWidget {
               value: goal != null
                   ? "${formatNumber(context, currentCounter)}/${formatNumber(context, goal!)}"
                   : "-",
-              valueColor: Theme.of(context).primaryColor,
+              valueColor: context.theme.primaryColor,
               onEdit: onEditGoal,
             ),
           ),
@@ -64,7 +66,7 @@ class TasbihStatsCard extends StatelessWidget {
       width: 1,
       height: 34,
       color:
-          Theme.of(context).textTheme.bodySmall!.color!.withValues(alpha: 0.15),
+          context.textTheme.bodySmall!.color!.withValues(alpha: 0.15),
     );
   }
 }
@@ -93,12 +95,8 @@ class _StatColumn extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyle(
-                fontSize: 12,
-                color: Theme.of(context)
-                    .textTheme
-                    .bodySmall!
-                    .color!
+              style: context.textTheme.labelSmall!.copyWith(
+                color: context.textTheme.bodySmall!.color!
                     .withValues(alpha: 0.6),
               ),
             ),
@@ -106,10 +104,7 @@ class _StatColumn extends StatelessWidget {
               const SizedBox(width: 4),
               Icon(Icons.edit,
                   size: 14,
-                  color: Theme.of(context)
-                      .textTheme
-                      .bodySmall!
-                      .color!
+                  color: context.textTheme.bodySmall!.color!
                       .withValues(alpha: 0.6)),
             ],
           ],
@@ -132,7 +127,7 @@ class _StatColumn extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       onTap: onEdit,
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
         child: column,
       ),
     );

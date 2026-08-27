@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/get_all_azkar_cubit.dart';
@@ -54,8 +55,8 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                     maxLines: 4,
                     minFontSize: 14,
-                    style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                        color: Theme.of(context).primaryColor,
+                    style: context.textTheme.headlineSmall!.copyWith(
+                        color: context.theme.primaryColor,
                         fontSize: 26,
                         fontWeight: FontWeight.w700),
                   ),
@@ -69,8 +70,7 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 14, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Theme.of(context)
-                            .primaryColor
+                        color: context.theme.primaryColor
                             .withValues(alpha: 0.1),
                         borderRadius: BorderRadius.circular(20),
                       ),
@@ -78,14 +78,14 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Icon(Icons.swap_horiz_rounded,
-                              color: Theme.of(context).primaryColor, size: 18),
+                              color: context.theme.primaryColor, size: 18),
                           const SizedBox(width: 6),
                           Text(
                             AppLocalizations.of(context).chooseZikr,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w600,
-                              color: Theme.of(context).primaryColor,
+                              color: context.theme.primaryColor,
                             ),
                           ),
                         ],
@@ -105,7 +105,7 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                       fontSize: _captionFontSize(currentZikr.contentTransliteration!),
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.italic,
-                      color: Theme.of(context).primaryColor,
+                      color: context.theme.primaryColor,
                     ),
                   ),
                 ],
@@ -119,10 +119,7 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontSize: _captionFontSize(currentZikr.contentEn!),
-                      color: Theme.of(context)
-                          .textTheme
-                          .bodySmall!
-                          .color!
+                      color: context.textTheme.bodySmall!.color!
                           .withValues(alpha: 0.7),
                     ),
                   ),

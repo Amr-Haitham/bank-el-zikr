@@ -14,6 +14,8 @@ extension ContextExtension on BuildContext {
     String message, {
     String? title,
     SnackBarType type = SnackBarType.success,
+    String? actionLabel,
+    VoidCallback? onAction,
   }) {
     final color = switch (type) {
       SnackBarType.success => Colors.green,
@@ -63,6 +65,9 @@ extension ContextExtension on BuildContext {
       ),
       duration: Duration(
           milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
+      action: actionLabel == null || onAction == null
+          ? null
+          : SnackBarAction(label: actionLabel, onPressed: onAction, textColor: color),
     );
   }
 
@@ -70,17 +75,35 @@ extension ContextExtension on BuildContext {
     String message, {
     String? title,
     SnackBarType type = SnackBarType.success,
+    String? actionLabel,
+    VoidCallback? onAction,
   }) {
-    ScaffoldMessenger.of(this)
-        .showSnackBar(buildSnackBar(message, title: title, type: type));
+    ScaffoldMessenger.of(this).showSnackBar(buildSnackBar(
+      message,
+      title: title,
+      type: type,
+      actionLabel: actionLabel,
+      onAction: onAction,
+    ));
   }
 
   void showSuccessNotification({String? title, required String message}) {
     showSnackBar(message, title: title, type: SnackBarType.success);
   }
 
-  void showErrorNotification({String? title, required String message}) {
-    showSnackBar(message, title: title, type: SnackBarType.error);
+  void showErrorNotification({
+    String? title,
+    required String message,
+    String? actionLabel,
+    VoidCallback? onAction,
+  }) {
+    showSnackBar(
+      message,
+      title: title,
+      type: SnackBarType.error,
+      actionLabel: actionLabel,
+      onAction: onAction,
+    );
   }
 
   void showWarningNotification({String? title, required String message}) {

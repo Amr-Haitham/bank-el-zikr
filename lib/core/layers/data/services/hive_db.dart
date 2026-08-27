@@ -22,6 +22,18 @@ const prayerHiveBox = "prayerHiveBox";
 const versionCheckHiveBox = "versionCheckHiveBox";
 const ratePromptStateHiveBox = "ratePromptStateHiveBox";
 
+/// Normalizes zikr text for the old-id -> new-key content match below —
+/// strips Arabic tatweel/kashida (U+0640, purely decorative elongation used
+/// in older builds' justified-text formatting) and collapses/trims
+/// whitespace, so cosmetic formatting differences between builds don't mask
+/// an otherwise-identical dua and silently drop a user's logged history.
+String _normalizeForMatch(String text) {
+  return text
+      .replaceAll('ـ', '')
+      .replaceAll(RegExp(r'\s+'), ' ')
+      .trim();
+}
+
 class HiveDB {
   static initHiveDB() async {
     await Hive.initFlutter();
@@ -74,7 +86,7 @@ class HiveDB {
 
   Future<void> setupInitHiveDbDataIfNonExisting() async {
     var zikrBox = await openAndGetBox<Zikr>(boxName: zikrHiveBox);
-    await openAndGetBox<Zikr>(boxName: customAzkarHiveBox);
+    var customAzkarBox = await openAndGetBox<Zikr>(boxName: customAzkarHiveBox);
     var generalDataBox =
         await openAndGetBox<GeneralData>(boxName: generalDataHiveBox);
     var dayRecordBox = await openAndGetBox<DayRecord>(boxName: dayRecordHiveBox);
@@ -97,14 +109,19 @@ class HiveDB {
       // Build the old-int-id -> new-key mapping from whatever built-in Zikr
       // content is currently on disk, before it gets cleared below. Matched
       // by content string (position/id in the old box isn't a reliable
-      // guide once content has changed across releases).
+      // guide once content has changed across releases) — normalized to
+      // collapse whitespace differences (e.g. old triple-quoted strings with
+      // trailing newlines/extra spaces vs. today's single-line strings)
+      // that would otherwise silently break an exact-string match despite
+      // the underlying wording being identical.
       final Map<int, String> oldIdToNewKey = {};
       if (zikrBox.isNotEmpty) {
         final contentToNewKey = <String, String>{
-          for (final entity in allSeedZikr) entity.content: entity.key,
+          for (final entity in allSeedZikr)
+            _normalizeForMatch(entity.content): entity.key,
         };
         for (final oldZikr in zikrBox.values) {
-          final newKey = contentToNewKey[oldZikr.content];
+          final newKey = contentToNewKey[_normalizeForMatch(oldZikr.content)];
           if (newKey != null) {
             oldIdToNewKey[oldZikr.id] = newKey;
           }
@@ -156,6 +173,22 @@ class HiveDB {
               id,
               DayRecord(
                   id: id, date: dayDate, repsByZikrKey: repsByZikrKey));
+        }
+      }
+
+      // Backfill zikrKey for custom azkar created before that field existed
+      // (defaults to '' via @HiveField(13, defaultValue: '') on old
+      // records) — every such record would otherwise share the same empty
+      // key, making them indistinguishable to anything that looks up a
+      // zikr by key (e.g. the zikr picker's "is this the selected one"
+      // check, the tasbih counter's "current zikr" resolution) — with two
+      // or more empty-keyed custom azkar, the picker would show all of
+      // them as selected at once, and picking one could silently resolve
+      // to a different one.
+      for (final zikr in customAzkarBox.values) {
+        if (zikr.zikrKey.isEmpty) {
+          zikr.zikrKey = generateCustomZikrKey();
+          await zikr.save();
         }
       }
 

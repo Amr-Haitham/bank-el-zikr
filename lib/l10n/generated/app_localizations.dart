@@ -698,6 +698,24 @@ abstract class AppLocalizations {
   /// **'إذن الموقع غير مفعّل. فعّله لتطبيق بنك الذكر من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار'**
   String get locationRequiredForReminders;
 
+  /// No description provided for @locationServicesOffForReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'خدمة الموقع غير مفعّلة في هاتفك. فعّلها من إعدادات هاتفك لتتمكن من تفعيل تذكير الأذكار'**
+  String get locationServicesOffForReminders;
+
+  /// No description provided for @locationUnavailableForReminders.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذّر تحديد موقعك. تحقق من الاتصال وحاول مرة أخرى'**
+  String get locationUnavailableForReminders;
+
+  /// No description provided for @openSettingsAction.
+  ///
+  /// In ar, this message translates to:
+  /// **'فتح الإعدادات'**
+  String get openSettingsAction;
+
   /// No description provided for @nextReminderText.
   ///
   /// In ar, this message translates to:

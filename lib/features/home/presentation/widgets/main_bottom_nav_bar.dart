@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class MainBottomNavBar extends StatelessWidget {
     final isLight = GeneralUtils.isLightTheme(context);
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
+        color: context.theme.bottomNavigationBarTheme.backgroundColor,
         border: Border(
           top: BorderSide(
             color:
@@ -39,7 +40,7 @@ class MainBottomNavBar extends StatelessWidget {
             children: List.generate(items.length, (index) {
               final isActive = tabsRouter.activeIndex == index;
               final color = isActive
-                  ? Theme.of(context).primaryColor
+                  ? context.theme.primaryColor
                   : (isLight ? Colors.grey : Colors.grey.shade600);
               return GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -53,7 +54,7 @@ class MainBottomNavBar extends StatelessWidget {
                       items[index].label,
                       style: TextStyle(
                         color: color,
-                        fontSize: 11,
+                        fontSize: 13,
                         fontWeight:
                             isActive ? FontWeight.w700 : FontWeight.w500,
                       ),
