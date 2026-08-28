@@ -36,9 +36,9 @@ class InitialData {
         contentTransliteration: "La ilaha illa Allah",
         contentEn: "There is no god but Allah",
         descriptionEn:
-            "The Prophet ﷺ said: Allah has forbidden the Fire for whoever says \"There is no god but Allah\", seeking thereby the Face of Allah. (Bukhari)",
+            "The Prophet ﷺ said: Allah has forbidden the Fire for whoever says \"There is no god but Allah\", seeking thereby the Face of Allah. (Agreed upon)",
         description:
-            "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). رواه البخاري"),
+            "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). متفق عليه"),
     const ZikrEntity(
         id: 4,
         key: 'general_004',
@@ -145,9 +145,9 @@ class InitialData {
         contentEn:
             "Glory be to Allah and praise Him, glory be to Allah the Almighty",
         descriptionEn:
-            "The Prophet ﷺ said: Two phrases that are light on the tongue, heavy on the scale, and beloved to the Most Merciful: \"Glory be to Allah and praise Him, glory be to Allah the Almighty.\" (Bukhari)",
+            "The Prophet ﷺ said: Two phrases that are light on the tongue, heavy on the scale, and beloved to the Most Merciful: \"Glory be to Allah and praise Him, glory be to Allah the Almighty.\" (Agreed upon)",
         description:
-            "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). رواه البخاري"),
+            "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). متفق عليه"),
     const ZikrEntity(
         id: 13,
         key: 'general_013',
@@ -258,7 +258,7 @@ class InitialData {
         key: 'morning_008',
         category: 'morning',
         content:
-            """اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.""",
+            """اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.""",
         count: 4,
         contentTransliteration:
             "Allahumma inni asbahtu ush-hiduka, wa ush-hidu hamalata 'arshik, wa mala'ikataka, wa jami'a khalqik, annaka antallahu la ilaha illa anta wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
@@ -618,7 +618,7 @@ class InitialData {
         key: 'evening_009',
         category: 'evening',
         content:
-            """اللّهُـمَّ إِنِّـي أَمسيتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك. """,
+            """اللّهُـمَّ إِنِّـي أَمسيتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك. """,
         count: 4,
         contentTransliteration:
             "Allahumma inni amsaytu ush-hiduka, wa ush-hidu hamalata 'arshik, wa mala'ikataka, wa jami'a khalqik, annaka antallahu la ilaha illa anta wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
@@ -1272,7 +1272,7 @@ class InitialData {
         contentEn:
             "Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves, and to our Lord we will surely return.",
         description: """
-لِتَسْتَوُوا عَلَىٰ ظُهُورِهِ ثُمَّ تَذْكُرُوا نِعْمَةَ رَبِّكُمْ إِذَا اسْتَوَيْتُمْ عَلَيْهِ وَتَقُولُوا سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ (13) وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ [الزخرف 14]
+لِتَسْتَوُوا عَلَىٰ ظُهُورِهِ ثُمَّ تَذْكُرُوا نِعْمَةَ رَبِّكُمْ إِذَا اسْتَوَيْتُمْ عَلَيْهِ وَتَقُولُوا سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ (13) وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ [الزخرف 13 - 14]
 """,
         descriptionEn:
             "\"That you may settle yourselves upon their backs and then remember the favor of your Lord when you have settled upon them and say: 'Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves. And indeed we, to our Lord, will return.'\" (Az-Zukhruf 13-14)"),
@@ -1297,6 +1297,24 @@ class InitialData {
     const ZikrEntity(
         id: 27,
         key: 'condition_027',
+        category: 'afterEating',
+        titleEn: "After Eating",
+        count: 1,
+        title: "دعاء بعد الأكل",
+        content:
+            "الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة",
+        contentTransliteration:
+            "Alhamdu lillahilladhi at'amani hadha, wa razaqanihi min ghayri hawlin minni wa la quwwah.",
+        contentEn:
+            "Praise be to Allah who fed me this and provided it for me without any might or power on my part.",
+        description: """
+عَنْ مُعَاذِ بْنِ أَنَسٍ رضي الله عنه، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: مَنْ أَكَلَ طَعَامًا فَقَالَ: الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة، غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ.
+رواه أبو داود والترمذي وابن ماجه""",
+        descriptionEn:
+            "Mu'adh ibn Anas (may Allah be pleased with him) reported that the Prophet ﷺ said: \"Whoever eats food and then says: [the above], his previous sins will be forgiven.\" Reported by Abu Dawud, at-Tirmidhi, and Ibn Majah."),
+    const ZikrEntity(
+        id: 28,
+        key: 'condition_028',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1310,8 +1328,8 @@ class InitialData {
         descriptionEn:
             "Whenever the Prophet ﷺ wanted to sleep he would say the above. Narrated by Hudhayfah ibn al-Yaman, reported by al-Bukhari."),
     const ZikrEntity(
-        id: 28,
-        key: 'condition_028',
+        id: 29,
+        key: 'condition_029',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1328,8 +1346,8 @@ class InitialData {
         descriptionEn:
             "Whoever recites Ayat al-Kursi when he goes to his bed, a guardian from Allah remains with him and no devil will come near him until morning. Reported by al-Bukhari."),
     const ZikrEntity(
-        id: 29,
-        key: 'condition_029',
+        id: 30,
+        key: 'condition_030',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1346,8 +1364,8 @@ class InitialData {
         descriptionEn:
             "Whoever recites these two ayahs at night, they will suffice him. Agreed upon."),
     const ZikrEntity(
-        id: 30,
-        key: 'condition_030',
+        id: 31,
+        key: 'condition_031',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1360,8 +1378,8 @@ class InitialData {
         descriptionEn:
             "A'ishah (may Allah be pleased with her) reported that whenever the Prophet ﷺ went to his bed every night, he would join his palms together, blow into them, and recite Al-Ikhlas, Al-Falaq, and An-Nas, then wipe as much of his body as he could with them, starting with his head and face and the front of his body, doing so three times. Reported by al-Bukhari."),
     const ZikrEntity(
-        id: 31,
-        key: 'condition_031',
+        id: 32,
+        key: 'condition_032',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1378,8 +1396,8 @@ class InitialData {
         descriptionEn:
             "Abdullah ibn Umar (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ taught a man to say the above when he lay down to sleep. Reported by Muslim."),
     const ZikrEntity(
-        id: 32,
-        key: 'condition_032',
+        id: 33,
+        key: 'condition_033',
         category: 'sleep',
         titleEn: "Sleep",
         count: 3,
@@ -1395,8 +1413,8 @@ class InitialData {
         descriptionEn:
             "Al-Bara' ibn 'Azib (may Allah be pleased with him) reported that the Prophet ﷺ told him: \"When you go to your bed, say the above,\" three times. Reported by Abu Dawud and at-Tirmidhi."),
     const ZikrEntity(
-        id: 33,
-        key: 'condition_033',
+        id: 34,
+        key: 'condition_034',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1413,8 +1431,8 @@ class InitialData {
         descriptionEn:
             "Ibn 'Abbas (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ, whenever he went to his bed, would say the above. Reported by at-Tirmidhi and Abu Dawud."),
     const ZikrEntity(
-        id: 34,
-        key: 'condition_034',
+        id: 35,
+        key: 'condition_035',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1431,8 +1449,8 @@ class InitialData {
         descriptionEn:
             "Al-Bara' ibn 'Azib (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said to him: \"When you go to your bed, perform ablution as you would for prayer, then lie on your right side, then say the above; for if you die that night, you die upon the natural state (fitrah).\" Agreed upon."),
     const ZikrEntity(
-        id: 35,
-        key: 'condition_035',
+        id: 36,
+        key: 'condition_036',
         category: 'sleep',
         titleEn: "Sleep",
         count: 33,
@@ -1446,8 +1464,8 @@ class InitialData {
         descriptionEn:
             "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
     const ZikrEntity(
-        id: 36,
-        key: 'condition_036',
+        id: 37,
+        key: 'condition_037',
         category: 'sleep',
         titleEn: "Sleep",
         count: 33,
@@ -1461,8 +1479,8 @@ class InitialData {
         descriptionEn:
             "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
     const ZikrEntity(
-        id: 37,
-        key: 'condition_037',
+        id: 38,
+        key: 'condition_038',
         category: 'sleep',
         titleEn: "Sleep",
         count: 34,
@@ -1476,8 +1494,8 @@ class InitialData {
         descriptionEn:
             "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
     const ZikrEntity(
-        id: 38,
-        key: 'condition_038',
+        id: 39,
+        key: 'condition_039',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1494,8 +1512,8 @@ class InitialData {
         descriptionEn:
             "Farwah ibn Nawfal reported from his father that he came to the Prophet ﷺ and said: \"Teach me something to say when I go to sleep.\" He said: \"Recite Al-Kafirun, for it is a declaration of freedom from shirk.\" Reported by Abu Dawud and at-Tirmidhi."),
     const ZikrEntity(
-        id: 39,
-        key: 'condition_039',
+        id: 40,
+        key: 'condition_040',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1509,8 +1527,8 @@ class InitialData {
         descriptionEn:
             "Ibn 'Abbas (may Allah be pleased with them both) reported that the Prophet ﷺ said: \"There is a surah in the Qur'an of thirty verses which will intercede for a man until he is forgiven — Surah al-Mulk (Tabarak).\" Reported by Abu Dawud and at-Tirmidhi, authenticated by al-Albani."),
     const ZikrEntity(
-        id: 40,
-        key: 'condition_040',
+        id: 41,
+        key: 'condition_041',
         category: 'sleep',
         titleEn: "Sleep",
         count: 1,
@@ -1794,6 +1812,23 @@ class InitialData {
             """أمر النبي ﷺ عقبة بن عامر أن يقرأ بالمعوذتين دبر كل صلاة. رواه أبو داود والترمذي وصححه الألباني.""",
         descriptionEn:
             "The Prophet ﷺ commanded 'Uqbah ibn 'Amir to recite al-Mu'awwidhatan after every prayer. Reported by Abu Dawud and at-Tirmidhi, authenticated by al-Albani."),
+    const ZikrEntity(
+        id: 43,
+        key: 'afterPrayer_009',
+        category: 'afterPrayer',
+        titleEn: "After Prayer",
+        count: 1,
+        title: 'اللهم أعني على ذكرك',
+        content: "اللهم أعني على ذكرك، وشكرك، وحسن عبادتك",
+        contentTransliteration:
+            "Allahumma a'inni 'ala dhikrika, wa shukrika, wa husni 'ibadatik.",
+        contentEn:
+            "O Allah, help me remember You, to be grateful to You, and to worship You in an excellent manner.",
+        description: """
+عَنْ مُعَاذِ بْنِ جَبَلٍ رضي الله عنه، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَخَذَ بِيَدِهِ وَقَالَ: يَا مُعَاذُ، وَاللَّهِ إِنِّي لَأُحِبُّكَ، فَقَالَ: أُوصِيكَ يَا مُعَاذُ لَا تَدَعَنَّ فِي دُبُرِ كُلِّ صَلَاةٍ تَقُولُ: اللهم أعني على ذكرك، وشكرك، وحسن عبادتك.
+رواه أبو داود والنسائي""",
+        descriptionEn:
+            "Mu'adh ibn Jabal (may Allah be pleased with him) reported that the Messenger of Allah ﷺ took his hand and said: \"O Mu'adh, by Allah, I love you.\" Then he said: \"I advise you, Mu'adh, never fail to say after every prayer: [the above].\" Reported by Abu Dawud and an-Nasa'i."),
   ];
 
   static List<PrayerEntity> prayers = [
@@ -2368,6 +2403,14 @@ class InitialData {
       titleEn: 'Ruqyah',
       icon: Icons.shield_outlined,
       color: categoryRuqyahTeal,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'afterEating',
+      title: 'بعد الأكل',
+      titleEn: 'After Eating',
+      icon: Icons.restaurant_outlined,
+      color: categoryEatingOrange,
       isTrackedDaily: false,
     ),
   ];
