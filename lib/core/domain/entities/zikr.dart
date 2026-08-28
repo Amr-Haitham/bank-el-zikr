@@ -44,6 +44,16 @@ class ZikrEntity extends Equatable {
     return title ?? content;
   }
 
+  static List<ZikrEntity> tasbihEligible(List<ZikrEntity> azkar) {
+    final filtered = azkar
+        .where((zikr) => zikr.category == 'general' || zikr.isCustomZikr)
+        .toList();
+    return [
+      ...filtered.where((z) => z.isCustomZikr),
+      ...filtered.where((z) => !z.isCustomZikr),
+    ];
+  }
+
   @override
   List<Object?> get props => [
         id,
