@@ -1621,6 +1621,41 @@ class InitialData {
 رواه البخاري""",
         descriptionEn:
             "A'ishah (may Allah be pleased with her) reported that whenever the Prophet ﷺ saw rain, he would say: [the above]. Reported by al-Bukhari."),
+    const ZikrEntity(
+        id: 45,
+        key: 'condition_045',
+        category: 'thunder',
+        titleEn: "Thunder",
+        count: 1,
+        title: "دعاء عند سماع الرعد",
+        content:
+            "سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلَائِكَةُ مِنْ خِيفَتِهِ",
+        contentTransliteration:
+            "Subhanal-ladhi yusabbihur-ra'du bihamdihi wal-mala'ikatu min khifatih.",
+        contentEn:
+            "Glory be to the One whom the thunder glorifies with His praise, and the angels too, out of fear of Him.",
+        description: """
+عَنْ عَبْدِ اللَّهِ بْنِ الزُّبَيْرِ رضي الله عنهما، أَنَّهُ كَانَ إِذَا سَمِعَ الرَّعْدَ تَرَكَ الْحَدِيثَ وَقَالَ: سُبْحَانَ الَّذِي يُسَبِّحُ الرَّعْدُ بِحَمْدِهِ وَالْمَلَائِكَةُ مِنْ خِيفَتِهِ، ثُمَّ يَقُولُ: إِنَّ هَذَا لَوَعِيدٌ شَدِيدٌ لِأَهْلِ الْأَرْضِ.
+رواه البخاري في الأدب المفرد، موقوفاً، وصححه الألباني""",
+        descriptionEn:
+            "Abdullah ibn az-Zubayr (may Allah be pleased with them both) would stop talking upon hearing thunder and say: [the above], then say: \"This is a stern warning to the people of the earth.\" Reported by al-Bukhari in Al-Adab al-Mufrad as the saying of the Companion, authenticated by al-Albani."),
+    const ZikrEntity(
+        id: 46,
+        key: 'condition_046',
+        category: 'wedding',
+        titleEn: "Wedding Blessing",
+        count: 1,
+        title: "دعاء تهنئة المتزوج",
+        content: "بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+        contentTransliteration:
+            "Baraka Allahu laka, wa baraka 'alayka, wa jama'a baynakuma fi khayr.",
+        contentEn:
+            "May Allah bless you, and shower His blessings upon you, and join you both together in goodness.",
+        description: """
+عَنْ أَبِي هُرَيْرَةَ رضي الله عنه، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا رَفَّأَ الْإِنْسَانَ إِذَا تَزَوَّجَ قَالَ: بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ.
+رواه أبو داود والترمذي وابن ماجه، وصححه الألباني""",
+        descriptionEn:
+            "Abu Hurayrah (may Allah be pleased with him) reported that whenever the Prophet ﷺ congratulated someone on their marriage, he would say: [the above]. Reported by Abu Dawud, at-Tirmidhi, and Ibn Majah, authenticated by al-Albani."),
   ];
 
   static List<ZikrEntity> ruqyahAzkar = [
@@ -2512,6 +2547,22 @@ class InitialData {
       titleEn: 'Rain',
       icon: Icons.water_drop_outlined,
       color: categoryRainBlue,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'thunder',
+      title: 'عند سماع الرعد',
+      titleEn: 'Thunder',
+      icon: Icons.thunderstorm_outlined,
+      color: categoryThunderSlateBlue,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'wedding',
+      title: 'تهنئة المتزوج',
+      titleEn: 'Wedding Blessing',
+      icon: Icons.favorite_outline,
+      color: categoryWeddingPink,
       isTrackedDaily: false,
     ),
   ];
