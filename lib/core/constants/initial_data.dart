@@ -159,6 +159,33 @@ class InitialData {
             "The Prophet ﷺ said to Abu Musa al-Ash'ari: Shall I not guide you to a treasure from the treasures of Paradise? \"There is no might nor power except with Allah.\" (Agreed upon)",
         description:
             "قال النبي ﷺ لأبي موسى الأشعري: (أَلَا أَدُلُّكَ عَلَى كَنْزٍ مِنْ كُنُوزِ الْجَنَّةِ؟ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ). مُتَّفَقٌ عَلَيْهِ"),
+    const ZikrEntity(
+        id: 14,
+        key: 'general_014',
+        category: 'general',
+        content:
+            "أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه",
+        contentTransliteration:
+            "Astaghfirullah al-'azim alladhi la ilaha illa huwal-hayyul-qayyumu wa atubu ilayh",
+        contentEn:
+            "I seek the forgiveness of Allah, the Mighty, besides Whom there is no god, the Ever-Living, the Sustainer, and I turn to Him in repentance",
+        descriptionEn:
+            "The Prophet ﷺ said: Whoever says the above, his sins will be forgiven even if he had fled from the battlefield. (Abu Dawud, at-Tirmidhi, and al-Hakim, who graded it sahih)",
+        description:
+            "قال رسول الله ﷺ: (مَنْ قَالَ: أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ الَّذِي لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ وَأَتُوبُ إِلَيْهِ، غُفِرَ لَهُ وَإِنْ كَانَ قَدْ فَرَّ مِنَ الزَّحْفِ). رواه أبو داود والترمذي وصححه الحاكم"),
+    const ZikrEntity(
+        id: 15,
+        key: 'general_015',
+        category: 'general',
+        content: "رضيت بالله ربا، وبالإسلام دينا، وبمحمد نبيا",
+        contentTransliteration:
+            "Radhitu billahi rabban, wa bil-Islami dinan, wa bi-Muhammadin nabiyyan",
+        contentEn:
+            "I am pleased with Allah as my Lord, with Islam as my religion, and with Muhammad as my Prophet",
+        descriptionEn:
+            "Abu Sa'id al-Khudri reported that the Messenger of Allah ﷺ said: Whoever is pleased with Allah as Lord, Islam as religion, and Muhammad as Prophet, Paradise is assured for him. (Muslim)",
+        description:
+            "عَنْ أَبِي سَعِيدٍ الْخُدْرِيِّ رضي الله عنه، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: (مَنْ رَضِيَ بِاللَّهِ رَبًّا، وَبِالْإِسْلَامِ دِينًا، وَبِمُحَمَّدٍ نَبِيًّا، وَجَبَتْ لَهُ الْجَنَّةُ). رواه مسلم"),
   ];
 
   static List<ZikrEntity> morningAzkar = [
@@ -1544,6 +1571,56 @@ class InitialData {
 رواه مسلم والترمذي""",
         descriptionEn:
             "Anas ibn Malik (may Allah be pleased with him) reported that the Messenger of Allah ﷺ, whenever he went to his bed, would say the above. Reported by Muslim and at-Tirmidhi."),
+    const ZikrEntity(
+        id: 42,
+        key: 'condition_042',
+        category: 'istikharah',
+        titleEn: "Istikharah (Seeking Guidance)",
+        count: 1,
+        title: "دعاء الاستخارة",
+        content:
+            "اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ، وَأَسْتَقْدِرُكَ بِقُدْرَتِكَ، وَأَسْأَلُكَ مِنْ فَضْلِكَ الْعَظِيمِ، فَإِنَّكَ تَقْدِرُ وَلَا أَقْدِرُ، وَتَعْلَمُ وَلَا أَعْلَمُ، وَأَنْتَ عَلَّامُ الْغُيُوبِ، اللَّهُمَّ إِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ خَيْرٌ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي فَاقْدُرْهُ لِي وَيَسِّرْهُ لِي ثُمَّ بَارِكْ لِي فِيهِ، وَإِنْ كُنْتَ تَعْلَمُ أَنَّ هَذَا الْأَمْرَ شَرٌّ لِي فِي دِينِي وَمَعَاشِي وَعَاقِبَةِ أَمْرِي فَاصْرِفْهُ عَنِّي وَاصْرِفْنِي عَنْهُ، وَاقْدُرْ لِيَ الْخَيْرَ حَيْثُ كَانَ ثُمَّ أَرْضِنِي بِهِ",
+        contentTransliteration:
+            "Allahumma inni astakhiruka bi'ilmik, wa astaqdiruka biqudratik, wa as'aluka min fadlikal-'azim, fa'innaka taqdiru wa la aqdir, wa ta'lamu wa la a'lam, wa anta 'allamul-ghuyub. Allahumma in kunta ta'lamu anna hadhal-amra khayrun li fi dini wa ma'ashi wa 'aqibati amri, faqdurhu li wa yassirhu li thumma barik li fih, wa in kunta ta'lamu anna hadhal-amra sharrun li fi dini wa ma'ashi wa 'aqibati amri, fasrifhu 'anni wasrifni 'anh, waqdur liyal-khayra haythu kana thumma ardini bih.",
+        contentEn:
+            "O Allah, I seek Your guidance by virtue of Your knowledge, and I seek ability by virtue of Your power, and I ask You of Your great bounty, for You are able and I am not, and You know and I do not, and You are the Knower of the unseen. O Allah, if You know this matter to be good for me in my religion, my livelihood, and the outcome of my affairs, then decree it for me, make it easy for me, and bless me in it. And if You know this matter to be bad for me in my religion, my livelihood, and the outcome of my affairs, then turn it away from me and turn me away from it, and decree for me the good wherever it may be, and make me pleased with it.",
+        description: """
+عَنْ جَابِرِ بْنِ عَبْدِ اللَّهِ رضي الله عنهما قَالَ: كَانَ رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ يُعَلِّمُنَا الِاسْتِخَارَةَ فِي الْأُمُورِ كُلِّهَا كَمَا يُعَلِّمُنَا السُّورَةَ مِنَ الْقُرْآنِ، يَقُولُ: إِذَا هَمَّ أَحَدُكُمْ بِالْأَمْرِ فَلْيَرْكَعْ رَكْعَتَيْنِ مِنْ غَيْرِ الْفَرِيضَةِ ثُمَّ لِيَقُلْ: اللَّهُمَّ إِنِّي أَسْتَخِيرُكَ بِعِلْمِكَ...
+رواه البخاري""",
+        descriptionEn:
+            "Jabir ibn Abdullah (may Allah be pleased with them both) reported: The Messenger of Allah ﷺ used to teach us to seek guidance (istikharah) in all matters, just as he would teach us a surah of the Qur'an. He would say: \"When one of you is concerned about a matter, let him pray two rak'ahs other than the obligatory prayer, then say: [the above].\" Reported by al-Bukhari."),
+    const ZikrEntity(
+        id: 43,
+        key: 'condition_043',
+        category: 'visitingSick',
+        titleEn: "Visiting the Sick",
+        count: 7,
+        title: "دعاء عيادة المريض",
+        content: "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
+        contentTransliteration:
+            "As'alullahal-'azima rabbal-'arshil-'azimi an yashfiyak.",
+        contentEn:
+            "I ask Allah the Mighty, Lord of the Mighty Throne, to heal you.",
+        description: """
+عَنِ ابْنِ عَبَّاسٍ رضي الله عنهما، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: مَنْ عَادَ مَرِيضًا لَمْ يَحْضُرْ أَجَلُهُ، فَقَالَ عِنْدَهُ سَبْعَ مَرَّاتٍ: أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ، إِلَّا عَافَاهُ اللَّهُ مِنْ ذَلِكَ الْمَرَضِ.
+رواه أبو داود والترمذي وقال: حديث حسن غريب""",
+        descriptionEn:
+            "Ibn 'Abbas (may Allah be pleased with them both) reported that the Prophet ﷺ said: \"Whoever visits a sick person whose time [of death] has not come, and says seven times: [the above], Allah will cure him of that illness.\" Reported by Abu Dawud and at-Tirmidhi, who graded it hasan gharib."),
+    const ZikrEntity(
+        id: 44,
+        key: 'condition_044',
+        category: 'rain',
+        titleEn: "Rain",
+        count: 1,
+        title: "دعاء عند نزول المطر",
+        content: "اللَّهُمَّ صَيِّبًا نَافِعًا",
+        contentTransliteration: "Allahumma sayyiban nafi'an.",
+        contentEn: "O Allah, [make it] a beneficial rain cloud.",
+        description: """
+عَنْ عَائِشَةَ رضي الله عنها، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا رَأَى الْمَطَرَ قَالَ: اللَّهُمَّ صَيِّبًا نَافِعًا.
+رواه البخاري""",
+        descriptionEn:
+            "A'ishah (may Allah be pleased with her) reported that whenever the Prophet ﷺ saw rain, he would say: [the above]. Reported by al-Bukhari."),
   ];
 
   static List<ZikrEntity> ruqyahAzkar = [
@@ -2411,6 +2488,30 @@ class InitialData {
       titleEn: 'After Eating',
       icon: Icons.restaurant_outlined,
       color: categoryEatingOrange,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'istikharah',
+      title: 'الاستخارة',
+      titleEn: 'Istikharah',
+      icon: Icons.balance_outlined,
+      color: categoryIstikharahIndigo,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'visitingSick',
+      title: 'عيادة المريض',
+      titleEn: 'Visiting the Sick',
+      icon: Icons.healing_outlined,
+      color: categorySickRose,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'rain',
+      title: 'عند نزول المطر',
+      titleEn: 'Rain',
+      icon: Icons.water_drop_outlined,
+      color: categoryRainBlue,
       isTrackedDaily: false,
     ),
   ];
