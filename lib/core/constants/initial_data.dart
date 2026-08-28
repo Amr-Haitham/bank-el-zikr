@@ -1562,6 +1562,23 @@ class InitialData {
             """أمر النبي ﷺ عقبة بن عامر أن يقرأ بالمعوذتين دبر كل صلاة. رواه أبو داود والترمذي وصححه الألباني.""",
         descriptionEn:
             "The Prophet ﷺ commanded 'Uqbah ibn 'Amir to recite al-Mu'awwidhatan after every prayer. Reported by Abu Dawud and at-Tirmidhi, authenticated by al-Albani."),
+    const ZikrEntity(
+        id: 43,
+        key: 'afterPrayer_009',
+        category: 'afterPrayer',
+        titleEn: "After Prayer",
+        count: 1,
+        title: 'اللهم أعني على ذكرك',
+        content: "اللهم أعني على ذكرك، وشكرك، وحسن عبادتك",
+        contentTransliteration:
+            "Allahumma a'inni 'ala dhikrika, wa shukrika, wa husni 'ibadatik.",
+        contentEn:
+            "O Allah, help me remember You, to be grateful to You, and to worship You in an excellent manner.",
+        description: """
+عَنْ مُعَاذِ بْنِ جَبَلٍ رضي الله عنه، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ أَخَذَ بِيَدِهِ وَقَالَ: يَا مُعَاذُ، وَاللَّهِ إِنِّي لَأُحِبُّكَ، فَقَالَ: أُوصِيكَ يَا مُعَاذُ لَا تَدَعَنَّ فِي دُبُرِ كُلِّ صَلَاةٍ تَقُولُ: اللهم أعني على ذكرك، وشكرك، وحسن عبادتك.
+رواه أبو داود والنسائي""",
+        descriptionEn:
+            "Mu'adh ibn Jabal (may Allah be pleased with him) reported that the Messenger of Allah ﷺ took his hand and said: \"O Mu'adh, by Allah, I love you.\" Then he said: \"I advise you, Mu'adh, never fail to say after every prayer: [the above].\" Reported by Abu Dawud and an-Nasa'i."),
   ];
 
   static List<PrayerEntity> prayers = [
