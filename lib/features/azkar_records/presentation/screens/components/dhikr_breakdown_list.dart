@@ -105,9 +105,10 @@ class DhikrBreakdownList extends StatelessWidget {
       child: Text(
         label,
         textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: context.textTheme.labelSmall!.copyWith(
-          color: context.textTheme.bodySmall!.color!
-              .withValues(alpha: 0.5),
+          color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.5),
         ),
       ),
     );
@@ -119,8 +120,7 @@ class DhikrBreakdownList extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
-            color: context.textTheme.bodySmall!.color!
-                .withValues(alpha: 0.1),
+            color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.1),
           ),
         ),
       ),
@@ -173,16 +173,15 @@ class DhikrBreakdownList extends StatelessWidget {
           _countChip(
             context,
             formatNumber(context, row.weekCount),
-            background:
-                context.colors.primary.withValues(alpha: 0.12),
+            background: context.colors.primary.withValues(alpha: 0.12),
             color: context.colors.primary,
           ),
           const SizedBox(width: 8),
           _countChip(
             context,
             formatNumber(context, row.monthCount),
-            background: context.textTheme.bodySmall!.color!
-                .withValues(alpha: 0.08),
+            background:
+                context.textTheme.bodySmall!.color!.withValues(alpha: 0.08),
             color: context.textTheme.bodyLarge!.color!,
           ),
         ],
@@ -206,6 +205,8 @@ class DhikrBreakdownList extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w900,

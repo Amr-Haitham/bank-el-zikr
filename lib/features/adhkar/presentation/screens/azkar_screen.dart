@@ -48,8 +48,8 @@ class AzkarScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: context.theme.scaffoldBackgroundColor,
           body: Padding(
-            padding:
-                const EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 10),
+            padding: const EdgeInsetsDirectional.only(
+                top: 30, start: 30, end: 30, bottom: 10),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(
