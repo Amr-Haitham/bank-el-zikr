@@ -1293,7 +1293,221 @@ class InitialData {
 يسن لزائر المقبرة أن يدعو بما ورد عن النبي صلى الله عليه وسلم، ومن ذلك ما روى مسلم من حديث سليمان بن بريدة عن أبيه، أن النبي صلى الله عليه وسلم كان يعلم أصحابه إذا خرجوا إلى المقابر أن يقولوا: "السلام عليكم أهل الديار من المؤمنين والمسلمين وإنا إن شاء الله بكم لاحقون نسأل الله لنا ولكن العافية."
 """,
         descriptionEn:
-            "It is recommended for a visitor to the graveyard to supplicate with what has been reported from the Prophet ﷺ, as Muslim narrated from Sulayman ibn Buraydah, on the authority of his father, that the Prophet ﷺ used to teach his Companions that when they went out to the graves they should say the above.")
+            "It is recommended for a visitor to the graveyard to supplicate with what has been reported from the Prophet ﷺ, as Muslim narrated from Sulayman ibn Buraydah, on the authority of his father, that the Prophet ﷺ used to teach his Companions that when they went out to the graves they should say the above."),
+    const ZikrEntity(
+        id: 27,
+        key: 'condition_027',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "باسمِكَ اللّهُـمَّ أَمـوتُ وَأَحْـيا",
+        content: "بِاسْـمِكَ اللّهُـمَّ أَمـوتُ وَأَحْـيا",
+        contentTransliteration: "Bismika Allahumma amutu wa ahya.",
+        contentEn: "In Your name, O Allah, I die and I live.",
+        description: """
+كانَ النَّبيُّ صَلَّى اللهُ عليه وسلَّمَ إذَا أرَادَ أنْ يَنَامَ قالَ: باسْمِكَ اللَّهُمَّ أمُوتُ وأَحْيَا.
+الراوي : حذيفة بن اليمان و المحدث : البخاري""",
+        descriptionEn:
+            "Whenever the Prophet ﷺ wanted to sleep he would say the above. Narrated by Hudhayfah ibn al-Yaman, reported by al-Bukhari."),
+    const ZikrEntity(
+        id: 28,
+        key: 'condition_028',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: 'آية الكرسى',
+        content: """
+أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ  بِسْمِ اللَّـهِ الرَّحْمَـٰنِ الرَّحِيم {اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلاَّ بِمَا شَاء وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ} [آية الكرسى - البقرة 255]. """,
+        contentTransliteration:
+            "Allāhu lā ilāha illā huwa, al-ḥayyu al-qayyūm. Lā ta'khudhuhu sinatun wa lā nawm. Lahu mā fis-samāwāti wa mā fil-arḍ. Man dhal-ladhī yashfa'u 'indahu illā bi-idhnih. Ya'lamu mā bayna aydīhim wa mā khalfahum, wa lā yuḥīṭūna bishay'im min 'ilmihi illā bimā shā'. Wasi'a kursiyyuhus-samāwāti wal-arḍ, wa lā ya'ūduhu ḥifẓuhumā, wa huwal-'aliyyul-'aẓīm.",
+        contentEn:
+            "Allah - there is no deity except Him, the Ever-Living, the Sustainer of existence. Neither drowsiness overtakes Him nor sleep. To Him belongs whatever is in the heavens and whatever is on the earth. Who is it that can intercede with Him except by His permission? He knows what is before them and what will be after them, and they encompass not a thing of His knowledge except for what He wills. His Kursi extends over the heavens and the earth, and their preservation tires Him not. And He is the Most High, the Most Great.",
+        description: """
+مَنْ قَرَأَ آيَةَ الْكُرْسِيِّ حِينَ يَأْخُذُ مَضْجَعَهُ، لَمْ يَزَلْ عَلَيْهِ مِنَ اللَّهِ حَافِظٌ، وَلَا يَقْرَبُهُ شَيْطَانٌ حَتَّى يُصْبِحَ.
+رواه البخاري""",
+        descriptionEn:
+            "Whoever recites Ayat al-Kursi when he goes to his bed, a guardian from Allah remains with him and no devil will come near him until morning. Reported by al-Bukhari."),
+    const ZikrEntity(
+        id: 29,
+        key: 'condition_029',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: 'آخر آيتين من سورة البقرة',
+        content: """أَعُوذُ بِاللهِ مِنْ الشَّيْطَانِ الرَّجِيمِ
+{آمَنَ الرَّسُولُ بِمَا أُنْزِلَ إِلَيْهِ مِنْ رَبِّهِ وَالْمُؤْمِنُونَ ۚ كُلٌّ آمَنَ بِاللَّهِ وَمَلَائِكَتِهِ وَكُتُبِهِ وَرُسُلِهِ لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِنْ رُسُلِهِ ۚ وَقَالُوا سَمِعْنَا وَأَطَعْنَا ۖ غُفْرَانَكَ رَبَّنَا وَإِلَيْكَ الْمَصِيرُ. لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا لَهَا مَا كَسَبَتْ وَعَلَيْهَا مَا اكْتَسَبَتْ رَبَّنَا لَا تُؤَاخِذْنَا إِنْ نَّسِينَآ أَوْ أَخْطَأْنَا رَبَّنَا وَلَا تَحْمِلْ عَلَيْنَا إِصْرًا كَمَا حَمَلْتَهُ عَلَى الَّذِينَ مِنْ قَبْلِنَا رَبَّنَا وَلَا تُحَمِّلْنَا مَا لَا طَاقَةَ لَنَا بِهِ وَاعْفُ عَنَّا وَاغْفِرْ لَنَا وَارْحَمْنَا أَنْتَ مَوْلَانَا فَانْصُرْنَا عَلَى الْقَوْمِ الْكَافِرِينَ.} [البقرة 285 - 286].""",
+        contentTransliteration:
+            "A'udhu billahi minash-shaytanir-rajim. Amanar-rasulu bima unzila ilayhi mir-rabbihi wal-mu'minun, kullun amana billahi wa mala'ikatihi wa kutubihi wa rusulih, la nufarriqu bayna ahadim-mir-rusulih, wa qalu sami'na wa ata'na ghufranaka rabbana wa ilaykal-masir. La yukallifullahu nafsan illa wus'aha, laha ma kasabat wa 'alayha mak-tasabat, rabbana la tu'akhidhna in nasina aw akhta'na, rabbana wa la tahmil 'alayna isran kama hamaltahu 'alal-ladhina min qablina, rabbana wa la tuhammilna ma la taqata lana bih, wa'fu 'anna waghfir lana warhamna anta mawlana fansurna 'alal-qawmil-kafirin.",
+        contentEn:
+            "I seek refuge in Allah from the accursed Satan. The Messenger has believed in what was revealed to him from his Lord, and [so have] the believers. All of them have believed in Allah and His angels and His books and His messengers, [saying], 'We make no distinction between any of His messengers.' And they say, 'We hear and we obey. [We seek] Your forgiveness, our Lord, and to You is the [final] destination.' Allah does not charge a soul except with that within its capacity. It will have [the consequence of] what [good] it has gained, and it will bear [the consequence of] what [evil] it has earned. 'Our Lord, do not impose blame upon us if we have forgotten or erred. Our Lord, and lay not upon us a burden like that which You laid upon those before us. Our Lord, and burden us not with that which we have no ability to bear. And pardon us; and forgive us; and have mercy upon us. You are our protector, so give us victory over the disbelieving people.'",
+        description: """
+مَنْ قَرَأَهُمَا فِي لَيْلَةٍ كَفَتَاهُ.
+متفق عليه""",
+        descriptionEn:
+            "Whoever recites these two ayahs at night, they will suffice him. Agreed upon."),
+    const ZikrEntity(
+        id: 30,
+        key: 'condition_030',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: 'دعاء النوم من الرقية الشرعية',
+        content:
+            """يجمع كفيه ثم ينفث فيهما ويقرأ: {قُلْ هُوَ اللَّهُ أَحَدٌ}، {قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ}، {قُلْ أَعُوذُ بِرَبِّ النَّاسِ}، ثم يمسح بهما ما استطاع من جسده، يبدأ بهما على رأسه ووجهه وما أقبل من جسده""",
+        description: """
+عَنْ عَائِشَةَ رضي الله عنها، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا أَوَى إِلَى فِرَاشِهِ كُلَّ لَيْلَةٍ جَمَعَ كَفَّيْهِ، ثُمَّ نَفَثَ فِيهِمَا، فَقَرَأَ فِيهِمَا: {قُلْ هُوَ اللَّهُ أَحَدٌ} وَ{قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ} وَ{قُلْ أَعُوذُ بِرَبِّ النَّاسِ}، ثُمَّ يَمْسَحُ بِهِمَا مَا اسْتَطَاعَ مِنْ جَسَدِهِ، يَبْدَأُ بِهِمَا عَلَى رَأْسِهِ وَوَجْهِهِ وَمَا أَقْبَلَ مِنْ جَسَدِهِ، يَفْعَلُ ذَلِكَ ثَلَاثَ مَرَّاتٍ.
+رواه البخاري""",
+        descriptionEn:
+            "A'ishah (may Allah be pleased with her) reported that whenever the Prophet ﷺ went to his bed every night, he would join his palms together, blow into them, and recite Al-Ikhlas, Al-Falaq, and An-Nas, then wipe as much of his body as he could with them, starting with his head and face and the front of his body, doing so three times. Reported by al-Bukhari."),
+    const ZikrEntity(
+        id: 31,
+        key: 'condition_031',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "اللهم خَلَقْتَ نفسي وأنت توفَّاها",
+        content:
+            "اللهم خَلَقْتَ نفسي وأنت توفَّاها لك مماتها ومَحْياها، إن أحييتها فاحفظها وإن أمتها فاغفر لها، اللهم إني أسألك العافية",
+        contentTransliteration:
+            "Allahumma khalaqta nafsi wa anta tawaffaha, laka mamatuha wa mahyaha, in ahyaytaha fahfazha, wa in amattaha faghfir laha, Allahumma inni as'alukal-'afiyah.",
+        contentEn:
+            "O Allah, You have created my soul and You take it back; unto You is its death and its life. If You keep it alive then protect it, and if You cause it to die then forgive it. O Allah, I ask You for well-being.",
+        description: """
+عَنْ عَبْدِ اللَّهِ بْنِ عُمَرَ رضي الله عنهما، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ عَلَّمَ رَجُلًا إِذَا أَخَذَ مَضْجَعَهُ أَنْ يَقُولَ: اللهم خَلَقْتَ نفسي وأنت توفَّاها لك مماتها ومَحْياها، إن أحييتها فاحفظها وإن أمتها فاغفر لها، اللهم إني أسألك العافية.
+رواه مسلم""",
+        descriptionEn:
+            "Abdullah ibn Umar (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ taught a man to say the above when he lay down to sleep. Reported by Muslim."),
+    const ZikrEntity(
+        id: 32,
+        key: 'condition_032',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 3,
+        title: "اللهم قني عذابك يوم تبعث عبادك",
+        content: "اللهم قني عذابك يوم تبعث عبادك",
+        contentTransliteration:
+            "Allahumma qini 'adhabaka yawma tab'athu 'ibadak.",
+        contentEn:
+            "O Allah, protect me from Your punishment on the Day You resurrect Your servants.",
+        description: """
+عَنِ الْبَرَاءِ بْنِ عَازِبٍ رضي الله عنه، أَنَّ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ لَهُ: إِذَا أَتَيْتَ مَضْجَعَكَ فَقُلْ: اللهم قني عذابك يوم تبعث عبادك، ثَلَاثَ مَرَّاتٍ.
+رواه أبو داود والترمذي""",
+        descriptionEn:
+            "Al-Bara' ibn 'Azib (may Allah be pleased with him) reported that the Prophet ﷺ told him: \"When you go to your bed, say the above,\" three times. Reported by Abu Dawud and at-Tirmidhi."),
+    const ZikrEntity(
+        id: 33,
+        key: 'condition_033',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "اللهم عالم الغيب والشهادة",
+        content:
+            "اللهم عالم الغيب والشهادة، فاطر السموات والأرض، رب كل شيء ومليكه، أشهد أن لا إله إلا أنت، أعوذ بك من شر نفسي، ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءًا أو أجرَّه إلى مسلم",
+        contentTransliteration:
+            "Allahumma 'alimal-ghaybi wash-shahadah, fatiras-samawati wal-ard, rabba kulli shay'in wa malikah, ash-hadu alla ilaha illa anta, a'udhu bika min sharri nafsi wa min sharrish-shaytani wa shirkih, wa an aqtarifa 'ala nafsi su'an aw ajurrahu ila muslim.",
+        contentEn:
+            "O Allah, Knower of the unseen and the seen, Creator of the heavens and the earth, Lord and Sovereign of all things, I bear witness that there is no god but You. I seek refuge in You from the evil of my soul and from the evil and shirk of Satan, and from bringing evil upon myself or driving it to a Muslim.",
+        description: """
+عَنِ ابْنِ عَبَّاسٍ رضي الله عنهما، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا أَوَى إِلَى فِرَاشِهِ قَالَ: اللهم عالم الغيب والشهادة، فاطر السموات والأرض، رب كل شيء ومليكه، أشهد أن لا إله إلا أنت، أعوذ بك من شر نفسي، ومن شر الشيطان وشركه، وأن أقترف على نفسي سوءًا أو أجرَّه إلى مسلم.
+رواه الترمذي وأبو داود""",
+        descriptionEn:
+            "Ibn 'Abbas (may Allah be pleased with them both) reported that the Messenger of Allah ﷺ, whenever he went to his bed, would say the above. Reported by at-Tirmidhi and Abu Dawud."),
+    const ZikrEntity(
+        id: 34,
+        key: 'condition_034',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "اللهم أسلمت نفسي إليك",
+        content:
+            "اللهم أسلمت نفسي إليك، وفوضت أمري إليك، وألجأت ظهري إليك، رهبةً ورغبةً إليك، لا ملجأ ولا منجا منك إلا إليك، آمنت بكتابك الذي أنزلت وبنبيك الذي أرسلت",
+        contentTransliteration:
+            "Allahumma aslamtu nafsi ilayk, wa fawwadtu amri ilayk, wa alja'tu zahri ilayk, raghbatan wa rahbatan ilayk, la malja'a wa la manja minka illa ilayk, amantu bikitabikal-ladhi anzalta wa binabiyyikal-ladhi arsalt.",
+        contentEn:
+            "O Allah, I submit myself unto You, and I entrust my affair unto You, and I turn my back unto You, in fear and hope of You. There is no refuge and no escape from You except unto You. I believe in Your Book which You revealed, and in Your Prophet whom You sent.",
+        description: """
+عَنِ الْبَرَاءِ بْنِ عَازِبٍ رضي الله عنه، قَالَ: قَالَ لِي رَسُولُ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ: إِذَا أَتَيْتَ مَضْجَعَكَ فَتَوَضَّأْ وُضُوءَكَ لِلصَّلَاةِ، ثُمَّ اضْطَجِعْ عَلَى شِقِّكَ الْأَيْمَنِ، ثُمَّ قُلِ: اللهم أسلمت نفسي إليك، وفوضت أمري إليك، وألجأت ظهري إليك، رهبةً ورغبةً إليك، لا ملجأ ولا منجا منك إلا إليك، آمنت بكتابك الذي أنزلت وبنبيك الذي أرسلت، فَإِنْ مُتَّ مِنْ لَيْلَتِكَ مُتَّ عَلَى الْفِطْرَةِ.
+متفق عليه""",
+        descriptionEn:
+            "Al-Bara' ibn 'Azib (may Allah be pleased with him) reported that the Messenger of Allah ﷺ said to him: \"When you go to your bed, perform ablution as you would for prayer, then lie on your right side, then say the above; for if you die that night, you die upon the natural state (fitrah).\" Agreed upon."),
+    const ZikrEntity(
+        id: 35,
+        key: 'condition_035',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 33,
+        title: "تسبيح فاطمة (سبحان الله)",
+        content: "سُبْحَانَ اللَّهِ",
+        contentTransliteration: "Subhan Allah.",
+        contentEn: "Glory be to Allah.",
+        description: """
+عَنْ عَلِيٍّ رضي الله عنه، أَنَّ فَاطِمَةَ رضي الله عنها أَتَتِ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ تَشْكُو إِلَيْهِ مَا تَلْقَى فِي يَدِهَا مِنَ الرَّحَى، فَقَالَ لَهَا: إِذَا أَخَذْتِ مَضْجَعَكِ فَسَبِّحِي ثَلَاثًا وَثَلَاثِينَ، وَاحْمَدِي ثَلَاثًا وَثَلَاثِينَ، وَكَبِّرِي أَرْبَعًا وَثَلَاثِينَ، فَهُوَ خَيْرٌ لَكُمَا مِنْ خَادِمٍ.
+متفق عليه""",
+        descriptionEn:
+            "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
+    const ZikrEntity(
+        id: 36,
+        key: 'condition_036',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 33,
+        title: "تسبيح فاطمة (الحمد لله)",
+        content: "الْحَمْدُ لِلَّهِ",
+        contentTransliteration: "Alhamdu lillah.",
+        contentEn: "All praise is due to Allah.",
+        description: """
+عَنْ عَلِيٍّ رضي الله عنه، أَنَّ فَاطِمَةَ رضي الله عنها أَتَتِ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ تَشْكُو إِلَيْهِ مَا تَلْقَى فِي يَدِهَا مِنَ الرَّحَى، فَقَالَ لَهَا: إِذَا أَخَذْتِ مَضْجَعَكِ فَسَبِّحِي ثَلَاثًا وَثَلَاثِينَ، وَاحْمَدِي ثَلَاثًا وَثَلَاثِينَ، وَكَبِّرِي أَرْبَعًا وَثَلَاثِينَ، فَهُوَ خَيْرٌ لَكُمَا مِنْ خَادِمٍ.
+متفق عليه""",
+        descriptionEn:
+            "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
+    const ZikrEntity(
+        id: 37,
+        key: 'condition_037',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 34,
+        title: "تسبيح فاطمة (الله أكبر)",
+        content: "اللَّهُ أَكْبَرُ",
+        contentTransliteration: "Allahu Akbar.",
+        contentEn: "Allah is the Greatest.",
+        description: """
+عَنْ عَلِيٍّ رضي الله عنه، أَنَّ فَاطِمَةَ رضي الله عنها أَتَتِ النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ تَشْكُو إِلَيْهِ مَا تَلْقَى فِي يَدِهَا مِنَ الرَّحَى، فَقَالَ لَهَا: إِذَا أَخَذْتِ مَضْجَعَكِ فَسَبِّحِي ثَلَاثًا وَثَلَاثِينَ، وَاحْمَدِي ثَلَاثًا وَثَلَاثِينَ، وَكَبِّرِي أَرْبَعًا وَثَلَاثِينَ، فَهُوَ خَيْرٌ لَكُمَا مِنْ خَادِمٍ.
+متفق عليه""",
+        descriptionEn:
+            "Ali (may Allah be pleased with him) reported that Fatimah (may Allah be pleased with her) came to the Prophet ﷺ complaining about what she suffered from the hand-mill, so he told her: \"When you go to your bed, say SubhanAllah thirty-three times, Alhamdulillah thirty-three times, and Allahu Akbar thirty-four times; that is better for you both than a servant.\" Agreed upon."),
+    const ZikrEntity(
+        id: 38,
+        key: 'condition_038',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "سورة الكافرون",
+        content: """بِسْمِ اللهِ الرَّحْمنِ الرَّحِيم
+قُلْ يَا أَيُّهَا الْكَافِرُونَ، لَا أَعْبُدُ مَا تَعْبُدُونَ، وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ، وَلَا أَنَا عَابِدٌ مَا عَبَدْتُّمْ، وَلَا أَنْتُمْ عَابِدُونَ مَا أَعْبُدُ، لَكُمْ دِينُكُمْ وَلِيَ دِينِ""",
+        contentTransliteration:
+            "Qul ya ayyuhal-kafirun, la a'budu ma ta'budun, wa la antum 'abiduna ma a'bud, wa la ana 'abidum-ma 'abadtum, wa la antum 'abiduna ma a'bud, lakum dinukum wa liya din.",
+        contentEn:
+            "Say: O disbelievers, I do not worship what you worship, nor are you worshippers of what I worship, nor will I be a worshipper of what you worship, nor will you be worshippers of what I worship. For you is your religion, and for me is my religion.",
+        description: """
+عَنْ فَرْوَةَ بْنِ نَوْفَلٍ عَنْ أَبِيهِ، أَنَّهُ أَتَى النَّبِيَّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ فَقَالَ: عَلِّمْنِي شَيْئًا أَقُولُهُ عِنْدَ مَنَامِي، قَالَ: اقْرَأْ {قُلْ يَا أَيُّهَا الْكَافِرُونَ} فَإِنَّهَا بَرَاءَةٌ مِنَ الشِّرْكِ.
+رواه أبو داود والترمذي""",
+        descriptionEn:
+            "Farwah ibn Nawfal reported from his father that he came to the Prophet ﷺ and said: \"Teach me something to say when I go to sleep.\" He said: \"Recite Al-Kafirun, for it is a declaration of freedom from shirk.\" Reported by Abu Dawud and at-Tirmidhi."),
+    const ZikrEntity(
+        id: 39,
+        key: 'condition_039',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "سورة الملك",
+        content: "تُقرأ سورة الملك كاملة من المصحف قبل النوم (٣٠ آية).",
+        contentEn:
+            "Recite Surah al-Mulk in full from the Mushaf before sleeping (30 ayahs).",
+        description: """
+عَنِ ابْنِ عَبَّاسٍ رضي الله عنهما، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: إِنَّ سُورَةً مِنَ الْقُرْآنِ ثَلَاثُونَ آيَةً شَفَعَتْ لِرَجُلٍ حَتَّى غُفِرَ لَهُ، وَهِيَ سُورَةُ {تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ}.
+رواه أبو داود والترمذي وصححه الألباني.""",
+        descriptionEn:
+            "Ibn 'Abbas (may Allah be pleased with them both) reported that the Prophet ﷺ said: \"There is a surah in the Qur'an of thirty verses which will intercede for a man until he is forgiven — Surah al-Mulk (Tabarak).\" Reported by Abu Dawud and at-Tirmidhi, authenticated by al-Albani."),
   ];
 
   static List<ZikrEntity> ruqyahAzkar = [
