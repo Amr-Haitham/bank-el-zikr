@@ -62,6 +62,8 @@ const categoryEatingOrange = Color(0xffD98A3D);
 const categoryIstikharahIndigo = Color(0xff5B6EAE);
 const categorySickRose = Color(0xffC7607B);
 const categoryRainBlue = Color(0xff3F8FC4);
+const categoryThunderSlateBlue = Color(0xff556B8D);
+const categoryWeddingPink = Color(0xffD9739A);
 
 // Gradients & overlays.
 const primaryGradientEnd = Color(0xff1D6B3A);
