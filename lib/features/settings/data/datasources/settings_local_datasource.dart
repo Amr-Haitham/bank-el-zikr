@@ -135,7 +135,7 @@ class SettingsLocalDataSourceImpl implements SettingsLocalDataSource {
 
   @override
   Future<bool> getUseArabicNumerals() async {
-    return sharedPreferences.getBool(_useArabicNumeralsKey) ?? true;
+    return sharedPreferences.getBool(_useArabicNumeralsKey) ?? false;
   }
 
   @override

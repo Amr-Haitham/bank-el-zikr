@@ -17,7 +17,6 @@ import 'package:bank_el_ziker/features/settings/domain/entities/settings.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_stats_card.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_progress_circle.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_zikr_switcher_row.dart';
-import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/tasbih_reset_button.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/widgets/goal_setting_bottom_sheet.dart';
 
 class ZikerScreen extends StatefulWidget {
@@ -70,6 +69,12 @@ class _ZikerScreenState extends State<ZikerScreen> {
     context
         .read<DayRecordCubit>()
         .logZikrIncrement(counterState.currentZikrKey);
+  }
+
+  void _handleReset(BuildContext context) {
+    context.read<CounterCubit>().setCounter(0);
+    context.read<CounterCubit>().setGoal(null);
+    setState(() => _laps = 0);
   }
 
   void _showGoalSettingSheet(BuildContext parentContext) {
@@ -147,33 +152,41 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                       _showGoalSettingSheet(context),
                                 ),
                                 const SizedBox(height: 24),
-                                TasbihZikrSwitcherRow(
-                                    currentZikrKey: counter.currentZikrKey),
-                                const SizedBox(height: 4),
                                 Expanded(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      TasbihProgressCircle(
-                                        currentCounter: counter.currentCounter,
-                                        goal: counter.currentGoal,
-                                      ),
-                                      const SizedBox(height: 8),
-                                      Transform.translate(
-                                        offset: const Offset(0, 12),
-                                        child: TasbihResetButton(
-                                          onPressed: () {
-                                            context
-                                                .read<CounterCubit>()
-                                                .setCounter(0);
-                                            context
-                                                .read<CounterCubit>()
-                                                .setGoal(null);
-                                            setState(() => _laps = 0);
-                                          },
+                                  child: LayoutBuilder(
+                                    builder: (context, constraints) {
+                                      return SingleChildScrollView(
+                                        physics:
+                                            const ClampingScrollPhysics(),
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints(
+                                            minHeight: constraints.maxHeight,
+                                          ),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceEvenly,
+                                            children: [
+                                              TasbihZikrSwitcherRow(
+                                                  currentZikrKey:
+                                                      counter.currentZikrKey),
+                                              TasbihZikrActionsRow(
+                                                  currentZikrKey:
+                                                      counter.currentZikrKey),
+                                              TasbihProgressCircle(
+                                                currentCounter:
+                                                    counter.currentCounter,
+                                                goal: counter.currentGoal,
+                                                maxSize:
+                                                    constraints.maxHeight,
+                                                onReset: () =>
+                                                    _handleReset(context),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      );
+                                    },
                                   ),
                                 ),
                                 const SizedBox(

@@ -115,7 +115,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get anotherVerse => 'آية أخرى';
 
   @override
-  String get showTranslation => 'إظهار الترجمة';
+  String get showTranslation => 'عرض الترجمة';
 
   @override
   String get hideTranslation => 'إخفاء الترجمة';
@@ -449,6 +449,9 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get chooseZikr => 'اختر الذكر';
+
+  @override
+  String get translation => 'الترجمة';
 
   @override
   String get addCustomZikrHint => 'أضف ذكرًا مخصصًا...';

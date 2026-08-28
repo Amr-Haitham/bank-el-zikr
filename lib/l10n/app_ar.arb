@@ -223,6 +223,8 @@
     "description": "Settings screen language toggle label"
   },
   "chooseZikr": "اختر الذكر",
+  "showTranslation": "عرض الترجمة",
+  "translation": "الترجمة",
   "@chooseZikr": {
     "description": "Tasbih zikr-picker bottom sheet title"
   },
