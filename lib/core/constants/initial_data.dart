@@ -36,9 +36,9 @@ class InitialData {
         contentTransliteration: "La ilaha illa Allah",
         contentEn: "There is no god but Allah",
         descriptionEn:
-            "The Prophet ﷺ said: Allah has forbidden the Fire for whoever says \"There is no god but Allah\", seeking thereby the Face of Allah. (Bukhari)",
+            "The Prophet ﷺ said: Allah has forbidden the Fire for whoever says \"There is no god but Allah\", seeking thereby the Face of Allah. (Agreed upon)",
         description:
-            "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). رواه البخاري"),
+            "قال رسول الله ﷺ: (فإنَّ اللَّهَ قدْ حَرَّمَ علَى النَّارِ مَن قالَ: لا إلَهَ إلَّا اللَّهُ، يَبْتَغِي بذلكَ وجْهَ اللَّهِ). متفق عليه"),
     const ZikrEntity(
         id: 4,
         key: 'general_004',
@@ -145,9 +145,9 @@ class InitialData {
         contentEn:
             "Glory be to Allah and praise Him, glory be to Allah the Almighty",
         descriptionEn:
-            "The Prophet ﷺ said: Two phrases that are light on the tongue, heavy on the scale, and beloved to the Most Merciful: \"Glory be to Allah and praise Him, glory be to Allah the Almighty.\" (Bukhari)",
+            "The Prophet ﷺ said: Two phrases that are light on the tongue, heavy on the scale, and beloved to the Most Merciful: \"Glory be to Allah and praise Him, glory be to Allah the Almighty.\" (Agreed upon)",
         description:
-            "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). رواه البخاري"),
+            "قال النبي ﷺ: (كَلِمَتانِ خَفِيفَتانِ علَى اللِّسانِ، ثَقِيلَتانِ في المِيزانِ، حَبِيبَتانِ إلى الرَّحْمَنِ، سُبْحانَ اللَّهِ وبِحَمْدِهِ، سُبْحانَ اللَّهِ العَظِيمِ). متفق عليه"),
     const ZikrEntity(
         id: 13,
         key: 'general_013',
@@ -258,7 +258,7 @@ class InitialData {
         key: 'morning_008',
         category: 'morning',
         content:
-            """اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.""",
+            """اللّهُـمَّ إِنِّـي أَصْبَـحْتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك.""",
         count: 4,
         contentTransliteration:
             "Allahumma inni asbahtu ush-hiduka, wa ush-hidu hamalata 'arshik, wa mala'ikataka, wa jami'a khalqik, annaka antallahu la ilaha illa anta wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
@@ -618,7 +618,7 @@ class InitialData {
         key: 'evening_009',
         category: 'evening',
         content:
-            """اللّهُـمَّ إِنِّـي أَمسيتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ ُ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك. """,
+            """اللّهُـمَّ إِنِّـي أَمسيتُ أُشْـهِدُك ، وَأُشْـهِدُ حَمَلَـةَ عَـرْشِـك ، وَمَلَائِكَتَكَ ، وَجَمـيعَ خَلْـقِك ، أَنَّـكَ أَنْـتَ اللهُ لا إلهَ إلاّ أَنْـتَ وَحْـدَكَ لا شَريكَ لَـك ، وَأَنَّ مُحَمّـداً عَبْـدُكَ وَرَسـولُـك. """,
         count: 4,
         contentTransliteration:
             "Allahumma inni amsaytu ush-hiduka, wa ush-hidu hamalata 'arshik, wa mala'ikataka, wa jami'a khalqik, annaka antallahu la ilaha illa anta wahdaka la sharika lak, wa anna Muhammadan 'abduka wa rasuluk.",
@@ -1272,7 +1272,7 @@ class InitialData {
         contentEn:
             "Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves, and to our Lord we will surely return.",
         description: """
-لِتَسْتَوُوا عَلَىٰ ظُهُورِهِ ثُمَّ تَذْكُرُوا نِعْمَةَ رَبِّكُمْ إِذَا اسْتَوَيْتُمْ عَلَيْهِ وَتَقُولُوا سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ (13) وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ [الزخرف 14]
+لِتَسْتَوُوا عَلَىٰ ظُهُورِهِ ثُمَّ تَذْكُرُوا نِعْمَةَ رَبِّكُمْ إِذَا اسْتَوَيْتُمْ عَلَيْهِ وَتَقُولُوا سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَٰذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ (13) وَإِنَّا إِلَىٰ رَبِّنَا لَمُنقَلِبُونَ [الزخرف 13 - 14]
 """,
         descriptionEn:
             "\"That you may settle yourselves upon their backs and then remember the favor of your Lord when you have settled upon them and say: 'Glory is to Him who has subjected this to us, and we could not have done so [by] ourselves. And indeed we, to our Lord, will return.'\" (Az-Zukhruf 13-14)"),
