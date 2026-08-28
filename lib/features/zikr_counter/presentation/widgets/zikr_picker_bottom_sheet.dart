@@ -166,11 +166,8 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                 child: CircularProgressIndicator()),
                             failure: (f) => const SizedBox.shrink(),
                             success: (allAzkar) {
-                              final azkar = allAzkar
-                                  .where((zikr) =>
-                                      zikr.category == 'general' ||
-                                      zikr.isCustomZikr)
-                                  .toList();
+                              final azkar =
+                                  ZikrEntity.tasbihEligible(allAzkar);
                               return ScrollbarTheme(
                                 data: const ScrollbarThemeData(
                                   crossAxisMargin: 4,

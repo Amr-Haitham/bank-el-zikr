@@ -29,9 +29,7 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
           loading: () => const SizedBox.shrink(),
           failure: (f) => const SizedBox.shrink(),
           success: (allAzkar) {
-            final azkar = allAzkar
-                .where((z) => z.category == 'general' || z.isCustomZikr)
-                .toList();
+            final azkar = ZikrEntity.tasbihEligible(allAzkar);
             if (azkar.isEmpty) return const SizedBox.shrink();
             final currentZikr = azkar.firstWhere(
               (z) => z.key == currentZikrKey,
@@ -102,9 +100,7 @@ class TasbihZikrActionsRow extends StatelessWidget {
           loading: () => const SizedBox.shrink(),
           failure: (f) => const SizedBox.shrink(),
           success: (allAzkar) {
-            final azkar = allAzkar
-                .where((z) => z.category == 'general' || z.isCustomZikr)
-                .toList();
+            final azkar = ZikrEntity.tasbihEligible(allAzkar);
             if (azkar.isEmpty) return const SizedBox.shrink();
             final currentZikr = azkar.firstWhere(
               (z) => z.key == currentZikrKey,
