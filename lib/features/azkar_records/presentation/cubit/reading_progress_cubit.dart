@@ -25,9 +25,10 @@ class ReadingProgressCubit
 
   Future<void> saveProgress(ReadingProgressEntity progress) async {
     final currentState = state;
-    if (currentState is RequestStateSuccess<Map<String, ReadingProgressEntity>>) {
-      modifyState((s) => RequestState.success(
-          {...s.data, progress.category: progress}));
+    if (currentState
+        is RequestStateSuccess<Map<String, ReadingProgressEntity>>) {
+      modifyState((s) =>
+          RequestState.success({...s.data, progress.category: progress}));
     }
     await saveReadingProgressUseCase(progress);
   }

@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -41,7 +42,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(ConstantValues.spacingXl),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(28),
         gradient: LinearGradient(
@@ -62,8 +63,9 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
             children: [
               if (percentChange != null)
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: ConstantValues.spacingSm,
+                      vertical: ConstantValues.spacingXs),
                   decoration: BoxDecoration(
                     color: Colors.white24,
                     borderRadius: BorderRadius.circular(20),
@@ -96,7 +98,7 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
           ),
           const SizedBox(height: 16),
           Container(
-            padding: const EdgeInsets.all(4),
+            padding: const EdgeInsets.all(ConstantValues.spacingXs),
             decoration: BoxDecoration(
               color: Colors.white24,
               borderRadius: BorderRadius.circular(30),
@@ -108,7 +110,8 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                   child: GestureDetector(
                     onTap: () => setState(() => _period = period),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ConstantValues.spacingSm),
                       decoration: BoxDecoration(
                         color: selected ? Colors.white : Colors.transparent,
                         borderRadius: BorderRadius.circular(26),
@@ -152,7 +155,8 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                           return const SizedBox.shrink();
                         }
                         return Padding(
-                          padding: const EdgeInsets.only(top: 6),
+                          padding: const EdgeInsets.only(
+                              top: ConstantValues.spacingSm),
                           child: Text(
                             points[index].label,
                             style: const TextStyle(

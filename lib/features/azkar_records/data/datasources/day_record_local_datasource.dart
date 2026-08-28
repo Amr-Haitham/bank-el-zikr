@@ -3,8 +3,10 @@ import 'package:bank_el_ziker/features/azkar_records/data/models/day_record_mode
 
 abstract class DayRecordLocalDataSource {
   Future<List<DayRecord>> getAll();
-  Future<void> logZikrIncrement({required String zikrKey, required DateTime date});
-  Future<void> markCategoryCompleted({required String category, required DateTime date});
+  Future<void> logZikrIncrement(
+      {required String zikrKey, required DateTime date});
+  Future<void> markCategoryCompleted(
+      {required String category, required DateTime date});
   Future<void> deleteZikrRecord(String zikrKey);
 }
 

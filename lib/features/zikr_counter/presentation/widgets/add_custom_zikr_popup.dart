@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/general_functions.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
@@ -77,8 +78,12 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(12),
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
+      margin: const EdgeInsets.all(ConstantValues.spacingMd),
+      padding: const EdgeInsets.fromLTRB(
+          ConstantValues.spacingXl,
+          ConstantValues.spacingXl,
+          ConstantValues.spacingXl,
+          ConstantValues.spacingXl),
       decoration: BoxDecoration(
         color: context.colors.surface,
         borderRadius: BorderRadius.circular(24),
@@ -125,8 +130,8 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
               decoration: InputDecoration(
                 border: InputBorder.none,
                 contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 14,
+                  horizontal: ConstantValues.spacingLg,
+                  vertical: ConstantValues.spacingMd,
                 ),
                 hintText: AppLocalizations.of(context).addCustomZikrHint,
                 hintStyle: context.textTheme.bodyMedium,
@@ -141,7 +146,8 @@ class _AddCustomZikrPopupState extends State<AddCustomZikrPopup> {
               onPressed: _submit,
               style: FilledButton.styleFrom(
                 backgroundColor: context.colors.primary,
-                padding: const EdgeInsets.symmetric(vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                    vertical: ConstantValues.spacingLg),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
                 ),

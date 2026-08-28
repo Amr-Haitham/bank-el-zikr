@@ -105,7 +105,7 @@ class AdhkarSingleCardView extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(ConstantValues.spacingXl),
               decoration: BoxDecoration(
                 color: context.theme.cardColor,
                 borderRadius: BorderRadius.circular(24),
@@ -126,12 +126,11 @@ class AdhkarSingleCardView extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               minFontSize: 13,
                               maxLines: 12,
-                              style: context.textTheme.bodyMedium!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                    color: context.colors.onSurface,
-                                  ),
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: context.colors.onSurface,
+                              ),
                             ),
                             if (isEnglish &&
                                 zikr.contentTransliteration != null) ...[
@@ -140,13 +139,12 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentTransliteration!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.italic,
-                                      color: context.theme.primaryColor,
-                                    ),
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.italic,
+                                  color: context.theme.primaryColor,
+                                ),
                               ),
                             ],
                             if (isEnglish && zikr.contentEn != null) ...[
@@ -155,10 +153,8 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentEn!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(
-                                        fontSize: 14,
-                                        color: secondaryTextColor),
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                    fontSize: 14, color: secondaryTextColor),
                               ),
                             ],
                           ],
@@ -199,8 +195,8 @@ class AdhkarSingleCardView extends StatelessWidget {
                 translation: isEnglish ? zikr.contentEn : null,
               ),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 44, vertical: ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   color: primaryGreen.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(16),
@@ -232,7 +228,7 @@ class AdhkarSingleCardView extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               child: Container(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 44, vertical: 10),
+                    horizontal: 44, vertical: ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: primaryGreen.withValues(alpha: 0.4),

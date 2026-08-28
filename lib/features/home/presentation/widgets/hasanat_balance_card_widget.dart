@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
@@ -43,7 +44,9 @@ class HasanatBalanceCardWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 20),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstantValues.spacingXxl,
+                  horizontal: ConstantValues.spacingXl),
               child: Column(
                 children: [
                   Row(
@@ -52,10 +55,10 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context).totalHasanatBalance,
                         style: context.textTheme.bodySmall!.copyWith(
-                              fontSize: 14,
-                              color: context.textTheme.bodySmall!.color!
-                                  .withValues(alpha: 0.6),
-                            ),
+                          fontSize: 14,
+                          color: context.textTheme.bodySmall!.color!
+                              .withValues(alpha: 0.6),
+                        ),
                       ),
                       const SizedBox(width: 6),
                       Icon(
@@ -92,7 +95,8 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                       if (depositedToday <= 0) return const SizedBox.shrink();
                       return Container(
                         padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
+                            horizontal: ConstantValues.spacingMd,
+                            vertical: ConstantValues.spacingSm),
                         decoration: BoxDecoration(
                           color: context.theme.primaryColor
                               .withValues(alpha: 0.12),
@@ -118,7 +122,8 @@ class HasanatBalanceCardWidget extends StatelessWidget {
                     child: Container(
                       width: double.infinity,
                       alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: ConstantValues.spacingMd),
                       decoration: BoxDecoration(
                         color: context.theme.primaryColor,
                         borderRadius: BorderRadius.circular(30),

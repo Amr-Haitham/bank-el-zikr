@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
@@ -41,7 +42,11 @@ class SupporterSheet extends StatelessWidget {
       child: SafeArea(
         top: false,
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(24, 12, 24, 24),
+          padding: const EdgeInsets.fromLTRB(
+              ConstantValues.spacingXl,
+              ConstantValues.spacingMd,
+              ConstantValues.spacingXl,
+              ConstantValues.spacingXl),
           child:
               BlocConsumer<SupporterStatusCubit, RequestState<SupporterStatus>>(
             listener: (context, state) {
@@ -97,7 +102,7 @@ class SupporterSheet extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Container(
-                    padding: const EdgeInsets.all(14),
+                    padding: const EdgeInsets.all(ConstantValues.spacingMd),
                     decoration: BoxDecoration(
                       color: context.colors.surfaceContainerHighest,
                       borderRadius: BorderRadius.circular(16),
@@ -131,14 +136,15 @@ class SupporterSheet extends StatelessWidget {
                         children: [
                           for (final package in packages) ...[
                             Padding(
-                              padding: const EdgeInsets.only(bottom: 6),
+                              padding: const EdgeInsets.only(
+                                  bottom: ConstantValues.spacingSm),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   if (package.description.isNotEmpty)
                                     Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 8),
+                                      padding: const EdgeInsets.only(
+                                          bottom: ConstantValues.spacingSm),
                                       child: Text(
                                         package.description,
                                         style: context.textTheme.bodySmall,

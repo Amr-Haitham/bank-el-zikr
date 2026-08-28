@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class ZikrCard extends StatelessWidget {
         AutoRouter.of(context).push(ZikrContentRoute(zikr: zikr));
       },
       child: Padding(
-        padding: const EdgeInsets.only(bottom: 40),
+        padding: const EdgeInsets.only(bottom: ConstantValues.spacingXxl),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

@@ -1,4 +1,5 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/features/notifications/domain/entities/prayer_times.dart';
@@ -45,10 +46,10 @@ class NextReminderBanner extends StatelessWidget {
 
         return _buildPill(
           context,
-          morningEnabled:
-              settings.morningReminderEnabled && settings.morningZikrAlarm != null,
-          eveningEnabled:
-              settings.eveningReminderEnabled && settings.nightZikrAlarm != null,
+          morningEnabled: settings.morningReminderEnabled &&
+              settings.morningZikrAlarm != null,
+          eveningEnabled: settings.eveningReminderEnabled &&
+              settings.nightZikrAlarm != null,
           morningTime: settings.morningZikrAlarm == null
               ? null
               : _toDateTime(settings.morningZikrAlarm!),
@@ -87,7 +88,8 @@ class NextReminderBanner extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: 14, vertical: ConstantValues.spacingMd),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(16),
@@ -133,8 +135,7 @@ class NextReminderBanner extends StatelessWidget {
     final l10n = AppLocalizations.of(context);
     final hour12 = time.hourOfPeriod == 0 ? 12 : time.hourOfPeriod;
     final hourText = _digits(context, hour12);
-    final minuteText =
-        _digits(context, time.minute.toString().padLeft(2, '0'));
+    final minuteText = _digits(context, time.minute.toString().padLeft(2, '0'));
     final periodText = time.period == DayPeriod.am ? l10n.am : l10n.pm;
     return '$hourText:$minuteText $periodText';
   }

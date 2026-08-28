@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:flutter/material.dart';
 
 class ZikrShareCard extends StatelessWidget {
@@ -17,7 +18,9 @@ class ZikrShareCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 360,
-      padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 36),
+      padding: const EdgeInsets.symmetric(
+          horizontal: ConstantValues.spacingXl,
+          vertical: ConstantValues.spacingXxl),
       decoration: const BoxDecoration(color: Colors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,

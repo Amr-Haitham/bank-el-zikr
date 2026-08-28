@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
@@ -38,7 +39,7 @@ class SupportAppCardWidget extends StatelessWidget {
               : () => SupporterSheet.show(context),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(ConstantValues.spacingLg),
             decoration: BoxDecoration(
               color: context.theme.cardColor,
               borderRadius: BorderRadius.circular(20),
@@ -83,8 +84,8 @@ class SupportAppCardWidget extends StatelessWidget {
                 if (!isSupporter)
                   Container(
                     padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 10,
+                      horizontal: ConstantValues.spacingLg,
+                      vertical: ConstantValues.spacingSm,
                     ),
                     decoration: BoxDecoration(
                       color: context.colors.primary,

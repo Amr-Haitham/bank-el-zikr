@@ -186,7 +186,9 @@ class _LanguageOption extends StatelessWidget {
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOut,
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ConstantValues.spacingLg,
+            vertical: ConstantValues.spacingLg),
         decoration: BoxDecoration(
           color: isSelected
               ? context.theme.primaryColor.withValues(alpha: 0.08)

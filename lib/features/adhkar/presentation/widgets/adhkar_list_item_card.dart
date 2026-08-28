@@ -57,9 +57,9 @@ class AdhkarListItemCard extends StatelessWidget {
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.rtl,
                     style: context.textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: context.colors.onSurface,
-                        ),
+                      fontWeight: FontWeight.w600,
+                      color: context.colors.onSurface,
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -89,11 +89,11 @@ class AdhkarListItemCard extends StatelessWidget {
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: context.theme.primaryColor,
-                    ),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                  color: context.theme.primaryColor,
+                ),
               ),
             ],
             if (isEnglish && zikr.contentEn != null) ...[
@@ -111,10 +111,9 @@ class AdhkarListItemCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: progress,
                 minHeight: 6,
-                backgroundColor: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.08),
-                valueColor:
-                    const AlwaysStoppedAnimation<Color>(primaryGreen),
+                backgroundColor:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.08),
+                valueColor: const AlwaysStoppedAnimation<Color>(primaryGreen),
               ),
             ),
             const SizedBox(height: 12),
@@ -123,8 +122,9 @@ class AdhkarListItemCard extends StatelessWidget {
               children: [
                 if (isCompleted)
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: ConstantValues.spacingMd,
+                        vertical: ConstantValues.spacingSm),
                     decoration: BoxDecoration(
                       color: primaryGreen.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(20),
@@ -181,7 +181,8 @@ class AdhkarListItemCard extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: ConstantValues.spacingSm),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: primaryGreen.withValues(alpha: 0.4),

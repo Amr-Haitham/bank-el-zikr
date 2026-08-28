@@ -19,8 +19,7 @@ abstract class RevenueCatDonationDataSource {
 
 class RevenueCatDonationDataSourceImpl implements RevenueCatDonationDataSource {
   bool _isSupporterEntitlementActive(CustomerInfo customerInfo) {
-    return customerInfo
-        .entitlements.active
+    return customerInfo.entitlements.active
         .containsKey(ThirdPartyValues.supporterEntitlementId);
   }
 

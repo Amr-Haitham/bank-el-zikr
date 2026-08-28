@@ -57,7 +57,8 @@ class TasbihZikrSwitcherRow extends StatelessWidget {
                         fontWeight: FontWeight.w700),
                   ),
                 ),
-                if (isEnglish && currentZikr.contentTransliteration != null) ...[
+                if (isEnglish &&
+                    currentZikr.contentTransliteration != null) ...[
                   const SizedBox(height: ConstantValues.spacingSm),
                   Text(
                     currentZikr.contentTransliteration!,
@@ -118,7 +119,8 @@ class TasbihZikrActionsRow extends StatelessWidget {
                     onTap: openPicker,
                     child: Container(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 14, vertical: 6),
+                          horizontal: ConstantValues.spacingMd,
+                          vertical: ConstantValues.spacingSm),
                       decoration: BoxDecoration(
                         color:
                             context.theme.primaryColor.withValues(alpha: 0.1),
@@ -154,8 +156,8 @@ class TasbihZikrActionsRow extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 14, vertical: 6),
                         decoration: BoxDecoration(
-                          color: context.theme.primaryColor
-                              .withValues(alpha: 0.1),
+                          color:
+                              context.theme.primaryColor.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Row(

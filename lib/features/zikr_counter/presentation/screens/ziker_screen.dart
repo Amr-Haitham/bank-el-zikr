@@ -156,16 +156,14 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                   child: LayoutBuilder(
                                     builder: (context, constraints) {
                                       return SingleChildScrollView(
-                                        physics:
-                                            const ClampingScrollPhysics(),
+                                        physics: const ClampingScrollPhysics(),
                                         child: ConstrainedBox(
                                           constraints: BoxConstraints(
                                             minHeight: constraints.maxHeight,
                                           ),
                                           child: Column(
                                             mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceEvenly,
+                                                MainAxisAlignment.spaceEvenly,
                                             children: [
                                               TasbihZikrSwitcherRow(
                                                   currentZikrKey:
@@ -177,8 +175,7 @@ class _ZikerScreenState extends State<ZikerScreen> {
                                                 currentCounter:
                                                     counter.currentCounter,
                                                 goal: counter.currentGoal,
-                                                maxSize:
-                                                    constraints.maxHeight,
+                                                maxSize: constraints.maxHeight,
                                                 onReset: () =>
                                                     _handleReset(context),
                                               ),

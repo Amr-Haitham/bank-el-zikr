@@ -25,7 +25,8 @@ class CheckAndRequestReview implements UseCase<void, List<DayRecordEntity>> {
   Future<RequestResult<void>> call(List<DayRecordEntity> dayRecords) async {
     final stateResult = await repository.getState();
     if (stateResult.isLeft()) {
-      return stateResult.fold((failure) => Left(failure), (_) => const Right(null));
+      return stateResult.fold(
+          (failure) => Left(failure), (_) => const Right(null));
     }
     final state = stateResult.fold((_) => null, (state) => state)!;
 

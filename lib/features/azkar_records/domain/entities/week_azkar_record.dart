@@ -13,8 +13,7 @@ class WeekAzkarRecord extends Equatable {
     required this.todayCountsByZikrKey,
   });
 
-  factory WeekAzkarRecord.fromDailyRecords(
-      List<DayRecordEntity> dailyRecords) {
+  factory WeekAzkarRecord.fromDailyRecords(List<DayRecordEntity> dailyRecords) {
     final Map<String, int> totalCounts = {};
     final Map<String, int> todayCounts =
         dailyRecords.isEmpty ? {} : dailyRecords.first.repsByZikrKey;

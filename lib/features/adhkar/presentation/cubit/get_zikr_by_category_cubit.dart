@@ -9,8 +9,7 @@ class GetZikrByCategoryCubit extends RequestCubit<List<ZikrEntity>> {
     required this.getZikrByCategory,
   }) : super(
           callOnCreate: true,
-          request: () =>
-              getZikrByCategory(const GetZikrByCategoryParams()),
+          request: () => getZikrByCategory(const GetZikrByCategoryParams()),
         );
 
   /// Re-executes the request scoped to a single [category]. Used by callers

@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
@@ -36,7 +37,7 @@ class WeeklyActivityGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(ConstantValues.spacingXl),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(24),
@@ -48,8 +49,9 @@ class WeeklyActivityGrid extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ConstantValues.spacingSm,
+                    vertical: ConstantValues.spacingXs),
                 decoration: BoxDecoration(
                   color: context.theme.primaryColor.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(999),
@@ -73,7 +75,7 @@ class WeeklyActivityGrid extends StatelessWidget {
           Row(
             children: days.map((day) {
               final cellsColumn = Container(
-                padding: const EdgeInsets.all(3),
+                padding: const EdgeInsets.all(ConstantValues.spacingXs),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
@@ -106,9 +108,8 @@ class WeeklyActivityGrid extends StatelessWidget {
                       Text(
                         _weekdayLabel(context, day.date.weekday),
                         style: context.textTheme.labelSmall!.copyWith(
-                          fontWeight: day.isToday
-                              ? FontWeight.w800
-                              : FontWeight.w500,
+                          fontWeight:
+                              day.isToday ? FontWeight.w800 : FontWeight.w500,
                           color: day.isToday
                               ? context.theme.primaryColor
                               : context.textTheme.bodySmall!.color!
@@ -164,8 +165,7 @@ class WeeklyActivityGrid extends StatelessWidget {
         Text(
           label,
           style: context.textTheme.labelSmall!.copyWith(
-            color: context.textTheme.bodySmall!.color!
-                .withValues(alpha: 0.6),
+            color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.6),
           ),
         ),
       ],

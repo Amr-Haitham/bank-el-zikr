@@ -124,8 +124,8 @@ class SettingsScreen extends StatelessWidget {
                       value: settings.adhkarRemindersEnabled,
                       onChanged: (value) async {
                         final settingsCubit = context.read<SettingsCubit>();
-                        final failure =
-                            await settingsCubit.setAdhkarRemindersEnabled(value);
+                        final failure = await settingsCubit
+                            .setAdhkarRemindersEnabled(value);
                         if (failure != null && value && context.mounted) {
                           context.showErrorNotification(
                             message: failure.getDisplayMessage(context),
@@ -164,8 +164,7 @@ class SettingsScreen extends StatelessWidget {
                             RequestState<PrayerTimesEntity>>(
                           builder: (context, prayerTimesState) {
                             if (prayerTimesState is RequestStateInitial) {
-                              WidgetsBinding.instance
-                                  .addPostFrameCallback((_) {
+                              WidgetsBinding.instance.addPostFrameCallback((_) {
                                 context.read<PrayerTimesCubit>().fetch();
                               });
                             }
@@ -216,15 +215,15 @@ class SettingsScreen extends StatelessWidget {
                         ReminderTimeCard(
                           icon: Icons.wb_sunny_outlined,
                           iconColor: morningOrange,
-                          iconBgColor: context.theme.brightness ==
-                                  Brightness.light
-                              ? morningBgLight
-                              : morningBgDark,
+                          iconBgColor:
+                              context.theme.brightness == Brightness.light
+                                  ? morningBgLight
+                                  : morningBgDark,
                           label: l10n.morningAdhkar,
                           timeText: settings.morningZikrAlarm == null
                               ? '--:--'
-                              : _formatTime(
-                                  context, _toDateTime(settings.morningZikrAlarm!)),
+                              : _formatTime(context,
+                                  _toDateTime(settings.morningZikrAlarm!)),
                           enabled: settings.morningReminderEnabled,
                           onToggle: (value) => context
                               .read<SettingsCubit>()
@@ -247,15 +246,15 @@ class SettingsScreen extends StatelessWidget {
                         ReminderTimeCard(
                           icon: Icons.nightlight_round,
                           iconColor: eveningPurple,
-                          iconBgColor: context.theme.brightness ==
-                                  Brightness.light
-                              ? eveningBgLight
-                              : eveningBgDark,
+                          iconBgColor:
+                              context.theme.brightness == Brightness.light
+                                  ? eveningBgLight
+                                  : eveningBgDark,
                           label: l10n.eveningAdhkar,
                           timeText: settings.nightZikrAlarm == null
                               ? '--:--'
-                              : _formatTime(
-                                  context, _toDateTime(settings.nightZikrAlarm!)),
+                              : _formatTime(context,
+                                  _toDateTime(settings.nightZikrAlarm!)),
                           enabled: settings.eveningReminderEnabled,
                           onToggle: (value) => context
                               .read<SettingsCubit>()
@@ -268,9 +267,7 @@ class SettingsScreen extends StatelessWidget {
                                   const TimeOfDay(hour: 18, minute: 40),
                             );
                             if (time != null && context.mounted) {
-                              context
-                                  .read<SettingsCubit>()
-                                  .setNightAlarm(time);
+                              context.read<SettingsCubit>().setNightAlarm(time);
                             }
                           },
                         ),

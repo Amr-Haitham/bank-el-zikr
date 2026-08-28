@@ -4,6 +4,7 @@ import 'package:bank_el_ziker/features/adhkar/presentation/cubit/add_custom_zikr
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/update_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/adhkar/presentation/cubit/delete_custom_zikr_cubit.dart';
 import 'package:bank_el_ziker/features/zikr_counter/presentation/cubit/counter_cubit.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:flutter/material.dart';
@@ -48,8 +49,11 @@ class AzkarScreen extends StatelessWidget {
         child: Scaffold(
           backgroundColor: context.theme.scaffoldBackgroundColor,
           body: Padding(
-            padding:
-                const EdgeInsets.only(top: 30, right: 30, left: 30, bottom: 10),
+            padding: const EdgeInsets.only(
+                top: ConstantValues.spacingXxl,
+                right: ConstantValues.spacingXxl,
+                left: ConstantValues.spacingXxl,
+                bottom: ConstantValues.spacingSm),
             child: CustomScrollView(
               slivers: [
                 SliverToBoxAdapter(

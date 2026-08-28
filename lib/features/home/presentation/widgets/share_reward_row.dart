@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -15,7 +16,7 @@ class ShareRewardRow extends StatelessWidget {
       },
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(vertical: 14),
+        padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingMd),
         decoration: BoxDecoration(
           color: context.theme.primaryColor.withValues(alpha: 0.1),
           borderRadius: BorderRadius.circular(20),

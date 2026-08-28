@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/app_purpose_step.dart';
@@ -62,11 +63,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       final snackBar = context.buildSnackBar(
         failure.getDisplayMessage(context),
         type: SnackBarType.error,
-        actionLabel:
-            isServiceDisabled ? AppLocalizations.of(context).openSettingsAction : null,
-        onAction: isServiceDisabled
-            ? settingsCubit.openLocationSettingsScreen
+        actionLabel: isServiceDisabled
+            ? AppLocalizations.of(context).openSettingsAction
             : null,
+        onAction:
+            isServiceDisabled ? settingsCubit.openLocationSettingsScreen : null,
       );
       AutoRouter.of(context).replaceAll([const DashboardRoute()]);
       messenger.showSnackBar(snackBar);
@@ -199,7 +200,8 @@ class _StepFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 24, top: 8),
+      padding: const EdgeInsets.only(
+          bottom: ConstantValues.spacingXl, top: ConstantValues.spacingSm),
       child: Column(
         children: [
           Row(
@@ -208,7 +210,8 @@ class _StepFooter extends StatelessWidget {
               final isActive = index == currentPage;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                margin: const EdgeInsets.symmetric(
+                    horizontal: ConstantValues.spacingXs),
                 width: isActive ? 20 : 8,
                 height: 8,
                 decoration: BoxDecoration(

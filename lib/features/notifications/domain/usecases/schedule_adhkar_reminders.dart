@@ -56,7 +56,8 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
         body: 'حان وقت أذكار الصباح',
         time: time,
       );
-      debugPrint('[AdhkarReminders] morning scheduled for $time -> ${_describe(result)}');
+      debugPrint(
+          '[AdhkarReminders] morning scheduled for $time -> ${_describe(result)}');
     }
 
     if (settings.eveningReminderEnabled) {
@@ -67,7 +68,8 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
         body: 'حان وقت أذكار المساء',
         time: time,
       );
-      debugPrint('[AdhkarReminders] evening scheduled for $time -> ${_describe(result)}');
+      debugPrint(
+          '[AdhkarReminders] evening scheduled for $time -> ${_describe(result)}');
     }
 
     return const Right(null);
@@ -76,8 +78,10 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
   Future<RequestResult<void>> _scheduleAuto(Settings settings) async {
     final coordinatesResult = await locationRepository.getCurrentCoordinates();
     if (coordinatesResult.isLeft()) {
-      debugPrint('[AdhkarReminders] could not get location: $coordinatesResult');
-      return coordinatesResult.fold((failure) => Left(failure), (_) => const Right(null));
+      debugPrint(
+          '[AdhkarReminders] could not get location: $coordinatesResult');
+      return coordinatesResult.fold(
+          (failure) => Left(failure), (_) => const Right(null));
     }
     final coordinates =
         coordinatesResult.fold((_) => null, (coordinates) => coordinates)!;

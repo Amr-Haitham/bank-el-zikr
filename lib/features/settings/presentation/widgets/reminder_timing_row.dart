@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,9 @@ class ReminderTimingRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+      padding: const EdgeInsets.symmetric(
+          horizontal: ConstantValues.spacingLg,
+          vertical: ConstantValues.spacingMd),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(18),
@@ -30,7 +33,7 @@ class ReminderTimingRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            padding: const EdgeInsets.all(3),
+            padding: const EdgeInsets.all(ConstantValues.spacingXs),
             decoration: BoxDecoration(
               color: context.theme.scaffoldBackgroundColor,
               borderRadius: BorderRadius.circular(20),
@@ -92,7 +95,9 @@ class _TimingOption extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 150),
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ConstantValues.spacingMd,
+            vertical: ConstantValues.spacingSm),
         decoration: BoxDecoration(
           color: isSelected ? context.theme.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(18),

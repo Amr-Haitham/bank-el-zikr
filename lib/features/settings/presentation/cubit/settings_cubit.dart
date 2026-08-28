@@ -35,7 +35,8 @@ class SettingsCubit extends RequestCubit<Settings> {
   /// only the next time the user touches a reminder-related setting.
   Future<void> _verifyRemindersOnLaunch() async {
     await stream.firstWhere(
-      (state) => state is RequestStateSuccess<Settings> ||
+      (state) =>
+          state is RequestStateSuccess<Settings> ||
           state is RequestStateFailure<Settings>,
     );
     final settings = state.whenOrNull(success: (s) => s);

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
@@ -39,9 +40,8 @@ class ListTileOfZikr extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final showTranslation = isEnglish && zikr.descriptionEn != null;
-    final descriptionText = showTranslation
-        ? zikr.descriptionEn!
-        : (zikr.description ?? "");
+    final descriptionText =
+        showTranslation ? zikr.descriptionEn! : (zikr.description ?? "");
 
     return ListTile(
       splashColor: Colors.transparent,
@@ -80,15 +80,15 @@ class ListTileOfZikr extends StatelessWidget {
                       child: AutoSizeText(
                         zikr.content,
                         textDirection: TextDirection.rtl,
-                        style:
-                            context.textTheme.titleMedium!.copyWith(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        style: context.textTheme.titleMedium!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
+                      padding:
+                          const EdgeInsets.only(left: ConstantValues.spacingLg),
                       child: useGreenCheckIndicator
                           ? Container(
                               height: 20,
@@ -145,11 +145,11 @@ class ListTileOfZikr extends StatelessWidget {
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: context.theme.primaryColor,
-                    ),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                  color: context.theme.primaryColor,
+                ),
               ),
             ),
           ],
@@ -161,11 +161,11 @@ class ListTileOfZikr extends StatelessWidget {
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14,
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appGray
-                          : appLightGrey,
-                    ),
+                  fontSize: 14,
+                  color: GeneralUtils.isLightTheme(context)
+                      ? appGray
+                      : appLightGrey,
+                ),
               ),
             ),
           ],
@@ -175,11 +175,10 @@ class ListTileOfZikr extends StatelessWidget {
             textDirection:
                 showTranslation ? TextDirection.ltr : TextDirection.rtl,
             style: context.textTheme.bodySmall!.copyWith(
-                  fontSize: 14,
-                  color: GeneralUtils.isLightTheme(context)
-                      ? appGray
-                      : appLightGrey,
-                ),
+              fontSize: 14,
+              color:
+                  GeneralUtils.isLightTheme(context) ? appGray : appLightGrey,
+            ),
           ),
         ],
       ),
