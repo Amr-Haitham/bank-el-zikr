@@ -1293,7 +1293,25 @@ class InitialData {
 يسن لزائر المقبرة أن يدعو بما ورد عن النبي صلى الله عليه وسلم، ومن ذلك ما روى مسلم من حديث سليمان بن بريدة عن أبيه، أن النبي صلى الله عليه وسلم كان يعلم أصحابه إذا خرجوا إلى المقابر أن يقولوا: "السلام عليكم أهل الديار من المؤمنين والمسلمين وإنا إن شاء الله بكم لاحقون نسأل الله لنا ولكن العافية."
 """,
         descriptionEn:
-            "It is recommended for a visitor to the graveyard to supplicate with what has been reported from the Prophet ﷺ, as Muslim narrated from Sulayman ibn Buraydah, on the authority of his father, that the Prophet ﷺ used to teach his Companions that when they went out to the graves they should say the above.")
+            "It is recommended for a visitor to the graveyard to supplicate with what has been reported from the Prophet ﷺ, as Muslim narrated from Sulayman ibn Buraydah, on the authority of his father, that the Prophet ﷺ used to teach his Companions that when they went out to the graves they should say the above."),
+    const ZikrEntity(
+        id: 27,
+        key: 'condition_027',
+        category: 'afterEating',
+        titleEn: "After Eating",
+        count: 1,
+        title: "دعاء بعد الأكل",
+        content:
+            "الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة",
+        contentTransliteration:
+            "Alhamdu lillahilladhi at'amani hadha, wa razaqanihi min ghayri hawlin minni wa la quwwah.",
+        contentEn:
+            "Praise be to Allah who fed me this and provided it for me without any might or power on my part.",
+        description: """
+عَنْ مُعَاذِ بْنِ أَنَسٍ رضي الله عنه، عَنِ النَّبِيِّ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ قَالَ: مَنْ أَكَلَ طَعَامًا فَقَالَ: الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة، غُفِرَ لَهُ مَا تَقَدَّمَ مِنْ ذَنْبِهِ.
+رواه أبو داود والترمذي وابن ماجه""",
+        descriptionEn:
+            "Mu'adh ibn Anas (may Allah be pleased with him) reported that the Prophet ﷺ said: \"Whoever eats food and then says: [the above], his previous sins will be forgiven.\" Reported by Abu Dawud, at-Tirmidhi, and Ibn Majah.")
   ];
 
   static List<ZikrEntity> ruqyahAzkar = [
@@ -2136,6 +2154,14 @@ class InitialData {
       titleEn: 'Ruqyah',
       icon: Icons.shield_outlined,
       color: categoryRuqyahTeal,
+      isTrackedDaily: false,
+    ),
+    const ZikrCategory(
+      key: 'afterEating',
+      title: 'بعد الأكل',
+      titleEn: 'After Eating',
+      icon: Icons.restaurant_outlined,
+      color: categoryEatingOrange,
       isTrackedDaily: false,
     ),
   ];
