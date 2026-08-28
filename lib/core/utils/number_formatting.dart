@@ -14,7 +14,7 @@ String formatNumber(BuildContext context, Object value) {
           .watch<SettingsCubit>()
           .state
           .whenOrNull(success: (Settings s) => s.useArabicNumerals) ??
-      true;
+      false;
 
   return useArabicNumerals ? ArabicNumbers().convert(value) : value.toString();
 }

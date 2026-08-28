@@ -454,6 +454,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get chooseZikr => 'Choose a Zikr';
 
   @override
+  String get translation => 'Translation';
+
+  @override
   String get addCustomZikrHint => 'Add a custom zikr...';
 
   @override

@@ -34,7 +34,7 @@ class Settings extends Equatable {
     this.hasSeenOnboarding = false,
     this.dhikrFont = 'clear',
     this.textSize = 'medium',
-    this.useArabicNumerals = true,
+    this.useArabicNumerals = false,
     this.adhkarRemindersEnabled = false,
     this.reminderMode = 'auto',
     this.morningReminderEnabled = true,

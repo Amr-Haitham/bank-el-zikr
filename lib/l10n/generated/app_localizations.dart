@@ -293,7 +293,7 @@ abstract class AppLocalizations {
   /// No description provided for @showTranslation.
   ///
   /// In ar, this message translates to:
-  /// **'إظهار الترجمة'**
+  /// **'عرض الترجمة'**
   String get showTranslation;
 
   /// No description provided for @hideTranslation.
@@ -907,6 +907,12 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'اختر الذكر'**
   String get chooseZikr;
+
+  /// No description provided for @translation.
+  ///
+  /// In ar, this message translates to:
+  /// **'الترجمة'**
+  String get translation;
 
   /// Placeholder text for the inline add-custom-zikr text field
   ///
