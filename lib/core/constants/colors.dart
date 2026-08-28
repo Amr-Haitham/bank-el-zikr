@@ -58,6 +58,7 @@ const categoryMountBrown = Color(0xffB5772F);
 const categoryGravesGreen = Color(0xff5A7D5E);
 const categoryAfterPrayerGreen = Color(0xff2FA366);
 const categoryRuqyahTeal = Color(0xff1E9E8E);
+const categoryEatingOrange = Color(0xffD98A3D);
 
 // Gradients & overlays.
 const primaryGradientEnd = Color(0xff1D6B3A);
