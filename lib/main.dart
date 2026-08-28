@@ -16,6 +16,7 @@ import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -26,6 +27,9 @@ import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
+
+const bool useDevicePreview =
+    bool.fromEnvironment('DEVICE_PREVIEW', defaultValue: false);
 
 Future<void> _initRevenueCat() async {
   final apiKey = !kIsWeb && Platform.isIOS
@@ -67,19 +71,23 @@ void main() async {
   final hasSeenOnboarding =
       getService<SharedPreferences>().getBool('hasSeenOnboarding') ?? false;
 
-  runApp(
-    MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => getService<SettingsCubit>()),
-        BlocProvider.value(value: getService<CounterCubit>()),
-        BlocProvider.value(value: getService<ReadingProgressCubit>()),
-        BlocProvider.value(value: getService<DayRecordCubit>()),
-        BlocProvider.value(value: getService<SupporterStatusCubit>()),
-      ],
-      child: MyApp(
-        appRouter: AppRouter(showOnboarding: !hasSeenOnboarding),
-      ),
+  final app = MultiBlocProvider(
+    providers: [
+      BlocProvider(create: (context) => getService<SettingsCubit>()),
+      BlocProvider.value(value: getService<CounterCubit>()),
+      BlocProvider.value(value: getService<ReadingProgressCubit>()),
+      BlocProvider.value(value: getService<DayRecordCubit>()),
+      BlocProvider.value(value: getService<SupporterStatusCubit>()),
+    ],
+    child: MyApp(
+      appRouter: AppRouter(showOnboarding: !hasSeenOnboarding),
     ),
+  );
+
+  runApp(
+    useDevicePreview
+        ? DevicePreview(enabled: true, builder: (context) => app)
+        : app,
   );
 }
 
@@ -118,7 +126,7 @@ class MyApp extends StatelessWidget {
         final locale = Locale(settings?.selectedLanguage ?? 'ar');
 
         return MaterialApp.router(
-          locale: locale,
+          locale: useDevicePreview ? DevicePreview.locale(context) : locale,
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: const [
             AppLocalizations.delegate,
@@ -129,11 +137,16 @@ class MyApp extends StatelessWidget {
           theme: theme,
           debugShowCheckedModeBanner: false,
           routerConfig: appRouter.config(),
-          builder: (context, child) => MediaQuery(
-            data: MediaQuery.of(context)
-                .copyWith(textScaler: TextScaler.linear(textScale)),
-            child: child!,
-          ),
+          builder: (context, child) {
+            final withTextScale = MediaQuery(
+              data: MediaQuery.of(context)
+                  .copyWith(textScaler: TextScaler.linear(textScale)),
+              child: child!,
+            );
+            return useDevicePreview
+                ? DevicePreview.appBuilder(context, withTextScale)
+                : withTextScale;
+          },
         );
       },
     );
