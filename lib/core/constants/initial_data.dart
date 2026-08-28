@@ -1508,6 +1508,24 @@ class InitialData {
 رواه أبو داود والترمذي وصححه الألباني.""",
         descriptionEn:
             "Ibn 'Abbas (may Allah be pleased with them both) reported that the Prophet ﷺ said: \"There is a surah in the Qur'an of thirty verses which will intercede for a man until he is forgiven — Surah al-Mulk (Tabarak).\" Reported by Abu Dawud and at-Tirmidhi, authenticated by al-Albani."),
+    const ZikrEntity(
+        id: 40,
+        key: 'condition_040',
+        category: 'sleep',
+        titleEn: "Sleep",
+        count: 1,
+        title: "الحمد لله الذي أطعمنا وسقانا",
+        content:
+            "الحمد لله الذي أطعمنا وسقانا وكفانا وآوانا، فكم ممن لا كافي له ولا مؤوي",
+        contentTransliteration:
+            "Alhamdu lillahilladhi at'amana wa saqana wa kafana wa awana, fakam mimman la kafiya lahu wa la mu'wi.",
+        contentEn:
+            "Praise be to Allah who has fed us and given us drink, and who has sufficed us and given us shelter, for how many are there who have no one to suffice them or shelter them.",
+        description: """
+عَنْ أَنَسِ بْنِ مَالِكٍ رضي الله عنه، أَنَّ رَسُولَ اللَّهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ كَانَ إِذَا أَوَى إِلَى فِرَاشِهِ قَالَ: الحمد لله الذي أطعمنا وسقانا وكفانا وآوانا، فكم ممن لا كافي له ولا مؤوي.
+رواه مسلم والترمذي""",
+        descriptionEn:
+            "Anas ibn Malik (may Allah be pleased with him) reported that the Messenger of Allah ﷺ, whenever he went to his bed, would say the above. Reported by Muslim and at-Tirmidhi."),
   ];
 
   static List<ZikrEntity> ruqyahAzkar = [
