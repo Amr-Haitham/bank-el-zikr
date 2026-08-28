@@ -59,6 +59,9 @@ const categoryGravesGreen = Color(0xff5A7D5E);
 const categoryAfterPrayerGreen = Color(0xff2FA366);
 const categoryRuqyahTeal = Color(0xff1E9E8E);
 const categoryEatingOrange = Color(0xffD98A3D);
+const categoryIstikharahIndigo = Color(0xff5B6EAE);
+const categorySickRose = Color(0xffC7607B);
+const categoryRainBlue = Color(0xff3F8FC4);
 
 // Gradients & overlays.
 const primaryGradientEnd = Color(0xff1D6B3A);
