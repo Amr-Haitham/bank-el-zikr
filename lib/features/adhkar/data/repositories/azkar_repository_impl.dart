@@ -35,7 +35,7 @@ class AzkarRepositoryImpl implements AzkarRepository {
       final model = ZikrMapper.toModel(
         zikr.copyWith(
           id: DateTime.now().microsecondsSinceEpoch % 0xFFFFFFFF,
-          key: generateCustomZikrKey(),
+          key: zikr.key.isEmpty ? generateCustomZikrKey() : zikr.key,
         ),
       );
       await localDataSource.addCustomZikr(model);
