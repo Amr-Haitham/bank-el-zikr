@@ -4,11 +4,11 @@
   "navHome": "الرئيسية",
   "navTasbih": "المسبحة",
   "navAdhkar": "الأذكار",
-  "navJourney": "رصدي",
+  "navJourney": "سجلي",
 
   "homeTitle": "بنك الذكر",
   "homeSubtitle": "حصنك اليومي",
-  "totalHasanatBalance": "رصيد الحسنات الكلي",
+  "totalHasanatBalance": "رصيد الذكر الكلي",
   "depositedToday": "أودعت اليوم +{count}",
   "@depositedToday": {
     "placeholders": { "count": { "type": "String" } }
@@ -46,6 +46,13 @@
   "showTranslation": "إظهار الترجمة",
   "hideTranslation": "إخفاء الترجمة",
   "shareReward": "شارك الأجر مع أصدقاءك",
+  "shareAppMessage": "بنك الذكر يساعدك على المداومة على أذكارك اليومية، جرّبه:\nآيفون: {iosLink}\nأندرويد: {androidLink}",
+  "@shareAppMessage": {
+    "placeholders": {
+      "iosLink": { "type": "String" },
+      "androidLink": { "type": "String" }
+    }
+  },
 
   "digitalTasbih": "السبحة الرقمية",
   "errorLoadingCounter": "حدث خطأ في تحميل العداد",
@@ -90,13 +97,13 @@
     "placeholders": { "time": { "type": "String" } }
   },
 
-  "mySpiritualJourney": "رحلتي الروحية",
+  "myDhikrLog": "سجل ذِكري",
   "dhikrBreakdown": "تفصيل الأذكار",
   "weekLabel": "الأسبوع",
   "monthLabel": "الشهر",
   "yearLabel": "السنة",
   "noDhikrRecorded": "لا يوجد ذكر مسجل بعد",
-  "hasanatGrowth": "نمو الحسنات",
+  "hasanatGrowth": "نمو الذكر",
   "longestStreakLabel": "الأطول: {count} يوم",
   "@longestStreakLabel": {
     "placeholders": { "count": { "type": "String" } }
@@ -245,7 +252,7 @@
     "description": "Validation message when submitting an empty custom zikr"
   },
 
-  "onboardingPurposeTitle": "اجمع حسناتك يومًا بعد يوم",
+  "onboardingPurposeTitle": "اذكر الله يومًا بعد يوم",
   "onboardingPurposeSubtitle": "سجّل أذكارك، حافظ على سلسلة الالتزام، وتابع رصيدك في مكان واحد",
   "onboardingAdhkarBalanceLabel": "رصيد أذكارك",
   "onboardingAdhkarBalanceHint": "كل ذكر تسجّله يضاف إلى رصيدك",
