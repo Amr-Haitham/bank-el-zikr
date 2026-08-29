@@ -9,4 +9,7 @@ class ConstantValues {
   static const double spacingLg = 16.0;
   static const double spacingXl = 24.0;
   static const double spacingXxl = 32.0;
+
+  static const double readingTransliterationFontSize = 17.0;
+  static const double readingTranslationFontSize = 16.0;
 }

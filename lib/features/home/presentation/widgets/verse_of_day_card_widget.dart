@@ -17,7 +17,8 @@ class VerseOfDayCardWidget extends StatelessWidget {
         return state.when(
           initial: () => const SizedBox.shrink(),
           loading: () => Padding(
-            padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingXl),
+            padding:
+                const EdgeInsets.symmetric(vertical: ConstantValues.spacingXl),
             child: Center(
               child: CircularProgressIndicator(
                 color: context.theme.primaryColor,
@@ -78,8 +79,8 @@ class _VerseCardState extends State<_VerseCard> {
             width: 36,
             height: 4,
             decoration: BoxDecoration(
-              color: context.textTheme.bodySmall!.color!
-                  .withValues(alpha: 0.15),
+              color:
+                  context.textTheme.bodySmall!.color!.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(2),
             ),
           ),
@@ -94,8 +95,7 @@ class _VerseCardState extends State<_VerseCard> {
           if (hasTranslation) ...[
             const SizedBox(height: 12),
             GestureDetector(
-              onTap: () =>
-                  setState(() => _showTranslation = !_showTranslation),
+              onTap: () => setState(() => _showTranslation = !_showTranslation),
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -133,7 +133,8 @@ class _VerseCardState extends State<_VerseCard> {
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize:
+                                  ConstantValues.readingTransliterationFontSize,
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.italic,
                               color: context.theme.primaryColor,
@@ -147,7 +148,8 @@ class _VerseCardState extends State<_VerseCard> {
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize:
+                                  ConstantValues.readingTranslationFontSize,
                               color: context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.7),
                             ),
@@ -160,8 +162,7 @@ class _VerseCardState extends State<_VerseCard> {
           if (prayer.reference != null) ...[
             const SizedBox(height: 12),
             Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
               decoration: BoxDecoration(
                 color: context.theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),

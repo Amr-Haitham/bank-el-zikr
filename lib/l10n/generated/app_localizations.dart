@@ -800,11 +800,11 @@ abstract class AppLocalizations {
   /// **'وضع علامة كمكتمل'**
   String get markCompleted;
 
-  /// No description provided for @virtueAndSource.
+  /// No description provided for @details.
   ///
   /// In ar, this message translates to:
-  /// **'الفضل والمصدر'**
-  String get virtueAndSource;
+  /// **'التفاصيل'**
+  String get details;
 
   /// No description provided for @shareLabel.
   ///

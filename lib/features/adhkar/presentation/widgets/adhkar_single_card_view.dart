@@ -62,7 +62,7 @@ class AdhkarSingleCardView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context).virtueAndSource,
+              AppLocalizations.of(context).details,
               style: context.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
@@ -126,12 +126,11 @@ class AdhkarSingleCardView extends StatelessWidget {
                               textDirection: TextDirection.rtl,
                               minFontSize: 13,
                               maxLines: 12,
-                              style: context.textTheme.bodyMedium!
-                                  .copyWith(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 20,
-                                    color: context.colors.onSurface,
-                                  ),
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: context.colors.onSurface,
+                              ),
                             ),
                             if (isEnglish &&
                                 zikr.contentTransliteration != null) ...[
@@ -140,13 +139,13 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentTransliteration!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      fontStyle: FontStyle.italic,
-                                      color: context.theme.primaryColor,
-                                    ),
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                  fontSize: ConstantValues
+                                      .readingTransliterationFontSize,
+                                  fontWeight: FontWeight.w600,
+                                  fontStyle: FontStyle.italic,
+                                  color: context.theme.primaryColor,
+                                ),
                               ),
                             ],
                             if (isEnglish && zikr.contentEn != null) ...[
@@ -155,10 +154,10 @@ class AdhkarSingleCardView extends StatelessWidget {
                                 zikr.contentEn!,
                                 textAlign: TextAlign.center,
                                 textDirection: TextDirection.ltr,
-                                style: context.textTheme.bodyMedium!
-                                    .copyWith(
-                                        fontSize: 14,
-                                        color: secondaryTextColor),
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                    fontSize: ConstantValues
+                                        .readingTranslationFontSize,
+                                    color: secondaryTextColor),
                               ),
                             ],
                           ],
@@ -173,7 +172,7 @@ class AdhkarSingleCardView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalizations.of(context).virtueAndSource,
+                            AppLocalizations.of(context).details,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
@@ -231,8 +230,8 @@ class AdhkarSingleCardView extends StatelessWidget {
               onTap: onComplete,
               behavior: HitTestBehavior.opaque,
               child: Container(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 44, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: primaryGreen.withValues(alpha: 0.4),

@@ -399,7 +399,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get markCompleted => 'وضع علامة كمكتمل';
 
   @override
-  String get virtueAndSource => 'الفضل والمصدر';
+  String get details => 'التفاصيل';
 
   @override
   String get shareLabel => 'مشاركة';
