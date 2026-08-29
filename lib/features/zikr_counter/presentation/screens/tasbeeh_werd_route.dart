@@ -17,7 +17,7 @@ class TasbeehWerdPage extends StatelessWidget {
     // here.
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getService<GetAllAzkarCubit>()),
+        BlocProvider.value(value: getService<GetAllAzkarCubit>()),
       ],
       child: const ZikerScreen(),
     );
