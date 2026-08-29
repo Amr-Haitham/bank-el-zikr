@@ -57,9 +57,10 @@ class AdhkarListItemCard extends StatelessWidget {
                     textAlign: TextAlign.right,
                     textDirection: TextDirection.rtl,
                     style: context.textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w600,
-                          color: context.colors.onSurface,
-                        ),
+                      fontSize: 19,
+                      fontWeight: FontWeight.w600,
+                      color: context.colors.onSurface,
+                    ),
                   ),
                 ),
                 GestureDetector(
@@ -89,11 +90,11 @@ class AdhkarListItemCard extends StatelessWidget {
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: context.theme.primaryColor,
-                    ),
+                  fontSize: ConstantValues.readingTransliterationFontSize,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                  color: context.theme.primaryColor,
+                ),
               ),
             ],
             if (isEnglish && zikr.contentEn != null) ...[
@@ -101,8 +102,9 @@ class AdhkarListItemCard extends StatelessWidget {
               Text(
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
-                style: context.textTheme.bodyMedium!
-                    .copyWith(fontSize: 16, color: secondaryTextColor),
+                style: context.textTheme.bodyMedium!.copyWith(
+                    fontSize: ConstantValues.readingTranslationFontSize,
+                    color: secondaryTextColor),
               ),
             ],
             const SizedBox(height: 12),
@@ -111,10 +113,9 @@ class AdhkarListItemCard extends StatelessWidget {
               child: LinearProgressIndicator(
                 value: progress,
                 minHeight: 6,
-                backgroundColor: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.08),
-                valueColor:
-                    const AlwaysStoppedAnimation<Color>(primaryGreen),
+                backgroundColor:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.08),
+                valueColor: const AlwaysStoppedAnimation<Color>(primaryGreen),
               ),
             ),
             const SizedBox(height: 12),
@@ -181,7 +182,8 @@ class AdhkarListItemCard extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 child: Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: ConstantValues.spacingSm),
                   decoration: BoxDecoration(
                     border: Border.all(
                       color: primaryGreen.withValues(alpha: 0.4),
