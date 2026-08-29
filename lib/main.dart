@@ -12,7 +12,6 @@ import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cub
 import 'package:bank_el_ziker/core/layers/data/services/hive_db.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
-import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_progress_cubit.dart';
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -64,7 +63,8 @@ void main() async {
 
   // Re-schedule any pending Adhkar reminders on every cold start, since auto
   // mode's schedule only covers a rolling window of upcoming days.
-  await getService<ScheduleAdhkarReminders>()(const NoParams());
+  await getService<ScheduleAdhkarReminders>()(
+      const ScheduleAdhkarRemindersParams());
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 

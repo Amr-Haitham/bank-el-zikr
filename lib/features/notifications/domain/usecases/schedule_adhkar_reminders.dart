@@ -1,5 +1,6 @@
 import 'package:bank_el_ziker/core/constants/type_definitions.dart';
 import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
+import 'package:bank_el_ziker/features/notifications/domain/entities/coordinates.dart';
 import 'package:bank_el_ziker/features/notifications/domain/repositories/location_repository.dart';
 import 'package:bank_el_ziker/features/notifications/domain/repositories/notification_scheduler_repository.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/cancel_adhkar_reminders.dart';
@@ -17,7 +18,14 @@ String _describe(RequestResult<void> result) {
   return result.fold((f) => 'FAILED: ${f.message}', (_) => 'OK');
 }
 
-class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
+class ScheduleAdhkarRemindersParams {
+  final CoordinatesEntity? cachedCoordinates;
+
+  const ScheduleAdhkarRemindersParams({this.cachedCoordinates});
+}
+
+class ScheduleAdhkarReminders
+    implements UseCase<void, ScheduleAdhkarRemindersParams> {
   final SettingsRepository settingsRepository;
   final LocationRepository locationRepository;
   final GetPrayerTimes getPrayerTimes;
@@ -31,7 +39,7 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
   });
 
   @override
-  Future<RequestResult<void>> call(NoParams params) async {
+  Future<RequestResult<void>> call(ScheduleAdhkarRemindersParams params) async {
     await schedulerRepository.cancelAll(reminderNotificationIds);
 
     final settingsResult = await settingsRepository.getSettings();
@@ -42,7 +50,7 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
     }
 
     if (settings.reminderMode == 'auto') {
-      return _scheduleAuto(settings);
+      return _scheduleAuto(settings, params.cachedCoordinates);
     }
     return _scheduleManual(settings);
   }
@@ -75,16 +83,23 @@ class ScheduleAdhkarReminders implements UseCase<void, NoParams> {
     return const Right(null);
   }
 
-  Future<RequestResult<void>> _scheduleAuto(Settings settings) async {
-    final coordinatesResult = await locationRepository.getCurrentCoordinates();
-    if (coordinatesResult.isLeft()) {
-      debugPrint(
-          '[AdhkarReminders] could not get location: $coordinatesResult');
-      return coordinatesResult.fold(
-          (failure) => Left(failure), (_) => const Right(null));
+  Future<RequestResult<void>> _scheduleAuto(
+      Settings settings, CoordinatesEntity? cachedCoordinates) async {
+    CoordinatesEntity coordinates;
+    if (cachedCoordinates != null) {
+      coordinates = cachedCoordinates;
+    } else {
+      final coordinatesResult =
+          await locationRepository.getCurrentCoordinates();
+      if (coordinatesResult.isLeft()) {
+        debugPrint(
+            '[AdhkarReminders] could not get location: $coordinatesResult');
+        return coordinatesResult.fold(
+            (failure) => Left(failure), (_) => const Right(null));
+      }
+      coordinates =
+          coordinatesResult.fold((_) => null, (coordinates) => coordinates)!;
     }
-    final coordinates =
-        coordinatesResult.fold((_) => null, (coordinates) => coordinates)!;
 
     final now = DateTime.now();
 

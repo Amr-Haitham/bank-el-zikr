@@ -1,6 +1,7 @@
 import 'package:bank_el_ziker/core/layers/data/failure/failure.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/domain/usecases/usecase.dart';
+import 'package:bank_el_ziker/features/notifications/domain/entities/coordinates.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/get_current_coordinates.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/open_location_settings.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/schedule_adhkar_reminders.dart';
@@ -69,8 +70,15 @@ class SettingsCubit extends RequestCubit<Settings> {
   /// `adhkarRemindersEnabled` back to false so the Settings toggle never
   /// claims reminders are on when scheduling actually failed (e.g. location
   /// permission was revoked after reminders had already been turned on).
-  Future<void> _rescheduleReminders() async {
-    final result = await scheduleAdhkarReminders(const NoParams());
+  ///
+  /// [cachedCoordinates], when provided, skips a second GPS fetch — used by
+  /// [setAdhkarRemindersEnabled], which already fetched coordinates once to
+  /// validate location access before allowing the toggle on.
+  Future<void> _rescheduleReminders(
+      {CoordinatesEntity? cachedCoordinates}) async {
+    final result = await scheduleAdhkarReminders(
+      ScheduleAdhkarRemindersParams(cachedCoordinates: cachedCoordinates),
+    );
     if (result.isLeft()) {
       await updateSettings(
         const UpdateSettingsParams(adhkarRemindersEnabled: false),
@@ -105,11 +113,13 @@ class SettingsCubit extends RequestCubit<Settings> {
   /// Returns the failure that blocked it — leaving the toggle off — or null
   /// on success.
   Future<FailureBase?> setAdhkarRemindersEnabled(bool value) async {
+    CoordinatesEntity? coordinates;
     if (value) {
       final coordinatesResult = await getCurrentCoordinates(const NoParams());
       if (coordinatesResult.isLeft()) {
         return coordinatesResult.fold((failure) => failure, (_) => null);
       }
+      coordinates = coordinatesResult.fold((_) => null, (c) => c);
     }
 
     final result = await updateSettings(
@@ -118,7 +128,7 @@ class SettingsCubit extends RequestCubit<Settings> {
     return result.fold(
       (failure) => Future.value(failure),
       (_) async {
-        await _rescheduleReminders();
+        await _rescheduleReminders(cachedCoordinates: coordinates);
         return null;
       },
     );
