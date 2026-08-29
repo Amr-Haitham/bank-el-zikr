@@ -397,7 +397,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get markCompleted => 'Mark as completed';
 
   @override
-  String get virtueAndSource => 'Virtue & source';
+  String get details => 'Details';
 
   @override
   String get shareLabel => 'Share';

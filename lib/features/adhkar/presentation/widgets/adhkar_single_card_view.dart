@@ -62,7 +62,7 @@ class AdhkarSingleCardView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              AppLocalizations.of(context).virtueAndSource,
+              AppLocalizations.of(context).details,
               style: context.textTheme.bodyMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
@@ -173,7 +173,7 @@ class AdhkarSingleCardView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            AppLocalizations.of(context).virtueAndSource,
+                            AppLocalizations.of(context).details,
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w700,
