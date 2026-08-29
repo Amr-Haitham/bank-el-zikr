@@ -38,7 +38,7 @@ class ZikrShareSheet {
                     style: context.textTheme.bodyLarge),
                 onTap: () {
                   Navigator.of(context).pop();
-                  _shareAsText(content);
+                  _shareAsText(context, content);
                 },
               ),
               ListTile(
@@ -58,8 +58,9 @@ class ZikrShareSheet {
                 title: Text(AppLocalizations.of(context).saveImage,
                     style: context.textTheme.bodyLarge),
                 onTap: () {
+                  final outerContext = Navigator.of(context).context;
                   Navigator.of(context).pop();
-                  _saveImage(context,
+                  _saveImage(outerContext,
                       content: content, translation: translation);
                 },
               ),
@@ -70,9 +71,13 @@ class ZikrShareSheet {
     );
   }
 
-  static void _shareAsText(String content) {
+  static void _shareAsText(BuildContext context, String content) {
+    final appMessage = AppLocalizations.of(context).shareAppMessage(
+      ThirdPartyValues.appLinkIOS,
+      ThirdPartyValues.appLinkAndroid,
+    );
     SharePlus.instance.share(
-      ShareParams(text: '$content\n\n${ThirdPartyValues.appLink}'),
+      ShareParams(text: '$content\n\n$appMessage'),
     );
   }
 

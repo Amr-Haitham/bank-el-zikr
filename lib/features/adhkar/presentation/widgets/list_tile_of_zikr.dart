@@ -144,6 +144,8 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
@@ -160,6 +162,8 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
                   fontSize: 14,
                   color: GeneralUtils.isLightTheme(context)

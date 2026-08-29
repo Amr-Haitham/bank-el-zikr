@@ -4,11 +4,11 @@
   "navHome": "Home",
   "navTasbih": "Tasbih",
   "navAdhkar": "Adhkar",
-  "navJourney": "Journey",
+  "navJourney": "Log",
 
   "homeTitle": "Bank el Dhikr",
   "homeSubtitle": "Your daily fortress",
-  "totalHasanatBalance": "Total hasanat balance",
+  "totalHasanatBalance": "Total dhikr balance",
   "depositedToday": "Deposited today +{count}",
   "depositMore": "Deposit more +",
   "morningAdhkar": "Morning Adhkar",
@@ -37,6 +37,13 @@
   "showTranslation": "Show translation",
   "hideTranslation": "Hide translation",
   "shareReward": "Share the reward with friends",
+  "shareAppMessage": "Bank El Zikr helps you keep up with your daily Adhkar — try it out:\niPhone: {iosLink}\nAndroid: {androidLink}",
+  "@shareAppMessage": {
+    "placeholders": {
+      "iosLink": { "type": "String" },
+      "androidLink": { "type": "String" }
+    }
+  },
 
   "digitalTasbih": "Digital Tasbih",
   "errorLoadingCounter": "Error loading counter",
@@ -90,13 +97,13 @@
   "today": "Today, {time}",
   "yesterday": "Yesterday, {time}",
 
-  "mySpiritualJourney": "My Spiritual Journey",
+  "myDhikrLog": "My Dhikr Log",
   "dhikrBreakdown": "Dhikr breakdown",
   "weekLabel": "Week",
   "monthLabel": "Month",
   "yearLabel": "Year",
   "noDhikrRecorded": "No dhikr recorded yet",
-  "hasanatGrowth": "Hasanat growth",
+  "hasanatGrowth": "Dhikr growth",
   "longestStreakLabel": "Longest: {count} days",
   "@longestStreakLabel": {
     "placeholders": { "count": { "type": "String" } }
@@ -170,7 +177,7 @@
   "completedLabel": "Completed",
   "tapToCount": "Tap to count",
   "markCompleted": "Mark as completed",
-  "virtueAndSource": "Virtue & source",
+  "details": "Details",
   "shareLabel": "Share",
   "shareAsText": "Share as text",
   "shareAsImage": "Share as image",
@@ -197,8 +204,8 @@
   "addCustomZikrButton": "Add Zikr",
   "emptyZikrError": "Please enter the zikr text",
 
-  "onboardingPurposeTitle": "Grow your hasanat, day after day",
-  "onboardingPurposeSubtitle": "Track your Adhkar, build your streak, and watch your hasanat grow",
+  "onboardingPurposeTitle": "Grow your dhikr, day after day",
+  "onboardingPurposeSubtitle": "Track your Adhkar, build your streak, and watch your balance grow",
   "onboardingAdhkarBalanceLabel": "Your Adhkar balance",
   "onboardingAdhkarBalanceHint": "Every zikr you log adds to your balance",
   "onboardingStreakPreview": "Streak: 7 days",

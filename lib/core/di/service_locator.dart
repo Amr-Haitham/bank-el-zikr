@@ -353,7 +353,7 @@ void _setUpAdhkarUseCases() {
 }
 
 void _setUpAdhkarBlocs() {
-  _getIt.registerFactory<GetAllAzkarCubit>(
+  _getIt.registerLazySingleton<GetAllAzkarCubit>(
     () => GetAllAzkarCubit(
       getAllAzkar: getService<GetAllAzkar>(),
     ),

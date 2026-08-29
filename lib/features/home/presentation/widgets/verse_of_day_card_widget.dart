@@ -135,7 +135,8 @@ class _VerseCardState extends State<_VerseCard> {
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize:
+                                  ConstantValues.readingTransliterationFontSize,
                               fontWeight: FontWeight.w600,
                               fontStyle: FontStyle.italic,
                               color: context.theme.primaryColor,
@@ -149,7 +150,8 @@ class _VerseCardState extends State<_VerseCard> {
                             textDirection: TextDirection.ltr,
                             textAlign: TextAlign.center,
                             style: TextStyle(
-                              fontSize: 13,
+                              fontSize:
+                                  ConstantValues.readingTranslationFontSize,
                               color: context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.7),
                             ),

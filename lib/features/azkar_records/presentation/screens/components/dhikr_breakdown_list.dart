@@ -107,6 +107,8 @@ class DhikrBreakdownList extends StatelessWidget {
       child: Text(
         label,
         textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: context.textTheme.labelSmall!.copyWith(
           color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.5),
         ),
@@ -205,6 +207,8 @@ class DhikrBreakdownList extends StatelessWidget {
       child: Text(
         text,
         textAlign: TextAlign.center,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w900,

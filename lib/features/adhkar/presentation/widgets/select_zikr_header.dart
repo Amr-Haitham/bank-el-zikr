@@ -22,9 +22,14 @@ class SelectZikrHeader extends StatelessWidget {
             color: context.colors.onPrimary,
           ),
         ),
-        Text(
-          "اختر الذكر",
-          style: context.textTheme.headlineSmall,
+        Expanded(
+          child: Text(
+            "اختر الذكر",
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.headlineSmall,
+          ),
         ),
         GestureDetector(
           onTap: () => context.router.maybePop(),

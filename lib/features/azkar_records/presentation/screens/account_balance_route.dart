@@ -12,8 +12,8 @@ class AccountBalancePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getService<GetAllAzkarCubit>(),
+    return BlocProvider.value(
+      value: getService<GetAllAzkarCubit>(),
       child: const AccountBalanceScreen(),
     );
   }

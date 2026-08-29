@@ -17,7 +17,7 @@ class SelectZikrPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => getService<GetAllAzkarCubit>()),
+        BlocProvider.value(value: getService<GetAllAzkarCubit>()),
         BlocProvider(create: (context) => getService<AddCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<UpdateCustomZikrCubit>()),
         BlocProvider(create: (context) => getService<DeleteCustomZikrCubit>()),
