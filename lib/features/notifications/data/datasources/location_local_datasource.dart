@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -29,11 +31,21 @@ class LocationLocalDataSourceImpl implements LocationLocalDataSource {
   @override
   Future<({double latitude, double longitude})> getCurrentCoordinates() async {
     final serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    var permission = await Geolocator.checkPermission();
 
-    if (permission == LocationPermission.denied ||
-        permission == LocationPermission.unableToDetermine) {
-      permission = await Geolocator.requestPermission();
+    LocationPermission permission;
+    try {
+      permission = await Geolocator.checkPermission()
+          .timeout(const Duration(seconds: 8));
+
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.unableToDetermine) {
+        permission = await Geolocator.requestPermission()
+            .timeout(const Duration(seconds: 20));
+      }
+    } on TimeoutException {
+      final cached = _cachedCoordinates();
+      if (cached != null) return cached;
+      throw const LocationUnavailableException();
     }
 
     if (permission == LocationPermission.denied ||

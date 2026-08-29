@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/custom_app_button.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/app_purpose_step.dart';
@@ -227,17 +228,13 @@ class _StepFooter extends StatelessWidget {
             }),
           ),
           if (onSkip != null) ...[
-            const SizedBox(height: 12),
-            TextButton(
-              onPressed: onSkip,
-              child: Text(
-                AppLocalizations.of(context).onboardingNext,
-                style: TextStyle(
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600,
-                  color: context.textTheme.bodySmall!.color!
-                      .withValues(alpha: 0.6),
-                ),
+            const SizedBox(height: ConstantValues.spacingLg),
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: ConstantValues.appHorizontalPadding),
+              child: CustomAppButton(
+                onPressed: onSkip!,
+                text: AppLocalizations.of(context).onboardingNext,
               ),
             ),
           ],
