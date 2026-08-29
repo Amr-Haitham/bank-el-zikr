@@ -18,7 +18,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get navAdhkar => 'الأذكار';
 
   @override
-  String get navJourney => 'رصدي';
+  String get navJourney => 'سجلي';
 
   @override
   String get homeTitle => 'بنك الذكر';
@@ -27,7 +27,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get homeSubtitle => 'حصنك اليومي';
 
   @override
-  String get totalHasanatBalance => 'رصيد الحسنات الكلي';
+  String get totalHasanatBalance => 'رصيد الذكر الكلي';
 
   @override
   String depositedToday(String count) {
@@ -124,6 +124,11 @@ class AppLocalizationsAr extends AppLocalizations {
   String get shareReward => 'شارك الأجر مع أصدقاءك';
 
   @override
+  String shareAppMessage(String iosLink, String androidLink) {
+    return 'بنك الذكر يساعدك على المداومة على أذكارك اليومية، جرّبه:\nآيفون: $iosLink\nأندرويد: $androidLink';
+  }
+
+  @override
   String get digitalTasbih => 'السبحة الرقمية';
 
   @override
@@ -212,7 +217,7 @@ class AppLocalizationsAr extends AppLocalizations {
   }
 
   @override
-  String get mySpiritualJourney => 'رحلتي الروحية';
+  String get myDhikrLog => 'سجل ذِكري';
 
   @override
   String get dhikrBreakdown => 'تفصيل الأذكار';
@@ -230,7 +235,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get noDhikrRecorded => 'لا يوجد ذكر مسجل بعد';
 
   @override
-  String get hasanatGrowth => 'نمو الحسنات';
+  String get hasanatGrowth => 'نمو الذكر';
 
   @override
   String longestStreakLabel(String count) {
@@ -466,7 +471,7 @@ class AppLocalizationsAr extends AppLocalizations {
   String get emptyZikrError => 'الرجاء إدخال نص الذكر';
 
   @override
-  String get onboardingPurposeTitle => 'اجمع حسناتك يومًا بعد يوم';
+  String get onboardingPurposeTitle => 'اذكر الله يومًا بعد يوم';
 
   @override
   String get onboardingPurposeSubtitle =>

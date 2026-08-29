@@ -18,7 +18,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navAdhkar => 'Adhkar';
 
   @override
-  String get navJourney => 'Journey';
+  String get navJourney => 'Log';
 
   @override
   String get homeTitle => 'Bank el Dhikr';
@@ -27,7 +27,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get homeSubtitle => 'Your daily fortress';
 
   @override
-  String get totalHasanatBalance => 'Total hasanat balance';
+  String get totalHasanatBalance => 'Total dhikr balance';
 
   @override
   String depositedToday(String count) {
@@ -126,6 +126,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shareReward => 'Share the reward with friends';
 
   @override
+  String shareAppMessage(String iosLink, String androidLink) {
+    return 'Bank El Zikr helps you keep up with your daily Adhkar — try it out:\niPhone: $iosLink\nAndroid: $androidLink';
+  }
+
+  @override
   String get digitalTasbih => 'Digital Tasbih';
 
   @override
@@ -214,7 +219,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get mySpiritualJourney => 'My Spiritual Journey';
+  String get myDhikrLog => 'My Dhikr Log';
 
   @override
   String get dhikrBreakdown => 'Dhikr breakdown';
@@ -232,7 +237,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get noDhikrRecorded => 'No dhikr recorded yet';
 
   @override
-  String get hasanatGrowth => 'Hasanat growth';
+  String get hasanatGrowth => 'Dhikr growth';
 
   @override
   String longestStreakLabel(String count) {
@@ -469,11 +474,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get emptyZikrError => 'Please enter the zikr text';
 
   @override
-  String get onboardingPurposeTitle => 'Grow your hasanat, day after day';
+  String get onboardingPurposeTitle => 'Grow your dhikr, day after day';
 
   @override
   String get onboardingPurposeSubtitle =>
-      'Track your Adhkar, build your streak, and watch your hasanat grow';
+      'Track your Adhkar, build your streak, and watch your balance grow';
 
   @override
   String get onboardingAdhkarBalanceLabel => 'Your Adhkar balance';

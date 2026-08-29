@@ -40,7 +40,7 @@ class AccountBalanceScreen extends StatelessWidget {
                     children: [
                       const SizedBox(height: ConstantValues.appTopPadding),
                       Text(
-                        AppLocalizations.of(context).mySpiritualJourney,
+                        AppLocalizations.of(context).myDhikrLog,
                         textAlign: TextAlign.center,
                         style: context.textTheme.headlineSmall!
                             .copyWith(fontSize: 22),

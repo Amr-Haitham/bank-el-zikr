@@ -119,7 +119,7 @@ abstract class AppLocalizations {
   /// No description provided for @navJourney.
   ///
   /// In ar, this message translates to:
-  /// **'رصدي'**
+  /// **'سجلي'**
   String get navJourney;
 
   /// No description provided for @homeTitle.
@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @totalHasanatBalance.
   ///
   /// In ar, this message translates to:
-  /// **'رصيد الحسنات الكلي'**
+  /// **'رصيد الذكر الكلي'**
   String get totalHasanatBalance;
 
   /// No description provided for @depositedToday.
@@ -308,6 +308,12 @@ abstract class AppLocalizations {
   /// **'شارك الأجر مع أصدقاءك'**
   String get shareReward;
 
+  /// No description provided for @shareAppMessage.
+  ///
+  /// In ar, this message translates to:
+  /// **'بنك الذكر يساعدك على المداومة على أذكارك اليومية، جرّبه:\nآيفون: {iosLink}\nأندرويد: {androidLink}'**
+  String shareAppMessage(String iosLink, String androidLink);
+
   /// No description provided for @digitalTasbih.
   ///
   /// In ar, this message translates to:
@@ -464,11 +470,11 @@ abstract class AppLocalizations {
   /// **'أمس، {time}'**
   String yesterday(String time);
 
-  /// No description provided for @mySpiritualJourney.
+  /// No description provided for @myDhikrLog.
   ///
   /// In ar, this message translates to:
-  /// **'رحلتي الروحية'**
-  String get mySpiritualJourney;
+  /// **'سجل ذِكري'**
+  String get myDhikrLog;
 
   /// No description provided for @dhikrBreakdown.
   ///
@@ -503,7 +509,7 @@ abstract class AppLocalizations {
   /// No description provided for @hasanatGrowth.
   ///
   /// In ar, this message translates to:
-  /// **'نمو الحسنات'**
+  /// **'نمو الذكر'**
   String get hasanatGrowth;
 
   /// No description provided for @longestStreakLabel.
@@ -941,7 +947,7 @@ abstract class AppLocalizations {
   /// No description provided for @onboardingPurposeTitle.
   ///
   /// In ar, this message translates to:
-  /// **'اجمع حسناتك يومًا بعد يوم'**
+  /// **'اذكر الله يومًا بعد يوم'**
   String get onboardingPurposeTitle;
 
   /// No description provided for @onboardingPurposeSubtitle.
