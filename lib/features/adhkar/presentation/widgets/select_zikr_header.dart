@@ -15,16 +15,21 @@ class SelectZikrHeader extends StatelessWidget {
       children: [
         IconButton(
           onPressed: onAddPressed,
-          style: IconButton.styleFrom(
-              backgroundColor: context.theme.primaryColor),
+          style:
+              IconButton.styleFrom(backgroundColor: context.theme.primaryColor),
           icon: Icon(
             Icons.add,
             color: context.colors.onPrimary,
           ),
         ),
-        Text(
-          "اختر الذكر",
-          style: context.textTheme.headlineSmall,
+        Expanded(
+          child: Text(
+            "اختر الذكر",
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: context.textTheme.headlineSmall,
+          ),
         ),
         GestureDetector(
           onTap: () => context.router.maybePop(),

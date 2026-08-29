@@ -33,45 +33,49 @@ class MainBottomNavBar extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: SizedBox(
-          height: 62,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.generate(items.length, (index) {
-              final isActive = tabsRouter.activeIndex == index;
-              final color = isActive
-                  ? context.theme.primaryColor
-                  : (isLight ? Colors.grey : Colors.grey.shade600);
-              return GestureDetector(
-                behavior: HitTestBehavior.opaque,
-                onTap: () => tabsRouter.setActiveIndex(index),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(items[index].icon, color: color, size: 24),
-                    const SizedBox(height: 4),
-                    Text(
-                      items[index].label,
-                      style: TextStyle(
-                        color: color,
-                        fontSize: 13,
-                        fontWeight:
-                            isActive ? FontWeight.w700 : FontWeight.w500,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 62),
+          child: IntrinsicHeight(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: List.generate(items.length, (index) {
+                final isActive = tabsRouter.activeIndex == index;
+                final color = isActive
+                    ? context.theme.primaryColor
+                    : (isLight ? Colors.grey : Colors.grey.shade600);
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () => tabsRouter.setActiveIndex(index),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(items[index].icon, color: color, size: 24),
+                      const SizedBox(height: 4),
+                      Text(
+                        items[index].label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: color,
+                          fontSize: 13,
+                          fontWeight:
+                              isActive ? FontWeight.w700 : FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 3),
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: isActive ? color : Colors.transparent,
+                      const SizedBox(height: 3),
+                      Container(
+                        width: 4,
+                        height: 4,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isActive ? color : Colors.transparent,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }),
+                    ],
+                  ),
+                );
+              }),
+            ),
           ),
         ),
       ),

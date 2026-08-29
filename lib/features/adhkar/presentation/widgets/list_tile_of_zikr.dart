@@ -39,9 +39,8 @@ class ListTileOfZikr extends StatelessWidget {
   Widget build(BuildContext context) {
     final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     final showTranslation = isEnglish && zikr.descriptionEn != null;
-    final descriptionText = showTranslation
-        ? zikr.descriptionEn!
-        : (zikr.description ?? "");
+    final descriptionText =
+        showTranslation ? zikr.descriptionEn! : (zikr.description ?? "");
 
     return ListTile(
       splashColor: Colors.transparent,
@@ -80,11 +79,10 @@ class ListTileOfZikr extends StatelessWidget {
                       child: AutoSizeText(
                         zikr.content,
                         textDirection: TextDirection.rtl,
-                        style:
-                            context.textTheme.titleMedium!.copyWith(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                        style: context.textTheme.titleMedium!.copyWith(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Padding(
@@ -144,12 +142,14 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      fontStyle: FontStyle.italic,
-                      color: context.theme.primaryColor,
-                    ),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  fontStyle: FontStyle.italic,
+                  color: context.theme.primaryColor,
+                ),
               ),
             ),
           ],
@@ -160,12 +160,14 @@ class ListTileOfZikr extends StatelessWidget {
               child: Text(
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
+                maxLines: 4,
+                overflow: TextOverflow.ellipsis,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14,
-                      color: GeneralUtils.isLightTheme(context)
-                          ? appGray
-                          : appLightGrey,
-                    ),
+                  fontSize: 14,
+                  color: GeneralUtils.isLightTheme(context)
+                      ? appGray
+                      : appLightGrey,
+                ),
               ),
             ),
           ],
@@ -175,11 +177,10 @@ class ListTileOfZikr extends StatelessWidget {
             textDirection:
                 showTranslation ? TextDirection.ltr : TextDirection.rtl,
             style: context.textTheme.bodySmall!.copyWith(
-                  fontSize: 14,
-                  color: GeneralUtils.isLightTheme(context)
-                      ? appGray
-                      : appLightGrey,
-                ),
+              fontSize: 14,
+              color:
+                  GeneralUtils.isLightTheme(context) ? appGray : appLightGrey,
+            ),
           ),
         ],
       ),
