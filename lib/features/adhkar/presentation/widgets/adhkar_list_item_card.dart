@@ -89,7 +89,7 @@ class AdhkarListItemCard extends StatelessWidget {
                 zikr.contentTransliteration!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!.copyWith(
-                      fontSize: 14,
+                      fontSize: 17,
                       fontWeight: FontWeight.w600,
                       fontStyle: FontStyle.italic,
                       color: context.theme.primaryColor,
@@ -102,7 +102,7 @@ class AdhkarListItemCard extends StatelessWidget {
                 zikr.contentEn!,
                 textDirection: TextDirection.ltr,
                 style: context.textTheme.bodyMedium!
-                    .copyWith(fontSize: 13, color: secondaryTextColor),
+                    .copyWith(fontSize: 16, color: secondaryTextColor),
               ),
             ],
             const SizedBox(height: 12),
