@@ -11,7 +11,12 @@ class ShareRewardRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        SharePlus.instance.share(ShareParams(text: ThirdPartyValues.appLink));
+        SharePlus.instance.share(ShareParams(
+          text: AppLocalizations.of(context).shareAppMessage(
+            ThirdPartyValues.appLinkIOS,
+            ThirdPartyValues.appLinkAndroid,
+          ),
+        ));
       },
       child: Container(
         width: double.infinity,
