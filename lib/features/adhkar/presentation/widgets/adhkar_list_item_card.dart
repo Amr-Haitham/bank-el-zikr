@@ -163,13 +163,19 @@ class AdhkarListItemCard extends StatelessWidget {
                         translation: isEnglish ? zikr.contentEn : null,
                       ),
                       behavior: HitTestBehavior.opaque,
-                      child: Padding(
-                        padding: const EdgeInsets.all(ConstantValues.spacingXs),
-                        child: Icon(Icons.ios_share,
-                            size: 16, color: secondaryTextColor),
+                      child: Container(
+                        width: 28,
+                        height: 28,
+                        decoration: BoxDecoration(
+                          color:
+                              context.theme.primaryColor.withValues(alpha: 0.1),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(Icons.ios_share_rounded,
+                            size: 16, color: context.theme.primaryColor),
                       ),
                     ),
-                    const SizedBox(width: ConstantValues.spacingXs),
+                    const SizedBox(width: ConstantValues.spacingSm),
                     Text(
                       "${formatNumber(context, reps)}/${formatNumber(context, zikr.count)}",
                       style: context.textTheme.labelMedium!.copyWith(
