@@ -63,19 +63,7 @@ class AdhkarListItemCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => ZikrShareSheet.show(
-                    context,
-                    content: zikr.content,
-                    translation: isEnglish ? zikr.contentEn : null,
-                  ),
-                  behavior: HitTestBehavior.opaque,
-                  child: Padding(
-                    padding: const EdgeInsets.all(ConstantValues.spacingMd),
-                    child: Icon(Icons.ios_share,
-                        size: 18, color: secondaryTextColor),
-                  ),
-                ),
+                const SizedBox(width: ConstantValues.spacingSm),
                 Text(
                   formatNumber(context, index + 1),
                   style: context.textTheme.labelMedium!.copyWith(
@@ -166,12 +154,30 @@ class AdhkarListItemCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                Text(
-                  "${formatNumber(context, reps)}/${formatNumber(context, zikr.count)}",
-                  style: context.textTheme.labelMedium!.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: context.textTheme.bodySmall!.color!,
-                  ),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () => ZikrShareSheet.show(
+                        context,
+                        content: zikr.content,
+                        translation: isEnglish ? zikr.contentEn : null,
+                      ),
+                      behavior: HitTestBehavior.opaque,
+                      child: Padding(
+                        padding: const EdgeInsets.all(ConstantValues.spacingXs),
+                        child: Icon(Icons.ios_share,
+                            size: 16, color: secondaryTextColor),
+                      ),
+                    ),
+                    const SizedBox(width: ConstantValues.spacingXs),
+                    Text(
+                      "${formatNumber(context, reps)}/${formatNumber(context, zikr.count)}",
+                      style: context.textTheme.labelMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: context.textTheme.bodySmall!.color!,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
