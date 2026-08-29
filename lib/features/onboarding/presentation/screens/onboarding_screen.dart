@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/router/app_router.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/app_purpose_step.dart';
 import 'package:bank_el_ziker/features/onboarding/presentation/screens/components/language_step.dart';
@@ -103,7 +104,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                                 alignment: AlignmentDirectional.centerStart,
                                 child: IconButton(
                                   onPressed: _goBack,
-                                  icon: const Icon(Icons.arrow_back_rounded),
+                                  icon: const DirectionalChevron(
+                                    pointBackward: true,
+                                  ),
                                 ),
                               )
                             : const SizedBox.shrink(),

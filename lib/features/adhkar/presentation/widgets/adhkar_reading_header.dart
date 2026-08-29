@@ -1,5 +1,6 @@
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:flutter/material.dart';
 
@@ -19,14 +20,15 @@ class AdhkarReadingHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isEnglish = Localizations.localeOf(context).languageCode == 'en';
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         GestureDetector(
           onTap: onBack,
-          child: Icon(isEnglish ? Icons.chevron_left : Icons.chevron_right,
-              color: context.textTheme.bodyLarge!.color),
+          child: DirectionalChevron(
+            pointBackward: true,
+            color: context.textTheme.bodyLarge!.color,
+          ),
         ),
         Expanded(
           child: Padding(
