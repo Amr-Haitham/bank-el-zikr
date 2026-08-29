@@ -49,8 +49,9 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom + 24,
-        top: 12,
+        bottom:
+            MediaQuery.of(context).viewInsets.bottom + ConstantValues.spacingXl,
+        top: ConstantValues.spacingMd,
         right: ConstantValues.appHorizontalPadding,
         left: ConstantValues.appHorizontalPadding,
       ),
@@ -64,8 +65,8 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               height: 4,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(11),
-                color: context.textTheme.bodyLarge!.color!
-                    .withValues(alpha: 0.2),
+                color:
+                    context.textTheme.bodyLarge!.color!.withValues(alpha: 0.2),
               ),
             ),
             const SizedBox(height: 20),
@@ -80,14 +81,15 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 13,
-                color: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.6),
+                color:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.6),
               ),
             ),
             const SizedBox(height: 20),
             Container(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstantValues.spacingLg),
               decoration: BoxDecoration(
                 color: context.theme.cardColor,
                 borderRadius: BorderRadius.circular(14),
@@ -114,11 +116,13 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
               children: _presets
                   .map((preset) => Expanded(
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: ConstantValues.spacingXs),
                           child: GestureDetector(
                             onTap: () => _selectPreset(preset),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(vertical: 12),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: ConstantValues.spacingMd),
                               decoration: BoxDecoration(
                                 color: context.theme.cardColor,
                                 borderRadius: BorderRadius.circular(12),
@@ -146,7 +150,8 @@ class _GoalSettingBottomSheetState extends State<GoalSettingBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: context.theme.primaryColor,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: ConstantValues.spacingMd),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30),
                   ),

@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/constants/third_party_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_card.dart';
@@ -24,8 +25,9 @@ class ZikrShareSheet {
         color: context.colors.surface,
         borderRadius: BorderRadius.circular(24),
         child: Container(
-          margin: const EdgeInsets.all(12),
-          padding: const EdgeInsets.symmetric(vertical: 12),
+          margin: const EdgeInsets.all(ConstantValues.spacingMd),
+          padding:
+              const EdgeInsets.symmetric(vertical: ConstantValues.spacingMd),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

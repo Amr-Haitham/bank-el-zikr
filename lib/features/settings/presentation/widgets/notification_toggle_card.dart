@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,9 @@ class NotificationToggleCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+      padding: const EdgeInsets.symmetric(
+          horizontal: ConstantValues.spacingLg,
+          vertical: ConstantValues.spacingMd),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(18),

@@ -105,7 +105,7 @@ class AdhkarSingleCardView extends StatelessWidget {
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.all(ConstantValues.spacingXl),
               decoration: BoxDecoration(
                 color: context.theme.cardColor,
                 borderRadius: BorderRadius.circular(24),
@@ -198,8 +198,8 @@ class AdhkarSingleCardView extends StatelessWidget {
                 translation: isEnglish ? zikr.contentEn : null,
               ),
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 44, vertical: ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   color: primaryGreen.withValues(alpha: 0.12),
                   borderRadius: BorderRadius.circular(16),
@@ -230,8 +230,8 @@ class AdhkarSingleCardView extends StatelessWidget {
               onTap: onComplete,
               behavior: HitTestBehavior.opaque,
               child: Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 44, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 44, vertical: ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: primaryGreen.withValues(alpha: 0.4),

@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,9 @@ class SettingsRowContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 16),
+      padding: const EdgeInsets.symmetric(
+          horizontal: ConstantValues.spacingLg,
+          vertical: ConstantValues.spacingLg),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(18),

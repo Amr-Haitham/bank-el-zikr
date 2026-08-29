@@ -1,4 +1,5 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -75,7 +76,8 @@ class _TimePickerBottomSheetState extends State<TimePickerBottomSheet> {
 
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding:
+            const EdgeInsets.symmetric(horizontal: ConstantValues.spacingLg),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -84,8 +86,8 @@ class _TimePickerBottomSheetState extends State<TimePickerBottomSheet> {
               width: 40,
               height: 4,
               decoration: BoxDecoration(
-                color: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.2),
+                color:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.2),
                 borderRadius: BorderRadius.circular(999),
               ),
             ),
@@ -128,17 +130,17 @@ class _TimePickerBottomSheetState extends State<TimePickerBottomSheet> {
                     itemCount: 12,
                     columnLabel: AppLocalizations.of(context).hoursLabel,
                     labelBuilder: (index) => digits(index + 1),
-                    onSelected: (index) =>
-                        setState(() => _hour12 = index + 1),
+                    onSelected: (index) => setState(() => _hour12 = index + 1),
                   ),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const _WheelColumnSpacer(),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8),
-                        child: Text(':',
-                            style: context.textTheme.headlineMedium),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: ConstantValues.spacingSm),
+                        child:
+                            Text(':', style: context.textTheme.headlineMedium),
                       ),
                     ],
                   ),
@@ -174,7 +176,8 @@ class _TimePickerBottomSheetState extends State<TimePickerBottomSheet> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: context.theme.primaryColor,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: ConstantValues.spacingLg),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
@@ -334,10 +337,9 @@ class _AmPmOption extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: 48,
-        padding: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
         decoration: BoxDecoration(
-          color:
-              isSelected ? context.theme.primaryColor : Colors.transparent,
+          color: isSelected ? context.theme.primaryColor : Colors.transparent,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
             color: isSelected
@@ -349,7 +351,8 @@ class _AmPmOption extends StatelessWidget {
           label,
           textAlign: TextAlign.center,
           style: context.textTheme.labelLarge?.copyWith(
-            color: isSelected ? Colors.white : context.textTheme.bodySmall!.color,
+            color:
+                isSelected ? Colors.white : context.textTheme.bodySmall!.color,
           ),
         ),
       ),

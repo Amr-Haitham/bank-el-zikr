@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +60,7 @@ class _ToggleButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
         decoration: BoxDecoration(
           color: context.theme.cardColor,
           borderRadius: BorderRadius.circular(14),

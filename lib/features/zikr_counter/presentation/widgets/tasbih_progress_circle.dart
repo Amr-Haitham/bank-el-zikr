@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -180,7 +181,7 @@ class TasbihProgressCircle extends StatelessWidget {
               behavior: HitTestBehavior.opaque,
               onTap: onReset,
               child: Container(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   color: context.theme.cardColor,
                   shape: BoxShape.circle,

@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
@@ -49,7 +50,7 @@ class DhikrBreakdownList extends StatelessWidget {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(ConstantValues.spacingXl),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(24),
@@ -83,7 +84,8 @@ class DhikrBreakdownList extends StatelessWidget {
           const SizedBox(height: 16),
           if (rows.isEmpty)
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 12),
+              padding: const EdgeInsets.symmetric(
+                  vertical: ConstantValues.spacingMd),
               child: Text(
                 AppLocalizations.of(context).noDhikrRecorded,
                 style: context.textTheme.bodySmall!.copyWith(
@@ -116,7 +118,7 @@ class DhikrBreakdownList extends StatelessWidget {
 
   Widget _breakdownRow(BuildContext context, DhikrBreakdownRow row) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 9),
+      padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingSm),
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(
@@ -197,7 +199,7 @@ class DhikrBreakdownList extends StatelessWidget {
   }) {
     return Container(
       width: 44,
-      padding: const EdgeInsets.symmetric(vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: ConstantValues.spacingXs),
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(10),

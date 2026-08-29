@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class CustomAppButton extends StatelessWidget {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(ConstantValues.spacingLg),
         child: Row(
           mainAxisAlignment: trailing == null
               ? MainAxisAlignment.center

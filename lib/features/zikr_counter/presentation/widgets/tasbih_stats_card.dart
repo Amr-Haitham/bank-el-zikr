@@ -23,7 +23,9 @@ class TasbihStatsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 18, horizontal: ConstantValues.spacingMd),
+      padding: const EdgeInsets.symmetric(
+          vertical: ConstantValues.spacingLg,
+          horizontal: ConstantValues.spacingMd),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(20),
@@ -65,8 +67,7 @@ class TasbihStatsCard extends StatelessWidget {
     return Container(
       width: 1,
       height: 34,
-      color:
-          context.textTheme.bodySmall!.color!.withValues(alpha: 0.15),
+      color: context.textTheme.bodySmall!.color!.withValues(alpha: 0.15),
     );
   }
 }
@@ -96,8 +97,8 @@ class _StatColumn extends StatelessWidget {
             Text(
               label,
               style: context.textTheme.labelSmall!.copyWith(
-                color: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.6),
+                color:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.6),
               ),
             ),
             if (onEdit != null) ...[

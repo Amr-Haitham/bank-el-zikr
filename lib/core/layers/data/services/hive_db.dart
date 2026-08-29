@@ -28,10 +28,7 @@ const ratePromptStateHiveBox = "ratePromptStateHiveBox";
 /// whitespace, so cosmetic formatting differences between builds don't mask
 /// an otherwise-identical dua and silently drop a user's logged history.
 String _normalizeForMatch(String text) {
-  return text
-      .replaceAll('ـ', '')
-      .replaceAll(RegExp(r'\s+'), ' ')
-      .trim();
+  return text.replaceAll('ـ', '').replaceAll(RegExp(r'\s+'), ' ').trim();
 }
 
 class HiveDB {
@@ -89,7 +86,8 @@ class HiveDB {
     var customAzkarBox = await openAndGetBox<Zikr>(boxName: customAzkarHiveBox);
     var generalDataBox =
         await openAndGetBox<GeneralData>(boxName: generalDataHiveBox);
-    var dayRecordBox = await openAndGetBox<DayRecord>(boxName: dayRecordHiveBox);
+    var dayRecordBox =
+        await openAndGetBox<DayRecord>(boxName: dayRecordHiveBox);
     await openAndGetBox<ReadingProgress>(boxName: readingProgressHiveBox);
     var prayerAzkarBox = await openAndGetBox<Prayer>(boxName: prayerHiveBox);
     var versionBox = await openAndGetBox<Version>(boxName: versionCheckHiveBox);
@@ -169,10 +167,8 @@ class HiveDB {
           existing.repsByZikrKey = merged;
           await dayRecordBox.put(id, existing);
         } else if (repsByZikrKey.isNotEmpty) {
-          await dayRecordBox.put(
-              id,
-              DayRecord(
-                  id: id, date: dayDate, repsByZikrKey: repsByZikrKey));
+          await dayRecordBox.put(id,
+              DayRecord(id: id, date: dayDate, repsByZikrKey: repsByZikrKey));
         }
       }
 

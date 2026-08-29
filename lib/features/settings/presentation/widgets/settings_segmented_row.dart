@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class SettingsSegmentedRow extends StatelessWidget {
     return SettingsRowContainer(
       label: label,
       control: Container(
-        padding: const EdgeInsets.all(3),
+        padding: const EdgeInsets.all(ConstantValues.spacingXs),
         decoration: BoxDecoration(
           color: context.theme.scaffoldBackgroundColor,
           borderRadius: BorderRadius.circular(20),
@@ -45,8 +46,9 @@ class SettingsSegmentedRow extends StatelessWidget {
               onTap: () => onSelected(index),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 150),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+                padding: const EdgeInsets.symmetric(
+                    horizontal: ConstantValues.spacingMd,
+                    vertical: ConstantValues.spacingSm),
                 decoration: BoxDecoration(
                   color: isSelected
                       ? context.theme.primaryColor

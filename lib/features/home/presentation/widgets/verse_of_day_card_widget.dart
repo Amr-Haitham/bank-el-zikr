@@ -68,7 +68,9 @@ class _VerseCardState extends State<_VerseCard> {
 
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      padding: const EdgeInsets.symmetric(
+          vertical: ConstantValues.spacingXl,
+          horizontal: ConstantValues.spacingXl),
       decoration: BoxDecoration(
         color: context.theme.cardColor,
         borderRadius: BorderRadius.circular(20),
@@ -162,7 +164,9 @@ class _VerseCardState extends State<_VerseCard> {
           if (prayer.reference != null) ...[
             const SizedBox(height: 12),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: ConstantValues.spacingMd,
+                  vertical: ConstantValues.spacingSm),
               decoration: BoxDecoration(
                 color: context.theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),
@@ -182,7 +186,8 @@ class _VerseCardState extends State<_VerseCard> {
             onTap: () =>
                 context.read<GetRandomPrayerCubit>().reExecutePastRequest(),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 14, vertical: ConstantValues.spacingSm),
               decoration: BoxDecoration(
                 color: context.theme.scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(20),

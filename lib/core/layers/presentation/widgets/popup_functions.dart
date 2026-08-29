@@ -23,7 +23,7 @@ class PopupFunctions {
               children: <Widget>[
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(ConstantValues.spacingLg),
                     child: Center(
                       child: Text(
                         content,
@@ -46,9 +46,9 @@ class PopupFunctions {
                       child: Text(
                         'حذف',
                         style: context.textTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: appRed,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          color: appRed,
+                        ),
                       ),
                     ),
                     TextButton(
@@ -59,9 +59,9 @@ class PopupFunctions {
                       child: Text(
                         'الغاء',
                         style: context.textTheme.bodySmall!.copyWith(
-                              fontWeight: FontWeight.w700,
-                              color: context.theme.primaryColor,
-                            ),
+                          fontWeight: FontWeight.w700,
+                          color: context.theme.primaryColor,
+                        ),
                       ),
                     ),
                   ],

@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/di/service_locator.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
@@ -86,7 +87,9 @@ class ZikrPickerBottomSheet extends StatelessWidget {
           return Builder(builder: (context) {
             return SafeArea(
               child: Padding(
-                padding: const EdgeInsets.only(left: 4, right: 8),
+                padding: const EdgeInsets.only(
+                    left: ConstantValues.spacingXs,
+                    right: ConstantValues.spacingSm),
                 child: Column(
                   children: [
                     const SizedBox(height: 10),
@@ -104,16 +107,15 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                       final isEnglish =
                           Localizations.localeOf(context).languageCode == 'en';
                       final closeButton = Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: ConstantValues.spacingSm),
                         child: GestureDetector(
                           onTap: () => Navigator.of(context).maybePop(),
                           child: Container(
                             width: 38,
                             height: 38,
                             decoration: BoxDecoration(
-                              color: context
-                                  .colors
-                                  .surfaceContainerHighest,
+                              color: context.colors.surfaceContainerHighest,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             child: Icon(
@@ -129,7 +131,8 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                         style: context.textTheme.headlineSmall,
                       );
                       final addZikrButton = Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: ConstantValues.spacingSm),
                         child: GestureDetector(
                           onTap: () => AddCustomZikrPopup.show(context),
                           child: Container(
@@ -166,8 +169,7 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                 child: CircularProgressIndicator()),
                             failure: (f) => const SizedBox.shrink(),
                             success: (allAzkar) {
-                              final azkar =
-                                  ZikrEntity.tasbihEligible(allAzkar);
+                              final azkar = ZikrEntity.tasbihEligible(allAzkar);
                               return ScrollbarTheme(
                                 data: const ScrollbarThemeData(
                                   crossAxisMargin: 4,
@@ -184,13 +186,12 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                     children: [
                                       Material(
                                         color: context
-                                            .colors
-                                            .surfaceContainerHighest
+                                            .colors.surfaceContainerHighest
                                             .withValues(alpha: 0.5),
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         child: Padding(
-                                          padding: const EdgeInsets.all(16),
+                                          padding: const EdgeInsets.all(
+                                              ConstantValues.spacingLg),
                                           child: Column(
                                             children: [
                                               for (final zikr in azkar) ...[
@@ -220,9 +221,8 @@ class ZikrPickerBottomSheet extends StatelessWidget {
                                                   Divider(
                                                     height: 1,
                                                     thickness: 1,
-                                                    color: context
-                                                        .colors
-                                                        .outline,
+                                                    color:
+                                                        context.colors.outline,
                                                   ),
                                                   const SizedBox(height: 16),
                                                 ],

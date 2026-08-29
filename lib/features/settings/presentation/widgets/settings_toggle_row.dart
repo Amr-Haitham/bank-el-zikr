@@ -33,8 +33,8 @@ class SettingsToggleRow extends StatelessWidget {
         activeThumbColor: Colors.white,
         activeTrackColor: context.theme.primaryColor,
         inactiveThumbColor: Colors.white,
-        inactiveTrackColor: context.textTheme.bodySmall!.color!
-            .withValues(alpha: 0.25),
+        inactiveTrackColor:
+            context.textTheme.bodySmall!.color!.withValues(alpha: 0.25),
         thumbIcon: (activeIcon == null && inactiveIcon == null)
             ? null
             : WidgetStateProperty.resolveWith((states) {

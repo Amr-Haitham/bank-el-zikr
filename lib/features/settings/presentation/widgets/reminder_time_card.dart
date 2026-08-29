@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +33,9 @@ class ReminderTimeCard extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        padding: const EdgeInsets.symmetric(
+            horizontal: ConstantValues.spacingLg,
+            vertical: ConstantValues.spacingMd),
         decoration: BoxDecoration(
           color: context.theme.cardColor,
           borderRadius: BorderRadius.circular(18),
@@ -55,14 +58,14 @@ class ReminderTimeCard extends StatelessWidget {
                 children: [
                   Text(
                     label,
-                    style: context.textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w700, fontSize: 15),
+                    style: context.textTheme.bodyLarge
+                        ?.copyWith(fontWeight: FontWeight.w700, fontSize: 15),
                   ),
                   const SizedBox(height: 2),
                   Text(
                     timeText,
-                    style: context.textTheme.bodyMedium
-                        ?.copyWith(color: iconColor, fontWeight: FontWeight.w600),
+                    style: context.textTheme.bodyMedium?.copyWith(
+                        color: iconColor, fontWeight: FontWeight.w600),
                   ),
                 ],
               ),
@@ -74,8 +77,8 @@ class ReminderTimeCard extends StatelessWidget {
                 activeThumbColor: Colors.white,
                 activeTrackColor: context.theme.primaryColor,
                 inactiveThumbColor: Colors.white,
-                inactiveTrackColor: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.25),
+                inactiveTrackColor:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.25),
               )
             else
               Icon(
@@ -86,8 +89,8 @@ class ReminderTimeCard extends StatelessWidget {
               const SizedBox(width: 6),
               DirectionalChevron(
                 size: 16,
-                color: context.textTheme.bodySmall!.color!
-                    .withValues(alpha: 0.4),
+                color:
+                    context.textTheme.bodySmall!.color!.withValues(alpha: 0.4),
               ),
             ],
           ],

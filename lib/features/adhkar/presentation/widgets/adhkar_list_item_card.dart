@@ -112,8 +112,9 @@ class AdhkarListItemCard extends StatelessWidget {
               children: [
                 if (isCompleted)
                   Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: ConstantValues.spacingMd,
+                        vertical: ConstantValues.spacingSm),
                     decoration: BoxDecoration(
                       color: primaryGreen.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(20),

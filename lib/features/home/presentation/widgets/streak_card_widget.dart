@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/request_cubit/request_cubit.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
@@ -58,7 +59,7 @@ class StreakCardWidget extends StatelessWidget {
           onTap: () => AutoTabsRouter.of(context).setActiveIndex(3),
           child: Container(
             width: double.infinity,
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.all(ConstantValues.spacingXl),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               gradient: LinearGradient(
@@ -125,8 +126,9 @@ class StreakCardWidget extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: ConstantValues.spacingLg,
+                      vertical: ConstantValues.spacingMd),
                   decoration: BoxDecoration(
                     color: Colors.white.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(16),

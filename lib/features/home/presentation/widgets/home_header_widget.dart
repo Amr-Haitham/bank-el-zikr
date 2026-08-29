@@ -12,17 +12,16 @@ class HomeHeaderWidget extends StatelessWidget {
       children: [
         Text(
           AppLocalizations.of(context).homeTitle,
-          style: context.textTheme.headlineSmall!
-              .copyWith(fontSize: 24),
+          style: context.textTheme.headlineSmall!.copyWith(fontSize: 24),
         ),
         const SizedBox(height: 4),
         Text(
           AppLocalizations.of(context).homeSubtitle,
           style: context.textTheme.bodySmall!.copyWith(
-                fontSize: 14,
-                color: context.theme.primaryColor,
-                fontWeight: FontWeight.w600,
-              ),
+            fontSize: 14,
+            color: context.theme.primaryColor,
+            fontWeight: FontWeight.w600,
+          ),
         ),
       ],
     );

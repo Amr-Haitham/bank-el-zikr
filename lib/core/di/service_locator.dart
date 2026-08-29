@@ -206,8 +206,7 @@ Future<void> _setUpExternalDependencies() async {
     () => dayRecordBox,
     instanceName: 'dayRecordBox',
   );
-  final readingProgressBox =
-      Hive.box<ReadingProgress>(readingProgressHiveBox);
+  final readingProgressBox = Hive.box<ReadingProgress>(readingProgressHiveBox);
   _getIt.registerLazySingleton<Box<ReadingProgress>>(
     () => readingProgressBox,
     instanceName: 'readingProgressBox',
@@ -235,8 +234,7 @@ Future<void> _setUpExternalDependencies() async {
   );
 
   // engagement
-  final ratePromptStateBox =
-      Hive.box<RatePromptState>(ratePromptStateHiveBox);
+  final ratePromptStateBox = Hive.box<RatePromptState>(ratePromptStateHiveBox);
   _getIt.registerLazySingleton<Box<RatePromptState>>(
     () => ratePromptStateBox,
     instanceName: 'ratePromptStateBox',
@@ -441,8 +439,7 @@ void _setUpDayRecordBlocs() {
 void _setUpReadingProgressDataSources() {
   _getIt.registerLazySingleton<ReadingProgressLocalDataSource>(
     () => ReadingProgressLocalDataSourceImpl(
-      box: getService<Box<ReadingProgress>>(
-          instanceName: 'readingProgressBox'),
+      box: getService<Box<ReadingProgress>>(instanceName: 'readingProgressBox'),
     ),
   );
 }

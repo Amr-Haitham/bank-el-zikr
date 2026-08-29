@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/number_formatting.dart';
 import 'package:flutter/material.dart';
@@ -29,19 +30,21 @@ class AdhkarReadingHeader extends StatelessWidget {
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ConstantValues.spacingSm),
             child: Text(
               title,
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              style: context.textTheme.headlineSmall!
-                  .copyWith(fontSize: 20),
+              style: context.textTheme.headlineSmall!.copyWith(fontSize: 20),
             ),
           ),
         ),
         Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          padding: const EdgeInsets.symmetric(
+              horizontal: ConstantValues.spacingSm,
+              vertical: ConstantValues.spacingXs),
           decoration: BoxDecoration(
             color: context.theme.cardColor,
             borderRadius: BorderRadius.circular(20),

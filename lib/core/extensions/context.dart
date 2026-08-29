@@ -67,7 +67,8 @@ extension ContextExtension on BuildContext {
           milliseconds: (3000 + 100 * message.length).clamp(3000, 6000)),
       action: actionLabel == null || onAction == null
           ? null
-          : SnackBarAction(label: actionLabel, onPressed: onAction, textColor: color),
+          : SnackBarAction(
+              label: actionLabel, onPressed: onAction, textColor: color),
     );
   }
 

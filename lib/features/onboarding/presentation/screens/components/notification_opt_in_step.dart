@@ -106,7 +106,8 @@ class _NotificationOptInStepState extends State<NotificationOptInStep>
               children: [
                 CustomAppButton(
                   onPressed: widget.onEnable,
-                  text: AppLocalizations.of(context).onboardingEnableNotifications,
+                  text: AppLocalizations.of(context)
+                      .onboardingEnableNotifications,
                 ),
                 const SizedBox(height: 12),
                 TextButton(
@@ -116,8 +117,8 @@ class _NotificationOptInStepState extends State<NotificationOptInStep>
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color:
-                          context.textTheme.bodySmall!.color!.withValues(alpha: 0.6),
+                      color: context.textTheme.bodySmall!.color!
+                          .withValues(alpha: 0.6),
                     ),
                   ),
                 ),

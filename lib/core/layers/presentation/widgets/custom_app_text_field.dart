@@ -1,3 +1,4 @@
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -23,7 +24,7 @@ class CustomAppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8),
+      padding: const EdgeInsets.all(ConstantValues.spacingSm),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
@@ -32,17 +33,16 @@ class CustomAppTextField extends StatelessWidget {
             text: TextSpan(
               text: title,
               style: context.textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+                fontWeight: FontWeight.bold,
+              ),
               children: optional
                   ? [
                       TextSpan(
                         text: ' (اختياري)',
                         style: context.textTheme.bodyMedium!.copyWith(
-                              fontSize:
-                                  12.0, // Adjust the size to your preference
-                              fontWeight: FontWeight.normal,
-                            ),
+                          fontSize: 12.0, // Adjust the size to your preference
+                          fontWeight: FontWeight.normal,
+                        ),
                       ),
                     ]
                   : [],

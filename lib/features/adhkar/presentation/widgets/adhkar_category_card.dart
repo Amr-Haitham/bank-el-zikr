@@ -1,4 +1,5 @@
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class AdhkarCategoryCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(20),
+        padding: const EdgeInsets.all(ConstantValues.spacingXl),
         decoration: BoxDecoration(
           color: cardBackground,
           borderRadius: BorderRadius.circular(20),

@@ -42,7 +42,8 @@ class ZikrContentScreen extends StatelessWidget {
                             zikr.description!.isNotEmpty) ...[
                           Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 50, horizontal: 16),
+                                vertical: 50,
+                                horizontal: ConstantValues.spacingLg),
                             child: Divider(
                               color: context.textTheme.bodySmall!.color,
                               thickness: 1,

@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bank_el_ziker/core/constants/colors.dart';
+import 'package:bank_el_ziker/core/constants/constant_values.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
 import 'package:bank_el_ziker/core/utils/general_utils.dart';
 import 'package:bank_el_ziker/core/domain/entities/zikr.dart';
@@ -86,7 +87,8 @@ class ListTileOfZikr extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 16.0),
+                      padding:
+                          const EdgeInsets.only(left: ConstantValues.spacingLg),
                       child: useGreenCheckIndicator
                           ? Container(
                               height: 20,

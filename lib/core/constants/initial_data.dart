@@ -163,8 +163,7 @@ class InitialData {
         id: 14,
         key: 'general_014',
         category: 'general',
-        content:
-            "أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه",
+        content: "أستغفر الله العظيم الذي لا إله إلا هو الحي القيوم وأتوب إليه",
         contentTransliteration:
             "Astaghfirullah al-'azim alladhi la ilaha illa huwal-hayyul-qayyumu wa atubu ilayh",
         contentEn:
@@ -1328,8 +1327,7 @@ class InitialData {
         titleEn: "After Eating",
         count: 1,
         title: "دعاء بعد الأكل",
-        content:
-            "الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة",
+        content: "الحمد لله الذي أطعمني هذا، ورزقنيه من غير حول مني ولا قوة",
         contentTransliteration:
             "Alhamdu lillahilladhi at'amani hadha, wa razaqanihi min ghayri hawlin minni wa la quwwah.",
         contentEn:
@@ -1596,7 +1594,8 @@ class InitialData {
         titleEn: "Visiting the Sick",
         count: 7,
         title: "دعاء عيادة المريض",
-        content: "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
+        content:
+            "أَسْأَلُ اللَّهَ الْعَظِيمَ رَبَّ الْعَرْشِ الْعَظِيمِ أَنْ يَشْفِيَكَ",
         contentTransliteration:
             "As'alullahal-'azima rabbal-'arshil-'azimi an yashfiyak.",
         contentEn:
@@ -1646,7 +1645,8 @@ class InitialData {
         titleEn: "Wedding Blessing",
         count: 1,
         title: "دعاء تهنئة المتزوج",
-        content: "بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
+        content:
+            "بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
         contentTransliteration:
             "Baraka Allahu laka, wa baraka 'alayka, wa jama'a baynakuma fi khayr.",
         contentEn:

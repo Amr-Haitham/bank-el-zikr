@@ -108,7 +108,7 @@ class _HasanatPreviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(ConstantValues.spacingXl),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         gradient: LinearGradient(
@@ -132,7 +132,8 @@ class _HasanatPreviewCard extends StatelessWidget {
                   children: [
                     Text(
                       AppLocalizations.of(context).onboardingAdhkarBalanceLabel,
-                      style: const TextStyle(color: Colors.white70, fontSize: 14),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     const SizedBox(height: 4),
                     AnimatedBuilder(
@@ -152,7 +153,8 @@ class _HasanatPreviewCard extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       AppLocalizations.of(context).onboardingAdhkarBalanceHint,
-                      style: const TextStyle(color: Colors.white70, fontSize: 13),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 13),
                     ),
                   ],
                 ),
@@ -185,7 +187,9 @@ class _HasanatPreviewCard extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(
+                horizontal: ConstantValues.spacingLg,
+                vertical: ConstantValues.spacingMd),
             decoration: BoxDecoration(
               color: Colors.white.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(16),
@@ -222,7 +226,8 @@ class _SparklinePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final path = Path();
-    final visibleCount = (progress * (_points.length - 1)).clamp(0, _points.length - 1);
+    final visibleCount =
+        (progress * (_points.length - 1)).clamp(0, _points.length - 1);
     for (var i = 0; i <= visibleCount; i++) {
       final x = size.width * i / (_points.length - 1);
       final y = size.height * (1 - _points[i]);
