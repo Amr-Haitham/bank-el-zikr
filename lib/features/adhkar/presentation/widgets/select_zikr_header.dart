@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:bank_el_ziker/core/extensions/context.dart';
+import 'package:bank_el_ziker/core/layers/presentation/widgets/directional_chevron.dart';
 import 'package:flutter/material.dart';
 
 class SelectZikrHeader extends StatelessWidget {
@@ -33,8 +34,8 @@ class SelectZikrHeader extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () => context.router.maybePop(),
-          child: Icon(
-            Icons.arrow_forward,
+          child: DirectionalChevron(
+            pointBackward: true,
             color: context.textTheme.bodyLarge!.color,
           ),
         ),
