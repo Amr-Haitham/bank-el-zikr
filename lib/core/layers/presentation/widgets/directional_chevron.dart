@@ -45,7 +45,7 @@ class _ChevronPainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = size.width * 0.14
+      ..strokeWidth = size.width * 0.1
       ..strokeCap = StrokeCap.round
       ..strokeJoin = StrokeJoin.round
       ..style = PaintingStyle.stroke;
