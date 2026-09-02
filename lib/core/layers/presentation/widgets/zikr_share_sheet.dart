@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:bank_el_ziker/core/constants/constant_values.dart';
@@ -8,7 +7,6 @@ import 'package:bank_el_ziker/core/layers/presentation/widgets/zikr_share_card.d
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:gal/gal.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -39,17 +37,6 @@ class ZikrShareSheet {
                 onTap: () {
                   Navigator.of(context).pop();
                   _shareAsText(context, content);
-                },
-              ),
-              ListTile(
-                leading:
-                    Icon(Icons.image_outlined, color: context.colors.primary),
-                title: Text(AppLocalizations.of(context).shareAsImage,
-                    style: context.textTheme.bodyLarge),
-                onTap: () {
-                  Navigator.of(context).pop();
-                  _shareAsImage(context,
-                      content: content, translation: translation);
                 },
               ),
               ListTile(
@@ -98,24 +85,6 @@ class ZikrShareSheet {
         ),
       ),
       pixelRatio: 3,
-    );
-  }
-
-  static Future<void> _shareAsImage(
-    BuildContext context, {
-    required String content,
-    String? translation,
-  }) async {
-    final bytes =
-        await _renderImage(context, content: content, translation: translation);
-
-    final tempDir = await getTemporaryDirectory();
-    final file = File(
-        '${tempDir.path}/zikr_share_${DateTime.now().microsecondsSinceEpoch}.png');
-    await file.writeAsBytes(bytes);
-
-    await SharePlus.instance.share(
-      ShareParams(files: [XFile(file.path)]),
     );
   }
 

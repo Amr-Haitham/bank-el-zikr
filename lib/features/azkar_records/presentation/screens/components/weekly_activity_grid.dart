@@ -73,7 +73,11 @@ class WeeklyActivityGrid extends StatelessWidget {
           ),
           const SizedBox(height: 18),
           Row(
-            children: days.map((day) {
+            children:
+                (Directionality.of(context) == TextDirection.rtl
+                        ? days.reversed
+                        : days)
+                    .map((day) {
               final cellsColumn = Container(
                 padding: const EdgeInsets.all(ConstantValues.spacingXs),
                 decoration: BoxDecoration(
@@ -107,6 +111,8 @@ class WeeklyActivityGrid extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         _weekdayLabel(context, day.date.weekday),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: context.textTheme.labelSmall!.copyWith(
                           fontWeight:
                               day.isToday ? FontWeight.w800 : FontWeight.w500,
@@ -114,6 +120,18 @@ class WeeklyActivityGrid extends StatelessWidget {
                               ? context.theme.primaryColor
                               : context.textTheme.bodySmall!.color!
                                   .withValues(alpha: 0.6),
+                        ),
+                      ),
+                      Text(
+                        formatNumber(
+                            context, '${day.date.day}/${day.date.month}'),
+                        style: context.textTheme.labelSmall!.copyWith(
+                          fontWeight:
+                              day.isToday ? FontWeight.w800 : FontWeight.w500,
+                          color: day.isToday
+                              ? context.theme.primaryColor
+                              : context.textTheme.bodySmall!.color!
+                                  .withValues(alpha: 0.4),
                         ),
                       ),
                     ],

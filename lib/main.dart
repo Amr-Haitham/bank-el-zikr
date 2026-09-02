@@ -1,6 +1,6 @@
-import 'dart:io';
+// import 'dart:io';
 
-import 'package:bank_el_ziker/core/constants/third_party_values.dart';
+// import 'package:bank_el_ziker/core/constants/third_party_values.dart';
 import 'package:bank_el_ziker/core/theme/app_theme.dart';
 import 'package:bank_el_ziker/features/notifications/data/datasources/notification_local_datasource.dart';
 import 'package:bank_el_ziker/features/notifications/domain/usecases/schedule_adhkar_reminders.dart';
@@ -16,13 +16,13 @@ import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/reading_
 import 'package:bank_el_ziker/features/azkar_records/presentation/cubit/day_record_cubit.dart';
 import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
+// import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timezone/data/latest.dart' as tz_data;
 import 'package:timezone/timezone.dart' as tz;
@@ -30,15 +30,21 @@ import 'package:timezone/timezone.dart' as tz;
 const bool useDevicePreview =
     bool.fromEnvironment('DEVICE_PREVIEW', defaultValue: false);
 
-Future<void> _initRevenueCat() async {
-  final apiKey = !kIsWeb && Platform.isIOS
-      ? ThirdPartyValues.revenueCatApiKeyIOS
-      : ThirdPartyValues.revenueCatApiKeyAndroid;
+// purchases_flutter (RevenueCat) has been removed as a dependency; this is a
+// no-op stub kept in place of the real init below. Restore the
+// commented-out body and the purchases_flutter dependency in pubspec.yaml
+// to bring it back.
+Future<void> _initRevenueCat() async {}
 
-  if (apiKey.isEmpty) return;
-
-  await Purchases.configure(PurchasesConfiguration(apiKey));
-}
+// Future<void> _initRevenueCat() async {
+//   final apiKey = !kIsWeb && Platform.isIOS
+//       ? ThirdPartyValues.revenueCatApiKeyIOS
+//       : ThirdPartyValues.revenueCatApiKeyAndroid;
+//
+//   if (apiKey.isEmpty) return;
+//
+//   await Purchases.configure(PurchasesConfiguration(apiKey));
+// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

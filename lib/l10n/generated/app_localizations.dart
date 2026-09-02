@@ -533,43 +533,43 @@ abstract class AppLocalizations {
   /// No description provided for @weekdayMon.
   ///
   /// In ar, this message translates to:
-  /// **'ن'**
+  /// **'إث'**
   String get weekdayMon;
 
   /// No description provided for @weekdayTue.
   ///
   /// In ar, this message translates to:
-  /// **'ث'**
+  /// **'ثلا'**
   String get weekdayTue;
 
   /// No description provided for @weekdayWed.
   ///
   /// In ar, this message translates to:
-  /// **'ر'**
+  /// **'أرب'**
   String get weekdayWed;
 
   /// No description provided for @weekdayThu.
   ///
   /// In ar, this message translates to:
-  /// **'خ'**
+  /// **'خم'**
   String get weekdayThu;
 
   /// No description provided for @weekdayFri.
   ///
   /// In ar, this message translates to:
-  /// **'ج'**
+  /// **'جمعة'**
   String get weekdayFri;
 
   /// No description provided for @weekdaySat.
   ///
   /// In ar, this message translates to:
-  /// **'س'**
+  /// **'سبت'**
   String get weekdaySat;
 
   /// No description provided for @weekdaySun.
   ///
   /// In ar, this message translates to:
-  /// **'ح'**
+  /// **'أحد'**
   String get weekdaySun;
 
   /// No description provided for @settingsTitle.

@@ -6,6 +6,7 @@ import 'package:bank_el_ziker/l10n/generated/app_localizations.dart';
 import 'package:bank_el_ziker/features/azkar_records/domain/entities/journey_stats.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class HasanatGrowthCard extends StatefulWidget {
   const HasanatGrowthCard({
@@ -30,6 +31,16 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
       GrowthPeriod.week: l10n.weekLabel,
       GrowthPeriod.month: l10n.monthLabel,
       GrowthPeriod.year: l10n.yearLabel,
+    };
+  }
+
+  String _pointLabel(BuildContext context, DateTime date) {
+    final locale = Localizations.localeOf(context).toString();
+    return switch (_period) {
+      GrowthPeriod.week => DateFormat.E(locale).format(date),
+      GrowthPeriod.month =>
+        formatNumber(context, '${date.day}/${date.month}'),
+      GrowthPeriod.year => DateFormat.MMM(locale).format(date),
     };
   }
 
@@ -157,10 +168,16 @@ class _HasanatGrowthCardState extends State<HasanatGrowthCard> {
                         return Padding(
                           padding: const EdgeInsets.only(
                               top: ConstantValues.spacingSm),
-                          child: Text(
-                            points[index].label,
-                            style: const TextStyle(
-                                color: Colors.white70, fontSize: 12),
+                          child: SizedBox(
+                            width: 32,
+                            child: Text(
+                              _pointLabel(context, points[index].date),
+                              textAlign: TextAlign.center,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                  color: Colors.white70, fontSize: 12),
+                            ),
                           ),
                         );
                       },

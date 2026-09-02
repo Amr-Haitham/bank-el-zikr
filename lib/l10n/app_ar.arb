@@ -113,13 +113,13 @@
   "@adhkarOutOf21": {
     "placeholders": { "count": { "type": "String" } }
   },
-  "weekdayMon": "ن",
-  "weekdayTue": "ث",
-  "weekdayWed": "ر",
-  "weekdayThu": "خ",
-  "weekdayFri": "ج",
-  "weekdaySat": "س",
-  "weekdaySun": "ح",
+  "weekdayMon": "إث",
+  "weekdayTue": "ثلا",
+  "weekdayWed": "أرب",
+  "weekdayThu": "خم",
+  "weekdayFri": "جمعة",
+  "weekdaySat": "سبت",
+  "weekdaySun": "أحد",
 
   "settingsTitle": "الإعدادات",
   "appTheme": "مظهر التطبيق",
