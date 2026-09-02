@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 2.0.5+27
+version: 2.1.0+27
 
 environment:
   sdk: '>=3.0.5 <4.0.0'
@@ -69,7 +69,7 @@ dependencies:
   freezed_annotation: ^2.4.4
   json_annotation: ^4.9.0
   auto_route: ^9.2.2
-  purchases_flutter: ^8.4.0
+  # purchases_flutter: ^8.4.0 # RevenueCat SDK — removed, bundled an outdated Google Play Billing Library. Donations feature code kept as stubs; see revenuecat_donation_datasource.dart.
   in_app_review: ^2.0.9
   vibration: ^3.2.0
   device_preview: ^1.2.0
