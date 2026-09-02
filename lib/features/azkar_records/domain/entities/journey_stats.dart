@@ -3,9 +3,9 @@ import 'day_record.dart';
 enum GrowthPeriod { week, month, year }
 
 class GrowthPoint {
-  final String label;
+  final DateTime date;
   final int value;
-  const GrowthPoint({required this.label, required this.value});
+  const GrowthPoint({required this.date, required this.value});
 }
 
 class WeeklyGridDay {
@@ -33,31 +33,6 @@ class JourneyStats {
   final List<DayRecordEntity> entries;
 
   JourneyStats(this.entries);
-
-  static const _weekdayLabels = {
-    1: "Mon",
-    2: "Tue",
-    3: "Wed",
-    4: "Thu",
-    5: "Fri",
-    6: "Sat",
-    7: "Sun",
-  };
-
-  static const _monthLabels = {
-    1: "Jan",
-    2: "Feb",
-    3: "Mar",
-    4: "Apr",
-    5: "May",
-    6: "Jun",
-    7: "Jul",
-    8: "Aug",
-    9: "Sep",
-    10: "Oct",
-    11: "Nov",
-    12: "Dec",
-  };
 
   DateTime get _today {
     final now = DateTime.now();
@@ -145,18 +120,12 @@ class JourneyStats {
       case GrowthPeriod.week:
         return List.generate(7, (i) {
           final date = today.subtract(Duration(days: 6 - i));
-          return GrowthPoint(
-            label: _weekdayLabels[date.weekday] ?? "",
-            value: _totalZikrOn(date),
-          );
+          return GrowthPoint(date: date, value: _totalZikrOn(date));
         });
       case GrowthPeriod.month:
         return List.generate(30, (i) {
           final date = today.subtract(Duration(days: 29 - i));
-          return GrowthPoint(
-            label: date.day.toString(),
-            value: _totalZikrOn(date),
-          );
+          return GrowthPoint(date: date, value: _totalZikrOn(date));
         });
       case GrowthPeriod.year:
         return List.generate(12, (i) {
@@ -165,8 +134,7 @@ class JourneyStats {
               .where((e) =>
                   e.date.year == month.year && e.date.month == month.month)
               .fold<int>(0, (sum, e) => sum + e.totalZikrCount);
-          return GrowthPoint(
-              label: _monthLabels[month.month] ?? "", value: total);
+          return GrowthPoint(date: month, value: total);
         });
     }
   }
