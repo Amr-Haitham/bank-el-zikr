@@ -37,7 +37,7 @@ class HiveDB {
 
     // register all classes
     Hive.registerAdapter<Zikr>(ZikrAdapter());
-    Hive.registerAdapter<GeneralData>(GeneralDataAdapter());
+    Hive.registerAdapter<GeneralData>(LegacyTolerantGeneralDataAdapter());
     Hive.registerAdapter<DayRecord>(DayRecordAdapter());
     Hive.registerAdapter<ReadingProgress>(ReadingProgressAdapter());
     Hive.registerAdapter<Prayer>(PrayerAdapter());
@@ -104,6 +104,33 @@ class HiveDB {
 
     if (versionBox.isEmpty ||
         (versionBox.values.first.currentVersion != ReleaseVersion.version)) {
+      // Pre-v11 builds stored user-created azkar in zikrBox alongside the
+      // built-in content, so they'd be destroyed by the zikrBox.clear()
+      // below that reseeds built-in content. Move them into customAzkarBox
+      // (keyed by id, matching AzkarLocalDataSourceImpl) before that runs.
+      for (final oldZikr in zikrBox.values) {
+        if (oldZikr.isCustomZikr == true &&
+            !customAzkarBox.containsKey(oldZikr.id)) {
+          await customAzkarBox.put(
+              oldZikr.id,
+              Zikr(
+                  id: oldZikr.id,
+                  zikrKey: oldZikr.zikrKey,
+                  content: oldZikr.content,
+                  description: oldZikr.description,
+                  title: oldZikr.title,
+                  isCustomZikr: true,
+                  category: oldZikr.category,
+                  count: oldZikr.count,
+                  source: oldZikr.source,
+                  contentTransliteration: oldZikr.contentTransliteration,
+                  contentEn: oldZikr.contentEn,
+                  titleEn: oldZikr.titleEn,
+                  descriptionEn: oldZikr.descriptionEn,
+                  sourceEn: oldZikr.sourceEn));
+        }
+      }
+
       // Backfill zikrKey for custom azkar created before that field existed
       // (defaults to '' via @HiveField(13, defaultValue: '') on old
       // records) — every such record would otherwise share the same empty
@@ -131,12 +158,19 @@ class HiveDB {
       // the underlying wording being identical. Custom azkar are mapped
       // directly by id -> zikrKey since customAzkarBox is never cleared and
       // ids aren't reassigned by this migration.
+      //
+      // Several seed entries share content across categories (e.g.
+      // "سبحان الله" is both general_001 and afterPrayer_004), so the first
+      // match wins — allSeedZikr starts with generalAzkar, which is where
+      // the tasbih counter writes, keeping migrated reps on the same key
+      // the counter uses instead of splitting them across two rows.
       final Map<int, String> oldIdToNewKey = {};
       if (zikrBox.isNotEmpty) {
-        final contentToNewKey = <String, String>{
-          for (final entity in allSeedZikr)
-            _normalizeForMatch(entity.content): entity.key,
-        };
+        final contentToNewKey = <String, String>{};
+        for (final entity in allSeedZikr) {
+          contentToNewKey.putIfAbsent(
+              _normalizeForMatch(entity.content), () => entity.key);
+        }
         for (final oldZikr in zikrBox.values) {
           final newKey = contentToNewKey[_normalizeForMatch(oldZikr.content)];
           if (newKey != null) {
