@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_model.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_mapper.dart';
 import 'package:bank_el_ziker/features/settings/data/models/version_model.dart';
@@ -37,7 +40,7 @@ class HiveDB {
 
     // register all classes
     Hive.registerAdapter<Zikr>(ZikrAdapter());
-    Hive.registerAdapter<GeneralData>(GeneralDataAdapter());
+    Hive.registerAdapter<GeneralData>(LegacyTolerantGeneralDataAdapter());
     Hive.registerAdapter<DayRecord>(DayRecordAdapter());
     Hive.registerAdapter<ReadingProgress>(ReadingProgressAdapter());
     Hive.registerAdapter<Prayer>(PrayerAdapter());
@@ -53,11 +56,33 @@ class HiveDB {
     try {
       return await Hive.openBox<T>(boxName);
     } catch (_) {
-      // Box on disk is incompatible with the current schema (e.g. leftover
-      // data from before a model change) — drop it and start fresh rather
-      // than crashing on startup.
-      await Hive.deleteBoxFromDisk(boxName);
+      // Box on disk can't be read under the current adapters (e.g. a field
+      // whose type changed across releases). Startup has to continue, but
+      // deleting is unrecoverable — a GeneralData field that changed from
+      // int to String once wiped users' account balances this way — so the
+      // file is set aside under a .corrupt suffix instead, leaving the data
+      // on disk for a later migration to salvage.
+      await _setBoxFileAside(boxName);
       return await Hive.openBox<T>(boxName);
+    }
+  }
+
+  Future<void> _setBoxFileAside(String boxName) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final boxFile = File('${directory.path}/${boxName.toLowerCase()}.hive');
+      if (await boxFile.exists()) {
+        final stamp = DateTime.now().millisecondsSinceEpoch;
+        await boxFile.rename('${boxFile.path}.corrupt-$stamp');
+      }
+      final lockFile = File('${directory.path}/${boxName.toLowerCase()}.lock');
+      if (await lockFile.exists()) {
+        await lockFile.delete();
+      }
+    } catch (_) {
+      // If it can't be moved aside, fall back to deleting so startup isn't
+      // stuck in a crash loop on an unreadable box.
+      await Hive.deleteBoxFromDisk(boxName);
     }
   }
 
@@ -78,6 +103,27 @@ class HiveDB {
     } catch (_) {
       // Nothing usable to migrate — don't block startup over it.
       return [];
+    }
+  }
+
+  /// Pre-v11 builds kept each azkar category in its own box. That content is
+  /// built-in and now reseeded from [InitialData] into [zikrHiveBox], and
+  /// user-created azkar were never stored here, so these are dead weight on
+  /// disk once an install has migrated.
+  Future<void> _deleteOrphanedCategoryBoxes() async {
+    const orphanedBoxNames = [
+      "morningAzkarBox",
+      "nightAzkarBox",
+      "conditionalAzkarHiveBox",
+    ];
+    for (final boxName in orphanedBoxNames) {
+      try {
+        if (await Hive.boxExists(boxName)) {
+          await Hive.deleteBoxFromDisk(boxName);
+        }
+      } catch (_) {
+        // Leftover clutter isn't worth blocking startup over.
+      }
     }
   }
 
@@ -104,6 +150,50 @@ class HiveDB {
 
     if (versionBox.isEmpty ||
         (versionBox.values.first.currentVersion != ReleaseVersion.version)) {
+      // Pre-v11 builds stored user-created azkar in zikrBox alongside the
+      // built-in content, so they'd be destroyed by the zikrBox.clear()
+      // below that reseeds built-in content. Move them into customAzkarBox
+      // (keyed by id, matching AzkarLocalDataSourceImpl) before that runs.
+      for (final oldZikr in zikrBox.values) {
+        if (oldZikr.isCustomZikr == true &&
+            !customAzkarBox.containsKey(oldZikr.id)) {
+          await customAzkarBox.put(
+              oldZikr.id,
+              Zikr(
+                  id: oldZikr.id,
+                  zikrKey: oldZikr.zikrKey,
+                  content: oldZikr.content,
+                  description: oldZikr.description,
+                  title: oldZikr.title,
+                  isCustomZikr: true,
+                  category: oldZikr.category,
+                  count: oldZikr.count,
+                  source: oldZikr.source,
+                  contentTransliteration: oldZikr.contentTransliteration,
+                  contentEn: oldZikr.contentEn,
+                  titleEn: oldZikr.titleEn,
+                  descriptionEn: oldZikr.descriptionEn,
+                  sourceEn: oldZikr.sourceEn));
+        }
+      }
+
+      // Backfill zikrKey for custom azkar created before that field existed
+      // (defaults to '' via @HiveField(13, defaultValue: '') on old
+      // records) — every such record would otherwise share the same empty
+      // key, making them indistinguishable to anything that looks up a
+      // zikr by key (e.g. the zikr picker's "is this the selected one"
+      // check, the tasbih counter's "current zikr" resolution) — with two
+      // or more empty-keyed custom azkar, the picker would show all of
+      // them as selected at once, and picking one could silently resolve
+      // to a different one. Must run before oldIdToNewKey is built below,
+      // since custom azkar are mapped by their (now-backfilled) zikrKey.
+      for (final zikr in customAzkarBox.values) {
+        if (zikr.zikrKey.isEmpty) {
+          zikr.zikrKey = generateCustomZikrKey();
+          await zikr.save();
+        }
+      }
+
       // Build the old-int-id -> new-key mapping from whatever built-in Zikr
       // content is currently on disk, before it gets cleared below. Matched
       // by content string (position/id in the old box isn't a reliable
@@ -111,19 +201,31 @@ class HiveDB {
       // collapse whitespace differences (e.g. old triple-quoted strings with
       // trailing newlines/extra spaces vs. today's single-line strings)
       // that would otherwise silently break an exact-string match despite
-      // the underlying wording being identical.
+      // the underlying wording being identical. Custom azkar are mapped
+      // directly by id -> zikrKey since customAzkarBox is never cleared and
+      // ids aren't reassigned by this migration.
+      //
+      // Several seed entries share content across categories (e.g.
+      // "سبحان الله" is both general_001 and afterPrayer_004), so the first
+      // match wins — allSeedZikr starts with generalAzkar, which is where
+      // the tasbih counter writes, keeping migrated reps on the same key
+      // the counter uses instead of splitting them across two rows.
       final Map<int, String> oldIdToNewKey = {};
       if (zikrBox.isNotEmpty) {
-        final contentToNewKey = <String, String>{
-          for (final entity in allSeedZikr)
-            _normalizeForMatch(entity.content): entity.key,
-        };
+        final contentToNewKey = <String, String>{};
+        for (final entity in allSeedZikr) {
+          contentToNewKey.putIfAbsent(
+              _normalizeForMatch(entity.content), () => entity.key);
+        }
         for (final oldZikr in zikrBox.values) {
           final newKey = contentToNewKey[_normalizeForMatch(oldZikr.content)];
           if (newKey != null) {
             oldIdToNewKey[oldZikr.id] = newKey;
           }
         }
+      }
+      for (final customZikr in customAzkarBox.values) {
+        oldIdToNewKey[customZikr.id] = customZikr.zikrKey;
       }
 
       // Preserve accountBalance/currentCounter, repoint currentZikrKey.
@@ -132,7 +234,6 @@ class HiveDB {
         final accountBalance = generalData.accountBalance;
         final currentCounter = generalData.currentCounter;
 
-        await generalDataBox.clear();
         await generalDataBox.put(
             "generalData",
             GeneralData(
@@ -172,21 +273,7 @@ class HiveDB {
         }
       }
 
-      // Backfill zikrKey for custom azkar created before that field existed
-      // (defaults to '' via @HiveField(13, defaultValue: '') on old
-      // records) — every such record would otherwise share the same empty
-      // key, making them indistinguishable to anything that looks up a
-      // zikr by key (e.g. the zikr picker's "is this the selected one"
-      // check, the tasbih counter's "current zikr" resolution) — with two
-      // or more empty-keyed custom azkar, the picker would show all of
-      // them as selected at once, and picking one could silently resolve
-      // to a different one.
-      for (final zikr in customAzkarBox.values) {
-        if (zikr.zikrKey.isEmpty) {
-          zikr.zikrKey = generateCustomZikrKey();
-          await zikr.save();
-        }
-      }
+      await _deleteOrphanedCategoryBoxes();
 
       await prayerAzkarBox.clear();
 
