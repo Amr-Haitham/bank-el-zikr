@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_model.dart';
 import 'package:bank_el_ziker/features/home/data/models/prayer_mapper.dart';
 import 'package:bank_el_ziker/features/settings/data/models/version_model.dart';
@@ -53,11 +56,33 @@ class HiveDB {
     try {
       return await Hive.openBox<T>(boxName);
     } catch (_) {
-      // Box on disk is incompatible with the current schema (e.g. leftover
-      // data from before a model change) — drop it and start fresh rather
-      // than crashing on startup.
-      await Hive.deleteBoxFromDisk(boxName);
+      // Box on disk can't be read under the current adapters (e.g. a field
+      // whose type changed across releases). Startup has to continue, but
+      // deleting is unrecoverable — a GeneralData field that changed from
+      // int to String once wiped users' account balances this way — so the
+      // file is set aside under a .corrupt suffix instead, leaving the data
+      // on disk for a later migration to salvage.
+      await _setBoxFileAside(boxName);
       return await Hive.openBox<T>(boxName);
+    }
+  }
+
+  Future<void> _setBoxFileAside(String boxName) async {
+    try {
+      final directory = await getApplicationDocumentsDirectory();
+      final boxFile = File('${directory.path}/${boxName.toLowerCase()}.hive');
+      if (await boxFile.exists()) {
+        final stamp = DateTime.now().millisecondsSinceEpoch;
+        await boxFile.rename('${boxFile.path}.corrupt-$stamp');
+      }
+      final lockFile = File('${directory.path}/${boxName.toLowerCase()}.lock');
+      if (await lockFile.exists()) {
+        await lockFile.delete();
+      }
+    } catch (_) {
+      // If it can't be moved aside, fall back to deleting so startup isn't
+      // stuck in a crash loop on an unreadable box.
+      await Hive.deleteBoxFromDisk(boxName);
     }
   }
 
@@ -78,6 +103,27 @@ class HiveDB {
     } catch (_) {
       // Nothing usable to migrate — don't block startup over it.
       return [];
+    }
+  }
+
+  /// Pre-v11 builds kept each azkar category in its own box. That content is
+  /// built-in and now reseeded from [InitialData] into [zikrHiveBox], and
+  /// user-created azkar were never stored here, so these are dead weight on
+  /// disk once an install has migrated.
+  Future<void> _deleteOrphanedCategoryBoxes() async {
+    const orphanedBoxNames = [
+      "morningAzkarBox",
+      "nightAzkarBox",
+      "conditionalAzkarHiveBox",
+    ];
+    for (final boxName in orphanedBoxNames) {
+      try {
+        if (await Hive.boxExists(boxName)) {
+          await Hive.deleteBoxFromDisk(boxName);
+        }
+      } catch (_) {
+        // Leftover clutter isn't worth blocking startup over.
+      }
     }
   }
 
@@ -226,6 +272,8 @@ class HiveDB {
               DayRecord(id: id, date: dayDate, repsByZikrKey: repsByZikrKey));
         }
       }
+
+      await _deleteOrphanedCategoryBoxes();
 
       await prayerAzkarBox.clear();
 
