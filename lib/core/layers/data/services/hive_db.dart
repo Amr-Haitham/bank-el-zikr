@@ -104,6 +104,23 @@ class HiveDB {
 
     if (versionBox.isEmpty ||
         (versionBox.values.first.currentVersion != ReleaseVersion.version)) {
+      // Backfill zikrKey for custom azkar created before that field existed
+      // (defaults to '' via @HiveField(13, defaultValue: '') on old
+      // records) — every such record would otherwise share the same empty
+      // key, making them indistinguishable to anything that looks up a
+      // zikr by key (e.g. the zikr picker's "is this the selected one"
+      // check, the tasbih counter's "current zikr" resolution) — with two
+      // or more empty-keyed custom azkar, the picker would show all of
+      // them as selected at once, and picking one could silently resolve
+      // to a different one. Must run before oldIdToNewKey is built below,
+      // since custom azkar are mapped by their (now-backfilled) zikrKey.
+      for (final zikr in customAzkarBox.values) {
+        if (zikr.zikrKey.isEmpty) {
+          zikr.zikrKey = generateCustomZikrKey();
+          await zikr.save();
+        }
+      }
+
       // Build the old-int-id -> new-key mapping from whatever built-in Zikr
       // content is currently on disk, before it gets cleared below. Matched
       // by content string (position/id in the old box isn't a reliable
@@ -111,7 +128,9 @@ class HiveDB {
       // collapse whitespace differences (e.g. old triple-quoted strings with
       // trailing newlines/extra spaces vs. today's single-line strings)
       // that would otherwise silently break an exact-string match despite
-      // the underlying wording being identical.
+      // the underlying wording being identical. Custom azkar are mapped
+      // directly by id -> zikrKey since customAzkarBox is never cleared and
+      // ids aren't reassigned by this migration.
       final Map<int, String> oldIdToNewKey = {};
       if (zikrBox.isNotEmpty) {
         final contentToNewKey = <String, String>{
@@ -125,6 +144,9 @@ class HiveDB {
           }
         }
       }
+      for (final customZikr in customAzkarBox.values) {
+        oldIdToNewKey[customZikr.id] = customZikr.zikrKey;
+      }
 
       // Preserve accountBalance/currentCounter, repoint currentZikrKey.
       if (generalDataBox.isNotEmpty) {
@@ -132,7 +154,6 @@ class HiveDB {
         final accountBalance = generalData.accountBalance;
         final currentCounter = generalData.currentCounter;
 
-        await generalDataBox.clear();
         await generalDataBox.put(
             "generalData",
             GeneralData(
@@ -169,22 +190,6 @@ class HiveDB {
         } else if (repsByZikrKey.isNotEmpty) {
           await dayRecordBox.put(id,
               DayRecord(id: id, date: dayDate, repsByZikrKey: repsByZikrKey));
-        }
-      }
-
-      // Backfill zikrKey for custom azkar created before that field existed
-      // (defaults to '' via @HiveField(13, defaultValue: '') on old
-      // records) — every such record would otherwise share the same empty
-      // key, making them indistinguishable to anything that looks up a
-      // zikr by key (e.g. the zikr picker's "is this the selected one"
-      // check, the tasbih counter's "current zikr" resolution) — with two
-      // or more empty-keyed custom azkar, the picker would show all of
-      // them as selected at once, and picking one could silently resolve
-      // to a different one.
-      for (final zikr in customAzkarBox.values) {
-        if (zikr.zikrKey.isEmpty) {
-          zikr.zikrKey = generateCustomZikrKey();
-          await zikr.save();
         }
       }
 
